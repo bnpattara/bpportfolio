@@ -1,0 +1,97 @@
+/* Design System CSS extracted from Molecular_Design_System.html */
+:root{--ck-black:#000;--ck-white:#fff;--ck-g100:#f5f5f5;--ck-g200:#e8e8e8;--ck-g300:#ccc;--ck-g400:#999;--ck-g500:#666;--ck-g700:#333;--ck-red:#c8102e;--doc-bg:#0d0d0d;--doc-surface:#141414;--doc-card:#1c1c1c;--doc-border:#2a2a2a;--doc-muted:#777;--accent:#c8102e}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Helvetica Neue',Arial,sans-serif;background:var(--doc-bg);color:#e5e5e5;line-height:1.6;font-size:14px;scroll-behavior:smooth}
+.header{background:#000;border-bottom:1px solid var(--doc-border);padding:32px 60px;display:flex;align-items:center;justify-content:space-between}
+.header-logo{font-size:20px;font-weight:700;letter-spacing:.25em;color:#fff;text-transform:uppercase}
+.header-meta{font-size:10px;color:var(--doc-muted);letter-spacing:.08em;text-align:right}
+.header-meta span{display:block}
+.hero{background:linear-gradient(135deg,#111 0%,#000 60%,#1a0205 100%);padding:60px;border-bottom:1px solid var(--doc-border);position:relative;overflow:hidden}
+.hero::before{content:'CK';position:absolute;right:-20px;top:-30px;font-size:300px;font-weight:900;color:rgba(255,255,255,.02);line-height:1;user-select:none}
+.hero-tag{display:inline-block;background:var(--accent);color:#fff;font-size:10px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;padding:4px 10px;margin-bottom:20px}
+.hero-title{font-size:42px;font-weight:300;letter-spacing:.08em;text-transform:uppercase;color:#fff;line-height:1.1;margin-bottom:16px}
+.hero-sub{font-size:13px;color:var(--doc-muted);max-width:560px;line-height:1.7}
+.container{max-width:1200px;margin:0 auto;padding:0 60px}
+.content{padding:60px 0}
+.section{margin-bottom:70px}
+.section-header{display:flex;align-items:baseline;gap:16px;margin-bottom:32px;padding-bottom:16px;border-bottom:1px solid var(--doc-border)}
+.section-number{font-size:11px;color:var(--accent);font-weight:600;letter-spacing:.1em;min-width:28px}
+.section-title{font-size:20px;font-weight:500;color:#fff;letter-spacing:.05em;text-transform:uppercase}
+.section-desc{font-size:12px;color:var(--doc-muted);margin-left:auto;letter-spacing:.04em;max-width:300px;text-align:right}
+.card-grid{display:grid;gap:16px}
+.card-grid-2{grid-template-columns:1fr 1fr}
+.card-grid-3{grid-template-columns:1fr 1fr 1fr}
+.card-grid-4{grid-template-columns:repeat(4,1fr)}
+.card{background:var(--doc-card);border:1px solid var(--doc-border);padding:24px}
+.card-label{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--doc-muted);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.card-label::before{content:'';display:inline-block;width:6px;height:6px;background:var(--accent)}
+.card-value{font-size:24px;font-weight:300;color:#fff;margin-bottom:6px}
+.card-note{font-size:11px;color:#555}
+.color-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:12px}
+.swatch{background:var(--doc-card);border:1px solid var(--doc-border);overflow:hidden}
+.swatch-color{height:80px}
+.swatch-info{padding:10px 12px}
+.swatch-name{font-size:11px;font-weight:600;color:#ddd;margin-bottom:2px}
+.swatch-hex{font-size:10px;color:#555;font-family:monospace}
+.type-sample{background:var(--doc-card);border:1px solid var(--doc-border);padding:24px 28px;margin-bottom:10px;display:flex;align-items:baseline;justify-content:space-between;gap:20px}
+.type-specimen{color:#fff;line-height:1.2;flex:1}
+.type-meta{text-align:right;min-width:180px}
+.type-meta-name{font-size:10px;font-weight:600;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;margin-bottom:3px}
+.type-meta-detail{font-size:10px;color:#555;font-family:monospace;line-height:1.6}
+.spacing-grid{display:flex;flex-direction:column;gap:8px}
+.spacing-row{display:flex;align-items:center;gap:16px}
+.spacing-token{font-size:10px;font-family:monospace;color:var(--accent);width:70px}
+.spacing-bar-track{flex:1;height:24px;background:var(--doc-card);border:1px solid var(--doc-border);position:relative}
+.spacing-bar{height:100%;background:rgba(200,16,46,.35);border-right:2px solid var(--accent)}
+.spacing-px{font-size:10px;color:#555;font-family:monospace;width:40px;text-align:right}
+.anatomy-wrapper{background:var(--doc-card);border:1px solid var(--doc-border);padding:36px;margin-bottom:20px}
+.anatomy-title{font-size:10px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--doc-muted);margin-bottom:28px}
+.ck-btn{display:inline-block;background:#000;color:#fff;padding:14px 32px;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;border:none;cursor:pointer;text-align:center;min-width:200px;transition:background 150ms ease}
+.ck-btn-outline{background:transparent;border:1px solid #000;color:#000}
+.btn-showcase{display:flex;flex-wrap:wrap;gap:16px;margin-bottom:20px;padding:30px;background:#f5f5f5;border:1px solid var(--doc-border)}
+.ck-nav-sim{background:#fff;border-bottom:1px solid #e0e0e0}
+.ck-nav-top{display:flex;justify-content:space-between;align-items:center;padding:10px 24px;border-bottom:1px solid #f0f0f0;font-size:10px;color:#666;letter-spacing:.08em}
+.ck-nav-main{display:flex;justify-content:space-between;align-items:center;padding:16px 24px}
+.ck-wordmark{font-size:18px;font-weight:700;letter-spacing:.2em;color:#000;text-transform:uppercase}
+.ck-nav-links{display:flex;gap:28px;font-size:12px;font-weight:500;letter-spacing:.08em;color:#000;text-transform:uppercase}
+.ck-nav-actions{display:flex;gap:20px;font-size:11px;color:#666}
+.ck-product-card{background:#fff;border:1px solid #e8e8e8;overflow:hidden;max-width:240px}
+.ck-product-img{width:100%;height:260px;background:#f5f5f5;display:flex;align-items:center;justify-content:center;font-size:10px;color:#999;letter-spacing:.1em;text-transform:uppercase;position:relative}
+.ck-badge{position:absolute;top:12px;left:12px;background:#000;color:#fff;font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:3px 8px}
+.ck-product-info{padding:14px 16px}
+.ck-product-name{font-size:12px;font-weight:400;color:#000;letter-spacing:.04em;margin-bottom:4px;text-transform:uppercase}
+.ck-product-price{font-size:13px;font-weight:600;color:#000}
+.ck-product-colors{display:flex;gap:6px;margin-top:10px}
+.ck-color-dot{width:12px;height:12px;border-radius:50%;border:1px solid #ccc}
+.ck-pdp{background:#fff;display:grid;grid-template-columns:1.1fr 1fr;gap:0;min-height:360px}
+.ck-pdp-gallery{background:#f5f5f5;display:flex;align-items:center;justify-content:center;font-size:10px;color:#999;letter-spacing:.1em;text-transform:uppercase;min-height:360px}
+.ck-pdp-info{padding:36px 32px;display:flex;flex-direction:column;gap:18px}
+.ck-pdp-brand{font-size:10px;letter-spacing:.2em;color:#999;text-transform:uppercase}
+.ck-pdp-title{font-size:18px;font-weight:400;color:#000;letter-spacing:.06em;text-transform:uppercase;line-height:1.3}
+.ck-pdp-price{font-size:20px;font-weight:500;color:#000}
+.ck-size-label{font-size:10px;letter-spacing:.1em;color:#666;text-transform:uppercase;margin-bottom:8px}
+.ck-size-grid{display:flex;flex-wrap:wrap;gap:6px}
+.ck-size-btn{width:40px;height:40px;border:1px solid #ccc;background:transparent;font-size:11px;font-weight:500;color:#000;cursor:pointer;display:flex;align-items:center;justify-content:center;letter-spacing:.04em}
+.ck-size-btn.active{border-color:#000;border-width:2px}
+.ck-add-to-bag{background:#000;color:#fff;border:none;padding:16px;font-size:12px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;width:100%}
+.ck-wishlist{background:transparent;border:1px solid #000;padding:14px;font-size:12px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;width:100%;color:#000}
+.molecular-tree{background:var(--doc-card);border:1px solid var(--doc-border);padding:32px}
+.mol-level{margin-bottom:28px}
+.mol-level-header{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.mol-badge{font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:3px 8px;border-radius:2px;min-width:80px;text-align:center}
+.mol-atoms{background:rgba(255,200,100,.15);color:#f5c842;border:1px solid rgba(245,200,66,.3)}
+.mol-molecules{background:rgba(100,180,255,.12);color:#64b4ff;border:1px solid rgba(100,180,255,.3)}
+.mol-organisms{background:rgba(100,220,140,.12);color:#64dc8c;border:1px solid rgba(100,220,140,.3)}
+.mol-templates{background:rgba(200,100,255,.12);color:#c864ff;border:1px solid rgba(200,100,255,.3)}
+.mol-pages{background:rgba(200,16,46,.15);color:#ff6b87;border:1px solid rgba(200,16,46,.3)}
+.mol-level-title{font-size:13px;font-weight:500;color:#ccc}
+.mol-items{display:flex;flex-wrap:wrap;gap:8px;padding-left:92px}
+.mol-item{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);padding:5px 12px;font-size:11px;color:#aaa;letter-spacing:.04em}
+.callout{background:rgba(200,16,46,.07);border-left:3px solid var(--accent);padding:14px 18px;margin:16px 0;font-size:12px;color:#ccc;line-height:1.6}
+.callout strong{color:#fff}
+.code-block{background:#0a0a0a;border:1px solid var(--doc-border);padding:20px 24px;font-family:monospace;font-size:11px;color:#88c0d0;line-height:1.8;overflow-x:auto;margin:8px 0;white-space:pre}
+.doc-footer{background:#000;border-top:1px solid var(--doc-border);padding:24px 60px;display:flex;justify-content:space-between;align-items:center;font-size:10px;color:#444;letter-spacing:.08em;text-transform:uppercase}
+/* Additional utility classes */
+.text-center{text-align:center}
+.mt-4{margin-top:16px}
+.mb-4{margin-bottom:16px}
