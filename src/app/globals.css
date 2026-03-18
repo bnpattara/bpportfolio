@@ -2405,17 +2405,12 @@ body>* {
     flex 520ms cubic-bezier(0.4, 0, 0.2, 1),
     opacity 300ms ease,
     filter 400ms ease-in-out;
-  border-right: 1px solid rgba(255, 255, 255, 0.2);
-  filter: grayscale(40%) contrast(90%) brightness(80%);
+  filter: grayscale(100%) contrast(115%);
 }
 
 .accordion-panel:hover,
 .accordion-panel.accordion-panel--expanded {
   filter: grayscale(0%) contrast(100%) brightness(100%);
-}
-
-.accordion-panel:last-child {
-  border-right: none;
 }
 
 /* Charcoal overlay — inactive state; fades out on hover/expand */
@@ -2623,8 +2618,6 @@ body>* {
   .accordion-panel {
     flex: none !important;
     height: 80px;
-    border-right: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     transition: height 500ms cubic-bezier(0.4, 0, 0.2, 1);
   }
 
