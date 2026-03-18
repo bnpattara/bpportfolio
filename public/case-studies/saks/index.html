@@ -46,6 +46,9 @@ body { font-family: var(--font); background: var(--white); color: var(--black); 
 .img-placeholder { background: var(--g100); border: 1px dashed var(--g300); display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 200px; padding: 24px; text-align: center; }
 .img-placeholder-num { font-size: 11px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--g400); margin-bottom: 8px; }
 .img-placeholder-desc { font-size: 11px; color: var(--g500); line-height: 1.5; max-width: 320px; }
+/* Smart-cropped images: show full image, avoid cutoff */
+.cs-img-contain { overflow: hidden; display: flex; align-items: center; justify-content: center; background: var(--g100); }
+.cs-img-contain img { width: 100%; height: 100%; object-fit: contain; object-position: center; display: block; }
 
 /* LAYOUT */
 .cs-body-wrap { display: grid; grid-template-columns: var(--sidenav-w) 1fr; align-items: start; min-height: 100vh; }
@@ -400,17 +403,11 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
           </div>
           <div class="cs-img-2col">
             <div class="cs-img-2col-item">
-              <div class="img-placeholder" style="aspect-ratio:4/3;">
-                <span class="img-placeholder-num">[02]</span>
-                <span class="img-placeholder-desc">Exterior detail — street-level intrigue; dusk passerby. Focal: storefront + one figure.</span>
-              </div>
+              <div class="cs-img-contain" style="aspect-ratio:4/3;"><img src="saks-02.png" alt="Exterior detail — street-level intrigue; dusk passerby" /></div>
               <span class="img-caption">Stage 01: Street-Level Intrigue. You pause. You look. You either know what this is or you don&rsquo;t.</span>
             </div>
             <div class="cs-img-2col-item">
-              <div class="img-placeholder" style="aspect-ratio:4/3;">
-                <span class="img-placeholder-num">[03]</span>
-                <span class="img-placeholder-desc">Corner node at night — interior glow from within. Focal: lit window, storefront.</span>
-              </div>
+              <div class="cs-img-contain" style="aspect-ratio:4/3;"><img src="saks-03.png" alt="Corner node at night — interior glow from within" /></div>
               <span class="img-caption">Corner node at night. The interior glows. Brass letterforms mark the entrance.</span>
             </div>
           </div>
@@ -432,10 +429,7 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
             <div class="cs-stat-cell"><div class="cs-stat-eyebrow">03 · Media Cost</div><div class="cs-stat-num">$0</div><div class="cs-stat-label">CPM vs. $350-600 CPM brand media for legacy Saks. Members opt in for discovery. Acquisition runs through word of mouth.</div></div>
           </div>
           <div class="cs-img-full">
-            <div class="img-placeholder" style="min-height:320px;">
-              <span class="img-placeholder-num">[04]</span>
-              <span class="img-placeholder-desc">Warm-climate exterior — brass letterforms on rammed earth. Focal: logo + material; two climates, one system.</span>
-            </div>
+            <div class="cs-img-contain" style="min-height:320px;aspect-ratio:16/9;"><img src="saks-04.png" alt="Warm-climate exterior — brass letterforms on rammed earth" /></div>
             <span class="img-caption">The identity is not dependent on the dark brick aesthetic. Same brass mark on rammed earth. Two climates, one system.</span>
           </div>
 
@@ -513,10 +507,7 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
           </div>
           <p class="cs-body">Vault is not a repositioning of Saks. It is a new business model that uses the Saks name as its only inheritance and earns everything else from scratch. Membership fees cover fixed costs. Designer subscriptions fund the platform. Retail GMV is pure margin upside. This is the only luxury model where the business doesn&rsquo;t need a hit season to stay solvent.</p>
           <div class="cs-img-full" style="margin:32px 0 8px;">
-            <div class="img-placeholder" style="min-height:380px;">
-              <span class="img-placeholder-num">[05]</span>
-              <span class="img-placeholder-desc">Still life — black marble, folded cashmere, single Vault tag. Focal: product + tag; rotation reduced to one frame.</span>
-            </div>
+            <div class="cs-img-contain" style="min-height:380px;aspect-ratio:4/3;"><img src="saks-05.png" alt="Still life — black marble, folded cashmere, single Vault tag" /></div>
           </div>
           <span class="img-caption">The rotation reduced to a still life. The Vault tag on the knitwear is the only brand signal in the frame.</span>
           <div class="cs-section-eyebrow" style="margin-top:40px;margin-bottom:20px;"><span class="cs-section-title">Legacy Saks vs. Vault: The Model Shift</span></div>
@@ -574,7 +565,7 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
           <div class="product-cards">
             <div class="product-card">
               <div class="product-card-num">01</div>
-              <div class="img-placeholder product-card-img" style="aspect-ratio:16/10;min-height:140px;"><span class="img-placeholder-num">[06]</span><span class="img-placeholder-desc">Membership cards on brass tray — Black, Reserve, Member. Focal: three tiers, one shot.</span></div>
+              <div class="cs-img-contain product-card-img" style="aspect-ratio:16/10;min-height:140px;"><img src="saks-06.png" alt="Membership cards on brass tray — Black, Reserve, Member" /></div>
               <div class="product-card-title">Membership Tiers</div>
               <div class="product-card-sub">Three relationships, not three price points</div>
               <div class="product-card-body">Pricing benchmarked against Soho House, Zero Bond, and Core Club, not fashion rental services. Each tier unlocks something qualitatively different.</div>
@@ -600,7 +591,7 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
             </div>
             <div class="product-card">
               <div class="product-card-num">02</div>
-              <div class="img-placeholder product-card-img" style="aspect-ratio:16/10;min-height:140px;"><span class="img-placeholder-num">[07]</span><span class="img-placeholder-desc">Sales floor interior — VBS monogram visible. Focal: node as product, modular fixtures.</span></div>
+              <div class="cs-img-contain product-card-img" style="aspect-ratio:16/10;min-height:140px;"><img src="saks-07.png" alt="Sales floor interior — VBS monogram visible" /></div>
               <div class="product-card-title">The Node</div>
               <div class="product-card-sub">3,500 sq ft discovery as physical product</div>
               <div class="product-card-body">Each node is a self-contained P&L. Month-to-month lease with 90-day exit. No permanent buildout. Modular fixtures only.</div>
@@ -618,7 +609,7 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
             </div>
             <div class="product-card">
               <div class="product-card-num">03</div>
-              <div class="img-placeholder product-card-img" style="aspect-ratio:16/10;min-height:140px;"><span class="img-placeholder-num">[08]</span><span class="img-placeholder-desc">Designer hang tags on black marble — fanned. Focal: curation credential, not price tag.</span></div>
+              <div class="cs-img-contain product-card-img" style="aspect-ratio:16/10;min-height:140px;"><img src="saks-08.png" alt="Designer hang tags on black marble — fanned" /></div>
               <div class="product-card-title">The Designer Platform</div>
               <div class="product-card-sub">Subscription revenue before any retail sale</div>
               <div class="product-card-body">Designers subscribe to the platform at $2,500/month. This generates revenue before any GMV and aligns designer incentives with sell-through.</div>
@@ -636,7 +627,7 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
             </div>
             <div class="product-card">
               <div class="product-card-num">04</div>
-              <div class="img-placeholder product-card-img" style="aspect-ratio:16/10;min-height:140px;"><span class="img-placeholder-num">[09]</span><span class="img-placeholder-desc">Ceiling-hung brass bar, dark bg, cream knitwear. Focal: 14-day rotation, one fixture.</span></div>
+              <div class="cs-img-contain product-card-img" style="aspect-ratio:16/10;min-height:140px;"><img src="saks-09.png" alt="Ceiling-hung brass bar, dark bg, cream knitwear" /></div>
               <div class="product-card-title">The 14-Day Rotation</div>
               <div class="product-card-sub">The operational thesis made tangible</div>
               <div class="product-card-body">26 rotations per year vs. 2.5 annual cycles for the legacy Saks model. Each phase generates data as well as revenue.</div>
@@ -820,7 +811,7 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
           <div class="cs-section-eyebrow"><span class="cs-section-num">05</span><span class="cs-section-title">The Experience</span></div>
           <h2 class="cs-heading">Physical Design as a Product System.</h2>
           <div class="cs-img-full">
-            <div class="img-placeholder" style="min-height:360px;"><span class="img-placeholder-num">[10]</span><span class="img-placeholder-desc">NYC concept store exterior, golden hour — one mannequin in window. Focal: first node, one piece, full argument.</span></div>
+            <div class="cs-img-contain" style="min-height:360px;aspect-ratio:16/9;"><img src="saks-10.png" alt="NYC concept store exterior, golden hour" /></div>
           </div>
           <span class="img-caption">New York City. The first node. Where the concept proves itself under scrutiny. One mannequin. One piece. The entire argument in the window.</span>
           <p class="cs-body" style="margin-top:20px;">The node is designed as a seven-stage experience with intended behaviors, environmental signals, and per-stage metrics at each step. Every design decision is a product decision, and every product decision is measurable. The physical experience and the data flywheel are not separate systems. A QR scan at Stage 04 is both an experience mechanic and a data collection mechanism that feeds the demand model.</p>
@@ -840,18 +831,18 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
 
           <!-- Interior sequence: 4-col full width -->
           <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;margin-bottom:8px;">
-            <div><div class="img-placeholder" style="aspect-ratio:3/4;min-height:180px;"><span class="img-placeholder-num">[11]</span><span class="img-placeholder-desc">Ceiling fixture, modular. Dark bg, cream knitwear.</span></div><span class="img-caption" style="padding-bottom:0">Ceiling fixture. Modular.</span></div>
-            <div><div class="img-placeholder" style="aspect-ratio:3/4;min-height:180px;"><span class="img-placeholder-num">[12]</span><span class="img-placeholder-desc">Floor bar fixture close-up. Mood, not brand.</span></div><span class="img-caption" style="padding-bottom:0">Grouped by mood, not brand.</span></div>
-            <div><div class="img-placeholder" style="aspect-ratio:3/4;min-height:180px;"><span class="img-placeholder-num">[13]</span><span class="img-placeholder-desc">Capsule wall niche — clothing + boots. Curated edit.</span></div><span class="img-caption" style="padding-bottom:0">Each niche is a curated edit.</span></div>
-            <div><div class="img-placeholder" style="aspect-ratio:3/4;min-height:180px;"><span class="img-placeholder-num">[14]</span><span class="img-placeholder-desc">Brass pipe joint detail. Material constant.</span></div><span class="img-caption" style="padding-bottom:0">Brass pipe. The material constant.</span></div>
+            <div><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:180px;"><img src="saks-11.png" alt="Ceiling fixture, modular. Dark bg, cream knitwear" /></div><span class="img-caption" style="padding-bottom:0">Ceiling fixture. Modular.</span></div>
+            <div><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:180px;"><img src="saks-12.png" alt="Floor bar fixture close-up. Mood, not brand" /></div><span class="img-caption" style="padding-bottom:0">Grouped by mood, not brand.</span></div>
+            <div><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:180px;"><img src="saks-13.png" alt="Capsule wall niche — clothing + boots. Curated edit" /></div><span class="img-caption" style="padding-bottom:0">Each niche is a curated edit.</span></div>
+            <div><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:180px;"><img src="saks-14.png" alt="Brass pipe joint detail. Material constant" /></div><span class="img-caption" style="padding-bottom:0">Brass pipe. The material constant.</span></div>
           </div>
 
           <div class="cs-img-2col" style="margin-top:8px;">
-            <div class="cs-img-2col-item"><div class="img-placeholder" style="aspect-ratio:16/10;min-height:200px;"><span class="img-placeholder-num">[15]</span><span class="img-placeholder-desc">Reserve fitting room — navy sofa, pieces laid out. Focal: ready before you arrive.</span></div><span class="img-caption">The Reserve fitting room. Pieces laid out before you arrive.</span></div>
-            <div class="cs-img-2col-item"><div class="img-placeholder" style="aspect-ratio:16/10;min-height:200px;"><span class="img-placeholder-num">[16]</span><span class="img-placeholder-desc">Black fitting room — champagne, ranunculus. Focal: everything already ready.</span></div><span class="img-caption">The Black fitting room. Everything already ready.</span></div>
+            <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:16/10;min-height:200px;"><img src="saks-15.png" alt="Reserve fitting room — navy sofa, pieces laid out" /></div><span class="img-caption">The Reserve fitting room. Pieces laid out before you arrive.</span></div>
+            <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:16/10;min-height:200px;"><img src="saks-16.png" alt="Black fitting room — champagne, ranunculus" /></div><span class="img-caption">The Black fitting room. Everything already ready.</span></div>
           </div>
 
-          <div class="cs-img-full" style="margin-top:8px;"><div class="img-placeholder" style="min-height:300px;"><span class="img-placeholder-num">[17]</span><span class="img-placeholder-desc">Capsule aesthetic — stylist past illuminated racks, white/cream. Focal: Stage 03 Discovery; edit speaks first.</span></div></div>
+          <div class="cs-img-full" style="margin-top:8px;"><div class="cs-img-contain" style="min-height:300px;aspect-ratio:16/9;"><img src="saks-17.png" alt="Capsule aesthetic — stylist past illuminated racks" /></div></div>
           <span class="img-caption">Stage 03 · Discovery. The stylist moves through the floor. The edit speaks before anyone does.</span>
 
           <!-- Brand in World -->
@@ -859,36 +850,36 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
 
           <!-- Exteriors -->
           <div class="cs-img-3col">
-            <div class="cs-img-3col-item"><div class="img-placeholder" style="aspect-ratio:3/4;min-height:200px;"><span class="img-placeholder-num">[18]</span><span class="img-placeholder-desc">Logo on exterior — brass on dark brick. No tagline.</span></div><span class="img-caption">Dark brick. Brass type. No tagline.</span></div>
-            <div class="cs-img-3col-item"><div class="img-placeholder" style="aspect-ratio:3/4;min-height:200px;"><span class="img-placeholder-num">[19]</span><span class="img-placeholder-desc">Exterior detail dusk, passerby. Stage 01.</span></div><span class="img-caption">Stage 01: You pause. You look. You either know or you don&rsquo;t.</span></div>
-            <div class="cs-img-3col-item"><div class="img-placeholder" style="aspect-ratio:3/4;min-height:200px;"><span class="img-placeholder-num">[20]</span><span class="img-placeholder-desc">Corner node at night. Two markets, one system.</span></div><span class="img-caption">Corner node. Two markets. One system.</span></div>
+            <div class="cs-img-3col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="saks-18.png" alt="Logo on exterior — brass on dark brick. No tagline" /></div><span class="img-caption">Dark brick. Brass type. No tagline.</span></div>
+            <div class="cs-img-3col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="saks-19.png" alt="Exterior detail dusk, passerby. Stage 01" /></div><span class="img-caption">Stage 01: You pause. You look. You either know or you don&rsquo;t.</span></div>
+            <div class="cs-img-3col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="saks-20.png" alt="Corner node at night. Two markets, one system" /></div><span class="img-caption">Corner node. Two markets. One system.</span></div>
           </div>
 
           <!-- Packaging -->
           <div class="cs-img-3col" style="margin-top:8px;">
-            <div class="cs-img-3col-item"><div class="img-placeholder" style="aspect-ratio:3/4;min-height:200px;"><span class="img-placeholder-num">[21]</span><span class="img-placeholder-desc">Designer hang tags. Curation credential.</span></div><span class="img-caption">The tag is not a price tag. It is a curation credential.</span></div>
-            <div class="cs-img-3col-item"><div class="img-placeholder" style="aspect-ratio:3/4;min-height:200px;"><span class="img-placeholder-num">[22]</span><span class="img-placeholder-desc">Tissue, VBS wax seal. At-home edit, 1:1 brand.</span></div><span class="img-caption">The at-home edit arrives sealed. The wax seal is the brand at 1:1 scale.</span></div>
-            <div class="cs-img-3col-item"><div class="img-placeholder" style="aspect-ratio:3/4;min-height:200px;"><span class="img-placeholder-num">[23]</span><span class="img-placeholder-desc">Black box, grosgrain bow. Six pieces, 96hr before public.</span></div><span class="img-caption">Six pieces, stylist-curated, 96 hours before the rotation is public.</span></div>
+            <div class="cs-img-3col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="saks-21.png" alt="Designer hang tags. Curation credential" /></div><span class="img-caption">The tag is not a price tag. It is a curation credential.</span></div>
+            <div class="cs-img-3col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="saks-22.png" alt="Tissue, VBS wax seal. At-home edit, 1:1 brand" /></div><span class="img-caption">The at-home edit arrives sealed. The wax seal is the brand at 1:1 scale.</span></div>
+            <div class="cs-img-3col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="saks-23.png" alt="Black box, grosgrain bow. Six pieces, 96hr before public" /></div><span class="img-caption">Six pieces, stylist-curated, 96 hours before the rotation is public.</span></div>
           </div>
 
           <div class="cs-img-2col" style="margin-top:8px;">
-            <div class="cs-img-2col-item"><div class="img-placeholder" style="aspect-ratio:4/3;min-height:220px;"><span class="img-placeholder-num">[24]</span><span class="img-placeholder-desc">Customer with bag on street, store in background. Brand in motion.</span></div><span class="img-caption">The bag leaves the node. The brand in motion on the street.</span></div>
-            <div class="cs-img-2col-item"><div class="img-placeholder" style="aspect-ratio:4/3;min-height:220px;"><span class="img-placeholder-num">[25]</span><span class="img-placeholder-desc">Apple Wallet pass — Black tier. 14-day cycle becomes personal.</span></div><span class="img-caption">The 14-day cycle becomes personal. This is the moment the rotation starts being yours.</span></div>
+            <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:4/3;min-height:220px;"><img src="saks-24.png" alt="Customer with bag on street, store in background" /></div><span class="img-caption">The bag leaves the node. The brand in motion on the street.</span></div>
+            <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:4/3;min-height:220px;"><img src="saks-25.png" alt="Apple Wallet pass — Black tier. 14-day cycle becomes personal" /></div><span class="img-caption">The 14-day cycle becomes personal. This is the moment the rotation starts being yours.</span></div>
           </div>
 
           <!-- Identity details -->
           <div class="cs-img-2col" style="margin-top:8px;">
-            <div class="cs-img-2col-item"><div class="img-placeholder" style="aspect-ratio:4/3;min-height:220px;"><span class="img-placeholder-num">[26]</span><span class="img-placeholder-desc">2x2 material grid — wool, silk, VBS button, boot. Monogram once.</span></div><span class="img-caption">VBS engraved on the button hardware. The monogram appears once: engraved, functional, invisible until you look.</span></div>
-            <div class="cs-img-2col-item"><div class="img-placeholder" style="aspect-ratio:4/3;min-height:220px;"><span class="img-placeholder-num">[27]</span><span class="img-placeholder-desc">Hand, ring, watch, boot, wool. One statement piece; none branded.</span></div><span class="img-caption">The one statement piece rule at 1:1. Three objects. None of them branded.</span></div>
+            <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:4/3;min-height:220px;"><img src="saks-26.png" alt="2x2 material grid — wool, silk, VBS button, boot. Monogram once" /></div><span class="img-caption">VBS engraved on the button hardware. The monogram appears once: engraved, functional, invisible until you look.</span></div>
+            <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:4/3;min-height:220px;"><img src="saks-27.png" alt="Hand, ring, watch, boot, wool. One statement piece; none branded" /></div><span class="img-caption">The one statement piece rule at 1:1. Three objects. None of them branded.</span></div>
           </div>
 
           <!-- Team -->
-          <div class="cs-img-full" style="margin-top:8px;"><div class="img-placeholder" style="min-height:320px;"><span class="img-placeholder-num">[28]</span><span class="img-placeholder-desc">Team portrait in node — three people, tonal dressing, brass rail. Editorial signal.</span></div></div>
+          <div class="cs-img-full" style="margin-top:8px;"><div class="cs-img-contain" style="min-height:320px;aspect-ratio:16/9;"><img src="saks-28.png" alt="Team portrait in node — three people, tonal dressing, brass rail" /></div></div>
           <span class="img-caption">The team is the editorial signal before a member touches anything. Tonal dressing. One statement piece. No branded product.</span>
 
           <div class="cs-img-2col" style="margin-top:8px;">
-            <div class="cs-img-2col-item"><div class="img-placeholder" style="aspect-ratio:4/3;min-height:220px;"><span class="img-placeholder-num">[29]</span><span class="img-placeholder-desc">Female stylist — blazer, silk, gold chains. Reserve; $900 relationship.</span></div><span class="img-caption">The Reserve stylist. The named relationship behind the $900 membership.</span></div>
-            <div class="cs-img-2col-item"><div class="img-placeholder" style="aspect-ratio:4/3;min-height:220px;"><span class="img-placeholder-num">[30]</span><span class="img-placeholder-desc">Male stylist — turtleneck, grey trousers. Tonal; style code applied.</span></div><span class="img-caption">Tonal. No logo. One material story. The style code applied.</span></div>
+            <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:4/3;min-height:220px;"><img src="saks-29.png" alt="Female stylist — blazer, silk, gold chains. Reserve; $900 relationship" /></div><span class="img-caption">The Reserve stylist. The named relationship behind the $900 membership.</span></div>
+            <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:4/3;min-height:220px;"><img src="saks-30.png" alt="Male stylist — turtleneck, grey trousers. Tonal; style code applied" /></div><span class="img-caption">Tonal. No logo. One material story. The style code applied.</span></div>
           </div>
 
           <p class="cs-body" style="margin-top:20px;">The identity is built on restraint. Brass letterforms on dark brick. VBS monogram on the zip pull. The monogram appears once: engraved, functional, invisible until you look. Recognizable to those who know it and invisible to those who don&rsquo;t. That is the correct luxury register for a brand whose physical presence communicates through material and craft.</p>
@@ -914,11 +905,11 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
               <button class="artifact-close-btn" onclick="closeArtifact(2)">Close &uarr;</button>
             </div>
             <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px;background:#1a1a1a;padding:16px;padding-top:2px;">
-              <div class="img-placeholder" style="aspect-ratio:4/3;background:#111;border-color:#333;"><span class="img-placeholder-num" style="color:rgba(255,255,255,.4)">[31]</span></div>
-              <div class="img-placeholder" style="aspect-ratio:4/3;background:#111;border-color:#333;"><span class="img-placeholder-num" style="color:rgba(255,255,255,.4)">[32]</span></div>
-              <div class="img-placeholder" style="aspect-ratio:4/3;background:#111;border-color:#333;"><span class="img-placeholder-num" style="color:rgba(255,255,255,.4)">[33]</span></div>
-              <div class="img-placeholder" style="aspect-ratio:4/3;background:#111;border-color:#333;"><span class="img-placeholder-num" style="color:rgba(255,255,255,.4)">[34]</span></div>
-              <div class="img-placeholder" style="aspect-ratio:4/3;background:#111;border-color:#333;"><span class="img-placeholder-num" style="color:rgba(255,255,255,.4)">[35]</span></div>
+              <div class="cs-img-contain" style="aspect-ratio:4/3;background:#111;"><img src="saks-31.png" alt="Extended gallery 31" /></div>
+              <div class="cs-img-contain" style="aspect-ratio:4/3;background:#111;"><img src="saks-32.png" alt="Extended gallery 32" /></div>
+              <div class="cs-img-contain" style="aspect-ratio:4/3;background:#111;"><img src="saks-33.png" alt="Extended gallery 33" /></div>
+              <div class="cs-img-contain" style="aspect-ratio:4/3;background:#111;"><img src="saks-34.png" alt="Extended gallery 34" /></div>
+              <div class="cs-img-contain" style="aspect-ratio:4/3;background:#111;"><img src="saks-35.png" alt="Extended gallery 35" /></div>
               <div class="img-placeholder" style="aspect-ratio:4/3;background:#111;border-color:#333;"><span class="img-placeholder-num" style="color:rgba(255,255,255,.4)">[36]</span></div>
               <div class="img-placeholder" style="aspect-ratio:4/3;background:#111;border-color:#333;"><span class="img-placeholder-num" style="color:rgba(255,255,255,.4)">[37]</span></div>
               <div class="img-placeholder" style="aspect-ratio:4/3;background:#111;border-color:#333;"><span class="img-placeholder-num" style="color:rgba(255,255,255,.4)">[38]</span></div>

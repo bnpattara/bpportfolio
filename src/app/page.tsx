@@ -165,7 +165,7 @@ export default function Home() {
                   <div className="accordion-collapsed-title">{cs.title}</div>
                 </div>
 
-                {/* Card number (expanded state) */}
+                {/* Card number */}
                 <div className="accordion-num">{cs.num}</div>
 
                 {/* Full content — fades in on expand */}
