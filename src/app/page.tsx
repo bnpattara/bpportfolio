@@ -126,10 +126,6 @@ export default function Home() {
     <>
       {/* ── NAV ── */}
       <nav id="site-nav" ref={navRef}>
-        <div className="nav-utility">
-          <span>Brand Experience Strategist &amp; Systems Designer</span>
-          <span>VCU Brandcenter &middot; M.S. Business/Branding &middot; 2026</span>
-        </div>
         <div className="nav-main">
           <div className="nav-left">
             <a href="#work">Work</a>

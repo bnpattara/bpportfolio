@@ -11,10 +11,6 @@ export default function ThirteenPage() {
                 background: '#080808',
                 borderBottom: '1px solid rgba(255,255,255,.06)',
             }}>
-                <div className="nav-utility" style={{ color: 'rgba(255,255,255,.2)', borderBottomColor: 'rgba(255,255,255,.06)' }}>
-                    <span>Brand Experience Strategist &amp; Systems Designer</span>
-                    <span>VCU Brandcenter &middot; M.S. Business/Branding &middot; 2026</span>
-                </div>
                 <div className="nav-main">
                     <div className="nav-left">
                         <a href="/#work" style={{ color: 'rgba(255,255,255,.4)' }}>Work</a>
