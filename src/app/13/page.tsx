@@ -176,7 +176,8 @@ export default function ThirteenPage() {
       <footer className="page-13-footer">
         <div className="footer-left">
           <span className="footer-name">Benn Pattara</span>
-          <span className="footer-role">Brand Experience Strategist &amp; Systems Designer</span>
+          <span className="footer-role">Brand &amp; Product Strategist</span>
+          <span className="footer-qualifier">from cultural insight to shipped product specs</span>
         </div>
         <div className="footer-links">
           <Link href="/" className="footer-link">Home</Link>
@@ -512,7 +513,8 @@ export default function ThirteenPage() {
           border-top: 1px solid var(--doc-border);
         }
         .page-13-footer .footer-name { color: rgba(255,255,255,.6); }
-        .page-13-footer .footer-role { color: rgba(255,255,255,.25); }
+        .page-13-footer .footer-role { color: rgba(255,255,255,.4); }
+        .page-13-footer .footer-qualifier { color: rgba(255,255,255,.25); }
         .page-13-footer .footer-link { color: rgba(255,255,255,.35); }
         .page-13-footer .footer-link:hover { color: rgba(255,255,255,.7); }
         .page-13-footer .footer-copy { color: rgba(255,255,255,.18); }

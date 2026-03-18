@@ -152,7 +152,7 @@ export default function Home() {
                 key={i}
                 className={`accordion-panel${isHovered ? ' accordion-panel--expanded' : ''}${anyHovered && !isHovered ? ' accordion-panel--compressed' : ''}`}
                 style={cs.image ? {
-                  background: `linear-gradient(to bottom, rgba(3,8,30,.25) 0%, rgba(3,8,30,.75) 100%), url(${cs.image}) no-repeat`,
+                  background: `linear-gradient(to bottom, rgba(3,8,30,.12) 0%, rgba(3,8,30,.45) 100%), url(${cs.image}) no-repeat`,
                   backgroundSize: "cover",
                   backgroundPosition: cs.imagePosition || "center center",
                 } : { background: cs.bg }}
@@ -224,7 +224,7 @@ export default function Home() {
 
 
       {/* ── PHILOSOPHY INTERSTITIAL ── */}
-      <section id="philosophy" className="reveal" style={{ display: 'none' }} aria-hidden="true">
+      <section id="philosophy" className="reveal">
         <div className="philosophy-inner">
           <div className="philosophy-eyebrow">Design Philosophy</div>
           <div className="philosophy-quote reveal" style={{ animationDelay: '80ms' }}>
@@ -360,7 +360,7 @@ export default function Home() {
             </div>
             <div className="status-cell">
               <div className="status-cell-label">FOCUS</div>
-              <div className="status-cell-value">Brand strategy &amp; product management</div>
+              <div className="status-cell-value">Brand &amp; product strategist</div>
             </div>
             <div className="status-cell">
               <div className="status-cell-label">BASED</div>
@@ -597,7 +597,8 @@ export default function Home() {
       <footer>
         <div className="footer-left">
           <span className="footer-name">Benn Pattara</span>
-          <span className="footer-role">Brand Experience Strategist &amp; Systems Designer</span>
+          <span className="footer-role">Brand &amp; Product Strategist</span>
+          <span className="footer-qualifier">from cultural insight to shipped product specs</span>
         </div>
         <div className="footer-links">
           <a href="#about" className="footer-link">About</a>

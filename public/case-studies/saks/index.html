@@ -46,9 +46,9 @@ body { font-family: var(--font); background: var(--white); color: var(--black); 
 .img-placeholder { background: var(--g100); border: 1px dashed var(--g300); display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 200px; padding: 24px; text-align: center; }
 .img-placeholder-num { font-size: 11px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--g400); margin-bottom: 8px; }
 .img-placeholder-desc { font-size: 11px; color: var(--g500); line-height: 1.5; max-width: 320px; }
-/* Smart-cropped images: show full image, avoid cutoff */
-.cs-img-contain { overflow: hidden; display: flex; align-items: center; justify-content: center; background: var(--g100); }
-.cs-img-contain img { width: 100%; height: 100%; object-fit: contain; object-position: center; display: block; }
+/* Images fill placeholders perfectly — cover with center focus */
+.cs-img-contain { overflow: hidden; display: block; background: var(--g100); width: 100%; }
+.cs-img-contain img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
 
 /* LAYOUT */
 .cs-body-wrap { display: grid; grid-template-columns: var(--sidenav-w) 1fr; align-items: start; min-height: 100vh; }
@@ -110,10 +110,13 @@ body { font-family: var(--font); background: var(--white); color: var(--black); 
 /* IMAGE LAYOUTS */
 .cs-img-full { width: 100%; margin-bottom: 8px; overflow: hidden; }
 .cs-img-full img { width: 100%; display: block; object-fit: cover; }
+.cs-img-full .cs-img-contain img { object-fit: cover; }
 .cs-img-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px; }
 .cs-img-2col-item img { width: 100%; display: block; object-fit: cover; aspect-ratio: 4/3; }
+.cs-img-2col-item .cs-img-contain img { object-fit: cover; }
 .cs-img-3col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 8px; }
 .cs-img-3col-item img { width: 100%; display: block; object-fit: cover; aspect-ratio: 3/4; }
+.cs-img-3col-item .cs-img-contain img { object-fit: cover; }
 .img-caption { font-size: 9px; letter-spacing: .12em; text-transform: uppercase; color: var(--g400); padding: 6px 0 20px; display: block; }
 .cs-img-2col-item .img-caption, .cs-img-3col-item .img-caption { padding: 6px 0 0; }
 
@@ -309,6 +312,7 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
 .footer-id { display: flex; flex-direction: column; gap: 4px; }
 .footer-name { font-size: 12px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--white); }
 .footer-role { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.28); }
+.footer-qualifier { font-size: 9px; letter-spacing: .06em; color: rgba(255,255,255,.2); font-style: italic; text-transform: none; margin-top: 2px; }
 .footer-links { display: flex; gap: 24px; }
 .footer-link { font-size: 10px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.35); text-decoration: none; transition: color var(--ease-fast); }
 .footer-link:hover { color: var(--white); }
@@ -1308,7 +1312,8 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
 <footer>
   <div class="footer-id">
     <span class="footer-name">Benn Pattara</span>
-    <span class="footer-role">Brand Experience Strategist &amp; Systems Designer</span>
+    <span class="footer-role">Brand &amp; Product Strategist</span>
+    <span class="footer-qualifier">from cultural insight to shipped product specs</span>
   </div>
   <div class="footer-links">
     <a href="index.html" class="footer-link">Home</a>

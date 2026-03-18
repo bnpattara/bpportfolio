@@ -223,7 +223,8 @@ export default function BurberryCaseStudy() {
             <footer>
                 <div className="footer-left">
                     <span className="footer-name">Benn Pattara</span>
-                    <span className="footer-role">Brand Experience Strategist &amp; Systems Designer</span>
+                    <span className="footer-role">Brand &amp; Product Strategist</span>
+                    <span className="footer-qualifier">from cultural insight to shipped product specs</span>
                 </div>
                 <div className="footer-links">
                     <Link href="/#about" className="footer-link">About</Link>
