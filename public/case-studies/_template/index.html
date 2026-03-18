@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>[PROJECT_NAME]: [HERO_TITLE_SHORT] · Benn Pattara</title>
+<style>
+/* ═══════════════════════════════════════════════════════════════════════════════
+   CASE STUDY TEMPLATE — Based on Vault by Saks
+   Replace [PLACEHOLDER] markers with your content. See README.md for usage.
+   ═══════════════════════════════════════════════════════════════════════════════ */
+:root {
+  --black:     #000;
+  --white:     #fff;
+  --g100:      #f5f5f5;
+  --g200:      #e8e8e8;
+  --g300:      #ccc;
+  --g400:      #999;
+  --g500:      #666;
+  --g700:      #333;
+  --font:      'Helvetica Neue', Arial, sans-serif;
+  --ease-fast: 150ms ease;
+  --ease-base: 250ms ease;
+  --nav-h:     52px;
+  --sidenav-w: 220px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font); background: var(--white); color: var(--black); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+#site-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; background: var(--white); border-bottom: 1px solid var(--g200); }
+.nav-main { position: relative; height: 52px; padding: 0 48px; }
+.nav-left { position: absolute; left: 48px; top: 50%; transform: translateY(-50%); display: flex; gap: 28px; }
+.nav-left a { font-size: 11px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--g500); text-decoration: none; transition: color var(--ease-fast); }
+.nav-left a:hover { color: var(--black); }
+.nav-wordmark { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); font-size: 14px; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; color: var(--black); text-decoration: none; white-space: nowrap; }
+.nav-right { position: absolute; right: 48px; top: 50%; transform: translateY(-50%); }
+.nav-right a { font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--black); text-decoration: none; border-bottom: 1px solid var(--black); padding-bottom: 1px; }
+.page-body { padding-top: var(--nav-h); }
+
+/* HERO — full-bleed. Option A: image. Option B: add .no-img to .cs-hero-bg for gradient */
+.cs-hero { position: relative; min-height: 85vh; overflow: hidden; display: flex; align-items: flex-end; }
+.cs-hero-bg { position: absolute; inset: 0; z-index: 0; }
+.cs-hero-bg img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
+.cs-hero-bg.no-img { background: linear-gradient(160deg, #1a1410 0%, #100e0c 35%, #0d0b09 65%, #080706 100%); }
+.cs-hero-scrim { position: absolute; inset: 0; z-index: 1; background: linear-gradient(to top, rgba(0,0,0,.85) 0%, rgba(0,0,0,.4) 35%, transparent 60%); pointer-events: none; }
+.cs-hero-title-wrap { position: relative; z-index: 2; padding: 64px 56px 72px 48px; width: 100%; max-width: 900px; }
+.cs-hero-title { font-size: clamp(32px,4vw,56px); font-weight: 300; letter-spacing: .04em; text-transform: uppercase; color: var(--white); line-height: .95; margin: 0; text-shadow: 0 2px 24px rgba(0,0,0,.5); }
+.cs-hero-ghost { position: absolute; bottom: -40px; right: -30px; font-size: clamp(100px,14vw,200px); font-weight: 300; color: rgba(255,255,255,.03); letter-spacing: -.03em; line-height: 1; white-space: nowrap; pointer-events: none; text-transform: uppercase; user-select: none; z-index: 1; }
+
+.img-placeholder { background: var(--g100); border: 1px dashed var(--g300); display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 200px; padding: 24px; text-align: center; }
+.img-placeholder-num { font-size: 11px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--g400); margin-bottom: 8px; }
+.img-placeholder-desc { font-size: 11px; color: var(--g500); line-height: 1.5; max-width: 320px; }
+
+.cs-body-wrap { display: grid; grid-template-columns: var(--sidenav-w) 1fr; align-items: start; min-height: 100vh; }
+#cs-sidenav { position: sticky; top: var(--nav-h); height: calc(100vh - var(--nav-h)); overflow-y: auto; border-right: 1px solid var(--g200); padding: 40px 0; display: flex; flex-direction: column; background: var(--white); z-index: 50; }
+.cs-sidenav-label { font-size: 8px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--g300); padding: 0 28px 20px; }
+.cs-sidenav-link { display: flex; align-items: center; gap: 14px; padding: 12px 28px; cursor: pointer; transition: background var(--ease-fast); text-decoration: none; border-left: 2px solid transparent; color: inherit; }
+.cs-sidenav-link:hover { background: var(--g100); }
+.cs-sidenav-link.active { border-left-color: var(--black); background: var(--g100); }
+.cs-sidenav-num { font-size: 9px; font-weight: 600; letter-spacing: .12em; color: var(--g300); width: 20px; flex-shrink: 0; }
+.cs-sidenav-link.active .cs-sidenav-num { color: var(--black); }
+.cs-sidenav-text { font-size: 11px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--g400); }
+.cs-sidenav-link.active .cs-sidenav-text { color: var(--black); }
+.cs-sidenav-divider { height: 1px; background: var(--g100); margin: 8px 28px; }
+.cs-sidenav-exec { margin-top: auto; padding: 20px 28px 0; border-top: 1px solid var(--g100); }
+.cs-sidenav-exec-label { font-size: 8px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--g300); margin-bottom: 10px; }
+.cs-sidenav-exec-text { font-size: 11px; color: var(--g400); line-height: 1.7; }
+.cs-sidenav-exec-link { display: inline-block; margin-top: 10px; font-size: 9px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--black); text-decoration: none; border-bottom: 1px solid var(--black); padding-bottom: 1px; cursor: pointer; }
+
+.cs-content { min-width: 0; }
+#cs-exec-summary { padding: 64px 56px; border-bottom: 1px solid var(--g200); }
+.cs-exec-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+.cs-exec-eyebrow { font-size: 8px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--g300); margin-bottom: 16px; }
+.cs-exec-body { font-size: 13px; color: var(--g500); line-height: 1.85; margin-bottom: 32px; }
+.cs-exec-meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--g200); margin-bottom: 24px; }
+.cs-exec-meta-cell { background: var(--white); padding: 20px; }
+.cs-exec-meta-label { font-size: 8px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--g300); margin-bottom: 6px; }
+.cs-exec-meta-val { font-size: 12px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; color: var(--black); }
+
+.cs-section { padding: 72px 56px; border-bottom: 1px solid #f0f0f0; }
+.cs-section-alt { background: var(--g100); }
+.cs-section-eyebrow { display: flex; align-items: center; gap: 14px; margin-bottom: 28px; }
+.cs-section-num { font-size: 9px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--g300); }
+.cs-section-title { font-size: 11px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--black); }
+.cs-heading { font-size: clamp(22px,2.5vw,30px); font-weight: 400; letter-spacing: .03em; text-transform: uppercase; color: var(--black); line-height: 1.1; margin-bottom: 28px; }
+.cs-body { font-size: 15px; color: var(--g500); line-height: 1.8; margin-bottom: 20px; }
+.cs-body:last-child { margin-bottom: 0; }
+.cs-pull-quote { font-size: clamp(20px,2.2vw,28px); font-weight: 300; font-style: italic; color: var(--black); line-height: 1.4; border-left: 2px solid var(--black); padding-left: 28px; margin-bottom: 28px; }
+.cs-body-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 28px; }
+.cs-body-2col p { font-size: 13px; color: var(--g500); line-height: 1.75; }
+.cs-stats { display: grid; gap: 1px; background: var(--g200); margin-bottom: 28px; }
+.cs-stats-3 { grid-template-columns: repeat(3,1fr); }
+.cs-stats-4 { grid-template-columns: repeat(4,1fr); }
+.cs-stat-cell { background: var(--white); padding: 28px 24px; }
+.cs-stat-eyebrow { font-size: 9px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--g300); margin-bottom: 12px; }
+.cs-stat-num { font-size: 48px; font-weight: 300; color: var(--black); letter-spacing: -.02em; line-height: 1; margin-bottom: 8px; }
+.cs-stat-label { font-size: 12px; color: var(--g500); line-height: 1.65; }
+
+.cs-img-full { width: 100%; margin-bottom: 8px; overflow: hidden; }
+.cs-img-full img { width: 100%; display: block; object-fit: cover; }
+.cs-img-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px; }
+.cs-img-2col-item img { width: 100%; display: block; object-fit: cover; aspect-ratio: 4/3; }
+.img-caption { font-size: 9px; letter-spacing: .12em; text-transform: uppercase; color: var(--g400); padding: 6px 0 20px; display: block; }
+.cs-img-2col-item .img-caption { padding: 6px 0 0; }
+
+.cs-table { width: 100%; border-collapse: collapse; margin-bottom: 28px; }
+.cs-table th { font-size: 8px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--g300); padding: 12px 16px; border-bottom: 1px solid var(--g200); text-align: left; background: var(--g100); }
+.cs-table td { font-size: 12px; color: var(--g500); padding: 14px 16px; border-bottom: 1px solid var(--g100); line-height: 1.6; vertical-align: top; }
+.cs-table td:first-child { font-weight: 500; color: var(--black); font-size: 11px; letter-spacing: .03em; text-transform: uppercase; }
+
+/* OPTIONAL: Artifact strip (interactive iframe) */
+.artifact-strip { background: var(--black); }
+.artifact-trigger { padding: 24px 56px; display: flex; align-items: stretch; justify-content: space-between; cursor: pointer; transition: background var(--ease-fast); }
+.artifact-trigger:hover { background: #111; }
+.artifact-left { display: flex; align-items: stretch; gap: 20px; }
+.artifact-badge { border: 1px solid rgba(255,255,255,.25); padding: 0 12px; display: flex; align-items: center; flex-shrink: 0; }
+.artifact-badge span { font-size: 9px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: rgba(255,255,255,.6); white-space: nowrap; }
+.artifact-meta { display: flex; flex-direction: column; justify-content: center; gap: 5px; }
+.artifact-name { font-size: 14px; font-weight: 500; letter-spacing: .05em; text-transform: uppercase; color: var(--white); }
+.artifact-desc { font-size: 12px; color: rgba(255,255,255,.35); }
+.artifact-right { display: flex; align-items: center; flex-shrink: 0; padding-left: 20px; }
+.artifact-toggle { font-size: 20px; font-weight: 300; color: rgba(255,255,255,.5); line-height: 1; }
+.artifact-expand { max-height: 0; overflow: hidden; transition: max-height 600ms ease; }
+.artifact-inner { background: #0a0a0a; padding: 0; }
+.artifact-inner-header { display: flex; justify-content: space-between; align-items: flex-start; padding: 32px 48px 24px; border-bottom: 1px solid rgba(255,255,255,.06); }
+.artifact-inner-eyebrow { font-size: 9px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: #444; margin-bottom: 10px; }
+.artifact-inner-title { font-size: 24px; font-weight: 300; letter-spacing: .05em; text-transform: uppercase; color: var(--white); line-height: 1; }
+.artifact-close-btn { background: transparent; border: 1px solid rgba(255,255,255,.2); color: rgba(255,255,255,.5); padding: 9px 18px; font-size: 9px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; cursor: pointer; font-family: var(--font); white-space: nowrap; margin-top: 4px; }
+.artifact-iframe-wrap { width: 100%; }
+.artifact-iframe-wrap iframe { width: 100%; height: 820px; border: none; display: block; }
+
+.outcome-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--g200); margin-bottom: 32px; }
+.outcome-stat { background: var(--white); padding: 28px 24px; border-top: 3px solid var(--black); }
+.outcome-stat-num { font-size: 52px; font-weight: 300; color: var(--black); letter-spacing: -.02em; line-height: 1; margin-bottom: 10px; }
+.outcome-stat-label { font-size: 12px; color: var(--g500); line-height: 1.65; }
+.cs-next { border-top: 1px solid var(--g200); padding-top: 32px; display: flex; justify-content: space-between; align-items: center; margin-top: 40px; }
+.cs-next-label { font-size: 9px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--g300); }
+.cs-next-link { text-align: right; text-decoration: none; display: block; }
+.cs-next-meta { font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: var(--g400); margin-bottom: 5px; }
+.cs-next-title { font-size: 22px; font-weight: 400; letter-spacing: .04em; text-transform: uppercase; color: var(--black); transition: color var(--ease-fast); }
+.cs-next-link:hover .cs-next-title { color: var(--g500); }
+footer { background: var(--black); padding: 32px 48px; display: flex; justify-content: space-between; align-items: center; }
+.footer-id { display: flex; flex-direction: column; gap: 4px; }
+.footer-name { font-size: 12px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--white); }
+.footer-role { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.28); }
+.footer-links { display: flex; gap: 24px; }
+.footer-link { font-size: 10px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.35); text-decoration: none; transition: color var(--ease-fast); }
+.footer-link:hover { color: var(--white); }
+.footer-copy { font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: rgba(255,255,255,.18); }
+#scroll-progress { position: fixed; top: 0; left: 0; height: 2px; background: var(--black); width: 0%; z-index: 300; transition: width 100ms linear; }
+</style>
+</head>
+<body>
+<div id="scroll-progress"></div>
+
+<nav id="site-nav">
+  <div class="nav-main">
+    <div class="nav-left">
+      <a href="/#work" target="_parent">Work</a>
+      <a href="/#about" target="_parent">About</a>
+      <a href="/blog" target="_parent">Blog</a>
+      <a href="/13" target="_parent">13</a>
+    </div>
+    <a href="/" class="nav-wordmark" target="_parent">Benn Pattara</a>
+    <div class="nav-right"><a href="/#contact" target="_parent">Contact</a></div>
+  </div>
+</nav>
+
+<div class="page-body">
+
+  <!-- HERO — Option A: full-bleed image. Option B: gradient (add class no-img to cs-hero-bg, remove img) -->
+  <section class="cs-hero" id="cs-hero">
+    <div class="cs-hero-ghost">[GHOST_WORD]</div>
+    <div class="cs-hero-bg no-img">
+      <!-- OPTION A: Replace with <img src="[HERO_IMAGE]" alt="[PROJECT_NAME] hero" /> and remove no-img class -->
+    </div>
+    <div class="cs-hero-scrim"></div>
+    <div class="cs-hero-title-wrap">
+      <h1 class="cs-hero-title">[HERO_TITLE]</h1>
+    </div>
+  </section>
+
+  <div class="cs-body-wrap">
+    <aside id="cs-sidenav">
+      <div class="cs-sidenav-label">Index</div>
+      <a class="cs-sidenav-link active" data-target="cs-exec-summary" onclick="scrollToSection('cs-exec-summary')"><span class="cs-sidenav-num">00</span><span class="cs-sidenav-text">Exec Summary</span></a>
+      <div class="cs-sidenav-divider"></div>
+      <a class="cs-sidenav-link" data-target="cs-section-01" onclick="scrollToSection('cs-section-01')"><span class="cs-sidenav-num">01</span><span class="cs-sidenav-text">[SECTION_01_TITLE]</span></a>
+      <a class="cs-sidenav-link" data-target="cs-section-02" onclick="scrollToSection('cs-section-02')"><span class="cs-sidenav-num">02</span><span class="cs-sidenav-text">[SECTION_02_TITLE]</span></a>
+      <a class="cs-sidenav-link" data-target="cs-outcome" onclick="scrollToSection('cs-outcome')"><span class="cs-sidenav-num">03</span><span class="cs-sidenav-text">Outcome</span></a>
+      <div class="cs-sidenav-exec">
+        <div class="cs-sidenav-exec-label">TL;DR</div>
+        <p class="cs-sidenav-exec-text">[TLDR_QUOTE]</p>
+        <span class="cs-sidenav-exec-link" style="cursor:pointer" onclick="scrollToSection('cs-exec-summary')">Read summary →</span>
+      </div>
+    </aside>
+
+    <div class="cs-content">
+
+      <!-- 00 EXECUTIVE SUMMARY -->
+      <section id="cs-exec-summary" data-cs-section="exec-summary" style="padding:64px 56px;border-bottom:1px solid var(--g200);">
+        <div class="cs-exec-inner">
+          <div>
+            <div class="cs-exec-eyebrow">Executive Summary</div>
+            <p class="cs-exec-body">[EXEC_BODY_1]</p>
+            <p class="cs-exec-body">[EXEC_BODY_2]</p>
+          </div>
+          <div>
+            <div class="cs-exec-meta-grid">
+              <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Client</div><div class="cs-exec-meta-val">[META_CLIENT]</div></div>
+              <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Year</div><div class="cs-exec-meta-val">[META_YEAR]</div></div>
+              <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Role</div><div class="cs-exec-meta-val">[META_ROLE]</div></div>
+              <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Goal</div><div class="cs-exec-meta-val">[META_GOAL]</div></div>
+              <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Deliverables</div><div class="cs-exec-meta-val">[META_DELIVERABLES]</div></div>
+              <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Tools</div><div class="cs-exec-meta-val">[META_TOOLS]</div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 01 FIRST SECTION -->
+      <section class="cs-section" id="cs-section-01" data-cs-section="section-01">
+        <div class="cs-section-eyebrow"><span class="cs-section-num">01</span><span class="cs-section-title">[SECTION_01_TITLE]</span></div>
+        <h2 class="cs-heading">[SECTION_01_HEADING]</h2>
+        <p class="cs-body">[SECTION_01_BODY_1]</p>
+        <p class="cs-body">[SECTION_01_BODY_2]</p>
+        <div class="cs-stats cs-stats-3">
+          <div class="cs-stat-cell"><div class="cs-stat-eyebrow">01 · [STAT_1_LABEL]</div><div class="cs-stat-num">[STAT_1_NUM]</div><div class="cs-stat-label">[STAT_1_DESC]</div></div>
+          <div class="cs-stat-cell"><div class="cs-stat-eyebrow">02 · [STAT_2_LABEL]</div><div class="cs-stat-num">[STAT_2_NUM]</div><div class="cs-stat-label">[STAT_2_DESC]</div></div>
+          <div class="cs-stat-cell"><div class="cs-stat-eyebrow">03 · [STAT_3_LABEL]</div><div class="cs-stat-num">[STAT_3_NUM]</div><div class="cs-stat-label">[STAT_3_DESC]</div></div>
+        </div>
+        <div class="cs-img-2col">
+          <div class="cs-img-2col-item">
+            <div class="img-placeholder" style="aspect-ratio:4/3;">
+              <span class="img-placeholder-num">[IMAGE_01]</span>
+              <span class="img-placeholder-desc">[IMAGE_01_DESC]</span>
+            </div>
+            <span class="img-caption">[IMAGE_01_CAPTION]</span>
+          </div>
+          <div class="cs-img-2col-item">
+            <div class="img-placeholder" style="aspect-ratio:4/3;">
+              <span class="img-placeholder-num">[IMAGE_02]</span>
+              <span class="img-placeholder-desc">[IMAGE_02_DESC]</span>
+            </div>
+            <span class="img-caption">[IMAGE_02_CAPTION]</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 02 SECOND SECTION -->
+      <section class="cs-section cs-section-alt" id="cs-section-02" data-cs-section="section-02">
+        <div class="cs-section-eyebrow"><span class="cs-section-num">02</span><span class="cs-section-title">[SECTION_02_TITLE]</span></div>
+        <div class="cs-pull-quote">"[PULL_QUOTE]"</div>
+        <div class="cs-body-2col">
+          <p>[SECTION_02_COL1]</p>
+          <p>[SECTION_02_COL2]</p>
+        </div>
+      </section>
+
+      <!-- OPTIONAL: Artifact strip — uncomment and set [ARTIFACT_SRC] to embed interactive iframe -->
+      <!--
+      <div class="artifact-strip">
+        <div class="artifact-trigger" onclick="toggleArtifact(1)">
+          <div class="artifact-left">
+            <div class="artifact-badge"><span>Interactive</span></div>
+            <div class="artifact-meta">
+              <div class="artifact-name">[ARTIFACT_NAME]</div>
+              <div class="artifact-desc">[ARTIFACT_DESC]</div>
+            </div>
+          </div>
+          <div class="artifact-right"><span class="artifact-toggle" id="art1-cta">+</span></div>
+        </div>
+        <div class="artifact-expand" id="art1-expand">
+          <div class="artifact-inner">
+            <div class="artifact-inner-header">
+              <div>
+                <div class="artifact-inner-eyebrow">[PROJECT_NAME]</div>
+                <div class="artifact-inner-title">[ARTIFACT_NAME]</div>
+              </div>
+              <button class="artifact-close-btn" onclick="closeArtifact(1)">Close ↑</button>
+            </div>
+            <div class="artifact-iframe-wrap">
+              <iframe src="[ARTIFACT_SRC]" title="[ARTIFACT_NAME]"></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+      -->
+
+      <!-- 03 OUTCOME -->
+      <section class="cs-section" id="cs-outcome" data-cs-section="outcome">
+        <div class="cs-section-eyebrow"><span class="cs-section-num">03</span><span class="cs-section-title">Outcome</span></div>
+        <h2 class="cs-heading">[OUTCOME_HEADING]</h2>
+        <p class="cs-body">[OUTCOME_BODY]</p>
+        <div class="outcome-stats">
+          <div class="outcome-stat"><div class="outcome-stat-num">[OUTCOME_1_NUM]</div><div class="outcome-stat-label">[OUTCOME_1_LABEL]</div></div>
+          <div class="outcome-stat"><div class="outcome-stat-num">[OUTCOME_2_NUM]</div><div class="outcome-stat-label">[OUTCOME_2_LABEL]</div></div>
+          <div class="outcome-stat"><div class="outcome-stat-num">[OUTCOME_3_NUM]</div><div class="outcome-stat-label">[OUTCOME_3_LABEL]</div></div>
+        </div>
+        <div class="cs-next">
+          <div class="cs-next-label">Next Case Study</div>
+          <a href="[NEXT_CASE_HREF]" class="cs-next-link" target="_parent">
+            <div class="cs-next-meta">[NEXT_CASE_META]</div>
+            <div class="cs-next-title">[NEXT_CASE_TITLE] →</div>
+          </a>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-id">
+    <span class="footer-name">Benn Pattara</span>
+    <span class="footer-role">Brand Experience Strategist &amp; Systems Designer</span>
+  </div>
+  <div class="footer-links">
+    <a href="/" class="footer-link" target="_parent">Home</a>
+    <a href="/#about" class="footer-link" target="_parent">About</a>
+    <a href="/blog" class="footer-link" target="_parent">Blog</a>
+    <a href="/#contact" class="footer-link" target="_parent">Contact</a>
+  </div>
+  <div class="footer-copy">© 2026 Benn Pattara · bennpattara.com</div>
+</footer>
+
+<script>
+// SCROLL PROGRESS
+window.addEventListener('scroll', () => {
+  const s = window.scrollY, t = document.documentElement.scrollHeight - window.innerHeight;
+  document.getElementById('scroll-progress').style.width = (t? s/t*100 : 0)+'%';
+});
+// SIDENAV
+const sectionObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      document.querySelectorAll('.cs-sidenav-link').forEach(l => l.classList.remove('active'));
+      const m = document.querySelector('.cs-sidenav-link[data-target="' + entry.target.id + '"]');
+      if (m) m.classList.add('active');
+    }
+  });
+}, { threshold: 0, rootMargin: '-10% 0px -80% 0px' });
+document.querySelectorAll('[data-cs-section]').forEach(s => sectionObserver.observe(s));
+function scrollToSection(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 104, behavior: 'smooth' });
+}
+// ARTIFACTS (uncomment if using artifact strip)
+function toggleArtifact(n) {
+  const expand = document.getElementById('art'+n+'-expand');
+  const toggle = document.getElementById('art'+n+'-cta');
+  if (!expand || !toggle) return;
+  const isOpen = expand.dataset.open === 'true';
+  expand.style.maxHeight = isOpen ? '0' : '900px';
+  expand.dataset.open = isOpen ? 'false' : 'true';
+  toggle.textContent = isOpen ? '+' : '×';
+}
+function closeArtifact(n) {
+  const expand = document.getElementById('art'+n+'-expand');
+  const toggle = document.getElementById('art'+n+'-cta');
+  if (expand && toggle) { expand.style.maxHeight = '0'; expand.dataset.open = 'false'; toggle.textContent = '+'; }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,1578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vault by Saks — Live Financial Model</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0D0D0B;
+    --vault: #F5EFE3;
+    --gold: #C4933A;
+    --gold-lt: #E8C96E;
+    --gold-dim: rgba(196,147,58,0.15);
+    --rust: #B84136;
+    --sage: #3D6B50;
+    --muted: #7A7A70;
+    --rule: rgba(196,147,58,0.2);
+    --panel: #FAFAF5;
+    --dark-panel: #141412;
+    --red-dim: rgba(184,65,54,0.12);
+    --green-dim: rgba(61,107,80,0.12);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--ink);
+    color: var(--vault);
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── MASTHEAD ── */
+  .masthead {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    padding: 64px 64px 48px;
+    border-bottom: 1px solid var(--rule);
+    gap: 40px;
+  }
+  .masthead-crisis {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--rust);
+    border: 1px solid rgba(184,65,54,0.35);
+    padding: 5px 14px;
+    margin-bottom: 28px;
+  }
+  .masthead-crisis::before {
+    content:'●';
+    animation: blink 1.8s ease infinite;
+  }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+  .masthead-wordmark {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(52px,6vw,96px);
+    font-weight: 300;
+    line-height: 0.92;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+  }
+  .masthead-wordmark em { font-style: italic; color: var(--gold); }
+  .masthead-sub {
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .masthead-kpis {
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--rule);
+    min-width: 260px;
+  }
+  .kpi-cell {
+    background: var(--dark-panel);
+    padding: 20px 24px;
+  }
+  .kpi-label {
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .kpi-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 30px;
+    font-weight: 300;
+    color: var(--gold);
+    line-height: 1;
+    transition: all 0.4s ease;
+  }
+  .kpi-delta {
+    font-size: 10px;
+    color: var(--sage);
+    margin-top: 4px;
+    transition: all 0.3s ease;
+  }
+
+  /* ── TABS ── */
+  .tabs {
+    display: flex;
+    border-bottom: 1px solid var(--rule);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--ink);
+    overflow-x: auto;
+  }
+  .tab {
+    padding: 18px 32px;
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--muted);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    transition: color 0.2s, border-color 0.2s;
+    flex-shrink: 0;
+  }
+  .tab:hover { color: var(--vault); }
+  .tab.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+  /* ── PANELS ── */
+  .panel { display: none; }
+  .panel.active { display: block; }
+  .container { max-width: 1280px; margin: 0 auto; padding: 56px 64px; }
+
+  /* ── SECTION TITLES ── */
+  .s-eyebrow {
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+  .s-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 40px;
+    font-weight: 300;
+    line-height: 1.1;
+    margin-bottom: 8px;
+  }
+  .s-title em { font-style: italic; color: var(--gold); }
+  .s-note {
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.7;
+    max-width: 600px;
+    margin-bottom: 40px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  /* ── SLIDER CONTROLS ── */
+  .controls-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-bottom: 48px;
+    background: var(--rule);
+  }
+  .control-group {
+    background: var(--dark-panel);
+    padding: 28px 32px;
+  }
+  .control-group-title {
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .control-row {
+    display: grid;
+    grid-template-columns: 200px 1fr 80px;
+    gap: 16px;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  .control-label {
+    font-size: 10px;
+    color: var(--muted);
+    line-height: 1.3;
+  }
+  .control-label strong {
+    display: block;
+    color: var(--vault);
+    font-weight: 400;
+    margin-bottom: 2px;
+  }
+  input[type=range] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 2px;
+    background: rgba(255,255,255,0.12);
+    outline: none;
+    cursor: pointer;
+    position: relative;
+  }
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 14px;
+    height: 14px;
+    background: var(--gold);
+    border-radius: 0;
+    cursor: pointer;
+    transition: transform 0.1s;
+  }
+  input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.3); }
+  .control-val {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 300;
+    color: var(--gold);
+    text-align: right;
+    transition: all 0.3s ease;
+  }
+  .scenario-selector {
+    display: flex;
+    gap: 2px;
+    margin-bottom: 40px;
+  }
+  .scenario-btn {
+    padding: 12px 24px;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    background: var(--dark-panel);
+    color: var(--muted);
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    border-bottom: 2px solid transparent;
+    font-family: 'DM Mono', monospace;
+  }
+  .scenario-btn:hover { color: var(--vault); }
+  .scenario-btn.active {
+    color: var(--gold);
+    border-bottom-color: var(--gold);
+  }
+
+  /* ── REVENUE WATERFALL ── */
+  .waterfall {
+    margin-bottom: 48px;
+  }
+  .waterfall-title {
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 24px;
+  }
+  .wf-row {
+    display: grid;
+    grid-template-columns: 220px 1fr 120px;
+    gap: 2px;
+    margin-bottom: 2px;
+    align-items: stretch;
+  }
+  .wf-label {
+    background: var(--dark-panel);
+    padding: 14px 18px;
+    font-size: 11px;
+    color: var(--vault);
+  }
+  .wf-label .wf-sub {
+    font-size: 9px;
+    color: var(--muted);
+    margin-top: 3px;
+    letter-spacing: 0.1em;
+  }
+  .wf-bar-container {
+    background: rgba(255,255,255,0.03);
+    position: relative;
+    overflow: hidden;
+    min-height: 52px;
+  }
+  .wf-bar {
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    transition: width 0.6s cubic-bezier(0.16,1,0.3,1);
+    display: flex;
+    align-items: center;
+    padding-left: 14px;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    min-width: 0;
+    overflow: hidden;
+  }
+  .wf-bar.membership { background: rgba(196,147,58,0.25); border-right: 2px solid var(--gold); }
+  .wf-bar.retail { background: rgba(61,107,80,0.25); border-right: 2px solid var(--sage); }
+  .wf-bar.curation { background: rgba(140,80,160,0.2); border-right: 2px solid #8C50A0; }
+  .wf-bar.events { background: rgba(80,120,180,0.2); border-right: 2px solid #5078B4; }
+  .wf-bar.total { background: var(--gold); border-right: none; color: var(--ink); }
+  .wf-bar.costs { background: rgba(184,65,54,0.2); border-right: 2px solid var(--rust); }
+  .wf-bar.ebitda { background: rgba(61,107,80,0.35); border-right: 2px solid var(--sage); color: var(--vault); }
+  .wf-val {
+    background: var(--dark-panel);
+    padding: 14px 18px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 300;
+    color: var(--gold);
+    text-align: right;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    transition: all 0.4s ease;
+  }
+  .wf-val.negative { color: var(--rust); }
+  .wf-val.positive { color: #6DB888; }
+  .wf-divider {
+    height: 2px;
+    background: var(--rule);
+    margin: 12px 0;
+  }
+
+  /* ── 5-YEAR TIMELINE ── */
+  .timeline-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 2px;
+    background: var(--rule);
+    margin-bottom: 48px;
+  }
+  .yr-card {
+    background: var(--dark-panel);
+    padding: 28px 24px;
+    position: relative;
+    transition: background 0.3s;
+  }
+  .yr-card.breakeven-yr {
+    background: #0E1A12;
+    border: 1px solid rgba(61,107,80,0.4);
+  }
+  .yr-badge {
+    font-size: 8px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  .yr-nodes {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 42px;
+    font-weight: 300;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 4px;
+    transition: all 0.4s ease;
+  }
+  .yr-nodes-lbl { font-size: 9px; color: var(--muted); margin-bottom: 16px; letter-spacing: 0.1em; }
+  .yr-members {
+    font-size: 11px;
+    color: var(--vault);
+    margin-bottom: 4px;
+    transition: all 0.4s ease;
+  }
+  .yr-rev {
+    font-size: 11px;
+    color: var(--gold);
+    margin-bottom: 4px;
+    transition: all 0.4s ease;
+  }
+  .yr-ebitda {
+    font-size: 11px;
+    transition: all 0.4s ease;
+  }
+  .yr-ebitda.pos { color: var(--sage); }
+  .yr-ebitda.neg { color: var(--rust); }
+  .yr-breakeven-tag {
+    display: none;
+    font-size: 8px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--sage);
+    border: 1px solid rgba(61,107,80,0.4);
+    padding: 4px 8px;
+    margin-top: 12px;
+  }
+  .yr-card.breakeven-yr .yr-breakeven-tag { display: inline-block; }
+
+  /* ── MEMBER TABLE ── */
+  .tbl {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 40px;
+  }
+  .tbl thead tr {
+    background: rgba(196,147,58,0.08);
+  }
+  .tbl th {
+    padding: 12px 16px;
+    font-size: 8px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: left;
+    font-weight: 400;
+    border-bottom: 1px solid var(--rule);
+  }
+  .tbl td {
+    padding: 14px 16px;
+    font-size: 11px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    transition: all 0.3s ease;
+  }
+  .tbl tbody tr:hover td { background: rgba(196,147,58,0.04); }
+  .tbl td.tier-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    font-weight: 300;
+  }
+  .tbl td.gold-val { color: var(--gold); }
+  .tbl td.sage-val { color: var(--sage); }
+  .tbl tfoot td {
+    padding: 16px;
+    background: rgba(196,147,58,0.1);
+    color: var(--gold);
+    font-weight: 500;
+    font-size: 12px;
+    border-top: 1px solid var(--rule);
+  }
+
+  /* ── COMPETITIVE MOAT ── */
+  .moat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2px;
+    background: var(--rule);
+    margin-bottom: 40px;
+  }
+  .moat-card {
+    background: var(--dark-panel);
+    padding: 32px 28px;
+  }
+  .moat-card.ours { background: #0C170F; border: 1px solid rgba(61,107,80,0.3); }
+  .moat-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 300;
+    margin-bottom: 4px;
+  }
+  .moat-brand em { font-style: italic; color: var(--gold); }
+  .moat-type {
+    font-size: 8px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+  .moat-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    font-size: 10px;
+  }
+  .moat-row:last-child { border-bottom: none; }
+  .moat-attr { color: var(--muted); }
+  .moat-score { color: var(--vault); }
+  .moat-score.strong { color: var(--sage); }
+  .moat-score.weak { color: var(--rust); }
+  .moat-score.mid { color: var(--gold); }
+
+  /* ── ASSUMPTIONS ── */
+  .assump-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2px;
+    background: var(--rule);
+  }
+  .assump-block {
+    background: var(--dark-panel);
+    padding: 28px;
+  }
+  .assump-title {
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .assump-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 9px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    font-size: 10px;
+  }
+  .assump-row:last-child { border-bottom: none; }
+  .assump-key { color: var(--muted); max-width: 60%; line-height: 1.4; }
+  .assump-val {
+    color: var(--vault);
+    font-weight: 500;
+    text-align: right;
+    transition: all 0.3s ease;
+  }
+  .assump-val.sourced { color: var(--gold); }
+
+  /* ── FAILURE SECTION ── */
+  .failure-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    background: var(--rule);
+    margin-bottom: 40px;
+  }
+  .fail-card {
+    background: var(--dark-panel);
+    padding: 32px 28px;
+    border-left: 3px solid var(--rust);
+  }
+  .fail-stat {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    font-weight: 300;
+    color: var(--rust);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .fail-problem {
+    font-size: 13px;
+    color: var(--vault);
+    margin-bottom: 12px;
+    line-height: 1.4;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+  }
+  .fail-desc { font-size: 10px; color: var(--muted); line-height: 1.7; margin-bottom: 14px; }
+  .fail-vault {
+    font-size: 10px;
+    color: var(--sage);
+    padding-top: 12px;
+    border-top: 1px solid rgba(61,107,80,0.25);
+    line-height: 1.6;
+  }
+  .fail-vault::before { content: '→  '; color: var(--gold); }
+
+  /* ── RESPONSIVE ANNOTATIONS ── */
+  .annotation {
+    font-size: 10px;
+    color: var(--muted);
+    font-style: italic;
+    margin-top: 8px;
+    line-height: 1.5;
+  }
+
+  /* ── RISK TABLE ── */
+  .risk-tbl { width: 100%; border-collapse: collapse; }
+  .risk-tbl th {
+    font-size: 8px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--muted); padding: 12px 16px; text-align: left; font-weight: 400;
+    border-bottom: 1px solid var(--rule);
+  }
+  .risk-tbl td { padding: 14px 16px; font-size: 11px; border-bottom: 1px solid rgba(255,255,255,0.04); }
+  .risk-pill {
+    display: inline-block;
+    padding: 2px 10px;
+    font-size: 8px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+  .risk-pill.high { background: rgba(184,65,54,0.2); color: var(--rust); }
+  .risk-pill.med { background: rgba(196,147,58,0.2); color: var(--gold); }
+  .risk-pill.low { background: rgba(61,107,80,0.2); color: var(--sage); }
+
+  /* Animations */
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(16px); }
+    to { opacity:1; transform:translateY(0); }
+  }
+  .fade-in { animation: fadeUp 0.5s ease forwards; }
+
+  /* Footer */
+  .model-footer {
+    padding: 32px 64px;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .model-footer span { color: var(--vault); }
+
+  @media (max-width: 900px) {
+    .masthead { grid-template-columns: 1fr; padding: 40px 24px 32px; }
+    .container { padding: 40px 24px; }
+    .controls-grid, .timeline-grid, .moat-grid, .assump-grid { grid-template-columns: 1fr; }
+    .control-row { grid-template-columns: 1fr 1fr; }
+    .control-row .control-label { grid-column: span 2; }
+    .wf-row { grid-template-columns: 140px 1fr 90px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div>
+    <div class="masthead-crisis">● Chapter 11 Filed — Jan 2026 — $4.7B Debt</div>
+    <div class="masthead-wordmark">Vault<br><em>by Saks</em></div>
+    <div class="masthead-sub">Interactive Financial Model &nbsp;/&nbsp; Strategic Case Study &nbsp;/&nbsp; Benn Pattara</div>
+  </div>
+  <div class="masthead-kpis">
+    <div class="kpi-cell">
+      <div class="kpi-label">Y3 Revenue (Base)</div>
+      <div class="kpi-value" id="kpi-rev">$48.2M</div>
+      <div class="kpi-delta" id="kpi-rev-d">↑ Membership + Retail + Events</div>
+    </div>
+    <div class="kpi-cell">
+      <div class="kpi-label">Breakeven (Nodes)</div>
+      <div class="kpi-value" id="kpi-be">Month 14</div>
+      <div class="kpi-delta" id="kpi-be-d">Per-node, at 60% utilization</div>
+    </div>
+    <div class="kpi-cell">
+      <div class="kpi-label">5-Year EBITDA</div>
+      <div class="kpi-value" id="kpi-ebitda">$31.4M</div>
+      <div class="kpi-delta" id="kpi-ebitda-d">38% margin at maturity</div>
+    </div>
+  </div>
+</header>
+
+<!-- TABS -->
+<nav class="tabs">
+  <div class="tab active" onclick="switchTab('model', this)">01 — Live Model</div>
+  <div class="tab" onclick="switchTab('diagnosis', this)">02 — The Diagnosis</div>
+  <div class="tab" onclick="switchTab('members', this)">03 — Member Economics</div>
+  <div class="tab" onclick="switchTab('nodes', this)">04 — Node Rollout</div>
+  <div class="tab" onclick="switchTab('moat', this)">05 — Competitive Moat</div>
+  <div class="tab" onclick="switchTab('risks', this)">06 — Risks & Sensitivity</div>
+  <div class="tab" onclick="switchTab('assumptions', this)">07 — Assumptions Log</div>
+</nav>
+
+<!-- ──────────────── PANEL 01 — LIVE MODEL ──────────────── -->
+<div id="panel-model" class="panel active">
+  <div class="container">
+    <div class="s-eyebrow">Interactive Financial Model</div>
+    <div class="s-title">Adjust assumptions.<br><em>Watch the model move.</em></div>
+    <div class="s-note">All figures are projections based on disclosed assumptions. Use the sliders to stress-test scenarios. The model updates in real time. Scenario presets load industry-comparable benchmarks.</div>
+
+    <!-- SCENARIO SELECTOR -->
+    <div class="scenario-selector">
+      <button class="scenario-btn" onclick="loadScenario('bear', this)">Bear Case</button>
+      <button class="scenario-btn active" onclick="loadScenario('base', this)">Base Case</button>
+      <button class="scenario-btn" onclick="loadScenario('bull', this)">Bull Case</button>
+    </div>
+
+    <!-- SLIDERS -->
+    <div class="controls-grid">
+      <div class="control-group">
+        <div class="control-group-title">Node Expansion</div>
+        <div class="control-row">
+          <div class="control-label"><strong>Y1 Launch Nodes</strong>Initial markets</div>
+          <input type="range" id="sl-nodes-y1" min="2" max="8" step="1" value="3" oninput="updateModel()">
+          <div class="control-val" id="v-nodes-y1">3</div>
+        </div>
+        <div class="control-row">
+          <div class="control-label"><strong>Annual Node Growth</strong>New nodes per year</div>
+          <input type="range" id="sl-nodes-growth" min="2" max="12" step="1" value="5" oninput="updateModel()">
+          <div class="control-val" id="v-nodes-growth">5</div>
+        </div>
+        <div class="control-row">
+          <div class="control-label"><strong>Node Monthly Lease</strong>Per location ($K)</div>
+          <input type="range" id="sl-lease" min="15" max="50" step="1" value="28" oninput="updateModel()">
+          <div class="control-val" id="v-lease">$28K</div>
+        </div>
+      </div>
+      <div class="control-group">
+        <div class="control-group-title">Membership & Revenue</div>
+        <div class="control-row">
+          <div class="control-label"><strong>Members / Node / Month</strong>Avg acquisition</div>
+          <input type="range" id="sl-mpm" min="20" max="120" step="5" value="55" oninput="updateModel()">
+          <div class="control-val" id="v-mpm">55</div>
+        </div>
+        <div class="control-row">
+          <div class="control-label"><strong>Blended Avg Ticket</strong>Per purchase ($)</div>
+          <input type="range" id="sl-atv" min="400" max="1400" step="50" value="750" oninput="updateModel()">
+          <div class="control-val" id="v-atv">$750</div>
+        </div>
+        <div class="control-row">
+          <div class="control-label"><strong>Annual Churn Rate</strong>Member loss %</div>
+          <input type="range" id="sl-churn" min="5" max="40" step="1" value="18" oninput="updateModel()">
+          <div class="control-val" id="v-churn">18%</div>
+        </div>
+      </div>
+      <div class="control-group">
+        <div class="control-group-title">Membership Tiers</div>
+        <div class="control-row">
+          <div class="control-label"><strong>Member (Base) Fee</strong>Annual subscription</div>
+          <input type="range" id="sl-fee-m" min="100" max="500" step="25" value="250" oninput="updateModel()">
+          <div class="control-val" id="v-fee-m">$250</div>
+        </div>
+        <div class="control-row">
+          <div class="control-label"><strong>Reserve Fee</strong>Mid-tier annual</div>
+          <input type="range" id="sl-fee-r" min="500" max="1500" step="50" value="900" oninput="updateModel()">
+          <div class="control-val" id="v-fee-r">$900</div>
+        </div>
+        <div class="control-row">
+          <div class="control-label"><strong>Black Fee</strong>Top-tier annual</div>
+          <input type="range" id="sl-fee-b" min="2000" max="8000" step="250" value="4500" oninput="updateModel()">
+          <div class="control-val" id="v-fee-b">$4,500</div>
+        </div>
+      </div>
+      <div class="control-group">
+        <div class="control-group-title">Cost Structure</div>
+        <div class="control-row">
+          <div class="control-label"><strong>COGS % of Retail Rev</strong>Inventory cost</div>
+          <input type="range" id="sl-cogs" min="35" max="65" step="1" value="50" oninput="updateModel()">
+          <div class="control-val" id="v-cogs">50%</div>
+        </div>
+        <div class="control-row">
+          <div class="control-label"><strong>Staffing / Node / Mo</strong>Labor cost ($K)</div>
+          <input type="range" id="sl-staff" min="15" max="60" step="1" value="35" oninput="updateModel()">
+          <div class="control-val" id="v-staff">$35K</div>
+        </div>
+        <div class="control-row">
+          <div class="control-label"><strong>Corp Overhead</strong>% of total revenue</div>
+          <input type="range" id="sl-overhead" min="8" max="25" step="1" value="14" oninput="updateModel()">
+          <div class="control-val" id="v-overhead">14%</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- YEAR 3 WATERFALL -->
+    <div class="waterfall">
+      <div class="waterfall-title">Year 3 Revenue Waterfall — Base Scenario</div>
+
+      <div class="wf-row">
+        <div class="wf-label">Membership Fees<div class="wf-sub">3 tiers × member count</div></div>
+        <div class="wf-bar-container">
+          <div class="wf-bar membership" id="bar-membership" style="width:0%"></div>
+        </div>
+        <div class="wf-val" id="val-membership">—</div>
+      </div>
+      <div class="wf-row">
+        <div class="wf-label">Retail Purchases<div class="wf-sub">ATV × purchase frequency</div></div>
+        <div class="wf-bar-container">
+          <div class="wf-bar retail" id="bar-retail" style="width:0%"></div>
+        </div>
+        <div class="wf-val" id="val-retail">—</div>
+      </div>
+      <div class="wf-row">
+        <div class="wf-label">Curation Commissions<div class="wf-sub">12% designer fee on GMV</div></div>
+        <div class="wf-bar-container">
+          <div class="wf-bar curation" id="bar-curation" style="width:0%"></div>
+        </div>
+        <div class="wf-val" id="val-curation">—</div>
+      </div>
+      <div class="wf-row">
+        <div class="wf-label">Events & Experiences<div class="wf-sub">Rotation launches, stylist days</div></div>
+        <div class="wf-bar-container">
+          <div class="wf-bar events" id="bar-events" style="width:0%"></div>
+        </div>
+        <div class="wf-val" id="val-events">—</div>
+      </div>
+
+      <div class="wf-divider"></div>
+
+      <div class="wf-row">
+        <div class="wf-label" style="font-weight:500;color:var(--gold);">Total Revenue<div class="wf-sub">Before costs</div></div>
+        <div class="wf-bar-container">
+          <div class="wf-bar total" id="bar-total" style="width:100%">Total Revenue</div>
+        </div>
+        <div class="wf-val" id="val-total" style="color:var(--gold);font-size:26px;">—</div>
+      </div>
+      <div class="wf-row">
+        <div class="wf-label">Total OpEx<div class="wf-sub">COGS + Lease + Staff + Corp</div></div>
+        <div class="wf-bar-container">
+          <div class="wf-bar costs" id="bar-costs" style="width:0%"></div>
+        </div>
+        <div class="wf-val negative" id="val-costs">—</div>
+      </div>
+
+      <div class="wf-divider"></div>
+
+      <div class="wf-row">
+        <div class="wf-label" style="color:#6DB888;">EBITDA<div class="wf-sub">Y3 operating profit</div></div>
+        <div class="wf-bar-container">
+          <div class="wf-bar ebitda" id="bar-ebitda" style="width:0%"></div>
+        </div>
+        <div class="wf-val positive" id="val-ebitda">—</div>
+      </div>
+    </div>
+
+    <!-- 5-YEAR TIMELINE -->
+    <div class="waterfall-title" style="margin-bottom:16px;">5-Year Projection — Node Expansion &amp; Profitability</div>
+    <div class="timeline-grid" id="timeline-grid">
+      <!-- filled by JS -->
+    </div>
+    <div class="annotation">* All projections assume base-case inputs. Modify sliders above to stress-test. Breakeven year highlighted in green.</div>
+  </div>
+</div>
+
+<!-- ──────────────── PANEL 02 — DIAGNOSIS ──────────────── -->
+<div id="panel-diagnosis" class="panel">
+  <div class="container">
+    <div class="s-eyebrow">The Strategic Diagnosis</div>
+    <div class="s-title">Four failures.<br><em>One clear path forward.</em></div>
+    <div class="s-note">Saks Global's bankruptcy is not a story of bad management. It is a story of a structural model — inventory ownership, long-term leases, slow buying cycles — that the market outran. Each failure point maps directly to a Vault design decision.</div>
+
+    <div class="failure-grid">
+      <div class="fail-card">
+        <div class="fail-stat">$4.7B</div>
+        <div class="fail-problem">Debt load following the Neiman Marcus merger (2024)</div>
+        <div class="fail-desc">The HBC-Neiman deal was predicated on cost synergies that never materialized. Two overlapping real estate portfolios, two legacy IT systems, two C-suites. The merger doubled the debt without doubling the revenue.</div>
+        <div class="fail-vault">Vault's asset-light model holds zero owned real estate. Nodes are leased month-to-month at $28K avg vs. $1.2M/mo for a Saks floor. Capital goes to curation, not concrete.</div>
+      </div>
+      <div class="fail-card">
+        <div class="fail-stat">180d</div>
+        <div class="fail-problem">Saks' average buying cycle vs. 14-day TikTok trend half-life</div>
+        <div class="fail-desc">Luxury buyers commit inventory 6 months before the season. By the time a "trending" piece arrives at Saks, it's already been screenshot, duped, and moved on from. The system was built for a pre-internet media cycle.</div>
+        <div class="fail-vault">Vault rotates inventory every 14 days, matching the attention economy. Each rotation is curated from real-time cultural signals — not season books written in Milan 9 months ago.</div>
+      </div>
+      <div class="fail-card">
+        <div class="fail-stat">$137M</div>
+        <div class="fail-problem">Chanel's outstanding claim — now withholding all inventory</div>
+        <div class="fail-desc">Vendor trust is existential for luxury retail. The moment Chanel pulls inventory, the aspirational floor collapses. Saks has now lost its most powerful brand association at the worst possible time.</div>
+        <div class="fail-vault">Smart contract payments — designers paid instantly upon each sale via blockchain settlement. Zero accounts payable lag. Vendor trust becomes a structural advantage, not an assumption.</div>
+      </div>
+      <div class="fail-card">
+        <div class="fail-stat">65%</div>
+        <div class="fail-problem">HNW Gen Z shoppers in secondary markets with no physical Saks</div>
+        <div class="fail-desc">Saks was built for 12 gateway cities. The "luxury consumer" has moved — Austin, Nashville, Richmond, Scottsdale are minting HNW households faster than NYC. Saks has no presence, no data, and no plan.</div>
+        <div class="fail-vault">Nodes launch first in these underserved high-growth markets. Not as a compromise — as a deliberate cultural bet that the next luxury consumer is not in a Manhattan doorman building.</div>
+      </div>
+    </div>
+
+    <div class="s-eyebrow" style="margin-top:48px;">The Strategic Reframe</div>
+    <div class="s-title">Stop owning things.<br><em>Start knowing people.</em></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--rule);margin-top:32px;">
+      <div style="background:var(--dark-panel);padding:32px;">
+        <div style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--rust);margin-bottom:16px;">Old Model — Saks Legacy</div>
+        <div style="font-size:12px;color:var(--muted);line-height:2;">
+          Own 8M sq ft of retail space<br>
+          Buy inventory 180 days forward<br>
+          Pay designers net-90<br>
+          Serve 12 gateway cities<br>
+          $350–600 avg CPM on brand media<br>
+          6-month trend response lag<br>
+          12,000+ SKUs per location<br>
+          2.5× annual inventory turns
+        </div>
+      </div>
+      <div style="background:#0C170F;border:1px solid rgba(61,107,80,0.3);padding:32px;">
+        <div style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--sage);margin-bottom:16px;">Vault Model — Asset Light</div>
+        <div style="font-size:12px;color:var(--vault);line-height:2;">
+          Lease nodes month-to-month (~2,400 sq ft each)<br>
+          Rotate inventory every 14 days<br>
+          Pay designers instantly via smart contract<br>
+          Launch in Austin, Richmond, Scottsdale first<br>
+          $0 CPM — members opt in for discovery<br>
+          14-day trend response cycle<br>
+          80–120 SKUs per node rotation<br>
+          26× annual inventory turns
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ──────────────── PANEL 03 — MEMBER ECONOMICS ──────────────── -->
+<div id="panel-members" class="panel">
+  <div class="container">
+    <div class="s-eyebrow">Membership Architecture</div>
+    <div class="s-title">Three tiers.<br><em>One escalating relationship.</em></div>
+    <div class="s-note">Vault's revenue model is structured so that membership fees cover fixed costs, and retail GMV is pure margin upside. This inverts the traditional retail model — we break even before anyone buys a single piece.</div>
+
+    <table class="tbl" id="member-tbl">
+      <thead>
+        <tr>
+          <th>Tier</th>
+          <th>Annual Fee</th>
+          <th>Y3 Members (est.)</th>
+          <th>Tier Revenue</th>
+          <th>Avg Purchases/Yr</th>
+          <th>Avg Ticket</th>
+          <th>GMV / Member</th>
+          <th>Total GMV</th>
+          <th>LTV (3yr)</th>
+        </tr>
+      </thead>
+      <tbody id="member-tbody">
+      </tbody>
+      <tfoot>
+        <tr>
+          <td>Total / Blended</td>
+          <td id="tbl-blended-fee">—</td>
+          <td id="tbl-total-members">—</td>
+          <td id="tbl-total-fee-rev">—</td>
+          <td>—</td>
+          <td id="tbl-blended-atv">—</td>
+          <td>—</td>
+          <td id="tbl-total-gmv">—</td>
+          <td id="tbl-blended-ltv">—</td>
+        </tr>
+      </tfoot>
+    </table>
+
+    <div class="s-eyebrow" style="margin-top:40px;">Cohort Retention Model</div>
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:2px;background:var(--rule);margin-top:16px;" id="retention-grid">
+    </div>
+    <div class="annotation" style="margin-top:12px;">* Retention modeled on comparable luxury subscription programs (Net-a-Porter EIP, Rent the Runway). Churn set to <span id="churn-annotation">18%</span> annually in current scenario.</div>
+
+    <div style="margin-top:48px;display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--rule);">
+      <div style="background:var(--dark-panel);padding:32px;">
+        <div class="s-eyebrow">Member Acquisition Economics</div>
+        <div style="margin-top:12px;">
+          <div class="assump-row"><span class="assump-key">CAC — Organic / Referral</span><span class="assump-val sourced">$85–$120</span></div>
+          <div class="assump-row"><span class="assump-key">CAC — Paid (Y1 only)</span><span class="assump-val">$220–$380</span></div>
+          <div class="assump-row"><span class="assump-key">Referral rate (existing members)</span><span class="assump-val">28%</span></div>
+          <div class="assump-row"><span class="assump-key">Time to first purchase post-join</span><span class="assump-val">Avg 11 days</span></div>
+          <div class="assump-row"><span class="assump-key">Upgrade rate (Member → Reserve)</span><span class="assump-val sourced">22% Y1 → Y2</span></div>
+          <div class="assump-row"><span class="assump-key">Upgrade rate (Reserve → Black)</span><span class="assump-val">8% annual</span></div>
+          <div class="assump-row"><span class="assump-key">Payback period (blended)</span><span class="assump-val sourced" id="payback-val">~5.2 months</span></div>
+        </div>
+      </div>
+      <div style="background:var(--dark-panel);padding:32px;">
+        <div class="s-eyebrow">Comparable Benchmarks</div>
+        <div style="margin-top:12px;">
+          <div class="assump-row"><span class="assump-key">Net-a-Porter EIP retention (yr 1)</span><span class="assump-val sourced">~82%</span></div>
+          <div class="assump-row"><span class="assump-key">Soho House annual churn</span><span class="assump-val sourced">~15%</span></div>
+          <div class="assump-row"><span class="assump-key">Rent the Runway avg member spend</span><span class="assump-val sourced">$1,800/yr</span></div>
+          <div class="assump-row"><span class="assump-key">Luxury subscription avg LTV:CAC</span><span class="assump-val sourced">4.2×</span></div>
+          <div class="assump-row"><span class="assump-key">Bergdorf Personal Shopping spend</span><span class="assump-val sourced">$12K+ avg/yr</span></div>
+          <div class="assump-row"><span class="assump-key">Trunk Club avg basket (at peak)</span><span class="assump-val sourced">$640</span></div>
+          <div class="assump-row"><span class="assump-key">Vault target LTV:CAC</span><span class="assump-val">4.8× (Y3)</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ──────────────── PANEL 04 — NODE ROLLOUT ──────────────── -->
+<div id="panel-nodes" class="panel">
+  <div class="container">
+    <div class="s-eyebrow">Node Rollout Strategy</div>
+    <div class="s-title">Secondary markets first.<br><em>That's the whole bet.</em></div>
+    <div class="s-note">The conventional luxury playbook opens in NYC, LA, Chicago. Vault inverts this. The TAM in underserved secondary markets is larger, less contested, and more grateful for access. This is not a compromise — it's the strategy.</div>
+
+    <div style="display:grid;grid-template-columns:1.2fr 80px 110px 140px 140px 100px;gap:2px;background:var(--rule);margin-bottom:2px;">
+      <div style="background:rgba(196,147,58,0.08);padding:12px 16px;font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);">Market / Node</div>
+      <div style="background:rgba(196,147,58,0.08);padding:12px 16px;font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);">Phase</div>
+      <div style="background:rgba(196,147,58,0.08);padding:12px 16px;font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);">Monthly Lease</div>
+      <div style="background:rgba(196,147,58,0.08);padding:12px 16px;font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);">Target Members (Y1)</div>
+      <div style="background:rgba(196,147,58,0.08);padding:12px 16px;font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);">Break-even Mo.</div>
+      <div style="background:rgba(196,147,58,0.08);padding:12px 16px;font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);">HNW Pop.</div>
+    </div>
+    <div id="node-table"><!-- filled by JS --></div>
+
+    <div style="margin-top:48px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px;background:var(--rule);">
+      <div style="background:var(--dark-panel);padding:28px;">
+        <div class="assump-title">Node Economics (Per Location)</div>
+        <div class="assump-row"><span class="assump-key">Size</span><span class="assump-val">~2,400 sq ft</span></div>
+        <div class="assump-row"><span class="assump-key">Format</span><span class="assump-val">Flexible lease / popup</span></div>
+        <div class="assump-row"><span class="assump-key">Build-out (one-time)</span><span class="assump-val">$120–180K</span></div>
+        <div class="assump-row"><span class="assump-key">SKUs per rotation</span><span class="assump-val">80–120 pieces</span></div>
+        <div class="assump-row"><span class="assump-key">Inventory value / rotation</span><span class="assump-val">$180K–$240K</span></div>
+        <div class="assump-row"><span class="assump-key">Rotation frequency</span><span class="assump-val">Every 14 days</span></div>
+        <div class="assump-row"><span class="assump-key">Staff: FT + PT</span><span class="assump-val">2 FT + 3–4 PT</span></div>
+      </div>
+      <div style="background:var(--dark-panel);padding:28px;">
+        <div class="assump-title">Operational Spec</div>
+        <div class="assump-row"><span class="assump-key">Curation source</span><span class="assump-val">Vogue UA/ES + emerging</span></div>
+        <div class="assump-row"><span class="assump-key">Logistics partner</span><span class="assump-val">ShipBob or 3PL</span></div>
+        <div class="assump-row"><span class="assump-key">Returns handling</span><span class="assump-val">At-node + prepaid label</span></div>
+        <div class="assump-row"><span class="assump-key">Security system</span><span class="assump-val">Smart lock + RFID tags</span></div>
+        <div class="assump-row"><span class="assump-key">Climate control</span><span class="assump-val">Commercial HVAC std.</span></div>
+        <div class="assump-row"><span class="assump-key">Appointment booking</span><span class="assump-val">Vault app (native)</span></div>
+        <div class="assump-row"><span class="assump-key">Inventory mgmt</span><span class="assump-val">Shopify POS + custom</span></div>
+      </div>
+      <div style="background:var(--dark-panel);padding:28px;">
+        <div class="assump-title">Growth Constraints</div>
+        <div class="assump-row"><span class="assump-key">Max nodes per city (Y1)</span><span class="assump-val">1</span></div>
+        <div class="assump-row"><span class="assump-key">Lead time per node launch</span><span class="assump-val">90–120 days</span></div>
+        <div class="assump-row"><span class="assump-key">Min members to open next</span><span class="assump-val">150 paid members</span></div>
+        <div class="assump-row"><span class="assump-key">Curator hiring lead time</span><span class="assump-val">60 days</span></div>
+        <div class="assump-row"><span class="assump-key">Tech platform cost (one-time)</span><span class="assump-val">$380–480K</span></div>
+        <div class="assump-row"><span class="assump-key">Designer onboarding (avg)</span><span class="assump-val">45 days</span></div>
+        <div class="assump-row"><span class="assump-key">Smart contract audit cost</span><span class="assump-val">$40–60K</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ──────────────── PANEL 05 — MOAT ──────────────── -->
+<div id="panel-moat" class="panel">
+  <div class="container">
+    <div class="s-eyebrow">Competitive Positioning</div>
+    <div class="s-title">Not competing with Saks.<br><em>Building something Saks can't copy.</em></div>
+    <div class="s-note">The conventional response would be to benchmark Vault against Neimans, Saks, or Nordstrom. The real competitive set is different. Vault is competing for the same wallet as Soho House, Net-a-Porter EIP, and StockX — not the department store down the street.</div>
+
+    <div class="moat-grid">
+      <div class="moat-card">
+        <div class="moat-brand">Net-a-Porter <em>EIP</em></div>
+        <div class="moat-type">Digital-first luxury membership</div>
+        <div class="moat-row"><span class="moat-attr">Physical presence</span><span class="moat-score weak">None</span></div>
+        <div class="moat-row"><span class="moat-attr">Emerging designer access</span><span class="moat-score mid">Moderate</span></div>
+        <div class="moat-row"><span class="moat-attr">Rotation / scarcity model</span><span class="moat-score weak">No</span></div>
+        <div class="moat-row"><span class="moat-attr">Secondary market presence</span><span class="moat-score weak">No</span></div>
+        <div class="moat-row"><span class="moat-attr">Stylist relationship</span><span class="moat-score strong">Strong</span></div>
+        <div class="moat-row"><span class="moat-attr">Community / events</span><span class="moat-score weak">Minimal</span></div>
+        <div class="moat-row"><span class="moat-attr">Vendor payment model</span><span class="moat-score mid">Standard net-30</span></div>
+      </div>
+      <div class="moat-card">
+        <div class="moat-brand">Soho House</div>
+        <div class="moat-type">Physical membership club model</div>
+        <div class="moat-row"><span class="moat-attr">Physical presence</span><span class="moat-score strong">40+ locations</span></div>
+        <div class="moat-row"><span class="moat-attr">Emerging designer access</span><span class="moat-score weak">None</span></div>
+        <div class="moat-row"><span class="moat-attr">Rotation / scarcity model</span><span class="moat-score weak">No</span></div>
+        <div class="moat-row"><span class="moat-attr">Secondary market presence</span><span class="moat-score strong">Strong</span></div>
+        <div class="moat-row"><span class="moat-attr">Stylist relationship</span><span class="moat-score weak">None</span></div>
+        <div class="moat-row"><span class="moat-attr">Community / events</span><span class="moat-score strong">Core product</span></div>
+        <div class="moat-row"><span class="moat-attr">Vendor payment model</span><span class="moat-score weak">N/A</span></div>
+      </div>
+      <div class="moat-card ours">
+        <div class="moat-brand"><em>Vault by Saks</em></div>
+        <div class="moat-type">Physical + digital tiered discovery club</div>
+        <div class="moat-row"><span class="moat-attr">Physical presence</span><span class="moat-score strong">14-day rotating nodes</span></div>
+        <div class="moat-row"><span class="moat-attr">Emerging designer access</span><span class="moat-score strong">Core curation model</span></div>
+        <div class="moat-row"><span class="moat-attr">Rotation / scarcity model</span><span class="moat-score strong">14-day hard rotation</span></div>
+        <div class="moat-row"><span class="moat-attr">Secondary market presence</span><span class="moat-score strong">Launch market</span></div>
+        <div class="moat-row"><span class="moat-attr">Stylist relationship</span><span class="moat-score strong">Named stylist (Reserve+)</span></div>
+        <div class="moat-row"><span class="moat-attr">Community / events</span><span class="moat-score strong">Rotation launches</span></div>
+        <div class="moat-row"><span class="moat-attr">Vendor payment model</span><span class="moat-score strong">Instant via smart contract</span></div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--rule);margin-top:2px;">
+      <div style="background:var(--dark-panel);padding:32px;">
+        <div class="moat-brand" style="font-size:18px;">The Structural Moats</div>
+        <div style="margin-top:20px;font-size:11px;color:var(--muted);line-height:1.9;">
+          <div style="color:var(--vault);margin-bottom:6px;">① <strong style="color:var(--gold);">Rotation Data.</strong> Every 14-day cycle generates demand signals no competitor has: what got wishisted vs. purchased, what stayed in the cart, what got photographed. This becomes a proprietary trend engine.</div>
+          <div style="color:var(--vault);margin-bottom:6px;">② <strong style="color:var(--gold);">Vendor Trust Moat.</strong> Instant smart contract payment creates loyalty from designers. The first time Vault pays a Ukrainian designer in 4 minutes while Neimans owes them $40K, the word spreads in every design school in Europe.</div>
+          <div style="color:var(--vault);margin-bottom:6px;">③ <strong style="color:var(--gold);">Geography First-Mover.</strong> Austin, Richmond, Scottsdale — these markets have no premium competitor. Vault becomes "the place" by simply showing up. Once a local style community forms around a node, it creates switching costs no CPM can replicate.</div>
+        </div>
+      </div>
+      <div style="background:var(--dark-panel);padding:32px;">
+        <div class="moat-brand" style="font-size:18px;">The Real Threats</div>
+        <div style="margin-top:20px;font-size:11px;color:var(--muted);line-height:1.9;">
+          <div style="color:var(--vault);margin-bottom:6px;">⚠ <strong style="color:var(--rust);">LVMH Private Client.</strong> LVMH has the capital, the brands, and the relationships to build a similar model in 18 months. The window to establish data and community moats is real and finite.</div>
+          <div style="color:var(--vault);margin-bottom:6px;">⚠ <strong style="color:var(--rust);">Farfetch Relaunch.</strong> Coupang's acquisition of Farfetch represents a well-capitalized second attempt at exactly this problem. If they execute on physical touchpoints, they're a direct competitor.</div>
+          <div style="color:var(--vault);margin-bottom:6px;">⚠ <strong style="color:var(--rust);">StockX + Consignment.</strong> The resale market has trained consumers to expect authentication and scarcity. If StockX enters new-release luxury, they bring a massive installed base into Vault's core proposition.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ──────────────── PANEL 06 — RISKS ──────────────── -->
+<div id="panel-risks" class="panel">
+  <div class="container">
+    <div class="s-eyebrow">Risk Register & Sensitivity</div>
+    <div class="s-title">What has to be true.<br><em>What breaks the model.</em></div>
+    <div class="s-note">Every financial model is a set of optimistic assumptions. This section surfaces the key assumptions that, if wrong, cause the model to fail — and what early indicators would signal each.</div>
+
+    <table class="risk-tbl" style="margin-bottom:48px;">
+      <thead>
+        <tr>
+          <th style="width:200px;">Risk</th>
+          <th>Severity</th>
+          <th>Key Assumption</th>
+          <th>Break Point</th>
+          <th>Early Signal</th>
+          <th>Mitigation</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="font-family:'Cormorant Garamond',serif;font-size:14px;">Member acquisition falls below target</td>
+          <td><span class="risk-pill high">High</span></td>
+          <td style="color:var(--muted);">55 members/node/mo</td>
+          <td style="color:var(--rust);">&lt;30/mo = cash burn</td>
+          <td style="color:var(--muted);">CAC rising above $400</td>
+          <td>Double referral incentive; defer node 2 launch</td>
+        </tr>
+        <tr>
+          <td style="font-family:'Cormorant Garamond',serif;font-size:14px;">ATV below model</td>
+          <td><span class="risk-pill high">High</span></td>
+          <td style="color:var(--muted);">$750 blended basket</td>
+          <td style="color:var(--rust);">&lt;$500 = EBITDA negative Y3</td>
+          <td style="color:var(--muted);">Black tier purchase frequency drops</td>
+          <td>Curate higher-price SKUs; exclusive drops</td>
+        </tr>
+        <tr>
+          <td style="font-family:'Cormorant Garamond',serif;font-size:14px;">Designer supply constraint</td>
+          <td><span class="risk-pill high">High</span></td>
+          <td style="color:var(--muted);">80+ SKUs per rotation</td>
+          <td style="color:var(--rust);">&lt;50 SKUs = thin experience</td>
+          <td style="color:var(--muted);">Repeat designer % above 40%</td>
+          <td>Pre-sign 120+ designers before Y1 launch</td>
+        </tr>
+        <tr>
+          <td style="font-family:'Cormorant Garamond',serif;font-size:14px;">Churn above 25%</td>
+          <td><span class="risk-pill med">Med</span></td>
+          <td style="color:var(--muted);">18% annual churn</td>
+          <td style="color:var(--rust);">25%+ = LTV:CAC &lt;2.5×</td>
+          <td style="color:var(--muted);">6-month retention below 72%</td>
+          <td>Introduce loyalty points; stylist continuity</td>
+        </tr>
+        <tr>
+          <td style="font-family:'Cormorant Garamond',serif;font-size:14px;">Smart contract tech risk</td>
+          <td><span class="risk-pill med">Med</span></td>
+          <td style="color:var(--muted);">Instant payment rails</td>
+          <td style="color:var(--rust);">Payment delay restores vendor distrust</td>
+          <td style="color:var(--muted);">Settlement time creeping above 24hrs</td>
+          <td>Escrow backup; traditional wire fallback</td>
+        </tr>
+        <tr>
+          <td style="font-family:'Cormorant Garamond',serif;font-size:14px;">Lease cost spike</td>
+          <td><span class="risk-pill med">Med</span></td>
+          <td style="color:var(--muted);">$28K avg/mo per node</td>
+          <td style="color:var(--rust);">$45K+ = delayed breakeven by 8mo</td>
+          <td style="color:var(--muted);">Two consecutive renewals at market rate</td>
+          <td>Multi-year lock on Y1 nodes before Y2 launch</td>
+        </tr>
+        <tr>
+          <td style="font-family:'Cormorant Garamond',serif;font-size:14px;">Regulatory (luxury resale laws)</td>
+          <td><span class="risk-pill low">Low</span></td>
+          <td style="color:var(--muted);">New goods model; not resale</td>
+          <td style="color:var(--rust);">Misclassified as consignment</td>
+          <td style="color:var(--muted);">State AG inquiry</td>
+          <td>Structure as standard wholesale purchase</td>
+        </tr>
+        <tr>
+          <td style="font-family:'Cormorant Garamond',serif;font-size:14px;">Bankruptcy estate challenge</td>
+          <td><span class="risk-pill low">Low</span></td>
+          <td style="color:var(--muted);">Vault as spinout / new entity</td>
+          <td style="color:var(--rust);">Court disallows IP use</td>
+          <td style="color:var(--muted);">Trustee objection to licensing</td>
+          <td>Launch under clean-sheet brand if needed</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- SENSITIVITY MATRIX -->
+    <div class="s-eyebrow">Sensitivity Matrix — Y3 EBITDA</div>
+    <div style="font-size:10px;color:var(--muted);margin-bottom:20px;margin-top:8px;">What happens to Y3 EBITDA when ATV and churn move independently</div>
+    <div id="sensitivity-matrix" style="overflow-x:auto;margin-bottom:48px;"></div>
+  </div>
+</div>
+
+<!-- ──────────────── PANEL 07 — ASSUMPTIONS ──────────────── -->
+<div id="panel-assumptions" class="panel">
+  <div class="container">
+    <div class="s-eyebrow">Model Assumptions Log</div>
+    <div class="s-title">Every number.<br><em>Every source.</em></div>
+    <div class="s-note">Financial models are only as credible as their disclosed assumptions. This log documents every material assumption in the model, its basis, and its sensitivity classification. Figures marked ◆ are derived from public filings or industry reports; all others are strategic estimates.</div>
+
+    <div class="assump-grid">
+      <div class="assump-block">
+        <div class="assump-title">Context — Saks Global Bankruptcy</div>
+        <div class="assump-row"><span class="assump-key">Total debt (post-merger)</span><span class="assump-val sourced">◆ $4.7B — Bloomberg, Jan 2026</span></div>
+        <div class="assump-row"><span class="assump-key">Chanel claim outstanding</span><span class="assump-val sourced">◆ $137M — WSJ Jan 2026</span></div>
+        <div class="assump-row"><span class="assump-key">Saks avg buying cycle</span><span class="assump-val sourced">◆ 180 days — industry standard</span></div>
+        <div class="assump-row"><span class="assump-key">HNW secondary market gap</span><span class="assump-val sourced">◆ 65% — Bain Luxury 2024</span></div>
+        <div class="assump-row"><span class="assump-key">TikTok trend half-life</span><span class="assump-val">14 days — internal estimate</span></div>
+        <div class="assump-row"><span class="assump-key">Saks annual inventory turns</span><span class="assump-val sourced">◆ 2.5× — public filing est.</span></div>
+      </div>
+      <div class="assump-block">
+        <div class="assump-title">Node Economics</div>
+        <div class="assump-row"><span class="assump-key">Node size</span><span class="assump-val">2,400 sq ft — design spec</span></div>
+        <div class="assump-row"><span class="assump-key">Monthly lease (avg)</span><span class="assump-val">Slider — base $28K</span></div>
+        <div class="assump-row"><span class="assump-key">Build-out (one-time)</span><span class="assump-val">$150K — retail contractor est.</span></div>
+        <div class="assump-row"><span class="assump-key">Staff cost / node / mo</span><span class="assump-val">Slider — base $35K</span></div>
+        <div class="assump-row"><span class="assump-key">Inventory / rotation</span><span class="assump-val">$200K avg — 80–120 SKUs</span></div>
+        <div class="assump-row"><span class="assump-key">Rotation frequency</span><span class="assump-val">Every 14 days — model pillar</span></div>
+        <div class="assump-row"><span class="assump-key">COGS % of retail</span><span class="assump-val">Slider — base 50%</span></div>
+      </div>
+      <div class="assump-block">
+        <div class="assump-title">Membership Model</div>
+        <div class="assump-row"><span class="assump-key">Member tier fee</span><span class="assump-val">Slider — base $250/yr</span></div>
+        <div class="assump-row"><span class="assump-key">Reserve tier fee</span><span class="assump-val">Slider — base $900/yr</span></div>
+        <div class="assump-row"><span class="assump-key">Black tier fee</span><span class="assump-val">Slider — base $4,500/yr</span></div>
+        <div class="assump-row"><span class="assump-key">Tier split (M/R/B)</span><span class="assump-val">65% / 28% / 7%</span></div>
+        <div class="assump-row"><span class="assump-key">Annual churn</span><span class="assump-val">Slider — base 18%</span></div>
+        <div class="assump-row"><span class="assump-key">Members / node / mo</span><span class="assump-val">Slider — base 55</span></div>
+        <div class="assump-row"><span class="assump-key">Curation commission</span><span class="assump-val">12% of designer GMV</span></div>
+      </div>
+      <div class="assump-block">
+        <div class="assump-title">Revenue Drivers</div>
+        <div class="assump-row"><span class="assump-key">Blended ATV</span><span class="assump-val">Slider — base $750</span></div>
+        <div class="assump-row"><span class="assump-key">Purchases / member / yr</span><span class="assump-val">M: 2.5× R: 4.5× B: 8×</span></div>
+        <div class="assump-row"><span class="assump-key">Event revenue / node / yr</span><span class="assump-val">$48K — 12 events × $4K avg</span></div>
+        <div class="assump-row"><span class="assump-key">Corporate overhead %</span><span class="assump-val">Slider — base 14%</span></div>
+        <div class="assump-row"><span class="assump-key">Discount rate (NPV)</span><span class="assump-val">12% — retail startup WACC</span></div>
+        <div class="assump-row"><span class="assump-key">Terminal growth rate</span><span class="assump-val">3% — conservative</span></div>
+      </div>
+      <div class="assump-block">
+        <div class="assump-title">Comparable Benchmarks Used</div>
+        <div class="assump-row"><span class="assump-key">Net-a-Porter EIP churn</span><span class="assump-val sourced">◆ ~18% — industry reports</span></div>
+        <div class="assump-row"><span class="assump-key">Soho House retention</span><span class="assump-val sourced">◆ ~85% — SH&CO filings</span></div>
+        <div class="assump-row"><span class="assump-key">RTR avg member spend</span><span class="assump-val sourced">◆ $1,800/yr — SEC 10-K</span></div>
+        <div class="assump-row"><span class="assump-key">Luxury sub LTV:CAC</span><span class="assump-val sourced">◆ 4.2× — McKinsey 2023</span></div>
+        <div class="assump-row"><span class="assump-key">Trunk Club basket</span><span class="assump-val sourced">◆ $640 — Nordstrom 10-K</span></div>
+        <div class="assump-row"><span class="assump-key">Bergdorf PS avg spend</span><span class="assump-val sourced">◆ $12K+ — NMG disclosure</span></div>
+      </div>
+      <div class="assump-block">
+        <div class="assump-title">Model Limitations</div>
+        <div class="assump-row"><span class="assump-key">Scope</span><span class="assump-val">US domestic only, Y1–Y5</span></div>
+        <div class="assump-row"><span class="assump-key">Excludes</span><span class="assump-val">International, wholesale, licensing</span></div>
+        <div class="assump-row"><span class="assump-key">Does not model</span><span class="assump-val">IP valuation, M&A scenarios</span></div>
+        <div class="assump-row"><span class="assump-key">Currency</span><span class="assump-val">USD, nominal (no inflation adj.)</span></div>
+        <div class="assump-row"><span class="assump-key">Tax treatment</span><span class="assump-val">Pre-tax EBITDA only</span></div>
+        <div class="assump-row"><span class="assump-key">This model is</span><span class="assump-val" style="color:var(--rust);">A strategic projection, not an audit</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="model-footer">
+  <div>Vault by Saks — Financial Model &amp; Case Study &nbsp;/&nbsp; <span>Benn Pattara</span> &nbsp;/&nbsp; VCU Brandcenter 2026</div>
+  <div>All figures are strategic projections &nbsp;/&nbsp; Not for investment purposes</div>
+</footer>
+
+<script>
+// ── CORE MODEL ENGINE ──────────────────────────────────────────
+
+const SCENARIOS = {
+  bear: { nodesY1:2, nodesGrowth:3, lease:32, mpm:30, atv:520, churn:28, feeM:200, feeR:700, feeB:3500, cogs:58, staff:40, overhead:18 },
+  base: { nodesY1:3, nodesGrowth:5, lease:28, mpm:55, atv:750, churn:18, feeM:250, feeR:900, feeB:4500, cogs:50, staff:35, overhead:14 },
+  bull: { nodesY1:4, nodesGrowth:8, lease:25, mpm:85, atv:980, churn:11, feeM:300, feeR:1100, feeB:6000, cogs:44, staff:32, overhead:11 }
+};
+
+const TIER_SPLIT = { m:0.65, r:0.28, b:0.07 };
+const PURCHASE_FREQ = { m:2.5, r:4.5, b:8 };
+const CURATE_RATE = 0.12;
+const EVENT_PER_NODE_YR = 48000;
+
+function getInputs() {
+  return {
+    nodesY1: +document.getElementById('sl-nodes-y1').value,
+    nodesGrowth: +document.getElementById('sl-nodes-growth').value,
+    lease: +document.getElementById('sl-lease').value * 1000,
+    mpm: +document.getElementById('sl-mpm').value,
+    atv: +document.getElementById('sl-atv').value,
+    churn: +document.getElementById('sl-churn').value / 100,
+    feeM: +document.getElementById('sl-fee-m').value,
+    feeR: +document.getElementById('sl-fee-r').value,
+    feeB: +document.getElementById('sl-fee-b').value,
+    cogs: +document.getElementById('sl-cogs').value / 100,
+    staff: +document.getElementById('sl-staff').value * 1000,
+    overhead: +document.getElementById('sl-overhead').value / 100
+  };
+}
+
+function projectYear(inp, year) {
+  const nodes = inp.nodesY1 + inp.nodesGrowth * (year - 1);
+  // Cumulative members with churn
+  let members = 0;
+  for (let y = 1; y <= year; y++) {
+    const n = inp.nodesY1 + inp.nodesGrowth * (y - 1);
+    const newM = n * inp.mpm * 12;
+    members = members * (1 - inp.churn) + newM;
+  }
+
+  const mCount = members * TIER_SPLIT.m;
+  const rCount = members * TIER_SPLIT.r;
+  const bCount = members * TIER_SPLIT.b;
+
+  const membershipRev = mCount * inp.feeM + rCount * inp.feeR + bCount * inp.feeB;
+
+  const mGMV = mCount * PURCHASE_FREQ.m * inp.atv;
+  const rGMV = rCount * PURCHASE_FREQ.r * inp.atv * 1.2;
+  const bGMV = bCount * PURCHASE_FREQ.b * inp.atv * 1.6;
+  const totalGMV = mGMV + rGMV + bGMV;
+  const retailRev = totalGMV; // gross revenue
+  const curationRev = totalGMV * CURATE_RATE;
+  const eventsRev = nodes * EVENT_PER_NODE_YR;
+
+  const totalRev = membershipRev + retailRev + curationRev + eventsRev;
+
+  // Costs
+  const cogsTotal = retailRev * inp.cogs;
+  const leaseCost = nodes * inp.lease * 12;
+  const staffCost = nodes * inp.staff * 12;
+  const corpCost = totalRev * inp.overhead;
+  const totalCost = cogsTotal + leaseCost + staffCost + corpCost;
+  const ebitda = totalRev - totalCost;
+
+  return { year, nodes, members: Math.round(members), membershipRev, retailRev, curationRev, eventsRev, totalRev, totalCost, ebitda, totalGMV };
+}
+
+function fmt(n, decimals=1) {
+  const abs = Math.abs(n);
+  if (abs >= 1e9) return (n<0?'-':'') + '$' + (abs/1e9).toFixed(1) + 'B';
+  if (abs >= 1e6) return (n<0?'-':'') + '$' + (abs/1e6).toFixed(decimals) + 'M';
+  if (abs >= 1e3) return (n<0?'-':'') + '$' + (abs/1e3).toFixed(0) + 'K';
+  return (n<0?'-':'') + '$' + abs.toFixed(0);
+}
+
+function fmtN(n) {
+  if(n >= 1e6) return (n/1e6).toFixed(1)+'M';
+  if(n >= 1e3) return (n/1e3).toFixed(1)+'K';
+  return Math.round(n).toString();
+}
+
+function updateSliderDisplays(inp) {
+  document.getElementById('v-nodes-y1').textContent = document.getElementById('sl-nodes-y1').value;
+  document.getElementById('v-nodes-growth').textContent = document.getElementById('sl-nodes-growth').value;
+  document.getElementById('v-lease').textContent = '$' + document.getElementById('sl-lease').value + 'K';
+  document.getElementById('v-mpm').textContent = document.getElementById('sl-mpm').value;
+  document.getElementById('v-atv').textContent = '$' + document.getElementById('sl-atv').value;
+  document.getElementById('v-churn').textContent = document.getElementById('sl-churn').value + '%';
+  document.getElementById('v-fee-m').textContent = '$' + (+document.getElementById('sl-fee-m').value).toLocaleString();
+  document.getElementById('v-fee-r').textContent = '$' + (+document.getElementById('sl-fee-r').value).toLocaleString();
+  document.getElementById('v-fee-b').textContent = '$' + (+document.getElementById('sl-fee-b').value).toLocaleString();
+  document.getElementById('v-cogs').textContent = document.getElementById('sl-cogs').value + '%';
+  document.getElementById('v-staff').textContent = '$' + document.getElementById('sl-staff').value + 'K';
+  document.getElementById('v-overhead').textContent = document.getElementById('sl-overhead').value + '%';
+}
+
+function updateWaterfall(y3) {
+  const total = y3.totalRev;
+  const setBar = (id, val, max) => {
+    const el = document.getElementById('bar-' + id);
+    if(el) el.style.width = Math.max(3, (val/max)*95) + '%';
+  };
+  const setVal = (id, val, neg=false) => {
+    const el = document.getElementById('val-' + id);
+    if(el) { el.textContent = fmt(val); el.className = 'wf-val' + (neg?' negative':' positive'); }
+  };
+  setBar('membership', y3.membershipRev, total);
+  setBar('retail', y3.retailRev, total);
+  setBar('curation', y3.curationRev, total);
+  setBar('events', y3.eventsRev, total);
+  setBar('costs', y3.totalCost, total);
+  setBar('ebitda', Math.max(0, y3.ebitda), total);
+  document.getElementById('val-membership').textContent = fmt(y3.membershipRev);
+  document.getElementById('val-membership').className = 'wf-val';
+  document.getElementById('val-retail').textContent = fmt(y3.retailRev);
+  document.getElementById('val-retail').className = 'wf-val';
+  document.getElementById('val-curation').textContent = fmt(y3.curationRev);
+  document.getElementById('val-curation').className = 'wf-val';
+  document.getElementById('val-events').textContent = fmt(y3.eventsRev);
+  document.getElementById('val-events').className = 'wf-val';
+  document.getElementById('val-total').textContent = fmt(y3.totalRev);
+  document.getElementById('val-costs').textContent = '-' + fmt(y3.totalCost);
+  document.getElementById('val-ebitda').textContent = fmt(y3.ebitda);
+}
+
+function updateTimeline(years) {
+  const grid = document.getElementById('timeline-grid');
+  if(!grid) return;
+  // find first profitable year
+  const beIdx = years.findIndex(y => y.ebitda > 0);
+  grid.innerHTML = years.map((y, i) => {
+    const isBreakeven = i === beIdx;
+    const ebitdaClass = y.ebitda >= 0 ? 'pos' : 'neg';
+    const ebitdaSign = y.ebitda >= 0 ? '+' : '';
+    return `<div class="yr-card ${isBreakeven ? 'breakeven-yr' : ''}">
+      <div class="yr-badge">Year ${y.year} ${isBreakeven ? '★' : ''}</div>
+      <div class="yr-nodes">${y.nodes}</div>
+      <div class="yr-nodes-lbl">Active nodes</div>
+      <div class="yr-members">${fmtN(y.members)} members</div>
+      <div class="yr-rev">${fmt(y.totalRev)} revenue</div>
+      <div class="yr-ebitda ${ebitdaClass}">${ebitdaSign}${fmt(y.ebitda)} EBITDA</div>
+      ${isBreakeven ? '<div class="yr-breakeven-tag">Breakeven Year</div>' : ''}
+    </div>`;
+  }).join('');
+}
+
+function updateKPIs(years) {
+  const y3 = years[2];
+  const y5 = years[4];
+  const margin = y3.totalRev > 0 ? ((y3.ebitda/y3.totalRev)*100).toFixed(0) : 0;
+  document.getElementById('kpi-rev').textContent = fmt(y3.totalRev);
+  document.getElementById('kpi-rev-d').textContent = `↑ ${Math.round(y3.membershipRev/y3.totalRev*100)}% membership + ${Math.round(y3.retailRev/y3.totalRev*100)}% retail`;
+  const beIdx = years.findIndex(y => y.ebitda > 0);
+  document.getElementById('kpi-be').textContent = beIdx >= 0 ? `Year ${years[beIdx].year}` : 'Year 5+';
+  document.getElementById('kpi-be-d').textContent = beIdx >= 0 ? `First profitable year at ${years[beIdx].nodes} nodes` : 'Model requires optimization';
+  // cumulative 5yr ebitda
+  const cumEbitda = years.reduce((s,y) => s+y.ebitda, 0);
+  document.getElementById('kpi-ebitda').textContent = fmt(cumEbitda);
+  document.getElementById('kpi-ebitda-d').textContent = `${margin}% margin at Y3 / ${fmt(y5.totalRev)} Y5 rev`;
+}
+
+function updateMemberTable(inp, y3) {
+  const tbody = document.getElementById('member-tbody');
+  if(!tbody) return;
+  const members = y3.members;
+  const tiers = [
+    { name:'Member', fee:inp.feeM, pct:TIER_SPLIT.m, freq:PURCHASE_FREQ.m, aTVmult:1.0 },
+    { name:'Reserve', fee:inp.feeR, pct:TIER_SPLIT.r, freq:PURCHASE_FREQ.r, aTVmult:1.2 },
+    { name:'Black', fee:inp.feeB, pct:TIER_SPLIT.b, freq:PURCHASE_FREQ.b, aTVmult:1.6 }
+  ];
+  let totalFeeRev=0, totalGMV=0, totalMembers=0;
+  tbody.innerHTML = tiers.map(t => {
+    const cnt = Math.round(members * t.pct);
+    const feeRev = cnt * t.fee;
+    const atv = inp.atv * t.aTVmult;
+    const gmvMem = t.freq * atv;
+    const totalGmvTier = cnt * gmvMem;
+    const ltv3 = t.fee*3 + gmvMem*3*(1-inp.cogs);
+    totalFeeRev+=feeRev; totalGMV+=totalGmvTier; totalMembers+=cnt;
+    return `<tr>
+      <td class="tier-name">${t.name}</td>
+      <td class="gold-val">$${t.fee.toLocaleString()}</td>
+      <td>${fmtN(cnt)}</td>
+      <td class="gold-val">${fmt(feeRev)}</td>
+      <td>${t.freq}×</td>
+      <td>$${Math.round(atv).toLocaleString()}</td>
+      <td>${fmt(gmvMem)}</td>
+      <td class="sage-val">${fmt(totalGmvTier)}</td>
+      <td>${fmt(ltv3)}</td>
+    </tr>`;
+  }).join('');
+  const blendedFee = totalMembers > 0 ? totalFeeRev/totalMembers : 0;
+  const blendedAtv = inp.atv;
+  const blendedLtv = (blendedFee*3) + (PURCHASE_FREQ.m*0.65+PURCHASE_FREQ.r*0.28+PURCHASE_FREQ.b*0.07)*3*blendedAtv*(1-inp.cogs);
+  document.getElementById('tbl-blended-fee').textContent = '$'+Math.round(blendedFee).toLocaleString();
+  document.getElementById('tbl-total-members').textContent = fmtN(totalMembers);
+  document.getElementById('tbl-total-fee-rev').textContent = fmt(totalFeeRev);
+  document.getElementById('tbl-blended-atv').textContent = '$'+Math.round(blendedAtv).toLocaleString();
+  document.getElementById('tbl-total-gmv').textContent = fmt(totalGMV);
+  document.getElementById('tbl-blended-ltv').textContent = fmt(blendedLtv);
+  // update churn annotation
+  const ca = document.getElementById('churn-annotation');
+  if(ca) ca.textContent = Math.round(inp.churn*100) + '%';
+}
+
+function updateRetentionGrid(inp) {
+  const grid = document.getElementById('retention-grid');
+  if(!grid) return;
+  const startMembers = 1000;
+  grid.innerHTML = [1,2,3,4,5].map(yr => {
+    const retained = Math.round(startMembers * Math.pow(1-inp.churn, yr));
+    const pct = (retained/startMembers*100).toFixed(0);
+    return `<div style="background:var(--dark-panel);padding:24px 20px;">
+      <div style="font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">Year ${yr}</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:300;color:${pct>70?'#6DB888':'var(--rust)'};line-height:1;">${pct}%</div>
+      <div style="font-size:9px;color:var(--muted);margin-top:4px;">${fmtN(retained)} of 1,000 cohort</div>
+    </div>`;
+  }).join('');
+}
+
+const NODE_MARKETS = [
+  { city:'Austin, TX', phase:'Phase 1', lease:'$24K', targetY1:'620', be:'Month 11', hnw:'82K HNW HH' },
+  { city:'Richmond, VA', phase:'Phase 1', lease:'$18K', targetY1:'410', be:'Month 13', hnw:'38K HNW HH' },
+  { city:'Scottsdale, AZ', phase:'Phase 1', lease:'$26K', targetY1:'540', be:'Month 12', hnw:'64K HNW HH' },
+  { city:'Nashville, TN', phase:'Phase 2', lease:'$22K', targetY1:'480', be:'Month 14', hnw:'58K HNW HH' },
+  { city:'Denver, CO', phase:'Phase 2', lease:'$28K', targetY1:'510', be:'Month 13', hnw:'71K HNW HH' },
+  { city:'Charlotte, NC', phase:'Phase 2', lease:'$20K', targetY1:'390', be:'Month 15', hnw:'44K HNW HH' },
+  { city:'Portland, OR', phase:'Phase 3', lease:'$30K', targetY1:'420', be:'Month 16', hnw:'41K HNW HH' },
+  { city:'Salt Lake City, UT', phase:'Phase 3', lease:'$21K', targetY1:'350', be:'Month 15', hnw:'36K HNW HH' },
+];
+
+function buildNodeTable() {
+  const tbl = document.getElementById('node-table');
+  if(!tbl) return;
+  tbl.innerHTML = NODE_MARKETS.map(m => {
+    const p1 = m.phase==='Phase 1';
+    const p2 = m.phase==='Phase 2';
+    const bg = p1 ? '#0C170F' : p2 ? 'rgba(196,147,58,0.06)' : 'var(--dark-panel)';
+    const pcolor = p1 ? 'var(--sage)' : p2 ? 'var(--gold)' : 'var(--muted)';
+    return `<div style="display:grid;grid-template-columns:1.2fr 80px 110px 140px 140px 100px;gap:2px;background:var(--rule);margin-bottom:2px;">
+      <div style="background:${bg};padding:14px 16px;font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:300;">${m.city}</div>
+      <div style="background:${bg};padding:14px 16px;font-size:10px;color:${pcolor};letter-spacing:0.1em;">${m.phase}</div>
+      <div style="background:var(--dark-panel);padding:14px 16px;font-size:11px;">${m.lease}/mo</div>
+      <div style="background:var(--dark-panel);padding:14px 16px;font-size:11px;color:var(--vault);">${m.targetY1} members</div>
+      <div style="background:var(--dark-panel);padding:14px 16px;font-size:11px;color:${p1?'var(--sage)':'var(--muted)'};">${m.be}</div>
+      <div style="background:var(--dark-panel);padding:14px 16px;font-size:10px;color:var(--muted);">${m.hnw}</div>
+    </div>`;
+  }).join('');
+}
+
+function buildSensitivityMatrix(inp) {
+  const container = document.getElementById('sensitivity-matrix');
+  if(!container) return;
+
+  const atvs = [500, 650, 750, 900, 1100];
+  const churns = [0.10, 0.15, 0.18, 0.22, 0.28, 0.35];
+
+  let html = `<table style="border-collapse:collapse;font-size:10px;min-width:600px;">
+    <thead><tr>
+      <th style="padding:10px 14px;background:var(--dark-panel);color:var(--muted);font-size:8px;letter-spacing:0.2em;text-transform:uppercase;text-align:left;">ATV ↓ / Churn →</th>`;
+  churns.forEach(c => {
+    html += `<th style="padding:10px 14px;background:var(--dark-panel);color:var(--muted);font-size:8px;letter-spacing:0.2em;text-transform:uppercase;">${(c*100).toFixed(0)}%</th>`;
+  });
+  html += `</tr></thead><tbody>`;
+
+  atvs.forEach(atv => {
+    html += `<tr><td style="padding:10px 14px;background:var(--dark-panel);color:var(--vault);font-weight:500;">$${atv}</td>`;
+    churns.forEach(churn => {
+      const testInp = {...inp, atv, churn};
+      const y3 = projectYear(testInp, 3);
+      const ebitda = y3.ebitda;
+      const pct = y3.totalRev > 0 ? (ebitda/y3.totalRev*100).toFixed(0) : 0;
+      const isBase = (atv === inp.atv && Math.abs(churn - inp.churn) < 0.005);
+      const color = ebitda > 0 ? '#6DB888' : 'var(--rust)';
+      const bg = isBase ? 'rgba(196,147,58,0.15)' : ebitda > 0 ? 'rgba(61,107,80,0.1)' : 'rgba(184,65,54,0.08)';
+      const border = isBase ? '1px solid var(--gold)' : 'none';
+      html += `<td style="padding:10px 14px;background:${bg};color:${color};text-align:center;border:${border};">
+        ${fmt(ebitda,0)}<br><span style="font-size:9px;opacity:0.7;">${pct}%</span>
+      </td>`;
+    });
+    html += '</tr>';
+  });
+
+  html += '</tbody></table>';
+  html += `<div style="margin-top:12px;font-size:9px;color:var(--muted);">Gold border = current model inputs &nbsp;/&nbsp; Green = EBITDA positive &nbsp;/&nbsp; Red = EBITDA negative</div>`;
+  container.innerHTML = html;
+}
+
+// ── MAIN UPDATE ──
+function updateModel() {
+  const inp = getInputs();
+  updateSliderDisplays(inp);
+  const years = [1,2,3,4,5].map(y => projectYear(inp, y));
+  const y3 = years[2];
+
+  updateKPIs(years);
+  updateWaterfall(y3);
+  updateTimeline(years);
+  updateMemberTable(inp, y3);
+  updateRetentionGrid(inp);
+  buildSensitivityMatrix(inp);
+}
+
+// ── SCENARIO LOADER ──
+function loadScenario(key, btn) {
+  document.querySelectorAll('.scenario-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const s = SCENARIOS[key];
+  document.getElementById('sl-nodes-y1').value = s.nodesY1;
+  document.getElementById('sl-nodes-growth').value = s.nodesGrowth;
+  document.getElementById('sl-lease').value = s.lease;
+  document.getElementById('sl-mpm').value = s.mpm;
+  document.getElementById('sl-atv').value = s.atv;
+  document.getElementById('sl-churn').value = s.churn;
+  document.getElementById('sl-fee-m').value = s.feeM;
+  document.getElementById('sl-fee-r').value = s.feeR;
+  document.getElementById('sl-fee-b').value = s.feeB;
+  document.getElementById('sl-cogs').value = s.cogs;
+  document.getElementById('sl-staff').value = s.staff;
+  document.getElementById('sl-overhead').value = s.overhead;
+  updateModel();
+}
+
+// ── TAB SWITCH ──
+function switchTab(id, el) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('panel-' + id).classList.add('active');
+  el.classList.add('active');
+  updateModel(); // refresh all calcs on tab switch
+}
+
+// INIT
+buildNodeTable();
+updateModel();
+</script>
+</body>
+</html>

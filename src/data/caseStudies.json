@@ -1,0 +1,203 @@
+[
+    {
+        "caseId": 1,
+        "stageTag": "Stage 02 — Consideration & Trial",
+        "title": "Nike SNKRS",
+        "subtitle": "The Confidence Pivot — From Lottery Machine to Styling Platform",
+        "thesisInAction": "\"Exclusivity creates hype. Confidence creates loyalty. When consumers stop trusting the system, they don't just stop buying — they stop identifying with the brand entirely.\"",
+        "businessProblem": "Nike’s lottery‑driven SNKRS app created scarcity but alienated consumers; the model was eroding repeat purchase and brand‑consumer relationship.",
+        "strategicInsight": "Consumers own many sneakers but lack confidence in styling; the barrier is confidence, not access.",
+        "solution": [
+            "The Style Gym – product pages become full styling resources.",
+            "Nike Stylist AI – photo‑based wardrobe analysis and recommendation.",
+            "Confidence Drops – 48‑hour pre‑order windows tied to styling challenges."
+        ],
+        "impact": [
+            {
+                "metric": "40%",
+                "description": "\"Aesthetic Individualists\" segment captured (previously opting out of drops)"
+            },
+            {
+                "metric": "↓ Returns",
+                "description": "Reduced mismatches and sizing uncertainty"
+            },
+            {
+                "metric": "↑ LTV",
+                "description": "Removing the \"museum mindset\" accelerates natural replacement cycle"
+            }
+        ]
+    },
+    {
+        "caseId": 2,
+        "stageTag": "Stage 01 — Discovery & Cultural Relevancy",
+        "title": "Burberry × Fortnite",
+        "subtitle": "The Forest of Arden — A Transmedia Brand Takeover",
+        "thesisInAction": "\"People don't just want to buy heritage — they want to wear the story. Gen Z uses the internet like a dressing room, seeking costumes that signal their intellectual and creative identity.\"",
+        "businessProblem": "Burberry’s heritage is a liability for Gen Z, who need digital participation; the iconic trench coat lacked a natural entry point.",
+        "strategicInsight": "Gen Z spends ~25 % of free time in Fortnite; high‑fashion collaborations thrive there – opportunity is an identity infrastructure.",
+        "solution": [
+            "The Forest of Arden Map – bespoke Fortnite POI for brand immersion.",
+            "\"Seven Ages of Man\" Battle Pass – 100‑tier progression evolving the trench coat.",
+            "Live MoCap Performance – real‑time theatrical performance within Fortnite.",
+            "Proscenium Portals (Retail) – AR mirrors linking physical self to digital avatar."
+        ],
+        "impact": [
+            {
+                "metric": "70 hrs+",
+                "description": "Brand engagement per player (vs. 5‑sec ads)"
+            },
+            {
+                "metric": "Future 50 %",
+                "description": "Captures next‑gen luxury consumers in primary social environment"
+            },
+            {
+                "metric": "Phygital",
+                "description": "Solves retail foot‑traffic gap by turning stores into identity portals"
+            }
+        ]
+    },
+    {
+        "caseId": 3,
+        "stageTag": "Stage 03 — Acquisition & Transaction",
+        "title": "Saks Orbit",
+        "subtitle": "Platform‑as‑a‑Service — Rebuilding Luxury Retail from the Balance Sheet Up",
+        "thesisInAction": "\"Luxury is no longer about access to goods. It is about access to curation. Consumers don't need Saks to buy Gucci — they can go to Gucci.com. They need Saks to find the next Gucci before anyone else does.\"",
+        "businessProblem": "Saks filed Chapter 11 with $4.7 B debt; inventory and long buying cycles made the brand culturally irrelevant.",
+        "strategicInsight": "In bankruptcy, real estate is a liability; data is an asset. Shift to a logistics & discovery layer, not inventory ownership.",
+        "solution": [
+            "The Node – modular 40‑ft shipping containers as rotating retail pods.",
+            "The Pulse App – AI‑driven trend forecasting & Orbit Pass QR for VIP access.",
+            "Smart Contracts – blockchain payments to designers, bypassing frozen accounts."
+        ],
+        "impact": [
+            {
+                "metric": "85 %",
+                "description": "Reduced physical footprint costs while increasing brand presence"
+            },
+            {
+                "metric": "12×",
+                "description": "Annual inventory turnover (up from 2.5×) via 14‑day rotation"
+            },
+            {
+                "metric": "<35 %",
+                "description": "Demographic captured – repositioned as cutting‑edge fashion incubator"
+            }
+        ]
+    },
+    {
+        "caseId": 4,
+        "stageTag": "Stage 04 — Retention & Deep Engagement",
+        "title": "On Apex",
+        "subtitle": "The Movement Platform — Community as the Product",
+        "thesisInAction": "\"The primary barrier to running isn't fitness — it's isolation. Running is not just about the miles; it's about the sense of belonging and the collective triumph of shared goals.\"",
+        "businessProblem": "On’s high‑performance shoes drive one‑time purchases; runners feel isolated and lack community infrastructure.",
+        "strategicInsight": "70 % of runners are more motivated in groups, yet only 15 % regularly join organized runs – the gap is infrastructure.",
+        "solution": [
+            "Local Pods – curated groups of 10‑20 matched by goals & schedule.",
+            "Pod Dashboard – profiles, progress bars, social tags for shared motivation.",
+            "AR Navigation – Mapbox‑powered real‑time route with pod member locations.",
+            "Tiered Rewards – product‑based incentives driving 40 % higher purchase intent."
+        ],
+        "impact": [
+            {
+                "metric": "+45 %",
+                "description": "Increase in local group run participation within 6 months"
+            },
+            {
+                "metric": "82 NPS",
+                "description": "Runners now identify with On — not just their shoes"
+            },
+            {
+                "metric": "+25 %",
+                "description": "Higher gear demand from Apex pod participants"
+            }
+        ]
+    },
+    {
+        "caseId": 5,
+        "stageTag": "Stage 05 — Loyalty & LTV Maximization",
+        "title": "Mattel Dreamers",
+        "subtitle": "The Phygital Ecosystem — Bridging the Age 7 Cliff",
+        "thesisInAction": "\"The Dream is Messy. Real ambition isn't about the Dreamhouse — it's about the late nights in the studio, the failed prototypes, and the rough drafts. Gen Alpha is obsessed with the Work, not the Award.\"",
+        "businessProblem": "Barbie’s heritage of perfection alienates Gen Alpha, who value process, transparency, and longer engagement; toy lifespan dropping from age 10 to 7.",
+        "strategicInsight": "Digital platforms keep users 3‑5× longer; shift brand philosophy to process‑centric storytelling.",
+        "solution": [
+            "The Blueprint Key – unique key unlocking a persistent digital identity in the Blueprint Studio MMO.",
+            "The Blueprint Collective – community for sharing projects, feedback, collaboration.",
+            "The Blueprint Studio MMO – persistent digital world for skill development and creative careers.",
+            "The Studiowear Visual Language – product line reflecting “messy middle” aesthetics."
+        ],
+        "impact": [
+            {
+                "metric": "Extended",
+                "description": "Lifecycle & LTV — physical product becomes entry point to years of digital engagement"
+            },
+            {
+                "metric": "Hardware+",
+                "description": "Software ecosystem creates recurring revenue beyond one‑time purchase"
+            },
+            {
+                "metric": "Future‑",
+                "description": "Proofed — aligns with resilience and maker culture values of Gen Alpha"
+            }
+        ]
+    },
+    {
+        "caseId": 6,
+        "stageTag": "Stage 06 — Advocacy & Brand Affinity",
+        "title": "Diesel Iceberg",
+        "subtitle": "The Cultural Destination — 10 % Product, 90 % Soul",
+        "thesisInAction": "\"Japanese consumers possess a discerning eye for the story behind a product. They don't just buy a brand — they adopt it. The Iceberg exists to give them something worth adopting.\"",
+        "businessProblem": "Diesel’s creative direction needs a physical statement; a standard retail store won’t convey depth for Japanese market.",
+        "strategicInsight": "Japanese consumers purchase high‑end goods as a \"self‑reward\"; they value meticulous construction and story; Harajuku is ideal cultural epicenter.",
+        "solution": [
+            "High‑Velocity Retail & Gallery (Ground Floor) – curated lighting, sculptural cash wrap, rotating gallery.",
+            "The Denim Lab – glass‑walled theater for co‑creation with artisans.",
+            "Café 1978 & Archive – space for brand heritage, coworking, visual library.",
+            "Ghiaccio Ice Bar – monolithic glass bar as social heart."
+        ],
+        "impact": [
+            {
+                "metric": "Global",
+                "description": "Statement — Tokyo flagship solidifies Diesel's return to top‑tier fashion"
+            },
+            {
+                "metric": "Gateway",
+                "description": "\"Cool Japan\" cultural influence as launchpad for broader Asian expansion"
+            },
+            {
+                "metric": "Loyalty",
+                "description": "Cultural destination captures next‑gen luxury consumers in a stable, resilient market"
+            }
+        ]
+    },
+    {
+        "caseId": 7,
+        "stageTag": "Cross‑Cutting — Personalization & Decision Layer",
+        "title": "Stylect",
+        "subtitle": "The Human‑Led Styling Platform — Trust First, Algorithm Second",
+        "thesisInAction": "\"The product shouldn't be a shopping mall — it should be a concierge. The value isn't in the inventory. It's in the rejection of everything wrong.\"",
+        "businessProblem": "Fashion e‑commerce causes fatigue; algorithms fail to understand nuanced life events; post‑algorithm consumers (23‑45) value time & authenticity.",
+        "strategicInsight": "Confidence drops sharply after 24 hrs; three curated choices yield 60 % higher purchase likelihood vs. many options.",
+        "solution": [
+            "Occasion Brief Builder – 5‑question intake capturing vibe, body‑focus, budget, weather.",
+            "Stylist Dashboard – interface for human stylists to manage requests & send Shortlist Cards.",
+            "2‑Hour SLA – strict response protocol for immediacy.",
+            "Style Vault – post‑purchase tagging & storage to build long‑term style identity."
+        ],
+        "impact": [
+            {
+                "metric": ">70 %",
+                "description": "Target purchase confidence rate by eliminating choice friction"
+            },
+            {
+                "metric": "O2O",
+                "description": "Online‑to‑offline traffic via \"Reserve in Store\" – high‑intent foot traffic to retail partners"
+            },
+            {
+                "metric": "↑ LTV",
+                "description": "Proprietary Style Identity graph powers smarter future recommendations"
+            }
+        ]
+    }
+]

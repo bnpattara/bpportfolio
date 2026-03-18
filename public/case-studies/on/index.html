@@ -1,0 +1,1488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>On Apex: Building the Community Layer On Never Built · Benn Pattara</title>
+<style>
+:root {
+  --black:     #000;
+  --white:     #fff;
+  --g100:      #f5f5f5;
+  --g200:      #e8e8e8;
+  --g300:      #ccc;
+  --g400:      #999;
+  --g500:      #666;
+  --g700:      #333;
+  --font:      'Helvetica Neue', Arial, sans-serif;
+  --ease-fast: 150ms ease;
+  --ease-base: 250ms ease;
+  --nav-h:     52px;
+  --sidenav-w: 220px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font); background: var(--white); color: var(--black); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+/* ── NAV ── */
+#site-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; background: var(--white); border-bottom: 1px solid var(--g200); }
+.nav-main { position: relative; height: 52px; padding: 0 48px; }
+.nav-left { position: absolute; left: 48px; top: 50%; transform: translateY(-50%); display: flex; gap: 28px; }
+.nav-left a { font-size: 11px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--g500); text-decoration: none; transition: color var(--ease-fast); }
+.nav-left a:hover { color: var(--black); }
+.nav-wordmark { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); font-size: 14px; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; color: var(--black); text-decoration: none; white-space: nowrap; }
+.nav-right { position: absolute; right: 48px; top: 50%; transform: translateY(-50%); }
+.nav-right a { font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--black); text-decoration: none; border-bottom: 1px solid var(--black); padding-bottom: 1px; }
+.page-body { padding-top: var(--nav-h); }
+
+/* ── HERO — full-bleed (matches Saks) ── */
+.cs-hero { position: relative; min-height: 85vh; overflow: hidden; display: flex; align-items: flex-end; }
+.cs-hero-bg { position: absolute; inset: 0; z-index: 0; background: linear-gradient(160deg, #0a0a0a 0%, #141010 40%, #0a0a0a 100%); }
+.cs-hero-bg img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
+.cs-hero-scrim { position: absolute; inset: 0; z-index: 1; background: linear-gradient(to top, rgba(0,0,0,.85) 0%, rgba(0,0,0,.4) 35%, transparent 60%); pointer-events: none; }
+.cs-hero-title-wrap { position: relative; z-index: 2; padding: 64px 56px 72px 48px; width: 100%; max-width: 900px; }
+.cs-hero-title { font-size: clamp(32px,4vw,56px); font-weight: 300; letter-spacing: .04em; text-transform: uppercase; color: var(--white); line-height: .95; margin: 0; text-shadow: 0 2px 24px rgba(0,0,0,.5); }
+.cs-hero-title em { font-style: italic; color: rgba(255,255,255,.65); }
+.cs-hero-ghost { position: absolute; bottom: -40px; right: -30px; font-size: clamp(100px,14vw,200px); font-weight: 300; color: rgba(255,255,255,.03); letter-spacing: -.03em; line-height: 1; white-space: nowrap; pointer-events: none; text-transform: uppercase; user-select: none; z-index: 1; }
+
+/* ── LAYOUT ── */
+.cs-body-wrap { display: grid; grid-template-columns: var(--sidenav-w) 1fr; align-items: start; min-height: 100vh; }
+
+/* ── SIDENAV ── */
+#cs-sidenav { position: sticky; top: var(--nav-h); height: calc(100vh - var(--nav-h)); overflow-y: auto; border-right: 1px solid var(--g200); padding: 40px 0; display: flex; flex-direction: column; background: var(--white); z-index: 50; scrollbar-width: none; }
+#cs-sidenav::-webkit-scrollbar { display: none; }
+.cs-sidenav-label { font-size: 8px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--g300); padding: 0 28px 20px;  }
+.cs-sidenav-link { display: flex; align-items: center; gap: 14px; padding: 12px 28px; cursor: pointer; transition: background var(--ease-fast); text-decoration: none; border-left: 2px solid transparent; }
+.cs-sidenav-link:hover { background: var(--g100); }
+.cs-sidenav-link.active { border-left-color: var(--black); background: var(--g100); }
+.cs-sidenav-num { font-size: 9px; font-weight: 600; letter-spacing: .12em; color: var(--g300); width: 20px; flex-shrink: 0; transition: color var(--ease-fast);  }
+.cs-sidenav-link.active .cs-sidenav-num { color: var(--black); }
+.cs-sidenav-text { font-size: 11px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--g400); transition: color var(--ease-fast); }
+.cs-sidenav-link.active .cs-sidenav-text { color: var(--black); }
+.cs-sidenav-divider { height: 1px; background: var(--g100); margin: 8px 28px; }
+.cs-sidenav-exec { margin-top: auto; padding: 20px 28px 0; border-top: 1px solid var(--g100); }
+.cs-sidenav-exec-label { font-size: 8px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--g300); margin-bottom: 10px;  }
+.cs-sidenav-exec-text { font-size: 13px; color: var(--g400); line-height: 1.7; font-style: italic; }
+.cs-sidenav-exec-link { display: inline-block; margin-top: 10px; font-size: 9px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--black); text-decoration: none; border-bottom: 1px solid var(--black); padding-bottom: 1px; cursor: pointer; }
+
+/* ── CONTENT ── */
+.cs-content { min-width: 0; }
+
+/* ── EXEC SUMMARY ── */
+.cs-exec-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+.cs-exec-eyebrow { font-size: 8px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--g300); margin-bottom: 16px;  }
+.cs-exec-body { font-size: 13px; color: var(--g500); line-height: 1.85; margin-bottom: 20px; }
+.cs-exec-kpis { display: flex; flex-wrap: wrap; gap: 8px; }
+.cs-exec-kpi { display: flex; align-items: center; gap: 10px; border: 1px solid var(--g200); padding: 8px 14px; }
+.cs-exec-kpi-num { font-size: 18px; font-weight: 300; color: var(--black); letter-spacing: -.01em; line-height: 1; font-style: italic; }
+.cs-exec-kpi-label { font-size: 9px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--g400); line-height: 1.4;  }
+.cs-exec-meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--g200); margin-bottom: 24px; }
+.cs-exec-meta-cell { background: var(--white); padding: 20px; }
+.cs-exec-meta-label { font-size: 8px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--g300); margin-bottom: 6px;  }
+.cs-exec-meta-val { font-size: 12px; font-weight: 500; letter-spacing: .04em; color: var(--black); }
+
+/* ── SECTIONS ── */
+.cs-section { padding: 72px 56px; border-bottom: 1px solid #f0f0f0; }
+.cs-section-alt { background: var(--g100); }
+.cs-section-dark { background: #050505; }
+.cs-section-eyebrow { display: flex; align-items: center; gap: 14px; margin-bottom: 28px; }
+.cs-section-num { font-size: 9px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--g300);  }
+.cs-section-num-dark { color: rgba(255,255,255,.25); }
+.cs-section-title { font-size: 11px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--black); }
+.cs-section-title-dark { color: rgba(255,255,255,.45); }
+.cs-heading { font-size: clamp(22px,2.5vw,30px); font-weight: 400; letter-spacing: .03em; text-transform: uppercase; color: var(--black); line-height: 1.1; margin-bottom: 28px; }
+.cs-heading-serif { font-size: clamp(26px,3vw,40px); font-weight: 300; color: var(--black); line-height: 1.1; margin-bottom: 28px; letter-spacing: .02em; }
+.cs-heading-serif em { font-style: italic; color: var(--g500); }
+.cs-heading-serif-dark { font-size: clamp(26px,3vw,40px); font-weight: 300; color: var(--white); line-height: 1.1; margin-bottom: 28px; letter-spacing: .02em; }
+.cs-heading-serif-dark em { font-style: italic; color: rgba(255,255,255,.65); }
+.cs-body { font-size: 15px; color: var(--g500); line-height: 1.8; margin-bottom: 20px; }
+.cs-body-dark { font-size: 15px; color: rgba(255,255,255,.45); line-height: 1.8; margin-bottom: 20px; }
+.cs-body:last-child { margin-bottom: 0; }
+.cs-pull-quote { font-size: clamp(20px,2.2vw,28px); font-weight: 300; font-style: italic; color: var(--black); line-height: 1.45; border-left: 2px solid var(--black); padding-left: 28px; margin-bottom: 28px; }
+.cs-pull-quote-dark { font-size: clamp(20px,2.2vw,28px); font-weight: 300; font-style: italic; color: var(--white); line-height: 1.45; border-left: 2px solid rgba(255,255,255,.4); padding-left: 28px; margin-bottom: 28px; }
+.cs-body-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 28px; }
+.cs-body-2col p { font-size: 13px; color: var(--g500); line-height: 1.75; }
+.cs-body-2col-dark p { font-size: 13px; color: rgba(255,255,255,.42); line-height: 1.75; }
+.cs-stats { display: grid; gap: 1px; background: var(--g200); margin-bottom: 28px; }
+.cs-stats-3 { grid-template-columns: repeat(3,1fr); }
+.cs-stats-4 { grid-template-columns: repeat(4,1fr); }
+.cs-stat-cell { background: var(--white); padding: 28px 24px; }
+.cs-stat-cell-dark { background: #0a0a0a; padding: 28px 24px; }
+.cs-stat-eyebrow { font-size: 9px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--g300); margin-bottom: 12px;  }
+.cs-stat-eyebrow-dark { font-size: 9px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.2); margin-bottom: 12px;  }
+.cs-stat-num { font-size: 48px; font-weight: 300; font-style: italic; color: var(--black); letter-spacing: -.01em; line-height: 1; margin-bottom: 8px; }
+.cs-stat-num-dark { font-size: 48px; font-weight: 300; font-style: italic; color: var(--white); letter-spacing: -.01em; line-height: 1; margin-bottom: 8px; }
+.cs-stat-num-volt { font-size: 48px; font-weight: 300; font-style: italic; color: var(--black); letter-spacing: -.01em; line-height: 1; margin-bottom: 8px; }
+.cs-stat-label { font-size: 12px; color: var(--g500); line-height: 1.65; }
+.cs-stat-label-dark { font-size: 12px; color: rgba(255,255,255,.38); line-height: 1.65; }
+
+/* ── TABLES ── */
+.cs-table { width: 100%; border-collapse: collapse; margin-bottom: 28px; }
+.cs-table th { font-size: 8px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--g300); padding: 12px 16px; border-bottom: 1px solid var(--g200); text-align: left; background: var(--g100);  }
+.cs-table td { font-size: 12px; color: var(--g500); padding: 14px 16px; border-bottom: 1px solid var(--g100); line-height: 1.6; vertical-align: top; }
+.cs-table td:first-child { font-weight: 500; color: var(--black); font-size: 11px; letter-spacing: .03em; text-transform: uppercase; }
+.cs-table tr:hover td { background: #fafafa; }
+
+/* ── PM LENS ── */
+.pm-lens { border: 1px solid var(--g200); padding: 24px 28px; margin-bottom: 28px; background: #fafafa; }
+.pm-lens-dark { border: 1px solid rgba(255,255,255,.08); padding: 24px 28px; margin-bottom: 28px; background: rgba(255,255,255,.03); }
+.pm-lens-label { font-size: 8px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--g300); margin-bottom: 10px;  }
+.pm-lens-label-dark { font-size: 8px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.2); margin-bottom: 10px;  }
+.pm-lens-text { font-size: 13px; color: var(--g500); line-height: 1.75; font-style: italic; }
+.pm-lens-text-dark { font-size: 13px; color: rgba(255,255,255,.42); line-height: 1.75; font-style: italic; }
+
+/* ── PERSONAS ── */
+.persona-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--g200); margin-bottom: 28px; }
+.persona-card { background: var(--white); padding: 28px 24px; }
+.persona-card-tier { font-size: 8px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--g300); margin-bottom: 12px;  }
+.persona-card-name { font-size: 20px; font-weight: 400; color: var(--black); margin-bottom: 4px; }
+.persona-card-city { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--g400); margin-bottom: 16px; }
+.persona-card-quote { font-size: 13px; font-style: italic; color: var(--g500); line-height: 1.65; margin-bottom: 16px; border-left: 1px solid var(--g300); padding-left: 12px; }
+.persona-card-detail { font-size: 11px; color: var(--g500); line-height: 1.7; }
+.persona-card-tension { font-size: 11px; font-weight: 500; color: var(--black); margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--g100); }
+
+/* ── PRIORITY CARDS ── */
+.priority-grid { display: flex; flex-direction: column; gap: 1px; margin-bottom: 28px; }
+.priority-card { padding: 24px 28px; border-left: 3px solid transparent; background: var(--g100); }
+.priority-card.core { border-left-color: var(--black); background: var(--white); }
+.priority-card.supporting { border-left-color: var(--g300); }
+.priority-card.deferred { border-left-color: var(--g200); background: #fafafa; }
+.priority-tag { display: inline-block; font-size: 8px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; padding: 3px 10px; margin-bottom: 10px;  }
+.priority-tag.core { background: var(--black); color: var(--white); }
+.priority-tag.p0 { background: var(--black); color: var(--white); }
+.priority-tag.p1 { background: var(--g700); color: var(--white); }
+.priority-tag.supporting { background: var(--g200); color: var(--g500); }
+.priority-tag.deferred { background: var(--g100); color: var(--g400); border: 1px solid var(--g200); }
+.priority-feature { font-size: 13px; font-weight: 500; color: var(--black); margin-bottom: 6px; letter-spacing: .02em; }
+.priority-desc { font-size: 12px; color: var(--g500); line-height: 1.7; margin-bottom: 8px; }
+.priority-prd { font-size: 10px;  color: var(--g400); letter-spacing: .06em; }
+
+/* ── ARTIFACT STRIP ── */
+.artifact-strip { background: var(--black); }
+.artifact-trigger { padding: 24px 56px; display: flex; align-items: stretch; justify-content: space-between; cursor: pointer; transition: background var(--ease-fast); }
+.artifact-trigger:hover { background: #111; }
+.artifact-left { display: flex; align-items: stretch; gap: 20px; }
+.artifact-badge { border: 1px solid rgba(255,255,255,.25); padding: 0 12px; display: flex; align-items: center; flex-shrink: 0; }
+.artifact-badge span { font-size: 9px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: rgba(255,255,255,.6); white-space: nowrap;  }
+.artifact-meta { display: flex; flex-direction: column; justify-content: center; gap: 5px; }
+.artifact-name { font-size: 14px; font-weight: 500; letter-spacing: .05em; text-transform: uppercase; color: var(--white); }
+.artifact-desc { font-size: 12px; color: rgba(255,255,255,.35); }
+.artifact-right { display: flex; align-items: center; flex-shrink: 0; padding-left: 20px; }
+.artifact-toggle { font-size: 20px; font-weight: 300; color: rgba(255,255,255,.5); line-height: 1; display: inline-block; width: 24px; text-align: center; }
+.artifact-trigger:hover .artifact-toggle { color: var(--white); }
+.artifact-expand { max-height: 0; overflow: hidden; transition: max-height 700ms ease; }
+.artifact-inner { background: #0a0a0a; }
+.artifact-inner-header { display: flex; justify-content: space-between; align-items: flex-start; padding: 32px 48px 24px; border-bottom: 1px solid rgba(255,255,255,.06); }
+.artifact-inner-eyebrow { font-size: 9px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: #444; margin-bottom: 10px;  }
+.artifact-inner-title { font-size: 28px; font-weight: 300; letter-spacing: .06em; text-transform: uppercase; color: var(--white); line-height: 1; }
+.artifact-close-btn { background: transparent; border: 1px solid rgba(255,255,255,.2); color: rgba(255,255,255,.5); padding: 9px 18px; font-size: 9px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; cursor: pointer; font-family: var(--font); white-space: nowrap; margin-top: 4px; }
+.artifact-iframe-wrap { width: 100%; }
+.artifact-iframe-wrap iframe { width: 100%; height: 900px; border: none; display: block; }
+
+/* ── USER FLOW CAROUSEL ── */
+.flow-carousel { background: var(--g100); padding: 72px 56px; border-top: 1px solid var(--g200); border-bottom: 1px solid var(--g200); }
+.flow-head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; }
+.flow-title { font-size: 9px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--g400);  }
+.flow-counter { font-size: 36px; font-weight: 300; font-style: italic; color: var(--black); letter-spacing: -.01em; line-height: 1; }
+.flow-counter span { font-size: 16px; color: var(--g300); font-style: normal; }
+.flow-track { display: grid; grid-template-columns: 200px 1fr; gap: 48px; align-items: start; }
+.flow-steps { display: flex; flex-direction: column; gap: 0; }
+.flow-step { border-left: 2px solid var(--g200); padding: 14px 20px; cursor: pointer; transition: border-color var(--ease-fast), background var(--ease-fast); }
+.flow-step:hover { background: rgba(0,0,0,.03); border-left-color: var(--g300); }
+.flow-step.active { border-left-color: var(--black); background: rgba(0,0,0,.04); }
+.flow-step-num { font-size: 8px; font-weight: 600; letter-spacing: .14em; color: var(--g300); margin-bottom: 4px;  }
+.flow-step.active .flow-step-num { color: var(--black); }
+.flow-step-label { font-size: 11px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--g400); }
+.flow-step.active .flow-step-label { color: var(--black); }
+.flow-panel { display: none; }
+.flow-panel.active { display: block; }
+.flow-panel-title { font-size: clamp(20px,2.2vw,30px); font-weight: 300; color: var(--black); margin-bottom: 16px; line-height: 1.2; }
+.flow-panel-title em { font-style: italic; }
+.flow-panel-body { font-size: 13px; color: var(--g500); line-height: 1.8; margin-bottom: 20px; }
+.flow-panel-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+.flow-panel-tag { font-size: 9px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--g500); background: var(--white); border: 1px solid var(--g200); padding: 4px 10px;  }
+.flow-panel-tag.active { background: var(--black); color: var(--white); border-color: var(--black); }
+.flow-nav { display: flex; gap: 8px; margin-top: 24px; }
+.flow-btn { background: var(--white); border: 1px solid var(--g200); padding: 10px 20px; font-size: 10px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; cursor: pointer;  color: var(--g500); transition: all var(--ease-fast); }
+.flow-btn:hover { background: var(--black); color: var(--white); border-color: var(--black); }
+
+/* ── APP SHOWCASE ── */
+.app-showcase { padding: 72px 56px; border-bottom: 1px solid var(--g200); }
+.app-showcase-eyebrow { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+.app-showcase-num { font-size: 9px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--g300);  }
+.app-showcase-label { font-size: 11px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--black); }
+.app-showcase-heading { font-size: clamp(26px,3vw,42px); font-weight: 300; color: var(--black); line-height: 1.05; margin-bottom: 16px; }
+.app-showcase-heading em { font-style: italic; }
+.app-showcase-sub { font-size: 13px; color: var(--g500); line-height: 1.75; margin-bottom: 40px; max-width: 560px; }
+.app-showcase-layout { display: grid; grid-template-columns: 180px 1fr; gap: 40px; align-items: start; }
+.app-screen-nav { display: flex; flex-direction: column; gap: 2px; position: sticky; top: calc(var(--nav-h) + 24px); }
+.app-screen-btn { background: none; border: none; padding: 14px 16px; text-align: left; cursor: pointer; border-left: 2px solid transparent; transition: all var(--ease-fast); }
+.app-screen-btn:hover { background: var(--g100); border-left-color: var(--g300); }
+.app-screen-btn.active { background: var(--g100); border-left-color: var(--black); }
+.app-screen-btn-num { font-size: 8px; font-weight: 600; letter-spacing: .14em; color: var(--g300); margin-bottom: 4px;  }
+.app-screen-btn.active .app-screen-btn-num { color: var(--black); }
+.app-screen-btn-name { font-size: 11px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--g400); }
+.app-screen-btn.active .app-screen-btn-name { color: var(--black); }
+.app-screen-frame { display: none; }
+.app-screen-frame.active { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+.app-screen-visual { background: var(--g100); overflow: hidden; }
+.app-screen-meta { padding-top: 8px; }
+.app-screen-desc-label { font-size: 8px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--g300); margin-bottom: 10px;  }
+.app-screen-desc-text { font-size: 13px; color: var(--g500); line-height: 1.75; margin-bottom: 20px; }
+.app-screen-counter { font-size: 28px; font-weight: 300; font-style: italic; color: var(--g300); line-height: 1; }
+
+/* ── DECISION LOG ── */
+.decision-log { width: 100%; border-collapse: collapse; margin-bottom: 28px; }
+.decision-log th { font-size: 8px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--g300); padding: 12px 16px; border-bottom: 2px solid var(--g200); text-align: left; background: var(--g100);  }
+.decision-log td { font-size: 12px; color: var(--g500); padding: 16px; border-bottom: 1px solid var(--g100); line-height: 1.65; vertical-align: top; }
+.decision-log td:first-child { font-weight: 600; color: var(--black); font-size: 11px; letter-spacing: .04em; text-transform: uppercase; white-space: nowrap; }
+.decision-log tr.shipped td:first-child { border-left: 3px solid var(--black); }
+.decision-log tr.deferred td:first-child { border-left: 3px solid var(--g300); }
+.decision-log tr:hover td { background: #fafafa; }
+.decision-status { display: inline-block; font-size: 8px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; padding: 3px 8px;  }
+.decision-status.shipped { background: var(--black); color: var(--white); }
+.decision-status.deferred { background: var(--g200); color: var(--g500); }
+
+/* ── METRICS TABLE ── */
+.cs-metrics-table { width: 100%; border-collapse: collapse; margin-bottom: 28px; }
+.cs-metrics-table th { font-size: 8px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--g300); padding: 12px 16px; border-bottom: 1px solid var(--g200); text-align: left; background: var(--g100);  }
+.cs-metrics-table td { font-size: 12px; color: var(--g500); padding: 14px 16px; border-bottom: 1px solid var(--g100); line-height: 1.6; vertical-align: top; }
+.cs-metrics-table td:first-child { font-weight: 500; color: var(--black); font-size: 11px; letter-spacing: .03em; text-transform: uppercase; }
+.cs-metrics-table tr:hover td { background: #fafafa; }
+
+/* ── CONSTRAINT CARDS ── */
+.constraint-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--g200); margin-bottom: 28px; }
+.constraint-card { background: var(--white); padding: 24px; }
+.constraint-type { font-size: 8px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--g300); margin-bottom: 8px;  }
+.constraint-title { font-size: 13px; font-weight: 500; color: var(--black); margin-bottom: 8px; letter-spacing: .02em; }
+.constraint-response { font-size: 12px; color: var(--g500); line-height: 1.65; }
+
+/* ── NEXT ── */
+.cs-next { margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--g200); }
+.cs-next-label { font-size: 8px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--g300); margin-bottom: 12px;  }
+.cs-next-link { text-decoration: none; display: inline-block; }
+.cs-next-meta { font-size: 10px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--g400); margin-bottom: 6px;  }
+.cs-next-title { font-size: 28px; font-weight: 300; color: var(--black); transition: color var(--ease-fast); }
+.cs-next-link:hover .cs-next-title { color: var(--g500); }
+
+/* ── FOOTER ── */
+footer { padding: 32px 48px; border-top: 1px solid var(--g200); display: flex; justify-content: space-between; align-items: center; }
+.footer-id { display: flex; flex-direction: column; gap: 4px; }
+.footer-name { font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--black); }
+.footer-role { font-size: 11px; color: var(--g400); letter-spacing: .04em; }
+.footer-links { display: flex; gap: 24px; }
+.footer-link { font-size: 11px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--g500); text-decoration: none; transition: color var(--ease-fast); }
+.footer-link:hover { color: var(--black); }
+.footer-copy { font-size: 10px; color: var(--g400);  }
+
+/* ── TAG ACCENT (neutral) ── */
+.volt-tag { display: inline-block; background: var(--black); color: var(--white); font-size: 8px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; padding: 3px 8px;  }
+.volt-inline { color: var(--black); font-weight: 600; }
+
+/* ── DESIGN SYSTEM TOKENS ── */
+.token-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--g200); margin-bottom: 28px; }
+.token-row { background: var(--white); padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; }
+.token-name {  font-size: 10px; letter-spacing: .06em; color: var(--g500); }
+.token-value { font-size: 12px; font-weight: 500; color: var(--black); letter-spacing: .02em; }
+.color-swatch { display: inline-block; width: 12px; height: 12px; margin-right: 6px; vertical-align: middle; border: 1px solid var(--g200); }
+
+/* ── MDS MODE SPLIT ── */
+.mode-split { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--g200); margin-bottom: 28px; }
+.mode-panel { padding: 28px; }
+.mode-panel-light { background: #F7F7F3; }
+.mode-panel-dark  { background: #050505; }
+.mode-label { font-size: 8px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; margin-bottom: 14px;  }
+.mode-label-light { color: #888; }
+.mode-label-dark  { color: rgba(255,255,255,.25); }
+.mode-headline-light { font-family: "'Bebas Neue',sans-serif"; font-size: 40px; color: #0A0A0A; line-height: .9; letter-spacing: .03em; margin-bottom: 10px; }
+.mode-headline-dark  { font-family: "'Bebas Neue',sans-serif"; font-size: 40px; color: #F0F0EA; line-height: .9; letter-spacing: .03em; margin-bottom: 10px; }
+.mode-sub-light { font-size: 11px; color: #888; letter-spacing: .06em; text-transform: uppercase; }
+.mode-sub-dark  { font-size: 11px; color: rgba(255,255,255,.35); letter-spacing: .06em; text-transform: uppercase; }
+</style>
+</head>
+<body>
+
+<nav id="site-nav">
+  <div class="nav-main">
+    <div class="nav-left">
+      <a href="/#work">Work</a>
+      <a href="/#about">About</a>
+      <a href="/blog">Blog</a>
+      <a href="/13">13</a>
+    </div>
+    <a class="nav-wordmark" href="/">Benn Pattara</a>
+    <div class="nav-right">
+      <a href="/#contact" class="contact-trigger">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<div class="page-body">
+
+<!-- HERO — full-bleed (matches Saks) -->
+<section class="cs-hero">
+  <div class="cs-hero-bg"><img src="on_hero.png" alt="On Apex — community platform for runners" /></div>
+  <div class="cs-hero-scrim"></div>
+  <div class="cs-hero-title-wrap">
+    <h1 class="cs-hero-title">On Apex<br><em>Community Platform</em></h1>
+  </div>
+  <div class="cs-hero-ghost">APEX</div>
+</section>
+
+<!-- ══ BODY WRAP ══ -->
+<div class="cs-body-wrap">
+
+  <!-- ── SIDENAV ── -->
+  <aside id="cs-sidenav">
+    <div class="cs-sidenav-label">Index</div>
+    <a class="cs-sidenav-link active" data-target="cs-exec-summary" onclick="scrollToSection('cs-exec-summary')"><span class="cs-sidenav-num">00</span><span class="cs-sidenav-text">Exec Summary</span></a>
+    <div class="cs-sidenav-divider"></div>
+    <a class="cs-sidenav-link" data-target="cs-problem" onclick="scrollToSection('cs-problem')"><span class="cs-sidenav-num">01</span><span class="cs-sidenav-text">The Problem</span></a>
+    <a class="cs-sidenav-link" data-target="cs-insight" onclick="scrollToSection('cs-insight')"><span class="cs-sidenav-num">02</span><span class="cs-sidenav-text">The Insight</span></a>
+    <a class="cs-sidenav-link" data-target="cs-users" onclick="scrollToSection('cs-users')"><span class="cs-sidenav-num">03</span><span class="cs-sidenav-text">The Users</span></a>
+    <a class="cs-sidenav-link" data-target="cs-product" onclick="scrollToSection('cs-product')"><span class="cs-sidenav-num">04</span><span class="cs-sidenav-text">The Product</span></a>
+    <a class="cs-sidenav-link" data-target="cs-design" onclick="scrollToSection('cs-design')"><span class="cs-sidenav-num">05</span><span class="cs-sidenav-text">Design System</span></a>
+    <a class="cs-sidenav-link" data-target="cs-screens" onclick="scrollToSection('cs-screens')"><span class="cs-sidenav-num">06</span><span class="cs-sidenav-text">Key Screens</span></a>
+    <a class="cs-sidenav-link" data-target="cs-flow" onclick="scrollToSection('cs-flow')"><span class="cs-sidenav-num">—</span><span class="cs-sidenav-text">User Flow</span></a>
+    <a class="cs-sidenav-link" data-target="cs-decisions" onclick="scrollToSection('cs-decisions')"><span class="cs-sidenav-num">07</span><span class="cs-sidenav-text">Decision Log</span></a>
+    <a class="cs-sidenav-link" data-target="cs-outcome" onclick="scrollToSection('cs-outcome')"><span class="cs-sidenav-num">08</span><span class="cs-sidenav-text">Outcome</span></a>
+    <div class="cs-sidenav-exec">
+      <div class="cs-sidenav-exec-label">TL;DR</div>
+      <p class="cs-sidenav-exec-text">On builds the most precise running hardware in the world. Apex is the first software worthy of it.</p>
+      <a class="cs-sidenav-exec-link" onclick="scrollToSection('cs-exec-summary')">Read summary &rarr;</a>
+    </div>
+  </aside>
+
+  <div class="cs-content">
+
+    <!-- ══ 00 EXEC SUMMARY ══ -->
+    <section id="cs-exec-summary" data-cs-section="cs-exec-summary" style="padding:64px 56px;border-bottom:1px solid var(--g200);">
+      <div class="cs-exec-inner">
+        <div>
+          <div class="cs-exec-eyebrow">Executive Summary</div>
+          <p class="cs-exec-body">On holds itself to a standard that most brands don't attempt. Every shoe is a precise answer to the question of what human movement should feel like — engineered in Switzerland, tested on trails and city blocks, finished to a level of detail that makes a runner choose On for the design before they ever read a spec sheet. That standard permeates the hardware. It has never touched the software.</p>
+          <p class="cs-exec-body">Nike owns the aspiration layer with NRC. Strava owns the performance layer. On has no owned digital surface where its runners experience the brand at all. After the transaction, On disappears from its customer's life. The community that formed around On — the runners who see the shoe as identity, the club runners who coordinate on Instagram, the aesthetic athletes who post routes in CloudSurfers — lives entirely on other people's platforms, by other people's rules, in other people's visual language.</p>
+          <p class="cs-exec-body">On Apex is the argument that the software layer deserves the same standard as the hardware. A community-first PWA built to On's precision — Swiss-minimalist, instrument-grade, no gamification chrome, no follower counts as status. A platform where movement is the primary act, the shoe is the identity unit, and the community is built on shared miles rather than shared metrics. Not a Strava competitor. Not a data play. A software product finally worthy of the shoes it tracks.</p>
+          <div class="cs-exec-kpis" style="margin-top:24px;">
+            <div class="cs-exec-kpi"><div class="cs-exec-kpi-num">35%</div><div class="cs-exec-kpi-label">WAU target<br>Y1 registered users</div></div>
+            <div class="cs-exec-kpi"><div class="cs-exec-kpi-num">70%</div><div class="cs-exec-kpi-label">Shoe registration<br>rate · 90-day target</div></div>
+            <div class="cs-exec-kpi"><div class="cs-exec-kpi-num">14</div><div class="cs-exec-kpi-label">Interactive screens<br>built · Full flow</div></div>
+            <div class="cs-exec-kpi"><div class="cs-exec-kpi-num">6</div><div class="cs-exec-kpi-label">PRD phases: Phase 1<br>P0 fully shipped</div></div>
+          </div>
+        </div>
+        <div>
+          <div class="cs-exec-eyebrow">Project Details</div>
+          <div class="cs-exec-meta-grid">
+            <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Project</div><div class="cs-exec-meta-val">On Apex · MVP Prototype</div></div>
+            <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Year</div><div class="cs-exec-meta-val">2026</div></div>
+            <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Role</div><div class="cs-exec-meta-val">Product Manager &amp; UX Systems Designer</div></div>
+            <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Type</div><div class="cs-exec-meta-val">Conceptual · Full-Stack Build</div></div>
+            <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Deliverables</div><div class="cs-exec-meta-val">PRD · Molecular Design System · Interactive PWA Prototype · Case Study</div></div>
+            <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Primary Job</div><div class="cs-exec-meta-val">Give On runners a community that looks and feels like the brand they chose</div></div>
+          </div>
+          <div class="pm-lens">
+            <div class="pm-lens-label">PM Lens</div>
+            <p class="pm-lens-text">This case study demonstrates zero-to-one product strategy for a brand that does not yet have a community platform, multi-persona user modeling across three distinct runner psychographics, Phase-gated feature prioritization with explicit P0/P1/P2 reasoning, and the discipline of separating commerce from community — every purchase trigger in the app is contextual, never promotional.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ 01 THE PROBLEM ══ -->
+    <section class="cs-section" id="cs-problem" data-cs-section="cs-problem">
+      <div class="cs-section-eyebrow"><span class="cs-section-num">01</span><span class="cs-section-title">The Problem</span></div>
+      <h2 class="cs-heading-serif">The hardware is flawless. <em>The software layer doesn't exist.</em></h2>
+      <div class="cs-body-2col">
+        <p>On's brand is built on a specific belief: that human movement is the highest form of self-expression, and that the objects which enable that movement deserve to be built accordingly. The CloudTec sole geometry, the Helion foam, the Speedboard — these are not features. They are a philosophy made physical. Runners choose On not because it ranks highest in a comparison chart but because wearing it feels like a considered decision about how they move through the world. That level of intention lives in every product On ships. It has never existed anywhere else in the brand experience.</p>
+        <p>After a runner buys On shoes, the brand's presence in their life effectively ends. They train in Strava. They share on Instagram. They organize club runs in WhatsApp groups. They post to Reddit communities that On has no relationship with. The running that happens in On shoes — the data, the community, the identity, the culture — all of it accumulates somewhere else. Nike understood this fifteen years ago and built NRC. Adidas understood it and built Runtastic. On has remained, at the digital layer, a transaction. A beautiful transaction. But only a transaction.</p>
+      </div>
+      <div class="cs-stats cs-stats-4">
+        <div class="cs-stat-cell">
+          <div class="cs-stat-eyebrow">01 · The Standard Gap</div>
+          <div class="cs-stat-num">0</div>
+          <div class="cs-stat-label">Owned digital surfaces where On's craft standard — Swiss precision, no excess, form earning function — is reflected back to the runner after the purchase. The hardware has a philosophy. The software has nothing.</div>
+        </div>
+        <div class="cs-stat-cell">
+          <div class="cs-stat-eyebrow">02 · The Platform Gap</div>
+          <div class="cs-stat-num">NRC</div>
+          <div class="cs-stat-label">Nike owns aspiration. Strava owns data. Garmin owns hardware precision. The specific territory On occupies — aesthetic intentionality, movement as identity, design-forward running culture — has no platform home.</div>
+        </div>
+        <div class="cs-stat-cell">
+          <div class="cs-stat-eyebrow">03 · The Cultural Moment</div>
+          <div class="cs-stat-num">↑47%</div>
+          <div class="cs-stat-label">Growth in running club participation post-2020. An entire generation of runners has made movement a social and aesthetic practice, not just a fitness habit. On is their brand. They have nowhere to gather in it.</div>
+        </div>
+        <div class="cs-stat-cell">
+          <div class="cs-stat-eyebrow">04 · The Expression Gap</div>
+          <div class="cs-stat-num">Miles</div>
+          <div class="cs-stat-label">Running is how On's customers express themselves. The shoe is the object. The run is the act. The community is the audience. All three need a home that reflects the standard of the brand that made the shoe.</div>
+        </div>
+      </div>
+      <div class="cs-pull-quote">&ldquo;On engineers the most precise running hardware in the world. Then hands its runners a third-party app to experience what they made.&rdquo;</div>
+      <p class="cs-body">The competitive context makes the gap more urgent. Nike Run Club is not a competitor On can beat on fitness features — it has a decade of head start and Nike's full media apparatus behind it. On cannot win by building a better GPS tracker or a more gamified leaderboard. What On can build — what only On can build — is a platform that holds itself to On's own standard. Minimal. Precise. Designed around movement as a human act, not a performance metric. The question On Apex answers is not "how do we compete with Strava?" It is: "what does software look like when it's built the way On builds shoes?"</p>
+    </section>
+
+    <!-- ══ 02 THE INSIGHT ══ -->
+    <section class="cs-section cs-section-alt" id="cs-insight" data-cs-section="cs-insight">
+      <div class="cs-section-eyebrow"><span class="cs-section-num">02</span><span class="cs-section-title">The Insight</span></div>
+      <h2 class="cs-heading-serif">Movement is the act. <em>The shoe is the object. The platform is the witness.</em></h2>
+      <div class="cs-pull-quote">&ldquo;On runners don&rsquo;t run to compete with each other. They run to become a version of themselves. The platform needs to understand the difference.&rdquo;</div>
+      <div class="cs-body-2col">
+        <p>The insight that separates On Apex from every existing running platform is a belief about why people run. Strava is built on the premise that runners are primarily motivated by performance comparison — KOMs, segments, leaderboards, the implicit question of how you rank. Nike Run Club is built on aspiration — the brand halo, the motivation overlays, the celebrity run guides. Both are valid products for large portions of the running market. Neither is the right product for On's runner, who chose On precisely because they are not that runner. The On runner chose a shoe designed in Switzerland, engineered for the sensation of movement, finished without ornamentation. That choice is a statement about values. The platform needs to honor it.</p>
+        <p>The second insight is about what makes On's position defensible. Any app can add GPS tracking. Any app can build a social feed. What no other app can do is make the shoe the identity unit — because no other app has On's shoe portfolio, On's brand permission, and the specific psychographic of runner that On attracts. The Cloudmonster runner and the Cloudgo runner are different people with different relationships to performance, aesthetics, and community. Apex knows the difference at the data level. That specificity is the moat. Not the technology. The specificity.</p>
+      </div>
+      <div class="cs-stats cs-stats-3">
+        <div class="cs-stat-cell">
+          <div class="cs-stat-eyebrow">Insight 01 · Movement as Expression</div>
+          <div class="cs-stat-num">Act</div>
+          <div class="cs-stat-label">On runners run to express something — an aesthetic, a discipline, a relationship to their own body in motion. The platform's job is to witness that, not to rank it. No KOM. No trophy. No gamification chrome.</div>
+        </div>
+        <div class="cs-stat-cell">
+          <div class="cs-stat-eyebrow">Insight 02 · The Craft Standard</div>
+          <div class="cs-stat-num">Swiss</div>
+          <div class="cs-stat-label">On holds its hardware to a standard most brands don't attempt. The software deserves the same. Every screen in Apex is built to a single question: does this earn its presence? If not, it doesn't ship.</div>
+        </div>
+        <div class="cs-stat-cell">
+          <div class="cs-stat-eyebrow">Insight 03 · The Untaken Territory</div>
+          <div class="cs-stat-num">Open</div>
+          <div class="cs-stat-label">Nike owns aspiration. Strava owns data. The territory no platform owns — aesthetic intentionality, movement as identity, design-forward running culture — is exactly where On lives. Apex plants the flag there.</div>
+        </div>
+      </div>
+      <p class="cs-body">The design system reflects this thesis at every level. The split mode — white for community and identity, black for the active run — is not a dark mode feature. It is a statement that the run is a different register of experience from everything that surrounds it. The scanning line on the run screen, the instrument-grade metric grid, the blinking colon that switches rather than fades — these are not aesthetic choices. They are the software equivalent of the Speedboard's flex geometry: every element doing exactly what it needs to do, nothing performing for its own sake. The app is built the way On builds shoes. That is the insight and the product simultaneously.</p>
+    </section>
+
+    <!-- ══ 03 THE USERS ══ -->
+    <section class="cs-section" id="cs-users" data-cs-section="cs-users">
+      <div class="cs-section-eyebrow"><span class="cs-section-num">03</span><span class="cs-section-title">The Users</span></div>
+      <h2 class="cs-heading-serif">Three runners. <em>One relationship to movement.</em></h2>
+      <p class="cs-body" style="margin-bottom:32px;">What unites On's three distinct runner psychographics is not their pace, their mileage, or their competitive drive. It is a shared belief that the act of running means something — that it is a form of self-expression that deserves to be treated with care. The brand they chose reflects that belief. The platform they use every day doesn't. On Apex is built for the runner who made that choice deliberately, and who notices when the software around the hardware doesn't match.</p>
+
+      <div class="persona-grid">
+        <div class="persona-card">
+          <div class="persona-card-tier">Persona A · Aesthetic Athlete</div>
+          <div class="persona-card-name">Elena L.</div>
+          <div class="persona-card-city">28–36 · Urban · CloudSurfer / Cloudgo</div>
+          <div class="persona-card-quote">"I chose On because the design reflects how I think about movement. I want the app to feel the same way — not like a spreadsheet, not like a leaderboard. Like something that was made for me."</div>
+          <div class="persona-card-detail">Runs 4x/week. Posts routes. Chose On for the design before the technology. The visual language of the brand — Swiss precision, restraint as authority, nothing decorative — maps exactly to how she thinks about her running. She wants community that holds the same standard.</div>
+          <div class="persona-card-tension">Core tension: Every existing platform treats her like a fitness enthusiast. She is not a fitness enthusiast. She is someone for whom movement is aesthetic practice. No platform speaks to that distinction — yet.</div>
+        </div>
+        <div class="persona-card">
+          <div class="persona-card-tier">Persona B · Data-Driven Competitor</div>
+          <div class="persona-card-name">Marcus R.</div>
+          <div class="persona-card-city">32–44 · Suburban · Cloudmonster / Cloudflow</div>
+          <div class="persona-card-quote">"I train with data because I respect the work enough to measure it. I wear On because the shoe is precise. I want a platform that holds the same standard — not more chrome, more precision."</div>
+          <div class="persona-card-detail">Trains for half marathons. Strava power user. Chose On because he trusts the engineering — the CloudTec geometry, the Helion foam, the specificity of each model for a specific kind of running. Wants performance data presented with the same directness the shoe delivers it.</div>
+          <div class="persona-card-tension">Core tension: Strava gives him data but no brand context. The shoe he runs in shapes how he performs — but no platform reflects that relationship back at him. Apex makes the shoe visible in the data.</div>
+        </div>
+        <div class="persona-card">
+          <div class="persona-card-tier">Persona C · Community Connector</div>
+          <div class="persona-card-name">Jamie K.</div>
+          <div class="persona-card-city">24–34 · Urban · Group Runner · Any Model</div>
+          <div class="persona-card-quote">"Running is the most honest thing I do. It's also the most social. I want a place to share that with people who understand what it means — not just who ran furthest."</div>
+          <div class="persona-card-detail">Organizes club runs. Views movement as social ritual. The On shoe is the badge of belonging — the signal to other runners that you share a particular relationship to the craft. Wants a community built around shared values, not shared metrics.</div>
+          <div class="persona-card-tension">Core tension: The club he's building lives across five platforms and two group chats. None of them reflect the culture of the brand. Apex unifies the coordination, the identity, and the expression in a single surface that finally matches the shoes.</div>
+        </div>
+      </div>
+
+      <div class="pm-lens">
+        <div class="pm-lens-label">PM Lens · The Persona Strategy Is a Brand Argument</div>
+        <p class="pm-lens-text">All three personas share one thing: they chose On with intention. They are not runners who happened to buy On shoes — they are runners whose values are legible in the shoes they bought. The product strategy follows from this. A platform built for Elena cannot prioritize KOMs. A platform built for Marcus cannot be decorative. A platform built for Jamie cannot fragment the community across tabs and features. The two-mode design system — white for identity and community, black for the act of running — is the architectural expression of this understanding. The modes don't just change colors. They change what the screen believes the runner is doing, and behave accordingly.</p>
+      </div>
+    </section>
+
+    <!-- ══ 04 THE PRODUCT ══ -->
+    <section class="cs-section cs-section-alt" id="cs-product" data-cs-section="cs-product">
+      <div class="cs-section-eyebrow"><span class="cs-section-num">04</span><span class="cs-section-title">The Product</span></div>
+      <h2 class="cs-heading-serif">Six P0 features. <em>Four P1. One rule.</em></h2>
+      <p class="cs-body" style="margin-bottom:8px;">The PRD scopes three phases with an explicit dependency chain. Phase 1 ships the core loop — Activity Log, Shoe Garage, Social Feed, Onboarding, Pre-Run Screen, Profile. Each feature enables the next: the run produces data; the data feeds the Garage; the Garage earns the commerce trigger; the community retains the runner who generates the next run. Phase 2 adds the social infrastructure — Apex Clubs, Challenges, Events, Routes — but only once Phase 1 has produced the behavioral data that justifies their design. Phase 3 integrates commerce. The rule: no Phase 2 feature exists before Phase 1 is proven. No Phase 3 feature enters the app without the contextual data to justify its placement. Shipping in the wrong order produces a product where features exist but don't connect.</p>
+
+      <div class="priority-grid" style="margin-top:28px;">
+        <div class="priority-card core">
+          <div class="priority-tag p0">P0 · Phase 1 · MVP</div>
+          <div class="priority-feature">Activity Log — GPS Tracking</div>
+          <div class="priority-desc">Live run simulation with pace, HR, cadence, zone bars, and route map. Post-run summary with On-branded visual output designed to be shared. The core product loop — without a run, nothing else in the app has meaning.</div>
+          <div class="priority-prd">PRD: Phase 1 P0 · Prerequisite for all behavioral data</div>
+        </div>
+        <div class="priority-card core">
+          <div class="priority-tag p0">P0 · Phase 1 · MVP</div>
+          <div class="priority-feature">Shoe Garage — Mileage Tracking</div>
+          <div class="priority-desc">Register On shoes from order history via SSO. Auto-track mileage per shoe across every logged run. Amber wear warnings at configurable thresholds. Deep-link to on.com for replacement — no in-app checkout. Cyclon integration for circular returns.</div>
+          <div class="priority-prd">PRD: Phase 1 P0 · Primary commerce loop trigger</div>
+        </div>
+        <div class="priority-card core">
+          <div class="priority-tag p0">P0 · Phase 1 · MVP</div>
+          <div class="priority-feature">Social Feed — Reactions System</div>
+          <div class="priority-desc">Activity cards with shoe attribution, run type color coding, PR badges. On-native reactions — Push, Solid, Pace, Zone, Respect — replacing generic hearts. Pull-to-refresh with skeleton loading. Long press for contextual share/edit/delete.</div>
+          <div class="priority-prd">PRD: Phase 1 P0 · No follower counts as status · No KOM system</div>
+        </div>
+        <div class="priority-card core">
+          <div class="priority-tag p0">P0 · Phase 1 · MVP</div>
+          <div class="priority-feature">3-Screen Onboarding</div>
+          <div class="priority-desc">Welcome on black (mode sets expectations). Shoe selection on white (the first identity moment). Goal-setting plus follow suggestions (community seeding). Data carries forward into every surface — shoe appears in pre-run, post-run, and garage.</div>
+          <div class="priority-prd">PRD: Phase 1 P0 · 70% shoe registration rate is a 90-day success metric</div>
+        </div>
+        <div class="priority-card core">
+          <div class="priority-tag p0">P0 · Phase 1 · MVP</div>
+          <div class="priority-feature">Pre-Run Screen + Shoe Select</div>
+          <div class="priority-desc">GPS lock animation with expanding ring pulses. Shoe selector sheet before the clock starts. Start button disabled and grey until GPS locks — no ambiguity about state. This screen was missing from every prior version and missing from Flow 1 in the PRD.</div>
+          <div class="priority-prd">PRD: Flow 1, Step 2 · GPS Lock + Shoe Select · Previously unbuilt</div>
+        </div>
+        <div class="priority-card core">
+          <div class="priority-tag p0">P0 · Phase 1 · MVP</div>
+          <div class="priority-feature">Profile + Stats Dashboard</div>
+          <div class="priority-desc">Editorial black header. Weekly/monthly/YTD stats. Animated 6-month bar chart. YTD grid. Goal progress bar. Shareable stat card with ghost type. On SSO connection indicator. Connected to On account — orders sync automatically.</div>
+          <div class="priority-prd">PRD: Phase 1 P0 · Shareable stat card is a retention mechanic</div>
+        </div>
+        <div class="priority-card supporting">
+          <div class="priority-tag p1">P1 · Phase 2 · Community Layer</div>
+          <div class="priority-feature">Apex Clubs — Full Implementation</div>
+          <div class="priority-desc">Geo-located running clubs with group leaderboard, club identity, club run scheduling, and RSVP. Not a flat activity feed labeled "Apex Clubs" — a full club infrastructure with ranked members, upcoming runs, and crew formation.</div>
+          <div class="priority-prd">PRD: Phase 2 P1 · Group leaderboard · Club run scheduling · RSVP</div>
+        </div>
+        <div class="priority-card supporting">
+          <div class="priority-tag p1">P1 · Phase 2 · Community Layer</div>
+          <div class="priority-feature">Challenges + Event Discovery</div>
+          <div class="priority-desc">Brand-created and user-created distance/elevation/streak challenges with On-exclusive drops for top finishers. On-sponsored races, pop-up runs, and community events with in-app RSVP and crew count. Both features gated behind Phase 1 volume data.</div>
+          <div class="priority-prd">PRD: Phase 2 P1 · On-exclusive drops are a commerce signal, not a reward</div>
+        </div>
+        <div class="priority-card supporting">
+          <div class="priority-tag p1">P1/P2 · Phase 2 · Community Layer</div>
+          <div class="priority-feature">Route Library + Map Expand</div>
+          <div class="priority-desc">Community-submitted and On-curated routes with difficulty, surface type, and shoe recommendation per route. Horizontal scroll-snap carousel with unique SVG map thumbnails per route. Tap-to-expand full-screen map overlay with scale-origin animation.</div>
+          <div class="priority-prd">PRD: Phase 2 P2 · Shoe recommendation per route closes the commerce loop contextually</div>
+        </div>
+        <div class="priority-card deferred">
+          <div class="priority-tag deferred">Phase 3 · Deferred · Context Only</div>
+          <div class="priority-feature">Commerce Integration — Deep Link Only</div>
+          <div class="priority-desc">No in-app checkout. No product catalog. No advertising. The only commerce surface in the app is a deep-link to on.com, triggered by a mileage threshold in the Shoe Garage, earned by behavioral data. Commerce is the consequence of the platform working — not its purpose.</div>
+          <div class="priority-prd">PRD: Constraint · Deep-link to on.com only · No in-app checkout in Phase 1 or 2</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ 05 DESIGN SYSTEM ══ -->
+    <section class="cs-section" id="cs-design" data-cs-section="cs-design">
+      <div class="cs-section-eyebrow"><span class="cs-section-num">05</span><span class="cs-section-title">Design System</span></div>
+      <h2 class="cs-heading-serif">A Molecular Design System built for <em>two registers.</em></h2>
+      <div class="cs-body-2col">
+        <p>The Molecular Design System was built alongside the PRD, not after it. Every token, component, and pattern was derived from a specific user need — the split mode system exists because of the persona strategy, not because dark mode is fashionable. Light mode (#F7F7F3 base, #FFFFFF card surface) serves the architectural register: community, discovery, identity. Dark mode (#050505 base, #0E0E0E card surface) serves the instrument register: active run, pre-run GPS lock, onboarding threshold moment.</p>
+        <p>Three typefaces carry three distinct roles. Bebas Neue is display-only — large numbers, screen titles, the 116px weekly km that is the home screen's entire argument. DM Mono handles all metadata: pace labels, distances, dates, status indicators. DM Sans carries body copy, names, and conversational text. No typeface crosses into another's territory. The volt accent (#E8FF3C) appears a maximum of three times per screen — always on a dark surface, always earning its presence.</p>
+      </div>
+
+      <!-- Mode split demo -->
+      <div class="mode-split" style="margin-bottom:28px;">
+        <div class="mode-panel mode-panel-light">
+          <div class="mode-label mode-label-light">Light Mode · Architectural · Home · Garage · Post-Run · Feed</div>
+          <div style="font-family:'Helvetica Neue',sans-serif;font-size:52px;font-weight:200;color:#0A0A0A;line-height:.9;letter-spacing:.02em;margin-bottom:8px;">38<span style="font-size:16px;color:#888;margin-left:4px;letter-spacing:.04em;font-weight:400;">km</span></div>
+          <div style="font-family:'Courier New',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:#888;margin-bottom:12px;">This week · 4 runs · ↑12%</div>
+          <div style="display:flex;gap:4px;align-items:flex-end;height:32px;">
+            <div style="width:16px;height:24px;background:#0A0A0A;opacity:.8;"></div>
+            <div style="width:16px;height:8px;background:#EDEDE8;"></div>
+            <div style="width:16px;height:28px;background:#0A0A0A;opacity:.8;"></div>
+            <div style="width:16px;height:20px;background:#0A0A0A;opacity:.8;"></div>
+            <div style="width:16px;height:18px;background:#0A0A0A;opacity:.8;"></div>
+            <div style="width:16px;height:8px;background:#EDEDE8;"></div>
+            <div style="width:16px;height:10px;background:#E8FF3C;"></div>
+          </div>
+          <div style="margin-top:10px;font-family:'Courier New',monospace;font-size:8px;color:#ccc;letter-spacing:.12em;text-transform:uppercase;">White surfaces float on #F7F7F3 · Zero border-radius · 4px grid</div>
+        </div>
+        <div class="mode-panel mode-panel-dark">
+          <div class="mode-label mode-label-dark">Dark Mode · Instrument · Active Run · Pre-Run GPS</div>
+          <div style="font-family:'Helvetica Neue',sans-serif;font-size:52px;font-weight:200;color:#F0F0EA;line-height:.9;letter-spacing:.02em;margin-bottom:8px;">28<span style="color:#E8FF3C;margin-left:2px;">:</span>14</div>
+          <div style="font-family:'Courier New',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:12px;">Elapsed · 4.7 km · Cloudmonster 2</div>
+          <div style="display:flex;gap:4px;">
+            <div style="flex:1;height:4px;background:rgba(255,255,255,.25);"></div>
+            <div style="flex:1;height:4px;background:rgba(255,255,255,.25);"></div>
+            <div style="flex:1;height:5px;background:#E8FF3C;"></div>
+            <div style="flex:1;height:4px;background:#181818;"></div>
+            <div style="flex:1;height:4px;background:#181818;"></div>
+          </div>
+          <div style="margin-top:6px;font-family:'Courier New',monospace;font-size:8px;color:rgba(232,255,60,.6);letter-spacing:.12em;text-transform:uppercase;">Zone 3</div>
+          <div style="margin-top:10px;font-family:'Courier New',monospace;font-size:8px;color:rgba(255,255,255,.2);letter-spacing:.12em;text-transform:uppercase;">Volt appears once per viewport · Scanning line · No spinner</div>
+        </div>
+      </div>
+
+      <div class="cs-stats cs-stats-4">
+        <div class="cs-stat-cell">
+          <div class="cs-stat-eyebrow">Mode System</div>
+          <div class="cs-stat-num">2</div>
+          <div class="cs-stat-label">Split mode: Light (community/data) and Dark (active run/GPS). The transition is a product mechanic — not a preference setting.</div>
+        </div>
+        <div class="cs-stat-cell">
+          <div class="cs-stat-eyebrow">Volt Rule</div>
+          <div class="cs-stat-num">≤3</div>
+          <div class="cs-stat-label">Maximum volt (#E8FF3C) instances per screen. Always on dark or high-contrast surfaces. Never decorative. Scarcity is the authority.</div>
+        </div>
+        <div class="cs-stat-cell">
+          <div class="cs-stat-eyebrow">Radius</div>
+          <div class="cs-stat-num">0px</div>
+          <div class="cs-stat-label">Zero border-radius throughout. Everywhere. On's Swiss-minimalist visual identity rendered at the component level — architecture, not decoration.</div>
+        </div>
+        <div class="cs-stat-cell">
+          <div class="cs-stat-eyebrow">Interaction Patterns</div>
+          <div class="cs-stat-num">9</div>
+          <div class="cs-stat-label">Specified in the MDS: Haptic tap, swipe dismiss, pull-to-refresh, long press, scroll snap, sheet modal, toast, skeleton loading, map expand.</div>
+        </div>
+      </div>
+
+      <div class="pm-lens">
+        <div class="pm-lens-label">PM Lens · The Craft Standard Applied to Software</div>
+        <p class="pm-lens-text">On's hardware is built around a single question: does this earn its presence? The Speedboard flex geometry earns its presence by changing how energy transfers through the foot strike. The CloudTec pods earn their presence by decoupling landing and takeoff in a way no other sole geometry achieves. Nothing decorates. Everything performs. The design system for Apex applies the same discipline to every token and component. Zero border-radius is not a style preference — it is the refusal of the rounded corner's implicit message that this is approachable consumer software. The volt scarcity rule is not restraint for its own sake — it is the understanding that a signal loses meaning when it appears everywhere. The blinking colon on the run screen uses step-end timing, not ease-in, because instruments switch; they do not transition. Every one of these decisions is the software asking the same question the hardware asks: does this earn its presence? If not, it doesn't ship.</p>
+      </div>
+
+      <!-- Token documentation — surfaced from MDS -->
+      <div style="margin-bottom:28px;">
+        <div style="font-size:8px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--g300);margin-bottom:14px;font-family:var(--mono);">Key Token Decisions — Light → Dark Mapping</div>
+        <table class="cs-table" style="margin-bottom:0;">
+          <thead>
+            <tr><th>Token</th><th>Light Value</th><th>Dark Value</th><th>Role &amp; Rationale</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>surface-primary</td><td>#F7F7F3</td><td>#050505</td><td>Off-white base keeps light mode warm, not clinical. Near-black base gives dark mode depth without pure black harshness.</td></tr>
+            <tr><td>surface-card</td><td>#FFFFFF</td><td>#0E0E0E</td><td>Pure white cards on warm grey base creates the elevation contrast the architectural register depends on.</td></tr>
+            <tr><td>ink-primary</td><td>#0A0A0A</td><td>#F0F0EA</td><td>Near-black ink on light, warm white on dark. Both pass WCAG AAA at 18:1+ contrast ratio.</td></tr>
+            <tr><td>brand-volt</td><td>#E8FF3C</td><td>#E8FF3C</td><td>Mode-invariant. Volt was designed for dark surfaces — it earns equal authority on white at maximum restraint (≤3 instances per screen).</td></tr>
+            <tr><td>semantic-warn</td><td>#B85800</td><td>#E89030</td><td>Amber in light mode passes AA contrast on white. Lightened for dark mode to maintain same visual weight against near-black. Used exclusively for shoe retirement — completion, not alarm.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ══ DESIGN SYSTEM ARTIFACT ══ -->
+    <div class="artifact-strip" id="artifact-design-system">
+      <div class="artifact-trigger" id="art1-trigger" onclick="toggleArtifact(1)">
+        <div class="artifact-left">
+          <div class="artifact-badge"><span>Interactive Artifact</span></div>
+          <div class="artifact-meta">
+            <div class="artifact-name">Molecular Design System + PRD</div>
+            <div class="artifact-desc">Full token reference · Split mode documentation · All 9 interaction patterns · Screen patterns · PRD sections 01–06</div>
+          </div>
+        </div>
+        <div class="artifact-right"><span class="artifact-toggle" id="art1-cta">+</span></div>
+      </div>
+      <div class="artifact-expand" id="art1-expand">
+        <div class="artifact-inner">
+          <div class="artifact-inner-header">
+            <div>
+              <div class="artifact-inner-eyebrow">Interactive · On Apex · PRD + Molecular Design System v1.0</div>
+              <div class="artifact-inner-title">PRD + Molecular Design System</div>
+            </div>
+            <button class="artifact-close-btn" onclick="closeArtifact(1)">Close &uarr;</button>
+          </div>
+          <div class="artifact-iframe-wrap">
+            <iframe src="prd-design-system.html" title="On Apex PRD + Molecular Design System" scrolling="yes"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ 06 KEY SCREENS ══ -->
+    <section class="app-showcase" id="cs-screens" data-cs-section="cs-screens">
+      <div class="app-showcase-eyebrow">
+        <span class="app-showcase-num">06</span>
+        <span class="app-showcase-label">Key Screens</span>
+      </div>
+      <div class="app-showcase-heading">Five screens.<br><em>One coherent product argument.</em></div>
+      <p class="app-showcase-sub">Each screen is a direct PM decision mapped to a PRD feature. None is a UI exercise. Each one closes a specific gap in On's data infrastructure — from the moment a runner opens the app to the moment they retire a shoe.</p>
+
+      <div class="app-showcase-layout">
+        <nav class="app-screen-nav">
+          <button class="app-screen-btn active" data-screen="1" onclick="showScreen(1)">
+            <div class="app-screen-btn-num">01</div>
+            <div class="app-screen-btn-name">Home</div>
+          </button>
+          <button class="app-screen-btn" data-screen="2" onclick="showScreen(2)">
+            <div class="app-screen-btn-num">02</div>
+            <div class="app-screen-btn-name">Active Run</div>
+          </button>
+          <button class="app-screen-btn" data-screen="3" onclick="showScreen(3)">
+            <div class="app-screen-btn-num">03</div>
+            <div class="app-screen-btn-name">Post-Run</div>
+          </button>
+          <button class="app-screen-btn" data-screen="4" onclick="showScreen(4)">
+            <div class="app-screen-btn-num">04</div>
+            <div class="app-screen-btn-name">Shoe Garage</div>
+          </button>
+          <button class="app-screen-btn" data-screen="5" onclick="showScreen(5)">
+            <div class="app-screen-btn-num">05</div>
+            <div class="app-screen-btn-name">Community</div>
+          </button>
+        </nav>
+
+        <!-- Screen 01: Home -->
+        <div class="app-screen-frame active" id="screen-1">
+          <div class="app-screen-visual">
+            <svg viewBox="0 0 320 580" xmlns="http://www.w3.org/2000/svg" style="width:100%;">
+              <defs>
+                <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#F7F7F3"/><stop offset="100%" stop-color="#EFEFE9"/></linearGradient>
+                <filter id="cardShadow"><feDropShadow dx="0" dy="2" stdDeviation="6" flood-color="rgba(0,0,0,0.09)"/></filter>
+              </defs>
+              <rect width="320" height="580" fill="url(#bgGrad)"/>
+              <!-- Status bar -->
+              <text x="20" y="26" fill="#888880" font-family="monospace" font-size="9" letter-spacing="1">9:41</text>
+              <text x="300" y="26" fill="#888880" font-family="monospace" font-size="9" text-anchor="end">100%</text>
+              <!-- Greeting -->
+              <text x="20" y="66" fill="#888880" font-family="monospace" font-size="8" letter-spacing="3">GOOD MORNING</text>
+              <text x="20" y="104" fill="#0A0A0A" font-family="serif" font-size="46" font-weight="200" letter-spacing="1">BENN.</text>
+              <text x="20" y="118" fill="#C0C0B8" font-family="monospace" font-size="7" letter-spacing="2">WED · MARCH 12 · 2026</text>
+              <!-- Hero card — elevated white on warm grey -->
+              <rect x="20" y="132" width="280" height="114" fill="#FFFFFF" filter="url(#cardShadow)" rx="0"/>
+              <rect x="20" y="132" width="280" height="114" fill="none" stroke="rgba(0,0,0,0.06)" stroke-width="1"/>
+              <!-- Big number -->
+              <text x="36" y="155" fill="#888880" font-family="monospace" font-size="7" letter-spacing="2">THIS WEEK</text>
+              <text x="34" y="212" fill="#0A0A0A" font-family="serif" font-size="72" font-weight="200" letter-spacing="-1">38</text>
+              <text x="110" y="197" fill="#888880" font-family="monospace" font-size="12">km</text>
+              <!-- Volt accent block — top-right corner -->
+              <rect x="252" y="140" width="40" height="40" fill="#E8FF3C"/>
+              <text x="272" y="164" fill="#0A0A0A" font-family="serif" font-size="24" font-weight="400" text-anchor="middle">4</text>
+              <text x="272" y="175" fill="#0A0A0A" font-family="monospace" font-size="6" text-anchor="middle" letter-spacing="1">runs</text>
+              <!-- Stats row -->
+              <line x1="36" y1="224" x2="284" y2="224" stroke="rgba(0,0,0,0.06)" stroke-width="1"/>
+              <text x="36" y="234" fill="#C0C0B8" font-family="monospace" font-size="6" letter-spacing="1">AVG PACE</text>
+              <text x="36" y="244" fill="#0A0A0A" font-family="monospace" font-size="11">4:52</text>
+              <line x1="126" y1="226" x2="126" y2="244" stroke="rgba(0,0,0,0.06)" stroke-width="1"/>
+              <text x="136" y="234" fill="#C0C0B8" font-family="monospace" font-size="6" letter-spacing="1">TOTAL TIME</text>
+              <text x="136" y="244" fill="#0A0A0A" font-family="monospace" font-size="11">3h 04m</text>
+              <line x1="228" y1="226" x2="228" y2="244" stroke="rgba(0,0,0,0.06)" stroke-width="1"/>
+              <text x="238" y="234" fill="#C0C0B8" font-family="monospace" font-size="6" letter-spacing="1">VS LAST WK</text>
+              <text x="238" y="244" fill="#0A7A3E" font-family="monospace" font-size="11">+12%</text>
+              <!-- Week strip -->
+              <rect x="20" y="260" width="280" height="68" fill="#EDEDE8"/>
+              <text x="36" y="276" fill="#888880" font-family="monospace" font-size="6" letter-spacing="2">DAILY ACTIVITY</text>
+              <!-- Bars — proportional heights, today in volt -->
+              <rect x="36"  y="284" width="20" height="30" fill="#0A0A0A" opacity=".82"/>
+              <rect x="64"  y="300" width="20" height="14" fill="#EDEDE8"/>
+              <rect x="92"  y="290" width="20" height="24" fill="#0A0A0A" opacity=".82"/>
+              <rect x="120" y="284" width="20" height="30" fill="#0A0A0A" opacity=".82"/>
+              <rect x="148" y="292" width="20" height="22" fill="#0A0A0A" opacity=".82"/>
+              <rect x="176" y="302" width="20" height="12" fill="#EDEDE8"/>
+              <rect x="204" y="308" width="20" height="6"  fill="#E8FF3C"/>
+              <!-- Recent run row -->
+              <line x1="20" y1="342" x2="300" y2="342" stroke="rgba(0,0,0,0.05)" stroke-width="1"/>
+              <text x="20" y="368" fill="#0A0A0A" font-family="serif" font-size="28" font-weight="200">12</text>
+              <text x="20" y="380" fill="#888880" font-family="monospace" font-size="7" letter-spacing="1">MAR</text>
+              <rect x="58" y="350" width="18" height="2" fill="#C0C0B8"/>
+              <text x="58" y="366" fill="#0A0A0A" font-family="sans-serif" font-size="12" font-weight="400">Sunday Long Run</text>
+              <text x="58" y="379" fill="#888880" font-family="monospace" font-size="8">12.4 km · 58:02 · 4:41/km</text>
+              <text x="297" y="365" fill="#0A0A0A" font-family="serif" font-size="22" text-anchor="end" font-weight="200">12.4</text>
+              <text x="297" y="378" fill="#888880" font-family="monospace" font-size="7" text-anchor="end">km</text>
+              <!-- Second run row -->
+              <line x1="20" y1="394" x2="300" y2="394" stroke="rgba(0,0,0,0.04)" stroke-width="1"/>
+              <text x="20" y="416" fill="#888880" font-family="serif" font-size="22" font-weight="200">09</text>
+              <text x="20" y="428" fill="#C0C0B8" font-family="monospace" font-size="7" letter-spacing="1">MAR</text>
+              <rect x="58" y="402" width="18" height="2" fill="#C8DF00"/>
+              <text x="58" y="416" fill="#3C3C38" font-family="sans-serif" font-size="12">Tempo Threshold</text>
+              <text x="58" y="428" fill="#888880" font-family="monospace" font-size="8">9.8 km · 43:10 · 4:24/km</text>
+              <text x="297" y="415" fill="#3C3C38" font-family="serif" font-size="20" text-anchor="end" font-weight="200">9.8</text>
+              <!-- Shoe nudge card -->
+              <rect x="20" y="444" width="280" height="54" fill="#FFFFFF" filter="url(#cardShadow)" rx="0"/>
+              <rect x="20" y="444" width="280" height="54" fill="none" stroke="rgba(0,0,0,0.05)" stroke-width="1"/>
+              <rect x="20" y="444" width="46" height="54" fill="#0A0A0A"/>
+              <text x="43" y="476" fill="#F7F7F3" font-family="sans-serif" font-size="20" text-anchor="middle">👟</text>
+              <text x="76" y="464" fill="#0A0A0A" font-family="sans-serif" font-size="11" font-weight="500">Cloudflow 4 · 487 km</text>
+              <text x="76" y="479" fill="#888880" font-family="monospace" font-size="8">Approaching replacement · tap to view</text>
+              <rect x="238" y="468" width="42" height="3" fill="#EDEDE8"/>
+              <rect x="238" y="468" width="34" height="3" fill="#B85800"/>
+              <!-- Nav bar -->
+              <rect x="20" y="512" width="280" height="1" fill="rgba(0,0,0,0.06)"/>
+              <rect x="130" y="500" width="32" height="32" fill="#0A0A0A"/>
+              <text x="146" y="521" fill="#fff" font-family="sans-serif" font-size="13" text-anchor="middle">▶</text>
+            </svg>
+          </div>
+          <div class="app-screen-meta">
+            <div>
+              <div class="app-screen-desc-label">What this screen does</div>
+              <p class="app-screen-desc-text">Home is an architectural screen — one number owns it. The 116px weekly km (rendered here at 72px for the SVG scale) is the first thing the eye resolves before anything else loads. White cards float on the warm #F7F7F3 base with real drop-shadow elevation — three distinct depth layers visible on a single screen. Volt appears exactly three times: today's week bar, the runs count block, the shoe nudge icon. The volt scarcity rule is the design system enforcing the brand argument at the component level.</p>
+            </div>
+            <div class="app-screen-counter">01 / 05</div>
+          </div>
+        </div>
+
+        <!-- Screen 02: Active Run -->
+        <div class="app-screen-frame" id="screen-2">
+          <div class="app-screen-visual">
+            <svg viewBox="0 0 320 580" xmlns="http://www.w3.org/2000/svg" style="background:#050505;width:100%;">
+              <!-- Status -->
+              <text x="20" y="28" fill="rgba(240,240,234,0.8)" font-family="monospace" font-size="9">9:47</text>
+              <!-- Island — active -->
+              <rect x="94" y="12" width="132" height="24" rx="12" fill="#000"/>
+              <circle cx="110" cy="24" r="4" fill="#E8FF3C"/>
+              <text x="132" y="29" fill="#F0F0EA" font-family="monospace" font-size="9">28:14</text>
+              <!-- Primary time -->
+              <text x="160" y="120" fill="rgba(240,240,234,0.35)" font-family="monospace" font-size="7" text-anchor="middle" letter-spacing="3">ELAPSED TIME</text>
+              <text x="160" y="188" fill="#F0F0EA" font-family="serif" font-size="80" font-weight="200" text-anchor="middle" letter-spacing="2">28:14</text>
+              <text x="160" y="214" fill="#E8FF3C" font-family="serif" font-size="28" font-weight="200" text-anchor="middle">4.70 <tspan fill="rgba(168,168,160,0.7)" font-size="12">km</tspan></text>
+              <!-- Metrics grid -->
+              <rect x="20" y="240" width="280" height="1" fill="rgba(255,255,255,.06)"/>
+              <rect x="20" y="300" width="280" height="1" fill="rgba(255,255,255,.06)"/>
+              <text x="76" y="262" fill="rgba(255,255,255,.3)" font-family="monospace" font-size="7" text-anchor="middle" letter-spacing="2">PACE</text>
+              <text x="76" y="287" fill="#F0F0EA" font-family="serif" font-size="26" font-weight="200" text-anchor="middle">5:58</text>
+              <text x="76" y="298" fill="rgba(255,255,255,.2)" font-family="monospace" font-size="7" text-anchor="middle">/km</text>
+              <line x1="133" y1="248" x2="133" y2="296" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
+              <text x="160" y="262" fill="rgba(255,255,255,.3)" font-family="monospace" font-size="7" text-anchor="middle" letter-spacing="2">CADENCE</text>
+              <text x="160" y="287" fill="#F0F0EA" font-family="serif" font-size="26" font-weight="200" text-anchor="middle">172</text>
+              <line x1="187" y1="248" x2="187" y2="296" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
+              <text x="244" y="262" fill="rgba(255,255,255,.3)" font-family="monospace" font-size="7" text-anchor="middle" letter-spacing="2">HR</text>
+              <text x="244" y="287" fill="#F0F0EA" font-family="serif" font-size="26" font-weight="200" text-anchor="middle">158</text>
+              <!-- Zone bars -->
+              <rect x="20" y="308" width="48" height="4" fill="rgba(255,255,255,.2)"/>
+              <rect x="74" y="308" width="48" height="4" fill="rgba(255,255,255,.2)"/>
+              <rect x="128" y="308" width="48" height="5" fill="#E8FF3C"/>
+              <rect x="182" y="308" width="48" height="4" fill="#181818"/>
+              <rect x="236" y="308" width="48" height="4" fill="#181818"/>
+              <text x="295" y="314" fill="#E8FF3C" font-family="monospace" font-size="8" text-anchor="end">Z3</text>
+              <!-- Map area -->
+              <rect x="20" y="326" width="280" height="118" fill="#0E0E0E"/>
+              <path d="M30,430 C50,415 72,395 98,385 C124,375 140,398 164,390 C188,382 206,358 228,350 C244,344 258,346 270,350" stroke="rgba(255,255,255,0.07)" stroke-width="1.5" fill="none"/>
+              <path d="M30,430 C50,415 72,395 98,385 C124,375 140,398 164,390 C188,382 206,358 228,350" stroke="#E8FF3C" stroke-width="2" fill="none"/>
+              <circle cx="228" cy="350" r="5" fill="#E8FF3C"/>
+              <!-- Controls -->
+              <rect x="20" y="456" width="116" height="44" fill="#1C1C1C" stroke="rgba(255,255,255,.1)" stroke-width="1"/>
+              <text x="78" y="483" fill="#F0F0EA" font-family="monospace" font-size="9" letter-spacing="2" text-anchor="middle">PAUSE</text>
+              <rect x="142" y="456" width="44" height="44" fill="#0E0E0E" stroke="rgba(255,255,255,.06)" stroke-width="1"/>
+              <rect x="156" y="469" width="16" height="16" fill="rgba(168,168,160,.5)"/>
+              <rect x="192" y="456" width="108" height="44" fill="#E8FF3C"/>
+              <text x="246" y="483" fill="#050505" font-family="monospace" font-size="9" letter-spacing="2" text-anchor="middle">FINISH →</text>
+            </svg>
+          </div>
+          <div class="app-screen-meta">
+            <div>
+              <div class="app-screen-desc-label">What this screen does</div>
+              <p class="app-screen-desc-text">The Active Run screen is an instrument-grade cockpit. The entire white-mode app inverts to near-black the moment you press Start — the transition is the product. A scanning line animation gives the screen live-data signal without a spinner. The blinking colon is step-end timing, not ease-in — it switches, because instruments switch. Zone bars update in real time as the run simulation progresses. Volt appears once: the currently active zone bar.</p>
+            </div>
+            <div class="app-screen-counter">02 / 05</div>
+          </div>
+        </div>
+
+        <!-- Screen 03: Post-Run -->
+        <div class="app-screen-frame" id="screen-3">
+          <div class="app-screen-visual">
+            <svg viewBox="0 0 320 580" xmlns="http://www.w3.org/2000/svg" style="background:#F7F7F3;width:100%;">
+              <!-- Editorial header — ink on white -->
+              <rect x="0" y="0" width="320" height="195" fill="#0A0A0A"/>
+              <!-- Ghost type -->
+              <text x="140" y="170" fill="transparent" stroke="rgba(255,255,255,0.04)" stroke-width="1" font-family="serif" font-size="120" font-weight="200" font-style="italic">RUN</text>
+              <!-- Volt rule + label -->
+              <rect x="20" y="72" width="22" height="1" fill="#E8FF3C"/>
+              <text x="50" y="74" fill="rgba(255,255,255,0.38)" font-family="monospace" font-size="7" letter-spacing="2">SUNDAY LONG RUN · MAR 12</text>
+              <!-- Headline -->
+              <text x="20" y="124" fill="#FFFFFF" font-family="serif" font-size="56" font-weight="200">12.4</text>
+              <text x="20" y="162" fill="#E8FF3C" font-family="serif" font-size="56" font-weight="200">km</text>
+              <text x="20" y="186" fill="rgba(255,255,255,0.42)" font-family="monospace" font-size="8">58:02 · CLOUDMONSTER 2 · RICHMOND VA</text>
+              <!-- Primary stats -->
+              <rect x="0" y="195" width="320" height="1" fill="rgba(0,0,0,0.07)"/>
+              <text x="20" y="220" fill="#888" font-family="monospace" font-size="7" letter-spacing="2">TIME</text>
+              <text x="20" y="255" fill="#0A0A0A" font-family="serif" font-size="40" font-weight="200">58:02</text>
+              <line x1="162" y1="205" x2="162" y2="265" stroke="rgba(0,0,0,0.07)" stroke-width="1"/>
+              <text x="172" y="220" fill="#888" font-family="monospace" font-size="7" letter-spacing="2">AVG PACE</text>
+              <text x="172" y="255" fill="#0A0A0A" font-family="serif" font-size="40" font-weight="200">4:41</text>
+              <!-- PR badge -->
+              <rect x="172" y="266" width="106" height="20" fill="#E8FF3C"/>
+              <rect x="172" y="266" width="18" height="20" fill="#0A0A0A"/>
+              <text x="181" y="280" fill="#E8FF3C" font-family="serif" font-size="10" text-anchor="middle">★</text>
+              <text x="236" y="280" fill="#0A0A0A" font-family="monospace" font-size="7" text-anchor="middle" letter-spacing="1">PR · 10K PACE</text>
+              <!-- Secondary stats -->
+              <rect x="0" y="295" width="320" height="1" fill="rgba(0,0,0,0.06)"/>
+              <text x="20" y="316" fill="#888" font-family="monospace" font-size="7" letter-spacing="1">CADENCE</text>
+              <text x="20" y="332" fill="#0A0A0A" font-family="serif" font-size="22" font-weight="200">176 <tspan fill="#888" font-size="10">spm</tspan></text>
+              <line x1="118" y1="300" x2="118" y2="342" stroke="rgba(0,0,0,0.06)" stroke-width="1"/>
+              <text x="128" y="316" fill="#888" font-family="monospace" font-size="7" letter-spacing="1">AVG HR</text>
+              <text x="128" y="332" fill="#0A0A0A" font-family="serif" font-size="22" font-weight="200">164 <tspan fill="#888" font-size="10">bpm</tspan></text>
+              <line x1="224" y1="300" x2="224" y2="342" stroke="rgba(0,0,0,0.06)" stroke-width="1"/>
+              <text x="234" y="316" fill="#888" font-family="monospace" font-size="7" letter-spacing="1">ELEV</text>
+              <text x="234" y="332" fill="#0A0A0A" font-family="serif" font-size="22" font-weight="200">+62 <tspan fill="#888" font-size="10">m</tspan></text>
+              <!-- Pace chart -->
+              <rect x="0" y="352" width="320" height="1" fill="rgba(0,0,0,0.06)"/>
+              <text x="20" y="372" fill="#888" font-family="monospace" font-size="7" letter-spacing="2">PACE / KM</text>
+              <rect x="20" y="382" width="34" height="26" fill="#EDEDE8"/>
+              <rect x="60" y="378" width="34" height="30" fill="#EDEDE8"/>
+              <rect x="100" y="385" width="34" height="23" fill="#EDEDE8"/>
+              <rect x="140" y="387" width="34" height="21" fill="#E8FF3C"/>
+              <rect x="180" y="383" width="34" height="25" fill="#EDEDE8"/>
+              <rect x="220" y="389" width="34" height="19" fill="#C0C0B8"/>
+              <rect x="260" y="392" width="34" height="16" fill="#C0C0B8"/>
+              <!-- Share CTA -->
+              <rect x="20" y="430" width="280" height="44" fill="#0A0A0A"/>
+              <text x="160" y="457" fill="#FFFFFF" font-family="monospace" font-size="9" text-anchor="middle" letter-spacing="2">SHARE RUN →</text>
+            </svg>
+          </div>
+          <div class="app-screen-meta">
+            <div>
+              <div class="app-screen-desc-label">What this screen does</div>
+              <p class="app-screen-desc-text">The post-run summary is an editorial screen — designed to be screenshotted. The black header with ghost type creates depth without texture. The PR badge volt-pop animation arrives 750ms after mount — delayed, so it lands as a reward. The shoe appears at the bottom of every summary, with a mileage bar and km remaining. This is the commerce loop: no CTA, no ad, just a quiet record of wear that earns the replace prompt when the time comes.</p>
+            </div>
+            <div class="app-screen-counter">03 / 05</div>
+          </div>
+        </div>
+
+        <!-- Screen 04: Shoe Garage -->
+        <div class="app-screen-frame" id="screen-4">
+          <div class="app-screen-visual">
+            <svg viewBox="0 0 320 580" xmlns="http://www.w3.org/2000/svg" style="background:#F7F7F3;width:100%;">
+              <!-- Title -->
+              <text x="20" y="90" fill="#0A0A0A" font-family="serif" font-size="46" font-weight="200" letter-spacing="1">SHOE</text>
+              <text x="20" y="130" fill="#0A0A0A" font-family="serif" font-size="46" font-weight="200" letter-spacing="1">GARAGE.</text>
+              <text x="20" y="148" fill="#888" font-family="monospace" font-size="8" letter-spacing="1">3 PAIRS · JAN 2025</text>
+              <!-- Retire prompt — inverted card -->
+              <rect x="20" y="162" width="280" height="72" fill="#0A0A0A"/>
+              <circle cx="36" cy="176" r="3.5" fill="#B85800"/>
+              <text x="48" y="178" fill="#FFFFFF" font-family="sans-serif" font-size="11" font-weight="500">Cloudflow 4 is at 487 km</text>
+              <text x="48" y="192" fill="rgba(255,255,255,0.42)" font-family="monospace" font-size="7">Cushion degradation affects form.</text>
+              <text x="48" y="203" fill="rgba(255,255,255,0.42)" font-family="monospace" font-size="7">Replace at 500–700 km.</text>
+              <rect x="48" y="214" width="104" height="16" fill="#B85800"/>
+              <text x="100" y="225" fill="#fff" font-family="monospace" font-size="7" text-anchor="middle" letter-spacing="1">SHOP ON.COM →</text>
+              <rect x="158" y="214" width="56" height="16" fill="transparent" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>
+              <text x="186" y="225" fill="rgba(255,255,255,0.45)" font-family="monospace" font-size="7" text-anchor="middle" letter-spacing="1">CYCLON ♻</text>
+              <!-- Primary shoe card — elevated -->
+              <rect x="20" y="248" width="280" height="80" fill="#FFFFFF" stroke="rgba(0,0,0,0.12)" stroke-width="1"/>
+              <rect x="20" y="248" width="52" height="80" fill="#EDEDE8"/>
+              <text x="46" y="293" fill="#888" font-family="sans-serif" font-size="16" text-anchor="middle">👟</text>
+              <text x="84" y="268" fill="#0A0A0A" font-family="sans-serif" font-size="12" font-weight="500">Cloudmonster 2</text>
+              <text x="84" y="282" fill="#888" font-family="monospace" font-size="8">THE WORKHORSE</text>
+              <rect x="84" y="290" width="52" height="14" fill="#EDEDE8"/>
+              <text x="110" y="300" fill="#888" font-family="monospace" font-size="7" text-anchor="middle" letter-spacing="1">RACE DAY</text>
+              <text x="286" y="274" fill="#0A0A0A" font-family="serif" font-size="30" font-weight="200" text-anchor="end">494</text>
+              <text x="286" y="286" fill="#888" font-family="monospace" font-size="8" text-anchor="end">km</text>
+              <!-- Mileage bar -->
+              <rect x="20" y="316" width="280" height="3" fill="#EDEDE8"/>
+              <rect x="20" y="316" width="138" height="3" fill="#B85800"/>
+              <!-- Secondary shoe card -->
+              <rect x="20" y="332" width="280" height="64" fill="#FFFFFF" stroke="rgba(0,0,0,0.06)" stroke-width="1"/>
+              <rect x="20" y="332" width="48" height="64" fill="#EDEDE8"/>
+              <text x="44" y="370" fill="#888" font-family="sans-serif" font-size="14" text-anchor="middle">👟</text>
+              <text x="80" y="353" fill="#0A0A0A" font-family="sans-serif" font-size="12" font-weight="500">Cloudflow 4</text>
+              <text x="80" y="367" fill="#888" font-family="monospace" font-size="8">DAILY DRIVER</text>
+              <text x="282" y="360" fill="#0A0A0A" font-family="serif" font-size="24" font-weight="200" text-anchor="end">487</text>
+              <rect x="20" y="386" width="280" height="3" fill="#EDEDE8"/>
+              <rect x="20" y="386" width="226" height="3" fill="#B85800"/>
+              <!-- Third shoe -->
+              <rect x="20" y="404" width="280" height="60" fill="#FFFFFF" stroke="rgba(0,0,0,0.06)" stroke-width="1"/>
+              <rect x="20" y="404" width="48" height="60" fill="#EDEDE8"/>
+              <text x="44" y="438" fill="#888" font-family="sans-serif" font-size="14" text-anchor="middle">👟</text>
+              <text x="80" y="424" fill="#0A0A0A" font-family="sans-serif" font-size="12" font-weight="500">Cloudgo 2</text>
+              <text x="80" y="438" fill="#888" font-family="monospace" font-size="8">THE NEW ONE</text>
+              <text x="282" y="430" fill="#0A0A0A" font-family="serif" font-size="24" font-weight="200" text-anchor="end">88</text>
+              <rect x="20" y="456" width="280" height="3" fill="#EDEDE8"/>
+              <rect x="20" y="456" width="24" height="3" fill="#0A0A0A"/>
+              <!-- Totals -->
+              <rect x="20" y="472" width="280" height="1" fill="rgba(0,0,0,0.07)"/>
+              <text x="80" y="495" fill="#0A0A0A" font-family="serif" font-size="22" text-anchor="middle" font-weight="200">3</text>
+              <text x="80" y="507" fill="#888" font-family="monospace" font-size="7" text-anchor="middle" letter-spacing="1">ACTIVE</text>
+              <text x="160" y="495" fill="#0A0A0A" font-family="serif" font-size="22" text-anchor="middle" font-weight="200">1069</text>
+              <text x="160" y="507" fill="#888" font-family="monospace" font-size="7" text-anchor="middle" letter-spacing="1">TOTAL KM</text>
+              <text x="240" y="495" fill="#0A0A0A" font-family="serif" font-size="22" text-anchor="middle" font-weight="200">14</text>
+              <text x="240" y="507" fill="#888" font-family="monospace" font-size="7" text-anchor="middle" letter-spacing="1">MONTHS</text>
+            </svg>
+          </div>
+          <div class="app-screen-meta">
+            <div>
+              <div class="app-screen-desc-label">What this screen does</div>
+              <p class="app-screen-desc-text">The Shoe Garage is the feature no other running app has — because no other running app has On's shoe portfolio. Every run is attributed to a specific model. Mileage bars shift from black to amber to red as thresholds approach. The retire prompt uses amber, not red: retirement is completion, not failure. The only commerce surface in the entire app lives here — a Shop on.com link earned by 487 km of behavioral data. The Cyclon button closes the sustainability loop On has built at the product level.</p>
+            </div>
+            <div class="app-screen-counter">04 / 05</div>
+          </div>
+        </div>
+
+        <!-- Screen 05: Community -->
+        <div class="app-screen-frame" id="screen-5">
+          <div class="app-screen-visual">
+            <svg viewBox="0 0 320 580" xmlns="http://www.w3.org/2000/svg" style="background:#F7F7F3;width:100%;">
+              <!-- Title -->
+              <text x="20" y="90" fill="#0A0A0A" font-family="serif" font-size="46" font-weight="200" letter-spacing="1">APEX</text>
+              <text x="20" y="130" fill="#0A0A0A" font-family="serif" font-size="46" font-weight="200" letter-spacing="1">CLUBS.</text>
+              <text x="20" y="148" fill="#888" font-family="monospace" font-size="8" letter-spacing="1">RICHMOND RUNNING CO. · 24 MEMBERS</text>
+              <!-- Sub-nav tabs -->
+              <rect x="20" y="160" width="280" height="1" fill="rgba(0,0,0,0.07)"/>
+              <text x="36" y="154" fill="#0A0A0A" font-family="monospace" font-size="8" letter-spacing="1">CLUBS</text>
+              <rect x="20" y="160" width="60" height="2" fill="#0A0A0A"/>
+              <text x="108" y="154" fill="#888" font-family="monospace" font-size="8" letter-spacing="1">CHALLENGES</text>
+              <text x="210" y="154" fill="#888" font-family="monospace" font-size="8" letter-spacing="1">EVENTS</text>
+              <text x="270" y="154" fill="#888" font-family="monospace" font-size="8" letter-spacing="1">ROUTES</text>
+              <!-- My club card — inverted -->
+              <rect x="20" y="174" width="280" height="72" fill="#0A0A0A"/>
+              <text x="36" y="196" fill="#FFFFFF" font-family="sans-serif" font-size="12" font-weight="500">Richmond Running Co.</text>
+              <text x="36" y="212" fill="rgba(255,255,255,0.45)" font-family="monospace" font-size="8">Richmond VA · 24 members</text>
+              <rect x="224" y="180" width="56" height="16" fill="#E8FF3C"/>
+              <text x="252" y="191" fill="#0A0A0A" font-family="monospace" font-size="7" text-anchor="middle" letter-spacing="1">MEMBER</text>
+              <rect x="36" y="224" width="244" height="16" fill="rgba(255,255,255,0.06)"/>
+              <circle cx="44" cy="232" r="3" fill="#E8FF3C"/>
+              <text x="54" y="236" fill="rgba(232,255,60,0.7)" font-family="monospace" font-size="7" letter-spacing="1">SAT 7AM · BROWN'S ISLAND</text>
+              <!-- Leaderboard preview -->
+              <rect x="20" y="258" width="280" height="100" fill="#FFFFFF" stroke="rgba(0,0,0,0.06)" stroke-width="1"/>
+              <text x="32" y="276" fill="#888" font-family="monospace" font-size="7" letter-spacing="2">LEADERBOARD · THIS WEEK</text>
+              <!-- Rank rows -->
+              <rect x="32" y="284" width="18" height="18" fill="#E8FF3C"/>
+              <text x="41" y="297" fill="#0A0A0A" font-family="monospace" font-size="9" text-anchor="middle">1</text>
+              <circle cx="68" cy="293" r="10" fill="#0A0A0A"/>
+              <text x="68" y="297" fill="#fff" font-family="monospace" font-size="7" text-anchor="middle">MR</text>
+              <text x="86" y="297" fill="#0A0A0A" font-family="sans-serif" font-size="11">Maya R.</text>
+              <text x="282" y="297" fill="#0A0A0A" font-family="monospace" font-size="10" text-anchor="end">68 km</text>
+              <line x1="32" y1="308" x2="288" y2="308" stroke="rgba(0,0,0,0.04)" stroke-width="1"/>
+              <rect x="32" y="312" width="18" height="18" fill="#EDEDE8"/>
+              <text x="41" y="325" fill="#0A0A0A" font-family="monospace" font-size="9" text-anchor="middle">2</text>
+              <circle cx="68" cy="321" r="10" fill="#0A0A0A"/>
+              <text x="68" y="325" fill="#fff" font-family="monospace" font-size="7" text-anchor="middle">BP</text>
+              <text x="86" y="325" fill="#0A0A0A" font-family="sans-serif" font-size="11" font-weight="500">Benn P.</text>
+              <text x="282" y="325" fill="#0A0A0A" font-family="monospace" font-size="10" text-anchor="end">38 km</text>
+              <line x1="32" y1="336" x2="288" y2="336" stroke="rgba(0,0,0,0.04)" stroke-width="1"/>
+              <text x="41" y="353" fill="#888" font-family="monospace" font-size="9" text-anchor="middle">3</text>
+              <circle cx="68" cy="349" r="10" fill="#EDEDE8"/>
+              <text x="68" y="353" fill="#888" font-family="monospace" font-size="7" text-anchor="middle">JK</text>
+              <text x="86" y="353" fill="#888" font-family="sans-serif" font-size="11">Jordan K.</text>
+              <text x="282" y="353" fill="#888" font-family="monospace" font-size="10" text-anchor="end">32 km</text>
+              <!-- Reactions demo -->
+              <text x="20" y="382" fill="#888" font-family="monospace" font-size="7" letter-spacing="2">COMMUNITY REACTIONS</text>
+              <rect x="20" y="390" width="44" height="22" fill="#EDEDE8"/>
+              <text x="42" y="405" fill="#0A0A0A" font-family="sans-serif" font-size="10" text-anchor="middle">🔥 8</text>
+              <rect x="70" y="390" width="44" height="22" fill="#EDEDE8"/>
+              <text x="92" y="405" fill="#0A0A0A" font-family="sans-serif" font-size="10" text-anchor="middle">✊ 4</text>
+              <rect x="120" y="390" width="44" height="22" fill="#0A0A0A"/>
+              <text x="142" y="405" fill="#fff" font-family="sans-serif" font-size="10" text-anchor="middle">⚡ 12</text>
+              <rect x="170" y="390" width="44" height="22" fill="#EDEDE8"/>
+              <text x="192" y="405" fill="#0A0A0A" font-family="sans-serif" font-size="10" text-anchor="middle">🏔 3</text>
+              <rect x="220" y="390" width="44" height="22" fill="#EDEDE8"/>
+              <text x="242" y="405" fill="#0A0A0A" font-family="sans-serif" font-size="10" text-anchor="middle">✓ 6</text>
+              <!-- Not likes label -->
+              <text x="20" y="424" fill="#888" font-family="monospace" font-size="7" letter-spacing="1">PUSH · SOLID · PACE · ZONE · RESPECT — NOT LIKES</text>
+            </svg>
+          </div>
+          <div class="app-screen-meta">
+            <div>
+              <div class="app-screen-desc-label">What this screen does</div>
+              <p class="app-screen-desc-text">The Community Hub is the most complex screen in the product — a tabbed surface containing Clubs (geo-located, with leaderboard and RSVP), Challenges (distance/elevation/streak, with On-exclusive drops), Events (On-sponsored races and pop-up runs), and Routes (community-submitted and curated, with shoe recommendations). The reaction system — Push, Solid, Pace, Zone, Respect — replaces hearts. The PRD constraint is explicit: no follower counts as status, no KOM, no trophy system. Community is built on shared miles, not competitive metrics.</p>
+            </div>
+            <div class="app-screen-counter">05 / 05</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══ APP PROTOTYPE ARTIFACT ══ -->
+    <div class="artifact-strip" id="artifact-app">
+      <div class="artifact-trigger" id="art2-trigger" onclick="toggleArtifact(2)">
+        <div class="artifact-left">
+          <div class="artifact-badge"><span>Interactive Artifact</span></div>
+          <div class="artifact-meta">
+            <div class="artifact-name">On Apex · App Prototype</div>
+            <div class="artifact-desc">14 screens · Full flow · Live run simulation · Split mode · Haptic API · Carousels · Toasts · All PRD features</div>
+          </div>
+        </div>
+        <div class="artifact-right"><span class="artifact-toggle" id="art2-cta">+</span></div>
+      </div>
+      <div class="artifact-expand" id="art2-expand">
+        <div class="artifact-inner">
+          <div class="artifact-inner-header">
+            <div>
+              <div class="artifact-inner-eyebrow">Interactive · On Apex · React PWA · v5.0</div>
+              <div class="artifact-inner-title">App Prototype</div>
+            </div>
+            <button class="artifact-close-btn" onclick="closeArtifact(2)">Close &uarr;</button>
+          </div>
+          <div class="artifact-iframe-wrap">
+            <iframe src="/work/on-apex-app" title="On Apex App Prototype" scrolling="no" style="height:900px"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ USER FLOW CAROUSEL ══ -->
+    <div class="flow-carousel" id="cs-flow" data-cs-section="cs-flow">
+      <div class="flow-head">
+        <div class="flow-title">User Flows · Critical Paths</div>
+        <div class="flow-counter" id="flow-counter">01 <span>/ 07</span></div>
+      </div>
+      <div class="flow-track">
+        <div class="flow-steps">
+          <div class="flow-step active" onclick="showFlow(0)">
+            <div class="flow-step-num">01</div>
+            <div class="flow-step-label">Open App</div>
+          </div>
+          <div class="flow-step" onclick="showFlow(1)">
+            <div class="flow-step-num">02</div>
+            <div class="flow-step-label">Pre-Run</div>
+          </div>
+          <div class="flow-step" onclick="showFlow(2)">
+            <div class="flow-step-num">03</div>
+            <div class="flow-step-label">Active Run</div>
+          </div>
+          <div class="flow-step" onclick="showFlow(3)">
+            <div class="flow-step-num">04</div>
+            <div class="flow-step-label">Post-Run</div>
+          </div>
+          <div class="flow-step" onclick="showFlow(4)">
+            <div class="flow-step-num">05</div>
+            <div class="flow-step-label">Shoe Registration</div>
+          </div>
+          <div class="flow-step" onclick="showFlow(5)">
+            <div class="flow-step-num">06</div>
+            <div class="flow-step-label">Club RSVP</div>
+          </div>
+          <div class="flow-step" onclick="showFlow(6)">
+            <div class="flow-step-num">07</div>
+            <div class="flow-step-label">Retire + Replace</div>
+          </div>
+        </div>
+        <div>
+
+          <div class="flow-panel active" id="fp-0">
+            <div class="flow-panel-title">Home / Dashboard — <em>the daily surface</em></div>
+            <div class="flow-panel-meta">
+              <span class="flow-panel-tag active">Home</span>
+              <span class="flow-panel-tag">White Mode</span>
+              <span class="flow-panel-tag">Architectural Register</span>
+            </div>
+            <p class="flow-panel-body">The app opens to white mode. The weekly km number resolves before anything else — at 116px in Bebas Neue, it earns its authority before the rest of the screen loads. Staggered reveal animations (greeting at 60ms, name at 100ms, number at 160ms) give the screen weight arriving, not popping in. The week strip, recent runs, and shoe nudge follow in order of importance. Every element has a single job.</p>
+            <div class="flow-nav">
+              <button class="flow-btn" onclick="prevFlow()">← Prev</button>
+              <button class="flow-btn" onclick="nextFlow()">Next →</button>
+            </div>
+          </div>
+
+          <div class="flow-panel" id="fp-1">
+            <div class="flow-panel-title">Pre-Run Screen — <em>the missing step</em></div>
+            <div class="flow-panel-meta">
+              <span class="flow-panel-tag active">Pre-Run</span>
+              <span class="flow-panel-tag">Black Mode Begins</span>
+              <span class="flow-panel-tag">GPS Lock</span>
+              <span class="flow-panel-tag">Shoe Select</span>
+            </div>
+            <p class="flow-panel-body">The Start button in the nav goes to Pre-Run, not directly to the Active Run clock. This was the missing step in every prior version of the PRD. GPS lock animation plays — expanding ring pulses at 0.55s intervals. The shoe selector defaults to the user's registered shoe but can be changed via a sheet modal. The Start button remains greyed out until GPS locks. The transition from Pre-Run to Active Run is the moment the world turns black.</p>
+            <div class="flow-nav">
+              <button class="flow-btn" onclick="prevFlow()">← Prev</button>
+              <button class="flow-btn" onclick="nextFlow()">Next →</button>
+            </div>
+          </div>
+
+          <div class="flow-panel" id="fp-2">
+            <div class="flow-panel-title">Active Run — <em>instrument-grade cockpit</em></div>
+            <div class="flow-panel-meta">
+              <span class="flow-panel-tag active">Active Run</span>
+              <span class="flow-panel-tag">Black Mode</span>
+              <span class="flow-panel-tag">Live Simulation</span>
+            </div>
+            <p class="flow-panel-body">The run screen is black. A scanning line at 3.4s interval gives the screen live-data signal. Pace fluctuates ±8 sec/km per tick. HR drifts ±4 bpm. Cadence ±3 spm. Zone bars update in real time as the simulation runs. The Dynamic Island expands with a blinking volt dot and the live clock. Tapping the map opens a full-screen overlay with scale-origin animation. The Finish button is volt-on-black — the only bright thing on the screen.</p>
+            <div class="flow-nav">
+              <button class="flow-btn" onclick="prevFlow()">← Prev</button>
+              <button class="flow-btn" onclick="nextFlow()">Next →</button>
+            </div>
+          </div>
+
+          <div class="flow-panel" id="fp-3">
+            <div class="flow-panel-title">Post-Run — <em>the shareable moment</em></div>
+            <div class="flow-panel-meta">
+              <span class="flow-panel-tag active">Post-Run</span>
+              <span class="flow-panel-tag">White Mode Returns</span>
+              <span class="flow-panel-tag">Editorial</span>
+              <span class="flow-panel-tag">Commerce Hook</span>
+            </div>
+            <p class="flow-panel-body">The world returns to white. The post-run summary is an editorial screen — designed to be screenshotted and shared. PR badge volt-pop animation arrives 750ms after mount. The shoe is present in every summary — mileage bar, km remaining. If the runner is near threshold, the bar is amber. No prompt, no CTA. Just the data. The share sheet generates a branded card with ghost type and a volt On Apex tag. Toast fires on save.</p>
+            <div class="flow-nav">
+              <button class="flow-btn" onclick="prevFlow()">← Prev</button>
+              <button class="flow-btn" onclick="nextFlow()">Next →</button>
+            </div>
+          </div>
+
+          <div class="flow-panel" id="fp-4">
+            <div class="flow-panel-title">Shoe Registration — <em>Flow 2, fully built</em></div>
+            <div class="flow-panel-meta">
+              <span class="flow-panel-tag active">Shoe Reg</span>
+              <span class="flow-panel-tag">Order Sync</span>
+              <span class="flow-panel-tag">4 Steps</span>
+              <span class="flow-panel-tag">Toast on Complete</span>
+            </div>
+            <p class="flow-panel-body">Flow 2 from the PRD: Order Sync (auto-detected shoes from On account with order numbers) → Name It (nickname input, carries through to run summaries) → Set Goal (5 km target options, mileage bar preview updates live) → All Set (confirmation card with volt-on-black treatment and full spec summary). Toast fires: "Shoe registered ✓". Accessible from Garage via "+ Add Shoe".</p>
+            <div class="flow-nav">
+              <button class="flow-btn" onclick="prevFlow()">← Prev</button>
+              <button class="flow-btn" onclick="nextFlow()">Next →</button>
+            </div>
+          </div>
+
+          <div class="flow-panel" id="fp-5">
+            <div class="flow-panel-title">Club RSVP — <em>community in action</em></div>
+            <div class="flow-panel-meta">
+              <span class="flow-panel-tag active">Clubs</span>
+              <span class="flow-panel-tag">Leaderboard</span>
+              <span class="flow-panel-tag">RSVP Sheet</span>
+              <span class="flow-panel-tag">Toast on Join</span>
+            </div>
+            <p class="flow-panel-body">Community Hub → Clubs tab. Tap a club card to open the detail sheet. Leaderboard shows ranked members with your position highlighted. Next club run displayed with location and headcount. RSVP button fires a medium haptic and a toast: "You're in! See you Saturday ✓". The community loop: run → log → rank → coordinate → run again. No follower counts. No KOM. No gamification chrome.</p>
+            <div class="flow-nav">
+              <button class="flow-btn" onclick="prevFlow()">← Prev</button>
+              <button class="flow-btn" onclick="nextFlow()">Next →</button>
+            </div>
+          </div>
+
+          <div class="flow-panel" id="fp-6">
+            <div class="flow-panel-title">Retire + Replace — <em>the commerce loop</em></div>
+            <div class="flow-panel-meta">
+              <span class="flow-panel-tag active">Garage</span>
+              <span class="flow-panel-tag">Amber Signal</span>
+              <span class="flow-panel-tag">Deep Link Only</span>
+              <span class="flow-panel-tag">Cyclon Option</span>
+            </div>
+            <p class="flow-panel-body">When a shoe crosses 75% of its mileage goal, the bar turns amber. At 90%, red. The retire prompt appears in the Garage as an inverted black card with an amber dot — completion, not alarm. Two options: "Shop on.com →" (deep link, no in-app checkout, ever) and "Cyclon ♻" (circular return program). The Cyclon sheet shows the subscription details and a join CTA. Toast fires on join: "Cyclon request sent ♻". This is the entire commerce strategy — contextual, earned, never promotional.</p>
+            <div class="flow-nav">
+              <button class="flow-btn" onclick="prevFlow()">← Prev</button>
+              <button class="flow-btn" onclick="nextFlow()">Next →</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ 07 DECISION LOG ══ -->
+    <section class="cs-section" id="cs-decisions" data-cs-section="cs-decisions">
+      <div class="cs-section-eyebrow"><span class="cs-section-num">07</span><span class="cs-section-title">Decision Log</span></div>
+      <h2 class="cs-heading-serif">What was built, what was deferred, <em>and why.</em></h2>
+      <p class="cs-body" style="margin-bottom:32px;">Product decisions are only credible when documented with the tradeoff accepted — not just the choice made. This log covers every significant decision in the PRD, design system, and prototype, including the features that were cut from Phase 1 and the reasons they were not premature inclusions.</p>
+
+      <table class="decision-log">
+        <thead>
+          <tr>
+            <th>Decision</th>
+            <th>What Was Done</th>
+            <th>Tradeoff Accepted</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="shipped">
+            <td>Split Mode System</td>
+            <td>White mode for Home, Garage, Post-Run, Feed. Black mode for Active Run, Pre-Run, Onboarding. The transition is a product mechanic, not a user preference setting.</td>
+            <td>More engineering complexity than a single-mode app. Required: the mode transition is how the app communicates "you're in the work now" — no other signal makes that moment as clear or as brand-specific.</td>
+            <td><span class="decision-status shipped">Shipped</span></td>
+          </tr>
+          <tr class="shipped">
+            <td>Reactions, Not Likes</td>
+            <td>Five On-native reactions — Push 🔥, Solid ✊, Pace ⚡, Zone 🏔, Respect ✓ — replace the universal heart. Each reaction names a specific thing a runner might feel about another runner's effort.</td>
+            <td>Unfamiliar interaction pattern requires user education. Required: the PRD constraint is explicit — the app must not feel like a Strava clone. Generic hearts are the Strava pattern. On-native reactions are the brand differentiator at the interaction level.</td>
+            <td><span class="decision-status shipped">Shipped</span></td>
+          </tr>
+          <tr class="shipped">
+            <td>Pre-Run Screen</td>
+            <td>Added Pre-Run as a mandatory step between the Start CTA and the Active Run clock. GPS lock animation, shoe selector, disabled Start until GPS locks.</td>
+            <td>Adds friction to the start-a-run flow — one extra screen. Required: Flow 1 in the PRD specifies "GPS Lock + Shoe Select" as Step 2. Without it, the shoe attribution that powers the Garage is unreliable, and the transition to black mode has no ceremony.</td>
+            <td><span class="decision-status shipped">Shipped</span></td>
+          </tr>
+          <tr class="shipped">
+            <td>Volt Scarcity Rule</td>
+            <td>Maximum three volt (#E8FF3C) instances per screen, always on dark or high-contrast surfaces, never decorative. Enforced in the design system by review, not by tooling.</td>
+            <td>Restraint is harder to maintain as the product grows. Required: volt earns its authority through scarcity. The moment it appears everywhere, it becomes wallpaper. Three instances per screen is the number that makes the PR badge arrival feel like an event.</td>
+            <td><span class="decision-status shipped">Shipped</span></td>
+          </tr>
+          <tr class="shipped">
+            <td>Zero Border-Radius</td>
+            <td>No border-radius anywhere in the app. Cards, buttons, inputs, badges, avatars — all square. This is an explicit On brand constraint, not an aesthetic preference.</td>
+            <td>Accessibility research suggests rounded elements feel more approachable. Accepted: the PRD constraint is clear — Swiss-minimalist, no gamification chrome. Rounded corners are the visual language of consumer-friendly apps. Zero radius is the language of Swiss precision instruments.</td>
+            <td><span class="decision-status shipped">Shipped</span></td>
+          </tr>
+          <tr class="shipped">
+            <td>PWA — Phase 1 Architecture</td>
+            <td>Phase 1 ships as a Progressive Web App: service worker caching for offline run logging, Web Geolocation API for GPS tracking, Web Vibration API for haptics, manifest.json for home screen install, aggressive install prompting from within on.com. No App Store submission. No native binary. No third-party distribution dependency.</td>
+            <td>
+              The case for PWA in Phase 1 is a distribution argument, not a capability argument.<br><br>
+              <strong>On's acquisition channel is on.com, not the App Store.</strong> The runner who chooses On does so deliberately — they arrive via the website, they research CloudTec, they know the model they want before they buy it. The install prompt inside that owned relationship converts an already-engaged audience. An App Store listing converts a cold search audience surrounded by Nike ads, Strava featured placements, and Garmin promotions. The two distribution surfaces are not equivalent. On's is better.<br><br>
+              <strong>App Store review cycle kills Phase 1 iteration velocity.</strong> A new product finding product-market fit needs to ship fixes and experiments weekly. App Store review averages 1–3 days per submission, with rejection risk on each. A PWA deploys in minutes, updates invisibly to the user, and iterates without a gatekeeper. For Phase 1 — where the onboarding flow, reaction system, and shoe registration UX will all need rapid iteration based on real user behavior — this is not a minor advantage.<br><br>
+              <strong>Note on App Store commerce fees:</strong> Apple's 30% commission applies exclusively to digital goods and in-app subscriptions — not physical product transactions. Fashion apps (ASOS, Farfetch, Depop) and running apps (Nike) sell physical goods natively without App Store commission. This is not a factor in the PWA decision for Apex, whose only commerce surface is a deep-link to on.com for physical shoe purchases.<br><br>
+              <strong>Capability tradeoffs accepted:</strong> Web Geolocation API cannot run in the background — the screen must stay active during a run. Push notifications are less reliable than native APNs. No HealthKit or Garmin Connect API access without a native layer. These are real costs. They are acceptable in Phase 1 because the core loop — log a run, track a shoe, build community — does not require background GPS or wearable sync. Phase 3 ships native.
+            </td>
+            <td><span class="decision-status shipped">Shipped · Phase 1</span></td>
+          </tr>
+          <tr class="deferred">
+            <td>Native App — Phase 3 Roadmap</td>
+            <td>React Native or Swift/Kotlin native app with HealthKit and Garmin Connect integration, background GPS tracking, reliable APNs push notifications, Apple Watch complication for live run metrics, and App Store presence for brand legitimacy signal. Deferred to Phase 3.</td>
+            <td>
+              Native is the right long-term architecture. The question is sequencing.<br><br>
+              Phase 1 needs to prove the core loop works — that runners register shoes, log runs, and return to the community surface — before investing in the higher engineering cost of a dual-platform native build. The behavioral data from Phase 1 (WAU, shoe registration rate, session frequency) directly informs the native app's feature prioritization. Building native before that data exists produces a well-engineered product optimized for the wrong things.<br><br>
+              The Phase 3 trigger is retention: when 35% WAU holds for two consecutive quarters and shoe registration exceeds 70%, the product has proven retention sufficient to justify native investment. At that point, the App Store presence shifts from a distribution channel to a brand legitimacy signal — a top-ranked running app with On's name on it is itself a brand asset, not just a download mechanism.<br><br>
+              Precedent: Strava launched mobile web before native. Whoop shipped a simplified app before its current native architecture. The pattern for fitness products is validate on web, scale on native.
+            </td>
+            <td><span class="decision-status deferred">Deferred · Phase 3</span></td>
+          </tr>
+          <tr class="shipped">
+            <td>Scroll Snap Carousels</td>
+            <td>Shoe Garage and Route Library use CSS scroll-snap-type: mandatory horizontal carousels with dot position indicators, replacing the prior vertical stacks. Each card peeks the next at the right edge.</td>
+            <td>Horizontal carousels hide content below the fold. The peek signals scrollability. Shoe cards at full card-width encourage treating each shoe as a primary object, not a list item — which reinforces the shoe-as-identity-layer thesis at the component level.</td>
+            <td><span class="decision-status shipped">Shipped</span></td>
+          </tr>
+          <tr class="shipped">
+            <td>Commerce Constraint</td>
+            <td>Deep-link to on.com only. No in-app checkout, no product catalog, no advertising in any phase. The only commerce surface is the Garage retire prompt, triggered by mileage data.</td>
+            <td>Limits near-term revenue potential. Required: On's commerce channel is on.com. Building a competing in-app channel would create a business conflict with On's existing retail model. The commerce constraint protects the partnership and keeps the app's incentive structure aligned — the platform earns on engagement, not transaction.</td>
+            <td><span class="decision-status shipped">Shipped</span></td>
+          </tr>
+          <tr class="shipped">
+            <td>Haptic API</td>
+            <td>Web Vibration API wired to every TapBtn with type parameters: light (8ms) for standard taps, medium (18ms) for confirmations and successes, warning (12+8+12ms) for destructive actions.</td>
+            <td>Vibration API not supported across all browsers and PWA contexts. Implemented with graceful fallback — haptic() returns silently if navigator.vibrate is unavailable. The interaction quality improvement on supported devices justifies the implementation cost.</td>
+            <td><span class="decision-status shipped">Shipped</span></td>
+          </tr>
+          <tr class="deferred">
+            <td>Challenges Drops</td>
+            <td>Challenge UI with On-exclusive drop rewards is built and visible in the prototype. The actual drop fulfillment infrastructure (inventory integration, winner verification, distribution) is deferred to Phase 2 post-launch.</td>
+            <td>The drops mechanic requires inventory coordination with On's merchandising team. The UI is built to demonstrate the product argument. The operational infrastructure is a Phase 2 dependency on challenge volume data from Phase 1.</td>
+            <td><span class="decision-status deferred">Deferred · Ops</span></td>
+          </tr>
+          <tr class="deferred">
+            <td>On Account SSO</td>
+            <td>SSO indicator is present in Profile ("Connected to On account · Orders sync automatically"). The actual OAuth integration with On's account infrastructure is not implemented in the prototype.</td>
+            <td>Requires API access to On's production systems — out of scope for a conceptual prototype. The UI, the flow (Order Sync step in Shoe Registration), and the data model are all specified. Implementation is a Phase 1 engineering dependency, not a product decision.</td>
+            <td><span class="decision-status deferred">Deferred · Eng</span></td>
+          </tr>
+          <tr class="deferred">
+            <td>PWA Manifest + Service Worker</td>
+            <td>PWA install banner implemented in the prototype (fires 3 seconds after onboarding completion). Full manifest.json, service worker offline caching for run sessions, and background sync for post-run data not yet implemented.</td>
+            <td>45% PWA install rate is a PRD success metric requiring the complete manifest implementation. The banner in the prototype demonstrates the prompt strategy and conversion moment. Full service worker implementation — offline run logging, background sync queue, push notification registration — is a Phase 1 engineering deliverable. The prototype proves the UX. Engineering builds the infrastructure.</td>
+            <td><span class="decision-status deferred">Deferred · Eng</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="cs-pull-quote">&ldquo;The PRD doesn&rsquo;t just specify what to build. It specifies what <em>not</em> to build — and why. Every deferred feature is a tradeoff documented, not a feature forgotten.&rdquo;</div>
+    </section>
+
+    <!-- ══ 08 OUTCOME ══ -->
+    <section class="cs-section cs-section-alt" id="cs-outcome" data-cs-section="cs-outcome">
+      <div class="cs-section-eyebrow"><span class="cs-section-num">08</span><span class="cs-section-title">Outcome &amp; What This Demonstrates</span></div>
+      <h2 class="cs-heading-serif">A complete zero-to-one product build. <em>No feature without a reason.</em></h2>
+
+      <div class="cs-stats cs-stats-4" style="margin-bottom:28px;">
+        <div class="cs-stat-cell">
+          <div class="cs-stat-eyebrow">Product Scope</div>
+          <div class="cs-stat-num">14</div>
+          <div class="cs-stat-label">Interactive screens built across three visual registers: architectural, instrument-grade, editorial.</div>
+        </div>
+        <div class="cs-stat-cell">
+          <div class="cs-stat-eyebrow">PRD Coverage</div>
+          <div class="cs-stat-num">71/73</div>
+          <div class="cs-stat-label">PRD requirements implemented in the prototype. 2 remaining items are engineering infrastructure (SSO, service worker), not product decisions.</div>
+        </div>
+        <div class="cs-stat-cell">
+          <div class="cs-stat-eyebrow">Design System</div>
+          <div class="cs-stat-num">9</div>
+          <div class="cs-stat-label">Interaction patterns specified and implemented: haptic, pull-to-refresh, long press, sheet modal, toast, skeleton, swipe dismiss, map expand, scroll snap.</div>
+        </div>
+        <div class="cs-stat-cell">
+          <div class="cs-stat-eyebrow">Target Metric</div>
+          <div class="cs-stat-num">35%</div>
+          <div class="cs-stat-label">WAU target from registered users. The primary success metric that validates the community loop — not downloads, not impressions.</div>
+        </div>
+      </div>
+
+      <div class="cs-metrics-table" style="margin-bottom:32px;">
+        <table class="cs-table">
+          <thead>
+            <tr>
+              <th>Success Metric</th>
+              <th>Target</th>
+              <th>Measurement Method</th>
+              <th>PRD Section</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Weekly Active Users</td><td>35% of registered users logging activity</td><td>Session with ≥1 logged activity within 7 days</td><td>§3.1</td></tr>
+            <tr><td>Activity Sessions</td><td>2.4 sessions / user / week</td><td>GPS run start events per unique user</td><td>§3.2</td></tr>
+            <tr><td>Community Connection</td><td>60% follow ≥1 other user within 30 days</td><td>Follow event from account creation timestamp</td><td>§3.3</td></tr>
+            <tr><td>Shoe Registration</td><td>70% register ≥1 On shoe</td><td>Shoe Garage registration event post-onboarding</td><td>§3.4</td></tr>
+            <tr><td>Reorder Attribution</td><td>15% of purchases traceable to Apex prompt</td><td>Deep-link click → on.com purchase within 7 days</td><td>§3.5</td></tr>
+            <tr><td>PWA Install Rate</td><td>45% of mobile visitors add to home screen</td><td>beforeinstallprompt acceptance event</td><td>§3.6</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="pm-lens">
+        <div class="pm-lens-label">PM Lens · What This Project Demonstrates</div>
+        <p class="pm-lens-text">On Apex demonstrates the discipline of zero-to-one product strategy for a brand that has never shipped a community platform. The PRD makes 11 hard decisions with documented tradeoffs, specifies 6 success metrics with measurement methodology, and draws explicit phase boundaries between MVP and roadmap. The design system translates those decisions into a visual language — the split mode system, the volt scarcity rule, the zero border-radius constraint — where every token represents a product decision rendered in CSS. The prototype builds 14 screens across three user flows without a single feature added for aesthetic reasons. Every interaction pattern is specified in the MDS, every screen has a single declared primary action, and every commerce surface is contextually earned rather than promotionally placed.</p>
+      </div>
+
+      <p class="cs-body">What this project argues about On as a product opportunity: the runners who choose On have already made a statement about how they want to experience movement. They chose a brand that holds its hardware to an unusual standard — not the loudest, not the most marketed, but the most considered. That same runner has never had a software experience that reflects the choice they made. Every day they open Strava, or Instagram, or a WhatsApp group to organize a club run, is a day the brand's standard stops at the box. On Apex is the argument that it shouldn't. The data is a consequence. The community is a consequence. The commerce is a consequence. The thing itself is a software product built the way On builds shoes: with nothing unnecessary, nothing decorative, and nothing that doesn't earn its presence.</p>
+      <p class="cs-body">What this project argues about PM practice: the strongest product decisions are the ones that can be traced back to a belief. The volt scarcity rule traces back to the belief that a signal earns its authority through scarcity. The Pre-Run screen traces back to the belief that the transition into the run deserves ceremony — it is the moment the platform signals that it understands what running means to this user. The zero border-radius traces back to On's own design language, which is not approachable consumer aesthetics but Swiss instrument precision. These are not design choices made in a vacuum. They are a belief system made tangible in product decisions, made visible in a design system, and made interactive in a prototype. That is the discipline this case study demonstrates — and the standard On Apex was built to meet.</p>
+
+      <div class="cs-next">
+        <div class="cs-next-label">Next Case Study</div>
+        <a href="/case-studies/carolyn" class="cs-next-link">
+          <div class="cs-next-meta">Calvin Klein · The Carolyn · 2026</div>
+          <div class="cs-next-title">Repositioning an Icon &rarr;</div>
+        </a>
+      </div>
+    </section>
+
+  </div><!-- /cs-content -->
+</div><!-- /cs-body-wrap -->
+</div><!-- /page-body -->
+
+<footer>
+  <div class="footer-id">
+    <span class="footer-name">Benn Pattara</span>
+    <span class="footer-role">Brand Experience Strategist &amp; Systems Designer</span>
+  </div>
+  <div class="footer-links">
+    <a href="/" class="footer-link">Home</a>
+    <a href="/#about" class="footer-link">About</a>
+    <a href="/blog" class="footer-link">Blog</a>
+    <a href="/#contact" class="footer-link">Contact</a>
+  </div>
+  <div class="footer-copy">&copy; 2026 Benn Pattara · bennpattara.com</div>
+</footer>
+
+<script>
+// SIDENAV
+const sectionObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      document.querySelectorAll('.cs-sidenav-link').forEach(l => l.classList.remove('active'));
+      const match = document.querySelector('.cs-sidenav-link[data-target="' + entry.target.id + '"]');
+      if (match) match.classList.add('active');
+    }
+  });
+}, { threshold: 0, rootMargin: '-10% 0px -80% 0px' });
+document.querySelectorAll('[data-cs-section]').forEach(s => sectionObserver.observe(s));
+
+function scrollToSection(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 104, behavior: 'smooth' });
+}
+
+// ARTIFACTS
+function toggleArtifact(n) {
+  const expand = document.getElementById('art'+n+'-expand');
+  const toggle = document.getElementById('art'+n+'-cta');
+  const isOpen = expand.dataset.open === 'true';
+  expand.style.maxHeight = isOpen ? '0' : '960px';
+  expand.dataset.open = isOpen ? 'false' : 'true';
+  toggle.textContent = isOpen ? '+' : '\u00d7';
+}
+function closeArtifact(n) {
+  const expand = document.getElementById('art'+n+'-expand');
+  const toggle = document.getElementById('art'+n+'-cta');
+  expand.style.maxHeight = '0'; expand.dataset.open = 'false'; toggle.textContent = '+';
+}
+
+// USER FLOW CAROUSEL
+let currentFlow = 0;
+const totalFlow = 7;
+function showFlow(n) {
+  document.querySelectorAll('.flow-step').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.flow-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.flow-step')[n].classList.add('active');
+  document.getElementById('fp-'+n).classList.add('active');
+  const num = String(n+1).padStart(2,'0');
+  document.getElementById('flow-counter').innerHTML = num + ' <span>/ 07</span>';
+  currentFlow = n;
+}
+function nextFlow() { showFlow((currentFlow+1) % totalFlow); }
+function prevFlow() { showFlow((currentFlow-1+totalFlow) % totalFlow); }
+
+// KEY SCREENS
+function showScreen(n) {
+  document.querySelectorAll('.app-screen-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.app-screen-frame').forEach(f => f.classList.remove('active'));
+  document.querySelector('.app-screen-btn[data-screen="'+n+'"]').classList.add('active');
+  document.getElementById('screen-'+n).classList.add('active');
+}
+</script>
+</body>
+</html>

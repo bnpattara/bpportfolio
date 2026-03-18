@@ -6,9 +6,13 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "sync:saks": "cp ../vault_by_saks_case_study.html ./public/case-studies/saks/index.html"
   },
   "dependencies": {
+    "@google/genai": "^1.43.0",
+    "jspdf": "^4.2.0",
+    "lucide-react": "^0.576.0",
     "next": "16.1.6",
     "react": "19.2.3",
     "react-dom": "19.2.3"

@@ -1,65 +1,616 @@
-import Image from "next/image";
+"use client";
+
+import { useEffect, useRef, useState, useCallback } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+  const navRef = useRef<HTMLElement>(null);
+
+  const [blogPage, setBlogPage] = useState(0);
+  const [isBlogExpanded, setIsBlogExpanded] = useState(false);
+  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+
+  const router = useRouter();
+  const accordionRef = useRef<HTMLElement>(null);
+
+  const handleCardClick = useCallback((link: string, e: React.MouseEvent) => {
+    e.preventDefault();
+    router.push(link);
+  }, [router]);
+
+  /* NAV scroll observer — watches accordion section top */
+  useEffect(() => {
+    const section = accordionRef.current;
+    const nav = navRef.current;
+    if (!nav) return;
+    if (!section) {
+      // Fallback: just listen to scroll position
+      const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 80);
+      window.addEventListener('scroll', onScroll, { passive: true });
+      return () => window.removeEventListener('scroll', onScroll);
+    }
+    // Scrolled past ~80px of accordion top = nav gets white bg
+    const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 80);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  /* SCROLL REVEAL */
+  useEffect(() => {
+    const els = document.querySelectorAll('.reveal, .reveal-fade');
+    if (!els.length) return;
+    const obs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            obs.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
+    els.forEach((el) => obs.observe(el));
+    return () => obs.disconnect();
+  }, []);
+
+  /* ── case study data ── */
+  const caseStudies = [
+    {
+      bg: "linear-gradient(160deg,#1a0e00 0%,#2e1a00 35%,#1a0e00 70%,#0d0700 100%)",
+      image: "/case-studies/nike/nike_hero_brand_identity.png",
+      ghost: "Nike",
+      badge: "Consideration & Trial",
+      num: "01 / 06",
+      title: "NIKE SNKRS",
+      insight: "\u201CFrom Lottery Machine to Styling Platform. Rebuilding trust in a drop system designed to create desire but creating abandonment instead.\u201D",
+      link: "/work/nike",
+    },
+    {
+      bg: "linear-gradient(160deg,#03081e 0%,#060f2e 35%,#03081e 65%,#010408 100%)",
+      image: "/case-studies/saks/saks_hero_exterior.png",
+      ghost: "Saks",
+      badge: "Acquisition & Transaction",
+      num: "02 / 06",
+      title: "Vault by Saks",
+      insight: "\u201CLuxury is no longer about access to goods. It\u2019s about access to curation.\u201D",
+      link: "/work/saks",
+    },
+    {
+      bg: "linear-gradient(160deg,#120e08 0%,#251a10 35%,#120e08 70%,#080504 100%)",
+      image: "/case-studies/carolyn/carolyn_hero_silhouette.png",
+      ghost: "Calvin Klein",
+      badge: "Brand Architecture",
+      num: "03 / 06",
+      title: "The Carolyn",
+      insight: "\u201CThirty years of cultural capital and no named object to carry it.\u201D",
+      link: "/work/carolyn",
+    },
+    {
+      bg: "linear-gradient(160deg,#001a08 0%,#002e12 35%,#001a08 70%,#000d04 100%)",
+      image: "/case-studies/on/on_hero.png",
+      ghost: "On",
+      badge: "Retention & Deep Engagement",
+      num: "04 / 06",
+      title: "On APEX",
+      insight: "\u201CThe brand that owns the community owns the repeat purchase cycle for the lifetime of the runner.\u201D",
+      link: "/work/on",
+    },
+    {
+      bg: "linear-gradient(160deg,#1c0e00 0%,#2e1800 35%,#1c0e00 70%,#0e0700 100%)",
+      image: "/case-studies/diesel/diesel_hero.png",
+      imagePosition: "center center",
+      ghost: "Diesel",
+      badge: "Advocacy & Brand Affinity",
+      num: "05 / 06",
+      title: "Diesel Iceberg",
+      insight: "\u201C10% product. 90% soul.\u201D",
+      link: "/work/diesel",
+      peek: true,
+    },
+    {
+      bg: "linear-gradient(160deg,#08060e 0%,#120e1e 35%,#08060e 70%,#040308 100%)",
+      image: "/case-studies/stylect/stylect_hero.png",
+      ghost: "Stylect",
+      badge: "Personalization Layer",
+      num: "06 / 06",
+      title: "Stylect",
+      insight: "\u201CThe value isn\u2019t in the inventory. It\u2019s in the rejection of everything wrong.\u201D",
+      link: "/work/stylect",
+      peek: true,
+      extraOpacity: 0.5,
+    },
+  ];
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <>
+      {/* ── NAV ── */}
+      <nav id="site-nav" ref={navRef}>
+        <div className="nav-utility">
+          <span>Brand Experience Strategist &amp; Systems Designer</span>
+          <span>VCU Brandcenter &middot; M.S. Business/Branding &middot; 2026</span>
+        </div>
+        <div className="nav-main">
+          <div className="nav-left">
+            <a href="#work">Work</a>
+            <a href="#about">About</a>
+            <a href="/blog">Blog</a>
+            <a href="/13">13</a>
+          </div>
+          <a href="/" className="nav-wordmark">Benn Pattara</a>
+          <div className="nav-right">
+            <a href="#contact">Contact</a>
+          </div>
+        </div>
+      </nav>
+
+      {/* ── ACCORDION WORK SECTION ── */}
+      <section id="work" ref={accordionRef as React.RefObject<HTMLElement>}>
+        {/* Accordion Panels — full viewport */}
+        <div className="accordion-panels">
+          {caseStudies.map((cs, i) => {
+            const isHovered = hoveredCard === i;
+            const anyHovered = hoveredCard !== null;
+            return (
+              <div
+                key={i}
+                className={`accordion-panel${isHovered ? ' accordion-panel--expanded' : ''}${anyHovered && !isHovered ? ' accordion-panel--compressed' : ''}`}
+                style={cs.image ? {
+                  background: `linear-gradient(to bottom, rgba(3,8,30,.25) 0%, rgba(3,8,30,.75) 100%), url(${cs.image}) no-repeat`,
+                  backgroundSize: "cover",
+                  backgroundPosition: cs.imagePosition || "center center",
+                } : { background: cs.bg }}
+                onMouseEnter={() => setHoveredCard(i)}
+                onMouseLeave={() => setHoveredCard(null)}
+                onClick={(e) => cs.link && handleCardClick(cs.link, e)}
+              >
+                {/* Collapsed state: project title */}
+                <div className={`accordion-collapsed${isHovered ? ' accordion-collapsed--hidden' : ''}`}>
+                  <div className="accordion-collapsed-title">{cs.title}</div>
+                </div>
+
+                {/* Card number (expanded state) */}
+                <div className="accordion-num">{cs.num}</div>
+
+                {/* Full content — fades in on expand */}
+                <div className={`accordion-content${isHovered ? ' accordion-content--visible' : ''}`}>
+                  <div className="accordion-badge">
+                    <span>{cs.badge}</span>
+                  </div>
+                  <div className="accordion-body">
+                    <div className="accordion-title">{cs.title}</div>
+                    <div className="accordion-insight">{cs.insight}</div>
+                    <button
+                      className="accordion-cta"
+                      onClick={(e) => { e.stopPropagation(); cs.link && handleCardClick(cs.link, e); }}
+                    >
+                      View Case Study &rarr;
+                    </button>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* ── METRICS STRIP (hidden) ── */}
+      <div className="metrics-strip" style={{ display: 'none' }} aria-hidden="true">
+        <div className="metrics-marquee">
+          {/* First Set */}
+          <div className="metric-block"><span className="metric-num">10&times;</span><span className="metric-label">Loyalty Conversion &middot; Gap Inc.</span></div>
+          <div className="metric-sep" />
+          <div className="metric-block"><span className="metric-num">70hrs+</span><span className="metric-label">Brand Engagement &middot; Burberry &times; Fortnite</span></div>
+          <div className="metric-sep" />
+          <div className="metric-block"><span className="metric-num">12&times;</span><span className="metric-label">Inventory Turnover &middot; Saks Orbit</span></div>
+          <div className="metric-sep" />
+          <div className="metric-block"><span className="metric-num">82 NPS</span><span className="metric-label">Brand Identity &middot; On Apex</span></div>
+          <div className="metric-sep" />
+          <div className="metric-block"><span className="metric-num">+11%</span><span className="metric-label">Comp YTD &middot; Gap District</span></div>
+          <div className="metric-sep" />
+          <div className="metric-block"><span className="metric-num">7</span><span className="metric-label">Complete Case Studies</span></div>
+          <div className="metric-sep" />
+          {/* Second Set (Duplicate for Marquee) */}
+          <div className="metric-block"><span className="metric-num">10&times;</span><span className="metric-label">Loyalty Conversion &middot; Gap Inc.</span></div>
+          <div className="metric-sep" />
+          <div className="metric-block"><span className="metric-num">70hrs+</span><span className="metric-label">Brand Engagement &middot; Burberry &times; Fortnite</span></div>
+          <div className="metric-sep" />
+          <div className="metric-block"><span className="metric-num">12&times;</span><span className="metric-label">Inventory Turnover &middot; Saks Orbit</span></div>
+          <div className="metric-sep" />
+          <div className="metric-block"><span className="metric-num">82 NPS</span><span className="metric-label">Brand Identity &middot; On Apex</span></div>
+          <div className="metric-sep" />
+          <div className="metric-block"><span className="metric-num">+11%</span><span className="metric-label">Comp YTD &middot; Gap District</span></div>
+          <div className="metric-sep" />
+          <div className="metric-block"><span className="metric-num">7</span><span className="metric-label">Complete Case Studies</span></div>
+          <div className="metric-sep" />
+        </div>
+      </div>
+
+
+      {/* ── PHILOSOPHY INTERSTITIAL ── */}
+      <section id="philosophy" className="reveal" style={{ display: 'none' }} aria-hidden="true">
+        <div className="philosophy-inner">
+          <div className="philosophy-eyebrow">Design Philosophy</div>
+          <div className="philosophy-quote reveal" style={{ animationDelay: '80ms' }}>
+            &ldquo;Good design isn&rsquo;t about making things beautiful. It&rsquo;s about making the right things feel inevitable.&rdquo;
+          </div>
+          <p className="philosophy-sub reveal" style={{ animationDelay: '180ms' }}>
+            I don&rsquo;t separate &ldquo;creative&rdquo; from &ldquo;data.&rdquo; I use data to understand desire, and design to fulfill it. Every system I build answers the same question: how does a brand earn a permanent place in someone&rsquo;s lifestyle, not just their wallet?
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+
+      {/* ── RECENT WRITING (moved under About, hidden for now) ── */}
+      <section id="writing" className="reveal" style={{ display: 'none' }} aria-hidden="true">
+        <div className="writing-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <span className="writing-label">Recent Writing</span>
+
+          {!isBlogExpanded ? (
+            <button
+              onClick={() => setIsBlogExpanded(true)}
+              style={{
+                cursor: 'pointer',
+                background: 'transparent',
+                border: 'none',
+                fontSize: '11px',
+                letterSpacing: '.1em',
+                color: 'var(--g500)',
+                textTransform: 'uppercase',
+                borderBottom: '1px solid var(--g500)',
+                paddingBottom: '2px',
+                transition: 'color var(--ease-fast)'
+              }}
+              onMouseOver={(e) => { e.currentTarget.style.color = 'var(--black)'; e.currentTarget.style.borderColor = 'var(--black)'; }}
+              onMouseOut={(e) => { e.currentTarget.style.color = 'var(--g500)'; e.currentTarget.style.borderColor = 'var(--g500)'; }}
+            >
+              All Articles &rarr;
+            </button>
+          ) : (
+            <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+              <button
+                onClick={() => setBlogPage(p => Math.max(0, p - 1))}
+                disabled={blogPage === 0}
+                style={{
+                  cursor: blogPage === 0 ? 'not-allowed' : 'pointer',
+                  opacity: blogPage === 0 ? 0.3 : 1,
+                  background: 'transparent',
+                  border: 'none',
+                  fontSize: '20px',
+                  color: 'var(--black)',
+                  padding: '4px 8px'
+                }}
+              >
+                &larr;
+              </button>
+              <span style={{ fontSize: '11px', letterSpacing: '.1em', color: 'var(--g500)', textTransform: 'uppercase' }}>
+                {blogPage + 1} / 2
+              </span>
+              <button
+                onClick={() => setBlogPage(p => Math.min(1, p + 1))}
+                disabled={blogPage >= 1}
+                style={{
+                  cursor: blogPage >= 1 ? 'not-allowed' : 'pointer',
+                  opacity: blogPage >= 1 ? 0.3 : 1,
+                  background: 'transparent',
+                  border: 'none',
+                  fontSize: '20px',
+                  color: 'var(--black)',
+                  padding: '4px 8px'
+                }}
+              >
+                &rarr;
+              </button>
+            </div>
+          )}
         </div>
-      </main>
-    </div>
+
+        <div className="articles-grid">
+          {[
+            { category: 'Brand Strategy', title: 'Why Heritage Brands Keep Losing Gen Z', desc: 'The mistake isn’t a failure to reach younger consumers. It’s reaching them with the wrong premise — that history is automatically valuable.', date: 'Mar 2025', link: '/blog/heritage-brands-gen-z', num: '001' },
+            { category: 'AI & Technology', title: 'The Personalization Paradox', desc: 'There’s a threshold where hyper-relevance starts to feel like surveillance. On the tension between precision and intimacy in AI-driven brand relationships.', date: 'Feb 2025', link: '#', num: '002' },
+            { category: 'Systems', title: 'Loyalty Is Not a Program', desc: 'After scaling loyalty conversion 10x at Gap, the most important lesson wasn’t the number. It was what changes when you treat loyalty as a brand promise, not a retention mechanic.', date: 'Dec 2024', link: '#', num: '003' },
+            { category: 'Experience Design', title: 'The Phygital Gap', desc: 'Bridging the physical and digital retail experience through journey mapping and intentional architectural choices.', date: 'Nov 2024', link: '#', num: '004' },
+            { category: 'Brand Purpose', title: 'Meaning Metrics', desc: 'Why we need to measure the cultural impact, not just the commercial click. Shifting our KPIs towards community health.', date: 'Oct 2024', link: '#', num: '005' },
+            { category: 'Cultural Strategy', title: 'Subcultures as Scaffolding', desc: 'How to build brands inside of communities without commodifying them. Earning the right to participate in niche networks.', date: 'Sep 2024', link: '#', num: '006' },
+            { category: 'Creative Tech', title: 'Designing with Invisible Intelligence', desc: 'The role of implicit AI in consumer facing experiences. Making algorithms useful without being visible to the user.', date: 'Aug 2024', link: '#', num: '007' }
+          ].slice(isBlogExpanded ? blogPage * 6 : 0, isBlogExpanded ? (blogPage + 1) * 6 : 3).map((blog) => (
+            <div className="article-card" key={blog.num}>
+              <div className="article-ghost-num">{blog.num}</div>
+              <div className="article-category">{blog.category}</div>
+              <div className="article-title">{blog.title}</div>
+              <div className="article-desc">{blog.desc}</div>
+              <div className="article-footer">
+                <span className="article-date">{blog.date}</span>
+                <a href={blog.link} className="article-read">{blog.link === '#' ? 'Coming Soon' : 'Read \u2192'}</a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+
+      {/* ══════════════════════════════════════════
+          FULL ABOUT SECTION (migrated from about.html)
+      ══════════════════════════════════════════ */}
+
+      {/* ── ABOUT HERO ── */}
+      <section id="about" className="about-hero reveal">
+        <div>
+          <div className="eyebrow" style={{ marginBottom: 20 }}>About</div>
+          <h2 className="about-hero-title">
+            Where Cultural<br />Strategy Meets<br />Commercial<br />Precision.
+          </h2>
+          <p className="about-hero-body">
+            I&rsquo;m a multidisciplinary strategic creative that identifies the right problems and builds the systems, experiences, and narratives that move people from passive awareness to active brand citizenship &mdash; across digital products, physical spaces, and everything in between. I bridge creative customer experience and quantitative growth at every touchpoint, from brief to implementation. I research, develop strategy, and execute across product and service &mdash; solving real-world brand problems through brand DNA and commercial precision.
+          </p>
+          <p className="about-hero-body">
+            I came to this through an unusual path: a background in graphic design and advertising, trained on visual systems and narrative craft, combined with frontline retail experience where I learned that loyalty isn&rsquo;t a program &mdash; it&rsquo;s a feeling you either engineer or lose. Currently pursuing a Master of Business with a concentration in Experiential Design at VCU Brandcenter.
+          </p>
+        </div>
+
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '48px', marginTop: '42px' }}>
+          {/* Philosophy / POV */}
+          <div className="about-philosophy-block" style={{ marginBottom: 0 }}>
+            <div className="about-philosophy-eyebrow">POINT OF VIEW</div>
+            <div className="about-philosophy-quote">&ldquo;The most powerful thing a brand can do is make a consumer feel seen &mdash; not as a demographic, not as a transaction, but as a person with an identity worth expressing.&rdquo;</div>
+          </div>
+
+          {/* Status grid */}
+          <div className="status-grid">
+            <div className="status-cell">
+              <div className="status-cell-label">CURRENTLY</div>
+              <div className="status-cell-value">VCU Brandcenter M.S. Business/Branding &mdash; Expected May 2026</div>
+            </div>
+            <div className="status-cell">
+              <div className="status-cell-label">FOCUS</div>
+              <div className="status-cell-value">Brand strategy &amp; product management</div>
+            </div>
+            <div className="status-cell">
+              <div className="status-cell-label">BASED</div>
+              <div className="status-cell-value">Richmond, VA</div>
+            </div>
+          </div>
+
+          <div className="featured-row" style={{ justifyContent: 'flex-start', paddingTop: 0, borderTop: 'none', background: 'transparent' }}>
+            <span className="featured-label">Featured In</span>
+            <div className="featured-names">
+              <span className="featured-name">AdAge</span>
+              <span className="featured-name">AdForum</span>
+              <span className="featured-name">Communication Arts</span>
+              <span className="featured-name">Print Mag</span>
+              <span className="featured-name">Stash</span>
+            </div>
+          </div>
+
+          <div className="about-hero-ctas">
+            <a href="/resume.pdf" className="about-cta-btn about-cta-btn--secondary" download>Download R&eacute;sum&eacute;</a>
+            <a href="#contact" className="about-cta-btn about-cta-btn--primary">Get in Touch</a>
+          </div>
+        </div>
+      </section>
+
+
+      {/* ── CAPABILITIES ── */}
+      <section className="section-block">
+        <div className="section-row" style={{ marginBottom: 40 }}>
+          <div>
+            <div className="section-num">01</div>
+            <div className="section-title-label">Capabilities</div>
+          </div>
+          <div />
+        </div>
+        <div className="cap-grid">
+          <div className="cap-card">
+            <div className="cap-num">01 &mdash;</div>
+            <div className="cap-title">Product<br />Management</div>
+            <div className="cap-desc">End-to-end product strategy and execution &mdash; from PRD authorship and user grounding to launch sequencing and sensitivity risk management. Decision-making frameworks, tradeoff documentation, and cross-functional alignment.</div>
+            <div className="cap-skills">
+              <span className="cap-skill">PRD &amp; Specs</span>
+              <span className="cap-skill">GTM Planning</span>
+              <span className="cap-skill">Launch Sequencing</span>
+              <span className="cap-skill">Risk Management</span>
+            </div>
+          </div>
+          <div className="cap-card">
+            <div className="cap-num">02 &mdash;</div>
+            <div className="cap-title">Brand<br />Strategy</div>
+            <div className="cap-desc">Building brand-consumer relationships across the full journey &mdash; from cultural discovery to deep identity-level advocacy. Trend forecasting, positioning, and narrative architecture.</div>
+            <div className="cap-skills">
+              <span className="cap-skill">Positioning</span>
+              <span className="cap-skill">Trend Forecasting</span>
+              <span className="cap-skill">Narrative Design</span>
+              <span className="cap-skill">Cultural Strategy</span>
+            </div>
+          </div>
+          <div className="cap-card">
+            <div className="cap-num">03 &mdash;</div>
+            <div className="cap-title">Experience<br />Design</div>
+            <div className="cap-desc">Designing the phygital gap &mdash; from user journey mapping and service blueprints to high-fidelity prototypes. Information architecture built for storytelling, not just usability.</div>
+            <div className="cap-skills">
+              <span className="cap-skill">Journey Mapping</span>
+              <span className="cap-skill">Service Blueprints</span>
+              <span className="cap-skill">Figma</span>
+              <span className="cap-skill">Phygital Integration</span>
+            </div>
+          </div>
+          <div className="cap-card">
+            <div className="cap-num">04 &mdash;</div>
+            <div className="cap-title">Systems<br />Design</div>
+            <div className="cap-desc">Designing the invisible scaffolding &mdash; gamification mechanics, loyalty architecture, behavioral loops, and circular economy models that make brand engagement feel effortless.</div>
+            <div className="cap-skills">
+              <span className="cap-skill">Gamification</span>
+              <span className="cap-skill">Behavioral Design</span>
+              <span className="cap-skill">Circular Economy</span>
+              <span className="cap-skill">Omnichannel</span>
+            </div>
+          </div>
+          <div className="cap-card">
+            <div className="cap-num">05 &mdash;</div>
+            <div className="cap-title">AI &amp;<br />Emerging Tech</div>
+            <div className="cap-desc">Translating machine learning concepts into actionable brand strategy. Generative AI workflows, AI-driven personalization systems, and &ldquo;Digital Fluency&rdquo; models for executives.</div>
+            <div className="cap-skills">
+              <span className="cap-skill">Gen AI Workflows</span>
+              <span className="cap-skill">Google AI Studio</span>
+              <span className="cap-skill">NotebookLM</span>
+              <span className="cap-skill">A/B Testing</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── CORE COMPETENCIES ── */}
+      <section className="section-block section-block-alt">
+        <div className="section-row">
+          <div>
+            <div className="section-num">Skills</div>
+            <div className="section-title-label">Core Competencies</div>
+          </div>
+          <div className="skills-cloud">
+            <span className="skill-pill">Product Management</span>
+            <span className="skill-pill">Brand Strategy</span>
+            <span className="skill-pill">Experience Design</span>
+            <span className="skill-pill">Retail Math (AUR, ST%, WOS)</span>
+            <span className="skill-pill">Trend Forecasting</span>
+            <span className="skill-pill">Phygital Integration</span>
+            <span className="skill-pill">User Journey Mapping</span>
+            <span className="skill-pill">Generative AI Workflows</span>
+            <span className="skill-pill">Circular Economy Models</span>
+            <span className="skill-pill">Gamification Design</span>
+            <span className="skill-pill">Behavioral Analysis</span>
+            <span className="skill-pill">Omnichannel Strategy</span>
+            <span className="skill-pill">Service Blueprints</span>
+            <span className="skill-pill">Figma</span>
+            <span className="skill-pill">Adobe Creative Suite</span>
+            <span className="skill-pill">Google AI Studio</span>
+            <span className="skill-pill">Cross-functional Leadership</span>
+          </div>
+        </div>
+      </section>
+
+      {/* ── EXPERIENCE ── */}
+      <section className="section-block">
+        <div className="section-row" style={{ marginBottom: 0 }}>
+          <div>
+            <div className="section-num">02</div>
+            <div className="section-title-label">Experience</div>
+          </div>
+          <div>
+            <div className="exp-intro">An unusual path.<br />An intentional practice.</div>
+            <p className="exp-intro-body">A background in graphic design, trained on visual systems and narrative craft, combined with frontline retail experience where loyalty isn&rsquo;t a program &mdash; it&rsquo;s a feeling you either engineer or lose.</p>
+
+            {/* Role 01 */}
+            <div className="role-row">
+              <div>
+                <div className="role-date">Apr 2025 &ndash; Present</div>
+                <div className="role-company">Gap Inc. &middot; #1224</div>
+              </div>
+              <div>
+                <div className="role-title">Loyalty Lead</div>
+                <div className="role-desc">Spearheaded Encore Madness, a Mid-Atlantic district loyalty acquisition initiative spanning 11 stores, partnering with General and District Management to build program infrastructure and a live PowerBI-backed performance microsite. Scaled personal loyalty conversion from 1.22% to 12.07% over eight months &mdash; a nearly 10x improvement &mdash; earning #1 acquisition rate in the district YTD. Drove +11% comp YTD and a 40% increase in team acquisition goal attainment through a proprietary KPI-based coaching methodology.</div>
+                <div className="role-highlight">~10x loyalty conversion improvement &middot; #1 acquisition in district YTD</div>
+              </div>
+            </div>
+
+            {/* Role 02 */}
+            <div className="role-row">
+              <div>
+                <div className="role-date">Mar 2025 &ndash; Present</div>
+                <div className="role-company">Branch Museum of Architecture and Design</div>
+              </div>
+              <div>
+                <div className="role-title">Product &amp; UX Strategist</div>
+                <div className="role-desc">Client-side digital consumer journey lead on a full web ecosystem build, translating a new brand identity into a cohesive digital experience in partnership with MullenLowe Design Studio. Authored PRDs with user stories and acceptance criteria; built interactive prototypes in React, HTML, and CSS to validate direction. Coordinated agile sprints across rebrand visual identity, CMS integration, and accessibility compliance. Work recognized in AdAge, AdForum, Communication Arts, Print Mag, and Stash.</div>
+              </div>
+            </div>
+
+            {/* Role 03 */}
+            <div className="role-row" style={{ borderBottom: "1px solid var(--g200)", paddingBottom: 32 }}>
+              <div>
+                <div className="role-date">Jan 2025 &ndash; Present</div>
+                <div className="role-company">The Rev. Factory</div>
+              </div>
+              <div>
+                <div className="role-title">Creative Director &amp; AI Systems Strategist</div>
+                <div className="role-desc">Serving as Creative Director for the upcoming publication <em>Designing the Future</em>. Designed &ldquo;Digital Fluency&rdquo; model visualizations for C-suite executives &mdash; translating complex machine learning concepts into actionable strategic frameworks.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── EDUCATION ── */}
+      <section className="section-block section-block-alt">
+        <div className="section-row">
+          <div>
+            <div className="section-num">03</div>
+            <div className="section-title-label">Education</div>
+          </div>
+          <div className="edu-grid">
+            <div className="edu-cell">
+              <div className="edu-level">Graduate</div>
+              <div className="edu-degree">M.S. Business/<br />Branding</div>
+              <div className="edu-focus">Experiential Design</div>
+              <div className="edu-school">VCU Brandcenter &middot; Expected May 2026</div>
+              <div className="edu-note">Research: consumer behavior, AI-driven product design &amp; data-driven brand strategy.</div>
+            </div>
+            <div className="edu-cell">
+              <div className="edu-level">Undergraduate</div>
+              <div className="edu-degree">B.S. Studio &amp;<br />Digital Arts</div>
+              <div className="edu-focus">Graphic Design</div>
+              <div className="edu-school">Liberty University &middot; May 2024</div>
+              <div className="edu-note">Core: visual systems, narrative craft. Minors: Business Marketing, Journalism.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── CONTACT ── */}
+      <section className="section-block reveal" id="contact" style={{ borderBottom: 'none', paddingBottom: '32px' }}>
+        <div className="section-row">
+          <div>
+            <div className="section-num">04</div>
+            <div className="section-title-label">Contact</div>
+          </div>
+          <div>
+            <h2 className="contact-heading">Let&rsquo;s Make<br />Something<br />Worth Doing.</h2>
+            <p className="contact-body">Open to full-time brand strategy, experience design, and creative direction roles. Also available for consulting and collaborative projects. Response within 48 hours.</p>
+
+            <div className="contact-links">
+              <div className="contact-link-cell">
+                <div className="contact-link-label">Email</div>
+                <div style={{ fontSize: '15px', color: 'var(--black)', marginTop: '8px', cursor: 'pointer', userSelect: 'all' }}>bennpattara@gmail.com</div>
+              </div>
+              <div className="contact-link-cell">
+                <div className="contact-link-label">LinkedIn</div>
+                <a href="https://linkedin.com/in/bennpattara" target="_blank" rel="noopener noreferrer">Connect</a>
+              </div>
+              <div className="contact-link-cell">
+                <div className="contact-link-label">R&eacute;sum&eacute; PDF</div>
+                <a href="/resume.pdf" download>Download</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Deleted Framework & POV Blocks */}
+
+
+      {/* ── FOOTER ── */}
+      <footer>
+        <div className="footer-left">
+          <span className="footer-name">Benn Pattara</span>
+          <span className="footer-role">Brand Experience Strategist &amp; Systems Designer</span>
+        </div>
+        <div className="footer-links">
+          <a href="#about" className="footer-link">About</a>
+          <a href="/blog" className="footer-link">Blog</a>
+          <a href="/13" className="footer-link">13</a>
+          <a href="#contact" className="footer-link">Contact</a>
+        </div>
+        <span className="footer-copy">&copy; 2025 Benn Pattara &middot; bennpattara.com</span>
+      </footer>
+    </>
   );
 }

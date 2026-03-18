@@ -1,0 +1,2313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SNKRS Confidence Hub — Molecular Design System</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Anton&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* =============================================
+   SNKRS CONFIDENCE HUB — MOLECULAR DESIGN SYSTEM
+   DNA: SNKRS app pushed to 2027
+   Grid: 8px base. Zero radius. High contrast.
+   Type: Anton (display) + Space Grotesk (UI)
+   Accent: Electric White / Volt / Pure Black
+============================================= */
+
+:root {
+  /* === FOUNDATION === */
+  --black:        #000000;
+  --white:        #ffffff;
+  --off-black:    #0a0a0a;
+  --surface-1:    #111111;
+  --surface-2:    #1a1a1a;
+  --surface-3:    #222222;
+  --surface-4:    #2c2c2c;
+
+  /* === BORDERS === */
+  --border-subtle:  rgba(255,255,255,0.06);
+  --border-default: rgba(255,255,255,0.10);
+  --border-strong:  rgba(255,255,255,0.18);
+  --border-max:     rgba(255,255,255,0.35);
+
+  /* === TEXT === */
+  --text-primary:   #ffffff;
+  --text-secondary: #a0a0a0;
+  --text-tertiary:  #555555;
+  --text-disabled:  #333333;
+
+  /* === ACCENT — VOLT === */
+  --volt:         #d4ff00;
+  --volt-dim:     rgba(212,255,0,0.1);
+  --volt-border:  rgba(212,255,0,0.3);
+  --volt-glow:    0 0 24px rgba(212,255,0,0.25);
+
+  /* === SIGNAL === */
+  --signal-live:   #ff3333;
+  --signal-soon:   #ff9500;
+  --signal-open:   #34c759;
+  --signal-closed: #444444;
+
+  /* === GRID === */
+  --g1: 8px;   --g2: 16px;  --g3: 24px;  --g4: 32px;
+  --g5: 40px;  --g6: 48px;  --g8: 64px;  --g10: 80px;
+  --g12: 96px; --g16: 128px;
+
+  /* === TYPOGRAPHY === */
+  --font-display: 'Anton', sans-serif;
+  --font-ui:      'Space Grotesk', sans-serif;
+  --font-data:    'DM Mono', monospace;
+
+  /* === MOTION === */
+  --ease-snap:    cubic-bezier(0.25, 0, 0, 1);
+  --ease-overshoot: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --dur-fast: 120ms;
+  --dur-mid:  220ms;
+  --dur-slow: 400ms;
+}
+
+/* =============================================
+   RESET + BASE
+============================================= */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--black);
+  color: var(--text-primary);
+  font-family: var(--font-ui);
+  font-size: 14px;
+  line-height: 1.5;
+  display: flex;
+  min-height: 100vh;
+}
+
+/* =============================================
+   SIDEBAR NAV
+============================================= */
+.sidebar {
+  width: 232px;
+  min-width: 232px;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  background: var(--surface-1);
+  border-right: 1px solid var(--border-default);
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  overflow-y: auto;
+}
+
+.sb-header {
+  padding: 24px 20px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.sb-product {
+  font-family: var(--font-display);
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.sb-title {
+  font-family: var(--font-display);
+  font-size: 22px;
+  letter-spacing: 0.05em;
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.sb-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  padding: 5px 9px;
+  background: var(--volt-dim);
+  border: 1px solid var(--volt-border);
+  font-size: 9px;
+  font-family: var(--font-data);
+  letter-spacing: 0.2em;
+  color: var(--volt);
+  text-transform: uppercase;
+}
+
+.sb-badge::before {
+  content: '';
+  width: 5px; height: 5px;
+  background: var(--volt);
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.4; transform: scale(0.8); }
+}
+
+.sb-nav { flex: 1; padding: 16px 0; }
+.sb-section { margin-bottom: 8px; }
+
+.sb-section-label {
+  padding: 8px 20px 4px;
+  font-family: var(--font-data);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+}
+
+.sb-link {
+  display: flex;
+  align-items: center;
+  padding: 8px 20px;
+  color: var(--text-tertiary);
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  border-left: 2px solid transparent;
+  transition: all var(--dur-fast) var(--ease-snap);
+  gap: 10px;
+}
+
+.sb-link .idx {
+  font-family: var(--font-data);
+  font-size: 9px;
+  min-width: 18px;
+  color: var(--text-disabled);
+}
+
+.sb-link:hover { color: var(--text-primary); background: var(--border-subtle); }
+.sb-link.active { color: var(--volt); border-left-color: var(--volt); background: var(--volt-dim); }
+.sb-link.active .idx { color: var(--volt); }
+
+/* =============================================
+   MAIN CONTENT
+============================================= */
+.main {
+  flex: 1;
+  max-width: 940px;
+  padding: 56px 64px 120px;
+  overflow-y: auto;
+}
+
+/* =============================================
+   PAGE COVER
+============================================= */
+.cover {
+  margin-bottom: 100px;
+  padding-bottom: 64px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.cover-kicker {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-data);
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  color: var(--volt);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.cover-kicker::after {
+  content: '';
+  width: 32px;
+  height: 1px;
+  background: var(--volt);
+}
+
+.cover-h {
+  font-family: var(--font-display);
+  font-size: 88px;
+  line-height: 0.88;
+  letter-spacing: 0.01em;
+  margin-bottom: 12px;
+}
+
+.cover-h .inv {
+  -webkit-text-stroke: 1px rgba(255,255,255,0.5);
+  color: transparent;
+}
+
+.cover-sub {
+  font-size: 15px;
+  color: var(--text-secondary);
+  max-width: 520px;
+  line-height: 1.7;
+  margin-top: 24px;
+}
+
+.cover-meta {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1px;
+  background: var(--border-subtle);
+  border: 1px solid var(--border-subtle);
+  margin-top: 40px;
+}
+
+.cover-meta-cell {
+  background: var(--surface-1);
+  padding: 14px 16px;
+}
+
+.cmc-l {
+  font-family: var(--font-data);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.cmc-v {
+  font-size: 12px;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+/* =============================================
+   SECTION HEADER
+============================================= */
+.section { margin-bottom: 96px; }
+
+.sec-hd {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin-bottom: 10px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.sec-n {
+  font-family: var(--font-data);
+  font-size: 11px;
+  color: var(--volt);
+  letter-spacing: 0.15em;
+}
+
+.sec-t {
+  font-family: var(--font-display);
+  font-size: 30px;
+  letter-spacing: 0.04em;
+  color: var(--text-primary);
+}
+
+.sec-d {
+  font-size: 13px;
+  color: var(--text-secondary);
+  max-width: 580px;
+  line-height: 1.7;
+  margin-bottom: 32px;
+}
+
+/* =============================================
+   CANVAS (display area)
+============================================= */
+.canvas {
+  background: var(--off-black);
+  border: 1px solid var(--border-default);
+  padding: 40px;
+  margin-bottom: 4px;
+  position: relative;
+}
+
+.canvas-lbl {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  font-family: var(--font-data);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+}
+
+.canvas + .token-row {
+  border: 1px solid var(--border-subtle);
+  border-top: none;
+  padding: 12px 16px;
+  display: flex;
+  gap: 24px;
+  background: var(--surface-1);
+  flex-wrap: wrap;
+}
+
+.tr-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.tr-key {
+  font-family: var(--font-data);
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+}
+
+.tr-val {
+  font-family: var(--font-data);
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+.tr-val.volt { color: var(--volt); }
+
+/* =============================================
+   ATOMS: COLOR TOKENS
+============================================= */
+.color-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 1px;
+  background: var(--border-subtle);
+  border: 1px solid var(--border-subtle);
+  margin-bottom: 28px;
+}
+
+.cs {
+  background: var(--surface-1);
+  display: flex;
+  flex-direction: column;
+  cursor: default;
+}
+
+.cs-swatch { height: 56px; transition: height var(--dur-mid) var(--ease-snap); }
+.cs:hover .cs-swatch { height: 72px; }
+
+.cs-info {
+  padding: 10px 12px;
+}
+
+.cs-name {
+  font-family: var(--font-ui);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+
+.cs-hex {
+  font-family: var(--font-data);
+  font-size: 10px;
+  color: var(--text-tertiary);
+}
+
+.cs-token {
+  font-family: var(--font-data);
+  font-size: 9px;
+  color: var(--text-disabled);
+  margin-top: 2px;
+  letter-spacing: 0.05em;
+}
+
+/* =============================================
+   ATOMS: TYPOGRAPHY
+============================================= */
+.type-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 32px;
+  align-items: start;
+  padding: 28px 0;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.type-row:last-child { border-bottom: none; }
+
+.type-specimen-text { overflow: hidden; }
+.type-meta-col { min-width: 200px; padding-top: 4px; }
+
+.type-meta-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0;
+  border-bottom: 1px solid var(--border-subtle);
+  font-size: 11px;
+}
+
+.type-meta-item .k { color: var(--text-tertiary); font-family: var(--font-data); font-size: 10px; }
+.type-meta-item .v { color: var(--text-secondary); font-family: var(--font-data); font-size: 10px; }
+
+/* TYPE SCALE */
+.ts-d1 { font-family: var(--font-display); font-size: 80px; line-height: 0.88; letter-spacing: 0.01em; color: var(--text-primary); }
+.ts-d2 { font-family: var(--font-display); font-size: 56px; line-height: 0.90; letter-spacing: 0.01em; color: var(--text-primary); }
+.ts-d3 { font-family: var(--font-display); font-size: 40px; line-height: 0.94; letter-spacing: 0.02em; color: var(--text-primary); }
+.ts-d4 { font-family: var(--font-display); font-size: 28px; line-height: 1.0;  letter-spacing: 0.03em; color: var(--text-primary); }
+.ts-h1 { font-family: var(--font-ui); font-size: 22px; font-weight: 700; line-height: 1.15; color: var(--text-primary); }
+.ts-h2 { font-family: var(--font-ui); font-size: 17px; font-weight: 600; line-height: 1.3;  color: var(--text-primary); }
+.ts-b1 { font-family: var(--font-ui); font-size: 15px; font-weight: 400; line-height: 1.6;  color: var(--text-secondary); }
+.ts-b2 { font-family: var(--font-ui); font-size: 13px; font-weight: 400; line-height: 1.65; color: var(--text-secondary); }
+.ts-c1 { font-family: var(--font-data); font-size: 11px; letter-spacing: 0.12em; color: var(--text-secondary); }
+.ts-c2 { font-family: var(--font-data); font-size: 9px; letter-spacing: 0.22em; color: var(--text-tertiary); text-transform: uppercase; }
+
+/* =============================================
+   ATOMS: BUTTONS
+============================================= */
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+/* BASE BUTTON */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition: all var(--dur-fast) var(--ease-snap);
+  border-radius: 0;
+  outline: none;
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/* SIZES */
+.btn-xl { font-size: 13px; padding: 18px 40px; }
+.btn-lg { font-size: 12px; padding: 14px 32px; }
+.btn-md { font-size: 11px; padding: 11px 24px; }
+.btn-sm { font-size: 10px; padding: 8px 16px; }
+
+/* VARIANTS */
+.btn-primary {
+  background: var(--white);
+  color: var(--black);
+}
+.btn-primary:hover {
+  background: var(--volt);
+  color: var(--black);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 20px rgba(212,255,0,0.2);
+}
+.btn-primary:active { transform: translateY(0); }
+
+.btn-volt {
+  background: var(--volt);
+  color: var(--black);
+}
+.btn-volt:hover {
+  background: #e8ff40;
+  transform: translateY(-1px);
+  box-shadow: var(--volt-glow);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border-strong);
+}
+.btn-ghost:hover {
+  border-color: var(--text-primary);
+  background: var(--border-subtle);
+}
+
+.btn-ghost-volt {
+  background: transparent;
+  color: var(--volt);
+  border: 1px solid var(--volt-border);
+}
+.btn-ghost-volt:hover {
+  background: var(--volt-dim);
+  border-color: var(--volt);
+}
+
+.btn-destructive {
+  background: var(--signal-live);
+  color: var(--white);
+}
+.btn-destructive:hover {
+  background: #ff5555;
+}
+
+.btn-disabled {
+  background: var(--surface-3);
+  color: var(--text-disabled);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Icon slot */
+.btn-icon {
+  width: 18px; height: 18px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+
+/* =============================================
+   ATOMS: BADGES / STATUS CHIPS
+============================================= */
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  font-family: var(--font-data);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border: 1px solid;
+}
+
+.chip-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+}
+
+.chip-live     { color: var(--signal-live);   border-color: rgba(255,51,51,0.3);   background: rgba(255,51,51,0.08);  }
+.chip-live .chip-dot { background: var(--signal-live); animation: pulse 1.2s infinite; }
+
+.chip-soon     { color: var(--signal-soon);   border-color: rgba(255,149,0,0.3);   background: rgba(255,149,0,0.08);  }
+.chip-soon .chip-dot { background: var(--signal-soon); }
+
+.chip-open     { color: var(--signal-open);   border-color: rgba(52,199,89,0.3);   background: rgba(52,199,89,0.08);  }
+.chip-open .chip-dot { background: var(--signal-open); }
+
+.chip-closed   { color: var(--text-disabled); border-color: var(--border-subtle);  background: transparent; }
+.chip-closed .chip-dot { background: var(--text-disabled); }
+
+.chip-volt     { color: var(--volt);          border-color: var(--volt-border);    background: var(--volt-dim); }
+.chip-volt .chip-dot { background: var(--volt); }
+
+.chip-new      { color: var(--text-primary);  border-color: var(--border-strong);  background: var(--surface-3); }
+
+/* =============================================
+   ATOMS: FORM INPUTS
+============================================= */
+.input-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: 380px;
+}
+
+.input-label {
+  font-family: var(--font-data);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+}
+
+.input-field {
+  background: var(--surface-1);
+  border: 1px solid var(--border-default);
+  color: var(--text-primary);
+  font-family: var(--font-ui);
+  font-size: 14px;
+  padding: 12px 16px;
+  border-radius: 0;
+  outline: none;
+  width: 100%;
+  transition: border-color var(--dur-fast);
+}
+
+.input-field::placeholder { color: var(--text-tertiary); }
+.input-field:focus { border-color: var(--volt); }
+.input-field.error { border-color: var(--signal-live); }
+.input-field:disabled {
+  background: var(--surface-2);
+  color: var(--text-disabled);
+  cursor: not-allowed;
+}
+
+.input-help {
+  font-size: 11px;
+  color: var(--text-tertiary);
+}
+
+.input-error {
+  font-size: 11px;
+  color: var(--signal-live);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* =============================================
+   MOLECULES: DROP CARD
+============================================= */
+.drop-card {
+  background: var(--surface-1);
+  border: 1px solid var(--border-default);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color var(--dur-mid) var(--ease-snap);
+}
+
+.drop-card:hover {
+  border-color: var(--border-max);
+}
+
+.drop-card:hover .dc-img-inner {
+  transform: scale(1.03);
+}
+
+.dc-img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: var(--surface-2);
+  position: relative;
+}
+
+.dc-img-inner {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--dur-slow) var(--ease-snap);
+}
+
+/* Placeholder shoe silhouette */
+.shoe-placeholder {
+  width: 75%;
+  height: 75%;
+  background: var(--surface-3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.shoe-svg { width: 80%; opacity: 0.15; }
+
+.dc-status {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+}
+
+.dc-fav {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 32px; height: 32px;
+  background: rgba(0,0,0,0.6);
+  border: 1px solid var(--border-default);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--dur-fast);
+}
+
+.dc-fav:hover { border-color: var(--border-max); background: rgba(0,0,0,0.8); }
+.dc-fav svg { width: 14px; height: 14px; stroke: var(--text-secondary); fill: none; }
+
+.dc-body { padding: 16px; }
+
+.dc-brand {
+  font-family: var(--font-data);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.dc-name {
+  font-family: var(--font-display);
+  font-size: 22px;
+  line-height: 1.0;
+  letter-spacing: 0.03em;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.dc-colorway {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+}
+
+.dc-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-top: 12px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.dc-price {
+  font-family: var(--font-ui);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.dc-date {
+  font-family: var(--font-data);
+  font-size: 10px;
+  color: var(--text-tertiary);
+  letter-spacing: 0.1em;
+  text-align: right;
+}
+
+.dc-date .date-val {
+  display: block;
+  color: var(--text-secondary);
+  font-size: 12px;
+  margin-top: 2px;
+}
+
+/* Countdown variant */
+.dc-countdown {
+  display: flex;
+  gap: 1px;
+  background: var(--border-subtle);
+  border: 1px solid var(--border-subtle);
+  margin-top: 12px;
+}
+
+.dc-cd-unit {
+  flex: 1;
+  background: var(--surface-2);
+  padding: 8px 4px;
+  text-align: center;
+}
+
+.dc-cd-num {
+  font-family: var(--font-display);
+  font-size: 24px;
+  line-height: 1;
+  color: var(--volt);
+  letter-spacing: 0.02em;
+}
+
+.dc-cd-label {
+  font-family: var(--font-data);
+  font-size: 8px;
+  letter-spacing: 0.18em;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+/* Drop card states */
+.drop-card.state-live { border-color: rgba(255,51,51,0.25); }
+.drop-card.state-live .dc-img { background: #140808; }
+
+.drop-card.state-confidence {
+  border-color: var(--volt-border);
+}
+
+.drop-card.state-sold {
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+/* Confidence lock overlay */
+.dc-confidence-lock {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0) 100%);
+  padding: 28px 16px 16px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.dc-lock-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-data);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: var(--volt);
+  text-transform: uppercase;
+}
+
+.dc-lock-icon {
+  width: 14px; height: 14px;
+}
+
+/* =============================================
+   MOLECULES: CONFIDENCE METER
+============================================= */
+.confidence-meter {
+  background: var(--surface-1);
+  border: 1px solid var(--border-default);
+  padding: 24px;
+}
+
+.cm-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.cm-label {
+  font-family: var(--font-data);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.cm-score {
+  font-family: var(--font-display);
+  font-size: 52px;
+  line-height: 1;
+  color: var(--volt);
+  letter-spacing: 0.02em;
+}
+
+.cm-max {
+  font-family: var(--font-display);
+  font-size: 24px;
+  color: var(--text-tertiary);
+}
+
+.cm-descriptor {
+  font-size: 12px;
+  color: var(--text-secondary);
+  max-width: 200px;
+  text-align: right;
+}
+
+.cm-bar-track {
+  height: 4px;
+  background: var(--surface-3);
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.cm-bar-fill {
+  height: 100%;
+  background: var(--volt);
+  transition: width 1s var(--ease-snap);
+  position: relative;
+}
+
+.cm-bar-fill::after {
+  content: '';
+  position: absolute;
+  right: 0; top: 50%;
+  transform: translateY(-50%);
+  width: 8px; height: 8px;
+  background: var(--volt);
+  border-radius: 50%;
+  box-shadow: var(--volt-glow);
+}
+
+.cm-factors {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cm-factor {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.cm-factor-name {
+  font-size: 12px;
+  color: var(--text-secondary);
+  min-width: 140px;
+}
+
+.cm-factor-bar {
+  flex: 1;
+  height: 2px;
+  background: var(--surface-3);
+}
+
+.cm-factor-fill {
+  height: 100%;
+  background: var(--volt);
+  opacity: 0.6;
+}
+
+.cm-factor-val {
+  font-family: var(--font-data);
+  font-size: 11px;
+  color: var(--text-tertiary);
+  min-width: 32px;
+  text-align: right;
+}
+
+/* =============================================
+   MOLECULES: WARDROBE GAP CARD
+============================================= */
+.gap-card {
+  background: var(--surface-1);
+  border: 1px solid var(--border-default);
+  padding: 24px;
+  display: flex;
+  gap: 20px;
+  cursor: pointer;
+  transition: border-color var(--dur-fast);
+}
+
+.gap-card:hover { border-color: var(--border-strong); }
+
+.gap-thumb {
+  width: 72px;
+  height: 72px;
+  background: var(--surface-2);
+  border: 1px solid var(--border-subtle);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+}
+
+.gap-body { flex: 1; }
+
+.gap-kicker {
+  font-family: var(--font-data);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: var(--volt);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.gap-title {
+  font-family: var(--font-display);
+  font-size: 20px;
+  letter-spacing: 0.03em;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.gap-reason {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+.gap-actions { display: flex; gap: 8px; }
+
+/* =============================================
+   MOLECULES: OUTFIT FORMULA CARD
+============================================= */
+.outfit-card {
+  background: var(--surface-1);
+  border: 1px solid var(--border-default);
+  overflow: hidden;
+}
+
+.outfit-header {
+  padding: 12px 16px;
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.outfit-context {
+  font-family: var(--font-data);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+}
+
+.outfit-occasion {
+  font-family: var(--font-display);
+  font-size: 15px;
+  letter-spacing: 0.06em;
+  color: var(--text-primary);
+}
+
+.outfit-items {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: var(--border-subtle);
+}
+
+.outfit-piece {
+  background: var(--surface-1);
+  padding: 10px 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.op-name {
+  font-size: 13px;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.op-brand {
+  font-family: var(--font-data);
+  font-size: 10px;
+  color: var(--text-tertiary);
+  margin-top: 2px;
+}
+
+.op-anchor {
+  font-family: var(--font-data);
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  color: var(--volt);
+  text-transform: uppercase;
+  border: 1px solid var(--volt-border);
+  padding: 3px 8px;
+  background: var(--volt-dim);
+}
+
+.op-link {
+  font-family: var(--font-data);
+  font-size: 10px;
+  color: var(--text-tertiary);
+  border: 1px solid var(--border-subtle);
+  padding: 3px 8px;
+  text-decoration: none;
+  transition: all var(--dur-fast);
+}
+
+.op-link:hover { color: var(--text-primary); border-color: var(--border-max); }
+
+/* =============================================
+   MOLECULES: CONFIDENCE PASS WIDGET
+============================================= */
+.pass-widget {
+  background: var(--surface-1);
+  border: 1px solid var(--volt-border);
+  padding: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.pass-widget::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--volt);
+}
+
+.pass-header {
+  padding: 16px 20px;
+  background: var(--volt-dim);
+  border-bottom: 1px solid var(--volt-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pass-label {
+  font-family: var(--font-data);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--volt);
+  text-transform: uppercase;
+}
+
+.pass-tier {
+  font-family: var(--font-display);
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  color: var(--volt);
+}
+
+.pass-body { padding: 20px; }
+
+.pass-score-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.pass-score {
+  font-family: var(--font-display);
+  font-size: 48px;
+  line-height: 1;
+  color: var(--text-primary);
+}
+
+.pass-score-max {
+  font-family: var(--font-display);
+  font-size: 20px;
+  color: var(--text-tertiary);
+}
+
+.pass-progress {
+  height: 4px;
+  background: var(--surface-3);
+  margin-bottom: 8px;
+}
+
+.pass-prog-fill {
+  height: 100%;
+  background: var(--volt);
+}
+
+.pass-prog-label {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-data);
+  font-size: 9px;
+  color: var(--text-tertiary);
+  letter-spacing: 0.1em;
+}
+
+.pass-unlocks {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pass-unlock-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.pui-icon {
+  width: 20px; height: 20px;
+  background: var(--volt-dim);
+  border: 1px solid var(--volt-border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px;
+  flex-shrink: 0;
+}
+
+/* =============================================
+   ORGANISMS: APP SHELL MOCKUP
+============================================= */
+.app-shell {
+  width: 320px;
+  background: var(--black);
+  border: 1px solid var(--border-default);
+  overflow: hidden;
+  font-size: 12px;
+  position: relative;
+}
+
+.app-statusbar {
+  background: var(--black);
+  padding: 10px 16px 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.app-statusbar .time { font-family: var(--font-ui); font-weight: 700; }
+.app-statusbar .icons { display: flex; gap: 4px; color: var(--text-primary); font-size: 10px; }
+
+.app-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.app-logo {
+  font-family: var(--font-display);
+  font-size: 20px;
+  letter-spacing: 0.08em;
+}
+
+.app-nav-icons { display: flex; gap: 14px; }
+.app-nav-icons svg { width: 18px; height: 18px; stroke: var(--text-secondary); fill: none; }
+
+.app-feed { padding: 12px; display: flex; flex-direction: column; gap: 12px; }
+
+.app-feed-card {
+  background: var(--surface-1);
+  border: 1px solid var(--border-default);
+  overflow: hidden;
+}
+
+.afc-img {
+  height: 180px;
+  background: var(--surface-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.afc-img-bg {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.afc-status { position: absolute; top: 10px; left: 10px; }
+.afc-fav    { position: absolute; top: 10px; right: 10px; }
+
+.afc-body { padding: 12px; }
+
+.afc-brand {
+  font-family: var(--font-data);
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+}
+
+.afc-name {
+  font-family: var(--font-display);
+  font-size: 18px;
+  line-height: 1.0;
+  letter-spacing: 0.02em;
+  color: var(--text-primary);
+  margin: 2px 0 8px;
+}
+
+.afc-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.afc-price { font-weight: 700; font-size: 14px; }
+.afc-cta {
+  background: var(--white);
+  color: var(--black);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 7px 12px;
+  border: none;
+  cursor: pointer;
+  transition: background var(--dur-fast);
+}
+.afc-cta:hover { background: var(--volt); }
+
+.app-tabbar {
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  padding: 8px 0;
+}
+
+.app-tab {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 4px 0;
+  font-family: var(--font-data);
+  font-size: 8px;
+  letter-spacing: 0.1em;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+}
+
+.app-tab svg { width: 20px; height: 20px; stroke: var(--text-tertiary); fill: none; }
+.app-tab.active svg { stroke: var(--volt); }
+.app-tab.active { color: var(--volt); }
+
+.app-tab-dot {
+  width: 4px; height: 4px;
+  background: var(--volt);
+  border-radius: 50%;
+  margin-top: 2px;
+}
+
+/* =============================================
+   SPACING GRID VISUAL
+============================================= */
+.grid-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.grid-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.grid-block {
+  background: var(--volt);
+  opacity: 0.7;
+  width: 100%;
+  min-width: 8px;
+}
+
+.grid-label {
+  font-family: var(--font-data);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  color: var(--text-tertiary);
+  text-align: center;
+}
+
+/* =============================================
+   ICON GRID
+============================================= */
+.icon-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: 1px;
+  background: var(--border-subtle);
+  border: 1px solid var(--border-subtle);
+}
+
+.icon-cell {
+  background: var(--surface-1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 20px 12px;
+  cursor: default;
+  transition: background var(--dur-fast);
+}
+
+.icon-cell:hover { background: var(--surface-2); }
+.icon-cell svg { width: 22px; height: 22px; stroke: var(--text-secondary); fill: none; stroke-width: 1.5; }
+.icon-cell:hover svg { stroke: var(--volt); }
+
+.icon-name {
+  font-family: var(--font-data);
+  font-size: 8px;
+  letter-spacing: 0.1em;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/* =============================================
+   MOTION TOKENS TABLE
+============================================= */
+.motion-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr auto;
+  gap: 1px;
+  background: var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+  align-items: center;
+  padding: 14px 16px;
+}
+
+.motion-row.header {
+  background: var(--surface-2);
+  border: 1px solid var(--border-subtle);
+  border-bottom: none;
+  padding: 10px 16px;
+}
+
+.motion-row .mh {
+  font-family: var(--font-data);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+}
+
+.motion-row .mk {
+  font-family: var(--font-data);
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+.motion-row .mv {
+  font-family: var(--font-data);
+  font-size: 11px;
+  color: var(--text-tertiary);
+  font-style: italic;
+}
+
+.motion-demo-btn {
+  background: var(--surface-3);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  font-size: 9px;
+  padding: 5px 10px;
+  cursor: pointer;
+  letter-spacing: 0.1em;
+  font-family: var(--font-data);
+  text-transform: uppercase;
+  transition: all var(--dur-fast);
+}
+
+.motion-demo-btn:hover { background: var(--surface-4); color: var(--text-primary); }
+
+/* =============================================
+   SCROLLBAR
+============================================= */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: var(--black); }
+::-webkit-scrollbar-thumb { background: var(--surface-4); }
+
+</style>
+</head>
+<body>
+
+<!-- ========================= SIDEBAR ========================= -->
+<nav class="sidebar">
+  <div class="sb-header">
+    <div class="sb-product">SNKRS Confidence Hub</div>
+    <div class="sb-title">DESIGN<br>SYSTEM</div>
+    <div class="sb-badge">v1.0 Live</div>
+  </div>
+
+  <div class="sb-nav">
+    <div class="sb-section">
+      <div class="sb-section-label">Foundations</div>
+      <a href="#tokens" class="sb-link active"><span class="idx">01</span>Color Tokens</a>
+      <a href="#type" class="sb-link"><span class="idx">02</span>Typography</a>
+      <a href="#grid" class="sb-link"><span class="idx">03</span>Grid & Spacing</a>
+      <a href="#motion" class="sb-link"><span class="idx">04</span>Motion</a>
+    </div>
+    <div class="sb-section">
+      <div class="sb-section-label">Atoms</div>
+      <a href="#buttons" class="sb-link"><span class="idx">05</span>Buttons</a>
+      <a href="#chips" class="sb-link"><span class="idx">06</span>Status Chips</a>
+      <a href="#inputs" class="sb-link"><span class="idx">07</span>Form Inputs</a>
+      <a href="#icons" class="sb-link"><span class="idx">08</span>Iconography</a>
+    </div>
+    <div class="sb-section">
+      <div class="sb-section-label">Molecules</div>
+      <a href="#drop-card" class="sb-link"><span class="idx">09</span>Drop Card</a>
+      <a href="#confidence" class="sb-link"><span class="idx">10</span>Confidence Meter</a>
+      <a href="#gap-card" class="sb-link"><span class="idx">11</span>Wardrobe Gap Card</a>
+      <a href="#outfit" class="sb-link"><span class="idx">12</span>Outfit Formula</a>
+      <a href="#pass" class="sb-link"><span class="idx">13</span>Confidence Pass</a>
+    </div>
+    <div class="sb-section">
+      <div class="sb-section-label">Organisms</div>
+      <a href="#shell" class="sb-link"><span class="idx">14</span>App Shell</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ========================= MAIN ========================= -->
+<main class="main">
+
+  <!-- COVER -->
+  <div class="cover" id="cover">
+    <div class="cover-kicker">Molecular Design System</div>
+    <div class="cover-h">SNKRS<br><span class="inv">CONFIDENCE</span><br>HUB</div>
+    <p class="cover-sub">A design system built from SNKRS's raw visual DNA — full black, high contrast, product-first — and pushed into 2027. Anton for authority. Space Grotesk for legibility. DM Mono for data precision. Volt as the new energy color.</p>
+    <div class="cover-meta">
+      <div class="cover-meta-cell">
+        <div class="cmc-l">Version</div>
+        <div class="cmc-v">1.0</div>
+      </div>
+      <div class="cover-meta-cell">
+        <div class="cmc-l">Grid</div>
+        <div class="cmc-v">8px base</div>
+      </div>
+      <div class="cover-meta-cell">
+        <div class="cmc-l">Border Radius</div>
+        <div class="cmc-v">0px</div>
+      </div>
+      <div class="cover-meta-cell">
+        <div class="cmc-l">Theme</div>
+        <div class="cmc-v">Dark Only</div>
+      </div>
+      <div class="cover-meta-cell">
+        <div class="cmc-l">Platform</div>
+        <div class="cmc-v">iOS / Android</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 01 COLOR TOKENS -->
+  <div class="section" id="tokens">
+    <div class="sec-hd"><span class="sec-n">01</span><h2 class="sec-t">COLOR TOKENS</h2></div>
+    <p class="sec-d">SNKRS runs on full black. No grays, no soft neutrals — everything earns its contrast. Volt (#D4FF00) replaces red as the primary accent: it reads as energy, not urgency. Red is reserved exclusively for live-drop states.</p>
+
+    <div style="margin-bottom:8px; font-size:11px; color:var(--text-tertiary); font-family:var(--font-data); letter-spacing:0.15em; text-transform:uppercase;">CORE PALETTE</div>
+    <div class="color-grid" style="margin-bottom:28px;">
+      <div class="cs"><div class="cs-swatch" style="background:#000000"></div><div class="cs-info"><div class="cs-name">Black</div><div class="cs-hex">#000000</div><div class="cs-token">--black</div></div></div>
+      <div class="cs"><div class="cs-swatch" style="background:#0a0a0a"></div><div class="cs-info"><div class="cs-name">Off-Black</div><div class="cs-hex">#0a0a0a</div><div class="cs-token">--off-black</div></div></div>
+      <div class="cs"><div class="cs-swatch" style="background:#111111"></div><div class="cs-info"><div class="cs-name">Surface 1</div><div class="cs-hex">#111111</div><div class="cs-token">--surface-1</div></div></div>
+      <div class="cs"><div class="cs-swatch" style="background:#1a1a1a"></div><div class="cs-info"><div class="cs-name">Surface 2</div><div class="cs-hex">#1a1a1a</div><div class="cs-token">--surface-2</div></div></div>
+      <div class="cs"><div class="cs-swatch" style="background:#222222"></div><div class="cs-info"><div class="cs-name">Surface 3</div><div class="cs-hex">#222222</div><div class="cs-token">--surface-3</div></div></div>
+      <div class="cs"><div class="cs-swatch" style="background:#ffffff"></div><div class="cs-info"><div class="cs-name">White</div><div class="cs-hex">#ffffff</div><div class="cs-token">--white</div></div></div>
+    </div>
+
+    <div style="margin-bottom:8px; font-size:11px; color:var(--text-tertiary); font-family:var(--font-data); letter-spacing:0.15em; text-transform:uppercase;">ACCENT + SIGNAL</div>
+    <div class="color-grid">
+      <div class="cs"><div class="cs-swatch" style="background:#d4ff00"></div><div class="cs-info"><div class="cs-name">Volt</div><div class="cs-hex">#D4FF00</div><div class="cs-token">--volt</div></div></div>
+      <div class="cs"><div class="cs-swatch" style="background:rgba(212,255,0,0.1); border:1px solid rgba(212,255,0,0.2)"></div><div class="cs-info"><div class="cs-name">Volt Dim</div><div class="cs-hex">10% Volt</div><div class="cs-token">--volt-dim</div></div></div>
+      <div class="cs"><div class="cs-swatch" style="background:#ff3333"></div><div class="cs-info"><div class="cs-name">Live Red</div><div class="cs-hex">#FF3333</div><div class="cs-token">--signal-live</div></div></div>
+      <div class="cs"><div class="cs-swatch" style="background:#ff9500"></div><div class="cs-info"><div class="cs-name">Soon Orange</div><div class="cs-hex">#FF9500</div><div class="cs-token">--signal-soon</div></div></div>
+      <div class="cs"><div class="cs-swatch" style="background:#34c759"></div><div class="cs-info"><div class="cs-name">Open Green</div><div class="cs-hex">#34C759</div><div class="cs-token">--signal-open</div></div></div>
+    </div>
+  </div>
+
+  <!-- 02 TYPOGRAPHY -->
+  <div class="section" id="type">
+    <div class="sec-hd"><span class="sec-n">02</span><h2 class="sec-t">TYPOGRAPHY</h2></div>
+    <p class="sec-d">Three-typeface system: Anton for display authority, Space Grotesk for UI legibility, DM Mono for data precision. Anton is the heir to SNKRS's existing Futura-heavy tradition — same condensed power, sharper at large sizes. Never use decorative fonts for data.</p>
+
+    <div class="canvas">
+      <div class="canvas-lbl">Type Specimens</div>
+
+      <div class="type-row">
+        <div class="type-specimen-text">
+          <div class="ts-d1">CONFIDENCE<br>DROP</div>
+        </div>
+        <div class="type-meta-col">
+          <div class="type-meta-item"><span class="k">Token</span><span class="v">Display / XL</span></div>
+          <div class="type-meta-item"><span class="k">Font</span><span class="v">Anton</span></div>
+          <div class="type-meta-item"><span class="k">Size</span><span class="v">80px</span></div>
+          <div class="type-meta-item"><span class="k">Line-height</span><span class="v">0.88</span></div>
+          <div class="type-meta-item"><span class="k">Usage</span><span class="v">Hero titles</span></div>
+        </div>
+      </div>
+
+      <div class="type-row">
+        <div class="type-specimen-text">
+          <div class="ts-d2">Air Jordan 1<br>Retro High OG</div>
+        </div>
+        <div class="type-meta-col">
+          <div class="type-meta-item"><span class="k">Token</span><span class="v">Display / L</span></div>
+          <div class="type-meta-item"><span class="k">Font</span><span class="v">Anton</span></div>
+          <div class="type-meta-item"><span class="k">Size</span><span class="v">56px</span></div>
+          <div class="type-meta-item"><span class="k">Usage</span><span class="v">Drop names</span></div>
+        </div>
+      </div>
+
+      <div class="type-row">
+        <div class="type-specimen-text">
+          <div class="ts-d3">Style Gym</div>
+        </div>
+        <div class="type-meta-col">
+          <div class="type-meta-item"><span class="k">Token</span><span class="v">Display / M</span></div>
+          <div class="type-meta-item"><span class="k">Font</span><span class="v">Anton</span></div>
+          <div class="type-meta-item"><span class="k">Size</span><span class="v">40px</span></div>
+          <div class="type-meta-item"><span class="k">Usage</span><span class="v">Section titles</span></div>
+        </div>
+      </div>
+
+      <div class="type-row">
+        <div class="type-specimen-text">
+          <div class="ts-h1">Your wardrobe has a gap. Here's how to fill it.</div>
+        </div>
+        <div class="type-meta-col">
+          <div class="type-meta-item"><span class="k">Token</span><span class="v">Heading / 1</span></div>
+          <div class="type-meta-item"><span class="k">Font</span><span class="v">Space Grotesk</span></div>
+          <div class="type-meta-item"><span class="k">Size</span><span class="v">22px / 700</span></div>
+          <div class="type-meta-item"><span class="k">Usage</span><span class="v">Card headlines</span></div>
+        </div>
+      </div>
+
+      <div class="type-row">
+        <div class="type-specimen-text">
+          <div class="ts-b1">Consumers own an average of 16 pairs but rotate only 2–5. The museum mindset breaks the replacement cycle. The Style Gym solves for confidence first.</div>
+        </div>
+        <div class="type-meta-col">
+          <div class="type-meta-item"><span class="k">Token</span><span class="v">Body / 1</span></div>
+          <div class="type-meta-item"><span class="k">Font</span><span class="v">Space Grotesk</span></div>
+          <div class="type-meta-item"><span class="k">Size</span><span class="v">15px / 400</span></div>
+          <div class="type-meta-item"><span class="k">Usage</span><span class="v">Descriptions</span></div>
+        </div>
+      </div>
+
+      <div class="type-row">
+        <div class="type-specimen-text">
+          <div class="ts-c1">48:00:00 remaining — CONFIDENCE DROP active</div>
+        </div>
+        <div class="type-meta-col">
+          <div class="type-meta-item"><span class="k">Token</span><span class="v">Caption / Mono</span></div>
+          <div class="type-meta-item"><span class="k">Font</span><span class="v">DM Mono</span></div>
+          <div class="type-meta-item"><span class="k">Size</span><span class="v">11px</span></div>
+          <div class="type-meta-item"><span class="k">Usage</span><span class="v">Timers, data</span></div>
+        </div>
+      </div>
+
+      <div class="type-row">
+        <div class="type-specimen-text">
+          <div class="ts-c2">Style Gym — Work / Casual / Night Out</div>
+        </div>
+        <div class="type-meta-col">
+          <div class="type-meta-item"><span class="k">Token</span><span class="v">Micro Label</span></div>
+          <div class="type-meta-item"><span class="k">Font</span><span class="v">DM Mono</span></div>
+          <div class="type-meta-item"><span class="k">Size</span><span class="v">9px / UC</span></div>
+          <div class="type-meta-item"><span class="k">Usage</span><span class="v">Tags, eyebrows</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 03 GRID -->
+  <div class="section" id="grid">
+    <div class="sec-hd"><span class="sec-n">03</span><h2 class="sec-t">GRID & SPACING</h2></div>
+    <p class="sec-d">8px base grid. All spacing is a multiple of 8. No half-values. No border-radius — ever. The grid produces tension, not comfort, which is exactly right for a brand that lives at the edge of culture.</p>
+
+    <div class="canvas">
+      <div class="canvas-lbl">Spacing Scale</div>
+      <div class="grid-row">
+        <div class="grid-unit"><div class="grid-block" style="height:8px; width:8px;"></div><div class="grid-label">g1<br>8px</div></div>
+        <div class="grid-unit"><div class="grid-block" style="height:16px; width:16px;"></div><div class="grid-label">g2<br>16px</div></div>
+        <div class="grid-unit"><div class="grid-block" style="height:24px; width:24px;"></div><div class="grid-label">g3<br>24px</div></div>
+        <div class="grid-unit"><div class="grid-block" style="height:32px; width:32px;"></div><div class="grid-label">g4<br>32px</div></div>
+        <div class="grid-unit"><div class="grid-block" style="height:40px; width:40px;"></div><div class="grid-label">g5<br>40px</div></div>
+        <div class="grid-unit"><div class="grid-block" style="height:48px; width:48px;"></div><div class="grid-label">g6<br>48px</div></div>
+        <div class="grid-unit"><div class="grid-block" style="height:64px; width:64px;"></div><div class="grid-label">g8<br>64px</div></div>
+        <div class="grid-unit"><div class="grid-block" style="height:80px; width:80px;"></div><div class="grid-label">g10<br>80px</div></div>
+        <div class="grid-unit"><div class="grid-block" style="height:96px; width:96px;"></div><div class="grid-label">g12<br>96px</div></div>
+        <div class="grid-unit"><div class="grid-block" style="height:128px; width:128px;"></div><div class="grid-label">g16<br>128px</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 04 MOTION -->
+  <div class="section" id="motion">
+    <div class="sec-hd"><span class="sec-n">04</span><h2 class="sec-t">MOTION</h2></div>
+    <p class="sec-d">Motion communicates state, not delight. Two primary eases: Snap for direct transitions (menu close, status change), Overshoot for rewards and achievements (pass unlock, confidence score reveal). Never animate decoratively.</p>
+
+    <div class="motion-row header">
+      <div class="mh">Token</div><div class="mh">Value</div><div class="mh">Usage</div><div class="mh">Preview</div>
+    </div>
+    <div class="motion-row" style="background:var(--surface-1); border:1px solid var(--border-subtle); border-top:none;">
+      <div class="mk">--dur-fast<br>--ease-snap</div>
+      <div class="mv">120ms<br>cubic-bezier(0.25,0,0,1)</div>
+      <div style="font-size:12px; color:var(--text-secondary);">Hover states, chip updates, button press</div>
+      <button class="motion-demo-btn" onclick="this.style.transform='translateY(-2px)'; setTimeout(()=>this.style.transform='',120)">Fire</button>
+    </div>
+    <div class="motion-row" style="background:var(--surface-1); border:1px solid var(--border-subtle); border-top:none;">
+      <div class="mk">--dur-mid<br>--ease-snap</div>
+      <div class="mv">220ms<br>cubic-bezier(0.25,0,0,1)</div>
+      <div style="font-size:12px; color:var(--text-secondary);">Card hover, sidebar transitions, image scale</div>
+      <button class="motion-demo-btn" onclick="this.style.background='var(--volt)'; this.style.color='#000'; setTimeout(()=>{this.style.background='';this.style.color=''},220)">Fire</button>
+    </div>
+    <div class="motion-row" style="background:var(--surface-1); border:1px solid var(--border-subtle); border-top:none;">
+      <div class="mk">--dur-slow<br>--ease-overshoot</div>
+      <div class="mv">400ms<br>cubic-bezier(0.34,1.56,0.64,1)</div>
+      <div style="font-size:12px; color:var(--text-secondary);">Confidence score reveal, pass unlock, level up</div>
+      <button class="motion-demo-btn" onclick="this.style.transform='scale(1.15)'; setTimeout(()=>this.style.transform='',400)">Fire</button>
+    </div>
+  </div>
+
+  <!-- 05 BUTTONS -->
+  <div class="section" id="buttons">
+    <div class="sec-hd"><span class="sec-n">05</span><h2 class="sec-t">BUTTONS</h2></div>
+    <p class="sec-d">Zero border-radius, always. The primary button is white-on-black that turns Volt on hover — a deliberate signal that confidence changes the outcome. Destructive red reserved for raffle cancellations and irreversible actions.</p>
+
+    <div class="canvas">
+      <div class="canvas-lbl">Variants</div>
+      <div class="btn-row">
+        <button class="btn btn-primary btn-lg">Enter Drop</button>
+        <button class="btn btn-volt btn-lg">Confidence Pass</button>
+        <button class="btn btn-ghost btn-lg">View Style Gym</button>
+        <button class="btn btn-ghost-volt btn-lg">Unlock Access</button>
+        <button class="btn btn-destructive btn-lg">Cancel Entry</button>
+        <button class="btn btn-disabled btn-lg">Sold Out</button>
+      </div>
+    </div>
+
+    <div class="canvas" style="margin-top:1px;">
+      <div class="canvas-lbl">Sizes</div>
+      <div class="btn-row" style="align-items:center;">
+        <button class="btn btn-primary btn-xl">XL — 18px</button>
+        <button class="btn btn-primary btn-lg">LG — 14px</button>
+        <button class="btn btn-primary btn-md">MD — 11px</button>
+        <button class="btn btn-primary btn-sm">SM — 10px</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 06 CHIPS -->
+  <div class="section" id="chips">
+    <div class="sec-hd"><span class="sec-n">06</span><h2 class="sec-t">STATUS CHIPS</h2></div>
+    <p class="sec-d">Chips communicate drop state. The live pulse is non-negotiable — Live drops animate. The Confidence Volt chip is exclusive to Confidence Hub and never appears in legacy drop UI.</p>
+
+    <div class="canvas">
+      <div class="canvas-lbl">All States</div>
+      <div class="chip-row">
+        <div class="chip chip-live"><div class="chip-dot"></div>Live Now</div>
+        <div class="chip chip-soon"><div class="chip-dot"></div>Dropping Soon</div>
+        <div class="chip chip-open"><div class="chip-dot"></div>Draw Open</div>
+        <div class="chip chip-closed"><div class="chip-dot"></div>Draw Closed</div>
+        <div class="chip chip-volt"><div class="chip-dot"></div>Confidence Drop</div>
+        <div class="chip chip-new"><div class="chip-dot" style="background:var(--text-secondary)"></div>New Arrival</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 07 INPUTS -->
+  <div class="section" id="inputs">
+    <div class="sec-hd"><span class="sec-n">07</span><h2 class="sec-t">FORM INPUTS</h2></div>
+    <p class="sec-d">Inputs use Volt on focus — the only moment a user sees Volt in a form context. This trains users to associate Volt with positive forward momentum (I'm actively engaging), not passive display.</p>
+
+    <div class="canvas" style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div>
+        <div class="input-stack">
+          <label class="input-label">Shoe Size</label>
+          <input class="input-field" type="text" placeholder="US 10.5" />
+          <span class="input-help">Used to filter available inventory.</span>
+        </div>
+      </div>
+      <div>
+        <div class="input-stack">
+          <label class="input-label">Occasion Brief</label>
+          <input class="input-field error" type="text" placeholder="E.g. Business casual" value="Streetwear evening" />
+          <span class="input-error">Please be more specific about the occasion context.</span>
+        </div>
+      </div>
+      <div>
+        <div class="input-stack">
+          <label class="input-label">Promo Code</label>
+          <input class="input-field" type="text" placeholder="CONFIDENCE24" />
+        </div>
+      </div>
+      <div>
+        <div class="input-stack">
+          <label class="input-label">Delivery Address</label>
+          <input class="input-field" type="text" disabled value="123 Main St, Chicago IL" />
+          <span class="input-help">Address locked to account. Edit in profile.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 08 ICONS -->
+  <div class="section" id="icons">
+    <div class="sec-hd"><span class="sec-n">08</span><h2 class="sec-t">ICONOGRAPHY</h2></div>
+    <p class="sec-d">1.5px stroke weight. No fill. Sharp corners where possible. Icons inherit parent text color by default; Volt stroke only on active/hover states.</p>
+
+    <div class="canvas">
+      <div class="canvas-lbl">Core Set</div>
+      <div class="icon-grid">
+        <div class="icon-cell">
+          <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          <div class="icon-name">Home</div>
+        </div>
+        <div class="icon-cell">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <div class="icon-name">Search</div>
+        </div>
+        <div class="icon-cell">
+          <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          <div class="icon-name">Fav</div>
+        </div>
+        <div class="icon-cell">
+          <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          <div class="icon-name">Bag</div>
+        </div>
+        <div class="icon-cell">
+          <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <div class="icon-name">Profile</div>
+        </div>
+        <div class="icon-cell">
+          <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+          <div class="icon-name">Alert</div>
+        </div>
+        <div class="icon-cell">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          <div class="icon-name">Grid</div>
+        </div>
+        <div class="icon-cell">
+          <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          <div class="icon-name">Activity</div>
+        </div>
+        <div class="icon-cell">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <div class="icon-name">Timer</div>
+        </div>
+        <div class="icon-cell">
+          <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="0"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+          <div class="icon-name">Lock</div>
+        </div>
+        <div class="icon-cell">
+          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+          <div class="icon-name">Check</div>
+        </div>
+        <div class="icon-cell">
+          <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          <div class="icon-name">Arrow</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 09 DROP CARD -->
+  <div class="section" id="drop-card">
+    <div class="sec-hd"><span class="sec-n">09</span><h2 class="sec-t">DROP CARD</h2></div>
+    <p class="sec-d">The primary unit of the SNKRS feed. Four states: Upcoming, Live, Confidence Drop (Volt), and Sold Out. Cards that require action lead with the CTA — never the product lore.</p>
+
+    <div class="canvas">
+      <div class="canvas-lbl">States — Upcoming / Live / Confidence / Sold Out</div>
+      <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:12px;">
+
+        <!-- UPCOMING -->
+        <div class="drop-card">
+          <div class="dc-img">
+            <div class="dc-img-inner">
+              <div class="shoe-placeholder">
+                <svg class="shoe-svg" viewBox="0 0 200 100" fill="white"><path d="M10 70 Q30 30 80 20 Q120 10 160 25 Q180 30 190 50 L185 65 Q160 80 100 80 Q50 80 20 75 Z"/></svg>
+              </div>
+            </div>
+            <div class="dc-status"><div class="chip chip-soon"><div class="chip-dot"></div>Jun 14</div></div>
+            <div class="dc-fav"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" stroke="var(--text-secondary)" stroke-width="1.5" fill="none"/></svg></div>
+          </div>
+          <div class="dc-body">
+            <div class="dc-brand">Nike / Jordan</div>
+            <div class="dc-name">Air Jordan 1<br>Chicago</div>
+            <div class="dc-colorway">White / Black-Varsity Red</div>
+            <div class="dc-footer">
+              <div class="dc-price">$180</div>
+              <div class="dc-date"><span class="dc-date">DROPS</span><span class="date-val">Jun 14, 10AM</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- LIVE -->
+        <div class="drop-card state-live">
+          <div class="dc-img" style="background:#140808;">
+            <div class="dc-img-inner">
+              <div class="shoe-placeholder" style="background:#1f0a0a;">
+                <svg class="shoe-svg" viewBox="0 0 200 100" fill="white"><path d="M10 70 Q30 30 80 20 Q120 10 160 25 Q180 30 190 50 L185 65 Q160 80 100 80 Q50 80 20 75 Z"/></svg>
+              </div>
+            </div>
+            <div class="dc-status"><div class="chip chip-live"><div class="chip-dot"></div>Live Now</div></div>
+            <div class="dc-fav"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" stroke="var(--signal-live)" stroke-width="1.5" fill="none"/></svg></div>
+          </div>
+          <div class="dc-body">
+            <div class="dc-brand">Nike</div>
+            <div class="dc-name">Dunk Low<br>Panda</div>
+            <div class="dc-colorway">White / Black</div>
+            <div class="dc-countdown">
+              <div class="dc-cd-unit"><div class="dc-cd-num">01</div><div class="dc-cd-label">Hrs</div></div>
+              <div class="dc-cd-unit"><div class="dc-cd-num">47</div><div class="dc-cd-label">Min</div></div>
+              <div class="dc-cd-unit"><div class="dc-cd-num">22</div><div class="dc-cd-label">Sec</div></div>
+            </div>
+            <div class="dc-footer" style="margin-top:12px;">
+              <div class="dc-price">$110</div>
+              <button class="btn btn-primary btn-sm">Enter Now</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- CONFIDENCE DROP -->
+        <div class="drop-card state-confidence">
+          <div class="dc-img" style="background:#0a0d00;">
+            <div class="dc-img-inner">
+              <div class="shoe-placeholder" style="background:#0f1200;">
+                <svg class="shoe-svg" viewBox="0 0 200 100" fill="#d4ff00"><path d="M10 70 Q30 30 80 20 Q120 10 160 25 Q180 30 190 50 L185 65 Q160 80 100 80 Q50 80 20 75 Z"/></svg>
+              </div>
+            </div>
+            <div class="dc-status"><div class="chip chip-volt"><div class="chip-dot"></div>Confidence Drop</div></div>
+            <div class="dc-confidence-lock">
+              <div class="dc-lock-label">
+                <svg class="dc-lock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="11" width="18" height="11"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+                Complete Challenge
+              </div>
+            </div>
+          </div>
+          <div class="dc-body">
+            <div class="dc-brand">Nike / Sacai</div>
+            <div class="dc-name">LDWaffle<br>Black Nylon</div>
+            <div class="dc-colorway">Black / White</div>
+            <div class="dc-footer">
+              <div class="dc-price">$200</div>
+              <button class="btn btn-volt btn-sm">View Challenge</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- SOLD OUT -->
+        <div class="drop-card state-sold">
+          <div class="dc-img">
+            <div class="dc-img-inner">
+              <div class="shoe-placeholder">
+                <svg class="shoe-svg" viewBox="0 0 200 100" fill="white"><path d="M10 70 Q30 30 80 20 Q120 10 160 25 Q180 30 190 50 L185 65 Q160 80 100 80 Q50 80 20 75 Z"/></svg>
+              </div>
+            </div>
+            <div class="dc-status"><div class="chip chip-closed"><div class="chip-dot"></div>Sold Out</div></div>
+          </div>
+          <div class="dc-body">
+            <div class="dc-brand">Jordan</div>
+            <div class="dc-name">Air Jordan 4<br>Military Blue</div>
+            <div class="dc-colorway">Military Blue / White</div>
+            <div class="dc-footer">
+              <div class="dc-price">$215</div>
+              <div class="dc-date"><span class="dc-date">SOLD</span><span class="date-val">Jun 01</span></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- 10 CONFIDENCE METER -->
+  <div class="section" id="confidence">
+    <div class="sec-hd"><span class="sec-n">10</span><h2 class="sec-t">CONFIDENCE METER</h2></div>
+    <p class="sec-d">New to Confidence Hub. Shown on product pages and at pre-checkout. Scores a user's wardrobe compatibility with the drop in question across four dimensions. The score doesn't block purchase — it informs it.</p>
+
+    <div class="canvas" style="max-width:480px;">
+      <div class="canvas-lbl">Confidence Meter — 78 / 100</div>
+      <div class="confidence-meter">
+        <div class="cm-header">
+          <div>
+            <div class="cm-label">Confidence Score</div>
+            <div class="cm-score">78<span class="cm-max">/100</span></div>
+          </div>
+          <div class="cm-descriptor">Strong match for your current wardrobe. This completes a gap in your casual rotation.</div>
+        </div>
+        <div class="cm-bar-track">
+          <div class="cm-bar-fill" style="width:78%"></div>
+        </div>
+        <div class="cm-factors">
+          <div class="cm-factor">
+            <div class="cm-factor-name">Colorway compatibility</div>
+            <div class="cm-factor-bar"><div class="cm-factor-fill" style="width:90%"></div></div>
+            <div class="cm-factor-val">90</div>
+          </div>
+          <div class="cm-factor">
+            <div class="cm-factor-name">Occasion coverage</div>
+            <div class="cm-factor-bar"><div class="cm-factor-fill" style="width:82%"></div></div>
+            <div class="cm-factor-val">82</div>
+          </div>
+          <div class="cm-factor">
+            <div class="cm-factor-name">Gap fill score</div>
+            <div class="cm-factor-bar"><div class="cm-factor-fill" style="width:76%"></div></div>
+            <div class="cm-factor-val">76</div>
+          </div>
+          <div class="cm-factor">
+            <div class="cm-factor-name">Style cohesion</div>
+            <div class="cm-factor-bar"><div class="cm-factor-fill" style="width:58%"></div></div>
+            <div class="cm-factor-val">58</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 11 WARDROBE GAP CARD -->
+  <div class="section" id="gap-card">
+    <div class="sec-hd"><span class="sec-n">11</span><h2 class="sec-t">WARDROBE GAP CARD</h2></div>
+    <p class="sec-d">Surfaced in the Nike Stylist AI flow after wardrobe analysis. Each card represents a specific gap — occasion, colorway, or silhouette — and links directly to the Style Gym for that category. The Volt kicker signals that this is a Confidence Hub exclusive feature.</p>
+
+    <div class="canvas" style="display:flex; flex-direction:column; gap:1px; background:var(--border-subtle); border:1px solid var(--border-subtle);">
+      <div class="gap-card">
+        <div class="gap-thumb">👟</div>
+        <div class="gap-body">
+          <div class="gap-kicker">Gap Identified</div>
+          <div class="gap-title">Clean White — Work Context</div>
+          <div class="gap-reason">You own 0 white sneakers suited for business-casual or office settings. This affects 3 days per week in your stated schedule.</div>
+          <div class="gap-actions">
+            <button class="btn btn-volt btn-sm">Shop the Gap</button>
+            <button class="btn btn-ghost btn-sm">Style Gym</button>
+          </div>
+        </div>
+      </div>
+      <div class="gap-card">
+        <div class="gap-thumb">🏃</div>
+        <div class="gap-body">
+          <div class="gap-kicker">Gap Identified</div>
+          <div class="gap-title">Performance Low — Training</div>
+          <div class="gap-reason">Your training rotation is dominated by lifestyle shoes. You have no dedicated performance trainer in your current rotation.</div>
+          <div class="gap-actions">
+            <button class="btn btn-volt btn-sm">Shop the Gap</button>
+            <button class="btn btn-ghost btn-sm">Style Gym</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 12 OUTFIT FORMULA -->
+  <div class="section" id="outfit">
+    <div class="sec-hd"><span class="sec-n">12</span><h2 class="sec-t">OUTFIT FORMULA CARD</h2></div>
+    <p class="sec-d">The core unit of the Style Gym. Each drop has three Outfit Formula Cards — Work, Casual, Night Out. The anchor shoe is always tagged. Non-Nike pieces are listed as shoppable links, not product placements. This is editorial service, not advertising.</p>
+
+    <div class="canvas" style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:1px; background:var(--border-subtle); border:1px solid var(--border-subtle);">
+
+      <div class="outfit-card">
+        <div class="outfit-header">
+          <div><div class="outfit-context">Formula 01</div><div class="outfit-occasion">Work</div></div>
+          <div class="chip chip-volt" style="border:none; background:transparent; padding:0; font-size:9px;">Business Casual</div>
+        </div>
+        <div class="outfit-items">
+          <div class="outfit-piece">
+            <div><div class="op-name">Air Jordan 1 Low</div><div class="op-brand">Nike — Anchor</div></div>
+            <div class="op-anchor">Anchor</div>
+          </div>
+          <div class="outfit-piece">
+            <div><div class="op-name">Slim Chinos</div><div class="op-brand">Uniqlo</div></div>
+            <a href="#" class="op-link">Shop ↗</a>
+          </div>
+          <div class="outfit-piece">
+            <div><div class="op-name">Oxford OCBD</div><div class="op-brand">J.Crew</div></div>
+            <a href="#" class="op-link">Shop ↗</a>
+          </div>
+          <div class="outfit-piece">
+            <div><div class="op-name">Minimal Watch</div><div class="op-brand">Casio</div></div>
+            <a href="#" class="op-link">Shop ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="outfit-card">
+        <div class="outfit-header">
+          <div><div class="outfit-context">Formula 02</div><div class="outfit-occasion">Casual</div></div>
+          <div class="chip chip-volt" style="border:none; background:transparent; padding:0; font-size:9px;">Weekend</div>
+        </div>
+        <div class="outfit-items">
+          <div class="outfit-piece">
+            <div><div class="op-name">Air Jordan 1 Low</div><div class="op-brand">Nike — Anchor</div></div>
+            <div class="op-anchor">Anchor</div>
+          </div>
+          <div class="outfit-piece">
+            <div><div class="op-name">Relaxed Jeans</div><div class="op-brand">Levi's 501</div></div>
+            <a href="#" class="op-link">Shop ↗</a>
+          </div>
+          <div class="outfit-piece">
+            <div><div class="op-name">Heavyweight Tee</div><div class="op-brand">Merz b. Schwanen</div></div>
+            <a href="#" class="op-link">Shop ↗</a>
+          </div>
+          <div class="outfit-piece">
+            <div><div class="op-name">Cotton Bomber</div><div class="op-brand">Carhartt WIP</div></div>
+            <a href="#" class="op-link">Shop ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="outfit-card">
+        <div class="outfit-header">
+          <div><div class="outfit-context">Formula 03</div><div class="outfit-occasion">Night Out</div></div>
+          <div class="chip chip-volt" style="border:none; background:transparent; padding:0; font-size:9px;">Elevated</div>
+        </div>
+        <div class="outfit-items">
+          <div class="outfit-piece">
+            <div><div class="op-name">Air Jordan 1 Low</div><div class="op-brand">Nike — Anchor</div></div>
+            <div class="op-anchor">Anchor</div>
+          </div>
+          <div class="outfit-piece">
+            <div><div class="op-name">Black Slim Trousers</div><div class="op-brand">COS</div></div>
+            <a href="#" class="op-link">Shop ↗</a>
+          </div>
+          <div class="outfit-piece">
+            <div><div class="op-name">Knit Polo</div><div class="op-brand">Ami Paris</div></div>
+            <a href="#" class="op-link">Shop ↗</a>
+          </div>
+          <div class="outfit-piece">
+            <div><div class="op-name">Minimal Tote</div><div class="op-brand">Cote & Ciel</div></div>
+            <a href="#" class="op-link">Shop ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 13 CONFIDENCE PASS -->
+  <div class="section" id="pass">
+    <div class="sec-hd"><span class="sec-n">13</span><h2 class="sec-t">CONFIDENCE PASS WIDGET</h2></div>
+    <p class="sec-d">Displayed in the user profile and on Confidence Drop product pages. Shows tier, score, and what unlocks next. Volt accent throughout — this widget is exclusively Confidence Hub territory. Never appears in legacy drop flows.</p>
+
+    <div class="canvas" style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div class="pass-widget">
+        <div class="pass-header">
+          <span class="pass-label">Confidence Pass</span>
+          <span class="pass-tier">TIER II — STYLIST</span>
+        </div>
+        <div class="pass-body">
+          <div class="pass-score-row">
+            <div class="pass-score">340</div>
+            <div class="pass-score-max">/ 500</div>
+          </div>
+          <div class="pass-progress"><div class="pass-prog-fill" style="width:68%"></div></div>
+          <div class="pass-prog-label">
+            <span>STYLIST</span>
+            <span>160 pts to CURATOR</span>
+          </div>
+          <div class="pass-unlocks">
+            <div class="pass-unlock-item"><div class="pui-icon">✓</div>48-hr early queue access</div>
+            <div class="pass-unlock-item"><div class="pui-icon">✓</div>Wardrobe AI — unlimited scans</div>
+            <div class="pass-unlock-item"><div class="pui-icon" style="opacity:0.4">◯</div><span style="opacity:0.5">Curator: direct buy (no queue)</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:16px;">
+        <div style="background:var(--surface-1); border:1px solid var(--border-default); padding:20px;">
+          <div style="font-family:var(--font-data); font-size:9px; letter-spacing:0.2em; color:var(--text-tertiary); text-transform:uppercase; margin-bottom:12px;">Tier Progression</div>
+          <div style="display:flex; flex-direction:column; gap:8px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; padding:8px 10px; background:var(--surface-2); border:1px solid var(--border-subtle);">
+              <div style="font-family:var(--font-display); font-size:14px; letter-spacing:0.06em;">CHALLENGER</div>
+              <div style="font-family:var(--font-data); font-size:10px; color:var(--text-tertiary);">0–99 pts</div>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center; padding:8px 10px; background:var(--volt-dim); border:1px solid var(--volt-border);">
+              <div style="font-family:var(--font-display); font-size:14px; letter-spacing:0.06em; color:var(--volt);">STYLIST</div>
+              <div style="font-family:var(--font-data); font-size:10px; color:var(--volt);">100–499 pts · Current</div>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center; padding:8px 10px; background:var(--surface-2); border:1px solid var(--border-subtle);">
+              <div style="font-family:var(--font-display); font-size:14px; letter-spacing:0.06em;">CURATOR</div>
+              <div style="font-family:var(--font-data); font-size:10px; color:var(--text-tertiary);">500–999 pts</div>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center; padding:8px 10px; background:var(--surface-2); border:1px solid var(--border-subtle);">
+              <div style="font-family:var(--font-display); font-size:14px; letter-spacing:0.06em; color:var(--text-tertiary);">ICON</div>
+              <div style="font-family:var(--font-data); font-size:10px; color:var(--text-tertiary);">1000+ pts · Invite Only</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 14 APP SHELL -->
+  <div class="section" id="shell">
+    <div class="sec-hd"><span class="sec-n">14</span><h2 class="sec-t">APP SHELL</h2></div>
+    <p class="sec-d">The full organism — navigation, feed, status bar, and tab bar assembled. Volt is sparse in the shell; it only appears on active states. The feed is editorial-first: each card stands alone before the CTA ever asks for action.</p>
+
+    <div class="canvas" style="display:flex; justify-content:center; gap:40px; flex-wrap:wrap;">
+
+      <!-- SHELL 1: FEED -->
+      <div class="app-shell">
+        <div class="app-statusbar">
+          <span class="time">9:41</span>
+          <div class="icons">▶▶ WiFi Battery</div>
+        </div>
+        <div class="app-navbar">
+          <div class="app-logo">SNKRS</div>
+          <div class="app-nav-icons">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          </div>
+        </div>
+        <div class="app-feed">
+          <!-- Card 1 -->
+          <div class="app-feed-card">
+            <div class="afc-img">
+              <div class="afc-img-bg">
+                <div class="shoe-placeholder" style="width:100%;height:100%;">
+                  <svg style="width:60%; opacity:0.12;" viewBox="0 0 200 100" fill="white"><path d="M10 70 Q30 30 80 20 Q120 10 160 25 Q180 30 190 50 L185 65 Q160 80 100 80 Q50 80 20 75 Z"/></svg>
+                </div>
+              </div>
+              <div class="afc-status"><div class="chip chip-volt" style="font-size:8px; padding:3px 7px;"><div class="chip-dot"></div>Confidence Drop</div></div>
+            </div>
+            <div class="afc-body">
+              <div class="afc-brand">Nike / Off-White</div>
+              <div class="afc-name">The Ten:<br>Air Max 90</div>
+              <div class="afc-row">
+                <span class="afc-price">$280</div>
+                <button class="afc-cta">View Challenge</button>
+              </div>
+            </div>
+          </div>
+          <!-- Card 2 -->
+          <div class="app-feed-card">
+            <div class="afc-img" style="background:#140808;">
+              <div class="afc-img-bg">
+                <div class="shoe-placeholder" style="width:100%;height:100%;background:#1a0808;">
+                  <svg style="width:60%; opacity:0.12;" viewBox="0 0 200 100" fill="#ff3333"><path d="M10 70 Q30 30 80 20 Q120 10 160 25 Q180 30 190 50 L185 65 Q160 80 100 80 Q50 80 20 75 Z"/></svg>
+                </div>
+              </div>
+              <div class="afc-status"><div class="chip chip-live" style="font-size:8px; padding:3px 7px;"><div class="chip-dot"></div>Live Now</div></div>
+            </div>
+            <div class="afc-body">
+              <div class="afc-brand">Jordan</div>
+              <div class="afc-name">Air Jordan 1<br>Lost & Found</div>
+              <div class="afc-row">
+                <span class="afc-price">$200</div>
+                <button class="afc-cta">Enter Draw</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="app-tabbar">
+          <div class="app-tab active">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            Feed
+            <div class="app-tab-dot"></div>
+          </div>
+          <div class="app-tab">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            Search
+          </div>
+          <div class="app-tab">
+            <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            Style Gym
+          </div>
+          <div class="app-tab">
+            <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            Profile
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+
+<script>
+  // Active nav on scroll
+  const sections = document.querySelectorAll('.section, .cover');
+  const links = document.querySelectorAll('.sb-link');
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        const t = document.querySelector(`.sb-link[href="#${e.target.id}"]`);
+        if (t) t.classList.add('active');
+      }
+    });
+  }, { threshold: 0.25, rootMargin: '-60px 0px -60% 0px' });
+
+  sections.forEach(s => { if(s.id) io.observe(s); });
+
+  // Animate confidence bar on view
+  const meterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const fill = e.target.querySelector('.cm-bar-fill');
+        if (fill) { fill.style.width = '0'; setTimeout(() => fill.style.width = '78%', 100); }
+      }
+    });
+  }, { threshold: 0.5 });
+
+  document.querySelectorAll('.confidence-meter').forEach(m => meterObserver.observe(m));
+</script>
+</body>
+</html>

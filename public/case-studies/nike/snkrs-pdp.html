@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Nike SNKRS — Waffle Debut 'White Black'</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black:   #000000;
+    --white:   #ffffff;
+    --off-white: #f7f7f5;
+    --warm-gray: #f0efed;
+    --mid-gray: #e5e4e2;
+    --text-primary:   #0a0a0a;
+    --text-secondary: #555555;
+    --text-tertiary:  #999999;
+    --border-light:   rgba(0,0,0,0.08);
+    --border-mid:     rgba(0,0,0,0.14);
+    --volt:    #d4ff00;
+    --volt-dim: rgba(212,255,0,0.12);
+    --font-display: 'Anton', sans-serif;
+    --font-ui:      'Space Grotesk', sans-serif;
+    --font-data:    'DM Mono', monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--white);
+    color: var(--text-primary);
+    font-family: var(--font-ui);
+    font-size: 14px;
+    line-height: 1.5;
+    /* Mobile frame */
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    background: #e8e8e8;
+  }
+
+  /* =================== PHONE FRAME =================== */
+  .phone {
+    width: 390px;
+    min-height: 100vh;
+    background: var(--white);
+    position: relative;
+    overflow-x: hidden;
+    box-shadow: 0 0 60px rgba(0,0,0,0.25);
+  }
+
+  /* =================== STATUS BAR =================== */
+  .statusbar {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 14px 20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .sb-time {
+    font-family: var(--font-ui);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--white);
+  }
+
+  .sb-icons {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .sb-icons svg { width: 15px; height: 15px; }
+
+  /* =================== NAV BAR =================== */
+  .navbar {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    z-index: 99;
+    height: 88px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 0 20px 14px;
+  }
+
+  .nav-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .nav-back {
+    width: 32px; height: 32px;
+    background: rgba(0,0,0,0.3);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  .nav-back svg { width: 16px; height: 16px; }
+
+  .nav-wordmark {
+    font-family: var(--font-display);
+    font-size: 22px;
+    letter-spacing: 0.05em;
+    color: var(--white);
+    line-height: 1;
+  }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .nav-icon-btn {
+    width: 32px; height: 32px;
+    background: rgba(0,0,0,0.3);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  .nav-icon-btn svg { width: 16px; height: 16px; }
+
+  /* =================== HERO =================== */
+  .hero {
+    position: relative;
+    width: 100%;
+    height: 380px;
+    overflow: hidden;
+    background: #d6d4d0;
+  }
+
+  .hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
+  }
+
+  /* Gradient fade to white at bottom */
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 80px;
+    background: linear-gradient(to bottom, transparent, var(--white));
+  }
+
+  /* =================== CONTEXT PILL ROW (Errand / Casual / After 5pm) =================== */
+  .context-row {
+    position: absolute;
+    bottom: 28px;
+    left: 20px;
+    right: 20px;
+    z-index: 10;
+    display: flex;
+    gap: 6px;
+    align-items: center;
+  }
+
+  .ctx-pill {
+    padding: 5px 12px;
+    font-family: var(--font-ui);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    border: 1px solid rgba(255,255,255,0.4);
+    color: rgba(255,255,255,0.7);
+    cursor: pointer;
+    transition: all 0.15s;
+    white-space: nowrap;
+    background: rgba(0,0,0,0.25);
+    backdrop-filter: blur(4px);
+  }
+
+  .ctx-pill.active {
+    background: var(--white);
+    color: var(--black);
+    border-color: var(--white);
+    font-weight: 700;
+  }
+
+  /* =================== PRODUCT INFO =================== */
+  .product-info {
+    padding: 12px 20px 0;
+    background: var(--white);
+    position: relative;
+    z-index: 2;
+  }
+
+  .product-meta-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 4px;
+  }
+
+  .product-brand {
+    font-family: var(--font-data);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+
+  .product-name {
+    font-family: var(--font-display);
+    font-size: 28px;
+    letter-spacing: 0.02em;
+    line-height: 1.0;
+    color: var(--text-primary);
+  }
+
+  .product-price {
+    font-family: var(--font-display);
+    font-size: 28px;
+    letter-spacing: 0.02em;
+    color: var(--text-primary);
+    white-space: nowrap;
+  }
+
+  .product-colorway {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-top: 4px;
+    margin-bottom: 16px;
+  }
+
+  /* Confidence score badge */
+  .confidence-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px 6px 8px;
+    background: var(--black);
+    margin-bottom: 20px;
+  }
+
+  .cb-score {
+    font-family: var(--font-display);
+    font-size: 18px;
+    color: var(--volt);
+    line-height: 1;
+  }
+
+  .cb-label {
+    font-family: var(--font-data);
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    color: rgba(255,255,255,0.6);
+    text-transform: uppercase;
+    line-height: 1.4;
+  }
+
+  .cb-bar {
+    width: 48px;
+    height: 2px;
+    background: rgba(255,255,255,0.15);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cb-bar-fill {
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 78%;
+    background: var(--volt);
+  }
+
+  /* =================== DIVIDER =================== */
+  .divider {
+    height: 1px;
+    background: var(--border-light);
+    margin: 0 20px;
+  }
+
+  /* =================== SECTION HEADER =================== */
+  .sec-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 20px 14px;
+  }
+
+  .sec-title {
+    font-family: var(--font-display);
+    font-size: 18px;
+    letter-spacing: 0.04em;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .sec-kicker {
+    font-family: var(--font-data);
+    font-size: 8px;
+    letter-spacing: 0.2em;
+    color: var(--volt);
+    text-transform: uppercase;
+    background: var(--black);
+    padding: 3px 7px;
+  }
+
+  .sec-action {
+    font-family: var(--font-data);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  /* =================== SIZE SELECTOR =================== */
+  .sizing-section {
+    padding: 0 20px 20px;
+  }
+
+  .sizing-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+
+  .sizing-label {
+    font-family: var(--font-display);
+    font-size: 18px;
+    letter-spacing: 0.04em;
+    color: var(--text-primary);
+  }
+
+  .sizing-price {
+    font-family: var(--font-display);
+    font-size: 22px;
+    letter-spacing: 0.02em;
+    color: var(--text-primary);
+  }
+
+  .size-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 6px;
+    margin-bottom: 14px;
+  }
+
+  .size-btn {
+    padding: 10px 4px;
+    text-align: center;
+    font-family: var(--font-ui);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    border: 1px solid var(--border-mid);
+    background: var(--white);
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.12s;
+  }
+
+  .size-btn:hover { border-color: var(--black); }
+
+  .size-btn.active {
+    background: var(--black);
+    color: var(--white);
+    border-color: var(--black);
+  }
+
+  .size-btn.out {
+    color: var(--text-tertiary);
+    text-decoration: line-through;
+    border-color: var(--border-light);
+    cursor: not-allowed;
+  }
+
+  /* Add to cart */
+  .add-to-cart {
+    width: 100%;
+    padding: 16px;
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--font-ui);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: background 0.15s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .add-to-cart:hover { background: #1a1a1a; }
+
+  .add-to-cart .cart-volt {
+    color: var(--volt);
+    font-size: 11px;
+    font-weight: 400;
+    font-family: var(--font-data);
+    letter-spacing: 0.1em;
+  }
+
+  /* =================== PRODUCT DESCRIPTION =================== */
+  .product-desc {
+    padding: 0 20px 20px;
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--text-secondary);
+  }
+
+  .product-desc ul {
+    margin-top: 10px;
+    padding-left: 16px;
+  }
+
+  .product-desc li {
+    margin-bottom: 3px;
+    font-family: var(--font-data);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    color: var(--text-tertiary);
+  }
+
+  /* =================== STYLE GYM SECTION =================== */
+  .style-gym {
+    background: var(--white);
+  }
+
+  .style-gym-header {
+    padding: 20px 20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 4px;
+  }
+
+  .sgm-left {}
+
+  .sgm-kicker {
+    font-family: var(--font-data);
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    color: var(--volt);
+    text-transform: uppercase;
+    background: var(--black);
+    padding: 3px 8px;
+    display: inline-block;
+    margin-bottom: 6px;
+  }
+
+  .sgm-title {
+    font-family: var(--font-display);
+    font-size: 26px;
+    letter-spacing: 0.03em;
+    color: var(--text-primary);
+    line-height: 1;
+  }
+
+  .sgm-desc {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-top: 6px;
+    padding: 0 20px;
+    line-height: 1.6;
+  }
+
+  /* =================== OUTFIT ROW =================== */
+  .outfit-row {
+    padding: 20px 0 0;
+  }
+
+  .outfit-row-header {
+    padding: 0 20px 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .outfit-context {
+    font-family: var(--font-data);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+
+  .outfit-name {
+    font-family: var(--font-display);
+    font-size: 20px;
+    letter-spacing: 0.03em;
+    color: var(--text-primary);
+    line-height: 1;
+  }
+
+  .outfit-add-btn {
+    padding: 8px 14px;
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--font-ui);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.15s;
+    flex-shrink: 0;
+  }
+
+  .outfit-add-btn:hover { background: var(--volt); color: var(--black); }
+
+  /* Horizontal scroll of outfit photos */
+  .outfit-scroll {
+    display: flex;
+    gap: 8px;
+    padding: 0 20px 20px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .outfit-scroll::-webkit-scrollbar { display: none; }
+
+  .outfit-photo {
+    flex-shrink: 0;
+    width: 200px;
+    height: 280px;
+    overflow: hidden;
+    position: relative;
+    background: var(--warm-gray);
+  }
+
+  .outfit-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Outfit divider */
+  .outfit-divider {
+    height: 1px;
+    background: var(--border-light);
+    margin: 0 20px;
+  }
+
+  /* =================== GAP INSIGHT CARD =================== */
+  .gap-insight {
+    margin: 20px;
+    padding: 16px;
+    background: var(--black);
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+
+  .gi-icon {
+    font-size: 24px;
+    line-height: 1;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .gi-body {}
+
+  .gi-kicker {
+    font-family: var(--font-data);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: var(--volt);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .gi-title {
+    font-family: var(--font-display);
+    font-size: 16px;
+    letter-spacing: 0.04em;
+    color: var(--white);
+    margin-bottom: 4px;
+  }
+
+  .gi-desc {
+    font-size: 12px;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.6;
+  }
+
+  /* =================== BOTTOM TAB BAR =================== */
+  .tabbar {
+    position: sticky;
+    bottom: 0;
+    background: var(--white);
+    border-top: 1px solid var(--border-light);
+    display: flex;
+    z-index: 50;
+    padding: 8px 0 20px;
+  }
+
+  .tab {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 0;
+    font-family: var(--font-ui);
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: var(--text-tertiary);
+    cursor: pointer;
+  }
+
+  .tab svg { width: 20px; height: 20px; stroke: var(--text-tertiary); fill: none; stroke-width: 1.5; }
+  .tab.active svg { stroke: var(--black); }
+  .tab.active { color: var(--black); font-weight: 700; }
+
+  /* SPACING SECTION */
+  .section-space { height: 8px; background: var(--off-white); }
+
+  /* =================== SCROLL INDICATOR =================== */
+  .scroll-indicator {
+    display: flex;
+    gap: 4px;
+    padding: 0 20px 4px;
+    align-items: center;
+  }
+
+  .si-dot {
+    width: 5px; height: 5px;
+    background: var(--border-mid);
+    border-radius: 50%;
+    transition: background 0.15s;
+  }
+
+  .si-dot.active { background: var(--black); width: 16px; border-radius: 3px; }
+
+  /* =================== ANIMATIONS =================== */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .product-info { animation: fadeUp 0.4s ease forwards; }
+  .sizing-section { animation: fadeUp 0.4s 0.1s ease both; }
+  .style-gym { animation: fadeUp 0.4s 0.2s ease both; }
+
+</style>
+</head>
+<body>
+
+<div class="phone">
+
+  <!-- STATUS BAR -->
+  <div class="statusbar">
+    <span class="sb-time">2:52</span>
+    <div class="sb-icons">
+      <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M1.5 8.5a16.5 16.5 0 0121 0"/><path d="M5 12a12 12 0 0114 0"/><path d="M8.5 15.5a7.5 7.5 0 017 0"/><circle cx="12" cy="19" r="1" fill="white"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="2" y="7" width="16" height="10" rx="1"/><path d="M22 11v2"/></svg>
+    </div>
+  </div>
+
+  <!-- NAV BAR (overlaid on hero) -->
+  <div class="navbar">
+    <div class="nav-left">
+      <div class="nav-back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+      </div>
+      <div class="nav-wordmark">SNKRS</div>
+    </div>
+    <div class="nav-right">
+      <div class="nav-icon-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      <div class="nav-icon-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO IMAGE — full bleed, your actual Figma asset -->
+  <div class="hero">
+    <img
+      class="hero-img"
+      src="https://www.figma.com/api/mcp/asset/7ef7b18a-7606-489c-93b9-6b0ce2bf1955"
+      alt="Waffle Debut White Black on foot"
+    />
+
+    <!-- Context pills — Errand / Casual / After 5pm, styled as small outlined pills -->
+    <div class="context-row">
+      <div class="ctx-pill active" onclick="setContext(this)">Errand</div>
+      <div class="ctx-pill" onclick="setContext(this)">Casual</div>
+      <div class="ctx-pill" onclick="setContext(this)">After 5pm</div>
+    </div>
+  </div>
+
+  <!-- ====== PRODUCT INFO ====== -->
+  <div class="product-info">
+    <div class="product-brand">Nike / Waffle</div>
+    <div class="product-meta-row">
+      <div class="product-name">Waffle Debut<br>'White Black'</div>
+      <div class="product-price">$95</div>
+    </div>
+    <div class="product-colorway">Sanddrift / Phantom / White / Black</div>
+
+    <!-- Confidence badge -->
+    <div class="confidence-badge">
+      <div class="cb-score">82</div>
+      <div>
+        <div class="cb-label">Confidence<br>Score</div>
+        <div class="cb-bar" style="margin-top:4px;"><div class="cb-bar-fill"></div></div>
+      </div>
+      <div style="margin-left:8px; font-family:var(--font-data); font-size:10px; color:rgba(255,255,255,0.5); line-height:1.5;">Fits your<br>casual gap</div>
+    </div>
+  </div>
+
+  <!-- ====== DIVIDER ====== -->
+  <div class="divider"></div>
+
+  <!-- ====== SIZING ====== -->
+  <div class="sizing-section">
+    <div class="sizing-header">
+      <div class="sizing-label">Sizing</div>
+    </div>
+
+    <div class="size-grid">
+      <div class="size-btn">7</div>
+      <div class="size-btn">7.5</div>
+      <div class="size-btn active">8</div>
+      <div class="size-btn">8.5</div>
+      <div class="size-btn">9</div>
+      <div class="size-btn">9.5</div>
+      <div class="size-btn">10</div>
+      <div class="size-btn">10.5</div>
+      <div class="size-btn">11</div>
+      <div class="size-btn out">11.5</div>
+    </div>
+
+    <button class="add-to-cart">
+      Add to Cart
+      <span class="cart-volt">· Size 8 selected</span>
+    </button>
+  </div>
+
+  <!-- ====== DESCRIPTION ====== -->
+  <div class="divider"></div>
+  <div class="product-desc" style="padding-top:16px;">
+    Retro gets modernized with these sleek sneaks inspired by the Nike Daybreak. Era-echoing suede and nylon are paired in complementary colors, and the updated wedge midsole gives you an extra lift. Style, comfort, iconic Waffle outsole — a perfect new addition to your daily rotation.
+    <ul>
+      <li>Shown: Sanddrift/Phantom/White/Black</li>
+      <li>Style: DH9523-102</li>
+    </ul>
+  </div>
+
+  <!-- ====== SECTION BREAK ====== -->
+  <div class="section-space"></div>
+
+  <!-- ====== STYLE GYM ====== -->
+  <div class="style-gym">
+
+    <div class="style-gym-header">
+      <div class="sgm-left">
+        <div class="sgm-kicker">Style Gym</div>
+        <div class="sgm-title">How to Wear It</div>
+      </div>
+      <div class="sec-action">
+        All 3 looks
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+      </div>
+    </div>
+
+    <div class="sgm-desc">Three ways to wear the Waffle Debut. Tap any look to shop the full outfit.</div>
+
+    <!-- GAP INSIGHT -->
+    <div class="gap-insight">
+      <div class="gi-icon">✦</div>
+      <div class="gi-body">
+        <div class="gi-kicker">Wardrobe Insight</div>
+        <div class="gi-title">Fills Your Casual Gap</div>
+        <div class="gi-desc">Based on your wardrobe scan, you have 0 neutral low-profile sneakers in your everyday rotation. This closes it.</div>
+      </div>
+    </div>
+
+    <!-- OUTFIT 1: The Sunday Reset (Casual / Errand) -->
+    <div class="outfit-row">
+      <div class="outfit-row-header">
+        <div>
+          <div class="outfit-context">Look 01 — Casual</div>
+          <div class="outfit-name">The Sunday Reset</div>
+        </div>
+        <button class="outfit-add-btn" onclick="this.textContent='Added ✓'; this.style.background='var(--volt)'; this.style.color='var(--black)';">Add Look</button>
+      </div>
+      <div class="outfit-scroll">
+        <div class="outfit-photo">
+          <img src="https://www.figma.com/api/mcp/asset/3422ced9-23aa-49c7-ba1c-f2e54c282eef" alt="The Sunday Reset - look 1" />
+        </div>
+        <div class="outfit-photo">
+          <img src="https://www.figma.com/api/mcp/asset/a30c91e9-8833-4439-92e4-358e0b351439" alt="The Sunday Reset - look 2" />
+        </div>
+        <div class="outfit-photo">
+          <img src="https://www.figma.com/api/mcp/asset/bb974ce8-3c4e-49cc-a319-10387ccbc677" alt="The Sunday Reset - look 3" />
+        </div>
+      </div>
+
+      <!-- Outfit pieces list -->
+      <div style="padding: 0 20px 20px; display:flex; flex-direction:column; background:var(--white);">
+        <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid var(--border-light);">
+          <div>
+            <div style="font-size:13px; font-weight:600; color:var(--text-primary);">Waffle Debut 'White Black'</div>
+            <div style="font-family:var(--font-data); font-size:10px; color:var(--text-tertiary); margin-top:2px; letter-spacing:0.1em;">NIKE · THIS SHOE</div>
+          </div>
+          <div style="font-family:var(--font-data); font-size:9px; letter-spacing:0.12em; color:var(--volt); background:var(--black); padding:4px 8px; text-transform:uppercase;">Anchor</div>
+        </div>
+        <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid var(--border-light);">
+          <div>
+            <div style="font-size:13px; color:var(--text-primary);">Nike Club Fleece Sweatshirt</div>
+            <div style="font-family:var(--font-data); font-size:10px; color:var(--text-tertiary); margin-top:2px; letter-spacing:0.1em;">NIKE</div>
+          </div>
+          <div style="font-family:var(--font-data); font-size:10px; color:var(--text-tertiary); letter-spacing:0.1em; text-decoration:underline; cursor:pointer;">Shop ↗</div>
+        </div>
+        <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 0;">
+          <div>
+            <div style="font-size:13px; color:var(--text-primary);">Nike Sportswear Club Joggers</div>
+            <div style="font-family:var(--font-data); font-size:10px; color:var(--text-tertiary); margin-top:2px; letter-spacing:0.1em;">NIKE</div>
+          </div>
+          <div style="font-family:var(--font-data); font-size:10px; color:var(--text-tertiary); letter-spacing:0.1em; text-decoration:underline; cursor:pointer;">Shop ↗</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="outfit-divider"></div>
+
+    <!-- OUTFIT 2: The Urban Trek -->
+    <div class="outfit-row">
+      <div class="outfit-row-header">
+        <div>
+          <div class="outfit-context">Look 02 — Errand</div>
+          <div class="outfit-name">The Urban Trek</div>
+        </div>
+        <button class="outfit-add-btn" onclick="this.textContent='Added ✓'; this.style.background='var(--volt)'; this.style.color='var(--black)';">Add Look</button>
+      </div>
+      <div class="outfit-scroll">
+        <div class="outfit-photo">
+          <img src="https://www.figma.com/api/mcp/asset/9a0e9cc2-75f6-46a7-a5db-812e4329e35a" alt="The Urban Trek - look 1" />
+        </div>
+        <div class="outfit-photo">
+          <img src="https://www.figma.com/api/mcp/asset/ed24ce99-c7e9-4fad-b3f4-4fac0ecf59e5" alt="The Urban Trek - look 2" />
+        </div>
+        <div class="outfit-photo">
+          <img src="https://www.figma.com/api/mcp/asset/9c96df3a-8964-4334-af82-c22208e3b1a3" alt="The Urban Trek - look 3" />
+        </div>
+      </div>
+
+      <div style="padding: 0 20px 20px; display:flex; flex-direction:column;">
+        <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid var(--border-light);">
+          <div>
+            <div style="font-size:13px; font-weight:600; color:var(--text-primary);">Waffle Debut 'White Black'</div>
+            <div style="font-family:var(--font-data); font-size:10px; color:var(--text-tertiary); margin-top:2px; letter-spacing:0.1em;">NIKE · THIS SHOE</div>
+          </div>
+          <div style="font-family:var(--font-data); font-size:9px; letter-spacing:0.12em; color:var(--volt); background:var(--black); padding:4px 8px; text-transform:uppercase;">Anchor</div>
+        </div>
+        <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid var(--border-light);">
+          <div>
+            <div style="font-size:13px; color:var(--text-primary);">Nike Sportswear Tech Woven Trousers</div>
+            <div style="font-family:var(--font-data); font-size:10px; color:var(--text-tertiary); margin-top:2px; letter-spacing:0.1em;">NIKE</div>
+          </div>
+          <div style="font-family:var(--font-data); font-size:10px; color:var(--text-tertiary); letter-spacing:0.1em; text-decoration:underline; cursor:pointer;">Shop ↗</div>
+        </div>
+        <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 0;">
+          <div>
+            <div style="font-size:13px; color:var(--text-primary);">Nike Windrunner Jacket</div>
+            <div style="font-family:var(--font-data); font-size:10px; color:var(--text-tertiary); margin-top:2px; letter-spacing:0.1em;">NIKE</div>
+          </div>
+          <div style="font-family:var(--font-data); font-size:10px; color:var(--text-tertiary); letter-spacing:0.1em; text-decoration:underline; cursor:pointer;">Shop ↗</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="outfit-divider"></div>
+
+    <!-- OUTFIT 3: The After 5 -->
+    <div class="outfit-row">
+      <div class="outfit-row-header">
+        <div>
+          <div class="outfit-context">Look 03 — After 5pm</div>
+          <div class="outfit-name">The Evening Edit</div>
+        </div>
+        <button class="outfit-add-btn" onclick="this.textContent='Added ✓'; this.style.background='var(--volt)'; this.style.color='var(--black)';">Add Look</button>
+      </div>
+      <div class="outfit-scroll">
+        <div class="outfit-photo">
+          <img src="https://www.figma.com/api/mcp/asset/9f277ac3-5e25-4e1b-bf9f-4e8443422e51" alt="The Evening Edit - look 1" />
+        </div>
+        <div class="outfit-photo">
+          <img src="https://www.figma.com/api/mcp/asset/bcf2a211-2490-4ce1-9be2-9685355b3b3a" alt="The Evening Edit - look 2" />
+        </div>
+        <div class="outfit-photo">
+          <img src="https://www.figma.com/api/mcp/asset/bd4a7a0f-0283-4953-abf9-7a08de527b06" alt="The Evening Edit - look 3" />
+        </div>
+      </div>
+
+      <div style="padding: 0 20px 20px; display:flex; flex-direction:column;">
+        <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid var(--border-light);">
+          <div>
+            <div style="font-size:13px; font-weight:600; color:var(--text-primary);">Waffle Debut 'White Black'</div>
+            <div style="font-family:var(--font-data); font-size:10px; color:var(--text-tertiary); margin-top:2px; letter-spacing:0.1em;">NIKE · THIS SHOE</div>
+          </div>
+          <div style="font-family:var(--font-data); font-size:9px; letter-spacing:0.12em; color:var(--volt); background:var(--black); padding:4px 8px; text-transform:uppercase;">Anchor</div>
+        </div>
+        <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid var(--border-light);">
+          <div>
+            <div style="font-size:13px; color:var(--text-primary);">Nike Sportswear Tech Fleece Pants</div>
+            <div style="font-family:var(--font-data); font-size:10px; color:var(--text-tertiary); margin-top:2px; letter-spacing:0.1em;">NIKE</div>
+          </div>
+          <div style="font-family:var(--font-data); font-size:10px; color:var(--text-tertiary); letter-spacing:0.1em; text-decoration:underline; cursor:pointer;">Shop ↗</div>
+        </div>
+        <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 0;">
+          <div>
+            <div style="font-size:13px; color:var(--text-primary);">Nike Sportswear Premium Essentials Tee</div>
+            <div style="font-family:var(--font-data); font-size:10px; color:var(--text-tertiary); margin-top:2px; letter-spacing:0.1em;">NIKE</div>
+          </div>
+          <div style="font-family:var(--font-data); font-size:10px; color:var(--text-tertiary); letter-spacing:0.1em; text-decoration:underline; cursor:pointer;">Shop ↗</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom spacing -->
+    <div style="height:16px;"></div>
+
+  </div><!-- /style-gym -->
+
+  <!-- ====== TAB BAR — matches Figma: Feed, In Stock, Upcoming, Style, Maps, Profile ====== -->
+  <div class="tabbar">
+    <div class="tab active">
+      <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      Feed
+    </div>
+    <div class="tab">
+      <svg viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+      In Stock
+    </div>
+    <div class="tab">
+      <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      Upcoming
+    </div>
+    <div class="tab">
+      <svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
+      Style
+    </div>
+    <div class="tab">
+      <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      Maps
+    </div>
+    <div class="tab">
+      <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      Profile
+    </div>
+  </div>
+
+</div><!-- /phone -->
+
+<script>
+  // Context pill switching
+  function setContext(el) {
+    document.querySelectorAll('.ctx-pill').forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
+  }
+
+  // Filter pill
+  document.querySelectorAll('.filter-pill').forEach(p => {
+    p.addEventListener('click', function() {
+      document.querySelectorAll('.filter-pill').forEach(x => x.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+
+  // Size selection
+  document.querySelectorAll('.size-btn:not(.out)').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      const cartBtn = document.querySelector('.cart-volt');
+      if (cartBtn) cartBtn.textContent = `· Size ${this.textContent} selected`;
+    });
+  });
+</script>
+</body>
+</html>

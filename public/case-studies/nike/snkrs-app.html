@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Nike SNKRS — Confidence Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ── TOKENS ────────────────────────────────────────────── */
+:root {
+  --black:  #000;
+  --white:  #fff;
+  --off:    #f5f5f3;
+  --warm:   #eeecea;
+  --mid:    #e0dedd;
+  --t1:     #0a0a0a;   /* primary text  — on white */
+  --t2:     #444444;   /* secondary     — AA on white */
+  --t3:     #767676;   /* tertiary      — AA on white exactly */
+  --bl:     rgba(0,0,0,.07);
+  --bm:     rgba(0,0,0,.14);
+  --volt:   #d4ff00;
+  --vdim:   rgba(212,255,0,.10);
+  --vbdr:   rgba(212,255,0,.30);
+  --live:   #e52222;   /* red on white — AA */
+  --soon:   #b86200;   /* orange on white — AA */
+  --fd:     'Anton',sans-serif;
+  --fu:     'Space Grotesk',sans-serif;
+  --fm:     'DM Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+html,body{height:100%;overflow:hidden;}
+body{background:#b8b8b8;font-family:var(--fu);display:flex;justify-content:center;}
+
+/* ── PHONE ─────────────────────────────────────────────── */
+.phone{width:390px;height:100vh;background:var(--white);position:relative;overflow:hidden;box-shadow:0 0 80px rgba(0,0,0,.4);}
+
+/* ── SCREENS ───────────────────────────────────────────── */
+.screen{position:absolute;inset:0;background:var(--white);display:flex;flex-direction:column;opacity:0;pointer-events:none;transform:translateX(20px);transition:opacity .18s ease,transform .18s ease;}
+.screen.active{opacity:1;pointer-events:all;transform:none;}
+.sb{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:76px;}
+.sb::-webkit-scrollbar{display:none;}
+
+/* ── STATUS BAR ────────────────────────────────────────── */
+.stat{padding:14px 20px 0;display:flex;justify-content:space-between;align-items:center;flex-shrink:0;}
+.st{font-family:var(--fu);font-size:13px;font-weight:700;}
+.st.w{color:#fff;} .st.b{color:var(--t1);}
+.si{display:flex;align-items:center;gap:5px;}
+.si svg{width:14px;height:14px;}
+
+/* ── NAV ───────────────────────────────────────────────── */
+.nav{display:flex;justify-content:space-between;align-items:center;padding:8px 20px 12px;flex-shrink:0;}
+.nav.dk{background:var(--black);}
+.nav.lt{background:var(--white);border-bottom:1px solid var(--bl);}
+.nav.ov{position:absolute;top:36px;left:0;right:0;background:transparent;z-index:99;padding:8px 20px;}
+.logo{font-family:var(--fd);font-size:24px;letter-spacing:.05em;line-height:1;}
+.logo.w{color:#fff;} .logo.b{color:var(--t1);}
+.ni{display:flex;gap:8px;}
+.nb{width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;}
+.nb svg{width:18px;height:18px;}
+.nb.gl{background:rgba(0,0,0,.35);backdrop-filter:blur(8px);}
+
+/* ── TABBAR ────────────────────────────────────────────── */
+.tabbar{position:absolute;bottom:0;left:0;right:0;background:var(--white);border-top:1px solid var(--bl);display:flex;z-index:200;padding:8px 0 20px;}
+.tab{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:4px 2px;font-family:var(--fu);font-size:9px;font-weight:500;color:var(--t3);cursor:pointer;transition:color .12s;}
+.tab svg{width:20px;height:20px;stroke:var(--t3);fill:none;stroke-width:1.5;transition:stroke .12s;}
+.tab.on{color:var(--t1);font-weight:700;}
+.tab.on svg{stroke:var(--t1);}
+
+/* ── UTILS ─────────────────────────────────────────────── */
+.div{height:1px;background:var(--bl);}
+.div.mx{margin:0 20px;}
+.brk{height:8px;background:var(--off);}
+.kck{font-family:var(--fm);font-size:9px;letter-spacing:.2em;color:var(--volt);text-transform:uppercase;background:var(--t1);padding:3px 8px;display:inline-block;}
+
+/* Chips — all pass WCAG AA */
+.chip{display:inline-flex;align-items:center;gap:5px;padding:4px 9px;font-family:var(--fm);font-size:9px;letter-spacing:.14em;text-transform:uppercase;border:1px solid;}
+.cd{width:5px;height:5px;border-radius:50%;}
+/* Volt chip: dark bg so volt text works */
+.vc{color:var(--volt);border-color:rgba(212,255,0,.35);background:#1a1a00;}
+.vc .cd{background:var(--volt);}
+/* Live: red on near-black */
+.lc{color:#ff6060;border-color:rgba(255,80,80,.3);background:#1a0000;}
+.lc .cd{background:#ff5050;animation:blk 1.2s infinite;}
+/* Soon: amber on near-black */
+.sc{color:#ffaa44;border-color:rgba(255,160,50,.3);background:#1a0d00;}
+.sc .cd{background:#ff9020;}
+@keyframes blk{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* ── BUTTONS ───────────────────────────────────────────── */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:var(--fu);font-weight:700;letter-spacing:.08em;text-transform:uppercase;border:none;cursor:pointer;transition:all .12s;}
+.bk{background:var(--t1);color:#fff;}
+.bk:hover{background:#222;}
+.bv{background:var(--volt);color:var(--t1);}
+.bv:hover{background:#deff20;}
+.bw{background:#fff;color:var(--t1);border:1px solid var(--bm);}
+.bw:hover{border-color:var(--t1);}
+.bow{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.45);}
+.bow:hover{border-color:#fff;}
+.blg{font-size:13px;padding:15px 24px;}
+.bmd{font-size:12px;padding:11px 20px;}
+.bsm{font-size:10px;padding:8px 14px;}
+.bfu{width:100%;}
+
+/* ══════════════════════════════════════════════════════
+   SCREEN 1: FEED
+══════════════════════════════════════════════════════ */
+.fhdr{background:var(--black);flex-shrink:0;}
+.fpills{display:flex;gap:6px;overflow-x:auto;padding:0 20px 14px;scrollbar-width:none;}
+.fpills::-webkit-scrollbar{display:none;}
+.fp{padding:6px 14px;font-family:var(--fu);font-size:12px;font-weight:500;border:1px solid rgba(255,255,255,.22);color:rgba(255,255,255,.6);cursor:pointer;transition:all .12s;white-space:nowrap;}
+.fp.on{background:#fff;color:var(--t1);border-color:#fff;font-weight:700;}
+
+/* Drop cards */
+.dc{margin:10px 16px;border:1px solid var(--bl);overflow:hidden;cursor:pointer;transition:border-color .15s;}
+.dc:hover{border-color:var(--bm);}
+.dc.cdrop{border-color:rgba(180,200,0,.3);}
+.dch{position:relative;overflow:hidden;background:#ccc;}
+.dch img{width:100%;height:100%;object-fit:cover;object-position:center 22%;transition:transform .4s ease;display:block;}
+.dc:hover .dch img{transform:scale(1.025);}
+.dco{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(0,0,0,.75) 0%,transparent 100%);padding:20px 14px 14px;display:flex;justify-content:space-between;align-items:flex-end;}
+.dcn{font-family:var(--fd);font-size:22px;letter-spacing:.03em;color:#fff;line-height:1.0;}
+.dcp{font-family:var(--fd);font-size:20px;color:#fff;}
+.dcb{padding:12px 14px;display:flex;justify-content:space-between;align-items:center;}
+.dcm{font-family:var(--fm);font-size:10px;color:var(--t3);letter-spacing:.12em;text-transform:uppercase;}
+.dcm span{display:block;color:var(--t2);font-size:12px;margin-top:2px;font-family:var(--fu);}
+/* Confidence Drop banner: dark bg so volt is visible */
+.cdb{background:var(--t1);padding:8px 14px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(212,255,0,.2);}
+.cdbl{display:flex;align-items:center;gap:7px;font-family:var(--fm);font-size:9px;letter-spacing:.16em;color:var(--volt);text-transform:uppercase;}
+.cdbt{font-family:var(--fd);font-size:18px;color:var(--volt);}
+
+/* ══════════════════════════════════════════════════════
+   SCREEN 2: PDP — single unified rhythm
+══════════════════════════════════════════════════════ */
+.ph{position:relative;width:100%;height:430px;overflow:hidden;background:#d0ceca;flex-shrink:0;}
+.ph img{width:100%;height:100%;object-fit:cover;object-position:center 15%;display:block;}
+.ph::after{content:'';position:absolute;bottom:0;left:0;right:0;height:90px;background:linear-gradient(to bottom,transparent,#fff);}
+.ctxr{position:absolute;bottom:12px;left:20px;right:20px;z-index:10;display:flex;gap:6px;}
+.cp{padding:5px 12px;font-family:var(--fu);font-size:11px;font-weight:500;border:1px solid rgba(255,255,255,.45);color:rgba(255,255,255,.75);cursor:pointer;transition:all .12s;white-space:nowrap;background:rgba(0,0,0,.28);backdrop-filter:blur(4px);}
+.cp.on{background:#fff;color:var(--t1);border-color:#fff;font-weight:700;}
+
+/* Single product block — no internal dividers, consistent 20px padding */
+.pblk{padding:16px 20px 20px;}
+.pb{font-family:var(--fm);font-size:10px;letter-spacing:.2em;color:var(--t3);text-transform:uppercase;margin-bottom:3px;}
+.pr{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px;}
+.pn{font-family:var(--fd);font-size:28px;letter-spacing:.02em;line-height:1;}
+.pp{font-family:var(--fd);font-size:26px;}
+.pc{font-size:13px;color:var(--t2);margin-bottom:14px;}
+
+/* Confidence badge — inline, compact */
+.cbg{display:inline-flex;align-items:center;gap:8px;padding:7px 12px 7px 9px;background:var(--t1);margin-bottom:18px;}
+.cbs{font-family:var(--fd);font-size:20px;color:var(--volt);line-height:1;}
+.cbl{font-family:var(--fm);font-size:9px;letter-spacing:.14em;color:rgba(255,255,255,.6);text-transform:uppercase;line-height:1.5;}
+.cbb{width:40px;height:2px;background:rgba(255,255,255,.15);overflow:hidden;margin-top:4px;}
+.cbf{height:100%;width:82%;background:var(--volt);}
+.cbn{font-family:var(--fm);font-size:10px;color:rgba(255,255,255,.45);line-height:1.4;margin-left:4px;}
+
+/* Size grid — sits directly in pblk, no wrapper padding */
+.sizh{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+.sizl{font-family:var(--fd);font-size:16px;letter-spacing:.04em;color:var(--t1);}
+.szg{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;margin-bottom:12px;}
+.sz{padding:9px 4px;text-align:center;font-family:var(--fu);font-size:12px;font-weight:500;border:1px solid var(--bm);background:#fff;color:var(--t1);cursor:pointer;transition:all .12s;}
+.sz:hover{border-color:var(--t1);}
+.sz.on{background:var(--t1);color:#fff;border-color:var(--t1);}
+.sz.xx{color:var(--t3);text-decoration:line-through;border-color:var(--bl);pointer-events:none;}
+
+/* Confidence match line — sits between grid and ATC, no box */
+.cmatch{display:flex;align-items:center;gap:8px;padding:8px 0 12px;border-top:1px solid var(--bl);}
+.cmi{width:6px;height:6px;background:var(--volt);border-radius:50%;flex-shrink:0;}
+.cmt{font-size:12px;color:var(--t2);}
+.cmt strong{color:var(--t1);}
+
+.atc{width:100%;padding:15px;background:var(--t1);color:#fff;font-family:var(--fu);font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;}
+.atc:hover{background:#222;}
+.atcv{color:var(--volt);font-size:11px;font-weight:400;font-family:var(--fm);letter-spacing:.1em;}
+
+/* Description — compact, no top padding needed after ATC */
+.pdesc{padding:12px 20px 16px;font-size:12px;line-height:1.7;color:var(--t2);border-top:1px solid var(--bl);}
+.pdesc ul{margin-top:6px;padding-left:14px;}
+.pdesc li{font-family:var(--fm);font-size:10px;color:var(--t3);letter-spacing:.04em;margin-bottom:1px;}
+
+/* Style Gym */
+.sgmh{padding:20px 20px 0;display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;}
+.sgmt{font-family:var(--fd);font-size:24px;letter-spacing:.03em;line-height:1;}
+.sgmd{font-size:12px;color:var(--t2);padding:0 20px 6px;line-height:1.6;}
+/* Gap card: black bg */
+.gc{margin:10px 20px 16px;padding:14px;background:var(--t1);display:flex;gap:12px;}
+.gci{font-size:18px;flex-shrink:0;margin-top:2px;}
+.gck{font-family:var(--fm);font-size:9px;letter-spacing:.2em;color:var(--volt);text-transform:uppercase;margin-bottom:3px;}
+.gct{font-family:var(--fd);font-size:16px;letter-spacing:.04em;color:#fff;margin-bottom:3px;}
+.gcd{font-size:11px;color:rgba(255,255,255,.6);line-height:1.6;}
+/* Outfit rows */
+.or{padding:0;}
+.orh{padding:14px 20px 10px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--bl);}
+.oc{font-family:var(--fm);font-size:9px;letter-spacing:.2em;color:var(--t3);text-transform:uppercase;margin-bottom:2px;}
+.oname{font-family:var(--fd);font-size:20px;letter-spacing:.03em;}
+.osc{display:flex;gap:8px;padding:0 20px 12px;overflow-x:auto;scrollbar-width:none;}
+.osc::-webkit-scrollbar{display:none;}
+.op{flex-shrink:0;width:190px;height:270px;overflow:hidden;background:var(--warm);}
+.op img{width:100%;height:100%;object-fit:cover;display:block;}
+.oit{padding:0 20px 14px;}
+.oi{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--bl);}
+.oi:last-child{border-bottom:none;}
+.oin{font-size:13px;color:var(--t1);font-weight:500;}
+.oib{font-family:var(--fm);font-size:10px;color:var(--t3);letter-spacing:.1em;margin-top:1px;}
+/* Anchor badge: black bg so volt works */
+.oa{font-family:var(--fm);font-size:8px;letter-spacing:.12em;color:var(--volt);background:var(--t1);padding:3px 7px;text-transform:uppercase;}
+.osh{font-family:var(--fm);font-size:10px;color:var(--t2);text-decoration:underline;cursor:pointer;}
+.odiv{display:none;} /* removed — outfit rows self-separate with border-top */
+
+/* ══════════════════════════════════════════════════════
+   SCREEN 3: STYLE PROFILE (replaces Stylist AI)
+   Uses purchase history + quick quiz — no photo upload
+══════════════════════════════════════════════════════ */
+.sph{background:var(--t1);padding:0 20px 20px;flex-shrink:0;}
+.sptit{font-family:var(--fd);font-size:30px;letter-spacing:.03em;color:#fff;line-height:1;}
+.spsub{font-size:13px;color:rgba(255,255,255,.55);margin-top:6px;line-height:1.6;}
+
+/* Purchase history wardrobe */
+.phist{display:flex;flex-direction:column;gap:1px;background:var(--bl);border:1px solid var(--bl);margin:16px 20px;}
+.phrow{background:#fff;padding:10px 14px;display:flex;align-items:center;gap:12px;}
+.phthumb{width:52px;height:38px;background:var(--warm);flex-shrink:0;overflow:hidden;}
+.phthumb img{width:100%;height:100%;object-fit:cover;}
+.phbody{flex:1;}
+.phn{font-size:13px;font-weight:600;color:var(--t1);}
+.phs{font-family:var(--fm);font-size:10px;color:var(--t3);letter-spacing:.08em;margin-top:1px;}
+.phtag{font-family:var(--fm);font-size:8px;letter-spacing:.12em;text-transform:uppercase;padding:3px 7px;border:1px solid;}
+/* In rotation = good contrast */
+.tag-rot{color:#1a6e1a;border-color:rgba(20,120,20,.3);background:rgba(20,150,20,.07);}
+.tag-mus{color:var(--t3);border-color:var(--bl);background:transparent;}
+
+/* Gap report */
+.gr{margin:0 20px 20px;}
+.grt{font-family:var(--fd);font-size:22px;letter-spacing:.04em;margin-bottom:12px;}
+.gi{border:1px solid var(--bl);margin-bottom:8px;cursor:pointer;transition:border-color .12s;}
+.gi:hover{border-color:var(--bm);}
+.gih{padding:12px 14px;display:flex;align-items:center;gap:14px;}
+.giico{width:44px;height:44px;background:var(--off);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:20px;}
+.gib{flex:1;}
+/* Gap kicker on white — using dark text */
+.gik{font-family:var(--fm);font-size:9px;letter-spacing:.18em;color:var(--t3);text-transform:uppercase;margin-bottom:2px;}
+.git{font-size:14px;font-weight:600;color:var(--t1);margin-bottom:1px;}
+.gir{font-size:11px;color:var(--t2);line-height:1.5;}
+.gisc{font-family:var(--fd);font-size:24px;color:var(--t1);flex-shrink:0;}
+.grec{padding:10px 14px;background:var(--off);border-top:1px solid var(--bl);display:flex;align-items:center;gap:12px;}
+.grsho{width:56px;height:40px;background:var(--mid);flex-shrink:0;overflow:hidden;}
+.grsho img{width:100%;height:100%;object-fit:cover;}
+.grn{font-size:12px;font-weight:600;color:var(--t1);}
+.grs{font-family:var(--fm);font-size:10px;color:var(--t3);letter-spacing:.08em;}
+
+/* Why This Works — dark bg */
+.ww{margin:0 20px 20px;padding:16px;background:var(--t1);border-left:3px solid var(--volt);}
+.wwl{font-family:var(--fm);font-size:9px;letter-spacing:.2em;color:var(--volt);text-transform:uppercase;margin-bottom:6px;}
+.wwt{font-size:13px;color:rgba(255,255,255,.8);line-height:1.7;font-style:italic;}
+
+/* Style quiz */
+.quiz{margin:0 20px 20px;border:1px solid var(--bl);padding:16px;}
+.qt{font-family:var(--fd);font-size:18px;letter-spacing:.04em;margin-bottom:4px;}
+.qs{font-size:12px;color:var(--t2);margin-bottom:14px;line-height:1.5;}
+.qopts{display:flex;gap:6px;flex-wrap:wrap;}
+.qo{padding:7px 14px;border:1px solid var(--bm);font-size:12px;font-weight:500;cursor:pointer;transition:all .12s;color:var(--t2);}
+.qo:hover{border-color:var(--t1);color:var(--t1);}
+.qo.on{background:var(--t1);color:#fff;border-color:var(--t1);}
+
+/* ══════════════════════════════════════════════════════
+   SCREEN 4: CONFIDENCE DROP
+══════════════════════════════════════════════════════ */
+.droph{background:var(--t1);flex-shrink:0;}
+.drphr{position:relative;height:310px;overflow:hidden;flex-shrink:0;background:#0a0a0a;}
+.drphr img{width:100%;height:100%;object-fit:cover;object-position:center 18%;opacity:.65;display:block;}
+.drphr::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.15) 0%,rgba(0,0,0,.9) 100%);}
+.dhc{position:absolute;bottom:0;left:0;right:0;padding:20px;z-index:5;}
+.dht{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:7px;}
+.dhn{font-family:var(--fd);font-size:30px;letter-spacing:.03em;color:#fff;line-height:1.0;}
+.dhp{font-family:var(--fd);font-size:22px;color:#fff;}
+.dhc2{font-size:12px;color:rgba(255,255,255,.55);margin-bottom:12px;}
+.cntd{display:flex;gap:8px;margin-bottom:14px;}
+.cdu{flex:1;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);padding:10px 4px;text-align:center;}
+.cdn{font-family:var(--fd);font-size:28px;color:var(--volt);line-height:1;letter-spacing:.02em;}
+.cdl{font-family:var(--fm);font-size:8px;letter-spacing:.18em;color:rgba(255,255,255,.4);text-transform:uppercase;margin-top:2px;}
+.chs{padding:20px;background:var(--t1);}
+.chk{font-family:var(--fm);font-size:9px;letter-spacing:.2em;color:var(--volt);text-transform:uppercase;background:rgba(212,255,0,.1);border:1px solid rgba(212,255,0,.22);padding:3px 8px;display:inline-block;margin-bottom:10px;}
+.cht{font-family:var(--fd);font-size:24px;letter-spacing:.04em;color:#fff;margin-bottom:8px;}
+.chd{font-size:13px;color:rgba(255,255,255,.6);line-height:1.7;margin-bottom:18px;}
+.chpb{margin-bottom:18px;}
+.chpl{display:flex;justify-content:space-between;margin-bottom:5px;font-family:var(--fm);font-size:10px;color:rgba(255,255,255,.4);letter-spacing:.1em;}
+.chpt{height:4px;background:rgba(255,255,255,.08);}
+.chpf{height:100%;width:33%;background:var(--volt);}
+.steps{display:flex;flex-direction:column;gap:1px;margin-bottom:18px;}
+.step{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);padding:14px;display:flex;gap:14px;}
+.stn{font-family:var(--fd);font-size:22px;color:rgba(255,255,255,.15);line-height:1;flex-shrink:0;min-width:28px;}
+.stn.dn{color:var(--volt);}
+.stt{font-size:13px;font-weight:600;color:#fff;margin-bottom:3px;}
+.std{font-size:12px;color:rgba(255,255,255,.5);line-height:1.5;}
+.stdn{font-family:var(--fm);font-size:9px;color:var(--volt);letter-spacing:.12em;text-transform:uppercase;margin-top:4px;}
+.pu{padding:14px;background:rgba(212,255,0,.05);border:1px solid rgba(212,255,0,.16);margin-bottom:18px;display:flex;align-items:center;gap:14px;}
+.put{font-family:var(--fd);font-size:15px;letter-spacing:.04em;color:var(--volt);margin-bottom:2px;}
+.pud{font-size:12px;color:rgba(255,255,255,.5);line-height:1.5;}
+.hwr{display:flex;gap:10px;align-items:flex-start;font-size:12px;color:rgba(255,255,255,.5);margin-bottom:8px;}
+.hwn{font-family:var(--fd);font-size:14px;color:rgba(255,255,255,.18);min-width:20px;flex-shrink:0;}
+
+/* ══════════════════════════════════════════════════════
+   SCREEN 5: PROFILE
+══════════════════════════════════════════════════════ */
+.prfh{background:var(--t1);padding:0 20px 22px;flex-shrink:0;}
+.phav{display:flex;align-items:center;gap:16px;margin-top:12px;margin-bottom:16px;}
+.ava{width:56px;height:56px;background:linear-gradient(135deg,#333 0%,#111 100%);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:22px;color:rgba(255,255,255,.7);}
+.avn{font-family:var(--fd);font-size:22px;letter-spacing:.04em;color:#fff;line-height:1;}
+.ave{font-family:var(--fm);font-size:10px;color:rgba(255,255,255,.4);letter-spacing:.1em;margin-top:3px;}
+/* Pass widget: dark bg so volt legible */
+.pw{margin:0 20px 20px;border:1px solid rgba(212,255,0,.22);background:var(--t1);position:relative;overflow:hidden;}
+.pw::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--volt);}
+.pwh{padding:13px 16px;background:rgba(212,255,0,.05);border-bottom:1px solid rgba(212,255,0,.13);display:flex;justify-content:space-between;align-items:center;}
+.pwl{font-family:var(--fm);font-size:9px;letter-spacing:.22em;color:var(--volt);text-transform:uppercase;}
+.pwt{font-family:var(--fd);font-size:14px;letter-spacing:.08em;color:var(--volt);}
+.pwb{padding:16px;}
+.pwsr{display:flex;align-items:baseline;gap:6px;margin-bottom:10px;}
+.pws{font-family:var(--fd);font-size:52px;line-height:1;color:#fff;}
+.pwm{font-family:var(--fd);font-size:22px;color:rgba(255,255,255,.22);}
+.pwtr{height:4px;background:rgba(255,255,255,.08);margin-bottom:6px;}
+.pwtf{height:100%;width:68%;background:var(--volt);}
+.pwtl{display:flex;justify-content:space-between;font-family:var(--fm);font-size:9px;color:rgba(255,255,255,.3);letter-spacing:.1em;text-transform:uppercase;}
+.pwu{margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,.05);display:flex;flex-direction:column;gap:8px;}
+.pwui{display:flex;align-items:center;gap:10px;font-size:12px;color:rgba(255,255,255,.55);}
+.pwui.on{color:#fff;}
+.pwuic{width:20px;height:20px;background:rgba(212,255,0,.1);border:1px solid rgba(212,255,0,.22);display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0;}
+.pwuic.lk{background:rgba(255,255,255,.03);border-color:rgba(255,255,255,.07);}
+.tr{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:var(--off);margin-bottom:2px;border:1px solid var(--bl);}
+.tr.cur{background:var(--t1);border-color:rgba(212,255,0,.22);}
+.trn{font-family:var(--fd);font-size:15px;letter-spacing:.06em;}
+.tr.cur .trn{color:var(--volt);}
+.trp{font-family:var(--fm);font-size:10px;color:var(--t3);letter-spacing:.1em;}
+.tr.cur .trp{color:var(--volt);opacity:.65;}
+.ar{display:flex;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--bl);}
+.ari{width:36px;height:36px;background:var(--off);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:16px;}
+.arb{flex:1;}
+.art{font-size:13px;font-weight:500;color:var(--t1);}
+.ars{font-family:var(--fm);font-size:10px;color:var(--t3);letter-spacing:.08em;margin-top:2px;}
+.arp{font-family:var(--fd);font-size:16px;color:var(--t1);}
+.idx{margin:0 20px 24px;background:var(--t1);padding:20px;position:relative;overflow:hidden;}
+.idx::after{content:'2026';position:absolute;right:-8px;top:-6px;font-family:var(--fd);font-size:80px;color:rgba(255,255,255,.03);line-height:1;pointer-events:none;}
+.idxk{font-family:var(--fm);font-size:9px;letter-spacing:.22em;color:var(--volt);text-transform:uppercase;margin-bottom:6px;}
+.idxt{font-family:var(--fd);font-size:22px;letter-spacing:.04em;color:#fff;line-height:1;margin-bottom:8px;}
+.idxd{font-size:12px;color:rgba(255,255,255,.55);line-height:1.6;margin-bottom:14px;}
+</style>
+</head>
+<body>
+<div class="phone">
+
+<!-- ═══════════ FEED ═══════════ -->
+<div class="screen active" id="s-feed">
+  <div class="fhdr">
+    <div class="stat"><span class="st w">9:41</span>
+      <div class="si"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M1.5 8.5a16.5 16.5 0 0121 0"/><path d="M5 12a12 12 0 0114 0"/><path d="M8.5 15.5a7.5 7.5 0 017 0"/><circle cx="12" cy="19" r="1" fill="white"/></svg><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="2" y="7" width="16" height="10" rx="1"/><path d="M22 11v2"/></svg></div>
+    </div>
+    <div class="nav dk">
+      <div class="logo w">SNKRS</div>
+      <div class="ni">
+        <div class="nb"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+        <div class="nb"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></div>
+      </div>
+    </div>
+    <div class="fpills">
+      <div class="fp on">All</div><div class="fp">Drop</div><div class="fp">Men</div><div class="fp">Women</div><div class="fp">In Stock</div>
+    </div>
+  </div>
+  <div class="sb">
+    <!-- Confidence Drop -->
+    <div class="dc cdrop" style="margin-top:10px;" onclick="go('s-drop')">
+      <div class="dch" style="height:290px;background:#0e0e0a;">
+        <img src="https://www.figma.com/api/mcp/asset/c6c1dae2-9efc-4a26-abf6-1730bbee0103" alt="shoe" style="opacity:.8;" />
+        <div class="dco"><div class="dcn">Waffle Debut<br>'Sanddrift'</div><div class="dcp">$110</div></div>
+        <div style="position:absolute;top:12px;left:12px;"><div class="chip vc"><div class="cd"></div>Confidence Drop</div></div>
+      </div>
+      <div class="cdb">
+        <div class="cdbl"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="11" width="18" height="11"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>Complete Challenge to Unlock Access</div>
+        <div class="cdbt">48h</div>
+      </div>
+      <div class="dcb">
+        <div class="dcm">Drops<span>Jun 14 · 10AM</span></div>
+        <button class="btn bk bsm" onclick="event.stopPropagation();go('s-drop')">View Challenge</button>
+      </div>
+    </div>
+
+    <!-- Live drop -->
+    <div class="dc" onclick="go('s-pdp')">
+      <div class="dch" style="height:260px;">
+        <img src="https://www.figma.com/api/mcp/asset/7ef7b18a-7606-489c-93b9-6b0ce2bf1955" alt="shoe" />
+        <div class="dco"><div class="dcn">Waffle Debut<br>'White Black'</div><div class="dcp">$95</div></div>
+        <div style="position:absolute;top:12px;left:12px;"><div class="chip sc"><div class="cd"></div>Today · 2PM</div></div>
+        <div style="position:absolute;top:12px;right:12px;background:rgba(212,255,0,.9);padding:5px 10px;font-family:var(--fm);font-size:9px;letter-spacing:.14em;color:var(--t1);text-transform:uppercase;">Style Gym Ready</div>
+      </div>
+      <div class="dcb">
+        <div class="dcm">Style Match<span>82/100 · Fills casual gap</span></div>
+        <button class="btn bk bsm" onclick="event.stopPropagation();go('s-pdp')">See Looks</button>
+      </div>
+    </div>
+
+    <!-- Style Profile banner -->
+    <div style="margin:4px 16px 10px;background:var(--t1);padding:18px;cursor:pointer;" onclick="go('s-style')">
+      <div style="display:flex;align-items:flex-start;gap:14px;">
+        <div style="width:44px;height:44px;background:rgba(212,255,0,.1);border:1px solid rgba(212,255,0,.22);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#d4ff00" stroke-width="1.5"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+        </div>
+        <div>
+          <div style="font-family:var(--fm);font-size:9px;letter-spacing:.2em;color:var(--volt);text-transform:uppercase;margin-bottom:4px;">Your Style Profile</div>
+          <div style="font-family:var(--fd);font-size:18px;letter-spacing:.04em;color:#fff;margin-bottom:4px;">Nike Knows Your Rotation</div>
+          <div style="font-size:12px;color:rgba(255,255,255,.55);line-height:1.6;">Based on your purchase history we've found 3 gaps in your wardrobe. See what's missing.</div>
+        </div>
+      </div>
+      <div style="margin-top:14px;"><button class="btn bv bsm">View My Gap Report →</button></div>
+    </div>
+
+    <!-- Upcoming -->
+    <div class="dc">
+      <div class="dch" style="height:170px;background:#111;">
+        <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;">
+          <div style="text-align:center;"><div style="font-family:var(--fd);font-size:28px;letter-spacing:.04em;color:#fff;">Air Jordan 1<br>Chicago</div></div>
+        </div>
+        <div style="position:absolute;top:12px;left:12px;"><div class="chip sc"><div class="cd"></div>Jun 21</div></div>
+      </div>
+      <div class="dcb">
+        <div class="dcm">Price<span>$180</span></div>
+        <button class="btn bw bsm">Notify Me</button>
+      </div>
+    </div>
+
+    <!-- Confidence Index teaser -->
+    <div style="margin:6px 16px 16px;background:var(--off);padding:20px;border:1px solid var(--bl);">
+      <div style="font-family:var(--fm);font-size:9px;letter-spacing:.2em;color:var(--t3);text-transform:uppercase;margin-bottom:6px;">Confidence Index 2026</div>
+      <div style="font-family:var(--fd);font-size:20px;letter-spacing:.04em;color:var(--t1);margin-bottom:6px;">What the Data Says<br>About Style This Year</div>
+      <div style="font-size:12px;color:var(--t2);line-height:1.6;margin-bottom:12px;">The definitive annual report on how people actually dress — aggregated from millions of SNKRS users.</div>
+      <button class="btn bk bsm">Read the Report</button>
+    </div>
+    <div style="height:16px;"></div>
+  </div>
+</div>
+
+<!-- ═══════════ PDP + STYLE GYM ═══════════ -->
+<div class="screen" id="s-pdp">
+  <!-- Overlay nav on hero -->
+  <div style="position:absolute;top:0;left:0;right:0;z-index:99;padding:14px 20px 0;">
+    <div style="display:flex;justify-content:space-between;align-items:center;">
+      <span style="font-family:var(--fu);font-size:13px;font-weight:700;color:#fff;">9:41</span>
+      <div style="display:flex;gap:5px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="2" y="7" width="16" height="10" rx="1"/><path d="M22 11v2"/></svg></div>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;padding-top:8px;">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div class="nb gl" onclick="go('s-feed')"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg></div>
+        <div class="logo w">SNKRS</div>
+      </div>
+      <div class="ni">
+        <div class="nb gl"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div>
+        <div class="nb gl"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></div>
+      </div>
+    </div>
+  </div>
+  <div class="sb">
+    <!-- HERO -->
+    <div class="ph">
+      <img src="https://www.figma.com/api/mcp/asset/7ef7b18a-7606-489c-93b9-6b0ce2bf1955" alt="Waffle Debut" />
+      <div class="ctxr">
+        <div class="cp on" onclick="ctxSw(this)">Errand</div>
+        <div class="cp" onclick="ctxSw(this)">Casual</div>
+        <div class="cp" onclick="ctxSw(this)">After 5pm</div>
+      </div>
+    </div>
+
+    <!-- SINGLE PRODUCT BLOCK: name / price / colorway / confidence / sizes / ATC / desc -->
+    <div class="pblk">
+      <div class="pb">Nike / Waffle</div>
+      <div class="pr">
+        <div class="pn">Waffle Debut<br>'White Black'</div>
+        <div class="pp">$95</div>
+      </div>
+      <div class="pc">Sanddrift / Phantom / White / Black</div>
+
+      <div class="cbg">
+        <div class="cbs">82</div>
+        <div><div class="cbl">Confidence<br>Score</div><div class="cbb"><div class="cbf"></div></div></div>
+        <div class="cbn">Fills your<br>casual gap</div>
+      </div>
+
+      <div class="sizh">
+        <div class="sizl">Sizing</div>
+        <div style="font-family:var(--fm);font-size:10px;color:var(--t3);letter-spacing:.1em;text-transform:uppercase;cursor:pointer;">Size Guide</div>
+      </div>
+      <div class="szg">
+        <div class="sz">7</div><div class="sz">7.5</div><div class="sz on">8</div><div class="sz">8.5</div><div class="sz">9</div>
+        <div class="sz">9.5</div><div class="sz">10</div><div class="sz">10.5</div><div class="sz">11</div><div class="sz xx">11.5</div>
+      </div>
+
+      <!-- Confidence match — inline above ATC, no box -->
+      <div class="cmatch">
+        <div class="cmi"></div>
+        <div class="cmt"><strong>Strong wardrobe match</strong> — pairs with 9 items in your rotation</div>
+      </div>
+
+      <button class="atc" id="atc-btn">Add to Cart <span class="atcv" id="atc-sz">· Size 8</span></button>
+    </div>
+
+    <!-- DESCRIPTION — tight, below ATC -->
+    <div class="pdesc">
+      Retro gets modernized with these sleek sneaks inspired by the Nike Daybreak. Era-echoing suede and nylon are paired in complementary colors, and the updated wedge midsole gives you an extra lift.
+      <ul><li>Shown: Sanddrift/Phantom/White/Black</li><li>Style: DH9523-102</li></ul>
+    </div>
+
+    <div class="brk"></div>
+
+    <!-- STYLE GYM -->
+    <div class="sgmh">
+      <div><div class="kck">Style Gym</div><div class="sgmt" style="margin-top:5px;">How to Wear It</div></div>
+      <div style="font-family:var(--fm);font-size:10px;color:var(--t3);letter-spacing:.1em;text-transform:uppercase;cursor:pointer;">All 3 →</div>
+    </div>
+    <div class="sgmd">Three ways to wear the Waffle Debut. Each look is shoppable — all Nike pieces.</div>
+    <div class="gc"><div class="gci">✦</div><div><div class="gck">Purchase History Insight</div><div class="gct">Fills Your Casual Gap</div><div class="gcd">Based on your last 12 months of purchases — 0 neutral low-profile sneakers in your rotation.</div></div></div>
+
+    <!-- Look 1 -->
+    <div class="or">
+      <div class="orh"><div><div class="oc">Look 01 — Casual</div><div class="oname">The Sunday Reset</div></div><button class="btn bk bsm" onclick="addLook(this)">Add Look</button></div>
+      <div class="osc">
+        <div class="op"><img src="https://www.figma.com/api/mcp/asset/3422ced9-23aa-49c7-ba1c-f2e54c282eef" alt="look" /></div>
+        <div class="op"><img src="https://www.figma.com/api/mcp/asset/a30c91e9-8833-4439-92e4-358e0b351439" alt="look" /></div>
+        <div class="op"><img src="https://www.figma.com/api/mcp/asset/bb974ce8-3c4e-49cc-a319-10387ccbc677" alt="look" /></div>
+      </div>
+      <div class="oit">
+        <div class="oi"><div><div class="oin">Waffle Debut 'White Black'</div><div class="oib">NIKE · THIS SHOE</div></div><div class="oa">Anchor</div></div>
+        <div class="oi"><div><div class="oin">Nike Club Fleece Sweatshirt</div><div class="oib">NIKE</div></div><div class="osh">Shop ↗</div></div>
+        <div class="oi"><div><div class="oin">Nike Sportswear Club Joggers</div><div class="oib">NIKE</div></div><div class="osh">Shop ↗</div></div>
+      </div>
+    </div>
+
+    <!-- Look 2 -->
+    <div class="or">
+      <div class="orh"><div><div class="oc">Look 02 — Errand</div><div class="oname">The Urban Trek</div></div><button class="btn bk bsm" onclick="addLook(this)">Add Look</button></div>
+      <div class="osc">
+        <div class="op"><img src="https://www.figma.com/api/mcp/asset/9a0e9cc2-75f6-46a7-a5db-812e4329e35a" alt="look" /></div>
+        <div class="op"><img src="https://www.figma.com/api/mcp/asset/ed24ce99-c7e9-4fad-b3f4-4fac0ecf59e5" alt="look" /></div>
+        <div class="op"><img src="https://www.figma.com/api/mcp/asset/9c96df3a-8964-4334-af82-c22208e3b1a3" alt="look" /></div>
+      </div>
+      <div class="oit">
+        <div class="oi"><div><div class="oin">Waffle Debut 'White Black'</div><div class="oib">NIKE · THIS SHOE</div></div><div class="oa">Anchor</div></div>
+        <div class="oi"><div><div class="oin">Nike Tech Woven Trousers</div><div class="oib">NIKE</div></div><div class="osh">Shop ↗</div></div>
+        <div class="oi"><div><div class="oin">Nike Windrunner Jacket</div><div class="oib">NIKE</div></div><div class="osh">Shop ↗</div></div>
+      </div>
+    </div>
+
+    <!-- Look 3 -->
+    <div class="or">
+      <div class="orh"><div><div class="oc">Look 03 — After 5pm</div><div class="oname">The Evening Edit</div></div><button class="btn bk bsm" onclick="addLook(this)">Add Look</button></div>
+      <div class="osc">
+        <div class="op"><img src="https://www.figma.com/api/mcp/asset/9f277ac3-5e25-4e1b-bf9f-4e8443422e51" alt="look" /></div>
+        <div class="op"><img src="https://www.figma.com/api/mcp/asset/bcf2a211-2490-4ce1-9be2-9685355b3b3a" alt="look" /></div>
+        <div class="op"><img src="https://www.figma.com/api/mcp/asset/bd4a7a0f-0283-4953-abf9-7a08de527b06" alt="look" /></div>
+      </div>
+      <div class="oit">
+        <div class="oi"><div><div class="oin">Waffle Debut 'White Black'</div><div class="oib">NIKE · THIS SHOE</div></div><div class="oa">Anchor</div></div>
+        <div class="oi"><div><div class="oin">Nike Tech Fleece Pants</div><div class="oib">NIKE</div></div><div class="osh">Shop ↗</div></div>
+        <div class="oi"><div><div class="oin">Nike PE Essentials Tee</div><div class="oib">NIKE</div></div><div class="osh">Shop ↗</div></div>
+      </div>
+    </div>
+
+    <div style="height:16px;"></div>
+  </div>
+</div>
+
+<!-- ═══════════ STYLE PROFILE ═══════════ -->
+<div class="screen" id="s-style">
+  <div class="sph">
+    <div class="stat"><span class="st w">9:41</span><div class="si"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="2" y="7" width="16" height="10" rx="1"/><path d="M22 11v2"/></svg></div></div>
+    <div style="display:flex;align-items:center;gap:12px;padding:8px 0 14px;">
+      <div class="nb" onclick="go('s-feed')" style="padding:0;"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="white" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg></div>
+      <div style="font-family:var(--fm);font-size:9px;letter-spacing:.22em;color:var(--volt);text-transform:uppercase;">Your Style Profile</div>
+    </div>
+    <div class="sptit">Nike Knows<br>Your Rotation</div>
+    <div class="spsub">Based on your purchase history and what you've worn, here's what your collection is missing.</div>
+  </div>
+  <div class="sb">
+    <!-- Purchase history wardrobe -->
+    <div style="padding:16px 20px 8px;display:flex;justify-content:space-between;align-items:center;">
+      <div style="font-family:var(--fd);font-size:18px;letter-spacing:.04em;color:var(--t1);">Your Collection</div>
+      <div style="font-family:var(--fm);font-size:9px;letter-spacing:.16em;color:var(--t3);text-transform:uppercase;">11 pairs · from purchase history</div>
+    </div>
+    <div class="phist">
+      <div class="phrow">
+        <div class="phthumb"><img src="https://www.figma.com/api/mcp/asset/7ef7b18a-7606-489c-93b9-6b0ce2bf1955" alt="shoe" /></div>
+        <div class="phbody"><div class="phn">Air Max 90 'White'</div><div class="phs">Purchased Mar 2024 · Nike.com</div></div>
+        <div class="phtag tag-rot">In Rotation</div>
+      </div>
+      <div class="phrow">
+        <div class="phthumb"><img src="https://www.figma.com/api/mcp/asset/c6c1dae2-9efc-4a26-abf6-1730bbee0103" alt="shoe" /></div>
+        <div class="phbody"><div class="phn">Air Jordan 1 Mid 'Black'</div><div class="phs">Purchased Sep 2023 · SNKRS</div></div>
+        <div class="phtag tag-mus">Museum</div>
+      </div>
+      <div class="phrow" style="background:var(--off);">
+        <div class="phthumb" style="background:var(--mid);display:flex;align-items:center;justify-content:center;"><span style="font-family:var(--fd);font-size:12px;letter-spacing:.1em;color:var(--t3);">+9</span></div>
+        <div class="phbody"><div class="phn" style="color:var(--t2);">9 more pairs</div><div class="phs">From Nike purchase history</div></div>
+        <div style="font-family:var(--fm);font-size:10px;color:var(--t3);text-decoration:underline;cursor:pointer;">See All</div>
+      </div>
+    </div>
+
+    <!-- Quick style quiz -->
+    <div class="div mx" style="margin-bottom:16px;"></div>
+    <div style="padding:0 20px 16px;">
+      <div style="font-family:var(--fd);font-size:20px;letter-spacing:.04em;margin-bottom:12px;">Quick Style Quiz</div>
+      <div class="quiz">
+        <div class="qt">Where do you wear sneakers most?</div>
+        <div class="qs">Helps us understand which gaps matter most to you.</div>
+        <div class="qopts">
+          <div class="qo on">Everyday / Casual</div>
+          <div class="qo">Work / Office</div>
+          <div class="qo">Active / Sport</div>
+          <div class="qo">Going Out</div>
+        </div>
+      </div>
+      <div class="quiz" style="margin-top:8px;">
+        <div class="qt">Colorway preference?</div>
+        <div class="qs">We'll prioritize recommendations that match your palette.</div>
+        <div class="qopts">
+          <div class="qo on">Neutrals</div>
+          <div class="qo">Bold / Color</div>
+          <div class="qo">All Black</div>
+          <div class="qo">Mixed</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gap Report -->
+    <div class="brk"></div>
+    <div class="gr" style="padding-top:16px;">
+      <div class="grt">Your Gap Report</div>
+      <div class="gi">
+        <div class="gih"><div class="giico">👟</div><div class="gib"><div class="gik">Gap Found via Purchase History</div><div class="git">Clean White — Work Context</div><div class="gir">You own 0 white sneakers suited for business-casual. Affects 3 days/week.</div></div><div class="gisc">91</div></div>
+        <div class="grec"><div class="grsho"><img src="https://www.figma.com/api/mcp/asset/7ef7b18a-7606-489c-93b9-6b0ce2bf1955" alt="rec" /></div><div style="flex:1;"><div class="grn">Waffle Debut 'White Black'</div><div class="grs">NIKE · $95 · Top match</div></div><button class="btn bk bsm" onclick="go('s-pdp')">View →</button></div>
+      </div>
+      <div class="gi">
+        <div class="gih"><div class="giico">🏃</div><div class="gib"><div class="gik">Gap Found via Training Data</div><div class="git">Performance Low — Training</div><div class="gir">All your NRC workouts logged in lifestyle shoes. No dedicated performance trainer.</div></div><div class="gisc">84</div></div>
+        <div class="grec"><div class="grsho" style="background:var(--mid);"></div><div style="flex:1;"><div class="grn">Nike Pegasus 41</div><div class="grs">NIKE · $130 · Strong match</div></div><button class="btn bk bsm">View →</button></div>
+      </div>
+      <div class="gi">
+        <div class="gih"><div class="giico">🌙</div><div class="gib"><div class="gik">Gap Found via Style Quiz</div><div class="git">Evening — Elevated Casual</div><div class="gir">Your quiz suggests you go out regularly but your rotation has nothing elevated.</div></div><div class="gisc">76</div></div>
+      </div>
+    </div>
+
+    <!-- Why This Works -->
+    <div class="ww">
+      <div class="wwl">Why This Works — Based On Your Data</div>
+      <div class="wwt">"The Waffle Debut's neutral colorway integrates with 9 items we see in your current Nike rotation. The wedge sole adds visual interest without competing with your existing patterned pieces."</div>
+    </div>
+    <div style="height:16px;"></div>
+  </div>
+</div>
+
+<!-- ═══════════ CONFIDENCE DROP ═══════════ -->
+<div class="screen" id="s-drop">
+  <div class="droph">
+    <div class="stat"><span class="st w">9:41</span><div class="si"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="2" y="7" width="16" height="10" rx="1"/><path d="M22 11v2"/></svg></div></div>
+    <div style="display:flex;align-items:center;gap:12px;padding:8px 20px 14px;">
+      <div class="nb" onclick="go('s-feed')" style="padding:0;"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="white" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg></div>
+      <div style="font-family:var(--fm);font-size:9px;letter-spacing:.2em;color:var(--volt);text-transform:uppercase;margin-left:auto;">Confidence Drop</div>
+    </div>
+  </div>
+  <div class="sb" style="background:var(--t1);">
+    <div class="drphr">
+      <img src="https://www.figma.com/api/mcp/asset/c6c1dae2-9efc-4a26-abf6-1730bbee0103" alt="shoe" />
+      <div class="dhc">
+        <div class="dht"><div class="dhn">Waffle Debut<br>'Sanddrift'</div><div class="dhp">$110</div></div>
+        <div class="dhc2">Sanddrift / Cool Grey / White</div>
+        <div class="cntd">
+          <div class="cdu"><div class="cdn" id="cdh">47</div><div class="cdl">Hrs</div></div>
+          <div class="cdu"><div class="cdn" id="cdm">58</div><div class="cdl">Min</div></div>
+          <div class="cdu"><div class="cdn" id="cds">33</div><div class="cdl">Sec</div></div>
+        </div>
+        <div class="chip vc"><div class="cd"></div>48hr Access Window</div>
+      </div>
+    </div>
+    <div class="chs">
+      <div class="chk">Styling Challenge</div>
+      <div class="cht">Earn Your Access</div>
+      <div class="chd">Complete the styling challenge to unlock 48-hour priority access. Your confidence and engagement — not a lottery — determines your queue position.</div>
+      <div class="chpb">
+        <div class="chpl"><span>1 of 3 steps complete</span><span>33%</span></div>
+        <div class="chpt"><div class="chpf"></div></div>
+      </div>
+      <div class="steps">
+        <div class="step"><div class="stn dn">01</div><div><div class="stt">Style Gym Review</div><div class="std">Reviewed all 3 outfit formulas for this shoe.</div><div class="stdn">✓ Completed</div></div></div>
+        <div class="step"><div class="stn">02</div><div><div class="stt">Confirm Your Style Profile</div><div class="std">Let us verify this drop matches your wardrobe gaps. Takes 20 seconds.</div><button class="btn bv bsm" style="margin-top:10px;" onclick="go('s-style')">View Profile →</button></div></div>
+        <div class="step"><div class="stn">03</div><div><div class="stt">Submit Your Look</div><div class="std">Style the Waffle Debut in your own context and share a photo.</div></div></div>
+      </div>
+      <div class="pu"><div style="font-size:22px;flex-shrink:0;">🏆</div><div><div class="put">Complete to Earn +80 Pass Points</div><div class="pud">Moves you from Challenger → Stylist tier with 48hr early access on all future drops.</div></div></div>
+      <button class="btn bv blg bfu" style="margin-bottom:12px;">Continue Challenge</button>
+      <button class="btn bow bmd bfu" style="margin-bottom:20px;">Enter Standard Queue Instead</button>
+      <div style="border-top:1px solid rgba(255,255,255,.07);padding-top:18px;">
+        <div style="font-family:var(--fm);font-size:9px;letter-spacing:.18em;color:rgba(255,255,255,.3);text-transform:uppercase;margin-bottom:10px;">How Confidence Drops Work</div>
+        <div class="hwr"><div class="hwn">1</div><div>Styling challenges open 48hrs before drop. Anyone can complete them — no lottery.</div></div>
+        <div class="hwr"><div class="hwn">2</div><div>Completing a challenge earns Confidence Pass points and queue priority.</div></div>
+        <div class="hwr"><div class="hwn">3</div><div>Standard queue always available. Passes improve odds — they don't replace fairness.</div></div>
+      </div>
+    </div>
+    <div style="height:24px;"></div>
+  </div>
+</div>
+
+<!-- ═══════════ PROFILE ═══════════ -->
+<div class="screen" id="s-profile">
+  <div class="prfh">
+    <div class="stat"><span class="st w">9:41</span><div class="si"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="2" y="7" width="16" height="10" rx="1"/><path d="M22 11v2"/></svg></div></div>
+    <div class="phav">
+      <div class="ava">BP</div>
+      <div><div class="avn">Benn P.</div><div class="ave"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1371767d7d537d7a78763d707c7e">[email&#160;protected]</a></div></div>
+    </div>
+  </div>
+  <div class="sb">
+    <div style="padding:16px 20px 8px;font-family:var(--fd);font-size:22px;letter-spacing:.04em;color:var(--t1);">Confidence Pass</div>
+    <div class="pw">
+      <div class="pwh"><span class="pwl">Confidence Pass</span><span class="pwt">Tier II — Stylist</span></div>
+      <div class="pwb">
+        <div class="pwsr"><div class="pws">340</div><div class="pwm">/ 500</div></div>
+        <div class="pwtr"><div class="pwtf"></div></div>
+        <div class="pwtl"><span>Stylist</span><span>160 pts → Curator</span></div>
+        <div class="pwu">
+          <div class="pwui on"><div class="pwuic">✓</div>48hr early queue access</div>
+          <div class="pwui on"><div class="pwuic">✓</div>Style Profile — purchase history analysis</div>
+          <div class="pwui on"><div class="pwuic">✓</div>Style challenge bonus entries</div>
+          <div class="pwui"><div class="pwuic lk" style="opacity:.3;">◯</div><span style="opacity:.35;">Curator: direct buy, no queue</span></div>
+        </div>
+      </div>
+    </div>
+    <div style="padding:0 20px 20px;">
+      <div style="font-family:var(--fd);font-size:20px;letter-spacing:.04em;margin-bottom:10px;color:var(--t1);">Tier Progression</div>
+      <div class="tr"><div class="trn">Challenger</div><div class="trp">0–99 pts</div></div>
+      <div class="tr cur"><div class="trn">Stylist</div><div class="trp">100–499 pts · Current</div></div>
+      <div class="tr"><div class="trn">Curator</div><div class="trp">500–999 pts</div></div>
+      <div class="tr" style="opacity:.45;"><div class="trn">Icon</div><div class="trp">1000+ · Invite Only</div></div>
+    </div>
+    <div class="div mx"></div>
+    <div style="padding:16px 20px 0;">
+      <div style="font-family:var(--fd);font-size:20px;letter-spacing:.04em;margin-bottom:10px;color:var(--t1);">Recent Activity</div>
+      <div class="ar"><div class="ari">👟</div><div class="arb"><div class="art">Style Gym — Waffle Debut</div><div class="ars">Completed all 3 outfit formulas · 2 days ago</div></div><div class="arp">+20</div></div>
+      <div class="ar"><div class="ari">📊</div><div class="arb"><div class="art">Style Profile Updated</div><div class="ars">Purchase history analyzed · Today</div></div><div class="arp">+40</div></div>
+      <div class="ar"><div class="ari">🏆</div><div class="arb"><div class="art">Challenge — Waffle Debut Sanddrift</div><div class="ars">1 of 3 steps · In progress</div></div><div class="arp">+80</div></div>
+      <div class="ar"><div class="ari">🛒</div><div class="arb"><div class="art">Purchased — Air Max 90</div><div class="ars">Style Profile match · Last month</div></div><div class="arp">+30</div></div>
+    </div>
+    <div class="div mx"></div>
+    <div style="padding:16px 20px 0;">
+      <div class="idx">
+        <div class="idxk">Confidence Index 2026</div>
+        <div class="idxt">What the Data<br>Says About Style</div>
+        <div class="idxd">The annual report distilled from millions of SNKRS interactions. Nike as cultural authority, not just vendor.</div>
+        <button class="btn bv bsm">Read the Report</button>
+      </div>
+    </div>
+    <div style="height:24px;"></div>
+  </div>
+</div>
+
+<!-- ═══════════ TABBAR ═══════════ -->
+<div class="tabbar">
+  <div class="tab on" id="t-feed" onclick="go('s-feed')">
+    <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Feed
+  </div>
+  <div class="tab" id="t-instk" onclick="go('s-pdp')">
+    <svg viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>In Stock
+  </div>
+  <div class="tab" id="t-drop" onclick="go('s-drop')">
+    <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Upcoming
+  </div>
+  <div class="tab" id="t-style" onclick="go('s-style')">
+    <svg viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>Style
+  </div>
+  <div class="tab" id="t-maps">
+    <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Maps
+  </div>
+  <div class="tab" id="t-prof" onclick="go('s-profile')">
+    <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Profile
+  </div>
+</div>
+
+</div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+const S2T={'s-feed':'t-feed','s-pdp':'t-instk','s-drop':'t-drop','s-style':'t-style','s-profile':'t-prof'};
+function go(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
+  const sc=document.getElementById(id);
+  if(sc){const b=sc.querySelector('.sb');if(b)b.scrollTop=0;sc.classList.add('active');}
+  const ti=S2T[id];if(ti){const t=document.getElementById(ti);if(t)t.classList.add('on');}
+}
+function ctxSw(el){el.closest('.ph').querySelectorAll('.cp').forEach(p=>p.classList.remove('on'));el.classList.add('on');}
+document.querySelectorAll('.sz:not(.xx)').forEach(b=>b.addEventListener('click',function(){
+  this.closest('.szg').querySelectorAll('.sz').forEach(x=>x.classList.remove('on'));
+  this.classList.add('on');
+  const v=document.getElementById('atc-sz');if(v)v.textContent=`· Size ${this.textContent}`;
+}));
+function addLook(b){b.textContent='Added ✓';b.style.background='#d4ff00';b.style.color='#0a0a0a';b.style.border='1px solid #d4ff00';}
+document.querySelectorAll('.fp').forEach(p=>p.addEventListener('click',function(){
+  this.closest('.fpills').querySelectorAll('.fp').forEach(x=>x.classList.remove('on'));this.classList.add('on');
+}));
+document.querySelectorAll('.qo').forEach(q=>q.addEventListener('click',function(){
+  this.closest('.qopts').querySelectorAll('.qo').forEach(x=>x.classList.remove('on'));this.classList.add('on');
+}));
+let secs=47*3600+58*60+33;
+setInterval(()=>{
+  if(secs<=0)return;secs--;
+  const h=Math.floor(secs/3600),m=Math.floor((secs%3600)/60),s=secs%60;
+  const eh=document.getElementById('cdh'),em=document.getElementById('cdm'),es=document.getElementById('cds');
+  if(eh)eh.textContent=String(h).padStart(2,'0');
+  if(em)em.textContent=String(m).padStart(2,'0');
+  if(es)es.textContent=String(s).padStart(2,'0');
+},1000);
+</script>
+</body>
+</html>

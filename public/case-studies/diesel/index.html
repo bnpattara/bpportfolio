@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Diesel Tokyo — Gravitational Pull · Benn Pattara</title>
+<style>
+/* DIESEL TOKYO — Aligned with portfolio case study template (Saks / On) */
+:root {
+  --black:     #000;
+  --white:     #fff;
+  --g100:      #f5f5f5;
+  --g200:      #e8e8e8;
+  --g300:      #ccc;
+  --g400:      #999;
+  --g500:      #666;
+  --g700:      #333;
+  --font:      'Helvetica Neue', Arial, sans-serif;
+  --ease-fast: 150ms ease;
+  --ease-base: 250ms ease;
+  --nav-h:     52px;
+  --sidenav-w: 220px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font); background: var(--white); color: var(--black); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+#site-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; background: var(--white); border-bottom: 1px solid var(--g200); }
+.nav-main { position: relative; height: 52px; padding: 0 48px; }
+.nav-left { position: absolute; left: 48px; top: 50%; transform: translateY(-50%); display: flex; gap: 28px; }
+.nav-left a { font-size: 11px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--g500); text-decoration: none; transition: color var(--ease-fast); }
+.nav-left a:hover { color: var(--black); }
+.nav-wordmark { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); font-size: 14px; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; color: var(--black); text-decoration: none; white-space: nowrap; }
+.nav-right { position: absolute; right: 48px; top: 50%; transform: translateY(-50%); }
+.nav-right a { font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--black); text-decoration: none; border-bottom: 1px solid var(--black); padding-bottom: 1px; }
+.page-body { padding-top: var(--nav-h); }
+
+/* HERO — full-bleed (matches Saks) */
+.cs-hero { position: relative; min-height: 85vh; overflow: hidden; display: flex; align-items: flex-end; }
+.cs-hero-bg { position: absolute; inset: 0; z-index: 0; background: linear-gradient(160deg, #0a0a0a 0%, #141010 40%, #0a0a0a 100%); }
+.cs-hero-bg img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
+.cs-hero-scrim { position: absolute; inset: 0; z-index: 1; background: linear-gradient(to top, rgba(0,0,0,.85) 0%, rgba(0,0,0,.4) 35%, transparent 60%); pointer-events: none; }
+.cs-hero-title-wrap { position: relative; z-index: 2; padding: 64px 56px 72px 48px; width: 100%; max-width: 900px; }
+.cs-hero-title { font-size: clamp(32px,4vw,56px); font-weight: 300; letter-spacing: .04em; text-transform: uppercase; color: var(--white); line-height: .95; margin: 0; text-shadow: 0 2px 24px rgba(0,0,0,.5); }
+.cs-hero-ghost { position: absolute; bottom: -40px; right: -30px; font-size: clamp(100px,14vw,200px); font-weight: 300; color: rgba(255,255,255,.03); letter-spacing: -.03em; line-height: 1; white-space: nowrap; pointer-events: none; text-transform: uppercase; user-select: none; z-index: 1; }
+
+.img-placeholder { background: var(--g100); border: 1px dashed var(--g300); display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 200px; padding: 24px; text-align: center; }
+.img-placeholder-num { font-size: 11px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--g400); margin-bottom: 8px; }
+.img-placeholder-desc { font-size: 11px; color: var(--g500); line-height: 1.5; max-width: 320px; }
+
+.meta-strip { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--g200); }
+.meta-strip span { padding: 14px 32px; font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: var(--g400); border-right: 1px solid var(--g200); }
+.meta-strip span:last-child { border-right: none; }
+.meta-strip span b { color: var(--black); font-weight: 600; }
+
+.cs-body-wrap { display: grid; grid-template-columns: var(--sidenav-w) 1fr; align-items: start; min-height: 100vh; }
+#cs-sidenav { position: sticky; top: var(--nav-h); height: calc(100vh - var(--nav-h)); overflow-y: auto; border-right: 1px solid var(--g200); padding: 40px 0; display: flex; flex-direction: column; background: var(--white); z-index: 50; }
+.cs-sidenav-label { font-size: 8px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--g300); padding: 0 28px 20px; }
+.cs-sidenav-link { display: flex; align-items: center; gap: 14px; padding: 12px 28px; cursor: pointer; transition: background var(--ease-fast); text-decoration: none; border-left: 2px solid transparent; color: inherit; }
+.cs-sidenav-link:hover { background: var(--g100); }
+.cs-sidenav-link.active { border-left-color: var(--black); background: var(--g100); }
+.cs-sidenav-num { font-size: 9px; font-weight: 600; letter-spacing: .12em; color: var(--g300); width: 20px; flex-shrink: 0; }
+.cs-sidenav-link.active .cs-sidenav-num { color: var(--black); }
+.cs-sidenav-text { font-size: 11px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--g400); }
+.cs-sidenav-link.active .cs-sidenav-text { color: var(--black); }
+.cs-sidenav-divider { height: 1px; background: var(--g100); margin: 8px 28px; }
+.cs-sidenav-exec { margin-top: auto; padding: 20px 28px 0; border-top: 1px solid var(--g100); }
+.cs-sidenav-exec-label { font-size: 8px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--g300); margin-bottom: 10px; }
+.cs-sidenav-exec-text { font-size: 11px; color: var(--g400); line-height: 1.7; }
+.cs-sidenav-exec-link { display: inline-block; margin-top: 10px; font-size: 9px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--black); text-decoration: none; border-bottom: 1px solid var(--black); padding-bottom: 1px; cursor: pointer; }
+
+.cs-content { min-width: 0; }
+#cs-exec-summary { padding: 64px 56px; border-bottom: 1px solid var(--g200); }
+.cs-exec-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+.cs-exec-eyebrow { font-size: 8px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--g300); margin-bottom: 16px; }
+.cs-exec-body { font-size: 13px; color: var(--g500); line-height: 1.85; margin-bottom: 32px; }
+.cs-exec-meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--g200); margin-bottom: 24px; }
+.cs-exec-meta-cell { background: var(--white); padding: 20px; }
+.cs-exec-meta-label { font-size: 8px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--g300); margin-bottom: 6px; }
+.cs-exec-meta-val { font-size: 12px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; color: var(--black); }
+
+.cs-section { padding: 72px 56px; border-bottom: 1px solid #f0f0f0; }
+.cs-section-alt { background: var(--g100); }
+.cs-section-eyebrow { display: flex; align-items: center; gap: 14px; margin-bottom: 28px; }
+.cs-section-num { font-size: 9px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--g300); }
+.cs-section-title { font-size: 11px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--black); }
+.cs-heading { font-size: clamp(22px,2.5vw,30px); font-weight: 400; letter-spacing: .03em; text-transform: uppercase; color: var(--black); line-height: 1.1; margin-bottom: 28px; }
+.cs-body { font-size: 15px; color: var(--g500); line-height: 1.8; margin-bottom: 20px; }
+.cs-body:last-child { margin-bottom: 0; }
+.cs-pull-quote { font-size: clamp(20px,2.2vw,28px); font-weight: 300; font-style: italic; color: var(--black); line-height: 1.4; border-left: 2px solid var(--black); padding-left: 28px; margin-bottom: 28px; }
+.cs-body-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 28px; }
+.cs-body-2col p { font-size: 13px; color: var(--g500); line-height: 1.75; }
+
+/* Accusation cards */
+.acc-card { border: 1px solid var(--g200); background: var(--white); padding: 28px 28px 24px; margin-bottom: 16px; position: relative; }
+.acc-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: var(--g200); }
+.acc-card.live::before { background: var(--black); }
+.acc-label { font-size: 8px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--g400); margin-bottom: 12px; }
+.acc-text { font-size: 15px; font-weight: 400; line-height: 1.6; letter-spacing: .02em; color: var(--g700); }
+.acc-text span { color: var(--black); }
+
+/* Harajuku split */
+.hara-split { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--g200); }
+.hara-col { padding: 40px 32px; border-right: 1px solid var(--g200); }
+.hara-col:last-child { border-right: none; }
+.hara-era { font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--g400); margin-bottom: 16px; }
+.hara-era.now { color: var(--black); font-weight: 700; }
+.hara-h { font-size: clamp(22px,2.5vw,30px); font-weight: 400; letter-spacing: .03em; text-transform: uppercase; line-height: 1.1; margin-bottom: 16px; color: var(--black); }
+
+/* Thesis pill */
+.thesis-pill { border: 1px solid var(--g200); padding: 20px 32px; max-width: 680px; margin: 0 auto; text-align: center; }
+.thesis-pill-label { font-size: 8px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--g400); margin-bottom: 12px; }
+.thesis-pill-text { font-size: clamp(18px,2.2vw,26px); font-weight: 400; line-height: 1.3; letter-spacing: .03em; text-transform: uppercase; color: var(--black); }
+.thesis-pill-text em { font-style: italic; font-weight: 300; }
+
+/* Token block */
+.token-block { border: 1px solid var(--g200); background: var(--g100); padding: 32px; margin-top: 28px; display: flex; align-items: center; gap: 32px; }
+.token-circle { width: 96px; height: 96px; border-radius: 50%; border: 1px solid var(--g200); background: var(--g100); display: flex; flex-direction: column; align-items: center; justify-content: center; flex-shrink: 0; }
+.token-text { font-size: 9px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--g500); text-align: center; line-height: 1.4; }
+.token-year { font-size: 8px; letter-spacing: .1em; color: var(--g400); margin-top: 4px; }
+.token-desc { font-size: 13px; line-height: 1.75; color: var(--g500); }
+.token-desc strong { color: var(--black); font-weight: 500; }
+
+/* Objection block */
+.objection-block { background: var(--g100); border: 1px solid var(--g200); border-top: 1px solid var(--black); }
+.obj-q { padding: 28px 32px 20px; border-bottom: 1px solid var(--g200); }
+.obj-q-label { font-size: 8px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--g400); margin-bottom: 10px; }
+.obj-q-text { font-size: 20px; font-weight: 700; line-height: 1.2; letter-spacing: -.01em; color: var(--g500); font-style: italic; }
+.obj-a { padding: 28px 32px; }
+.obj-a-label { font-size: 8px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--g400); margin-bottom: 10px; }
+.obj-a-text { font-size: 18px; font-weight: 500; line-height: 1.35; letter-spacing: .03em; text-transform: uppercase; color: var(--black); }
+.obj-a-text em { font-style: italic; font-weight: 400; }
+.obj-sub { margin-top: 14px; font-size: 13px; line-height: 1.75; color: var(--g500); }
+
+/* Content acts */
+.content-acts { border-top: 1px solid var(--g200); }
+.act-row { display: grid; grid-template-columns: 72px 1fr; border-bottom: 1px solid var(--g200); min-height: 120px; transition: background var(--ease-fast); }
+.act-row:last-child { border-bottom: none; }
+.act-row:hover { background: var(--g100); }
+.act-num { border-right: 1px solid var(--g200); display: flex; align-items: center; justify-content: center; font-size: 42px; font-weight: 300; letter-spacing: -.03em; color: var(--g300); transition: color var(--ease-fast); }
+.act-row:hover .act-num { color: var(--black); }
+.act-body { padding: 28px 32px; }
+.act-title { font-size: 18px; font-weight: 500; letter-spacing: .04em; text-transform: uppercase; margin-bottom: 10px; color: var(--black); }
+.act-desc { font-size: 13px; line-height: 1.75; color: var(--g500); }
+.act-desc strong { color: var(--black); font-weight: 500; }
+
+/* Floor layout */
+.floor { display: grid; grid-template-columns: 72px 1fr 1fr; border-bottom: 1px solid var(--g200); min-height: 420px; }
+.floor:last-child { border-bottom: none; }
+.floor-spine { border-right: 1px solid var(--g200); display: flex; flex-direction: column; align-items: center; padding: 36px 0; gap: 10px; }
+.f-num { font-size: 48px; font-weight: 300; letter-spacing: -.04em; line-height: 1; color: var(--g300); transition: color var(--ease-fast); }
+.floor:hover .f-num { color: var(--black); }
+.f-vert { font-size: 7px; letter-spacing: .16em; text-transform: uppercase; color: var(--g400); writing-mode: vertical-lr; transform: rotate(180deg); }
+.floor-info { padding: 44px 32px; border-right: 1px solid var(--g200); display: flex; flex-direction: column; }
+.f-kicker { font-size: 9px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--g400); margin-bottom: 12px; }
+.f-name { font-size: clamp(22px,2.5vw,30px); font-weight: 400; letter-spacing: .03em; text-transform: uppercase; line-height: 1.1; margin-bottom: 24px; color: var(--black); }
+.f-desc { font-size: 13px; line-height: 1.8; color: var(--g500); flex: 1; }
+.f-desc strong { color: var(--black); font-weight: 500; }
+.f-desc em { font-style: italic; }
+.f-strategy { margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--g200); }
+.f-s-label { font-size: 8px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--g400); margin-bottom: 8px; }
+.f-s-text { font-size: 12px; line-height: 1.72; color: var(--g500); font-style: italic; }
+.f-s-text strong { color: var(--g700); font-style: normal; font-weight: 500; }
+.f-phone-badge { display: inline-flex; align-items: center; gap: 8px; margin-top: 18px; font-size: 8px; letter-spacing: .14em; text-transform: uppercase; padding: 6px 12px; border: 1px solid var(--g200); color: var(--g500); }
+.f-phone-badge.off { border-color: var(--g300); color: var(--g700); background: var(--g100); }
+.f-phone-badge.on { border-color: var(--g200); color: var(--g500); }
+.badge-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--g400); }
+.f-phone-badge.off .badge-dot { background: var(--black); }
+.f-phone-badge.on .badge-dot { background: var(--g400); }
+.floor-visual { overflow: hidden; position: relative; }
+.floor-visual img { width: 100%; height: 100%; object-fit: cover; min-height: 320px; }
+.fv-tag { position: absolute; bottom: 16px; left: 16px; z-index: 2; font-size: 8px; letter-spacing: .12em; text-transform: uppercase; color: var(--g400); background: rgba(255,255,255,.9); padding: 5px 9px; border: 1px solid var(--g200); }
+
+/* Market stats */
+.market-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--g200); margin-bottom: 28px; }
+.m-cell { padding: 52px 32px; background: var(--white); }
+.m-big { font-size: clamp(42px,5vw,72px); font-weight: 300; line-height: 1; letter-spacing: -.03em; margin-bottom: 6px; color: var(--black); }
+.m-big span { color: var(--black); font-weight: 500; }
+.m-unit { font-size: 8.5px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--g400); margin-bottom: 18px; }
+.m-desc { font-size: 12px; line-height: 1.75; color: var(--g500); }
+
+/* Competitor table */
+.comp-wrap { border-top: 1px solid var(--g200); }
+.comp-row { display: grid; grid-template-columns: 140px 1fr 100px 80px; gap: 24px; align-items: center; padding: 18px 32px; border-bottom: 1px solid var(--g200); transition: background var(--ease-fast); }
+.comp-row:hover { background: var(--g100); }
+.comp-row.hdr { background: var(--g100); padding: 12px 32px; }
+.comp-row.hdr span { font-size: 8px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--g400); }
+.c-brand { font-size: 17px; font-weight: 700; text-transform: uppercase; letter-spacing: -.01em; color: var(--black); }
+.c-move { font-size: 12px; line-height: 1.65; color: var(--g500); }
+.c-loc { font-size: 9px; color: var(--g400); letter-spacing: .06em; }
+.c-yr { font-size: 20px; font-weight: 700; color: var(--g300); letter-spacing: -.02em; }
+.comp-row.diesel .c-brand, .comp-row.diesel .c-loc, .comp-row.diesel .c-yr { color: var(--black); font-weight: 700; }
+
+/* Returns list */
+.ret-item { padding: 26px 0; border-bottom: 1px solid var(--g200); }
+.ret-item:first-child { padding-top: 0; }
+.ret-item:last-child { border-bottom: none; padding-bottom: 0; }
+.ret-n { font-size: 9px; font-weight: 600; letter-spacing: .18em; color: var(--g400); margin-bottom: 7px; text-transform: uppercase; }
+.ret-title { font-size: 18px; font-weight: 500; letter-spacing: .04em; text-transform: uppercase; margin-bottom: 8px; color: var(--black); }
+.ret-body { font-size: 12px; line-height: 1.75; color: var(--g500); }
+
+/* Image pair */
+.img-pair { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--g200); }
+.img-cell { height: 380px; overflow: hidden; position: relative; border-right: 1px solid var(--g200); }
+.img-cell:last-child { border-right: none; }
+.img-cell img { width: 100%; height: 100%; object-fit: cover; }
+.img-cap { position: absolute; bottom: 16px; left: 18px; z-index: 2; font-size: 8px; letter-spacing: .12em; text-transform: uppercase; color: var(--white); background: rgba(0,0,0,.65); padding: 6px 10px; }
+
+.cs-stats { display: grid; gap: 1px; background: var(--g200); margin-bottom: 28px; }
+.cs-stats-3 { grid-template-columns: repeat(3,1fr); }
+.cs-stat-cell { background: var(--white); padding: 28px 24px; }
+.cs-stat-eyebrow { font-size: 9px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--g300); margin-bottom: 12px; }
+.cs-stat-num { font-size: 48px; font-weight: 300; color: var(--black); letter-spacing: -.02em; line-height: 1; margin-bottom: 8px; }
+.cs-stat-label { font-size: 12px; color: var(--g500); line-height: 1.65; }
+
+.outcome-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--g200); margin-bottom: 32px; }
+.outcome-stat { background: var(--white); padding: 28px 24px; border-top: 3px solid var(--black); }
+.outcome-stat-num { font-size: 52px; font-weight: 300; color: var(--black); letter-spacing: -.02em; line-height: 1; margin-bottom: 10px; }
+.outcome-stat-label { font-size: 12px; color: var(--g500); line-height: 1.65; }
+.cs-next { border-top: 1px solid var(--g200); padding-top: 32px; display: flex; justify-content: space-between; align-items: center; margin-top: 40px; }
+.cs-next-label { font-size: 9px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--g300); }
+.cs-next-link { text-align: right; text-decoration: none; display: block; }
+.cs-next-meta { font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: var(--g400); margin-bottom: 5px; }
+.cs-next-title { font-size: 22px; font-weight: 400; letter-spacing: .04em; text-transform: uppercase; color: var(--black); transition: color var(--ease-fast); }
+.cs-next-link:hover .cs-next-title { color: var(--g500); }
+footer { background: var(--black); padding: 32px 48px; display: flex; justify-content: space-between; align-items: center; }
+.footer-id { display: flex; flex-direction: column; gap: 4px; }
+.footer-name { font-size: 12px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--white); }
+.footer-role { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.28); }
+.footer-links { display: flex; gap: 24px; }
+.footer-link { font-size: 10px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.35); text-decoration: none; transition: color var(--ease-fast); }
+.footer-link:hover { color: var(--white); }
+.footer-copy { font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: rgba(255,255,255,.18); }
+#scroll-progress { position: fixed; top: 0; left: 0; height: 2px; background: var(--black); width: 0%; z-index: 300; transition: width 100ms linear; }
+
+/* Divider */
+.cs-divider { display: flex; align-items: center; gap: 16px; padding: 24px 56px; border-bottom: 1px solid var(--g200); }
+.cs-divider-text { font-size: 8px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--g400); white-space: nowrap; }
+.cs-divider-line { flex: 1; height: 1px; background: var(--g200); }
+.cs-divider-end { font-size: 8px; letter-spacing: .12em; color: var(--g400); white-space: nowrap; }
+
+@media (max-width: 1024px) {
+  .cs-hero { grid-template-columns: 1fr; }
+  .cs-hero-r { min-height: 50vh; }
+  .floor { grid-template-columns: 56px 1fr; }
+  .floor-visual { display: none; }
+  .market-stats { grid-template-columns: 1fr; }
+  .hara-split { grid-template-columns: 1fr; }
+  .img-pair { grid-template-columns: 1fr; }
+  .meta-strip { grid-template-columns: 1fr; }
+  .comp-row { grid-template-columns: 1fr 1fr 80px; }
+  .comp-row .c-move { grid-column: 1 / -1; }
+}
+</style>
+</head>
+<body>
+<div id="scroll-progress"></div>
+
+<nav id="site-nav">
+  <div class="nav-main">
+    <div class="nav-left">
+      <a href="/#work" target="_parent">Work</a>
+      <a href="/#about" target="_parent">About</a>
+      <a href="/blog" target="_parent">Blog</a>
+      <a href="/13" target="_parent">13</a>
+    </div>
+    <a href="/" class="nav-wordmark" target="_parent">Benn Pattara</a>
+    <div class="nav-right"><a href="/#contact" target="_parent">Contact</a></div>
+  </div>
+</nav>
+
+<div class="page-body">
+
+  <!-- HERO — full-bleed (matches Saks) -->
+  <section class="cs-hero" id="cs-hero">
+    <div class="cs-hero-ghost">Diesel</div>
+    <div class="cs-hero-bg">
+      <img src="diesel_hero.png" alt="Diesel Tokyo — Gravitational Pull">
+    </div>
+    <div class="cs-hero-scrim"></div>
+    <div class="cs-hero-title-wrap">
+      <h1 class="cs-hero-title">Diesel Tokyo:<br>Gravitational Pull</h1>
+    </div>
+  </section>
+
+  <div class="cs-body-wrap">
+    <aside id="cs-sidenav">
+      <div class="cs-sidenav-label">Index</div>
+      <a class="cs-sidenav-link active" data-target="cs-exec-summary" onclick="scrollToSection('cs-exec-summary')"><span class="cs-sidenav-num">00</span><span class="cs-sidenav-text">Exec Summary</span></a>
+      <div class="cs-sidenav-divider"></div>
+      <a class="cs-sidenav-link" data-target="cs-section-01" onclick="scrollToSection('cs-section-01')"><span class="cs-sidenav-num">01</span><span class="cs-sidenav-text">The Enemy</span></a>
+      <a class="cs-sidenav-link" data-target="cs-section-02" onclick="scrollToSection('cs-section-02')"><span class="cs-sidenav-num">02</span><span class="cs-sidenav-text">The Concept</span></a>
+      <a class="cs-sidenav-link" data-target="cs-section-03" onclick="scrollToSection('cs-section-03')"><span class="cs-sidenav-num">03</span><span class="cs-sidenav-text">The Provocation</span></a>
+      <a class="cs-sidenav-link" data-target="cs-section-04" onclick="scrollToSection('cs-section-04')"><span class="cs-sidenav-num">04</span><span class="cs-sidenav-text">The Floors</span></a>
+      <a class="cs-sidenav-link" data-target="cs-section-05" onclick="scrollToSection('cs-section-05')"><span class="cs-sidenav-num">05</span><span class="cs-sidenav-text">Market</span></a>
+      <a class="cs-sidenav-link" data-target="cs-section-06" onclick="scrollToSection('cs-section-06')"><span class="cs-sidenav-num">06</span><span class="cs-sidenav-text">Returns</span></a>
+      <a class="cs-sidenav-link" data-target="cs-outcome" onclick="scrollToSection('cs-outcome')"><span class="cs-sidenav-num">07</span><span class="cs-sidenav-text">Close</span></a>
+      <div class="cs-sidenav-exec">
+        <div class="cs-sidenav-exec-label">TL;DR</div>
+        <p class="cs-sidenav-exec-text">Find out who you are first. Post later. Tokyo isn't an expansion — it's the first physical space designed to match what Diesel now actually is.</p>
+        <span class="cs-sidenav-exec-link" style="cursor:pointer" onclick="scrollToSection('cs-exec-summary')">Read summary →</span>
+      </div>
+    </aside>
+
+    <div class="cs-content">
+
+      <!-- 00 EXECUTIVE SUMMARY -->
+      <section id="cs-exec-summary" data-cs-section="exec-summary">
+        <div class="cs-exec-inner">
+          <div>
+            <div class="cs-exec-eyebrow">Executive Summary</div>
+            <p class="cs-exec-body">Diesel has reclaimed the cultural conversation under Glenn Martens. But physical retail hasn't kept pace. Tokyo isn't an expansion — it's the first physical space designed to match what Diesel now actually is, and to dare the people who wear it to find out who they actually are.</p>
+            <p class="cs-exec-body">The concept: Gravitational Pull. A five-floor flagship in Harajuku — phone-free retail floors, Denim Lab, Café 1978, Ghiaccio Ice Bar. 10% product, 90% soul. The thesis: <em>Find out who you are first. Post later.</em></p>
+          </div>
+          <div>
+            <div class="cs-exec-meta-grid">
+              <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Client</div><div class="cs-exec-meta-val">Diesel S.p.A.</div></div>
+              <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Year</div><div class="cs-exec-meta-val">F25</div></div>
+              <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Role</div><div class="cs-exec-meta-val">Brand Strategist / Creative Director</div></div>
+              <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Goal</div><div class="cs-exec-meta-val">Market Expansion · Brand Equity</div></div>
+              <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Deliverables</div><div class="cs-exec-meta-val">Tokyo Flagship Concept · Spatial Narrative</div></div>
+              <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Tools</div><div class="cs-exec-meta-val">Strategy · Creative Direction</div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 01 THE ENEMY -->
+      <section class="cs-section" id="cs-section-01" data-cs-section="section-01">
+        <div class="cs-section-eyebrow"><span class="cs-section-num">01</span><span class="cs-section-title">The Strategic Tension</span></div>
+        <h2 class="cs-heading">Diesel is against the pose.</h2>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-bottom:32px;">
+          <div>
+            <p class="cs-body">In 2025, self-expression has become the most carefully managed performance in the world. The algorithm decides what's brave. The feed decides what's authentic. Even the "weird" looks are weird in pre-approved ways — rebellious within acceptable parameters, optimized for approval from people who aren't in the room.</p>
+            <p class="cs-body"><strong>Diesel's enemy isn't conformity.</strong> The brand has always known conformity is a boring target. <em>The real enemy is fake nonconformity</em> — the three-hour "effortless" fit, the "I don't care what people think" outfit engineered for 50K likes. The performance of a self that hasn't been decided yet.</p>
+            <p class="cs-body">Diesel has always made clothes for people who have actually decided. <strong>The Tokyo flagship is built to help people get there.</strong></p>
+          </div>
+          <div>
+            <div class="acc-card">
+              <div class="acc-label">What The Industry Does</div>
+              <div class="acc-text">Brands build "Instagrammable moments."<br>They lay out a red carpet <span>for your phone.</span></div>
+            </div>
+            <div class="acc-card">
+              <div class="acc-label">What The Consumer Does</div>
+              <div class="acc-text">Dresses for an audience<br>that isn't in the room.<br><span>Performs. Never decides.</span></div>
+            </div>
+            <div class="acc-card live">
+              <div class="acc-label">What Diesel Does</div>
+              <div class="acc-text">Removes the apparatus.<br>Forces the question.<br><span>Find out who you are first.</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cs-divider">
+          <span class="cs-divider-text">The Cultural Context</span>
+          <div class="cs-divider-line"></div>
+          <span class="cs-divider-end">Harajuku — Then & Now</span>
+        </div>
+
+        <div class="hara-split">
+          <div class="hara-col">
+            <div class="hara-era">1980s – 2010s</div>
+            <div class="hara-h">The Original Permission Zone</div>
+            <p class="cs-body">Harajuku was Tokyo's designated rupture — the street where <strong>honne</strong> (the true self) was allowed to show in a culture that elsewhere required the mask. The kids on Takeshita Street dressed for each other, for the physical moment, for no audience that wasn't present. It was the most authentic expression culture Japan had produced in decades.</p>
+          </div>
+          <div class="hara-col">
+            <div class="hara-era now">Now</div>
+            <div class="hara-h">Colonised By The Feed</div>
+            <p class="cs-body">The Takeshita Street kids are largely gone. Instagram replaced the street. The looks are still wild — but they're performing for an algorithm, not for each other. <strong>The authentic space that Harajuku once was has been consumed by the same performative self-expression that Diesel is against globally.</strong></p>
+            <p class="cs-body"><em>Diesel Tokyo is a reclamation.</em> The flagship exists where the original permission zone existed — to rebuild the space where you find out who you are before you tell everyone about it.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 02 THE CONCEPT -->
+      <section class="cs-section cs-section-alt" id="cs-section-02" data-cs-section="section-02">
+        <div class="cs-section-eyebrow"><span class="cs-section-num">02</span><span class="cs-section-title">The Strategic Concept</span></div>
+        <h2 class="cs-heading">The first flagship optimised for self-knowledge.</h2>
+        <p class="cs-body">Every other brand has spent the last decade optimising their stores for content creation — better lighting for fit checks, designated photo walls, engineered "moments." <strong>Diesel Tokyo does the opposite.</strong> It is designed to strip away the apparatus of performed self-expression and force a more fundamental question: who are you when nobody's watching?</p>
+        <div class="thesis-pill" style="margin-top:36px;">
+          <div class="thesis-pill-label">The Strategic Thesis</div>
+          <div class="thesis-pill-text">
+            We don't need you to see it. <em>We need you to feel it.</em><br>
+            Find out who you are first. Post later.
+          </div>
+        </div>
+      </section>
+
+      <!-- 03 THE PROVOCATION -->
+      <section class="cs-section" id="cs-section-03" data-cs-section="section-03">
+        <div class="cs-section-eyebrow"><span class="cs-section-num">03</span><span class="cs-section-title">The Central Provocation</span></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;">
+          <div>
+            <h2 class="cs-heading">The retail floors are phone-free.</h2>
+            <p class="cs-body">Not as a wellness gimmick. Not as a luxury status signal. <strong>As a genuine provocation with a specific argument:</strong> you have been dressing for your phone so long, you've forgotten what it feels like to dress for yourself.</p>
+            <p class="cs-body">At entry, your phone is checked via a beautifully designed coat-check system — brass hooks, numbered slots, a tactile ritual. In return, you receive a brass token. <em>The last branded object you'll hold before you enter. The first thing you photograph when you leave.</em></p>
+            <div class="token-block">
+              <div class="token-circle">
+                <div class="token-text">FOR<br>SUCCESSFUL<br>LIVING</div>
+                <div class="token-year">1978 ↗</div>
+              </div>
+              <div class="token-desc">
+                <strong>The Brass Token.</strong> Stamped with the brand's founding ethos. Milled from solid brass. Yours to keep. The first object in the building is also the only one with no price tag — because <strong>the decision to enter is the most valuable thing you'll do here.</strong>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="objection-block">
+              <div class="obj-q">
+                <div class="obj-q-label">CEO / Shareholder Objection</div>
+                <div class="obj-q-text">"If nobody's on their phone, how does this go viral?"</div>
+              </div>
+              <div class="obj-a">
+                <div class="obj-a-label">The Answer</div>
+                <div class="obj-a-text">We're not stopping people from posting about us. <em>We're making sure that when they do, they actually have something to say.</em></div>
+                <p class="obj-sub">People don't post about seamless experiences. They post about experiences that made them feel something they didn't expect. The content from inside Ghiaccio — earned, after an hour phone-free — is worth 400 times the post from a brand activation with a flower wall. Scarcity creates desire. <strong>Friction creates stories.</strong></p>
+              </div>
+            </div>
+
+            <div class="cs-section-eyebrow" style="margin-top:36px;margin-bottom:16px;"><span class="cs-section-num">—</span><span class="cs-section-title">The Three-Act Content Engine</span></div>
+            <p class="cs-body" style="max-width:420px;margin-bottom:24px;">The phone-free floors don't kill the content pipeline. They upgrade it into three distinct acts.</p>
+
+            <div class="content-acts">
+              <div class="act-row">
+                <div class="act-num">1</div>
+                <div class="act-body">
+                  <div class="act-title">Before You Enter</div>
+                  <p class="act-desc">The phone check-in <strong>is</strong> the first content. The brass token, the ritual of surrender, the decision to go in — people document themselves giving up their phone more enthusiastically than they document themselves shopping.</p>
+                </div>
+              </div>
+              <div class="act-row">
+                <div class="act-num">2</div>
+                <div class="act-body">
+                  <div class="act-title">The Absence</div>
+                  <p class="act-desc">Nothing generates more content than a conspicuous absence from content. <strong>"I just spent an hour phone-free in Diesel Tokyo and I don't know how to describe what happened but—"</strong> That sentence writes itself. Anticipation content, reflection content, "I need to go back" content.</p>
+                </div>
+              </div>
+              <div class="act-row">
+                <div class="act-num">3</div>
+                <div class="act-body">
+                  <div class="act-title">Ghiaccio — The Reward</div>
+                  <p class="act-desc">The top floor is fully phone-enabled. But by then, the person posting has spent an hour making real decisions about who they are without algorithmic input. <strong>The content from Ghiaccio will read differently — slower, more considered, more authentic.</strong></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 04 THE FLOORS -->
+      <section class="cs-section cs-section-alt" id="cs-section-04" data-cs-section="section-04">
+        <div class="cs-divider">
+          <span class="cs-divider-text">04 — The Building</span>
+          <div class="cs-divider-line"></div>
+          <span class="cs-divider-end">Five Floors / One Descent</span>
+        </div>
+
+        <div class="floor">
+          <div class="floor-spine"><div class="f-num">F1</div><div class="f-vert">Street Level</div></div>
+          <div class="floor-info">
+            <div><div class="f-kicker">Entry — The Provocation Begins</div><div class="f-name">High-Velocity Retail</div></div>
+            <p class="f-desc">The ground floor runs at full commercial intensity — but in a gallery setting. Lighting is calibrated for the body, not the phone. <strong>There are no mirrors on the floor.</strong> The Cash Wrap is carved from rough-hewn volcanic stone. Product is displayed with the restraint of a concept store. <em>Welcome to the building. It already has a point of view.</em></p>
+            <div class="f-strategy"><div class="f-s-label">Strategic Intent</div><div class="f-s-text"><strong>Close the gap between creative output and physical environment.</strong> The first thing a customer feels is the disconnect between what they expected and what they walked into. That gap converts before a word is spoken.</div></div>
+            <div class="f-phone-badge off"><div class="badge-dot"></div>Phone-Free Floor</div>
+          </div>
+          <div class="floor-visual"><img src="diesel-038.jpg" alt="F1 — High Velocity Retail"><div class="fv-tag">F1 — Gallery Retail</div></div>
+        </div>
+
+        <div class="floor">
+          <div class="floor-spine"><div class="f-num">F2</div><div class="f-vert">The Edit</div></div>
+          <div class="floor-info">
+            <div><div class="f-kicker">Considered Selection — Premium Lines</div><div class="f-name">The Edit</div></div>
+            <p class="f-desc">One wall. Forty pieces. No racks. <strong>A stylist — not a sales associate — who opens with one question: what version of yourself are you not wearing yet?</strong> Richer materials: dark walnut, hammered brass, black marble with gold kintsugi joinery. <em>The Japanese art of repair with gold, applied to a brand that has broken and rebuilt itself.</em></p>
+            <div class="f-strategy"><div class="f-s-label">Strategic Intent</div><div class="f-s-text"><strong>Reposition Diesel within the premium tier.</strong> Japan's luxury buyer purchases for intrinsic self-reward, not status signaling. Without a phone to check, the only input is the fabric, the stylist, and the question they asked you at the door.</div></div>
+            <div class="f-phone-badge off"><div class="badge-dot"></div>Phone-Free Floor</div>
+          </div>
+          <div class="floor-visual"><img src="diesel-046.jpg" alt="F2 — The Edit"><div class="fv-tag">F2 — The Edit</div></div>
+        </div>
+
+        <div class="floor">
+          <div class="floor-spine"><div class="f-num">F3</div><div class="f-vert">Denim Lab</div></div>
+          <div class="floor-info">
+            <div><div class="f-kicker">Co-Creation — The Destruction Ceremony</div><div class="f-name">Denim Lab</div></div>
+            <p class="f-desc">A glass-walled theater of craftsmanship. The signature experience: <strong>The Destruction Ceremony.</strong> Bring in your most worn-out pair of jeans — any brand. An artisan documents them, repairs or transforms them. The documentation — a physical artifact printed on-site — is yours to keep. <em>Your jeans as autobiography.</em> Completed pieces are vacuum-sealed in "Diesel Edited Denim" packaging.</p>
+            <div class="f-strategy"><div class="f-s-label">Strategic Intent</div><div class="f-s-text"><strong>Monetise craft and embed loyalty at the product level.</strong> A garment someone helped make isn't returned. The Destruction Ceremony maps to Japanese <em>monozukuri</em> — the art of making things with care.</div></div>
+            <div class="f-phone-badge off"><div class="badge-dot"></div>Phone-Free Floor</div>
+          </div>
+          <div class="floor-visual"><img src="diesel-064.jpg" alt="F3 — Denim Lab"><div class="fv-tag">F3 — Denim Lab</div></div>
+        </div>
+
+        <div class="floor">
+          <div class="floor-spine"><div class="f-num">F4</div><div class="f-vert">Archive</div></div>
+          <div class="floor-info">
+            <div><div class="f-kicker">Brand Heritage — Café 1978</div><div class="f-name">Café 1978 + The Banned Shelf</div></div>
+            <p class="f-desc">Named for the founding year. A coworking café built around a curated library of the brand's visual history. <strong>At the centre: The Banned Shelf.</strong> Every campaign Diesel has ever had pulled, censored, or officially complained about — displayed in full. With the complaint letters mounted alongside. <em>Italian warmth and Tokyo's appetite for third-place culture, wrapped around a brand that has always known that being complained about means you said something real.</em></p>
+            <div class="f-strategy"><div class="f-s-label">Strategic Intent</div><div class="f-s-text"><strong>Convert non-purchasers into brand loyalists through provocation-as-education.</strong> The Banned Shelf is the most efficient brand-building asset in the building.</div></div>
+            <div class="f-phone-badge off"><div class="badge-dot"></div>Phone-Free Floor</div>
+          </div>
+          <div class="floor-visual"><img src="diesel-086.jpg" alt="F4 — Café 1978"><div class="fv-tag">F4 — Café 1978</div></div>
+        </div>
+
+        <div class="floor">
+          <div class="floor-spine"><div class="f-num">F5</div><div class="f-vert">Ghiaccio</div></div>
+          <div class="floor-info">
+            <div><div class="f-kicker">Premier Dining — The Social Apex</div><div class="f-name">Ghiaccio Ice Bar</div></div>
+            <p class="f-desc">The building's apex. A monolithic bar constructed from molded glass, internally cooled to appear perpetually frozen. <strong>Phones fully permitted.</strong> Because by this point, the person posting has earned it. Kintsugi gold seams run through the walls — brokenness as beauty. One-page menu. Handwritten in Italian. No English translation unless you ask. <em>The friction is the point.</em></p>
+            <div class="f-strategy"><div class="f-s-label">Strategic Intent</div><div class="f-s-text"><strong>The top of the building is the reward for going further than you planned.</strong> The "Ghiaccio Table" becomes Tokyo's most coveted reservation precisely because it isn't easy to reach.</div></div>
+            <div class="f-phone-badge on"><div class="badge-dot"></div>Phones Permitted — You Earned It</div>
+          </div>
+          <div class="floor-visual"><img src="diesel-106.jpg" alt="F5 — Ghiaccio"><div class="fv-tag">F5 — Ghiaccio</div></div>
+        </div>
+      </section>
+
+      <!-- Image pair -->
+      <div class="img-pair">
+        <div class="img-cell">
+          <img src="diesel-130.jpg" alt="Denim napkins and kintsugi placemats at Ghiaccio">
+          <div class="img-cap">Ghiaccio — Denim Napkins / Kintsugi Placemats</div>
+        </div>
+        <div class="img-cell">
+          <img src="diesel-128.jpg" alt="Gold-rim crystal glassware at Ghiaccio bar">
+          <div class="img-cap">Ghiaccio — Custom Gold-Rim Crystal Service</div>
+        </div>
+      </div>
+
+      <!-- 05 MARKET -->
+      <section class="cs-section" id="cs-section-05" data-cs-section="section-05">
+        <div class="cs-divider">
+          <span class="cs-divider-text">05 — Why Tokyo, Why Now</span>
+          <div class="cs-divider-line"></div>
+          <span class="cs-divider-end">Market Rationale</span>
+        </div>
+        <div class="market-stats">
+          <div class="m-cell">
+            <div class="m-big"><span>4</span>th</div>
+            <div class="m-unit">World's Largest Economy</div>
+            <p class="m-desc">Japan's luxury market has demonstrated consistent resilience. Consumers contribute a disproportionate share to the global profitability of every major luxury brand operating here.</p>
+          </div>
+          <div class="m-cell">
+            <div class="m-big">Self<span>↗</span></div>
+            <div class="m-unit">Primary Purchase Motivation</div>
+            <p class="m-desc">Japanese luxury buyers purchase for intrinsic quality and personal reward — not status signaling. This maps directly onto Diesel's "For Successful Living" ethos. The cultural alignment is structural.</p>
+          </div>
+          <div class="m-cell">
+            <div class="m-big">Hara<span>—</span></div>
+            <div class="m-unit">Juku / The Original Site</div>
+            <p class="m-desc">Harajuku is chosen because it is the original site of authentic self-expression in Tokyo — the neighborhood Diesel's concept is explicitly reclaiming. Location as argument, not just real estate.</p>
+          </div>
+        </div>
+
+        <div class="comp-wrap">
+          <div class="cs-divider"><span class="cs-divider-text">Competitive Context — Recent Tokyo Flagship Entries</span><div class="cs-divider-line"></div></div>
+          <div class="comp-row hdr">
+            <span>Brand</span><span>Strategic Move</span><span>District</span><span>Year</span>
+          </div>
+          <div class="comp-row">
+            <div class="c-brand">Calvin Klein</div>
+            <div class="c-move">Largest lifestyle store globally. Minimalism merged with Japanese craft. Cultural and commercial destination.</div>
+            <div class="c-loc">Harajuku</div>
+            <div class="c-yr">2025</div>
+          </div>
+          <div class="comp-row">
+            <div class="c-brand">Jordan Brand</div>
+            <div class="c-move">Second worldwide flagship — Tokyo chosen for its role in defining global streetwear credibility.</div>
+            <div class="c-loc">Harajuku</div>
+            <div class="c-yr">Recent</div>
+          </div>
+          <div class="comp-row">
+            <div class="c-brand">Louis Vuitton</div>
+            <div class="c-move">Full renovation of iconic Ginza boutique. Reaffirming physical retail commitment amid global e-com shift.</div>
+            <div class="c-loc">Ginza</div>
+            <div class="c-yr">2021</div>
+          </div>
+          <div class="comp-row">
+            <div class="c-brand">Gucci</div>
+            <div class="c-move">Second Tokyo flagship. Japan remains one of Gucci's most profitable and brand-critical markets.</div>
+            <div class="c-loc">Ginza</div>
+            <div class="c-yr">2021</div>
+          </div>
+          <div class="comp-row diesel">
+            <div class="c-brand">Diesel ↗</div>
+            <div class="c-move">The Iceberg — Harajuku's first phone-free flagship. A cultural reclamation. The first store designed entirely in Glenn Martens' creative era.</div>
+            <div class="c-loc">Harajuku</div>
+            <div class="c-yr">F25</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 06 RETURNS -->
+      <section class="cs-section cs-section-alt" id="cs-section-06" data-cs-section="section-06">
+        <div class="cs-section-eyebrow"><span class="cs-section-num">06</span><span class="cs-section-title">The Business Case</span></div>
+        <h2 class="cs-heading">What the building returns.</h2>
+        <p class="cs-body">A flagship of this scale is not primarily a retail unit. It is an infrastructure investment in brand equity — the kind that pays out across every market, every product line, for years after opening. <strong>The real value is what happens to the brand's position globally when this exists.</strong></p>
+        <p class="cs-body">One number worth holding: the brands that have committed flagship infrastructure to Japan have reported Japan as a top-three market for global profitability within 36 months.</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:40px;">
+          <div>
+            <div class="ret-item">
+              <div class="ret-n">Return 01 — Brand Equity</div>
+              <div class="ret-title">Global Prestige Signal</div>
+              <p class="ret-body">Success in Japan's discerning market is internationally recognised as a quality benchmark. A Harajuku flagship communicates to press, wholesale buyers, and consumers across every market that Diesel operates at the prestige tier.</p>
+            </div>
+            <div class="ret-item">
+              <div class="ret-n">Return 02 — Market Access</div>
+              <div class="ret-title">Asian Market Gateway</div>
+              <p class="ret-body">Japan's "Cool Japan" cultural influence creates an amplification effect. A successful flagship generates press and brand equity that radiates into markets Diesel has not yet entered. Tokyo is the beachhead.</p>
+            </div>
+            <div class="ret-item">
+              <div class="ret-n">Return 03 — Loyalty Infrastructure</div>
+              <div class="ret-title">Highest-LTV Consumer Base</div>
+              <p class="ret-body">The Destruction Ceremony, the Ghiaccio table, the brass token — these are loyalty mechanics. Japan's propensity for deep brand loyalty, once earned, makes this the highest-lifetime-value customer base Diesel can cultivate.</p>
+            </div>
+          </div>
+          <div>
+            <div class="ret-item">
+              <div class="ret-n">Return 04 — Content Quality</div>
+              <div class="ret-title">Earned Organic Reach</div>
+              <p class="ret-body">The phone-free floors don't suppress content — they upgrade it. Diesel gets better organic distribution by engineering the conditions for authenticity. Content strategy built into the architecture.</p>
+            </div>
+            <div class="ret-item">
+              <div class="ret-n">Return 05 — Proof of Concept</div>
+              <div class="ret-title">The Expansion Template</div>
+              <p class="ret-body">This flagship demonstrates that Diesel can execute at prestige-tier retail globally under the Martens creative vision. If the Iceberg works in Harajuku, the brief for Seoul, Shanghai, and London is already written.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Image pair -->
+      <div class="img-pair">
+        <div class="img-cell">
+          <img src="diesel-124.jpg" alt="Staff as curators">
+          <div class="img-cap">Staff as Curators — Current Season Utilitarian Uniform</div>
+        </div>
+        <div class="img-cell">
+          <img src="diesel-048.jpg" alt="Vacuum sealed Denim Lab packaging">
+          <div class="img-cap">Denim Lab — Vacuum-Sealed Take-Home Packaging</div>
+        </div>
+      </div>
+
+      <!-- 07 CLOSE / OUTCOME -->
+      <section class="cs-section" id="cs-outcome" data-cs-section="outcome">
+        <div class="cs-section-eyebrow"><span class="cs-section-num">07</span><span class="cs-section-title">The Proposition</span></div>
+        <h2 class="cs-heading">Don't open a store. Open the space Harajuku forgot it had.</h2>
+        <p class="cs-body">Diesel's creative momentum is real and finite. The window to make a physical statement that matches the cultural moment is open now. <strong>The Iceberg is not a retail expansion. It is a reclamation — of Harajuku, of authentic self-expression, of the version of "For Successful Living" that has always meant deciding who you are before performing it.</strong></p>
+        <div class="meta-strip" style="margin-top:40px;border-top:1px solid var(--g200);">
+          <span>Enemy — <b>Performative Self-Expression</b></span>
+          <span>Provocation — <b>Phone-Free Retail Floors</b></span>
+          <span>Thesis — <b>Find Out First. Post Later.</b></span>
+        </div>
+        <div class="outcome-stats" style="margin-top:40px;">
+          <div class="outcome-stat"><div class="outcome-stat-num">5</div><div class="outcome-stat-label">Floors — High-Velocity Retail, The Edit, Denim Lab, Café 1978, Ghiaccio</div></div>
+          <div class="outcome-stat"><div class="outcome-stat-num">10/90</div><div class="outcome-stat-label">Product vs. Soul — The space carries the brand</div></div>
+          <div class="outcome-stat"><div class="outcome-stat-num">F25</div><div class="outcome-stat-label">First flagship designed in Glenn Martens' creative era</div></div>
+        </div>
+        <div class="cs-next">
+          <div class="cs-next-label">Next Case Study</div>
+          <a href="/case-studies/on" class="cs-next-link" target="_parent">
+            <div class="cs-next-meta">Community Running Platform</div>
+            <div class="cs-next-title">On APEX →</div>
+          </a>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-id">
+    <span class="footer-name">Benn Pattara</span>
+    <span class="footer-role">Brand Experience Strategist &amp; Systems Designer</span>
+  </div>
+  <div class="footer-links">
+    <a href="/" class="footer-link" target="_parent">Home</a>
+    <a href="/#about" class="footer-link" target="_parent">About</a>
+    <a href="/blog" class="footer-link" target="_parent">Blog</a>
+    <a href="/#contact" class="footer-link" target="_parent">Contact</a>
+  </div>
+  <div class="footer-copy">© 2026 Benn Pattara · bennpattara.com</div>
+</footer>
+
+<script>
+window.addEventListener('scroll', () => {
+  const s = window.scrollY, t = document.documentElement.scrollHeight - window.innerHeight;
+  document.getElementById('scroll-progress').style.width = (t ? s/t*100 : 0) + '%';
+});
+const sectionObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      document.querySelectorAll('.cs-sidenav-link').forEach(l => l.classList.remove('active'));
+      const m = document.querySelector('.cs-sidenav-link[data-target="' + entry.target.id + '"]');
+      if (m) m.classList.add('active');
+    }
+  });
+}, { threshold: 0, rootMargin: '-10% 0px -80% 0px' });
+document.querySelectorAll('[data-cs-section]').forEach(s => sectionObserver.observe(s));
+function scrollToSection(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 104, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>

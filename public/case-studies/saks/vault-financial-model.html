@@ -1,0 +1,1440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vault by Saks — Financial Model</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,400;1,300;1,400&family=Fragment+Mono:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:       #0C0C0C;
+  --surface:  #111111;
+  --surface2: #161616;
+  --border:   rgba(184,149,42,0.18);
+  --gold:     #B8952A;
+  --gold-dim: rgba(184,149,42,0.10);
+  --gold-mid: rgba(184,149,42,0.35);
+  --cream:    #E8E0CC;
+  --muted:    #555550;
+  --muted2:   #3A3A35;
+  --red:      #8C3030;
+  --red-dim:  rgba(140,48,48,0.12);
+  --green:    #2E5A3A;
+  --green-bright: #4A8C5C;
+  --green-dim: rgba(46,90,58,0.15);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* ── ROOT COMPONENT ── */
+.vbs-model {
+  background: var(--bg);
+  color: var(--cream);
+  font-family: 'Fragment Mono', monospace;
+  font-size: 11px;
+  line-height: 1.6;
+  width: 100%;
+  overflow-x: hidden;
+  border: 1px solid var(--border);
+}
+
+/* ── COMPONENT HEADER ── */
+.model-header {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: start;
+  padding: 48px 56px 36px;
+  border-bottom: 1px solid var(--border);
+  gap: 32px;
+}
+.header-left {}
+.header-eyebrow {
+  font-size: 9px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+.header-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(40px, 5vw, 72px);
+  line-height: 0.9;
+  letter-spacing: 0.02em;
+  color: var(--cream);
+  margin-bottom: 6px;
+}
+.header-title span { color: var(--gold); }
+.header-subtitle {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 14px;
+  color: var(--muted);
+  letter-spacing: 0.01em;
+  margin-top: 10px;
+}
+.header-kpis {
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 1px;
+  background: var(--border);
+  min-width: 220px;
+}
+.kpi-cell {
+  background: var(--surface);
+  padding: 16px 20px;
+}
+.kpi-label {
+  font-size: 8px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+.kpi-val {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 26px;
+  letter-spacing: 0.03em;
+  color: var(--gold);
+  line-height: 1;
+}
+.kpi-note {
+  font-size: 9px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+/* ── ACT NAV ── */
+.act-nav {
+  display: flex;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg);
+}
+.act-btn {
+  flex: 1;
+  padding: 16px 20px;
+  text-align: center;
+  cursor: pointer;
+  border-right: 1px solid var(--border);
+  border-bottom: 2px solid transparent;
+  transition: all 0.25s ease;
+  user-select: none;
+}
+.act-btn:last-child { border-right: none; }
+.act-btn:hover .act-num { color: var(--cream); }
+.act-btn.active { border-bottom-color: var(--gold); background: var(--gold-dim); }
+.act-btn.active .act-num { color: var(--gold); }
+.act-btn.active .act-label { color: var(--cream); }
+.act-num {
+  font-size: 8px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 3px;
+  transition: color 0.2s;
+}
+.act-label {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 15px;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  transition: color 0.25s;
+}
+.act-btn.active .act-label { color: var(--cream); }
+
+/* ── PANELS ── */
+.act-panel { display: none; }
+.act-panel.active { display: block; }
+.panel-inner { padding: 48px 56px; }
+
+/* ── SECTION HEADER ── */
+.section-hd {
+  margin-bottom: 36px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border);
+}
+.section-eyebrow {
+  font-size: 9px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+.section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  color: var(--cream);
+  margin-bottom: 8px;
+}
+.section-note {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 13px;
+  color: var(--muted);
+  max-width: 560px;
+  line-height: 1.5;
+}
+
+/* ═══════════════════════════════
+   ACT I — DIAGNOSIS
+═══════════════════════════════ */
+
+/* Crisis banner */
+.crisis-banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  border: 1px solid rgba(140,48,48,0.4);
+  background: var(--red-dim);
+  margin-bottom: 36px;
+  width: fit-content;
+}
+.crisis-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--red);
+  animation: pulse 1.8s ease infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.3;transform:scale(0.7)} }
+.crisis-text {
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #C44040;
+}
+
+/* Cost comparison table */
+.cost-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.cost-table thead tr {
+  border-bottom: 1px solid var(--border);
+}
+.cost-table th {
+  font-size: 8px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 0 16px 14px 0;
+  text-align: left;
+  font-weight: normal;
+}
+.cost-table th.right { text-align: right; padding-right: 0; }
+.cost-table th:first-child { padding-left: 0; }
+
+.cost-table tbody tr {
+  border-bottom: 1px solid var(--muted2);
+  transition: background 0.15s;
+}
+.cost-table tbody tr:hover { background: var(--surface2); }
+.cost-table tbody tr:last-child {
+  border-bottom: none;
+  border-top: 1px solid var(--border);
+}
+
+.cost-table td {
+  padding: 16px 16px 16px 0;
+  vertical-align: top;
+}
+.cost-table td:first-child { padding-left: 0; }
+.cost-table td.right { text-align: right; padding-right: 0; }
+
+.cost-category {
+  font-family: 'Fragment Mono', monospace;
+  font-size: 11px;
+  color: var(--cream);
+  line-height: 1.4;
+}
+.cost-sub {
+  font-size: 9px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+.legacy-val {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  color: #C44040;
+  letter-spacing: 0.03em;
+  line-height: 1;
+}
+.vault-val {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  color: var(--green-bright);
+  letter-spacing: 0.03em;
+  line-height: 1;
+}
+.savings-val {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  color: var(--gold);
+  letter-spacing: 0.03em;
+  line-height: 1;
+}
+
+.cost-table tfoot td {
+  padding-top: 20px;
+  padding-bottom: 4px;
+}
+.total-label {
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.total-legacy {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 34px;
+  color: #C44040;
+  line-height: 1;
+}
+.total-vault {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 34px;
+  color: var(--green-bright);
+  line-height: 1;
+}
+.total-savings {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 34px;
+  color: var(--gold);
+  line-height: 1;
+}
+
+/* Savings bar */
+.savings-bar-wrap {
+  margin-top: 40px;
+  padding: 28px 32px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+.savings-bar-label {
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 16px;
+}
+.bar-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 10px;
+}
+.bar-name {
+  font-size: 10px;
+  color: var(--muted);
+  width: 220px;
+  flex-shrink: 0;
+}
+.bar-track {
+  flex: 1;
+  height: 6px;
+  background: var(--muted2);
+  position: relative;
+  overflow: hidden;
+}
+.bar-fill {
+  height: 100%;
+  transform-origin: left;
+  animation: barIn 1s cubic-bezier(0.16,1,0.3,1) forwards;
+  transform: scaleX(0);
+}
+@keyframes barIn { to { transform: scaleX(1); } }
+.bar-fill.legacy { background: #C44040; }
+.bar-fill.vault  { background: var(--green-bright); }
+.bar-amount {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 16px;
+  letter-spacing: 0.04em;
+  width: 80px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+/* Thesis card */
+.thesis-card {
+  margin-top: 32px;
+  padding: 24px 28px;
+  border-left: 2px solid var(--gold);
+  background: var(--gold-dim);
+}
+.thesis-text {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--cream);
+}
+
+/* ═══════════════════════════════
+   ACT II — ENGINE
+═══════════════════════════════ */
+.engine-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  background: var(--border);
+  margin-bottom: 32px;
+}
+.engine-panel {
+  background: var(--bg);
+  padding: 32px;
+}
+.engine-panel-title {
+  font-size: 8px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* Slider */
+.slider-row {
+  margin-bottom: 20px;
+}
+.slider-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 8px;
+}
+.slider-label {
+  font-size: 10px;
+  color: var(--cream);
+}
+.slider-val {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px;
+  letter-spacing: 0.04em;
+  color: var(--gold);
+}
+.slider-val.dim { color: var(--muted); font-size: 16px; }
+input[type=range] {
+  width: 100%;
+  -webkit-appearance: none;
+  height: 2px;
+  background: var(--muted2);
+  outline: none;
+  cursor: pointer;
+}
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px; height: 14px;
+  border-radius: 0;
+  background: var(--gold);
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.3); }
+input[type=range]::-moz-range-thumb {
+  width: 14px; height: 14px;
+  border-radius: 0;
+  background: var(--gold);
+  border: none;
+  cursor: pointer;
+}
+.slider-sub {
+  font-size: 9px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+/* Live P&L */
+.pnl-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--border);
+}
+.pnl-cell {
+  background: var(--surface);
+  padding: 18px 20px;
+}
+.pnl-cell.wide {
+  grid-column: span 2;
+  background: var(--surface2);
+}
+.pnl-cell-label {
+  font-size: 8px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+.pnl-cell-val {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  letter-spacing: 0.03em;
+  color: var(--cream);
+  line-height: 1;
+  transition: all 0.3s ease;
+}
+.pnl-cell-val.gold { color: var(--gold); }
+.pnl-cell-val.green { color: var(--green-bright); }
+.pnl-cell-val.red   { color: #C44040; }
+.pnl-cell-note {
+  font-size: 9px;
+  color: var(--muted);
+  margin-top: 4px;
+  transition: all 0.3s ease;
+}
+
+/* Break-even chart */
+.be-chart-wrap {
+  margin-top: 32px;
+  padding: 28px 32px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+.be-chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 20px;
+}
+.be-chart-title {
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.be-chart-legend {
+  display: flex;
+  gap: 20px;
+  font-size: 9px;
+  color: var(--muted);
+}
+.legend-dot {
+  display: inline-block;
+  width: 8px; height: 8px;
+  border-radius: 0;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+canvas#beChart {
+  width: 100%;
+  height: 220px;
+  display: block;
+}
+
+/* ═══════════════════════════════
+   ACT III — SCENARIO
+═══════════════════════════════ */
+.scenario-toggle {
+  display: flex;
+  gap: 1px;
+  background: var(--border);
+  margin-bottom: 36px;
+  width: fit-content;
+}
+.scenario-btn {
+  padding: 12px 32px;
+  background: var(--surface);
+  cursor: pointer;
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--muted);
+  transition: all 0.2s;
+  user-select: none;
+}
+.scenario-btn:hover { color: var(--cream); background: var(--surface2); }
+.scenario-btn.active.bear  { background: var(--red-dim); color: #C44040; border-bottom: 2px solid #C44040; }
+.scenario-btn.active.base  { background: var(--gold-dim); color: var(--gold); border-bottom: 2px solid var(--gold); }
+.scenario-btn.active.bull  { background: var(--green-dim); color: var(--green-bright); border-bottom: 2px solid var(--green-bright); }
+
+.scenario-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  background: var(--border);
+  margin-bottom: 32px;
+}
+.sc-card {
+  background: var(--surface);
+  padding: 24px 24px;
+  transition: background 0.3s;
+}
+.sc-card.active { background: var(--surface2); }
+.sc-label {
+  font-size: 8px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+.sc-val {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 30px;
+  letter-spacing: 0.03em;
+  line-height: 1;
+  color: var(--cream);
+  transition: color 0.3s, transform 0.2s;
+}
+.sc-val.bear  { color: #C44040; }
+.sc-val.base  { color: var(--gold); }
+.sc-val.bull  { color: var(--green-bright); }
+.sc-note {
+  font-size: 9px;
+  color: var(--muted);
+  margin-top: 4px;
+  transition: color 0.3s;
+}
+
+/* Scenario compare table */
+.compare-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.compare-table th {
+  font-size: 8px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 0 0 14px;
+  text-align: left;
+  font-weight: normal;
+  border-bottom: 1px solid var(--border);
+}
+.compare-table th.right { text-align: right; }
+.compare-table td {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--muted2);
+  vertical-align: middle;
+}
+.compare-table tbody tr:last-child td { border-bottom: none; }
+.compare-table td.right { text-align: right; }
+.metric-name {
+  font-size: 10px;
+  color: var(--cream);
+}
+.metric-sub {
+  font-size: 9px;
+  color: var(--muted);
+}
+.metric-val {
+  font-family: 'Fragment Mono', monospace;
+  font-size: 12px;
+  transition: color 0.3s;
+}
+.metric-val.bear { color: #C44040; }
+.metric-val.base { color: var(--gold); }
+.metric-val.bull { color: var(--green-bright); }
+.metric-val.neutral { color: var(--cream); }
+
+.highlighted-row td { background: var(--gold-dim); }
+
+/* NPV proof */
+.npv-proof {
+  margin-top: 32px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  background: var(--border);
+}
+.npv-cell {
+  background: var(--surface);
+  padding: 28px 32px;
+}
+.npv-cell.dark { background: var(--surface2); }
+.npv-label {
+  font-size: 8px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+.npv-val {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 42px;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  color: var(--gold);
+  transition: color 0.4s;
+}
+.npv-note {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 8px;
+  line-height: 1.5;
+  transition: color 0.3s;
+}
+.npv-multiple {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px;
+  letter-spacing: 0.05em;
+  color: var(--cream);
+  margin-top: 4px;
+}
+
+/* ── FOOTER ── */
+.model-footer {
+  border-top: 1px solid var(--border);
+  padding: 20px 56px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer-byline {
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.footer-note {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 800px) {
+  .model-header { grid-template-columns: 1fr; }
+  .header-kpis { grid-template-columns: repeat(3,1fr); grid-template-rows: 1fr; min-width: 0; }
+  .panel-inner { padding: 32px 24px; }
+  .engine-layout { grid-template-columns: 1fr; }
+  .pnl-grid { grid-template-columns: 1fr 1fr; }
+  .scenario-grid { grid-template-columns: 1fr; }
+  .npv-proof { grid-template-columns: 1fr; }
+  .model-footer { flex-direction: column; gap: 8px; text-align: center; }
+  .cost-table { font-size: 10px; }
+  .model-header { padding: 32px 24px 24px; }
+}
+@media (max-width: 540px) {
+  .act-label { font-size: 11px; }
+  .header-kpis { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="vbs-model" id="vbsModel">
+
+  <!-- ── ACT NAV ── -->
+  <nav class="act-nav">
+    <div class="act-btn active" onclick="setAct('diagnosis',this)">
+      <div class="act-num">Act I</div>
+      <div class="act-label">The Diagnosis</div>
+    </div>
+    <div class="act-btn" onclick="setAct('engine',this)">
+      <div class="act-num">Act II</div>
+      <div class="act-label">The Engine</div>
+    </div>
+    <div class="act-btn" onclick="setAct('scenario',this)">
+      <div class="act-num">Act III</div>
+      <div class="act-label">The Scenario</div>
+    </div>
+  </nav>
+
+  <!-- ════════════════════════════
+       ACT I — DIAGNOSIS
+  ════════════════════════════ -->
+  <div class="act-panel active" id="panel-diagnosis">
+    <div class="panel-inner">
+
+      <div class="crisis-banner">
+        <div class="crisis-dot"></div>
+        <div class="crisis-text">Saks Global — Chapter 11 — January 2026</div>
+      </div>
+
+      <div class="section-hd">
+        <div class="section-eyebrow">Cost Structure Comparison</div>
+        <div class="section-title">Six Structural Failures</div>
+        <div class="section-note">The legacy model was spending money in six broken ways. Vault eliminates or dramatically reduces each one — before a single piece of retail sells.</div>
+      </div>
+
+      <table class="cost-table">
+        <thead>
+          <tr>
+            <th style="width:36%">Cost Category</th>
+            <th class="right" style="width:16%">Legacy Saks</th>
+            <th class="right" style="width:16%">Vault Model</th>
+            <th class="right" style="width:16%">Savings</th>
+            <th style="width:16%"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div class="cost-category">Inventory Carrying Cost</div>
+              <div class="cost-sub">Capital cost on ~$1.8B owned inventory</div>
+            </td>
+            <td class="right"><div class="legacy-val">$117M</div></td>
+            <td class="right"><div class="vault-val">$11M</div></td>
+            <td class="right"><div class="savings-val">$106M</div></td>
+            <td>
+              <div class="bar-track" style="margin-top:6px">
+                <div class="bar-fill legacy" style="width:100%;animation-delay:0.1s"></div>
+              </div>
+              <div class="bar-track" style="margin-top:4px">
+                <div class="bar-fill vault" style="width:9.4%;animation-delay:0.2s"></div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="cost-category">Inventory Write-Downs</div>
+              <div class="cost-sub">8% today → 2% with 14-day rotation</div>
+            </td>
+            <td class="right"><div class="legacy-val">$144M</div></td>
+            <td class="right"><div class="vault-val">$3M</div></td>
+            <td class="right"><div class="savings-val">$141M</div></td>
+            <td>
+              <div class="bar-track" style="margin-top:6px">
+                <div class="bar-fill legacy" style="width:100%;animation-delay:0.15s"></div>
+              </div>
+              <div class="bar-track" style="margin-top:4px">
+                <div class="bar-fill vault" style="width:2.1%;animation-delay:0.25s"></div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="cost-category">Store Lease Costs</div>
+              <div class="cost-sub">39 stores × 42K sq ft → 28 nodes × 3.5K sq ft</div>
+            </td>
+            <td class="right"><div class="legacy-val">$156M</div></td>
+            <td class="right"><div class="vault-val">$7M</div></td>
+            <td class="right"><div class="savings-val">$148M</div></td>
+            <td>
+              <div class="bar-track" style="margin-top:6px">
+                <div class="bar-fill legacy" style="width:100%;animation-delay:0.2s"></div>
+              </div>
+              <div class="bar-track" style="margin-top:4px">
+                <div class="bar-fill vault" style="width:4.5%;animation-delay:0.3s"></div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="cost-category">Store Labor</div>
+              <div class="cost-sub">39 stores × 85 staff → 28 nodes × 12 staff</div>
+            </td>
+            <td class="right"><div class="legacy-val">$192M</div></td>
+            <td class="right"><div class="vault-val">$20M</div></td>
+            <td class="right"><div class="savings-val">$173M</div></td>
+            <td>
+              <div class="bar-track" style="margin-top:6px">
+                <div class="bar-fill legacy" style="width:100%;animation-delay:0.25s"></div>
+              </div>
+              <div class="bar-track" style="margin-top:4px">
+                <div class="bar-fill vault" style="width:10.4%;animation-delay:0.35s"></div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="cost-category">Interest Expense</div>
+              <div class="cost-sub">Assumes 50% debt reduction over 3 years</div>
+            </td>
+            <td class="right"><div class="legacy-val">$306M</div></td>
+            <td class="right"><div class="vault-val">$153M</div></td>
+            <td class="right"><div class="savings-val">$153M</div></td>
+            <td>
+              <div class="bar-track" style="margin-top:6px">
+                <div class="bar-fill legacy" style="width:100%;animation-delay:0.3s"></div>
+              </div>
+              <div class="bar-track" style="margin-top:4px">
+                <div class="bar-fill vault" style="width:50%;animation-delay:0.4s"></div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="cost-category">Markdowns &amp; Promotions</div>
+              <div class="cost-sub">9% of revenue → 3% with fresh inventory</div>
+            </td>
+            <td class="right"><div class="legacy-val">$810M</div></td>
+            <td class="right"><div class="vault-val">$270M</div></td>
+            <td class="right"><div class="savings-val">$540M</div></td>
+            <td>
+              <div class="bar-track" style="margin-top:6px">
+                <div class="bar-fill legacy" style="width:100%;animation-delay:0.35s"></div>
+              </div>
+              <div class="bar-track" style="margin-top:4px">
+                <div class="bar-fill vault" style="width:33%;animation-delay:0.45s"></div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td><div class="total-label">Total Annual Cost</div></td>
+            <td class="right"><div class="total-legacy">$1,725M</div></td>
+            <td class="right"><div class="total-vault">$464M</div></td>
+            <td class="right"><div class="total-savings">$964M</div></td>
+            <td></td>
+          </tr>
+        </tfoot>
+      </table>
+
+      <div class="thesis-card">
+        <div class="thesis-text">"The $964M in annual savings isn't the upside — it's the floor. Membership fees cover fixed costs before a single piece of retail sells. Retail GMV is pure margin upside. This is the only luxury model where the business doesn't need a hit season to stay solvent."</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ════════════════════════════
+       ACT II — ENGINE
+  ════════════════════════════ -->
+  <div class="act-panel" id="panel-engine">
+    <div class="panel-inner">
+
+      <div class="section-hd">
+        <div class="section-eyebrow">Interactive Revenue Engine</div>
+        <div class="section-title">Node Count → Break-Even Walk</div>
+        <div class="section-note">Adjust node count and membership to watch the P&L build in real time. Break-even is 28 nodes — watch the model cross it.</div>
+      </div>
+
+      <div class="engine-layout">
+        <!-- Controls -->
+        <div class="engine-panel">
+          <div class="engine-panel-title">Model Inputs</div>
+
+          <div class="slider-row">
+            <div class="slider-header">
+              <div class="slider-label">Active Nodes</div>
+              <div class="slider-val" id="nodeVal">28</div>
+            </div>
+            <input type="range" min="1" max="38" value="28" id="nodeSlider" oninput="updateEngine()">
+            <div class="slider-sub">Break-even at 28 nodes · $18M revenue/node/year</div>
+          </div>
+
+          <div class="slider-row">
+            <div class="slider-header">
+              <div class="slider-label">Total Members</div>
+              <div class="slider-val" id="membersVal">50K</div>
+            </div>
+            <input type="range" min="5000" max="200000" step="5000" value="50000" id="membersSlider" oninput="updateEngine()">
+            <div class="slider-sub">Blended ARR: $1,188/member · 45% Member / 42% Reserve / 13% Black</div>
+          </div>
+
+          <div class="slider-row">
+            <div class="slider-header">
+              <div class="slider-label">Designer Subscribers</div>
+              <div class="slider-val" id="designersVal">250</div>
+            </div>
+            <input type="range" min="50" max="1200" step="50" value="250" id="designersSlider" oninput="updateEngine()">
+            <div class="slider-sub">Platform subscription: $2,500/month per designer</div>
+          </div>
+
+          <div class="slider-row">
+            <div class="slider-header">
+              <div class="slider-label">GMV per Rotation</div>
+              <div class="slider-val" id="gmvVal">$120K</div>
+            </div>
+            <input type="range" min="60000" max="200000" step="5000" value="120000" id="gmvSlider" oninput="updateEngine()">
+            <div class="slider-sub">26 rotations/year · 22% gross margin (consignment)</div>
+          </div>
+
+        </div>
+
+        <!-- Live P&L -->
+        <div class="engine-panel">
+          <div class="engine-panel-title">Live P&L Output</div>
+
+          <div class="pnl-grid">
+            <div class="pnl-cell">
+              <div class="pnl-cell-label">Node Retail GMV</div>
+              <div class="pnl-cell-val" id="out-gmv">$87.4M</div>
+              <div class="pnl-cell-note" id="out-gmv-note">28 nodes · 26 rotations</div>
+            </div>
+            <div class="pnl-cell">
+              <div class="pnl-cell-label">Membership ARR</div>
+              <div class="pnl-cell-val gold" id="out-arr">$59.4M</div>
+              <div class="pnl-cell-note" id="out-arr-note">50K members · $1,188 blended</div>
+            </div>
+            <div class="pnl-cell">
+              <div class="pnl-cell-label">Designer Platform</div>
+              <div class="pnl-cell-val" id="out-platform">$7.5M</div>
+              <div class="pnl-cell-note" id="out-platform-note">250 designers · $30K/yr</div>
+            </div>
+            <div class="pnl-cell">
+              <div class="pnl-cell-label">Gross Margin on GMV</div>
+              <div class="pnl-cell-val green" id="out-margin">$19.2M</div>
+              <div class="pnl-cell-note">22% on consignment model</div>
+            </div>
+            <div class="pnl-cell wide">
+              <div class="pnl-cell-label">Total Revenue</div>
+              <div class="pnl-cell-val gold" id="out-total" style="font-size:38px">$166.1M</div>
+              <div class="pnl-cell-note" id="out-total-note">Node GMV + Membership ARR + Platform</div>
+            </div>
+            <div class="pnl-cell">
+              <div class="pnl-cell-label">Fixed Node Costs</div>
+              <div class="pnl-cell-val" id="out-costs" style="color:#C44040">$13.4M</div>
+              <div class="pnl-cell-note" id="out-costs-note">$480K/node/yr · 28 nodes</div>
+            </div>
+            <div class="pnl-cell">
+              <div class="pnl-cell-label">EBITDA</div>
+              <div class="pnl-cell-val green" id="out-ebitda">$32.8M</div>
+              <div class="pnl-cell-note" id="out-ebitda-note">Membership covers fixed costs</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Break-even chart -->
+      <div class="be-chart-wrap">
+        <div class="be-chart-header">
+          <div class="be-chart-title">Revenue Walk — Node by Node</div>
+          <div class="be-chart-legend">
+            <span><span class="legend-dot" style="background:#B8952A"></span>Cumulative Revenue</span>
+            <span><span class="legend-dot" style="background:#8C3030"></span>Fixed Cost Floor</span>
+            <span><span class="legend-dot" style="background:#4A8C5C; opacity:0.4"></span>Break-Even Zone</span>
+          </div>
+        </div>
+        <canvas id="beChart"></canvas>
+        <div style="font-size:9px;color:var(--muted);margin-top:12px;letter-spacing:0.05em">
+          ◆ Current position highlighted · Drag slider to walk the break-even
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ════════════════════════════
+       ACT III — SCENARIO
+  ════════════════════════════ -->
+  <div class="act-panel" id="panel-scenario">
+    <div class="panel-inner">
+
+      <div class="section-hd">
+        <div class="section-eyebrow">Bear / Base / Bull</div>
+        <div class="section-title">The Model Holds in All Three</div>
+        <div class="section-note">Even in the bear case, membership fees cover the $480K fixed cost floor before any retail sale. The structural advantage isn't scenario-dependent.</div>
+      </div>
+
+      <!-- Toggle -->
+      <div class="scenario-toggle">
+        <div class="scenario-btn bear" onclick="setScenario('bear',this)">Bear</div>
+        <div class="scenario-btn base active" onclick="setScenario('base',this)">Base</div>
+        <div class="scenario-btn bull" onclick="setScenario('bull',this)">Bull</div>
+      </div>
+
+      <!-- KPI cards that change -->
+      <div class="scenario-grid">
+        <div class="sc-card active">
+          <div class="sc-label">Members / Node</div>
+          <div class="sc-val base" id="sc-members">500</div>
+          <div class="sc-note" id="sc-members-note">Base case penetration</div>
+        </div>
+        <div class="sc-card active">
+          <div class="sc-label">Blended Membership ARR</div>
+          <div class="sc-val base" id="sc-arr">$1,188</div>
+          <div class="sc-note" id="sc-arr-note">45% / 42% / 13% tier mix</div>
+        </div>
+        <div class="sc-card active">
+          <div class="sc-label">Retail GMV / Rotation</div>
+          <div class="sc-val base" id="sc-gmv">$120K</div>
+          <div class="sc-note" id="sc-gmv-note">26 rotations / year</div>
+        </div>
+        <div class="sc-card active">
+          <div class="sc-label">Gross Margin on GMV</div>
+          <div class="sc-val base" id="sc-gm">22%</div>
+          <div class="sc-note" id="sc-gm-note">Consignment model</div>
+        </div>
+        <div class="sc-card active">
+          <div class="sc-label">Node EBITDA</div>
+          <div class="sc-val base" id="sc-ebitda">$1.17M</div>
+          <div class="sc-note" id="sc-ebitda-note">After $480K fixed costs</div>
+        </div>
+        <div class="sc-card active">
+          <div class="sc-label">Payback on $2.8M Build-Out</div>
+          <div class="sc-val base" id="sc-payback">~2.4 yrs</div>
+          <div class="sc-note" id="sc-payback-note">Per node build-out</div>
+        </div>
+      </div>
+
+      <!-- Detailed compare table -->
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th style="width:40%">Metric</th>
+            <th class="right" style="width:20%">Bear</th>
+            <th class="right" style="width:20%">Base</th>
+            <th class="right" style="width:20%">Bull</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><div class="metric-name">Members per node</div></td>
+            <td class="right"><div class="metric-val bear">200</div></td>
+            <td class="right"><div class="metric-val base">500</div></td>
+            <td class="right"><div class="metric-val bull">850</div></td>
+          </tr>
+          <tr>
+            <td><div class="metric-name">Member / Reserve / Black mix</div></td>
+            <td class="right"><div class="metric-val bear">65 / 30 / 5%</div></td>
+            <td class="right"><div class="metric-val base">45 / 42 / 13%</div></td>
+            <td class="right"><div class="metric-val bull">30 / 47 / 23%</div></td>
+          </tr>
+          <tr>
+            <td><div class="metric-name">Blended membership ARR</div></td>
+            <td class="right"><div class="metric-val bear">$735</div></td>
+            <td class="right"><div class="metric-val base">$1,188</div></td>
+            <td class="right"><div class="metric-val bull">$1,620</div></td>
+          </tr>
+          <tr>
+            <td><div class="metric-name">Membership ARR per node</div></td>
+            <td class="right"><div class="metric-val bear">$147K</div></td>
+            <td class="right"><div class="metric-val base">$594K</div></td>
+            <td class="right"><div class="metric-val bull">$1.38M</div></td>
+          </tr>
+          <tr>
+            <td><div class="metric-name">Annual retail GMV per node</div></td>
+            <td class="right"><div class="metric-val bear">$1.56M</div></td>
+            <td class="right"><div class="metric-val base">$3.12M</div></td>
+            <td class="right"><div class="metric-val bull">$5.2M</div></td>
+          </tr>
+          <tr>
+            <td><div class="metric-name">Gross margin on GMV</div></td>
+            <td class="right"><div class="metric-val bear">18%</div></td>
+            <td class="right"><div class="metric-val base">22%</div></td>
+            <td class="right"><div class="metric-val bull">26%</div></td>
+          </tr>
+          <tr class="highlighted-row">
+            <td><div class="metric-name">Node fixed costs / yr</div><div class="metric-sub">Lease, staff, tech</div></td>
+            <td class="right"><div class="metric-val neutral">$480K</div></td>
+            <td class="right"><div class="metric-val neutral">$480K</div></td>
+            <td class="right"><div class="metric-val neutral">$480K</div></td>
+          </tr>
+          <tr>
+            <td><div class="metric-name">Node EBITDA</div></td>
+            <td class="right"><div class="metric-val bear">$122K</div></td>
+            <td class="right"><div class="metric-val base">$1.17M</div></td>
+            <td class="right"><div class="metric-val bull">$2.63M</div></td>
+          </tr>
+          <tr>
+            <td><div class="metric-name">Payback on $2.8M build-out</div></td>
+            <td class="right"><div class="metric-val bear">~23 yrs</div></td>
+            <td class="right"><div class="metric-val base">~2.4 yrs</div></td>
+            <td class="right"><div class="metric-val bull">~13 mo</div></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- NPV proof -->
+      <div class="npv-proof">
+        <div class="npv-cell">
+          <div class="npv-label">10-Year NPV at 9% WACC</div>
+          <div class="npv-val" id="npv-val">$6.1B</div>
+          <div class="npv-multiple" id="npv-multiple">75× the $81M investment</div>
+          <div class="npv-note" id="npv-note">Base case: discounted savings against $81M transformation investment. Even in the bear case at 12% WACC, NPV is $3.8B — 47× the investment.</div>
+        </div>
+        <div class="npv-cell dark">
+          <div class="npv-label">The Structural Insight</div>
+          <div style="font-family:'Playfair Display',serif;font-style:italic;font-size:15px;color:var(--cream);line-height:1.6;margin-top:8px" id="scenario-insight">
+            In the bear case, membership ARR covers only 31% of fixed costs — but the EBITDA is still positive. The model doesn't break in the bear case. It just earns less. That's the structural argument: subscriptions first, retail upside second.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── FOOTER ── -->
+  <footer class="model-footer">
+    <div class="footer-byline">Vault by Saks — Speculative Case Study — VCU Brandcenter 2026 — Benn Pattara</div>
+    <div class="footer-note">All figures speculative. Based on publicly available Saks Global Chapter 11 filings and industry benchmarks.</div>
+  </footer>
+
+</div><!-- /vbs-model -->
+
+<script>
+/* ── ACT NAVIGATION ── */
+function setAct(id, btn) {
+  document.querySelectorAll('.act-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.act-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('panel-' + id).classList.add('active');
+  btn.classList.add('active');
+  if (id === 'engine') { setTimeout(drawChart, 50); }
+}
+
+/* ── ENGINE CALCULATIONS ── */
+function fmt(n) {
+  if (n >= 1e9) return '$' + (n/1e9).toFixed(1) + 'B';
+  if (n >= 1e6) return '$' + (n/1e6).toFixed(1) + 'M';
+  if (n >= 1e3) return '$' + (n/1e3).toFixed(0) + 'K';
+  return '$' + n.toFixed(0);
+}
+function fmtK(n) {
+  if (n >= 1000) return (n/1000).toFixed(0) + 'K';
+  return n.toString();
+}
+
+function updateEngine() {
+  const nodes     = +document.getElementById('nodeSlider').value;
+  const members   = +document.getElementById('membersSlider').value;
+  const designers = +document.getElementById('designersSlider').value;
+  const gmvRot    = +document.getElementById('gmvSlider').value;
+
+  document.getElementById('nodeVal').textContent    = nodes;
+  document.getElementById('membersVal').textContent = fmtK(members);
+  document.getElementById('designersVal').textContent = designers;
+  document.getElementById('gmvVal').textContent     = fmt(gmvRot);
+
+  const nodeGMV    = nodes * gmvRot * 26;
+  const memberARR  = members * 1188;
+  const platformRev= designers * 2500 * 12;
+  const gm         = nodeGMV * 0.22;
+  const totalRev   = nodeGMV + memberARR + platformRev;
+  const fixedCosts = nodes * 480000;
+  const ebitda     = gm + memberARR + platformRev - fixedCosts;
+
+  document.getElementById('out-gmv').textContent      = fmt(nodeGMV);
+  document.getElementById('out-gmv-note').textContent = `${nodes} nodes · 26 rotations`;
+  document.getElementById('out-arr').textContent      = fmt(memberARR);
+  document.getElementById('out-arr-note').textContent = `${fmtK(members)} members · $1,188 blended`;
+  document.getElementById('out-platform').textContent = fmt(platformRev);
+  document.getElementById('out-platform-note').textContent = `${designers} designers · $30K/yr`;
+  document.getElementById('out-margin').textContent   = fmt(gm);
+  document.getElementById('out-total').textContent    = fmt(totalRev);
+  document.getElementById('out-costs').textContent    = fmt(fixedCosts);
+  document.getElementById('out-costs-note').textContent = `$480K/node/yr · ${nodes} nodes`;
+
+  const ebitdaEl = document.getElementById('out-ebitda');
+  ebitdaEl.textContent = fmt(ebitda);
+  ebitdaEl.className = 'pnl-cell-val ' + (ebitda >= 0 ? 'green' : 'red');
+
+  const coverageRatio = memberARR / fixedCosts;
+  document.getElementById('out-ebitda-note').textContent =
+    coverageRatio >= 1
+      ? `Membership covers ${Math.round(coverageRatio * 100)}% of fixed costs`
+      : `Membership covers ${Math.round(coverageRatio * 100)}% of fixed costs — retail margin required`;
+
+  drawChart(nodes);
+}
+
+/* ── BREAK-EVEN CHART ── */
+function drawChart(currentNodes) {
+  const canvas = document.getElementById('beChart');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  const dpr = window.devicePixelRatio || 1;
+  const w = canvas.offsetWidth;
+  const h = 220;
+  canvas.width  = w * dpr;
+  canvas.height = h * dpr;
+  ctx.scale(dpr, dpr);
+  canvas.style.height = h + 'px';
+
+  if (!currentNodes) currentNodes = +document.getElementById('nodeSlider').value;
+
+  const totalNodes = 38;
+  const revenuePerNode = 18; // $M
+  const fixedFloor = 240; // $M total fixed costs at break-even scale (approx)
+  const beNode = 28;
+
+  const pad = { top: 20, right: 20, bottom: 36, left: 60 };
+  const cw = w - pad.left - pad.right;
+  const ch = h - pad.top - pad.bottom;
+  const maxY = totalNodes * revenuePerNode * 1.05;
+
+  ctx.clearRect(0, 0, w, h);
+
+  // Grid lines
+  ctx.strokeStyle = 'rgba(184,149,42,0.08)';
+  ctx.lineWidth = 1;
+  for (let i = 0; i <= 4; i++) {
+    const y = pad.top + (ch / 4) * i;
+    ctx.beginPath(); ctx.moveTo(pad.left, y); ctx.lineTo(pad.left + cw, y); ctx.stroke();
+    const label = Math.round((maxY - (maxY / 4) * i));
+    ctx.fillStyle = '#3A3A35';
+    ctx.font = '9px Fragment Mono, monospace';
+    ctx.textAlign = 'right';
+    ctx.fillText('$' + label + 'M', pad.left - 8, y + 3);
+  }
+
+  // Break-even zone (shaded)
+  const beX = pad.left + ((beNode - 1) / (totalNodes - 1)) * cw;
+  ctx.fillStyle = 'rgba(74,140,92,0.07)';
+  ctx.fillRect(beX, pad.top, pad.left + cw - beX, ch);
+
+  // Fixed cost reference line
+  const fcY = pad.top + (1 - fixedFloor / maxY) * ch;
+  ctx.strokeStyle = 'rgba(140,48,48,0.5)';
+  ctx.setLineDash([4, 4]);
+  ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(pad.left, fcY); ctx.lineTo(pad.left + cw, fcY); ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.fillStyle = '#8C3030';
+  ctx.font = '9px Fragment Mono, monospace';
+  ctx.textAlign = 'left';
+  ctx.fillText('Fixed Cost Floor ~$240M', pad.left + 4, fcY - 5);
+
+  // Revenue line
+  ctx.beginPath();
+  for (let i = 1; i <= totalNodes; i++) {
+    const x = pad.left + ((i - 1) / (totalNodes - 1)) * cw;
+    const y = pad.top + (1 - (i * revenuePerNode) / maxY) * ch;
+    if (i === 1) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  }
+  ctx.strokeStyle = 'rgba(184,149,42,0.3)';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  // Filled active portion
+  ctx.beginPath();
+  for (let i = 1; i <= currentNodes; i++) {
+    const x = pad.left + ((i - 1) / (totalNodes - 1)) * cw;
+    const y = pad.top + (1 - (i * revenuePerNode) / maxY) * ch;
+    if (i === 1) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  }
+  const lastX = pad.left + ((currentNodes - 1) / (totalNodes - 1)) * cw;
+  ctx.lineTo(lastX, pad.top + ch);
+  ctx.lineTo(pad.left, pad.top + ch);
+  ctx.closePath();
+  const grad = ctx.createLinearGradient(0, pad.top, 0, pad.top + ch);
+  grad.addColorStop(0, 'rgba(184,149,42,0.25)');
+  grad.addColorStop(1, 'rgba(184,149,42,0.02)');
+  ctx.fillStyle = grad;
+  ctx.fill();
+
+  // Active portion stroke
+  ctx.beginPath();
+  for (let i = 1; i <= currentNodes; i++) {
+    const x = pad.left + ((i - 1) / (totalNodes - 1)) * cw;
+    const y = pad.top + (1 - (i * revenuePerNode) / maxY) * ch;
+    if (i === 1) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  }
+  ctx.strokeStyle = 'rgba(184,149,42,0.9)';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  // Current node dot
+  const curX = pad.left + ((currentNodes - 1) / (totalNodes - 1)) * cw;
+  const curY = pad.top + (1 - (currentNodes * revenuePerNode) / maxY) * ch;
+  ctx.beginPath();
+  ctx.arc(curX, curY, 5, 0, Math.PI * 2);
+  ctx.fillStyle = '#B8952A';
+  ctx.fill();
+
+  // Tooltip bubble
+  const revAtCur = currentNodes * revenuePerNode;
+  ctx.fillStyle = '#B8952A';
+  ctx.font = 'bold 10px Fragment Mono, monospace';
+  ctx.textAlign = 'center';
+  const tooltipY = curY - 18;
+  ctx.fillText(`$${revAtCur}M`, curX, tooltipY);
+
+  // Break-even vertical line
+  ctx.strokeStyle = 'rgba(74,140,92,0.5)';
+  ctx.setLineDash([3, 3]);
+  ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(beX, pad.top); ctx.lineTo(beX, pad.top + ch); ctx.stroke();
+  ctx.setLineDash([]);
+  ctx.fillStyle = '#4A8C5C';
+  ctx.font = '9px Fragment Mono, monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText('B/E Node 28', beX, pad.top + ch + 16);
+
+  // X-axis labels
+  ctx.fillStyle = '#3A3A35';
+  ctx.font = '9px Fragment Mono, monospace';
+  ctx.textAlign = 'center';
+  [1, 9, 18, 28, 38].forEach(n => {
+    const x = pad.left + ((n - 1) / (totalNodes - 1)) * cw;
+    ctx.fillText(n, x, pad.top + ch + 16);
+  });
+  ctx.fillStyle = '#3A3A35';
+  ctx.textAlign = 'center';
+  ctx.fillText('← Nodes →', pad.left + cw / 2, pad.top + ch + 28);
+}
+
+/* ── SCENARIO TOGGLE ── */
+const scenarios = {
+  bear: {
+    members: '200', arr: '$735', gmv: '$60K', gm: '18%',
+    ebitda: '$122K', payback: '~23 yrs',
+    members_note: 'Low membership penetration',
+    arr_note: '65% / 30% / 5% tier mix',
+    gmv_note: '26 rotations / year',
+    gm_note: 'Consignment model',
+    ebitda_note: 'After $480K fixed costs',
+    payback_note: 'Per node build-out',
+    npv: '$3.8B', multiple: '47× the $81M investment',
+    npv_note: 'At 12% WACC, bear-case savings. NPV still 47× the transformation investment.',
+    insight: 'In the bear case, membership ARR covers only 31% of fixed costs — but the EBITDA is still positive at $122K. The model doesn\'t break. It just earns less. That\'s the structural argument: the floor holds because subscriptions cover fixed costs structurally, regardless of any single rotation.'
+  },
+  base: {
+    members: '500', arr: '$1,188', gmv: '$120K', gm: '22%',
+    ebitda: '$1.17M', payback: '~2.4 yrs',
+    members_note: 'Base case penetration',
+    arr_note: '45% / 42% / 13% tier mix',
+    gmv_note: '26 rotations / year',
+    gm_note: 'Consignment model',
+    ebitda_note: 'After $480K fixed costs',
+    payback_note: 'Per node build-out',
+    npv: '$6.1B', multiple: '75× the $81M investment',
+    npv_note: 'At 9% WACC, base-case savings against $81M transformation investment. Payback in under one month at run-rate savings.',
+    insight: 'In the base case, membership ARR covers 124% of fixed costs before a single piece of retail sells. Retail GMV is pure margin upside. This is the only luxury model where the business doesn\'t need a hit season to stay solvent.'
+  },
+  bull: {
+    members: '850', arr: '$1,620', gmv: '$200K', gm: '26%',
+    ebitda: '$2.63M', payback: '~13 mo',
+    members_note: 'High-penetration market',
+    arr_note: '30% / 47% / 23% tier mix',
+    gmv_note: '26 rotations / year',
+    gm_note: 'Strong sell-through',
+    ebitda_note: 'After $480K fixed costs',
+    payback_note: 'Per node build-out',
+    npv: '$9.2B', multiple: '114× the $81M investment',
+    npv_note: 'At 9% WACC, bull-case savings. Strong sell-through and Black-tier concentration drives both ARR and GMV margin well above base projections.',
+    insight: 'In the bull case, 23% Black-tier concentration drives blended ARR to $1,620/member — 36% above base. At 850 members per node, membership ARR alone covers 288% of fixed costs. The retail margin becomes the compounding mechanism, not the survival mechanism.'
+  }
+};
+
+function setScenario(s, btn) {
+  document.querySelectorAll('.scenario-btn').forEach(b => b.classList.remove('active','bear','base','bull'));
+  btn.classList.add('active', s);
+
+  const d = scenarios[s];
+  const cls = s; // bear / base / bull
+
+  const fields = ['members','arr','gmv','gm','ebitda','payback'];
+  fields.forEach(f => {
+    const el = document.getElementById('sc-' + f);
+    el.textContent = d[f];
+    el.className = 'sc-val ' + cls;
+    const noteEl = document.getElementById('sc-' + f + '-note');
+    if (noteEl) noteEl.textContent = d[f + '_note'];
+  });
+
+  document.getElementById('npv-val').textContent      = d.npv;
+  document.getElementById('npv-val').style.color = cls === 'bear' ? '#C44040' : cls === 'bull' ? 'var(--green-bright)' : 'var(--gold)';
+  document.getElementById('npv-multiple').textContent = d.multiple;
+  document.getElementById('npv-note').textContent     = d.npv_note;
+  document.getElementById('scenario-insight').textContent = d.insight;
+}
+
+/* ── INIT ── */
+window.addEventListener('load', function() {
+  updateEngine();
+  // Redraw chart on resize
+  window.addEventListener('resize', function() {
+    if (document.getElementById('panel-engine').classList.contains('active')) drawChart();
+  });
+});
+</script>
+</body>
+</html>
