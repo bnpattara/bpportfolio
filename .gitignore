@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# private lyrics reference — never deploy
+src/data/mirrorball-songs-with-lyrics.json

@@ -9,6 +9,7 @@ export type Song = {
   scene: string;
   human_truth: string;
   psych_concept?: string;
+  tags?: string[];
   spotify_url?: string;
   youtube_url?: string;
 };
@@ -57,6 +58,28 @@ function scoreOverlap(userTokens: Set<string>, songText: string): number {
   return jaccard * 0.4 + simple * 0.6;
 }
 
+function scoreTagMatch(userTokens: Set<string>, tags: string[]): number {
+  if (!tags || tags.length === 0) return 0;
+  const tagSet = new Set(tags);
+  let matches = 0;
+  for (const t of userTokens) {
+    if (tagSet.has(t)) {
+      matches += 2.0;
+    } else if (t.length > 3) {
+      for (const tag of tagSet) {
+        if (tag.includes(t) || t.includes(tag)) {
+          matches += 1.4;
+          break;
+        }
+      }
+    }
+  }
+  const tagSize = tags.length;
+  const jaccard = matches / (userTokens.size + tagSize - matches) || 0;
+  const simple  = matches / Math.max(1, userTokens.size);
+  return jaccard * 0.4 + simple * 0.6;
+}
+
 export function findMatchingSong(
   feeling: string,
   songs: Song[]
@@ -82,7 +105,9 @@ export function findMatchingSong(
       s.title,
       s.psych_concept ?? '',
     ].join(' ');
-    const score = scoreOverlap(userTokens, searchable);
+    const contentScore = scoreOverlap(userTokens, searchable);
+    const tagScore     = scoreTagMatch(userTokens, s.tags ?? []);
+    const score        = tagScore * 0.5 + contentScore * 0.5;
     if (score > bestScore) {
       bestScore = score;
       bestSong = s;
@@ -100,7 +125,9 @@ export function findMatchingSong(
       s.title,
       s.psych_concept ?? '',
     ].join(' ');
-    const score = scoreOverlap(userTokens, searchable);
+    const contentScore = scoreOverlap(userTokens, searchable);
+    const tagScore     = scoreTagMatch(userTokens, s.tags ?? []);
+    const score        = tagScore * 0.5 + contentScore * 0.5;
     if (score >= bestScore * 0.85 && score > 0) {
       ties.push({ song: s, idx: i });
     }
