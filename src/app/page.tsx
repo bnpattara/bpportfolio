@@ -378,7 +378,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="featured-row" style={{ justifyContent: 'flex-start', paddingTop: 0, borderTop: 'none', background: 'transparent' }}>
+          <div className="featured-row" style={{ justifyContent: 'flex-start', alignItems: 'flex-start', paddingTop: 0, borderTop: 'none', background: 'transparent' }}>
             <span className="featured-label">Featured In</span>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
               <div className="featured-names">
@@ -389,7 +389,7 @@ export default function Home() {
                 <span className="featured-name">Stash</span>
               </div>
               <span style={{ fontSize: '11px', letterSpacing: '.06em', color: 'var(--g500)', textTransform: 'uppercase' }}>
-                Via Branch Museum of Architecture and Design &times; MullenLowe Design Studio
+                Via Branch Museum of Design &times; MullenLowe Design Studio
               </span>
             </div>
           </div>

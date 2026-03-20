@@ -1223,7 +1223,7 @@ footer {
   display: flex;
   gap: 16px;
   align-items: center;
-  margin-top: 32px;
+  margin-top: 16px;
   flex-wrap: wrap;
 }
 
