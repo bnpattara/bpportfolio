@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1200">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,400;0,500&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      width: 1200px;
+      height: 630px;
+      overflow: hidden;
+      background: #fff;
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      width: 1200px;
+      height: 630px;
+      position: relative;
+      background: #fff;
+    }
+
+    .top-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 80px;
+    }
+
+    .brand {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      color: #888;
+      text-transform: uppercase;
+    }
+
+    .case-number {
+      font-family: 'DM Mono', 'Courier New', monospace;
+      font-size: 13px;
+      color: #ccc;
+      letter-spacing: 0.05em;
+    }
+
+    .rule {
+      position: absolute;
+      top: 80px;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: #e8e8e8;
+    }
+
+    .main {
+      position: absolute;
+      top: 80px;
+      bottom: 80px;
+      left: 80px;
+      right: 80px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .project-name {
+      font-family: 'Bebas Neue', 'Arial Narrow', Arial, sans-serif;
+      font-size: 96px;
+      color: #000;
+      text-transform: uppercase;
+      line-height: 0.92;
+      letter-spacing: 0.01em;
+      font-weight: 400;
+    }
+
+    .strategic-lens {
+      font-family: 'DM Mono', 'Courier New', monospace;
+      font-size: 18px;
+      color: #888;
+      margin-top: 22px;
+      letter-spacing: 0.02em;
+    }
+
+    .bottom-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 80px;
+    }
+
+    .tagline {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 18px;
+      font-style: italic;
+      color: #333;
+    }
+
+    .domain {
+      font-family: 'DM Mono', 'Courier New', monospace;
+      font-size: 13px;
+      color: #ccc;
+      letter-spacing: 0.05em;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="top-bar">
+      <span class="brand">Benn Pattara</span>
+      <span class="case-number">01 / 06</span>
+    </div>
+    <div class="rule"></div>
+    <div class="main">
+      <div class="project-name">Nike SNKRS</div>
+      <div class="strategic-lens">Diagnosis → Decision Stack</div>
+    </div>
+    <div class="bottom-bar">
+      <span class="tagline">From lottery machine to styling platform.</span>
+      <span class="domain">bennpattara.com</span>
+    </div>
+  </div>
+</body>
+</html>

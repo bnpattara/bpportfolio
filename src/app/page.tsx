@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
+import BackToTopButton from "@/components/BackToTopButton";
 import { useRouter } from "next/navigation";
 
 export default function Home() {
@@ -60,40 +61,40 @@ export default function Home() {
       bg: "linear-gradient(160deg,#1a0e00 0%,#2e1a00 35%,#1a0e00 70%,#0d0700 100%)",
       image: "/case-studies/nike/nike_hero_brand_identity.png",
       ghost: "Nike",
-      badge: "Consideration & Trial",
+      badge: "Diagnosis → Decision Stack",
       num: "01 / 06",
       title: "NIKE SNKRS",
-      insight: "\u201CFrom Lottery Machine to Styling Platform. Rebuilding trust in a drop system designed to create desire but creating abandonment instead.\u201D",
+      insight: "\u201CWhich problem do we solve first? Finding the failure point in a drop system designed for desire but creating abandonment. Rebuilding trust through documented tradeoffs.\u201D",
       link: "/work/nike",
     },
     {
       bg: "linear-gradient(160deg,#03081e 0%,#060f2e 35%,#03081e 65%,#010408 100%)",
       image: "/case-studies/saks/saks_hero_exterior.png",
       ghost: "Saks",
-      badge: "Acquisition & Transaction",
+      badge: "Unit Economics → Platform Design",
       num: "02 / 06",
       title: "Vault by Saks",
-      insight: "\u201CLuxury is no longer about access to goods. It\u2019s about access to curation.\u201D",
+      insight: "\u201C$6.1B in 10-year value. Rebuilding luxury retail from the balance sheet up. A business model as a design deliverable.\u201D",
       link: "/work/saks",
     },
     {
       bg: "linear-gradient(160deg,#120e08 0%,#251a10 35%,#120e08 70%,#080504 100%)",
       image: "/case-studies/carolyn/carolyn_hero_silhouette.png",
       ghost: "Calvin Klein",
-      badge: "Brand Architecture",
+      badge: "Equity Architecture → Product Launch",
       num: "03 / 06",
       title: "The Carolyn",
-      insight: "\u201CThirty years of cultural capital and no named object to carry it.\u201D",
+      insight: "\u201CAn accessories gap is actually an equity architecture gap. Thirty years of cultural capital packed into a single, named object.\u201D",
       link: "/work/carolyn",
     },
     {
       bg: "linear-gradient(160deg,#001a08 0%,#002e12 35%,#001a08 70%,#000d04 100%)",
       image: "/case-studies/on/on_hero.png",
       ghost: "On",
-      badge: "Retention & Deep Engagement",
+      badge: "Community Layer → Retention System",
       num: "04 / 06",
       title: "On APEX",
-      insight: "\u201CThe brand that owns the community owns the repeat purchase cycle for the lifetime of the runner.\u201D",
+      insight: "\u201CThe hardware is flawless. The software layer doesn\u2019t exist. Designing the witness for the lifetime of the runner.\u201D",
       link: "/work/on",
     },
     {
@@ -101,10 +102,10 @@ export default function Home() {
       image: "/case-studies/diesel/diesel_hero.png",
       imagePosition: "center center",
       ghost: "Diesel",
-      badge: "Advocacy & Brand Affinity",
+      badge: "Cultural Destination → Spatial Design",
       num: "05 / 06",
       title: "Diesel Iceberg",
-      insight: "\u201C10% product. 90% soul.\u201D",
+      insight: "\u201CA building as a brand experience. Optimised for self-knowledge, not just transactions. Harajuku\u2019s gravitational anchor.\u201D",
       link: "/work/diesel",
       peek: true,
     },
@@ -112,10 +113,10 @@ export default function Home() {
       bg: "linear-gradient(160deg,#08060e 0%,#120e1e 35%,#08060e 70%,#040308 100%)",
       image: "/case-studies/stylect/stylect_hero.png",
       ghost: "Stylect",
-      badge: "Personalization Layer",
+      badge: "Marketplace Design → Stakeholder Alignment",
       num: "06 / 06",
       title: "Stylect",
-      insight: "\u201CThe value isn\u2019t in the inventory. It\u2019s in the rejection of everything wrong.\u201D",
+      insight: "\u201COrchestrating a three-sided marketplace where incentives align. Managing the tension between shopper, stylist, and retailer at the point of decision.\u201D",
       link: "/work/stylect",
       peek: true,
       extraOpacity: 0.5,
@@ -174,6 +175,15 @@ export default function Home() {
                     <span>{cs.badge}</span>
                   </div>
                   <div className="accordion-body">
+                    {/* ▼ Key Metrics dropdown – placeholder for each case study */}
+                    <details className="case-metrics">
+                      <summary>Key Metrics</summary>
+                      <ul>
+                        <li>Metric 1: TBD</li>
+                        <li>Metric 2: TBD</li>
+                        <li>Metric 3: TBD</li>
+                      </ul>
+                    </details>
                     <div className="accordion-title">{cs.title}</div>
                     <div className="accordion-insight">{cs.insight}</div>
                     <button
@@ -370,12 +380,17 @@ export default function Home() {
 
           <div className="featured-row" style={{ justifyContent: 'flex-start', paddingTop: 0, borderTop: 'none', background: 'transparent' }}>
             <span className="featured-label">Featured In</span>
-            <div className="featured-names">
-              <span className="featured-name">AdAge</span>
-              <span className="featured-name">AdForum</span>
-              <span className="featured-name">Communication Arts</span>
-              <span className="featured-name">Print Mag</span>
-              <span className="featured-name">Stash</span>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+              <div className="featured-names">
+                <span className="featured-name">AdAge</span>
+                <span className="featured-name">AdForum</span>
+                <span className="featured-name">Communication Arts</span>
+                <span className="featured-name">Print Mag</span>
+                <span className="featured-name">Stash</span>
+              </div>
+              <span style={{ fontSize: '11px', letterSpacing: '.06em', color: 'var(--g500)', textTransform: 'uppercase' }}>
+                Via Branch Museum of Architecture and Design &times; MullenLowe Design Studio
+              </span>
             </div>
           </div>
 
@@ -606,7 +621,7 @@ export default function Home() {
           <a href="/13" className="footer-link">13</a>
           <a href="#contact" className="footer-link">Contact</a>
         </div>
-        <span className="footer-copy">&copy; 2025 Benn Pattara &middot; bennpattara.com</span>
+        <span className="footer-copy">&copy; 2026 Benn Pattara &middot; bennpattara.com</span>
       </footer>
     </>
   );

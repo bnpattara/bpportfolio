@@ -37,7 +37,7 @@ export default function BlogLayout({ children }: { children: React.ReactNode }) 
                     <a href="/13" className="footer-link">13</a>
                     <a href="/#contact" className="footer-link">Contact</a>
                 </div>
-                <span className="footer-copy">&copy; 2025 Benn Pattara &middot; bennpattara.com</span>
+                <span className="footer-copy">&copy; 2026 Benn Pattara &middot; bennpattara.com</span>
             </footer>
         </>
     );

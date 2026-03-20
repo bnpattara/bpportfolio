@@ -1,4 +1,17 @@
 import React from "react";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "The Carolyn — Calvin Klein — Benn Pattara",
+  description: "Thirty years of cultural capital and no named object to carry it. A hero bag product strategy for Calvin Klein.",
+  openGraph: {
+    title: "The Carolyn — Calvin Klein — Benn Pattara",
+    description: "Thirty years of cultural capital and no named object to carry it. A hero bag product strategy for Calvin Klein.",
+    url: "/work/carolyn",
+    type: "website",
+    images: [{ url: "https://bennpattara.com/og/carolyn.jpg", width: 1200, height: 630 }],
+  },
+};
 
 export default function CarolynCaseStudy() {
   return (

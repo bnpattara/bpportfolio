@@ -1,4 +1,17 @@
 import React from "react";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Nike SNKRS Confidence Hub — Benn Pattara",
+  description: "From lottery machine to styling platform. Rebuilding trust in a drop system designed to create desire but creating abandonment instead.",
+  openGraph: {
+    title: "Nike SNKRS Confidence Hub — Benn Pattara",
+    description: "From lottery machine to styling platform. Rebuilding trust in a drop system designed to create desire but creating abandonment instead.",
+    url: "/work/nike",
+    type: "website",
+    images: [{ url: "https://bennpattara.com/og/nike.jpg", width: 1200, height: 630 }],
+  },
+};
 
 export default function NikeCaseStudy() {
   return (
