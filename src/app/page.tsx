@@ -13,10 +13,59 @@ export default function Home() {
 
   const router = useRouter();
   const accordionRef = useRef<HTMLElement>(null);
+  const overlayRef = useRef<HTMLDivElement>(null);
+  const panelRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [fadingOut, setFadingOut] = useState<number | null>(null);
 
-  const handleCardClick = useCallback((link: string, e: React.MouseEvent) => {
+  const handleCardClick = useCallback((link: string, image: string, index: number, e: React.MouseEvent) => {
     e.preventDefault();
-    router.push(link);
+
+    const nav = document.getElementById('site-nav');
+    if (nav) nav.classList.add('scrolled');
+
+    const overlay = overlayRef.current;
+    const panel = panelRefs.current[index];
+
+    if (!overlay || !panel) {
+      router.push(link);
+      return;
+    }
+
+    const rect = panel.getBoundingClientRect();
+
+    // Fade out non-clicked panels
+    setFadingOut(index);
+
+    // Snap overlay to the panel's exact position (no transition)
+    overlay.style.display = 'block';
+    overlay.style.backgroundImage = `url(${image})`;
+    overlay.style.top = `${rect.top}px`;
+    overlay.style.left = `${rect.left}px`;
+    overlay.style.width = `${rect.width}px`;
+    overlay.style.height = `${rect.height}px`;
+    overlay.style.transition = 'none';
+
+    // Force reflow so the starting position paints before transition kicks in
+    overlay.getBoundingClientRect();
+
+    // Next frame: expand to full viewport
+    requestAnimationFrame(() => {
+      overlay.style.transition = [
+        'top 400ms cubic-bezier(0.4, 0, 0.2, 1)',
+        'left 400ms cubic-bezier(0.4, 0, 0.2, 1)',
+        'width 400ms cubic-bezier(0.4, 0, 0.2, 1)',
+        'height 400ms cubic-bezier(0.4, 0, 0.2, 1)',
+      ].join(', ');
+      overlay.style.top = '0';
+      overlay.style.left = '0';
+      overlay.style.width = '100vw';
+      overlay.style.height = '100vh';
+    });
+
+    // Navigate after expansion completes
+    setTimeout(() => {
+      router.push(link);
+    }, 450);
   }, [router]);
 
   /* NAV scroll observer — watches accordion section top */
@@ -55,11 +104,33 @@ export default function Home() {
     return () => obs.disconnect();
   }, []);
 
+  /* DATA-ANIMATE scroll reveal */
+  useEffect(() => {
+    const els = document.querySelectorAll<HTMLElement>('[data-animate]');
+    if (!els.length) return;
+    const obs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const el = entry.target as HTMLElement;
+            const delay = el.dataset.animateDelay ?? '0';
+            el.style.setProperty('--delay', delay + 'ms');
+            el.classList.add('is-visible');
+            obs.unobserve(el);
+          }
+        });
+      },
+      { threshold: 0.2, rootMargin: '0px 0px -80px 0px' }
+    );
+    els.forEach((el) => obs.observe(el));
+    return () => obs.disconnect();
+  }, []);
+
   /* ── case study data ── */
   const caseStudies = [
     {
       bg: "linear-gradient(160deg,#1a0e00 0%,#2e1a00 35%,#1a0e00 70%,#0d0700 100%)",
-      image: "/case-studies/nike/nike_hero_brand_identity.png",
+      image: "/case-studies/nike/nike_hero_brand_identity.webp",
       ghost: "Nike",
       badge: "Diagnosis → Decision Stack",
       num: "01 / 06",
@@ -69,7 +140,7 @@ export default function Home() {
     },
     {
       bg: "linear-gradient(160deg,#03081e 0%,#060f2e 35%,#03081e 65%,#010408 100%)",
-      image: "/case-studies/saks/saks_hero_exterior.png",
+      image: "/case-studies/saks/saks_hero_exterior.webp",
       ghost: "Saks",
       badge: "Unit Economics → Platform Design",
       num: "02 / 06",
@@ -79,7 +150,7 @@ export default function Home() {
     },
     {
       bg: "linear-gradient(160deg,#120e08 0%,#251a10 35%,#120e08 70%,#080504 100%)",
-      image: "/case-studies/carolyn/carolyn_hero_silhouette.png",
+      image: "/case-studies/carolyn/carolyn_hero_silhouette.webp",
       ghost: "Calvin Klein",
       badge: "Equity Architecture → Product Launch",
       num: "03 / 06",
@@ -89,7 +160,7 @@ export default function Home() {
     },
     {
       bg: "linear-gradient(160deg,#001a08 0%,#002e12 35%,#001a08 70%,#000d04 100%)",
-      image: "/case-studies/on/on_hero.png",
+      image: "/case-studies/on/on_hero.webp",
       ghost: "On",
       badge: "Community Layer → Retention System",
       num: "04 / 06",
@@ -99,7 +170,7 @@ export default function Home() {
     },
     {
       bg: "linear-gradient(160deg,#1c0e00 0%,#2e1800 35%,#1c0e00 70%,#0e0700 100%)",
-      image: "/case-studies/diesel/diesel_hero.png",
+      image: "/case-studies/diesel/diesel_hero.webp",
       imagePosition: "center center",
       ghost: "Diesel",
       badge: "Cultural Destination → Spatial Design",
@@ -111,7 +182,7 @@ export default function Home() {
     },
     {
       bg: "linear-gradient(160deg,#08060e 0%,#120e1e 35%,#08060e 70%,#040308 100%)",
-      image: "/case-studies/stylect/stylect_hero.png",
+      image: "/case-studies/stylect/stylect_hero.webp",
       ghost: "Stylect",
       badge: "Marketplace Design → Stakeholder Alignment",
       num: "06 / 06",
@@ -151,7 +222,8 @@ export default function Home() {
             return (
               <div
                 key={i}
-                className={`accordion-panel${isHovered ? ' accordion-panel--expanded' : ''}${anyHovered && !isHovered ? ' accordion-panel--compressed' : ''}`}
+                ref={(el) => { panelRefs.current[i] = el; }}
+                className={`accordion-panel${isHovered ? ' accordion-panel--expanded' : ''}${anyHovered && !isHovered ? ' accordion-panel--compressed' : ''}${fadingOut !== null && fadingOut !== i ? ' accordion-panel--fade-out' : ''}`}
                 style={cs.image ? {
                   background: `linear-gradient(to bottom, rgba(3,8,30,.12) 0%, rgba(3,8,30,.45) 100%), url(${cs.image}) no-repeat`,
                   backgroundSize: "cover",
@@ -159,7 +231,7 @@ export default function Home() {
                 } : { background: cs.bg }}
                 onMouseEnter={() => setHoveredCard(i)}
                 onMouseLeave={() => setHoveredCard(null)}
-                onClick={(e) => cs.link && handleCardClick(cs.link, e)}
+                onClick={(e) => cs.link && handleCardClick(cs.link, cs.image, i, e)}
               >
                 {/* Collapsed state: project title */}
                 <div className={`accordion-collapsed${isHovered ? ' accordion-collapsed--hidden' : ''}`}>
@@ -188,7 +260,7 @@ export default function Home() {
                     <div className="accordion-insight">{cs.insight}</div>
                     <button
                       className="accordion-cta"
-                      onClick={(e) => { e.stopPropagation(); cs.link && handleCardClick(cs.link, e); }}
+                      onClick={(e) => { e.stopPropagation(); cs.link && handleCardClick(cs.link, cs.image, i, e); }}
                     >
                       View Case Study &rarr;
                     </button>
@@ -320,8 +392,13 @@ export default function Home() {
             { category: 'Brand Purpose', title: 'Meaning Metrics', desc: 'Why we need to measure the cultural impact, not just the commercial click. Shifting our KPIs towards community health.', date: 'Oct 2024', link: '#', num: '005' },
             { category: 'Cultural Strategy', title: 'Subcultures as Scaffolding', desc: 'How to build brands inside of communities without commodifying them. Earning the right to participate in niche networks.', date: 'Sep 2024', link: '#', num: '006' },
             { category: 'Creative Tech', title: 'Designing with Invisible Intelligence', desc: 'The role of implicit AI in consumer facing experiences. Making algorithms useful without being visible to the user.', date: 'Aug 2024', link: '#', num: '007' }
-          ].slice(isBlogExpanded ? blogPage * 6 : 0, isBlogExpanded ? (blogPage + 1) * 6 : 3).map((blog) => (
-            <div className="article-card" key={blog.num}>
+          ].slice(isBlogExpanded ? blogPage * 6 : 0, isBlogExpanded ? (blogPage + 1) * 6 : 3).map((blog, index) => (
+            <div
+              className="article-card"
+              key={blog.num}
+              data-animate="fade-up"
+              data-animate-delay={String(index * 80)}
+            >
               <div className="article-ghost-num">{blog.num}</div>
               <div className="article-category">{blog.category}</div>
               <div className="article-title">{blog.title}</div>
@@ -341,16 +418,16 @@ export default function Home() {
       ══════════════════════════════════════════ */}
 
       {/* ── ABOUT HERO ── */}
-      <section id="about" className="about-hero reveal">
+      <section id="about" className="about-hero">
         <div>
           <div className="eyebrow" style={{ marginBottom: 20 }}>About</div>
-          <h2 className="about-hero-title">
+          <h2 className="about-hero-title" data-animate="fade-up" data-animate-delay="0">
             Where Cultural<br />Strategy Meets<br />Commercial<br />Precision.
           </h2>
-          <p className="about-hero-body">
+          <p className="about-hero-body" data-animate="fade-up" data-animate-delay="0">
             I sit at the intersection of brand strategy and product management &mdash; translating cultural insight into commercial systems that perform. I don&rsquo;t separate creative from commercial. I use data to understand desire, and design to fulfill it.
           </p>
-          <p className="about-hero-body">
+          <p className="about-hero-body" data-animate="fade-up" data-animate-delay="120">
             I came to this through an unusual path &mdash; graphic design, editorial journalism, frontline retail &mdash; each discipline teaching me something the others couldn&rsquo;t. I learned brand systems in the studio, narrative craft in the newsroom, and what loyalty actually costs on the floor at Gap. Currently completing a Master of Business with a concentration in Experiential Design at VCU Brandcenter.
           </p>
         </div>
@@ -407,12 +484,12 @@ export default function Home() {
         <div className="section-row" style={{ marginBottom: 40 }}>
           <div>
             <div className="section-num">01</div>
-            <div className="section-title-label">Capabilities</div>
+            <div className="section-title-label" data-animate="fade-up" data-animate-delay="0">Capabilities</div>
           </div>
           <div />
         </div>
         <div className="cap-grid">
-          <div className="cap-card">
+          <div className="cap-card" data-animate="fade-up" data-animate-delay="0">
             <div className="cap-num">01 &mdash;</div>
             <div className="cap-title">Product<br />Management</div>
             <div className="cap-desc">End-to-end product strategy and execution &mdash; from PRD authorship and user grounding to launch sequencing and sensitivity risk management. Decision-making frameworks, tradeoff documentation, and cross-functional alignment.</div>
@@ -423,7 +500,7 @@ export default function Home() {
               <span className="cap-skill">Risk Management</span>
             </div>
           </div>
-          <div className="cap-card">
+          <div className="cap-card" data-animate="fade-up" data-animate-delay="80">
             <div className="cap-num">02 &mdash;</div>
             <div className="cap-title">Brand<br />Strategy</div>
             <div className="cap-desc">Building brand-consumer relationships across the full journey &mdash; from cultural discovery to deep identity-level advocacy. Trend forecasting, positioning, and narrative architecture.</div>
@@ -434,7 +511,7 @@ export default function Home() {
               <span className="cap-skill">Cultural Strategy</span>
             </div>
           </div>
-          <div className="cap-card">
+          <div className="cap-card" data-animate="fade-up" data-animate-delay="160">
             <div className="cap-num">03 &mdash;</div>
             <div className="cap-title">Experience<br />Design</div>
             <div className="cap-desc">Designing the phygital gap &mdash; from user journey mapping and service blueprints to high-fidelity prototypes. Information architecture built for storytelling, not just usability.</div>
@@ -445,7 +522,7 @@ export default function Home() {
               <span className="cap-skill">Phygital Integration</span>
             </div>
           </div>
-          <div className="cap-card">
+          <div className="cap-card" data-animate="fade-up" data-animate-delay="240">
             <div className="cap-num">04 &mdash;</div>
             <div className="cap-title">Systems<br />Design</div>
             <div className="cap-desc">Designing the invisible scaffolding &mdash; gamification mechanics, loyalty architecture, behavioral loops, and circular economy models that make brand engagement feel effortless.</div>
@@ -456,7 +533,7 @@ export default function Home() {
               <span className="cap-skill">Omnichannel</span>
             </div>
           </div>
-          <div className="cap-card">
+          <div className="cap-card" data-animate="fade-up" data-animate-delay="320">
             <div className="cap-num">05 &mdash;</div>
             <div className="cap-title">AI &amp;<br />Emerging Tech</div>
             <div className="cap-desc">Translating machine learning concepts into actionable brand strategy. Generative AI workflows, AI-driven personalization systems, and &ldquo;Digital Fluency&rdquo; models for executives.</div>
@@ -507,11 +584,11 @@ export default function Home() {
             <div className="section-title-label">Experience</div>
           </div>
           <div>
-            <div className="exp-intro">An unusual path.<br />An intentional practice.</div>
+            <div className="exp-intro" data-animate="fade-up" data-animate-delay="0">An unusual path.<br />An intentional practice.</div>
             <p className="exp-intro-body">A background in graphic design, trained on visual systems and narrative craft, combined with frontline retail experience where loyalty isn&rsquo;t a program &mdash; it&rsquo;s a feeling you either engineer or lose.</p>
 
             {/* Role 01 */}
-            <div className="role-row">
+            <div className="role-row" data-animate="fade-left" data-animate-delay="0">
               <div>
                 <div className="role-date">Apr 2025 &ndash; Present</div>
                 <div className="role-company">Gap Inc. &middot; #1224</div>
@@ -524,7 +601,7 @@ export default function Home() {
             </div>
 
             {/* Role 02 */}
-            <div className="role-row">
+            <div className="role-row" data-animate="fade-left" data-animate-delay="100">
               <div>
                 <div className="role-date">Mar 2025 &ndash; Present</div>
                 <div className="role-company">Branch Museum of Architecture and Design</div>
@@ -536,7 +613,7 @@ export default function Home() {
             </div>
 
             {/* Role 03 */}
-            <div className="role-row" style={{ borderBottom: "1px solid var(--g200)", paddingBottom: 32 }}>
+            <div className="role-row" data-animate="fade-left" data-animate-delay="200" style={{ borderBottom: "1px solid var(--g200)", paddingBottom: 32 }}>
               <div>
                 <div className="role-date">Jan 2025 &ndash; Present</div>
                 <div className="role-company">The Rev. Factory</div>
@@ -577,26 +654,26 @@ export default function Home() {
       </section>
 
       {/* ── CONTACT ── */}
-      <section className="section-block reveal" id="contact" style={{ borderBottom: 'none', paddingBottom: '32px' }}>
+      <section className="section-block" id="contact" style={{ borderBottom: 'none', paddingBottom: '32px' }}>
         <div className="section-row">
           <div>
             <div className="section-num">04</div>
             <div className="section-title-label">Contact</div>
           </div>
           <div>
-            <h2 className="contact-heading">Let&rsquo;s Make<br />Something<br />Worth Doing.</h2>
-            <p className="contact-body">Open to full-time brand strategy, experience design, and creative direction roles. Also available for consulting and collaborative projects. Response within 48 hours.</p>
+            <h2 className="contact-heading" data-animate="fade-up" data-animate-delay="0">Let&rsquo;s Make<br />Something<br />Worth Doing.</h2>
+            <p className="contact-body" data-animate="fade-up" data-animate-delay="80">Open to full-time brand strategy, experience design, and creative direction roles. Also available for consulting and collaborative projects. Response within 48 hours.</p>
 
             <div className="contact-links">
-              <div className="contact-link-cell">
+              <div className="contact-link-cell" data-animate="fade-up" data-animate-delay="160">
                 <div className="contact-link-label">Email</div>
                 <div style={{ fontSize: '15px', color: 'var(--black)', marginTop: '8px', cursor: 'pointer', userSelect: 'all' }}>bennpattara@gmail.com</div>
               </div>
-              <div className="contact-link-cell">
+              <div className="contact-link-cell" data-animate="fade-up" data-animate-delay="220">
                 <div className="contact-link-label">LinkedIn</div>
                 <a href="https://linkedin.com/in/bennpattara" target="_blank" rel="noopener noreferrer">Connect</a>
               </div>
-              <div className="contact-link-cell">
+              <div className="contact-link-cell" data-animate="fade-up" data-animate-delay="280">
                 <div className="contact-link-label">R&eacute;sum&eacute; PDF</div>
                 <a href="/resume.pdf" download>Download</a>
               </div>
@@ -623,6 +700,8 @@ export default function Home() {
         </div>
         <span className="footer-copy">&copy; 2026 Benn Pattara &middot; bennpattara.com</span>
       </footer>
+
+      <div id="cs-transition-overlay" ref={overlayRef} />
     </>
   );
 }

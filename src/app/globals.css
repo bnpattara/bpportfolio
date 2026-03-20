@@ -99,7 +99,7 @@ body {
   top: 0;
   left: 0;
   right: 0;
-  z-index: 100;
+  z-index: 10000;
   transition: background var(--ease-base), border-color var(--ease-base), box-shadow var(--ease-base);
   background: transparent;
   border-bottom: 1px solid transparent;
@@ -1764,6 +1764,30 @@ body>* {
   animation: pageFadeIn 400ms ease both;
 }
 
+/* ─── Cinematic transition overlay ─── */
+#cs-transition-overlay {
+  position: fixed;
+  z-index: 9999;
+  display: none;
+  background-size: cover;
+  background-position: center center;
+  border-radius: 0;
+  pointer-events: none;
+  /* transition is set dynamically via JS */
+}
+
+/* Other panels fade out while one expands */
+.accordion-panel--fade-out {
+  opacity: 0 !important;
+  transition: opacity 200ms ease !important;
+}
+
+/* Work page entrance */
+@keyframes workPageFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
 /* ═══════════════════════════════════════════════════
    RESPONSIVE — TABLET (≤ 1024px)
 ═══════════════════════════════════════════════════ */
@@ -3117,4 +3141,49 @@ body>* {
   text-transform: uppercase;
   color: var(--g400);
   margin-bottom: 14px;
+}
+
+/* =====================================================
+   SCROLL-REVEAL: data-animate system
+   Motion only plays when user has not requested reduced motion.
+   JS adds .is-visible; CSS does all animation via transition.
+   ===================================================== */
+
+@media (prefers-reduced-motion: no-preference) {
+
+  /* Fade-up — default 600ms (headings, about body) */
+  [data-animate="fade-up"] {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 600ms cubic-bezier(0.4, 0, 0.2, 1),
+                transform 600ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition-delay: var(--delay, 0ms);
+  }
+
+  /* Fade-left — 500ms (experience rows) */
+  [data-animate="fade-left"] {
+    opacity: 0;
+    transform: translateX(-16px);
+    transition: opacity 500ms cubic-bezier(0.4, 0, 0.2, 1),
+                transform 500ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition-delay: var(--delay, 0ms);
+  }
+
+  /* Duration override — 500ms (capability cards) */
+  .cap-card[data-animate="fade-up"] {
+    transition-duration: 500ms;
+  }
+
+  /* Duration override — 400ms (blog cards, contact cells) */
+  .article-card[data-animate="fade-up"],
+  .contact-link-cell[data-animate="fade-up"] {
+    transition-duration: 400ms;
+  }
+
+  /* Visible state — shared by all directions */
+  [data-animate].is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
 }
