@@ -348,10 +348,10 @@ export default function Home() {
             Where Cultural<br />Strategy Meets<br />Commercial<br />Precision.
           </h2>
           <p className="about-hero-body">
-            I&rsquo;m a multidisciplinary strategic creative that identifies the right problems and builds the systems, experiences, and narratives that move people from passive awareness to active brand citizenship &mdash; across digital products, physical spaces, and everything in between. I bridge creative customer experience and quantitative growth at every touchpoint, from brief to implementation. I research, develop strategy, and execute across product and service &mdash; solving real-world brand problems through brand DNA and commercial precision.
+            I sit at the intersection of brand strategy and product management &mdash; translating cultural insight into commercial systems that perform. I don&rsquo;t separate creative from commercial. I use data to understand desire, and design to fulfill it.
           </p>
           <p className="about-hero-body">
-            I came to this through an unusual path: a background in graphic design and advertising, trained on visual systems and narrative craft, combined with frontline retail experience where I learned that loyalty isn&rsquo;t a program &mdash; it&rsquo;s a feeling you either engineer or lose. Currently pursuing a Master of Business with a concentration in Experiential Design at VCU Brandcenter.
+            I came to this through an unusual path &mdash; graphic design, editorial journalism, frontline retail &mdash; each discipline teaching me something the others couldn&rsquo;t. I learned brand systems in the studio, narrative craft in the newsroom, and what loyalty actually costs on the floor at Gap. Currently completing a Master of Business with a concentration in Experiential Design at VCU Brandcenter.
           </p>
         </div>
 
