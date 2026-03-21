@@ -419,7 +419,7 @@ export default function Home() {
           </p>
         </div>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '48px', marginTop: '0px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '48px', marginTop: '0px', alignSelf: 'flex-start' }}>
           {/* Status grid */}
           <div className="status-grid">
             <div className="status-cell">

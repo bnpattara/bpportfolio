@@ -1203,7 +1203,7 @@ footer {
 }
 
 .about-hero-title {
-  font-size: clamp(38px, 4.5vw, 60px);
+  font-size: clamp(24px, 2.8vw, 38px);
   font-weight: 300;
   letter-spacing: .03em;
   text-transform: uppercase;
