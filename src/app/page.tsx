@@ -305,18 +305,6 @@ export default function Home() {
       </div>
 
 
-      {/* ── PHILOSOPHY INTERSTITIAL ── */}
-      <section id="philosophy" className="reveal">
-        <div className="philosophy-inner">
-          <div className="philosophy-eyebrow">Design Philosophy</div>
-          <div className="philosophy-quote reveal" style={{ animationDelay: '80ms' }}>
-            &ldquo;Good design isn&rsquo;t about making things beautiful. It&rsquo;s about making the right things feel inevitable.&rdquo;
-          </div>
-          <p className="philosophy-sub reveal" style={{ animationDelay: '180ms' }}>
-            I don&rsquo;t separate &ldquo;creative&rdquo; from &ldquo;data.&rdquo; I use data to understand desire, and design to fulfill it. Every system I build answers the same question: how does a brand earn a permanent place in someone&rsquo;s lifestyle, not just their wallet?
-          </p>
-        </div>
-      </section>
 
 
       {/* ── RECENT WRITING (moved under About, hidden for now) ── */}
@@ -420,9 +408,9 @@ export default function Home() {
       {/* ── ABOUT HERO ── */}
       <section id="about" className="about-hero">
         <div>
-          <p className="about-hero-body" data-animate="fade-up" data-animate-delay="0">
-            Fashion is in the business of identity. Most brands forget that.
-          </p>
+          <h2 className="about-hero-title" data-animate="fade-up" data-animate-delay="0">
+            Fashion is in the business of identity.
+          </h2>
           <p className="about-hero-body" data-animate="fade-up" data-animate-delay="80">
             The most powerful ones don&rsquo;t sell products &mdash; they make people feel like themselves. The smile when a pair of jeans fits perfectly. The quiet satisfaction of redeeming a reward you forgot you&rsquo;d earned. The feeling of walking out of a fitting room standing a little taller. These are the moments where confidence compounds &mdash; where a brand stops being a store and starts being part of how someone sees themselves.
           </p>
