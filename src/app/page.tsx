@@ -409,7 +409,7 @@ export default function Home() {
       <section id="about" className="about-hero">
         <div>
           <h2 className="about-hero-title" data-animate="fade-up" data-animate-delay="0">
-            Fashion is in the business of identity.
+            The brands that last don&rsquo;t sell clothes. They sell a version of yourself you want to be.
           </h2>
           <p className="about-hero-body" data-animate="fade-up" data-animate-delay="80">
             The most powerful ones don&rsquo;t sell products &mdash; they make people feel like themselves. The smile when a pair of jeans fits perfectly. The quiet satisfaction of redeeming a reward you forgot you&rsquo;d earned. The feeling of walking out of a fitting room standing a little taller. These are the moments where confidence compounds &mdash; where a brand stops being a store and starts being part of how someone sees themselves.
