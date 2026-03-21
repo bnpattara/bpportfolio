@@ -409,20 +409,17 @@ export default function Home() {
       <section id="about" className="about-hero">
         <div>
           <h2 className="about-hero-title" data-animate="fade-up" data-animate-delay="0">
-            The brands that last don&rsquo;t sell clothes. They sell a version of yourself you want to be.
+            The fashion brands that last don&rsquo;t just sell clothes, makeup, or accessories. They sell a version of yourself you want to be.
           </h2>
           <p className="about-hero-body" data-animate="fade-up" data-animate-delay="80">
-            The smile when a pair of jeans fits perfectly. The quiet satisfaction of redeeming a reward you forgot you&rsquo;d earned. That&rsquo;s where a brand stops being a store and starts being part of how someone sees themselves.
+            The most powerful ones make people feel like themselves. The smile when a pair of jeans fits perfectly. The satisfaction of redeeming rewards with your favorite retail card. The feeling of the perfect outfit making you stand just a little taller. These are the moments where confidence compounds &mdash; where the items we connect with stop being transactions and start being part of how we see ourselves.
           </p>
           <p className="about-hero-body" data-animate="fade-up" data-animate-delay="160">
-            I sit at the intersection of brand strategy and product management &mdash; translating cultural insight into commercial systems that perform. I use data to understand desire, and design to fulfill it.
-          </p>
-          <p className="about-hero-body" data-animate="fade-up" data-animate-delay="240">
-            I came to this through an unusual path &mdash; graphic design, editorial journalism, frontline retail &mdash; each discipline teaching me something the others couldn&rsquo;t. I learned brand systems in the studio, narrative craft in the newsroom, and what loyalty actually costs on the floor at Gap. Currently completing a Master of Business with a concentration in Experiential Design at VCU Brandcenter.
+            I&rsquo;m a multidisciplinary strategic creative who works across every stage of the consumer journey &mdash; from the cultural insight that earns attention, to the product experience that builds trust, to the loyalty system that makes you feel like you belong. I use data to understand desire, and design to fulfill it. That&rsquo;s the work. That&rsquo;s what I build toward.
           </p>
         </div>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '48px', marginTop: '42px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '48px', marginTop: '0px' }}>
           {/* Status grid */}
           <div className="status-grid">
             <div className="status-cell">
