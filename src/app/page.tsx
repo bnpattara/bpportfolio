@@ -420,25 +420,21 @@ export default function Home() {
       {/* ── ABOUT HERO ── */}
       <section id="about" className="about-hero">
         <div>
-          <div className="eyebrow" style={{ marginBottom: 20 }}>About</div>
-          <h2 className="about-hero-title" data-animate="fade-up" data-animate-delay="0">
-            Where Cultural<br />Strategy Meets<br />Commercial<br />Precision.
-          </h2>
           <p className="about-hero-body" data-animate="fade-up" data-animate-delay="0">
-            I sit at the intersection of brand strategy and product management &mdash; translating cultural insight into commercial systems that perform. I don&rsquo;t separate creative from commercial. I use data to understand desire, and design to fulfill it.
+            Fashion is in the business of identity. Most brands forget that.
           </p>
-          <p className="about-hero-body" data-animate="fade-up" data-animate-delay="120">
-            I came to this through an unusual path &mdash; graphic design, editorial journalism, frontline retail &mdash; each discipline teaching me something the others couldn&rsquo;t. I learned brand systems in the studio, narrative craft in the newsroom, and what loyalty actually costs on the floor at Gap. Currently completing a Master of Business with a concentration in Experiential Design at VCU Brandcenter.
+          <p className="about-hero-body" data-animate="fade-up" data-animate-delay="80">
+            The most powerful ones don&rsquo;t sell products &mdash; they make people feel like themselves. The smile when a pair of jeans fits perfectly. The quiet satisfaction of redeeming a reward you forgot you&rsquo;d earned. The feeling of walking out of a fitting room standing a little taller. These are the moments where confidence compounds &mdash; where a brand stops being a store and starts being part of how someone sees themselves.
+          </p>
+          <p className="about-hero-body" data-animate="fade-up" data-animate-delay="160">
+            I&rsquo;m a multidisciplinary strategic creative who works across every stage of the consumer journey &mdash; from the cultural insight that earns attention, to the product experience that builds trust, to the loyalty system that makes someone feel like they belong. I use data to understand desire, and design to fulfill it.
+          </p>
+          <p className="about-hero-body" data-animate="fade-up" data-animate-delay="240">
+            The brands that do this well don&rsquo;t just sell clothes. They make people feel something. That&rsquo;s what I build toward &mdash; and the brands I want to spend my career with are the ones that believe the same thing.
           </p>
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '48px', marginTop: '42px' }}>
-          {/* Philosophy / POV */}
-          <div className="about-philosophy-block" style={{ marginBottom: 0 }}>
-            <div className="about-philosophy-eyebrow">POINT OF VIEW</div>
-            <div className="about-philosophy-quote">&ldquo;The most powerful thing a brand can do is make a consumer feel seen &mdash; not as a demographic, not as a transaction, but as a person with an identity worth expressing.&rdquo;</div>
-          </div>
-
           {/* Status grid */}
           <div className="status-grid">
             <div className="status-cell">

@@ -207,6 +207,13 @@ footer{border-top:1px solid var(--g200);padding:32px 48px;display:flex;align-ite
 .footer-link{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--g400);text-decoration:none;transition:color var(--ease-fast);}
 .footer-link:hover{color:var(--black);}
 .footer-copy{font-size:11px;color:var(--g300);font-family:var(--font);}
+@media (max-width: 768px) {
+  #cs-sidenav { display: none !important; }
+  .cs-body-wrap { grid-template-columns: 1fr !important; }
+  #cs-exec-summary, .cs-section { padding: 40px 20px !important; }
+  .cs-exec-inner { grid-template-columns: 1fr !important; gap: 32px !important; }
+  .cs-hero-title-wrap { padding: 40px 20px 48px !important; }
+}
 </style>
 </head>
 <body>
@@ -273,10 +280,6 @@ footer{border-top:1px solid var(--g200);padding:32px 48px;display:flex;align-ite
         <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Deliverables</div><div class="cs-exec-meta-val">PRD &middot; Design System &middot; Interactive Prototype &middot; Case Study</div></div>
         <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Primary Job</div><div class="cs-exec-meta-val">Convert the 40% who opted out of the lottery back into the Nike ecosystem</div></div>
       </div>
-      <div class="pm-lens">
-        <div class="pm-lens-label">PM Lens</div>
-        <p class="pm-lens-text">This case study demonstrates platform pivot strategy grounded in research rather than assumption, multi-persona user modeling across three distinct consumer psychographics, phase-gated feature prioritization with documented P0/P1/P2 reasoning, and the discipline of building confidence infrastructure where every product decision traces back to a belief about what kind of relationship Nike wants with its consumers.</p>
-      </div>
     </div>
   </div>
 </section>
@@ -309,10 +312,6 @@ footer{border-top:1px solid var(--g200);padding:32px 48px;display:flex;align-ite
   <div class="cs-pull-quote">&ldquo;The SNKRS app has become a symbol of everything wrong with sneaker culture: inaccessible, hostile, designed to frustrate rather than serve. The lottery model isn&rsquo;t just underperforming &mdash; it is actively destroying Nike&rsquo;s relationship with its most valuable long-term consumers.&rdquo;</div>
   <p class="cs-body">The museum mindset is the most consequential finding. Consumers who treat shoes like stock certificates &mdash; bought to own, not to wear &mdash; break Nike&rsquo;s fundamental business mechanic: repeat purchase driven by wear-out. A shoe that never leaves the box never needs a replacement. The problem is not competition; it is activation failure at the post-purchase stage. Nike sells the shoe. The shoe joins the museum. The relationship ends there.</p>
   <p class="cs-body">The existing app architecture reinforces this failure. SNKRS surfaces drops, countdown timers, and raffle entry buttons. It does not help consumers understand what to do with the shoes they already own. There is no styling context, no wardrobe logic, no occasion mapping. The product experience ends at checkout &mdash; precisely where it should begin.</p>
-  <div class="pm-lens">
-    <div class="pm-lens-label">PM Lens &middot; Why This Is a Product Problem, Not a Marketing Problem</div>
-    <p class="pm-lens-text">The instinct is to solve opt-out with better marketing &mdash; better campaigns, better creative, better targeting. That is the wrong level. The opt-out is structural: the product model itself signals the wrong relationship with consumers. Marketing can generate awareness of a Confidence Hub; it cannot create a confidence infrastructure. The platform pivot requires product-level changes to the access model (lottery to participation), the product page (spec sheet to styling resource), and the underlying data architecture (transaction history to wardrobe graph). These are product decisions, not creative ones.</p>
-  </div>
 </section>
 
 <!-- 02 THE INSIGHT -->
@@ -342,10 +341,6 @@ footer{border-top:1px solid var(--g200);padding:32px 48px;display:flex;align-ite
   </div>
   <div class="cs-pull-quote">&ldquo;Solve for confidence, unlock the replacement cycle, recover LTV. This is not a UX improvement. It is a business model intervention. The app becomes a styling platform that happens to sell sneakers &mdash; not a sneaker store that happens to have an app.&rdquo;</div>
   <p class="cs-body">The strategic repositioning follows from the insight: Nike&rsquo;s proposition shifts from &ldquo;can you get it&rdquo; to &ldquo;can you wear it well.&rdquo; The Confidence Hub re-enters the Aesthetic Individualist&rsquo;s consideration set not by making drops more accessible &mdash; that addresses the symptom &mdash; but by making the brand&rsquo;s relationship with the consumer substantively more useful. The consumer who feels confident in how to dress becomes the consumer who wears shoes out. The consumer who wears shoes out becomes the consumer who needs new ones.</p>
-  <div class="pm-lens">
-    <div class="pm-lens-label">PM Lens &middot; The Data Architecture Behind the Insight</div>
-    <p class="pm-lens-text">The Confidence Hub does not require consumers to photograph their wardrobes or submit data they don&rsquo;t already have. Nike already has the data. Purchase history from Nike.com and SNKRS is the wardrobe graph. Nike Training Club and Run Club behavioral data reveals which shoes are in active rotation. A 3-question style quiz fills gaps for new users. The product insight and the data strategy were co-developed: the insight only works at scale because Nike owns the infrastructure to execute it without asking consumers to do extra work. This is the difference between a styling product that asks users to build a database and one that makes the database Nike already has visible to the user who created it.</p>
-  </div>
 </section>
 <!-- 03 THE USERS -->
 <section class="cs-section" id="cs-users" data-cs-section="cs-users">
@@ -377,10 +372,6 @@ footer{border-top:1px solid var(--g200);padding:32px 48px;display:flex;align-ite
       <div class="persona-card-detail">Purchases 2&ndash;3 pairs annually. Makes deliberate, researched decisions. Never participated in a drop. The museum mindset in its purest form: buys slowly, wears rarely, replaces infrequently. High income, high conversion probability if given styling confidence.</div>
       <div class="persona-card-tension">Core tension: Has the purchasing power and the intention &mdash; lacks the context to make the next purchase feel like the right decision. Style confidence is the unlock.</div>
     </div>
-  </div>
-  <div class="pm-lens">
-    <div class="pm-lens-label">PM Lens &middot; Designing for Three Personas Without Fragmenting the Product</div>
-    <p class="pm-lens-text">The platform serves all three personas through different entry points rather than different feature sets. The Aesthetic Individualist enters through the Style Profile &mdash; her purchase history becomes a wardrobe graph, her gaps become the recommendation engine. The Culture Participant enters through Confidence Drops &mdash; a participation model that finally rewards the engagement he was already making. The Considered Buyer enters through the Style Gym &mdash; outfit formulas that transform a product page into a decision support system. All three experiences share the same underlying infrastructure: the purchase-history wardrobe graph, the confidence score, and the contextual styling layer. The personas don&rsquo;t require three separate products. They require three entry points into one architecture.</p>
   </div>
 </section>
 
@@ -423,10 +414,6 @@ footer{border-top:1px solid var(--g200);padding:32px 48px;display:flex;align-ite
       <div class="priority-desc">The only commerce surfaces in the Confidence Hub are contextual: a Nike.com deep-link when the Style Profile recommends a gap-filling shoe, and Style Gym &ldquo;Shop &#x2197;&rdquo; links on each outfit item. No in-app checkout. No product catalog. No advertising. No promoted drops. Commerce is the consequence of the platform working &mdash; not its purpose. Every link goes exclusively to Nike.com or SNKRS, never to third-party retail.</div>
       <div class="priority-prd">PRD: Hard constraint &middot; Rationale: Keeps incentive structure aligned &mdash; the platform earns on engagement and confidence, not transaction. Third-party referrals would dilute the brand relationship the entire platform is designed to rebuild.</div>
     </div>
-  </div>
-  <div class="pm-lens">
-    <div class="pm-lens-label">PM Lens &middot; The Sequencing Logic</div>
-    <p class="pm-lens-text">Phase 1 ships Style Gym and Style Profile together because they are architecturally dependent &mdash; the Style Profile creates the wardrobe graph that makes Style Gym recommendations personally relevant, and the Style Gym creates the editorial context that makes the gap report actionable. Neither feature is as strong without the other. Phase 2 gates Confidence Drops on Phase 1 behavioral data: the drop system only works if the challenge mechanic is designed around the styling behaviors Phase 1 has already established. Phase 3 gates the Confidence Index on data volume &mdash; the report requires a dataset large enough to be culturally meaningful. This sequencing is a product decision, not a roadmap guess.</p>
   </div>
 </section>
 
@@ -477,10 +464,6 @@ footer{border-top:1px solid var(--g200);padding:32px 48px;display:flex;align-ite
     </table>
   </div>
 
-  <div class="pm-lens">
-    <div class="pm-lens-label">PM Lens &middot; Why Lighter, Not Darker</div>
-    <p class="pm-lens-text">The existing SNKRS app is dark throughout &mdash; black backgrounds, white type, red accents. That language reads as hype infrastructure: exclusive, urgent, designed to drive FOMO. The Confidence Hub is making a different argument. It is a styling resource, a confidence tool, an editorial experience. That argument requires a lighter, more editorial visual register. The Style Gym should feel like a well-considered magazine page, not a hype countdown. The Style Profile should feel like a service. Light mode earns the dark accents &mdash; the black confidence badge on a white product card, the volt score on a black surface &mdash; in a way that full dark mode never could. The design system is making the same argument as the PRD: confidence, not urgency.</p>
-  </div>
 </section>
 
 <!-- ARTIFACT 1: DESIGN SYSTEM + PRD -->
@@ -1093,10 +1076,6 @@ footer{border-top:1px solid var(--g200);padding:32px 48px;display:flex;align-ite
     </table>
   </div>
 
-  <div class="pm-lens">
-    <div class="pm-lens-label">PM Lens &middot; What This Project Demonstrates</div>
-    <p class="pm-lens-text">Nike SNKRS &mdash; Confidence Hub demonstrates the discipline of a platform pivot grounded in research rather than competitive response. The problem was not that Nike&rsquo;s competitors were outperforming it &mdash; the Aesthetic Individualist segment defected not because alternatives were better, but because Nike&rsquo;s own product model excluded them. The insight &mdash; that the barrier is confidence, not access &mdash; required research to find and strategic conviction to act on. The PRD makes 11 hard decisions with documented tradeoffs, specifies 7 success metrics with measurement methodology, and draws explicit phase boundaries between MVP and roadmap. The design system translates those decisions into a visual language where every token represents a product decision rendered in CSS. The prototype demonstrates five screens across three user flows without a single feature added for aesthetic reasons.</p>
-  </div>
 
   <p class="cs-body">What this project argues about Nike as a product opportunity: the consumers who choose Nike have made a statement about aspiration. That same consumer has never had a software experience that reflects the choice they made. Every day they open Instagram to figure out how to wear their Jordans, or ask a friend what goes with their Air Max, is a day the brand&rsquo;s aspiration stops at the box. The Confidence Hub is the argument that it shouldn&rsquo;t. The style intelligence is a consequence. The community is a consequence. The commerce is a consequence. The thing itself is a product built the way Nike should build software: with the same authority, precision, and cultural intelligence it brings to its hardware.</p>
   <p class="cs-body">What this project argues about PM practice: the strongest product decisions are the ones that can be traced back to a belief. The volt scarcity rule traces back to the belief that a signal earns its authority through restraint. The purchase history wardrobe graph traces back to the belief that consumers shouldn&rsquo;t have to give Nike data it already has. The zero border-radius traces back to Nike&rsquo;s own visual register &mdash; the Swoosh is not rounded; the product shouldn&rsquo;t be either. The Add Look mechanic traces back to the belief that outfit confidence is the actual product, and the shoe is just the anchor. These are not design choices made in a vacuum. They are a belief system made tangible in product decisions, made visible in a design system, and made interactive in a prototype.</p>

@@ -305,6 +305,13 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
 .priority-feature { font-size: 14px; font-weight: 500; color: var(--black); margin-bottom: 6px; letter-spacing: .02em; }
 .priority-desc { font-size: 11px; color: var(--g500); line-height: 1.65; }
 .priority-prd { font-size: 9px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--g300); margin-top: 12px; }
+@media (max-width: 768px) {
+  #cs-sidenav { display: none !important; }
+  .cs-body-wrap { grid-template-columns: 1fr !important; }
+  #cs-exec-summary, .cs-section { padding: 40px 20px !important; }
+  .cs-exec-inner { grid-template-columns: 1fr !important; gap: 32px !important; }
+  .cs-hero-title-wrap { padding: 40px 20px 48px !important; }
+}
 </style>
 </head>
 <body>
@@ -709,10 +716,6 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
           <div class="cs-stat-num">3</div>
           <div class="cs-stat-label">Glass Light (72% white), Glass Warm (80% ecru), Glass Dark (68% void black). Used over photography and gradients — never on flat solid backgrounds.</div>
         </div>
-      </div>
-      <div class="pm-lens">
-        <div class="pm-lens-label">PM Lens · Design System as Infrastructure</div>
-        <p class="pm-lens-text">The design system is not a style guide. It's a decision log in visual form. Every token represents a tradeoff: pill radius on buttons signals accessibility without sacrificing editorial quality. The mandatory "why-it-works" italic quote style in shortlist cards enforces the product's core mechanic at the component level — a PM decision rendered in CSS. When the system and the PRD agree, the product is coherent.</p>
       </div>
     </section>
 

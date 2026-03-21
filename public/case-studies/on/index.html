@@ -299,6 +299,13 @@ footer { padding: 32px 48px; border-top: 1px solid var(--g200); display: flex; j
 .mode-headline-dark  { font-family: "'Bebas Neue',sans-serif"; font-size: 40px; color: #F0F0EA; line-height: .9; letter-spacing: .03em; margin-bottom: 10px; }
 .mode-sub-light { font-size: 11px; color: #888; letter-spacing: .06em; text-transform: uppercase; }
 .mode-sub-dark  { font-size: 11px; color: rgba(255,255,255,.35); letter-spacing: .06em; text-transform: uppercase; }
+@media (max-width: 768px) {
+  #cs-sidenav { display: none !important; }
+  .cs-body-wrap { grid-template-columns: 1fr !important; }
+  #cs-exec-summary, .cs-section { padding: 40px 20px !important; }
+  .cs-exec-inner { grid-template-columns: 1fr !important; gap: 32px !important; }
+  .cs-hero-title-wrap { padding: 40px 20px 48px !important; }
+}
 </style>
 </head>
 <body>
@@ -380,10 +387,6 @@ footer { padding: 32px 48px; border-top: 1px solid var(--g200); display: flex; j
             <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Type</div><div class="cs-exec-meta-val">Conceptual · Full-Stack Build</div></div>
             <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Deliverables</div><div class="cs-exec-meta-val">PRD · Molecular Design System · Interactive PWA Prototype · Case Study</div></div>
             <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Primary Job</div><div class="cs-exec-meta-val">Give On runners a community that looks and feels like the brand they chose</div></div>
-          </div>
-          <div class="pm-lens">
-            <div class="pm-lens-label">PM Lens</div>
-            <p class="pm-lens-text">This case study demonstrates zero-to-one product strategy for a brand that does not yet have a community platform, multi-persona user modeling across three distinct runner psychographics, Phase-gated feature prioritization with explicit P0/P1/P2 reasoning, and the discipline of separating commerce from community — every purchase trigger in the app is contextual, never promotional.</p>
           </div>
         </div>
       </div>
@@ -485,10 +488,6 @@ footer { padding: 32px 48px; border-top: 1px solid var(--g200); display: flex; j
         </div>
       </div>
 
-      <div class="pm-lens">
-        <div class="pm-lens-label">PM Lens · The Persona Strategy Is a Brand Argument</div>
-        <p class="pm-lens-text">All three personas share one thing: they chose On with intention. They are not runners who happened to buy On shoes — they are runners whose values are legible in the shoes they bought. The product strategy follows from this. A platform built for Elena cannot prioritize KOMs. A platform built for Marcus cannot be decorative. A platform built for Jamie cannot fragment the community across tabs and features. The two-mode design system — white for identity and community, black for the act of running — is the architectural expression of this understanding. The modes don't just change colors. They change what the screen believes the runner is doing, and behave accordingly.</p>
-      </div>
     </section>
 
     <!-- ══ 04 THE PRODUCT ══ -->
@@ -626,10 +625,6 @@ footer { padding: 32px 48px; border-top: 1px solid var(--g200); display: flex; j
         </div>
       </div>
 
-      <div class="pm-lens">
-        <div class="pm-lens-label">PM Lens · The Craft Standard Applied to Software</div>
-        <p class="pm-lens-text">On's hardware is built around a single question: does this earn its presence? The Speedboard flex geometry earns its presence by changing how energy transfers through the foot strike. The CloudTec pods earn their presence by decoupling landing and takeoff in a way no other sole geometry achieves. Nothing decorates. Everything performs. The design system for Apex applies the same discipline to every token and component. Zero border-radius is not a style preference — it is the refusal of the rounded corner's implicit message that this is approachable consumer software. The volt scarcity rule is not restraint for its own sake — it is the understanding that a signal loses meaning when it appears everywhere. The blinking colon on the run screen uses step-end timing, not ease-in, because instruments switch; they do not transition. Every one of these decisions is the software asking the same question the hardware asks: does this earn its presence? If not, it doesn't ship.</p>
-      </div>
 
       <!-- Token documentation — surfaced from MDS -->
       <div style="margin-bottom:28px;">
@@ -1393,10 +1388,6 @@ footer { padding: 32px 48px; border-top: 1px solid var(--g200); display: flex; j
         </table>
       </div>
 
-      <div class="pm-lens">
-        <div class="pm-lens-label">PM Lens · What This Project Demonstrates</div>
-        <p class="pm-lens-text">On Apex demonstrates the discipline of zero-to-one product strategy for a brand that has never shipped a community platform. The PRD makes 11 hard decisions with documented tradeoffs, specifies 6 success metrics with measurement methodology, and draws explicit phase boundaries between MVP and roadmap. The design system translates those decisions into a visual language — the split mode system, the volt scarcity rule, the zero border-radius constraint — where every token represents a product decision rendered in CSS. The prototype builds 14 screens across three user flows without a single feature added for aesthetic reasons. Every interaction pattern is specified in the MDS, every screen has a single declared primary action, and every commerce surface is contextually earned rather than promotionally placed.</p>
-      </div>
 
       <p class="cs-body">What this project argues about On as a product opportunity: the runners who choose On have already made a statement about how they want to experience movement. They chose a brand that holds its hardware to an unusual standard — not the loudest, not the most marketed, but the most considered. That same runner has never had a software experience that reflects the choice they made. Every day they open Strava, or Instagram, or a WhatsApp group to organize a club run, is a day the brand's standard stops at the box. On Apex is the argument that it shouldn't. The data is a consequence. The community is a consequence. The commerce is a consequence. The thing itself is a software product built the way On builds shoes: with nothing unnecessary, nothing decorative, and nothing that doesn't earn its presence.</p>
       <p class="cs-body">What this project argues about PM practice: the strongest product decisions are the ones that can be traced back to a belief. The volt scarcity rule traces back to the belief that a signal earns its authority through scarcity. The Pre-Run screen traces back to the belief that the transition into the run deserves ceremony — it is the moment the platform signals that it understands what running means to this user. The zero border-radius traces back to On's own design language, which is not approachable consumer aesthetics but Swiss instrument precision. These are not design choices made in a vacuum. They are a belief system made tangible in product decisions, made visible in a design system, and made interactive in a prototype. That is the discipline this case study demonstrates — and the standard On Apex was built to meet.</p>
