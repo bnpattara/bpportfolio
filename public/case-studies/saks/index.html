@@ -170,7 +170,7 @@ body { font-family: var(--font); background: var(--white); color: var(--black); 
 .artifact-inner-title { font-size: 24px; font-weight: 300; letter-spacing: .05em; text-transform: uppercase; color: var(--white); line-height: 1; }
 .artifact-close-btn { background: transparent; border: 1px solid rgba(255,255,255,.2); color: rgba(255,255,255,.5); padding: 9px 18px; font-size: 9px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; cursor: pointer; font-family: var(--font); white-space: nowrap; margin-top: 4px; }
 .artifact-iframe-wrap { width: 100%; }
-.artifact-iframe-wrap iframe { width: 100%; height: 820px; border: none; display: block; }
+.artifact-iframe-wrap iframe { width: 100%; min-height: 700px; height: 85vh; border: none; display: block; }
 
 /* PERSONAS */
 .persona-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--g200); margin-bottom: 28px; }
@@ -553,7 +553,7 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
               <button class="artifact-close-btn" onclick="closeArtifact(1)">Close &uarr;</button>
             </div>
             <div class="artifact-iframe-wrap">
-              <iframe src="vault-financial-model.html" title="Vault by Saks Financial Model" scrolling="no"></iframe>
+              <iframe src="vault-financial-model.html" title="Vault by Saks Financial Model" scrolling="yes"></iframe>
             </div>
           </div>
         </div>

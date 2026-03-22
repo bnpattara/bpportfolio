@@ -177,7 +177,7 @@ body { font-family: var(--font); background: var(--white); color: var(--black); 
 .artifact-inner-title { font-size: 28px; font-weight: 300; letter-spacing: .06em; text-transform: uppercase; color: var(--white); line-height: 1; }
 .artifact-close-btn { background: transparent; border: 1px solid rgba(255,255,255,.2); color: rgba(255,255,255,.5); padding: 9px 18px; font-size: 9px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; cursor: pointer; font-family: var(--font); white-space: nowrap; margin-top: 4px; }
 .artifact-iframe-wrap { width: 100%; }
-.artifact-iframe-wrap iframe { width: 100%; height: 900px; border: none; display: block; }
+.artifact-iframe-wrap iframe { width: 100%; min-height: 700px; height: 85vh; border: none; display: block; }
 
 /* ── USER FLOW CAROUSEL ── */
 .flow-carousel { background: var(--g100); padding: 72px 56px; border-top: 1px solid var(--g200); border-bottom: 1px solid var(--g200); }
@@ -1076,7 +1076,8 @@ footer { padding: 32px 48px; border-top: 1px solid var(--g200); display: flex; j
             <button class="artifact-close-btn" onclick="closeArtifact(2)">Close &uarr;</button>
           </div>
           <div class="artifact-iframe-wrap">
-            <iframe src="/work/on-apex-app" title="On Apex App Prototype" scrolling="no" style="height:900px"></iframe>
+            <!-- TODO: verify /work/on-apex-app route is live before deploy -->
+            <iframe src="/work/on-apex-app" title="On Apex App Prototype" scrolling="yes"></iframe>
           </div>
         </div>
       </div>
