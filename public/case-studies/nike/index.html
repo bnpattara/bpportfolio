@@ -135,7 +135,17 @@ body{font-family:var(--font);background:var(--white);color:var(--black);line-hei
 .artifact-inner-title{font-family:var(--font);font-size:28px;font-weight:300;letter-spacing:.06em;text-transform:uppercase;color:var(--white);line-height:1;}
 .artifact-close-btn{background:transparent;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.5);padding:9px 18px;font-size:9px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;font-family:var(--font);white-space:nowrap;margin-top:4px;}
 .artifact-iframe-wrap{width:100%;}
-.artifact-iframe-wrap iframe{width:100%;min-height:700px;height:85vh;border:none;display:block;}
+.artifact-iframe-wrap iframe{width:100%;height:85vh;min-height:600px;border:none;display:block;}
+.proto-layout{display:grid;grid-template-columns:375px 1fr;gap:64px;align-items:start;padding:64px 0;}
+.proto-phone{position:sticky;top:40px;width:375px;height:812px;border-radius:44px;border:8px solid #000;overflow:hidden;background:#000;box-shadow:0 0 0 1px #e8e8e8;flex-shrink:0;}
+.proto-phone iframe{width:375px;height:812px;border:none;display:block;}
+.proto-description{padding-top:8px;}
+.proto-description h3{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:.04em;color:#000;margin-bottom:16px;line-height:1;}
+.proto-description p{font-size:14px;line-height:1.75;color:#000;margin-bottom:24px;}
+.proto-description .proto-feature-list{list-style:none;padding:0;margin:0 0 32px;border-top:1px solid #e8e8e8;}
+.proto-description .proto-feature-list li{font-size:13px;font-family:'DM Mono',monospace;color:#888;padding:10px 0;border-bottom:1px solid #e8e8e8;display:flex;justify-content:space-between;}
+.proto-description .proto-feature-list li span{color:#000;}
+@media(max-width:900px){.proto-layout{grid-template-columns:1fr;}.proto-phone{position:static;margin:0 auto;}}
 .flow-carousel{background:var(--g100);padding:72px 56px;border-top:1px solid var(--g200);border-bottom:1px solid var(--g200);}
 .flow-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:40px;}
 .flow-title{font-size:9px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--g400);font-family:var(--font);}
@@ -838,8 +848,21 @@ footer{border-top:1px solid var(--g200);padding:32px 48px;display:flex;align-ite
         </div>
         <button class="artifact-close-btn" onclick="closeArtifact(2)">Close &uarr;</button>
       </div>
-      <div class="artifact-iframe-wrap">
-        <iframe src="snkrs-app.html" title="Nike SNKRS Confidence Hub App Prototype" scrolling="yes"></iframe>
+      <div class="proto-layout">
+        <div class="proto-phone">
+          <iframe src="snkrs-app.html" title="Nike SNKRS App Prototype" scrolling="yes"></iframe>
+        </div>
+        <div class="proto-description">
+          <h3>App prototype</h3>
+          <p>A redesigned SNKRS experience built around the Confidence Hub — replacing scarcity anxiety with genuine cultural context. Every screen resolves a specific friction point identified in the audit.</p>
+          <ul class="proto-feature-list">
+            <li>Feed <span>Confidence Drop cards with context score</span></li>
+            <li>PDP <span>Context pills + Confidence Score overlay</span></li>
+            <li>Style Gym <span>Shoppable outfit rows, swipe to explore</span></li>
+            <li>Drop countdown <span>Near-black, full-bleed confidence framing</span></li>
+            <li>Style Profile <span>Wardrobe graph, taste over time</span></li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
