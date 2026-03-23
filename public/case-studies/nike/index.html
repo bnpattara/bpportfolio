@@ -133,9 +133,24 @@ body{font-family:var(--font);background:var(--white);color:var(--black);line-hei
 .artifact-close-btn{background:transparent;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.5);padding:9px 18px;font-size:9px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;font-family:var(--font);white-space:nowrap;margin-top:4px;}
 .artifact-iframe-wrap{width:100%;}
 .artifact-iframe-wrap iframe{width:100%;height:85vh;min-height:600px;border:none;display:block;}
-.proto-layout{display:flex;justify-content:center;padding:48px 0;}
-.proto-phone{width:320px;height:693px;border-radius:44px;border:8px solid #000;overflow:hidden;background:#000;box-shadow:0 0 0 1px #e8e8e8;display:flex;justify-content:center;align-items:flex-start;}
-.proto-phone iframe{width:375px;height:812px;border:none;display:block;transform:scale(0.8533);transform-origin:top center;flex-shrink:0;pointer-events:auto;}
+.proto-section { padding: 80px 0; }
+.proto-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+.proto-phone { position: sticky; top: 40px; width: 320px; height: 693px; border-radius: 44px; border: 8px solid #000; overflow: hidden; background: #000; box-shadow: 0 0 0 1px #e8e8e8; display: flex; justify-content: center; align-items: flex-start; }
+.proto-phone iframe { width: 375px; height: 812px; border: none; display: block; transform: scale(0.8533); transform-origin: top center; flex-shrink: 0; pointer-events: auto; }
+.proto-steps { display: flex; flex-direction: column; gap: 0; }
+.proto-step { padding: 24px 0; border-bottom: 1px solid var(--g200); cursor: default; transition: opacity 0.2s; }
+.proto-step:first-child { border-top: 1px solid var(--g200); }
+.proto-step-num { font-size: 9px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--g300); margin-bottom: 8px; font-family: var(--mono, 'DM Mono', monospace); }
+.proto-step-title { font-size: 14px; font-weight: 500; color: var(--black); margin-bottom: 6px; letter-spacing: -.01em; }
+.proto-step-desc { font-size: 13px; font-weight: 300; color: var(--g500); line-height: 1.65; }
+.proto-step.active .proto-step-num { color: var(--black); }
+.proto-step.active .proto-step-title { color: var(--black); }
+.proto-step:not(.active) { opacity: 0.4; }
+@media (max-width: 768px) {
+  .proto-layout { grid-template-columns: 1fr; gap: 40px; }
+  .proto-phone { position: static; }
+  .proto-step:not(.active) { opacity: 1; }
+}
   /* Journey Map */
   .journey-section { padding: 80px 48px; border-top: 1px solid var(--g200); border-bottom: 1px solid var(--g200); background: var(--white); }
   .journey-map { margin-top: 40px; }
@@ -328,7 +343,7 @@ footer{border-top:1px solid var(--g200);padding:32px 48px;display:flex;align-ite
   <a class="cs-sidenav-link" data-target="cs-product" onclick="scrollToSection('cs-product')"><span class="cs-sidenav-num">04</span><span class="cs-sidenav-text">The Product</span></a>
   <a class="cs-sidenav-link" data-target="cs-design" onclick="scrollToSection('cs-design')"><span class="cs-sidenav-num">05</span><span class="cs-sidenav-text">Design System</span></a>
   <a class="cs-sidenav-link" data-target="cs-screens" onclick="scrollToSection('cs-screens')"><span class="cs-sidenav-num">06</span><span class="cs-sidenav-text">Key Screens</span></a>
-  <a class="cs-sidenav-link" data-target="cs-flow" onclick="scrollToSection('cs-flow')"><span class="cs-sidenav-num">&mdash;</span><span class="cs-sidenav-text">User Flow</span></a>
+  <a class="cs-sidenav-link" data-target="prototype" onclick="scrollToSection('prototype')"><span class="cs-sidenav-num">&mdash;</span><span class="cs-sidenav-text">Prototype</span></a>
   <a class="cs-sidenav-link" data-target="cs-decisions" onclick="scrollToSection('cs-decisions')"><span class="cs-sidenav-num">07</span><span class="cs-sidenav-text">Decision Log</span></a>
   <a class="cs-sidenav-link" data-target="cs-outcome" onclick="scrollToSection('cs-outcome')"><span class="cs-sidenav-num">08</span><span class="cs-sidenav-text">Outcome</span></a>
   <div class="cs-sidenav-exec">
@@ -928,124 +943,51 @@ footer{border-top:1px solid var(--g200);padding:32px 48px;display:flex;align-ite
   </div>
 </section>
 
-<!-- ARTIFACT 2: APP PROTOTYPE -->
-<div class="artifact-strip" id="artifact-prototype">
-  <div class="artifact-trigger" id="art2-trigger" onclick="toggleArtifact(2)">
-    <div class="artifact-left">
-      <div class="artifact-badge"><span>Interactive Artifact</span></div>
-      <div class="artifact-meta">
-        <div class="artifact-name">App Prototype &mdash; Confidence Hub</div>
-        <div class="artifact-desc">5 fully interactive screens &middot; Feed &rarr; PDP &rarr; Style Gym &rarr; Confidence Drop &rarr; Style Profile &middot; Live countdown &middot; Full navigation</div>
-      </div>
+<!-- PROTOTYPE + WALKTHROUGH -->
+<section class="proto-section" id="prototype" data-cs-section="prototype">
+  <div class="proto-layout">
+    <div class="proto-phone">
+      <iframe src="snkrs-app.html" title="Nike SNKRS App Prototype" scrolling="yes"></iframe>
     </div>
-    <div class="artifact-right"><span class="artifact-toggle" id="art2-cta">+</span></div>
-  </div>
-  <div class="artifact-expand" id="art2-expand">
-    <div class="artifact-inner">
-      <div class="proto-layout">
-        <div class="proto-phone">
-          <iframe src="snkrs-app.html" title="Nike SNKRS App Prototype" scrolling="yes"></iframe>
+    <div class="proto-steps">
+      <div class="proto-step" data-step="1">
+        <div class="proto-step-num">01</div>
+        <div class="proto-step-body">
+          <div class="proto-step-title">Feed Discovery</div>
+          <div class="proto-step-desc">The app opens to a dark feed. The Confidence Drop card leads &mdash; darker background, volt chip, lock icon, challenge CTA &mdash; establishes the access model before mechanics. The live drop below uses &ldquo;Style Gym Ready&rdquo; to signal styling context. None of these compete. They sequence.</div>
+        </div>
+      </div>
+      <div class="proto-step" data-step="2">
+        <div class="proto-step-num">02</div>
+        <div class="proto-step-body">
+          <div class="proto-step-title">Product Page</div>
+          <div class="proto-step-desc">Taller hero image, occasion-first context pills sit directly on the image. The Confidence Score is the first data point after the name. Every element earns its position through documented product decisions.</div>
+        </div>
+      </div>
+      <div class="proto-step" data-step="3">
+        <div class="proto-step-num">03</div>
+        <div class="proto-step-body">
+          <div class="proto-step-title">Style Gym</div>
+          <div class="proto-step-desc">The Wardrobe Insight card names the specific gap this shoe closes. Three outfit rows follow with shoppable Nike links. &ldquo;Add Look&rdquo; adds the entire outfit to cart &mdash; the AOV lever.</div>
+        </div>
+      </div>
+      <div class="proto-step" data-step="4">
+        <div class="proto-step-num">04</div>
+        <div class="proto-step-body">
+          <div class="proto-step-title">Confidence Drop</div>
+          <div class="proto-step-desc">Access is gated by participation. Completing styling challenges earns Confidence Pass points and queue priority. Scarcity is not abolished; it is deprecated for specific releases.</div>
+        </div>
+      </div>
+      <div class="proto-step" data-step="5">
+        <div class="proto-step-num">05</div>
+        <div class="proto-step-body">
+          <div class="proto-step-title">Style Profile</div>
+          <div class="proto-step-desc">Nike&rsquo;s existing purchase history becomes the wardrobe graph. The Gap Report surfaces what&rsquo;s genuinely missing with recommendations ranked by gap-fill score, not inventory surplus.</div>
         </div>
       </div>
     </div>
   </div>
-</div>
-<!-- USER FLOW JOURNEY MAP -->
-<div class="journey-section" id="cs-flow" data-cs-section="cs-flow">
-  <div class="flow-head">
-    <div class="flow-title">User Flow &mdash; Nike SNKRS Confidence Hub</div>
-  </div>
-  
-  <div class="journey-map">
-    <!-- Step 01 -->
-    <div class="journey-step active" onclick="toggleJourney(this)">
-      <div class="journey-header">
-        <div class="journey-num">01</div>
-        <div class="journey-label">Feed Discovery</div>
-        <div class="journey-icon">+</div>
-      </div>
-      <div class="journey-panel">
-        <div class="journey-panel-title">Feed Discovery &mdash; <em>the first argument</em></div>
-        <div class="flow-panel-meta">
-          <span class="flow-panel-tag active">Feed</span>
-          <span class="flow-panel-tag">Dark Mode</span>
-          <span class="flow-panel-tag">Hierarchy by Intent</span>
-        </div>
-        <p class="flow-panel-body">The app opens to a dark feed. The Confidence Drop card leads &mdash; darker background, volt chip, lock icon, challenge CTA &mdash; establishes the access model before mechanics. The live drop below uses &ldquo;Style Gym Ready&rdquo; to signal styling context. None of these compete. They sequence.</p>
-      </div>
-    </div>
-
-    <!-- Step 02 -->
-    <div class="journey-step" onclick="toggleJourney(this)">
-      <div class="journey-header">
-        <div class="journey-num">02</div>
-        <div class="journey-label">Product Page</div>
-        <div class="journey-icon">+</div>
-      </div>
-      <div class="journey-panel">
-        <div class="journey-panel-title">Product Page &mdash; <em>confidence before checkout</em></div>
-        <div class="flow-panel-meta">
-          <span class="flow-panel-tag active">Product Page</span>
-          <span class="flow-panel-tag">Confidence Score</span>
-          <span class="flow-panel-tag">Context Pills</span>
-        </div>
-        <p class="flow-panel-body">Taller hero image, occasion-first context pills sit directly on the image. The Confidence Score is the first data point after the name. Every element earns its position through documented product decisions.</p>
-      </div>
-    </div>
-
-    <!-- Step 03 -->
-    <div class="journey-step" onclick="toggleJourney(this)">
-      <div class="journey-header">
-        <div class="journey-num">03</div>
-        <div class="journey-label">Style Gym</div>
-        <div class="journey-icon">+</div>
-      </div>
-      <div class="journey-panel">
-        <div class="journey-panel-title">Style Gym &mdash; <em>the page that didn&rsquo;t exist</em></div>
-        <div class="flow-panel-meta">
-          <span class="flow-panel-tag active">Style Gym</span>
-          <span class="flow-panel-tag">Outfit Formulas</span>
-          <span class="flow-panel-tag">Add Look</span>
-        </div>
-        <p class="flow-panel-body">The Wardrobe Insight card names the specific gap this shoe closes. Three outfit rows follow with shoppable Nike links. &ldquo;Add Look&rdquo; adds the entire outfit to cart &mdash; the AOV lever.</p>
-      </div>
-    </div>
-
-    <!-- Step 04 -->
-    <div class="journey-step" onclick="toggleJourney(this)">
-      <div class="journey-header">
-        <div class="journey-num">04</div>
-        <div class="journey-label">Confidence Drop</div>
-        <div class="journey-icon">+</div>
-      </div>
-      <div class="journey-panel">
-        <div class="journey-panel-title">Confidence Drop &mdash; <em>access earned, not won</em></div>
-        <div class="flow-panel-meta">
-          <span class="flow-panel-tag active">Participation Access</span>
-          <span class="flow-panel-tag">Styling Challenge</span>
-        </div>
-        <p class="flow-panel-body">Access is gated by participation. Completing styling challenges earns Confidence Pass points and queue priority. Scarcity is not abolished; it is deprecated for specific releases.</p>
-      </div>
-    </div>
-
-    <!-- Step 05 -->
-    <div class="journey-step" onclick="toggleJourney(this)">
-      <div class="journey-header">
-        <div class="journey-num">05</div>
-        <div class="journey-label">Style Profile</div>
-        <div class="journey-icon">+</div>
-      </div>
-      <div class="journey-panel">
-        <div class="journey-panel-title">Style Profile &mdash; <em>data layer</em></div>
-        <div class="flow-panel-meta">
-          <span class="flow-panel-tag active">Wardrobe Graph</span>
-          <span class="flow-panel-tag">Gap Report</span>
-        </div>
-        <p class="flow-panel-body">Nike&rsquo;s existing purchase history becomes the wardrobe graph. The Gap Report surfaces what&rsquo;s genuinely missing with recommendations ranked by gap-fill score, not inventory surplus.</p>
-      </div>
-    </div>
-  </div>
-</div>
+</section>
 
 <!-- 07 DECISION LOG -->
 <section class="cs-section" id="cs-decisions" data-cs-section="cs-decisions">
@@ -1273,6 +1215,22 @@ function toggleToken(el) {
 function toggleJourney(el) {
   el.classList.toggle('active');
 }
+</script>
+<script>
+(function() {
+  const steps = document.querySelectorAll('.proto-step');
+  if (!steps.length) return;
+  steps[0].classList.add('active');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        steps.forEach(s => s.classList.remove('active'));
+        e.target.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
+  steps.forEach(s => obs.observe(s));
+})();
 </script>
 </body>
 </html>
