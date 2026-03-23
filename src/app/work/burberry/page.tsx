@@ -68,7 +68,7 @@ export default function BurberryCaseStudy() {
 
                 {/* SECTION: BACKGROUND */}
                 <div style={{ padding: '80px 48px', borderBottom: '1px solid #f0f0f0' }}>
-                    <div style={{ display: 'grid', gridTemplateColumns: '200px 1fr', gap: '60px', alignItems: 'start' }}>
+                    <div className="cs-page-grid" style={{ gap: '60px', alignItems: 'start' }}>
                         <div>
                             <div style={{ fontSize: '9px', fontWeight: 600, letterSpacing: '.18em', textTransform: 'uppercase', color: '#ccc', marginBottom: '6px' }}>01</div>
                             <div style={{ fontSize: '14px', fontWeight: 500, letterSpacing: '.1em', textTransform: 'uppercase', color: '#000' }}>The Business Problem</div>
@@ -90,7 +90,7 @@ export default function BurberryCaseStudy() {
                         </div>
                         <div>
                             <div style={{ fontSize: '32px', fontWeight: 300, letterSpacing: '.02em', color: '#000', lineHeight: 1.35, marginBottom: '28px', borderLeft: '2px solid #000', paddingLeft: '28px', fontStyle: 'italic' }}>"Gen Z spends nearly 25% of their free time in Fortnite. The opportunity isn't just reach &mdash; it's identity infrastructure."</div>
-                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '32px' }}>
+                            <div className="cs-body-2col" style={{ gap: '32px' }}>
                                 <div style={{ fontSize: '13px', color: '#777', lineHeight: 1.75 }}>Gen Z uses the internet like a dressing room, seeking costumes that signal their intellectual and creative identity.</div>
                                 <div style={{ fontSize: '13px', color: '#777', lineHeight: 1.75 }}>The goal is to be the brand that taught a generation to perform themselves through clothing.</div>
                             </div>
@@ -100,27 +100,27 @@ export default function BurberryCaseStudy() {
 
                 {/* SECTION: STRATEGY */}
                 <div style={{ padding: '80px 48px', borderBottom: '1px solid #f0f0f0' }}>
-                    <div style={{ display: 'grid', gridTemplateColumns: '200px 1fr', gap: '60px', alignItems: 'start' }}>
+                    <div className="cs-page-grid" style={{ alignItems: 'start' }}>
                         <div>
                             <div style={{ fontSize: '9px', fontWeight: 600, letterSpacing: '.18em', textTransform: 'uppercase', color: '#ccc', marginBottom: '6px' }}>03</div>
                             <div style={{ fontSize: '14px', fontWeight: 500, letterSpacing: '.1em', textTransform: 'uppercase', color: '#000' }}>Research Metrics</div>
                         </div>
                         <div>
                             <div style={{ fontSize: '28px', fontWeight: 400, letterSpacing: '.03em', textTransform: 'uppercase', color: '#000', lineHeight: 1.1, marginBottom: '36px' }}>Validating the Virtual</div>
-                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1px', background: '#e8e8e8', marginBottom: '32px' }}>
-                                <div style={{ background: '#fff', padding: '28px 24px' }}>
-                                    <div style={{ fontSize: '9px', fontWeight: 600, letterSpacing: '.18em', textTransform: 'uppercase', color: '#ccc', marginBottom: '14px' }}>01 &mdash; Attention</div>
-                                    <div style={{ fontSize: '44px', fontWeight: 300, color: '#000', letterSpacing: '-.02em', lineHeight: 1, marginBottom: '10px' }}>25%</div>
+                            <div className="cs-stat-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1px', background: '#e8e8e8', marginBottom: '32px' }}>
+                                <div className="cs-stat-cell" style={{ background: '#fff', padding: '28px 24px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                                    <div style={{ fontSize: '44px', fontWeight: 300, color: '#000', letterSpacing: '-.02em', lineHeight: 1 }}>25%</div>
+                                    <div style={{ fontSize: '9px', fontWeight: 600, letterSpacing: '.18em', textTransform: 'uppercase', color: '#ccc' }}>01 &mdash; Attention</div>
                                     <div style={{ fontSize: '12px', color: '#666', lineHeight: 1.65 }}>of Gen Z free time spent in Fortnite &mdash; more than Netflix or Instagram</div>
                                 </div>
-                                <div style={{ background: '#fff', padding: '28px 24px' }}>
-                                    <div style={{ fontSize: '9px', fontWeight: 600, letterSpacing: '.18em', textTransform: 'uppercase', color: '#ccc', marginBottom: '14px' }}>02 &mdash; Reach</div>
-                                    <div style={{ fontSize: '44px', fontWeight: 300, color: '#000', letterSpacing: '-.02em', lineHeight: 1, marginBottom: '10px' }}>650M+</div>
+                                <div className="cs-stat-cell" style={{ background: '#fff', padding: '28px 24px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                                    <div style={{ fontSize: '44px', fontWeight: 300, color: '#000', letterSpacing: '-.02em', lineHeight: 1 }}>650M+</div>
+                                    <div style={{ fontSize: '9px', fontWeight: 600, letterSpacing: '.18em', textTransform: 'uppercase', color: '#ccc' }}>02 &mdash; Reach</div>
                                     <div style={{ fontSize: '12px', color: '#666', lineHeight: 1.65 }}>registered Fortnite players (2025/26 estimate)</div>
                                 </div>
-                                <div style={{ background: '#fff', padding: '28px 24px' }}>
-                                    <div style={{ fontSize: '9px', fontWeight: 600, letterSpacing: '.18em', textTransform: 'uppercase', color: '#ccc', marginBottom: '14px' }}>03 &mdash; Engagement</div>
-                                    <div style={{ fontSize: '44px', fontWeight: 300, color: '#000', letterSpacing: '-.02em', lineHeight: 1, marginBottom: '10px' }}>70hrs+</div>
+                                <div className="cs-stat-cell" style={{ background: '#fff', padding: '28px 24px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                                    <div style={{ fontSize: '44px', fontWeight: 300, color: '#000', letterSpacing: '-.02em', lineHeight: 1 }}>70hrs+</div>
+                                    <div style={{ fontSize: '9px', fontWeight: 600, letterSpacing: '.18em', textTransform: 'uppercase', color: '#ccc' }}>03 &mdash; Engagement</div>
                                     <div style={{ fontSize: '12px', color: '#666', lineHeight: 1.65 }}>seasonal brand engagement per player vs. 5-second passive ads</div>
                                 </div>
                             </div>
@@ -186,17 +186,29 @@ export default function BurberryCaseStudy() {
 
                 {/* SECTION: OUTCOME */}
                 <div className="cs-page-section" style={{ padding: '80px 48px' }}>
-                    <div className="cs-page-grid" style={{ display: 'grid', gridTemplateColumns: '200px 1fr', gap: '60px', alignItems: 'start' }}>
+                    <div className="cs-page-grid" style={{ alignItems: 'start' }}>
                         <div>
                             <div style={{ fontSize: '9px', fontWeight: 600, letterSpacing: '.18em', textTransform: 'uppercase', color: '#ccc', marginBottom: '6px' }}>05</div>
                             <div style={{ fontSize: '14px', fontWeight: 500, letterSpacing: '.1em', textTransform: 'uppercase', color: '#000' }}>Business Impact</div>
                         </div>
                         <div>
                             <div style={{ fontSize: '28px', fontWeight: 400, letterSpacing: '.03em', textTransform: 'uppercase', color: '#000', lineHeight: 1.1, marginBottom: '36px' }}>Transmedia Success</div>
-                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1px', background: '#e8e8e8', marginBottom: '36px' }}>
-                                <div style={{ background: '#fff', padding: '28px 24px', borderTop: '3px solid #000' }}><div style={{ fontSize: '48px', fontWeight: 300, color: '#000', letterSpacing: '-.02em', lineHeight: 1, marginBottom: '8px' }}>70hrs+</div><div style={{ fontSize: '12px', color: '#666', lineHeight: 1.6 }}>Brand engagement per player &mdash; replaces 5-second passive media</div></div>
-                                <div style={{ background: '#fff', padding: '28px 24px', borderTop: '3px solid #000' }}><div style={{ fontSize: '48px', fontWeight: 300, color: '#000', letterSpacing: '-.02em', lineHeight: 1, marginBottom: '8px' }}>50%</div><div style={{ fontSize: '12px', color: '#666', lineHeight: 1.6 }}>Captures the next generation of luxury consumers in their primary social environment</div></div>
-                                <div style={{ background: '#fff', padding: '28px 24px', borderTop: '3px solid #000' }}><div style={{ fontSize: '48px', fontWeight: 300, color: '#000', letterSpacing: '-.02em', lineHeight: 1, marginBottom: '8px' }}>Phygital</div><div style={{ fontSize: '12px', color: '#666', lineHeight: 1.6 }}>Solves retail foot-traffic gap by turning stores into identity portals</div></div>
+                            <div className="cs-stat-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1px', background: '#e8e8e8', marginBottom: '36px' }}>
+                                <div className="cs-stat-cell" style={{ background: '#fff', padding: '28px 24px', borderTop: '3px solid #000', display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                                    <div style={{ fontSize: '48px', fontWeight: 300, color: '#000', letterSpacing: '-.02em', lineHeight: 1 }}>70hrs+</div>
+                                    <div style={{ fontSize: '9px', fontWeight: 600, letterSpacing: '.18em', textTransform: 'uppercase', color: '#ccc' }}>Engagement</div>
+                                    <div style={{ fontSize: '12px', color: '#666', lineHeight: 1.6 }}>Brand engagement per player &mdash; replaces 5-second passive media</div>
+                                </div>
+                                <div className="cs-stat-cell" style={{ background: '#fff', padding: '28px 24px', borderTop: '3px solid #000', display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                                    <div style={{ fontSize: '48px', fontWeight: 300, color: '#000', letterSpacing: '-.02em', lineHeight: 1 }}>50%</div>
+                                    <div style={{ fontSize: '9px', fontWeight: 600, letterSpacing: '.18em', textTransform: 'uppercase', color: '#ccc' }}>Reach</div>
+                                    <div style={{ fontSize: '12px', color: '#666', lineHeight: 1.6 }}>Captures the next generation of luxury consumers in their social environment</div>
+                                </div>
+                                <div className="cs-stat-cell" style={{ background: '#fff', padding: '28px 24px', borderTop: '3px solid #000', display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                                    <div style={{ fontSize: '48px', fontWeight: 300, color: '#000', letterSpacing: '-.02em', lineHeight: 1 }}>Phygital</div>
+                                    <div style={{ fontSize: '9px', fontWeight: 600, letterSpacing: '.18em', textTransform: 'uppercase', color: '#ccc' }}>Conversion</div>
+                                    <div style={{ fontSize: '12px', color: '#666', lineHeight: 1.6 }}>Solves retail foot-traffic gap by turning stores into identity portals</div>
+                                </div>
                             </div>
                             <div style={{ borderTop: '1px solid #e8e8e8', paddingTop: '32px' }}>
                             </div>

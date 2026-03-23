@@ -123,10 +123,6 @@ body { font-family: var(--font); background: var(--white); color: var(--black); 
 .artifact-toggle { font-size: 20px; font-weight: 300; color: rgba(255,255,255,.5); line-height: 1; }
 .artifact-expand { max-height: 0; overflow: hidden; transition: max-height 600ms ease; }
 .artifact-inner { background: #0a0a0a; padding: 0; }
-.artifact-inner-header { display: flex; justify-content: space-between; align-items: flex-start; padding: 32px 48px 24px; border-bottom: 1px solid rgba(255,255,255,.06); }
-.artifact-inner-eyebrow { font-size: 9px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: #444; margin-bottom: 10px; }
-.artifact-inner-title { font-size: 24px; font-weight: 300; letter-spacing: .05em; text-transform: uppercase; color: var(--white); line-height: 1; }
-.artifact-close-btn { background: transparent; border: 1px solid rgba(255,255,255,.2); color: rgba(255,255,255,.5); padding: 9px 18px; font-size: 9px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; cursor: pointer; font-family: var(--font); white-space: nowrap; margin-top: 4px; }
 .artifact-iframe-wrap { width: 100%; }
 .artifact-iframe-wrap iframe { width: 100%; height: 820px; border: none; display: block; }
 
@@ -274,13 +270,6 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
         </div>
         <div class="artifact-expand" id="art1-expand">
           <div class="artifact-inner">
-            <div class="artifact-inner-header">
-              <div>
-                <div class="artifact-inner-eyebrow">[PROJECT_NAME]</div>
-                <div class="artifact-inner-title">[ARTIFACT_NAME]</div>
-              </div>
-              <button class="artifact-close-btn" onclick="closeArtifact(1)">Close ↑</button>
-            </div>
             <div class="artifact-iframe-wrap">
               <iframe src="[ARTIFACT_SRC]" title="[ARTIFACT_NAME]"></iframe>
             </div>
@@ -358,11 +347,6 @@ function toggleArtifact(n) {
   expand.style.maxHeight = isOpen ? '0' : '900px';
   expand.dataset.open = isOpen ? 'false' : 'true';
   toggle.textContent = isOpen ? '+' : '×';
-}
-function closeArtifact(n) {
-  const expand = document.getElementById('art'+n+'-expand');
-  const toggle = document.getElementById('art'+n+'-cta');
-  if (expand && toggle) { expand.style.maxHeight = '0'; expand.dataset.open = 'false'; toggle.textContent = '+'; }
 }
 </script>
 </body>

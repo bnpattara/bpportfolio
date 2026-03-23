@@ -103,6 +103,49 @@ body { font-family: var(--font); background: var(--white); color: var(--black); 
 .cs-body-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 28px; }
 .cs-body-2col p { font-size: 13px; color: var(--g500); line-height: 1.75; }
 .cs-body-2col-dark p { font-size: 13px; color: rgba(255,255,255,.42); line-height: 1.75; }
+
+    /* Success Metrics Grid — Mobile */
+    .metrics-grid-mobile { display: none; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 32px; }
+    .metric-card { background: #fff; border: 1px solid var(--g200); padding: 16px; display: flex; flex-direction: column; gap: 8px; }
+    .metric-card-title { font-size: 8px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--g300); }
+    .metric-card-val { font-size: 20px; font-weight: 200; font-family: var(--serif); color: var(--black); }
+    .metric-card-method { font-size: 10px; color: var(--g400); line-height: 1.4; }
+
+    /* Token/Decision Accordion — Mobile */
+    .token-accordion-mobile, .decision-accordion-mobile { display: none; border-top: 1px solid var(--g200); margin-bottom: 32px; }
+    .token-item, .decision-item { border-bottom: 1px solid var(--g200); }
+    .token-header, .decision-header { padding: 16px 0; display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
+    .token-header span:first-child, .decision-header span:first-child { font-size: 11px; font-weight: 500; letter-spacing: .05em; text-transform: uppercase; }
+    .token-icon { font-size: 16px; color: var(--g300); transition: transform 0.3s ease; }
+    .token-panel { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background: var(--g100); padding: 0 16px; }
+    .token-row { padding: 12px 0; font-size: 12px; color: var(--g500); line-height: 1.5; border-bottom: 1px solid rgba(0,0,0,0.05); }
+    .token-row:last-child { border-bottom: none; }
+    .token-item.active .token-panel, .decision-item.active .token-panel { max-height: 500px; padding: 8px 16px 20px 16px; }
+    .token-item.active .token-icon, .decision-item.active .token-icon { transform: rotate(45deg); }
+
+    /* Journey Map — Mobile */
+    .journey-map-mobile { display: none; flex-direction: column; border-top: 1px solid var(--g200); margin-bottom: 32px; }
+    .journey-step { border-bottom: 1px solid var(--g200); }
+    .journey-header { padding: 20px 0; display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
+    .journey-num { font-size: 10px; font-family: var(--mono); color: var(--g300); margin-right: 12px; }
+    .journey-title { font-size: 14px; font-weight: 400; color: var(--black); }
+    .journey-panel { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
+    .journey-step.active .journey-panel { max-height: 1200px; padding-bottom: 32px; }
+    .journey-step.active .token-icon { transform: rotate(45deg); }
+    .journey-visual { background: #f9f9f9; padding: 24px; margin-bottom: 16px; }
+    .journey-desc { font-size: 13px; color: var(--g500); line-height: 1.6; }
+
+    @media (max-width: 768px) {
+      .cs-exec-inner { grid-template-columns: 1fr; gap: 48px; }
+      .cs-exec-meta-grid { grid-template-columns: 1fr 1fr; }
+      .cs-body-2col { grid-template-columns: 1fr; }
+      .cs-stats-4, .cs-stats-3 { grid-template-columns: 1fr; }
+      .cs-metrics-table, .token-table-desktop, .flow-carousel { display: none !important; }
+      .metrics-grid-mobile, .token-accordion-mobile, .journey-map-mobile { display: grid; }
+      .journey-map-mobile { display: flex; }
+      .persona-grid { grid-template-columns: 1fr; }
+      .priority-grid { grid-template-columns: 1fr; }
+    }
 .cs-stats { display: grid; gap: 1px; background: var(--g200); margin-bottom: 28px; }
 .cs-stats-3 { grid-template-columns: repeat(3,1fr); }
 .cs-stats-4 { grid-template-columns: repeat(4,1fr); }
@@ -172,9 +215,6 @@ body { font-family: var(--font); background: var(--white); color: var(--black); 
 .artifact-trigger:hover .artifact-toggle { color: var(--white); }
 .artifact-expand { max-height: 0; overflow: hidden; transition: max-height 700ms ease; }
 .artifact-inner { background: #0a0a0a; }
-.artifact-inner-header { display: flex; justify-content: space-between; align-items: flex-start; padding: 32px 48px 24px; border-bottom: 1px solid rgba(255,255,255,.06); }
-.artifact-inner-eyebrow { font-size: 9px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: #444; margin-bottom: 10px;  }
-.artifact-inner-title { font-size: 28px; font-weight: 300; letter-spacing: .06em; text-transform: uppercase; color: var(--white); line-height: 1; }
 .artifact-close-btn { background: transparent; border: 1px solid rgba(255,255,255,.2); color: rgba(255,255,255,.5); padding: 9px 18px; font-size: 9px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; cursor: pointer; font-family: var(--font); white-space: nowrap; margin-top: 4px; }
 .artifact-iframe-wrap { width: 100%; }
 .artifact-iframe-wrap iframe { width: 100%; height: 85vh; min-height: 600px; border: none; display: block; }
@@ -303,11 +343,49 @@ footer { padding: 32px 48px; border-top: 1px solid var(--g200); display: flex; j
 .mode-sub-light { font-size: 11px; color: #888; letter-spacing: .06em; text-transform: uppercase; }
 .mode-sub-dark  { font-size: 11px; color: rgba(255,255,255,.35); letter-spacing: .06em; text-transform: uppercase; }
 @media (max-width: 768px) {
+  #site-nav .nav-main { padding: 0 20px !important; display: flex !important; justify-content: space-between !important; align-items: center !important; }
+  #site-nav .nav-left, #site-nav .nav-wordmark, #site-nav .nav-right { position: static !important; transform: none !important; left: auto !important; right: auto !important; top: auto !important; }
+  #site-nav .nav-left a:not([href="/"]):not([href="/#work"]) { display: none !important; }
+  #site-nav .nav-wordmark { font-size: 11px !important; letter-spacing: .12em !important; }
+  #site-nav .nav-right a { font-size: 9px !important; }
+
   #cs-sidenav { display: none !important; }
   .cs-body-wrap { grid-template-columns: 1fr !important; }
-  #cs-exec-summary, .cs-section { padding: 40px 20px !important; }
-  .cs-exec-inner { grid-template-columns: 1fr !important; gap: 32px !important; }
-  .cs-hero-title-wrap { padding: 40px 20px 48px !important; }
+  #cs-exec-summary, .cs-section, .flow-carousel, .app-showcase, .cs-hero-title-wrap { padding: 40px 20px !important; }
+  
+  .cs-exec-inner, .cs-stats-3, .cs-stats-4, .persona-grid, .cs-body-2col { 
+    grid-template-columns: 1fr !important; 
+    gap: 16px !important; 
+  }
+  .cs-exec-meta-grid { 
+    grid-template-columns: 1fr 1fr !important; 
+    gap: 1px !important; 
+    background: var(--g200) !important;
+    border: 1px solid var(--g200) !important;
+  }
+  .priority-grid, .flow-track, .app-showcase-layout, .app-screen-frame, .token-grid, .mode-split, .constraint-grid { 
+    grid-template-columns: 1fr !important; 
+    gap: 24px !important; 
+  }
+  
+  .flow-track, .app-showcase-layout, .app-screen-frame { display: flex !important; flex-direction: column !important; }
+  .flow-steps { flex-direction: row !important; overflow-x: auto !important; padding-bottom: 12px !important; }
+  .flow-step { border-left: none !important; border-bottom: 2px solid var(--g200) !important; white-space: nowrap !important; }
+  .flow-step.active { border-bottom-color: var(--black) !important; }
+  
+  .app-screen-nav { position: static !important; margin-bottom: 20px !important; flex-direction: row !important; overflow-x: auto !important; }
+  .app-screen-btn { border-left: none !important; border-bottom: 2px solid transparent !important; padding: 8px 12px !important; white-space: nowrap !important; }
+  .app-screen-btn.active { border-bottom-color: var(--black) !important; }
+  .app-screen-visual { width: 100% !important; margin-bottom: 12px !important; }
+
+  .cs-hero { min-height: 50vh !important; }
+  .cs-hero-title { font-size: 28px !important; }
+  .cs-heading-serif, .cs-heading-serif-dark { font-size: 24px !important; }
+  .cs-pull-quote, .cs-pull-quote-dark { padding-left: 20px !important; font-size: 18px !important; }
+  
+  .artifact-trigger { padding: 16px 20px !important; }
+  .artifact-name { font-size: 12px !important; }
+  .artifact-badge { display: none !important; }
 }
 </style>
 </head>
@@ -375,10 +453,10 @@ footer { padding: 32px 48px; border-top: 1px solid var(--g200); display: flex; j
           <p class="cs-exec-body">Nike owns the aspiration layer with NRC. Strava owns the performance layer. On has no owned digital surface where its runners experience the brand at all. After the transaction, On disappears from its customer's life. The community that formed around On — the runners who see the shoe as identity, the club runners who coordinate on Instagram, the aesthetic athletes who post routes in CloudSurfers — lives entirely on other people's platforms, by other people's rules, in other people's visual language.</p>
           <p class="cs-exec-body">On Apex is the argument that the software layer deserves the same standard as the hardware. A community-first PWA built to On's precision — Swiss-minimalist, instrument-grade, no gamification chrome, no follower counts as status. A platform where movement is the primary act, the shoe is the identity unit, and the community is built on shared miles rather than shared metrics. Not a Strava competitor. Not a data play. A software product finally worthy of the shoes it tracks.</p>
           <div class="cs-exec-kpis" style="margin-top:24px;">
-            <div class="cs-exec-kpi"><div class="cs-exec-kpi-num">35%</div><div class="cs-exec-kpi-label">WAU target<br>Y1 registered users</div></div>
-            <div class="cs-exec-kpi"><div class="cs-exec-kpi-num">70%</div><div class="cs-exec-kpi-label">Shoe registration<br>rate · 90-day target</div></div>
-            <div class="cs-exec-kpi"><div class="cs-exec-kpi-num">14</div><div class="cs-exec-kpi-label">Interactive screens<br>built · Full flow</div></div>
-            <div class="cs-exec-kpi"><div class="cs-exec-kpi-num">6</div><div class="cs-exec-kpi-label">PRD phases: Phase 1<br>P0 fully shipped</div></div>
+            <div class="cs-exec-kpi"><div class="cs-exec-kpi-num">35%</div><div class="cs-exec-kpi-eyebrow">WAU target</div><div class="cs-exec-kpi-label">Y1 registered users</div></div>
+            <div class="cs-exec-kpi"><div class="cs-exec-kpi-num">70%</div><div class="cs-exec-kpi-eyebrow">Shoe registration</div><div class="cs-exec-kpi-label">rate · 90-day target</div></div>
+            <div class="cs-exec-kpi"><div class="cs-exec-kpi-num">14</div><div class="cs-exec-kpi-eyebrow">Interactive screens</div><div class="cs-exec-kpi-label">built · Full flow</div></div>
+            <div class="cs-exec-kpi"><div class="cs-exec-kpi-num">6</div><div class="cs-exec-kpi-eyebrow">PRD phases</div><div class="cs-exec-kpi-label">Phase 1 P0 fully shipped</div></div>
           </div>
         </div>
         <div>
@@ -405,23 +483,23 @@ footer { padding: 32px 48px; border-top: 1px solid var(--g200); display: flex; j
       </div>
       <div class="cs-stats cs-stats-4">
         <div class="cs-stat-cell">
-          <div class="cs-stat-eyebrow">01 · The Standard Gap</div>
           <div class="cs-stat-num">0</div>
+          <div class="cs-stat-eyebrow">01 · The Standard Gap</div>
           <div class="cs-stat-label">Owned digital surfaces where On's craft standard — Swiss precision, no excess, form earning function — is reflected back to the runner after the purchase. The hardware has a philosophy. The software has nothing.</div>
         </div>
         <div class="cs-stat-cell">
-          <div class="cs-stat-eyebrow">02 · The Platform Gap</div>
           <div class="cs-stat-num">NRC</div>
+          <div class="cs-stat-eyebrow">02 · The Platform Gap</div>
           <div class="cs-stat-label">Nike owns aspiration. Strava owns data. Garmin owns hardware precision. The specific territory On occupies — aesthetic intentionality, movement as identity, design-forward running culture — has no platform home.</div>
         </div>
         <div class="cs-stat-cell">
-          <div class="cs-stat-eyebrow">03 · The Cultural Moment</div>
           <div class="cs-stat-num">↑47%</div>
+          <div class="cs-stat-eyebrow">03 · The Cultural Moment</div>
           <div class="cs-stat-label">Growth in running club participation post-2020. An entire generation of runners has made movement a social and aesthetic practice, not just a fitness habit. On is their brand. They have nowhere to gather in it.</div>
         </div>
         <div class="cs-stat-cell">
-          <div class="cs-stat-eyebrow">04 · The Expression Gap</div>
           <div class="cs-stat-num">Miles</div>
+          <div class="cs-stat-eyebrow">04 · The Expression Gap</div>
           <div class="cs-stat-label">Running is how On's customers express themselves. The shoe is the object. The run is the act. The community is the audience. All three need a home that reflects the standard of the brand that made the shoe.</div>
         </div>
       </div>
@@ -440,18 +518,18 @@ footer { padding: 32px 48px; border-top: 1px solid var(--g200); display: flex; j
       </div>
       <div class="cs-stats cs-stats-3">
         <div class="cs-stat-cell">
-          <div class="cs-stat-eyebrow">Insight 01 · Movement as Expression</div>
           <div class="cs-stat-num">Act</div>
+          <div class="cs-stat-eyebrow">Insight 01 · Movement as Expression</div>
           <div class="cs-stat-label">On runners run to express something — an aesthetic, a discipline, a relationship to their own body in motion. The platform's job is to witness that, not to rank it. No KOM. No trophy. No gamification chrome.</div>
         </div>
         <div class="cs-stat-cell">
-          <div class="cs-stat-eyebrow">Insight 02 · The Craft Standard</div>
           <div class="cs-stat-num">Swiss</div>
+          <div class="cs-stat-eyebrow">Insight 02 · The Craft Standard</div>
           <div class="cs-stat-label">On holds its hardware to a standard most brands don't attempt. The software deserves the same. Every screen in Apex is built to a single question: does this earn its presence? If not, it doesn't ship.</div>
         </div>
         <div class="cs-stat-cell">
-          <div class="cs-stat-eyebrow">Insight 03 · The Untaken Territory</div>
           <div class="cs-stat-num">Open</div>
+          <div class="cs-stat-eyebrow">Insight 03 · The Untaken Territory</div>
           <div class="cs-stat-label">Nike owns aspiration. Strava owns data. The territory no platform owns — aesthetic intentionality, movement as identity, design-forward running culture — is exactly where On lives. Apex plants the flag there.</div>
         </div>
       </div>
@@ -628,6 +706,31 @@ footer { padding: 32px 48px; border-top: 1px solid var(--g200); display: flex; j
         </div>
       </div>
 
+      <div class="token-accordion-mobile">
+        <div class="token-item active">
+          <div class="token-header" onclick="toggleToken(this)"><span>Background / Canvas</span><span class="token-icon">+</span></div>
+          <div class="token-panel">
+            <div class="token-row"><strong>Light:</strong> #F7F7F3 (Primary) / #FFFFFF (Cards)</div>
+            <div class="token-row"><strong>Dark:</strong> #0A0A0A (Primary) / #1C1C1C (Controls)</div>
+            <div class="token-row"><strong>Role:</strong> High-contrast mode switch when activity starts.</div>
+          </div>
+        </div>
+        <div class="token-item">
+          <div class="token-header" onclick="toggleToken(this)"><span>Primary Text</span><span class="token-icon">+</span></div>
+          <div class="token-panel">
+            <div class="token-row"><strong>Light:</strong> #0A0A0A (900)</div>
+            <div class="token-row"><strong>Dark:</strong> #F0F0EA (900)</div>
+            <div class="token-row"><strong>Role:</strong> Maximum legibility for instrument-grade data.</div>
+          </div>
+        </div>
+        <div class="token-item">
+          <div class="token-header" onclick="toggleToken(this)"><span>Accent (Volt)</span><span class="token-icon">+</span></div>
+          <div class="token-panel">
+            <div class="token-row"><strong>Value:</strong> #D4FF00 (MDS Volt)</div>
+            <div class="token-row"><strong>Role:</strong> Reserved for status (today), active zone, and CTAs.</div>
+          </div>
+        </div>
+      </div>
 
       <!-- Token documentation — surfaced from MDS -->
       <div style="margin-bottom:28px;">
@@ -661,13 +764,6 @@ footer { padding: 32px 48px; border-top: 1px solid var(--g200); display: flex; j
       </div>
       <div class="artifact-expand" id="art1-expand">
         <div class="artifact-inner">
-          <div class="artifact-inner-header">
-            <div>
-              <div class="artifact-inner-eyebrow">Interactive · On Apex · PRD + Molecular Design System v1.0</div>
-              <div class="artifact-inner-title">PRD + Molecular Design System</div>
-            </div>
-            <button class="artifact-close-btn" onclick="closeArtifact(1)">Close &uarr;</button>
-          </div>
           <div class="artifact-iframe-wrap">
             <iframe src="prd-design-system.html" title="On Apex PRD + Molecular Design System" scrolling="yes"></iframe>
           </div>
@@ -1071,19 +1167,45 @@ footer { padding: 32px 48px; border-top: 1px solid var(--g200); display: flex; j
       </div>
       <div class="artifact-expand" id="art2-expand">
         <div class="artifact-inner">
-          <div class="artifact-inner-header">
-            <div>
-              <div class="artifact-inner-eyebrow">Interactive · On Apex · React PWA · v5.0</div>
-              <div class="artifact-inner-title">App Prototype</div>
-            </div>
-            <button class="artifact-close-btn" onclick="closeArtifact(2)">Close &uarr;</button>
-          </div>
           <div class="proto-layout">
             <div class="proto-phone">
               <!-- TODO: verify /work/on-apex-app route is live before deploy -->
               <iframe src="/work/on-apex-app" title="On Apex App Prototype" scrolling="yes"></iframe>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="journey-map-mobile">
+      <div class="journey-step active" onclick="toggleJourney(this)">
+        <div class="journey-header"><span><span class="journey-num">01</span>Home / Dashboard</span><span class="token-icon">+</span></div>
+        <div class="journey-panel">
+          <p class="journey-desc">The app opens to white mode. The weekly km number resolves before anything else — at 116px in Bebas Neue, it earns its authority before the rest of the screen loads.</p>
+        </div>
+      </div>
+      <div class="journey-step" onclick="toggleJourney(this)">
+        <div class="journey-header"><span><span class="journey-num">02</span>Pre-Run Screen</span><span class="token-icon">+</span></div>
+        <div class="journey-panel">
+          <p class="journey-desc">The Start button in the nav goes to Pre-Run, not directly to the Active Run clock. GPS lock animation plays — expanding ring pulses at 0.55s intervals.</p>
+        </div>
+      </div>
+      <div class="journey-step" onclick="toggleJourney(this)">
+        <div class="journey-header"><span><span class="journey-num">03</span>Active Run</span><span class="token-icon">+</span></div>
+        <div class="journey-panel">
+          <p class="journey-desc">The run screen is black mode. A scanning line at 3.4s interval gives the screen live-data signal. Pace fluctuates ±8 sec/km per tick.</p>
+        </div>
+      </div>
+      <div class="journey-step" onclick="toggleJourney(this)">
+        <div class="journey-header"><span><span class="journey-num">04</span>Post-Run Summary</span><span class="token-icon">+</span></div>
+        <div class="journey-panel">
+          <p class="journey-desc">The world returns to white. The post-run summary is an editorial screen — designed to be screenshotted and shared on social platforms.</p>
+        </div>
+      </div>
+      <div class="journey-step" onclick="toggleJourney(this)">
+        <div class="journey-header"><span><span class="journey-num">05</span>Shoe Registration</span><span class="token-icon">+</span></div>
+        <div class="journey-panel">
+          <p class="journey-desc">Four steps to sync order history or manually register. Every run is attributed to a specific model to track wear and tear accurately.</p>
         </div>
       </div>
     </div>
@@ -1350,48 +1472,44 @@ footer { padding: 32px 48px; border-top: 1px solid var(--g200); display: flex; j
       <div class="cs-section-eyebrow"><span class="cs-section-num">08</span><span class="cs-section-title">Outcome</span></div>
       <h2 class="cs-heading-serif">A complete zero-to-one product build. <em>No feature without a reason.</em></h2>
 
-      <div class="cs-stats cs-stats-4" style="margin-bottom:28px;">
+      <div class="cs-stats cs-stats-3" style="margin-bottom:28px;">
         <div class="cs-stat-cell">
-          <div class="cs-stat-eyebrow">Product Scope</div>
-          <div class="cs-stat-num">14</div>
-          <div class="cs-stat-label">Interactive screens built across three visual registers: architectural, instrument-grade, editorial.</div>
-        </div>
-        <div class="cs-stat-cell">
-          <div class="cs-stat-eyebrow">PRD Coverage</div>
-          <div class="cs-stat-num">71/73</div>
+          <div class="cs-stat-num">P0</div>
+          <div class="cs-stat-eyebrow">Product Roadmap</div>
           <div class="cs-stat-label">PRD requirements implemented in the prototype. 2 remaining items are engineering infrastructure (SSO, service worker), not product decisions.</div>
         </div>
         <div class="cs-stat-cell">
-          <div class="cs-stat-eyebrow">Design System</div>
           <div class="cs-stat-num">9</div>
+          <div class="cs-stat-eyebrow">Design System</div>
           <div class="cs-stat-label">Interaction patterns specified and implemented: haptic, pull-to-refresh, long press, sheet modal, toast, skeleton, swipe dismiss, map expand, scroll snap.</div>
         </div>
         <div class="cs-stat-cell">
-          <div class="cs-stat-eyebrow">Target Metric</div>
           <div class="cs-stat-num">35%</div>
           <div class="cs-stat-label">WAU target from registered users. The primary success metric that validates the community loop — not downloads, not impressions.</div>
         </div>
       </div>
 
-      <div class="cs-metrics-table" style="margin-bottom:32px;">
-        <table class="cs-table">
-          <thead>
-            <tr>
-              <th>Success Metric</th>
-              <th>Target</th>
-              <th>Measurement Method</th>
-              <th>PRD Section</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td>Weekly Active Users</td><td>35% of registered users logging activity</td><td>Session with ≥1 logged activity within 7 days</td><td>§3.1</td></tr>
-            <tr><td>Activity Sessions</td><td>2.4 sessions / user / week</td><td>GPS run start events per unique user</td><td>§3.2</td></tr>
-            <tr><td>Community Connection</td><td>60% follow ≥1 other user within 30 days</td><td>Follow event from account creation timestamp</td><td>§3.3</td></tr>
-            <tr><td>Shoe Registration</td><td>70% register ≥1 On shoe</td><td>Shoe Garage registration event post-onboarding</td><td>§3.4</td></tr>
-            <tr><td>Reorder Attribution</td><td>15% of purchases traceable to Apex prompt</td><td>Deep-link click → on.com purchase within 7 days</td><td>§3.5</td></tr>
-            <tr><td>PWA Install Rate</td><td>45% of mobile visitors add to home screen</td><td>beforeinstallprompt acceptance event</td><td>§3.6</td></tr>
-          </tbody>
-        </table>
+      <div class="metrics-grid-mobile">
+        <div class="metric-card">
+          <div class="metric-card-title">Weekly Active Users</div>
+          <div class="metric-card-val">35%</div>
+          <div class="metric-card-method">Session with ≥1 logged activity within 7 days</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-card-title">Activity Sessions</div>
+          <div class="metric-card-val">2.4/wk</div>
+          <div class="metric-card-method">GPS run start events per unique user</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-card-title">Shoe Registration</div>
+          <div class="metric-card-val">70%</div>
+          <div class="metric-card-method">Garage registration event post-onboarding</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-card-title">Reorder Attribution</div>
+          <div class="metric-card-val">15%</div>
+          <div class="metric-card-method">Deep-link click → on.com purchase</div>
+        </div>
       </div>
 
 
@@ -1454,11 +1572,6 @@ function toggleArtifact(n) {
   expand.dataset.open = isOpen ? 'false' : 'true';
   toggle.textContent = isOpen ? '+' : '\u00d7';
 }
-function closeArtifact(n) {
-  const expand = document.getElementById('art'+n+'-expand');
-  const toggle = document.getElementById('art'+n+'-cta');
-  expand.style.maxHeight = '0'; expand.dataset.open = 'false'; toggle.textContent = '+';
-}
 
 // USER FLOW CAROUSEL
 let currentFlow = 0;
@@ -1475,12 +1588,12 @@ function showFlow(n) {
 function nextFlow() { showFlow((currentFlow+1) % totalFlow); }
 function prevFlow() { showFlow((currentFlow-1+totalFlow) % totalFlow); }
 
-// KEY SCREENS
-function showScreen(n) {
-  document.querySelectorAll('.app-screen-btn').forEach(b => b.classList.remove('active'));
-  document.querySelectorAll('.app-screen-frame').forEach(f => f.classList.remove('active'));
-  document.querySelector('.app-screen-btn[data-screen="'+n+'"]').classList.add('active');
-  document.getElementById('screen-'+n).classList.add('active');
+function toggleToken(el) {
+  const item = el.parentElement;
+  item.classList.toggle('active');
+}
+function toggleJourney(el) {
+  el.classList.toggle('active');
 }
 </script>
 </body>

@@ -165,12 +165,11 @@ body { font-family: var(--font); background: var(--white); color: var(--black); 
 .artifact-trigger:hover .artifact-toggle { color: var(--white); }
 .artifact-expand { max-height: 0; overflow: hidden; transition: max-height 600ms ease; }
 .artifact-inner { background: #0a0a0a; padding: 0; }
-.artifact-inner-header { display: flex; justify-content: space-between; align-items: flex-start; padding: 32px 48px 24px; border-bottom: 1px solid rgba(255,255,255,.06); }
-.artifact-inner-eyebrow { font-size: 9px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: #444; margin-bottom: 10px; }
-.artifact-inner-title { font-size: 24px; font-weight: 300; letter-spacing: .05em; text-transform: uppercase; color: var(--white); line-height: 1; }
-.artifact-close-btn { background: transparent; border: 1px solid rgba(255,255,255,.2); color: rgba(255,255,255,.5); padding: 9px 18px; font-size: 9px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; cursor: pointer; font-family: var(--font); white-space: nowrap; margin-top: 4px; }
 .artifact-iframe-wrap { width: 100%; }
 .artifact-iframe-wrap iframe { width: 100%; min-height: 700px; height: 85vh; border: none; display: block; }
+.proto-layout { display: flex; justify-content: center; padding: 48px; }
+.proto-phone { width: 375px; height: 812px; border: 12px solid #333; border-radius: 40px; overflow: hidden; background: #000; box-shadow: 0 0 0 1px rgba(255,255,255,.1), 0 0 0 2px rgba(0,0,0,.5), 0 20px 60px rgba(0,0,0,.5); }
+.proto-phone iframe { width: 100%; height: 100%; border: none; display: block; }
 
 /* PERSONAS */
 .persona-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--g200); margin-bottom: 28px; }
@@ -317,7 +316,65 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
 .footer-link { font-size: 10px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.35); text-decoration: none; transition: color var(--ease-fast); }
 .footer-link:hover { color: var(--white); }
 .footer-copy { font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: rgba(255,255,255,.18); }
-#scroll-progress { position: fixed; top: 0; left: 0; height: 2px; background: var(--black); width: 0%; z-index: 300; transition: width 100ms linear; }
+    /* Success Metrics Grid — Mobile */
+    .metrics-grid-mobile { display: none; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 32px; }
+    .metric-card { background: #fff; border: 1px solid var(--g200); padding: 16px; display: flex; flex-direction: column; gap: 8px; }
+    .metric-card-title { font-size: 8px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--g300); }
+    .metric-card-val { font-size: 20px; font-weight: 200; color: var(--black); }
+    .metric-card-method { font-size: 10px; color: var(--g400); line-height: 1.4; }
+
+    /* Decision/Accordion — Mobile */
+    .decision-accordion-mobile { display: none; border-top: 1px solid var(--g200); margin-bottom: 32px; }
+    .decision-item { border-bottom: 1px solid var(--g200); }
+    .decision-header { padding: 16px 0; display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
+    .decision-header span:first-child { font-size: 11px; font-weight: 500; letter-spacing: .05em; text-transform: uppercase; }
+    .token-icon { font-size: 16px; color: var(--g300); transition: transform 0.3s ease; }
+    .token-panel { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background: var(--g100); padding: 0 16px; }
+    .token-row { padding: 12px 0; font-size: 12px; color: var(--g500); line-height: 1.5; border-bottom: 1px solid rgba(0,0,0,0.05); }
+    .token-row:last-child { border-bottom: none; }
+    .decision-item.active .token-panel { max-height: 500px; padding: 8px 16px 20px 16px; }
+    .decision-item.active .token-icon { transform: rotate(45deg); }
+
+    .cs-exec-kpi { flex-direction: column; align-items: flex-start !important; gap: 4px !important; }
+    .cs-exec-kpi-eyebrow { font-size: 8px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--g300); }
+
+    #scroll-progress { position: fixed; top: 0; left: 0; height: 2px; background: var(--black); width: 0%; z-index: 300; transition: width 100ms linear; }
+
+@media (max-width: 768px) {
+  #site-nav .nav-main { padding: 0 20px !important; display: flex !important; justify-content: space-between !important; align-items: center !important; }
+  #site-nav .nav-left, #site-nav .nav-wordmark, #site-nav .nav-right { position: static !important; transform: none !important; left: auto !important; right: auto !important; top: auto !important; }
+  #site-nav .nav-left a:not([href="/"]):not([href="/#work"]) { display: none !important; }
+  #site-nav .nav-wordmark { font-size: 11px !important; letter-spacing: .12em !important; }
+  #site-nav .nav-right a { font-size: 9px !important; }
+
+  #cs-sidenav { display: none !important; }
+  .cs-body-wrap { grid-template-columns: 1fr !important; }
+  #cs-exec-summary, .cs-section, .app-showcase, .rotation-carousel, .cs-hero-title-wrap { padding: 40px 20px !important; }
+  
+  .cs-exec-meta-grid, .product-cards, .rotation-track, .tier-compare, .app-showcase-layout, .outcome-stats, .cs-img-2col, .cs-img-3col, .research-drawer-grid, .persona-grid { 
+    grid-template-columns: 1fr !important; 
+    gap: 24px !important; 
+  }
+  .cs-metrics-table, .rollout-table { display: none !important; }
+  .metrics-grid-mobile, .decision-accordion-mobile { display: grid !important; grid-template-columns: 1fr !important; }
+  
+  .cs-hero { min-height: 60vh !important; }
+  .cs-hero-title { font-size: 32px !important; }
+  .cs-pull-quote { padding-left: 20px !important; font-size: 18px !important; }
+  
+  .artifact-trigger { padding: 16px 20px !important; }
+  .artifact-name { font-size: 12px !important; }
+  .artifact-badge { display: none !important; }
+  
+  .app-screen-nav { position: static !important; margin-bottom: 20px !important; flex-direction: row !important; overflow-x: auto !important; }
+  .app-screen-btn { border-left: none !important; border-bottom: 2px solid #222 !important; padding: 8px 12px !important; white-space: nowrap !important; }
+  .app-screen-btn.active { border-bottom-color: #fff !important; }
+  
+  .rotation-counter { font-size: 24px !important; }
+  .rotation-detail-inner { min-height: auto !important; }
+  .rotation-detail-panel { position: static !important; display: none !important; opacity: 1 !important; }
+  .rotation-detail-panel.active { display: block !important; }
+}
 </style>
 </head>
 <body>
@@ -375,18 +432,19 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
       <section id="cs-exec-summary" data-cs-section="exec-summary" style="padding:64px 56px;border-bottom:1px solid var(--g200);">
         <div class="cs-exec-inner">
           <div>
-            <div class="cs-exec-eyebrow">Executive Summary</div>
-            <p class="cs-exec-body">Saks Global&rsquo;s Chapter 11 filing was not a management failure; it was a structural model the market outran simultaneously on every front: inventory ownership, long-term leases, 180-day buying cycles, and a $475M mass marketplace bet that proved luxury brand equity cannot survive distribution at scale.</p>
-            <p class="cs-exec-body">Vault replaces owned real estate with a node-based platform: 3,500 sq ft discovery nodes on month-to-month leases, a three-tier membership funding fixed costs, a designer subscription generating platform revenue, and a loyalty data flywheel creating the actual moat. The outcome is $964M in annual run-rate savings against an $81M transformation investment, payback in under one month.</p>
+            <div class="cs-exec-kpis" style="margin-top:24px;">
+              <div class="cs-exec-kpi"><div class="cs-exec-kpi-num">$964M</div><div class="cs-exec-kpi-eyebrow">Annual Savings</div><div class="cs-exec-kpi-label">Projected run-rate</div></div>
+              <div class="cs-exec-kpi"><div class="cs-exec-kpi-num">1mo</div><div class="cs-exec-kpi-eyebrow">Payback Period</div><div class="cs-exec-kpi-label">On $81M investment</div></div>
+              <div class="cs-exec-kpi"><div class="cs-exec-kpi-num">01</div><div class="cs-exec-kpi-eyebrow">Primary Target</div><div class="cs-exec-kpi-label">Chapter 11 Exit F26</div></div>
+            </div>
           </div>
           <div>
             <div class="cs-exec-meta-grid">
               <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Client</div><div class="cs-exec-meta-val">Vault by Saks</div></div>
               <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Year</div><div class="cs-exec-meta-val">2026</div></div>
-              <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Role</div><div class="cs-exec-meta-val">Brand Strategist &amp; Product Designer</div></div>
-              <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Goal</div><div class="cs-exec-meta-val">Platform Design + Financial Modeling</div></div>
-              <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Deliverables</div><div class="cs-exec-meta-val">Platform Model · Financial Model · Membership Design · Brand System</div></div>
-              <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Tools</div><div class="cs-exec-meta-val">HTML · Brand Architecture · Financial Modeling</div></div>
+              <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Role</div><div class="cs-exec-meta-val">Brand &amp; Product Strategist</div></div>
+              <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Deliverables</div><div class="cs-exec-meta-val">Platform Model · Membership Design · Brand System</div></div>
+              <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Tools</div><div class="cs-exec-meta-val">HTML · Node Architecture · Financial Modeling</div></div>
             </div>
           </div>
         </div>
@@ -400,10 +458,10 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
           <p class="cs-body">Saks Global&rsquo;s Chapter 11 filing in January 2026 was not a story of bad management. It was a structural model, inventory ownership, long-term leases, slow buying cycles, mass digital partnership, that the market outran on every front simultaneously. The $4.7B debt load following the HBC-Neiman Marcus merger, $600M/yr in synergies projected and zero delivered before bankruptcy, was only the starting condition for a cascade that took down every pillar at once.</p>
           <p class="cs-body">Each failure was mechanically distinct and structurally related. $700M+ in unpaid vendor invoices destroyed in one cycle the trust built over sixty years. A 180-day buying cycle in a 14-day trend market meant inventory was locked six months before the season opened. 65% of HNW Gen Z luxury spenders lived in markets with no physical Saks presence. The $475M Amazon investment proved luxury brand equity cannot survive mass marketplace distribution.</p>
           <div class="cs-stats cs-stats-4">
-            <div class="cs-stat-cell"><div class="cs-stat-eyebrow">01 · Debt Load</div><div class="cs-stat-num">$4.7B</div><div class="cs-stat-label">Debt following HBC-Neiman merger. $600M/yr in synergies projected. Zero delivered before bankruptcy.</div></div>
-            <div class="cs-stat-cell"><div class="cs-stat-eyebrow">02 · Buying Cycle</div><div class="cs-stat-num">180d</div><div class="cs-stat-label">Average buying cycle in a 14-day trend market. Inventory locked six months before the season opens.</div></div>
-            <div class="cs-stat-cell"><div class="cs-stat-eyebrow">03 · Vendor Debt</div><div class="cs-stat-num">$700M+</div><div class="cs-stat-label">Unpaid vendor invoices. 18-month payment backlog. Sixty years of trust destroyed in one cycle.</div></div>
-            <div class="cs-stat-cell"><div class="cs-stat-eyebrow">04 · Market Gap</div><div class="cs-stat-num">65%</div><div class="cs-stat-label">HNW Gen Z luxury spenders in markets with no physical Saks. 57 Off 5th stores closed February 2026.</div></div>
+            <div class="cs-stat-cell"><div class="cs-stat-num">$4.7B</div><div class="cs-stat-eyebrow">01 · Debt Load</div><div class="cs-stat-label">Debt following HBC-Neiman merger. $600M/yr in synergies projected. Zero delivered before bankruptcy.</div></div>
+            <div class="cs-stat-cell"><div class="cs-stat-num">180d</div><div class="cs-stat-eyebrow">02 · Buying Cycle</div><div class="cs-stat-label">Average buying cycle in a 14-day trend market. Inventory locked six months before the season opens.</div></div>
+            <div class="cs-stat-cell"><div class="cs-stat-num">$700M+</div><div class="cs-stat-eyebrow">03 · Vendor Debt</div><div class="cs-stat-label">Unpaid vendor invoices. 18-month payment backlog. Sixty years of trust destroyed in one cycle.</div></div>
+            <div class="cs-stat-cell"><div class="cs-stat-num">65%</div><div class="cs-stat-eyebrow">04 · Market Gap</div><div class="cs-stat-label">HNW Gen Z luxury spenders in markets with no physical Saks. 57 Off 5th stores closed February 2026.</div></div>
           </div>
           <div class="cs-img-2col">
             <div class="cs-img-2col-item">
@@ -545,19 +603,13 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
         </div>
         <div class="artifact-expand" id="art1-expand">
           <div class="artifact-inner">
-            <div class="artifact-inner-header">
-              <div>
-                <div class="artifact-inner-eyebrow">Interactive · Vault by Saks</div>
-                <div class="artifact-inner-title">P&amp;L + Scenario Planner</div>
-              </div>
-              <button class="artifact-close-btn" onclick="closeArtifact(1)">Close &uarr;</button>
-            </div>
             <div class="artifact-iframe-wrap">
               <iframe src="vault-financial-model.html" title="Vault by Saks Financial Model" scrolling="yes"></iframe>
             </div>
           </div>
         </div>
       </div>
+
 
       <!-- 04 THE PRODUCT -->
       <section class="cs-section cs-section-alt" id="cs-execution" data-cs-section="execution">
@@ -903,11 +955,7 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
           <div class="artifact-right"><span class="artifact-toggle" id="art2-cta">+</span></div>
         </div>
         <div class="artifact-expand" id="art2-expand">
-          <div class="artifact-inner">
-            <div class="artifact-inner-header">
-              <div><div class="artifact-inner-eyebrow">Image Gallery · Vault by Saks</div><div class="artifact-inner-title">Extended Visual Archive</div></div>
-              <button class="artifact-close-btn" onclick="closeArtifact(2)">Close &uarr;</button>
-            </div>
+            <div class="artifact-inner">
             <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px;background:#1a1a1a;padding:16px;padding-top:2px;">
               <div class="cs-img-contain" style="aspect-ratio:4/3;background:#111;"><img src="saks-31.png" alt="Extended gallery 31" /></div>
               <div class="cs-img-contain" style="aspect-ratio:4/3;background:#111;"><img src="saks-32.png" alt="Extended gallery 32" /></div>
@@ -1270,7 +1318,30 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
             <div class="outcome-stat"><div class="outcome-stat-num">&lt;1mo</div><div class="outcome-stat-label">Payback period at $964M/yr run-rate savings against $81M CapEx ($78.4M node build-out + $45M tech platform). The transformation investment is a rounding error against the cost structure it eliminates.</div></div>
           </div>
           <div class="cs-section-eyebrow" style="margin-bottom:20px;"><span class="cs-section-title">Revenue Model: Three Streams</span></div>
-          <table class="cs-table" style="margin-bottom:32px;">
+          <div class="metrics-grid-mobile">
+            <div class="metric-card">
+              <div class="metric-card-title">Node Retail Revenue</div>
+              <div class="metric-card-val">$144M</div>
+              <div class="metric-card-method">Year 1 · 8 nodes</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-card-title">Membership ARR</div>
+              <div class="metric-card-val">$59.4M</div>
+              <div class="metric-card-method">Year 1 · 50K members</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-card-title">Designer Platform</div>
+              <div class="metric-card-val">$7.5M</div>
+              <div class="metric-card-method">Year 1 · 250 designers</div>
+            </div>
+            <div class="metric-card">
+              <div class="metric-card-title">Total Year 1</div>
+              <div class="metric-card-val" style="color:var(--black);font-weight:600;">$210.9M</div>
+              <div class="metric-card-method">Blended revenue model</div>
+            </div>
+          </div>
+
+          <table class="cs-table cs-metrics-table" style="margin-bottom:32px;">
             <thead><tr><th>Revenue Stream</th><th>Year 1</th><th>Year 3 (Break-Even)</th><th>Year 5</th></tr></thead>
             <tbody>
               <tr><td>Node Retail Revenue</td><td>$144M (8 nodes)</td><td>$504M (28 nodes)</td><td>$990M (55 nodes)</td></tr>
@@ -1280,7 +1351,38 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
             </tbody>
           </table>
           <div class="cs-section-eyebrow" style="margin-bottom:20px;"><span class="cs-section-title">Decision Log: What We Built and Why</span></div>
-          <table class="cs-table">
+          <div class="decision-accordion-mobile">
+            <div class="decision-item active">
+              <div class="decision-header" onclick="toggleDecision(this)"><span>Revenue Model</span><span class="token-icon">+</span></div>
+              <div class="token-panel">
+                <div class="token-row"><strong>What We Did:</strong> Subscription-first (membership + designer platform). Retail GMV is upside.</div>
+                <div class="token-row"><strong>Tradeoff:</strong> Slower GMV growth early. Fixed costs covered before first sale.</div>
+              </div>
+            </div>
+            <div class="decision-item">
+              <div class="decision-header" onclick="toggleDecision(this)"><span>Launch Geography</span><span class="token-icon">+</span></div>
+              <div class="token-panel">
+                <div class="token-row"><strong>What We Did:</strong> Gateway cities first: NYC, LA, Miami.</div>
+                <div class="token-row"><strong>Tradeoff:</strong> Delays secondary market entry. Model proves itself under scrutiny before scaling.</div>
+              </div>
+            </div>
+            <div class="decision-item">
+              <div class="decision-header" onclick="toggleDecision(this)"><span>Inventory Ownership</span><span class="token-icon">+</span></div>
+              <div class="token-panel">
+                <div class="token-row"><strong>What We Did:</strong> Consignment model; designers retain ownership until sale.</div>
+                <div class="token-row"><strong>Tradeoff:</strong> Vault gives up inventory upside on fast-selling pieces. Eliminates balance sheet risk.</div>
+              </div>
+            </div>
+            <div class="decision-item">
+              <div class="decision-header" onclick="toggleDecision(this)"><span>Designer Sub</span><span class="token-icon">+</span></div>
+              <div class="token-panel">
+                <div class="token-row"><strong>What We Did:</strong> Charge designers $2,500/month for platform access.</div>
+                <div class="token-row"><strong>Tradeoff:</strong> Higher barrier for emerging designers. Funds platform before membership scales.</div>
+              </div>
+            </div>
+          </div>
+
+          <table class="cs-table rollout-table">
             <thead><tr><th>Decision</th><th>What We Did</th><th>Tradeoff Accepted</th></tr></thead>
             <tbody>
               <tr><td>Revenue Model</td><td>Subscription-first (membership + designer platform). Retail GMV is upside.</td><td>Slower GMV growth early. Fixed costs covered before first sale.</td></tr>
@@ -1358,11 +1460,6 @@ function toggleArtifact(n) {
   expand.dataset.open = isOpen ? 'false' : 'true';
   toggle.textContent = isOpen ? '+' : '\u00d7';
 }
-function closeArtifact(n) {
-  const expand = document.getElementById('art'+n+'-expand');
-  const toggle = document.getElementById('art'+n+'-cta');
-  expand.style.maxHeight = '0'; expand.dataset.open = 'false'; toggle.textContent = '+';
-}
 
 // RESEARCH DRAWER
 function toggleResearch() {
@@ -1395,6 +1492,10 @@ function showPhase(n) {
 }
 function nextPhase() { showPhase((currentPhase+1) % totalPhases); }
 function prevPhase() { showPhase((currentPhase-1+totalPhases) % totalPhases); }
+
+// MOBILE INTERACTIVES
+function toggleDecision(header) { header.parentElement.classList.toggle('active'); }
+function toggleMetric(el) { el.classList.toggle('active'); }
 </script>
 </body>
 </html>

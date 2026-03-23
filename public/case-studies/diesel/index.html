@@ -213,9 +213,9 @@ body { font-family: var(--font); background: var(--white); color: var(--black); 
 .cs-stat-num { font-size: 48px; font-weight: 300; color: var(--black); letter-spacing: -.02em; line-height: 1; margin-bottom: 8px; }
 .cs-stat-label { font-size: 12px; color: var(--g500); line-height: 1.65; }
 
-.outcome-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--g200); margin-bottom: 32px; }
-.outcome-stat { background: var(--white); padding: 28px 24px; border-top: 3px solid var(--black); }
-.outcome-stat-num { font-size: 52px; font-weight: 300; color: var(--black); letter-spacing: -.02em; line-height: 1; margin-bottom: 10px; }
+.outcome-stat { background: var(--white); padding: 28px 24px; border-top: 3px solid var(--black); display: flex; flex-direction: column; gap: 4px; }
+.outcome-stat-num { font-size: 52px; font-weight: 300; color: var(--black); letter-spacing: -.02em; line-height: 1; }
+.outcome-stat-eyebrow { font-size: 9px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--g300); }
 .outcome-stat-label { font-size: 12px; color: var(--g500); line-height: 1.65; }
 .cs-next { border-top: 1px solid var(--g200); padding-top: 32px; display: flex; justify-content: space-between; align-items: center; margin-top: 40px; }
 .cs-next-label { font-size: 9px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--g300); }
@@ -240,17 +240,47 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
 .cs-divider-line { flex: 1; height: 1px; background: var(--g200); }
 .cs-divider-end { font-size: 8px; letter-spacing: .12em; color: var(--g400); white-space: nowrap; }
 
-@media (max-width: 1024px) {
-  .cs-hero { grid-template-columns: 1fr; }
-  .cs-hero-r { min-height: 50vh; }
-  .floor { grid-template-columns: 56px 1fr; }
-  .floor-visual { display: none; }
-  .market-stats { grid-template-columns: 1fr; }
-  .hara-split { grid-template-columns: 1fr; }
-  .img-pair { grid-template-columns: 1fr; }
-  .meta-strip { grid-template-columns: 1fr; }
-  .comp-row { grid-template-columns: 1fr 1fr 80px; }
-  .comp-row .c-move { grid-column: 1 / -1; }
+@media (max-width: 768px) {
+  #site-nav .nav-main { padding: 0 20px !important; display: flex !important; justify-content: space-between !important; align-items: center !important; }
+  #site-nav .nav-left, #site-nav .nav-wordmark, #site-nav .nav-right { position: static !important; transform: none !important; left: auto !important; right: auto !important; top: auto !important; }
+  #site-nav .nav-left a:not([href="/"]):not([href="/#work"]) { display: none !important; }
+  #site-nav .nav-wordmark { font-size: 11px !important; letter-spacing: .12em !important; }
+  #site-nav .nav-right a { font-size: 9px !important; }
+
+  #cs-sidenav { display: none !important; }
+  .cs-body-wrap { grid-template-columns: 1fr !important; }
+  #cs-exec-summary, .cs-section, .cs-hero-title-wrap, .hara-col, .act-body, .floor-info, .m-cell, .comp-row { padding: 40px 20px !important; }
+  
+  .cs-exec-inner, .cs-stats-3, .cs-stats-4, .cs-body-2col { 
+     grid-template-columns: 1fr !important; 
+     gap: 16px !important; 
+   }
+   .cs-exec-meta-grid { 
+     grid-template-columns: 1fr 1fr !important; 
+     gap: 1px !important; 
+     background: var(--g200) !important;
+     border: 1px solid var(--g200) !important;
+   }
+  .outcome-stats, .cs-img-2col, .cs-img-3col, .hara-split, .market-stats, .img-pair, .meta-strip, .act-row, .floor { 
+    grid-template-columns: 1fr !important; 
+    gap: 24px !important; 
+  }
+  
+  .floor-spine { border-right: none !important; border-bottom: 1px solid var(--g200) !important; flex-direction: row !important; padding: 20px !important; justify-content: flex-start !important; }
+  .f-vert { writing-mode: horizontal-tb !important; transform: none !important; margin-left: 10px !important; }
+  .floor-visual { display: block !important; height: 300px !important; }
+  
+  .comp-row { grid-template-columns: 1fr !important; gap: 8px !important; }
+  .comp-row.hdr { display: none !important; }
+  .c-yr { font-size: 14px !important; margin-top: 4px !important; }
+
+  .cs-hero { min-height: 60vh !important; }
+  .cs-hero-title { font-size: 32px !important; }
+  .cs-heading { font-size: 24px !important; }
+  .cs-pull-quote { padding-left: 20px !important; font-size: 18px !important; }
+  
+  .thesis-pill { padding: 20px !important; }
+  .token-block { flex-direction: column !important; text-align: center !important; }
 }
 </style>
 </head>
@@ -330,7 +360,7 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
       <section class="cs-section" id="cs-section-01" data-cs-section="section-01">
         <div class="cs-section-eyebrow"><span class="cs-section-num">01</span><span class="cs-section-title">The Strategic Tension</span></div>
         <h2 class="cs-heading">Diesel is against the pose.</h2>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-bottom:32px;">
+        <div class="cs-body-2col" style="gap:48px;margin-bottom:32px;">
           <div>
             <p class="cs-body">In 2025, self-expression has become the most carefully managed performance in the world. The algorithm decides what's brave. The feed decides what's authentic. Even the "weird" looks are weird in pre-approved ways — rebellious within acceptable parameters, optimized for approval from people who aren't in the room.</p>
             <p class="cs-body"><strong>Diesel's enemy isn't conformity.</strong> The brand has always known conformity is a boring target. <em>The real enemy is fake nonconformity</em> — the three-hour "effortless" fit, the "I don't care what people think" outfit engineered for 50K likes. The performance of a self that hasn't been decided yet.</p>
@@ -390,7 +420,7 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
       <!-- 03 THE PROVOCATION -->
       <section class="cs-section" id="cs-section-03" data-cs-section="section-03">
         <div class="cs-section-eyebrow"><span class="cs-section-num">03</span><span class="cs-section-title">The Central Provocation</span></div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;">
+        <div class="cs-body-2col" style="gap:48px;">
           <div>
             <h2 class="cs-heading">The retail floors are phone-free.</h2>
             <p class="cs-body">Not as a wellness gimmick. Not as a luxury status signal. <strong>As a genuine provocation with a specific argument:</strong> you have been dressing for your phone so long, you've forgotten what it feels like to dress for yourself.</p>
@@ -534,18 +564,18 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
         <div class="market-stats">
           <div class="m-cell">
             <div class="m-big"><span>4</span>th</div>
-            <div class="m-unit">World's Largest Economy</div>
-            <p class="m-desc">Japan's luxury market has demonstrated consistent resilience. Consumers contribute a disproportionate share to the global profitability of every major luxury brand operating here.</p>
+            <div class="m-unit">Market Context</div>
+            <p class="m-desc"><strong>World's Largest Economy.</strong> Japan's luxury market has demonstrated consistent resilience and disproportionate profitability.</p>
           </div>
           <div class="m-cell">
             <div class="m-big">Self<span>↗</span></div>
-            <div class="m-unit">Primary Purchase Motivation</div>
-            <p class="m-desc">Japanese luxury buyers purchase for intrinsic quality and personal reward — not status signaling. This maps directly onto Diesel's "For Successful Living" ethos. The cultural alignment is structural.</p>
+            <div class="m-unit">Purchase Motivation</div>
+            <p class="m-desc"><strong>Intrinsic Reward.</strong> Japanese buyers purchase for quality over status—mapping directly to Diesel's "For Successful Living" ethos.</p>
           </div>
           <div class="m-cell">
             <div class="m-big">Hara<span>—</span></div>
-            <div class="m-unit">Juku / The Original Site</div>
-            <p class="m-desc">Harajuku is chosen because it is the original site of authentic self-expression in Tokyo — the neighborhood Diesel's concept is explicitly reclaiming. Location as argument, not just real estate.</p>
+            <div class="m-unit">Site Specificity</div>
+            <p class="m-desc"><strong>Original Site.</strong> Reclaiming Harajuku as the birthplace of authentic self-expression in Tokyo. Location as argument.</p>
           </div>
         </div>
 
@@ -593,7 +623,7 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
         <h2 class="cs-heading">What the building returns.</h2>
         <p class="cs-body">A flagship of this scale is a brand statement. <strong>The real value is what happens to the brand's position globally when this exists.</strong></p>
         <p class="cs-body">One number worth holding: the brands that have committed flagship infrastructure to Japan have reported Japan as a top-three market for global profitability within 36 months.</p>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:40px;">
+        <div class="cs-body-2col" style="gap:24px;margin-top:40px;">
           <div>
             <div class="ret-item">
               <div class="ret-n">Return 01 — Brand Equity</div>
@@ -649,9 +679,9 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
           <span>Thesis — <b>Find Out First. Post Later.</b></span>
         </div>
         <div class="outcome-stats" style="margin-top:40px;">
-          <div class="outcome-stat"><div class="outcome-stat-num">5</div><div class="outcome-stat-label">Floors — High-Velocity Retail, The Edit, Denim Lab, Café 1978, Ghiaccio</div></div>
-          <div class="outcome-stat"><div class="outcome-stat-num">10/90</div><div class="outcome-stat-label">Product vs. Soul — The space carries the brand</div></div>
-          <div class="outcome-stat"><div class="outcome-stat-num">F25</div><div class="outcome-stat-label">First flagship designed in Glenn Martens' creative era</div></div>
+          <div class="outcome-stat"><div class="outcome-stat-num">05</div><div class="outcome-stat-eyebrow">Physical Scale</div><div class="outcome-stat-label">Floors — High-Velocity Retail, The Edit, Denim Lab, Café 1978, Ghiaccio</div></div>
+          <div class="outcome-stat"><div class="outcome-stat-num">10/90</div><div class="outcome-stat-eyebrow">Product Mix</div><div class="outcome-stat-label">Product vs. Soul — The space carries the brand, not the SKU count</div></div>
+          <div class="outcome-stat"><div class="outcome-stat-num">F25</div><div class="outcome-stat-eyebrow">Creative Era</div><div class="outcome-stat-label">First flagship designed in Glenn Martens' creative era</div></div>
         </div>
         <div class="cs-next">
           <div class="cs-next-label">Next Case Study</div>

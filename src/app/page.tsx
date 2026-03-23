@@ -423,32 +423,31 @@ export default function Home() {
           {/* Status grid */}
           <div className="status-grid">
             <div className="status-cell">
-              <div className="status-cell-label">CURRENTLY</div>
               <div className="status-cell-value">VCU Brandcenter M.S. Business/Branding &mdash; Expected May 2026</div>
             </div>
             <div className="status-cell">
-              <div className="status-cell-label">FOCUS</div>
               <div className="status-cell-value">Brand &amp; product strategist</div>
             </div>
             <div className="status-cell">
-              <div className="status-cell-label">BASED</div>
               <div className="status-cell-value">Richmond, VA</div>
             </div>
           </div>
 
           <div className="featured-row" style={{ justifyContent: 'flex-start', alignItems: 'flex-start', paddingTop: 0, borderTop: 'none', background: 'transparent' }}>
-            <span className="featured-label">Featured In</span>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-              <div className="featured-names">
-                <span className="featured-name">AdAge</span>
-                <span className="featured-name">AdForum</span>
-                <span className="featured-name">Communication Arts</span>
-                <span className="featured-name">Print Mag</span>
-                <span className="featured-name">Stash</span>
+            <div className="featured-content">
+              <span className="featured-label">Featured In</span>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <div className="featured-names">
+                  <span className="featured-name">AdAge</span>
+                  <span className="featured-name">AdForum</span>
+                  <span className="featured-name">Communication Arts</span>
+                  <span className="featured-name">Print Mag</span>
+                  <span className="featured-name">Stash</span>
+                </div>
+                <span className="featured-qualifier">
+                  Via Branch Museum of Design &times; MullenLowe Design Studio
+                </span>
               </div>
-              <span style={{ fontSize: '11px', letterSpacing: '.06em', color: 'var(--g500)', textTransform: 'uppercase' }}>
-                Via Branch Museum of Design &times; MullenLowe Design Studio
-              </span>
             </div>
           </div>
 
@@ -576,7 +575,13 @@ export default function Home() {
               </div>
               <div>
                 <div className="role-title">Loyalty Lead</div>
-                <div className="role-desc">Spearheaded Encore Madness, a Mid-Atlantic district loyalty acquisition initiative spanning 11 stores, partnering with General and District Management to build program infrastructure and a live PowerBI-backed performance microsite. Scaled personal loyalty conversion from 1.22% to 12.07% over eight months &mdash; a nearly 10x improvement &mdash; earning #1 acquisition rate in the district YTD. Drove +11% comp YTD and a 40% increase in team acquisition goal attainment through a proprietary KPI-based coaching methodology.</div>
+                <div className="role-desc">
+                  <ul>
+                    <li>Spearheaded Encore Madness, a Mid-Atlantic district loyalty acquisition initiative spanning 11 stores, partnering with GM/DM to build program infrastructure.</li>
+                    <li>Scaled personal loyalty conversion from 1.22% to 12.07% over eight months (nearly 10x improvement), earning #1 acquisition rate YTD.</li>
+                    <li>Drove +11% comp YTD and a 40% increase in team acquisition goal attainment through proprietary KPI-based coaching methodology.</li>
+                  </ul>
+                </div>
                 <div className="role-highlight">~10x loyalty conversion improvement &middot; #1 acquisition in district YTD</div>
               </div>
             </div>
@@ -588,8 +593,14 @@ export default function Home() {
                 <div className="role-company">Branch Museum of Architecture and Design</div>
               </div>
               <div>
-                <div className="role-title">Product &amp; UX Strategist</div>
-                <div className="role-desc">Client-side digital consumer journey lead on a full web ecosystem build, translating a new brand identity into a cohesive digital experience in partnership with MullenLowe Design Studio. Authored PRDs with user stories and acceptance criteria; built interactive prototypes in React, HTML, and CSS to validate direction. Coordinated agile sprints across rebrand visual identity, CMS integration, and accessibility compliance. Work recognized in AdAge, AdForum, Communication Arts, Print Mag, and Stash.</div>
+                <div className="role-desc">
+                  <ul>
+                    <li>Client-side digital consumer journey lead on full web ecosystem build, translating new brand identity into a cohesive digital experience.</li>
+                    <li>Authored PRDs with user stories and acceptance criteria; built interactive prototypes in React/HTML/CSS to validate direction.</li>
+                    <li>Coordinated agile sprints across rebrand visual identity, CMS integration, and accessibility compliance.</li>
+                    <li>Work recognized in AdAge, AdForum, Communication Arts, Print Mag, and Stash.</li>
+                  </ul>
+                </div>
               </div>
             </div>
 
@@ -600,8 +611,12 @@ export default function Home() {
                 <div className="role-company">The Rev. Factory</div>
               </div>
               <div>
-                <div className="role-title">Creative Director &amp; AI Systems Strategist</div>
-                <div className="role-desc">Serving as Creative Director for the upcoming publication <em>Designing the Future</em>. Designed &ldquo;Digital Fluency&rdquo; model visualizations for C-suite executives &mdash; translating complex machine learning concepts into actionable strategic frameworks.</div>
+                <div className="role-desc">
+                  <ul>
+                    <li>Serving as Creative Director for the upcoming publication <em>Designing the Future</em>.</li>
+                    <li>Designed "Digital Fluency" model visualizations for C-suite executives, translating complex ML concepts into actionable strategic frameworks.</li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
@@ -645,7 +660,7 @@ export default function Home() {
             <h2 className="contact-heading" data-animate="fade-up" data-animate-delay="0">Let&rsquo;s Make<br />Something<br />Worth Doing.</h2>
             <p className="contact-body" data-animate="fade-up" data-animate-delay="80">Open to full-time brand strategy, experience design, and creative direction roles. Also available for consulting and collaborative projects. Response within 48 hours.</p>
 
-            <div className="contact-links">
+            <div className="contact-links" style={{ background: 'transparent' }}>
               <div className="contact-link-cell" data-animate="fade-up" data-animate-delay="160">
                 <div className="contact-link-label">Email</div>
                 <div style={{ fontSize: '15px', color: 'var(--black)', marginTop: '8px', cursor: 'pointer', userSelect: 'all' }}>bennpattara@gmail.com</div>

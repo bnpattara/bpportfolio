@@ -704,20 +704,31 @@ canvas#beChart {
 
 /* ── RESPONSIVE ── */
 @media (max-width: 800px) {
-  .model-header { grid-template-columns: 1fr; }
-  .header-kpis { grid-template-columns: repeat(3,1fr); grid-template-rows: 1fr; min-width: 0; }
-  .panel-inner { padding: 32px 24px; }
-  .engine-layout { grid-template-columns: 1fr; }
-  .pnl-grid { grid-template-columns: 1fr 1fr; }
-  .scenario-grid { grid-template-columns: 1fr; }
-  .npv-proof { grid-template-columns: 1fr; }
-  .model-footer { flex-direction: column; gap: 8px; text-align: center; }
-  .cost-table { font-size: 10px; }
-  .model-header { padding: 32px 24px 24px; }
-}
-@media (max-width: 540px) {
-  .act-label { font-size: 11px; }
-  .header-kpis { grid-template-columns: 1fr; }
+  .model-header { grid-template-columns: 1fr !important; padding: 32px 24px 24px !important; }
+  .header-kpis { grid-template-columns: 1fr !important; grid-template-rows: auto !important; min-width: 0 !important; }
+  .panel-inner { padding: 32px 20px !important; }
+  .engine-layout { grid-template-columns: 1fr !important; }
+  .pnl-grid { grid-template-columns: 1fr !important; }
+  .pnl-cell.wide { grid-column: span 1 !important; }
+  .scenario-grid { grid-template-columns: 1fr !important; }
+  .npv-proof { grid-template-columns: 1fr !important; }
+  .model-footer { flex-direction: column !important; gap: 12px !important; text-align: center !important; }
+  .cost-table, .cost-table thead, .cost-table tbody, .cost-table th, .cost-table td, .cost-table tr,
+  .compare-table, .compare-table thead, .compare-table tbody, .compare-table th, .compare-table td, .compare-table tr { 
+    display: block !important; 
+    width: 100% !important;
+  }
+  .cost-table thead, .compare-table thead { display: none !important; }
+  .cost-table td, .compare-table td { border-bottom: none !important; padding: 12px 0 !important; }
+  .cost-table td:first-child, .compare-table td:first-child { 
+    width: 100% !important; 
+    border-top: 1px solid var(--muted2) !important; 
+    padding-top: 20px !important; 
+    font-weight: bold !important;
+  }
+  .cost-table tr:first-child td:first-child, .compare-table tr:first-child td:first-child { border-top: none !important; }
+  .act-nav { flex-wrap: wrap !important; }
+  .act-btn { flex: 1 1 100px !important; }
 }
 </style>
 </head>

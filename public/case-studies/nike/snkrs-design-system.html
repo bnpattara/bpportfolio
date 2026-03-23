@@ -66,6 +66,17 @@
   --dur-slow: 400ms;
 }
 
+@media (max-width: 768px) {
+  body { flex-direction: column !important; }
+  .sidebar { width: 100% !important; height: auto !important; position: static !important; }
+  .main { padding: 40px 20px !important; }
+  .cover-h { font-size: 48px !important; }
+  .cover-meta { grid-template-columns: 1fr !important; }
+  .canvas { padding: 20px !important; }
+  .type-row { grid-template-columns: 1fr !important; }
+  .drop-card-grid { grid-template-columns: 1fr !important; }
+}
+
 /* =============================================
    RESET + BASE
 ============================================= */

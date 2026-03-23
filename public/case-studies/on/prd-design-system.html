@@ -141,6 +141,24 @@
     --sidebar-width:        260px;
   }
 
+  @media (max-width: 768px) {
+    body { flex-direction: column !important; }
+    .sidebar { width: 100% !important; height: auto !important; position: static !important; }
+    .main { padding: 40px 20px !important; }
+    .hero-title { font-size: 32px !important; }
+    .hero-meta { grid-template-columns: 1fr !important; }
+    .section-title { font-size: 28px !important; }
+    .subsection-title { font-size: 20px !important; }
+    .spec-table, .spec-table thead, .spec-table tbody, .spec-table th, .spec-table td, .spec-table tr { 
+      display: block !important; 
+    }
+    .spec-table thead { display: none !important; }
+    .spec-table td { border-bottom: none !important; padding: 10px 0 !important; }
+    .spec-table td:first-child { width: 100% !important; font-weight: bold !important; color: var(--color-ink-primary) !important; padding-top: 20px !important; border-top: 1px solid var(--color-border-subtle) !important; }
+    .spec-table tr:first-child td:first-child { border-top: none !important; }
+    .component-grid, .metric-grid, .persona-grid { grid-template-columns: 1fr !important; }
+  }
+
   /* ============================================================
      DARK MODE — Token Overrides
      Applied via html[data-mode="dark"]

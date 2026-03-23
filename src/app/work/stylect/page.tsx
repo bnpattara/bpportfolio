@@ -19,6 +19,7 @@ export default function StylectCaseStudy() {
       <iframe
         src="/case-studies/stylect/index.html"
         title="Stylect: Designing the Bridge Between Discovery and the Fitting Room"
+        className="responsive-iframe"
         style={{ width: "100%", height: "100%", border: "none" }}
       />
     </div>

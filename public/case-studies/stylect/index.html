@@ -162,12 +162,10 @@ body { font-family: var(--font); background: var(--white); color: var(--black); 
 .artifact-trigger:hover .artifact-toggle { color: var(--white); }
 .artifact-expand { max-height: 0; overflow: hidden; transition: max-height 700ms ease; }
 .artifact-inner { background: #0a0a0a; }
-.artifact-inner-header { display: flex; justify-content: space-between; align-items: flex-start; padding: 32px 48px 24px; border-bottom: 1px solid rgba(255,255,255,.06); }
-.artifact-inner-eyebrow { font-size: 9px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: #444; margin-bottom: 10px; }
-.artifact-inner-title { font-size: 24px; font-weight: 300; letter-spacing: .05em; text-transform: uppercase; color: var(--white); line-height: 1; }
-.artifact-close-btn { background: transparent; border: 1px solid rgba(255,255,255,.2); color: rgba(255,255,255,.5); padding: 9px 18px; font-size: 9px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; cursor: pointer; font-family: var(--font); white-space: nowrap; margin-top: 4px; }
 .artifact-iframe-wrap { width: 100%; }
 .artifact-iframe-wrap iframe { width: 100%; height: 85vh; min-height: 600px; border: none; display: block; }
+
+/* ── PROTOTYPE LAYOUT ── */
 .proto-layout { display: flex; justify-content: center; padding: 48px 0; }
 .proto-phone { width: 320px; height: 693px; border-radius: 44px; border: 8px solid #000; overflow: hidden; background: #000; box-shadow: 0 0 0 1px #e8e8e8; display: flex; justify-content: center; align-items: flex-start; }
 .proto-phone iframe { width: 375px; height: 812px; border: none; display: block; transform: scale(0.8533); transform-origin: top center; flex-shrink: 0; pointer-events: auto; }
@@ -736,13 +734,6 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
       </div>
       <div class="artifact-expand" id="art1-expand">
         <div class="artifact-inner">
-          <div class="artifact-inner-header">
-            <div>
-              <div class="artifact-inner-eyebrow">Interactive · Stylect · Design System v2</div>
-              <div class="artifact-inner-title">Molecular Design System</div>
-            </div>
-            <button class="artifact-close-btn" onclick="closeArtifact(1)">Close &uarr;</button>
-          </div>
           <div class="artifact-iframe-wrap">
             <iframe src="stylect-design-system.html" title="Stylect Molecular Design System" scrolling="yes"></iframe>
           </div>
@@ -1207,13 +1198,6 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
       </div>
       <div class="artifact-expand" id="art2-expand">
         <div class="artifact-inner">
-          <div class="artifact-inner-header">
-            <div>
-              <div class="artifact-inner-eyebrow">Interactive · Stylect · MVP Prototype</div>
-              <div class="artifact-inner-title">Full App · Three User Flows</div>
-            </div>
-            <button class="artifact-close-btn" onclick="closeArtifact(2)">Close &uarr;</button>
-          </div>
           <div class="proto-layout">
             <div class="proto-phone">
               <iframe src="stylect-app.html" title="Stylect App Prototype" scrolling="yes"></iframe>
@@ -1451,11 +1435,6 @@ function toggleArtifact(n) {
   expand.style.maxHeight = isOpen ? '0' : (n===1 ? '960px' : '960px');
   expand.dataset.open = isOpen ? 'false' : 'true';
   toggle.textContent = isOpen ? '+' : '\u00d7';
-}
-function closeArtifact(n) {
-  const expand = document.getElementById('art'+n+'-expand');
-  const toggle = document.getElementById('art'+n+'-cta');
-  expand.style.maxHeight = '0'; expand.dataset.open = 'false'; toggle.textContent = '+';
 }
 
 // RESEARCH DRAWER

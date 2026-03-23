@@ -13,12 +13,13 @@ export const metadata: Metadata = {
   },
 };
 
-export default function DieselCaseStudy() {
+export default function DieselCaseStudy(): React.ReactElement {
   return (
     <div style={{ width: "100%", height: "100dvh", background: "#fff" }}>
       <iframe
         src="/case-studies/diesel/index.html"
         title="Diesel Tokyo — Gravitational Pull"
+        className="responsive-iframe"
         style={{ width: "100%", height: "100%", border: "none" }}
       />
     </div>

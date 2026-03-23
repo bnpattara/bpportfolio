@@ -13,10 +13,10 @@ export const metadata: Metadata = {
   },
 };
 
-export default function NikeCaseStudy() {
+export default function NikeCaseStudy(): React.ReactElement {
   return (
     <div style={{ width: "100%", height: "100dvh", background: "#fff" }}>
-      <iframe
+      <iframe className="responsive-iframe"
         src="/case-studies/nike/index.html"
         title="Nike SNKRS — Confidence Hub"
         style={{ width: "100%", height: "100%", border: "none" }}

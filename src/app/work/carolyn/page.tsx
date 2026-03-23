@@ -13,10 +13,10 @@ export const metadata: Metadata = {
   },
 };
 
-export default function CarolynCaseStudy() {
+export default function CarolynCaseStudy(): React.ReactElement {
   return (
     <div style={{ width: "100%", height: "100dvh", background: "#fff" }}>
-      <iframe
+      <iframe className="responsive-iframe"
         src="/case-studies/carolyn/index.html"
         title="The Carolyn — Case Study"
         style={{ width: "100%", height: "100%", border: "none" }}

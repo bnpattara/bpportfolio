@@ -44,6 +44,14 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+h1, h2, h3, h4, h5, h6, .cs-heading, .section-title-label, .title-serif {
+  text-wrap: balance;
+}
+
+p, li, .cs-body, .role-desc, .cap-desc, .about-hero-body {
+  text-wrap: pretty;
+}
+
 /* ═══════════════════════════════════════════════════
    MAINTENANCE OVERLAY — Molecular Design System
    Full-viewport notice with backdrop blur
@@ -208,6 +216,42 @@ body {
   color: var(--black);
   border-bottom-color: var(--black);
 }
+
+@media (max-width: 768px) {
+  .nav-main {
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .nav-left, .nav-wordmark, .nav-right {
+    position: static;
+    transform: none;
+    left: auto;
+    right: auto;
+    top: auto;
+  }
+
+  /* Hide secondary navigation links on mobile to prevent overlap */
+  .nav-left a:not([href="#work"]) {
+    display: none;
+  }
+
+  .nav-left {
+    gap: 0;
+  }
+
+  .nav-wordmark {
+    font-size: 12px;
+    letter-spacing: .16em;
+  }
+
+  .nav-right a {
+    font-size: 10px;
+  }
+}
+
 
 /* IDENTITY BAR */
 #identity-bar {
@@ -467,6 +511,16 @@ body {
   border-right: 1px solid rgba(255, 255, 255, .05);
   cursor: pointer;
 }
+
+@media (max-width: 768px) {
+  .cs-card {
+    flex: 0 0 100% !important;
+    min-width: 100% !important;
+    height: auto;
+    min-height: auto;
+  }
+}
+
 
 .cs-card:last-child {
   border-right: none;
@@ -1411,9 +1465,24 @@ footer {
   background: var(--g200);
 }
 
+@media (max-width: 768px) {
+  .cap-grid {
+    background: transparent !important;
+    gap: 0 !important;
+    margin-top: -20px !important; /* Reduce space from title */
+  }
+}
+
 .cap-card {
   background: var(--white);
   padding: 28px 22px;
+}
+
+@media (max-width: 768px) {
+  .cap-card {
+    border-bottom: 1px solid var(--g200) !important;
+    padding: 24px 0 !important;
+  }
 }
 
 .cap-num {
@@ -1529,6 +1598,20 @@ footer {
   color: var(--g500);
   line-height: 1.8;
   margin-bottom: 14px;
+}
+
+.role-desc p {
+  margin-bottom: 8px;
+}
+
+.role-desc ul {
+  list-style-type: disc;
+  padding-left: 18px;
+  margin-top: 8px;
+}
+
+.role-desc li {
+  margin-bottom: 6px;
 }
 
 .role-highlight {
@@ -1959,23 +2042,35 @@ body>* {
   }
 
   /* Section rows — stack on mobile */
-  .section-row {
-    flex-direction: column;
-    gap: 24px;
+  .section-row, .cs-page-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
   }
 
-  .section-block {
-    padding: 60px 20px;
+  .section-block, .cs-page-section {
+    padding: 40px 20px !important;
   }
 
   .section-block-alt {
-    padding: 60px 20px;
+    padding: 40px 20px !important;
   }
 
   /* Capabilities 2→1 */
-  .cap-grid {
-    grid-template-columns: 1fr;
+  .cap-grid, .cs-stats-grid {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
   }
+
+
+
+  /* Responsive iframe utility */
+.responsive-iframe {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  border: none;
+}
 
   /* Experience roles */
   .role-row {
@@ -2034,16 +2129,31 @@ body>* {
     font-size: 9px;
   }
 
-  /* Blog page */
-  .blog-hero,
-  .blog-list {
-    padding-left: 20px;
-    padding-right: 20px;
+  /* About hero */
+  .about-hero {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding: 48px 20px;
   }
 
-  .blog-hero {
-    padding-top: 100px;
-    padding-bottom: 40px;
+  .about-hero-ctas {
+    justify-content: center !important;
+    width: 100%;
+  }
+
+  .featured-label {
+    font-size: 8px !important;
+    margin-bottom: 4px !important;
+  }
+
+  .featured-name {
+    font-size: 11px !important;
+    padding: 3px 8px !important;
+  }
+
+  .featured-qualifier {
+    font-size: 9px !important;
+    opacity: 0.7;
   }
 }
 
@@ -2343,6 +2453,12 @@ body>* {
     gap: 24px !important;
   }
 
+  /* Stat cards 3→1 */
+  .cs-stat-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
   /* Metric cards 4→2 */
   .cs-metric-grid {
     grid-template-columns: repeat(2, 1fr) !important;
@@ -2412,6 +2528,8 @@ body>* {
   background: #080706;
   padding-top: 52px;
   /* nav-main height - accordion fills below nav */
+  height: calc(100vh - 52px);
+  overflow: hidden;
 }
 
 .work-header {
@@ -2641,36 +2759,74 @@ body>* {
 
 /* ─── PAGE TRANSITION — legacy iris (unused, kept for reference) ─── */
 
-/* Mobile: stack vertically */
+/* Mobile: 2x3 Grid instead of accordion */
 @media (max-width: 768px) {
   .accordion-panels {
-    flex-direction: column;
-    height: auto;
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    grid-template-rows: repeat(3, 1fr) !important;
+    height: calc(100vh - 52px) !important;
+    overflow: hidden;
   }
 
   .accordion-panel {
     flex: none !important;
-    height: 80px;
-    transition: height 500ms cubic-bezier(0.4, 0, 0.2, 1);
+    width: 100% !important;
+    height: 100% !important;
+    transition: none !important;
+    border: 0.5px solid rgba(255,255,255,0.1);
   }
 
-  .accordion-panel--expanded {
-    height: 380px;
+  .accordion-panel--expanded,
+  .accordion-panel--compressed {
+    flex: none !important;
+    opacity: 1 !important;
   }
 
   .accordion-collapsed {
-    padding: 0 12px 16px;
-    justify-content: center;
+    opacity: 1 !important;
+    padding: 0 8px 12px !important;
+    justify-content: flex-end !important;
+  }
+
+  .accordion-num {
+    display: block !important;
+    bottom: auto !important;
+    top: 12px !important;
+    left: 12px !important;
+    transform: none !important;
+    font-size: 8px !important;
+    opacity: 0.4 !important;
   }
 
   .accordion-collapsed-title {
-    font-size: 11px;
-    -webkit-line-clamp: 1;
-    line-clamp: 1;
+    font-size: 10px !important;
+    letter-spacing: .08em !important;
+    max-width: 100% !important;
+    text-align: center !important;
+  }
+
+  /* Hide expanded content on mobile as it's now a static grid */
+  .accordion-content {
+    display: none !important;
   }
 }
 
 
+
+/* ─── INTERACTIVE ARTIFACTS — global shrink ─── */
+.artifact-trigger {
+  padding: 16px 48px !important;
+}
+
+@media (max-width: 768px) {
+  .artifact-trigger {
+    padding: 14px 20px !important;
+  }
+  .artifact-name {
+    font-size: 13px !important;
+  }
+}
 
 /* ─── HERO EXPAND TRANSITION — case study pages ─── */
 /* Overlay starts at clicked panel rect, expands to full viewport, then fades out */

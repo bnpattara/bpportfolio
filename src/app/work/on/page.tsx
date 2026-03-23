@@ -13,10 +13,10 @@ export const metadata: Metadata = {
   },
 };
 
-export default function OnApexCaseStudy() {
+export default function OnApexCaseStudy(): React.ReactElement {
   return (
     <div style={{ width: "100%", height: "100dvh", background: "#fff" }}>
-      <iframe
+      <iframe className="responsive-iframe"
         src="/case-studies/on/index.html"
         title="On Apex — Community Platform"
         style={{ width: "100%", height: "100%", border: "none" }}
