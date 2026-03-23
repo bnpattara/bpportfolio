@@ -218,9 +218,27 @@ body { font-family: var(--font); background: var(--white); color: var(--black); 
 .artifact-close-btn { background: transparent; border: 1px solid rgba(255,255,255,.2); color: rgba(255,255,255,.5); padding: 9px 18px; font-size: 9px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; cursor: pointer; font-family: var(--font); white-space: nowrap; margin-top: 4px; }
 .artifact-iframe-wrap { width: 100%; }
 .artifact-iframe-wrap iframe { width: 100%; height: 85vh; min-height: 600px; border: none; display: block; }
-.proto-layout { display: flex; justify-content: center; padding: 48px 0; }
-.proto-phone { width: 320px; height: 693px; border-radius: 44px; border: 8px solid #000; overflow: hidden; background: #000; box-shadow: 0 0 0 1px #e8e8e8; display: flex; justify-content: center; align-items: flex-start; }
+.proto-section { padding: 80px 0; }
+.proto-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+.proto-phone { position: sticky; top: 40px; width: 320px; height: 693px; border-radius: 44px; border: 8px solid #000; overflow: hidden; background: #000; box-shadow: 0 0 0 1px #e8e8e8; display: flex; justify-content: center; align-items: flex-start; margin: 0 auto; }
 .proto-phone iframe { width: 375px; height: 812px; border: none; display: block; transform: scale(0.8533); transform-origin: top center; flex-shrink: 0; pointer-events: auto; }
+.proto-steps { display: flex; flex-direction: column; gap: 0; }
+.proto-step { padding: 24px 0; border-bottom: 1px solid var(--g200); cursor: pointer; transition: opacity 0.2s; }
+.proto-step:first-child { border-top: 1px solid var(--g200); }
+.proto-step-num { font-size: 9px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--g300); margin-bottom: 8px; font-family: var(--mono, 'DM Mono', monospace); }
+.proto-step-title { font-size: 14px; font-weight: 500; color: var(--black); margin-bottom: 6px; letter-spacing: -.01em; }
+.proto-step-desc { font-size: 13px; font-weight: 300; color: var(--g500); line-height: 1.65; }
+.proto-step.active .proto-step-num { color: var(--black); }
+.proto-step.active .proto-step-title { color: var(--black); }
+.proto-step.active { opacity: 1; }
+.proto-step:not(.active) { opacity: 0.5; }
+.proto-step:hover:not(.active) { opacity: 0.75; }
+@media (max-width: 768px) {
+  .proto-layout { grid-template-columns: 1fr; gap: 40px; }
+  .proto-phone { position: static; }
+  .proto-step:not(.active) { opacity: 1; }
+  .proto-step:hover:not(.active) { opacity: 1; }
+}
 
 /* ── USER FLOW CAROUSEL ── */
 .flow-carousel { background: var(--g100); padding: 72px 56px; border-top: 1px solid var(--g200); border-bottom: 1px solid var(--g200); }
@@ -432,7 +450,7 @@ footer { padding: 32px 48px; border-top: 1px solid var(--g200); display: flex; j
     <a class="cs-sidenav-link" data-target="cs-product" onclick="scrollToSection('cs-product')"><span class="cs-sidenav-num">04</span><span class="cs-sidenav-text">The Product</span></a>
     <a class="cs-sidenav-link" data-target="cs-design" onclick="scrollToSection('cs-design')"><span class="cs-sidenav-num">05</span><span class="cs-sidenav-text">Design System</span></a>
     <a class="cs-sidenav-link" data-target="cs-screens" onclick="scrollToSection('cs-screens')"><span class="cs-sidenav-num">06</span><span class="cs-sidenav-text">Key Screens</span></a>
-    <a class="cs-sidenav-link" data-target="cs-flow" onclick="scrollToSection('cs-flow')"><span class="cs-sidenav-num">—</span><span class="cs-sidenav-text">User Flow</span></a>
+    <a class="cs-sidenav-link" data-target="prototype" onclick="scrollToSection('prototype')"><span class="cs-sidenav-num">—</span><span class="cs-sidenav-text">Prototype</span></a>
     <a class="cs-sidenav-link" data-target="cs-decisions" onclick="scrollToSection('cs-decisions')"><span class="cs-sidenav-num">07</span><span class="cs-sidenav-text">Decision Log</span></a>
     <a class="cs-sidenav-link" data-target="cs-outcome" onclick="scrollToSection('cs-outcome')"><span class="cs-sidenav-num">08</span><span class="cs-sidenav-text">Outcome</span></a>
     <div class="cs-sidenav-exec">
@@ -1153,208 +1171,65 @@ footer { padding: 32px 48px; border-top: 1px solid var(--g200); display: flex; j
       </div>
     </section>
 
-    <!-- ══ APP PROTOTYPE ARTIFACT ══ -->
-    <div class="artifact-strip" id="artifact-app">
-      <div class="artifact-trigger" id="art2-trigger" onclick="toggleArtifact(2)">
-        <div class="artifact-left">
-          <div class="artifact-badge"><span>Interactive Artifact</span></div>
-          <div class="artifact-meta">
-            <div class="artifact-name">On Apex · App Prototype</div>
-            <div class="artifact-desc">14 screens · Full flow · Live run simulation · Split mode · Haptic API · Carousels · Toasts · All PRD features</div>
+    <!-- PROTOTYPE + WALKTHROUGH -->
+    <section class="proto-section" id="prototype" data-cs-section="prototype">
+      <div class="proto-layout">
+        <div class="proto-phone">
+          <iframe src="/work/on-apex-app" title="On Apex App Prototype" scrolling="yes"></iframe>
+        </div>
+        <div class="proto-steps">
+          <div class="proto-step" data-step="1">
+            <div class="proto-step-num">01</div>
+            <div class="proto-step-body">
+              <div class="proto-step-title">Open App</div>
+              <div class="proto-step-desc">The app opens to white mode. The weekly km number resolves before anything else &mdash; at 116px in Bebas Neue, it earns its authority before the rest of the screen loads. Staggered reveal animations (greeting at 60ms, name at 100ms, number at 160ms) give the screen weight arriving, not popping in. The week strip, recent runs, and shoe nudge follow in order of importance. Every element has a single job.</div>
+            </div>
+          </div>
+          <div class="proto-step" data-step="2">
+            <div class="proto-step-num">02</div>
+            <div class="proto-step-body">
+              <div class="proto-step-title">Pre-Run</div>
+              <div class="proto-step-desc">The Start button in the nav goes to Pre-Run, not directly to the Active Run clock. This was the missing step in every prior version of the PRD. GPS lock animation plays &mdash; expanding ring pulses at 0.55s intervals. The shoe selector defaults to the user&rsquo;s registered shoe but can be changed via a sheet modal. The Start button remains greyed out until GPS locks. The transition from Pre-Run to Active Run is the moment the world turns black.</div>
+            </div>
+          </div>
+          <div class="proto-step" data-step="3">
+            <div class="proto-step-num">03</div>
+            <div class="proto-step-body">
+              <div class="proto-step-title">Active Run</div>
+              <div class="proto-step-desc">The run screen is black. A scanning line at 3.4s interval gives the screen live-data signal. Pace fluctuates &plusmn;8 sec/km per tick. HR drifts &plusmn;4 bpm. Cadence &plusmn;3 spm. Zone bars update in real time as the simulation runs. The Dynamic Island expands with a blinking volt dot and the live clock. Tapping the map opens a full-screen overlay with scale-origin animation. The Finish button is volt-on-black &mdash; the only bright thing on the screen.</div>
+            </div>
+          </div>
+          <div class="proto-step" data-step="4">
+            <div class="proto-step-num">04</div>
+            <div class="proto-step-body">
+              <div class="proto-step-title">Post-Run</div>
+              <div class="proto-step-desc">The world returns to white. The post-run summary is an editorial screen &mdash; designed to be screenshotted and shared. PR badge volt-pop animation arrives 750ms after mount. The shoe is present in every summary &mdash; mileage bar, km remaining. If the runner is near threshold, the bar is amber. No prompt, no CTA. Just the data. The share sheet generates a branded card with ghost type and a volt On Apex tag. Toast fires on save.</div>
+            </div>
+          </div>
+          <div class="proto-step" data-step="5">
+            <div class="proto-step-num">05</div>
+            <div class="proto-step-body">
+              <div class="proto-step-title">Shoe Registration</div>
+              <div class="proto-step-desc">Flow 2 from the PRD: Order Sync (auto-detected shoes from On account with order numbers) &rarr; Name It (nickname input, carries through to run summaries) &rarr; Set Goal (5 km target options, mileage bar preview updates live) &rarr; All Set (confirmation card with volt-on-black treatment and full spec summary). Toast fires: &ldquo;Shoe registered ✓&rdquo;. Accessible from Garage via &ldquo;+ Add Shoe&rdquo;.</div>
+            </div>
+          </div>
+          <div class="proto-step" data-step="6">
+            <div class="proto-step-num">06</div>
+            <div class="proto-step-body">
+              <div class="proto-step-title">Club RSVP</div>
+              <div class="proto-step-desc">Community Hub &rarr; Clubs tab. Tap a club card to open the detail sheet. Leaderboard shows ranked members with your position highlighted. Next club run displayed with location and headcount. RSVP button fires a medium haptic and a toast: &ldquo;You&rsquo;re in! See you Saturday ✓&rdquo;. The community loop: run &rarr; log &rarr; rank &rarr; coordinate &rarr; run again. No follower counts. No KOM. No gamification chrome.</div>
+            </div>
+          </div>
+          <div class="proto-step" data-step="7">
+            <div class="proto-step-num">07</div>
+            <div class="proto-step-body">
+              <div class="proto-step-title">Retire + Replace</div>
+              <div class="proto-step-desc">When a shoe crosses 75% of its mileage goal, the bar turns amber. At 90%, red. The retire prompt appears in the Garage as an inverted black card with an amber dot &mdash; completion, not alarm. Two options: &ldquo;Shop on.com &rarr;&rdquo; (deep link, no in-app checkout, ever) and &ldquo;Cyclon ♻&rdquo; (circular return program). The Cyclon sheet shows the subscription details and a join CTA. Toast fires on join: &ldquo;Cyclon request sent ♻&rdquo;. This is the entire commerce strategy &mdash; contextual, earned, never promotional.</div>
+            </div>
           </div>
         </div>
-        <div class="artifact-right"><span class="artifact-toggle" id="art2-cta">+</span></div>
       </div>
-      <div class="artifact-expand" id="art2-expand">
-        <div class="artifact-inner">
-          <div class="proto-layout">
-            <div class="proto-phone">
-              <!-- TODO: verify /work/on-apex-app route is live before deploy -->
-              <iframe src="/work/on-apex-app" title="On Apex App Prototype" scrolling="yes"></iframe>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="journey-map-mobile">
-      <div class="journey-step active" onclick="toggleJourney(this)">
-        <div class="journey-header"><span><span class="journey-num">01</span>Home / Dashboard</span><span class="token-icon">+</span></div>
-        <div class="journey-panel">
-          <p class="journey-desc">The app opens to white mode. The weekly km number resolves before anything else — at 116px in Bebas Neue, it earns its authority before the rest of the screen loads.</p>
-        </div>
-      </div>
-      <div class="journey-step" onclick="toggleJourney(this)">
-        <div class="journey-header"><span><span class="journey-num">02</span>Pre-Run Screen</span><span class="token-icon">+</span></div>
-        <div class="journey-panel">
-          <p class="journey-desc">The Start button in the nav goes to Pre-Run, not directly to the Active Run clock. GPS lock animation plays — expanding ring pulses at 0.55s intervals.</p>
-        </div>
-      </div>
-      <div class="journey-step" onclick="toggleJourney(this)">
-        <div class="journey-header"><span><span class="journey-num">03</span>Active Run</span><span class="token-icon">+</span></div>
-        <div class="journey-panel">
-          <p class="journey-desc">The run screen is black mode. A scanning line at 3.4s interval gives the screen live-data signal. Pace fluctuates ±8 sec/km per tick.</p>
-        </div>
-      </div>
-      <div class="journey-step" onclick="toggleJourney(this)">
-        <div class="journey-header"><span><span class="journey-num">04</span>Post-Run Summary</span><span class="token-icon">+</span></div>
-        <div class="journey-panel">
-          <p class="journey-desc">The world returns to white. The post-run summary is an editorial screen — designed to be screenshotted and shared on social platforms.</p>
-        </div>
-      </div>
-      <div class="journey-step" onclick="toggleJourney(this)">
-        <div class="journey-header"><span><span class="journey-num">05</span>Shoe Registration</span><span class="token-icon">+</span></div>
-        <div class="journey-panel">
-          <p class="journey-desc">Four steps to sync order history or manually register. Every run is attributed to a specific model to track wear and tear accurately.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- ══ USER FLOW CAROUSEL ══ -->
-    <div class="flow-carousel" id="cs-flow" data-cs-section="cs-flow">
-      <div class="flow-head">
-        <div class="flow-title">User Flows · Critical Paths</div>
-        <div class="flow-counter" id="flow-counter">01 <span>/ 07</span></div>
-      </div>
-      <div class="flow-track">
-        <div class="flow-steps">
-          <div class="flow-step active" onclick="showFlow(0)">
-            <div class="flow-step-num">01</div>
-            <div class="flow-step-label">Open App</div>
-          </div>
-          <div class="flow-step" onclick="showFlow(1)">
-            <div class="flow-step-num">02</div>
-            <div class="flow-step-label">Pre-Run</div>
-          </div>
-          <div class="flow-step" onclick="showFlow(2)">
-            <div class="flow-step-num">03</div>
-            <div class="flow-step-label">Active Run</div>
-          </div>
-          <div class="flow-step" onclick="showFlow(3)">
-            <div class="flow-step-num">04</div>
-            <div class="flow-step-label">Post-Run</div>
-          </div>
-          <div class="flow-step" onclick="showFlow(4)">
-            <div class="flow-step-num">05</div>
-            <div class="flow-step-label">Shoe Registration</div>
-          </div>
-          <div class="flow-step" onclick="showFlow(5)">
-            <div class="flow-step-num">06</div>
-            <div class="flow-step-label">Club RSVP</div>
-          </div>
-          <div class="flow-step" onclick="showFlow(6)">
-            <div class="flow-step-num">07</div>
-            <div class="flow-step-label">Retire + Replace</div>
-          </div>
-        </div>
-        <div>
-
-          <div class="flow-panel active" id="fp-0">
-            <div class="flow-panel-title">Home / Dashboard — <em>the daily surface</em></div>
-            <div class="flow-panel-meta">
-              <span class="flow-panel-tag active">Home</span>
-              <span class="flow-panel-tag">White Mode</span>
-              <span class="flow-panel-tag">Architectural Register</span>
-            </div>
-            <p class="flow-panel-body">The app opens to white mode. The weekly km number resolves before anything else — at 116px in Bebas Neue, it earns its authority before the rest of the screen loads. Staggered reveal animations (greeting at 60ms, name at 100ms, number at 160ms) give the screen weight arriving, not popping in. The week strip, recent runs, and shoe nudge follow in order of importance. Every element has a single job.</p>
-            <div class="flow-nav">
-              <button class="flow-btn" onclick="prevFlow()">← Prev</button>
-              <button class="flow-btn" onclick="nextFlow()">Next →</button>
-            </div>
-          </div>
-
-          <div class="flow-panel" id="fp-1">
-            <div class="flow-panel-title">Pre-Run Screen — <em>the missing step</em></div>
-            <div class="flow-panel-meta">
-              <span class="flow-panel-tag active">Pre-Run</span>
-              <span class="flow-panel-tag">Black Mode Begins</span>
-              <span class="flow-panel-tag">GPS Lock</span>
-              <span class="flow-panel-tag">Shoe Select</span>
-            </div>
-            <p class="flow-panel-body">The Start button in the nav goes to Pre-Run, not directly to the Active Run clock. This was the missing step in every prior version of the PRD. GPS lock animation plays — expanding ring pulses at 0.55s intervals. The shoe selector defaults to the user's registered shoe but can be changed via a sheet modal. The Start button remains greyed out until GPS locks. The transition from Pre-Run to Active Run is the moment the world turns black.</p>
-            <div class="flow-nav">
-              <button class="flow-btn" onclick="prevFlow()">← Prev</button>
-              <button class="flow-btn" onclick="nextFlow()">Next →</button>
-            </div>
-          </div>
-
-          <div class="flow-panel" id="fp-2">
-            <div class="flow-panel-title">Active Run — <em>instrument-grade cockpit</em></div>
-            <div class="flow-panel-meta">
-              <span class="flow-panel-tag active">Active Run</span>
-              <span class="flow-panel-tag">Black Mode</span>
-              <span class="flow-panel-tag">Live Simulation</span>
-            </div>
-            <p class="flow-panel-body">The run screen is black. A scanning line at 3.4s interval gives the screen live-data signal. Pace fluctuates ±8 sec/km per tick. HR drifts ±4 bpm. Cadence ±3 spm. Zone bars update in real time as the simulation runs. The Dynamic Island expands with a blinking volt dot and the live clock. Tapping the map opens a full-screen overlay with scale-origin animation. The Finish button is volt-on-black — the only bright thing on the screen.</p>
-            <div class="flow-nav">
-              <button class="flow-btn" onclick="prevFlow()">← Prev</button>
-              <button class="flow-btn" onclick="nextFlow()">Next →</button>
-            </div>
-          </div>
-
-          <div class="flow-panel" id="fp-3">
-            <div class="flow-panel-title">Post-Run — <em>the shareable moment</em></div>
-            <div class="flow-panel-meta">
-              <span class="flow-panel-tag active">Post-Run</span>
-              <span class="flow-panel-tag">White Mode Returns</span>
-              <span class="flow-panel-tag">Editorial</span>
-              <span class="flow-panel-tag">Commerce Hook</span>
-            </div>
-            <p class="flow-panel-body">The world returns to white. The post-run summary is an editorial screen — designed to be screenshotted and shared. PR badge volt-pop animation arrives 750ms after mount. The shoe is present in every summary — mileage bar, km remaining. If the runner is near threshold, the bar is amber. No prompt, no CTA. Just the data. The share sheet generates a branded card with ghost type and a volt On Apex tag. Toast fires on save.</p>
-            <div class="flow-nav">
-              <button class="flow-btn" onclick="prevFlow()">← Prev</button>
-              <button class="flow-btn" onclick="nextFlow()">Next →</button>
-            </div>
-          </div>
-
-          <div class="flow-panel" id="fp-4">
-            <div class="flow-panel-title">Shoe Registration — <em>Flow 2, fully built</em></div>
-            <div class="flow-panel-meta">
-              <span class="flow-panel-tag active">Shoe Reg</span>
-              <span class="flow-panel-tag">Order Sync</span>
-              <span class="flow-panel-tag">4 Steps</span>
-              <span class="flow-panel-tag">Toast on Complete</span>
-            </div>
-            <p class="flow-panel-body">Flow 2 from the PRD: Order Sync (auto-detected shoes from On account with order numbers) → Name It (nickname input, carries through to run summaries) → Set Goal (5 km target options, mileage bar preview updates live) → All Set (confirmation card with volt-on-black treatment and full spec summary). Toast fires: "Shoe registered ✓". Accessible from Garage via "+ Add Shoe".</p>
-            <div class="flow-nav">
-              <button class="flow-btn" onclick="prevFlow()">← Prev</button>
-              <button class="flow-btn" onclick="nextFlow()">Next →</button>
-            </div>
-          </div>
-
-          <div class="flow-panel" id="fp-5">
-            <div class="flow-panel-title">Club RSVP — <em>community in action</em></div>
-            <div class="flow-panel-meta">
-              <span class="flow-panel-tag active">Clubs</span>
-              <span class="flow-panel-tag">Leaderboard</span>
-              <span class="flow-panel-tag">RSVP Sheet</span>
-              <span class="flow-panel-tag">Toast on Join</span>
-            </div>
-            <p class="flow-panel-body">Community Hub → Clubs tab. Tap a club card to open the detail sheet. Leaderboard shows ranked members with your position highlighted. Next club run displayed with location and headcount. RSVP button fires a medium haptic and a toast: "You're in! See you Saturday ✓". The community loop: run → log → rank → coordinate → run again. No follower counts. No KOM. No gamification chrome.</p>
-            <div class="flow-nav">
-              <button class="flow-btn" onclick="prevFlow()">← Prev</button>
-              <button class="flow-btn" onclick="nextFlow()">Next →</button>
-            </div>
-          </div>
-
-          <div class="flow-panel" id="fp-6">
-            <div class="flow-panel-title">Retire + Replace — <em>the commerce loop</em></div>
-            <div class="flow-panel-meta">
-              <span class="flow-panel-tag active">Garage</span>
-              <span class="flow-panel-tag">Amber Signal</span>
-              <span class="flow-panel-tag">Deep Link Only</span>
-              <span class="flow-panel-tag">Cyclon Option</span>
-            </div>
-            <p class="flow-panel-body">When a shoe crosses 75% of its mileage goal, the bar turns amber. At 90%, red. The retire prompt appears in the Garage as an inverted black card with an amber dot — completion, not alarm. Two options: "Shop on.com →" (deep link, no in-app checkout, ever) and "Cyclon ♻" (circular return program). The Cyclon sheet shows the subscription details and a join CTA. Toast fires on join: "Cyclon request sent ♻". This is the entire commerce strategy — contextual, earned, never promotional.</p>
-            <div class="flow-nav">
-              <button class="flow-btn" onclick="prevFlow()">← Prev</button>
-              <button class="flow-btn" onclick="nextFlow()">Next →</button>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </div>
+    </section>
 
     <!-- ══ 07 DECISION LOG ══ -->
     <section class="cs-section" id="cs-decisions" data-cs-section="cs-decisions">
@@ -1573,20 +1448,6 @@ function toggleArtifact(n) {
   toggle.textContent = isOpen ? '+' : '\u00d7';
 }
 
-// USER FLOW CAROUSEL
-let currentFlow = 0;
-const totalFlow = 7;
-function showFlow(n) {
-  document.querySelectorAll('.flow-step').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.flow-panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.flow-step')[n].classList.add('active');
-  document.getElementById('fp-'+n).classList.add('active');
-  const num = String(n+1).padStart(2,'0');
-  document.getElementById('flow-counter').innerHTML = num + ' <span>/ 07</span>';
-  currentFlow = n;
-}
-function nextFlow() { showFlow((currentFlow+1) % totalFlow); }
-function prevFlow() { showFlow((currentFlow-1+totalFlow) % totalFlow); }
 
 function toggleToken(el) {
   const item = el.parentElement;
@@ -1595,6 +1456,22 @@ function toggleToken(el) {
 function toggleJourney(el) {
   el.classList.toggle('active');
 }
+</script>
+<script>
+(function() {
+  const steps = document.querySelectorAll('.proto-step');
+  if (!steps.length) return;
+  steps[0].classList.add('active');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        steps.forEach(s => s.classList.remove('active'));
+        e.target.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
+  steps.forEach(s => obs.observe(s));
+})();
 </script>
 </body>
 </html>
