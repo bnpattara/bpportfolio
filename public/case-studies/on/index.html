@@ -1178,49 +1178,49 @@ footer { padding: 32px 48px; border-top: 1px solid var(--g200); display: flex; j
           <iframe src="/work/on-apex-app" title="On Apex App Prototype" scrolling="yes"></iframe>
         </div>
         <div class="proto-steps">
-          <div class="proto-step" data-step="1">
+          <div class="proto-step" data-step="1" data-src="/work/on-apex-app"><!-- TODO: replace with on-app.html#screen-N once anchor ids are added -->
             <div class="proto-step-num">01</div>
             <div class="proto-step-body">
               <div class="proto-step-title">Open App</div>
               <div class="proto-step-desc">The app opens to white mode. The weekly km number resolves before anything else &mdash; at 116px in Bebas Neue, it earns its authority before the rest of the screen loads. Staggered reveal animations (greeting at 60ms, name at 100ms, number at 160ms) give the screen weight arriving, not popping in. The week strip, recent runs, and shoe nudge follow in order of importance. Every element has a single job.</div>
             </div>
           </div>
-          <div class="proto-step" data-step="2">
+          <div class="proto-step" data-step="2" data-src="/work/on-apex-app"><!-- TODO: replace with on-app.html#screen-N once anchor ids are added -->
             <div class="proto-step-num">02</div>
             <div class="proto-step-body">
               <div class="proto-step-title">Pre-Run</div>
               <div class="proto-step-desc">The Start button in the nav goes to Pre-Run, not directly to the Active Run clock. This was the missing step in every prior version of the PRD. GPS lock animation plays &mdash; expanding ring pulses at 0.55s intervals. The shoe selector defaults to the user&rsquo;s registered shoe but can be changed via a sheet modal. The Start button remains greyed out until GPS locks. The transition from Pre-Run to Active Run is the moment the world turns black.</div>
             </div>
           </div>
-          <div class="proto-step" data-step="3">
+          <div class="proto-step" data-step="3" data-src="/work/on-apex-app"><!-- TODO: replace with on-app.html#screen-N once anchor ids are added -->
             <div class="proto-step-num">03</div>
             <div class="proto-step-body">
               <div class="proto-step-title">Active Run</div>
               <div class="proto-step-desc">The run screen is black. A scanning line at 3.4s interval gives the screen live-data signal. Pace fluctuates &plusmn;8 sec/km per tick. HR drifts &plusmn;4 bpm. Cadence &plusmn;3 spm. Zone bars update in real time as the simulation runs. The Dynamic Island expands with a blinking volt dot and the live clock. Tapping the map opens a full-screen overlay with scale-origin animation. The Finish button is volt-on-black &mdash; the only bright thing on the screen.</div>
             </div>
           </div>
-          <div class="proto-step" data-step="4">
+          <div class="proto-step" data-step="4" data-src="/work/on-apex-app"><!-- TODO: replace with on-app.html#screen-N once anchor ids are added -->
             <div class="proto-step-num">04</div>
             <div class="proto-step-body">
               <div class="proto-step-title">Post-Run</div>
               <div class="proto-step-desc">The world returns to white. The post-run summary is an editorial screen &mdash; designed to be screenshotted and shared. PR badge volt-pop animation arrives 750ms after mount. The shoe is present in every summary &mdash; mileage bar, km remaining. If the runner is near threshold, the bar is amber. No prompt, no CTA. Just the data. The share sheet generates a branded card with ghost type and a volt On Apex tag. Toast fires on save.</div>
             </div>
           </div>
-          <div class="proto-step" data-step="5">
+          <div class="proto-step" data-step="5" data-src="/work/on-apex-app"><!-- TODO: replace with on-app.html#screen-N once anchor ids are added -->
             <div class="proto-step-num">05</div>
             <div class="proto-step-body">
               <div class="proto-step-title">Shoe Registration</div>
               <div class="proto-step-desc">Flow 2 from the PRD: Order Sync (auto-detected shoes from On account with order numbers) &rarr; Name It (nickname input, carries through to run summaries) &rarr; Set Goal (5 km target options, mileage bar preview updates live) &rarr; All Set (confirmation card with volt-on-black treatment and full spec summary). Toast fires: &ldquo;Shoe registered ✓&rdquo;. Accessible from Garage via &ldquo;+ Add Shoe&rdquo;.</div>
             </div>
           </div>
-          <div class="proto-step" data-step="6">
+          <div class="proto-step" data-step="6" data-src="/work/on-apex-app"><!-- TODO: replace with on-app.html#screen-N once anchor ids are added -->
             <div class="proto-step-num">06</div>
             <div class="proto-step-body">
               <div class="proto-step-title">Club RSVP</div>
               <div class="proto-step-desc">Community Hub &rarr; Clubs tab. Tap a club card to open the detail sheet. Leaderboard shows ranked members with your position highlighted. Next club run displayed with location and headcount. RSVP button fires a medium haptic and a toast: &ldquo;You&rsquo;re in! See you Saturday ✓&rdquo;. The community loop: run &rarr; log &rarr; rank &rarr; coordinate &rarr; run again. No follower counts. No KOM. No gamification chrome.</div>
             </div>
           </div>
-          <div class="proto-step" data-step="7">
+          <div class="proto-step" data-step="7" data-src="/work/on-apex-app"><!-- TODO: replace with on-app.html#screen-N once anchor ids are added -->
             <div class="proto-step-num">07</div>
             <div class="proto-step-body">
               <div class="proto-step-title">Retire + Replace</div>
@@ -1460,17 +1460,17 @@ function toggleJourney(el) {
 <script>
 (function() {
   const steps = document.querySelectorAll('.proto-step');
-  if (!steps.length) return;
+  const iframe = document.querySelector('.proto-phone iframe');
+  if (!steps.length || !iframe) return;
   steps[0].classList.add('active');
-  const obs = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        steps.forEach(s => s.classList.remove('active'));
-        e.target.classList.add('active');
-      }
+  steps.forEach(step => {
+    step.addEventListener('click', () => {
+      steps.forEach(s => s.classList.remove('active'));
+      step.classList.add('active');
+      const src = step.dataset.src;
+      if (src) iframe.src = src;
     });
-  }, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
-  steps.forEach(s => obs.observe(s));
+  });
 })();
 </script>
 </body>
