@@ -2595,7 +2595,7 @@ body>* {
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 0 24px 48px;
+  padding: 0 24px 64px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -2614,16 +2614,11 @@ body>* {
   font-size: 11px;
   font-weight: 600;
   letter-spacing: .12em;
-  line-height: 1.2;
+  line-height: 1.4;
   color: rgba(255, 255, 255, .9);
   text-align: center;
   text-transform: uppercase;
   max-width: 100%;
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  line-clamp: 3;
 }
 
 /* ── Card number ── */
