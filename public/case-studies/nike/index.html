@@ -135,21 +135,24 @@ body{font-family:var(--font);background:var(--white);color:var(--black);line-hei
 .artifact-iframe-wrap iframe{width:100%;height:85vh;min-height:600px;border:none;display:block;}
 .proto-section { padding: 80px 0; }
 .proto-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
-.proto-phone { position: sticky; top: 40px; width: 320px; height: 693px; border-radius: 44px; border: 8px solid #000; overflow: hidden; background: #000; box-shadow: 0 0 0 1px #e8e8e8; display: flex; justify-content: center; align-items: flex-start; }
+.proto-phone { position: sticky; top: 40px; width: 320px; height: 693px; border-radius: 44px; border: 8px solid #000; overflow: hidden; background: #000; box-shadow: 0 0 0 1px #e8e8e8; display: flex; justify-content: center; align-items: flex-start; margin: 0 auto; }
 .proto-phone iframe { width: 375px; height: 812px; border: none; display: block; transform: scale(0.8533); transform-origin: top center; flex-shrink: 0; pointer-events: auto; }
 .proto-steps { display: flex; flex-direction: column; gap: 0; }
-.proto-step { padding: 24px 0; border-bottom: 1px solid var(--g200); cursor: default; transition: opacity 0.2s; }
+.proto-step { padding: 24px 0; border-bottom: 1px solid var(--g200); cursor: pointer; transition: opacity 0.2s; }
 .proto-step:first-child { border-top: 1px solid var(--g200); }
 .proto-step-num { font-size: 9px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--g300); margin-bottom: 8px; font-family: var(--mono, 'DM Mono', monospace); }
 .proto-step-title { font-size: 14px; font-weight: 500; color: var(--black); margin-bottom: 6px; letter-spacing: -.01em; }
 .proto-step-desc { font-size: 13px; font-weight: 300; color: var(--g500); line-height: 1.65; }
 .proto-step.active .proto-step-num { color: var(--black); }
 .proto-step.active .proto-step-title { color: var(--black); }
-.proto-step:not(.active) { opacity: 0.4; }
+.proto-step.active { opacity: 1; }
+.proto-step:not(.active) { opacity: 0.5; }
+.proto-step:hover:not(.active) { opacity: 0.75; }
 @media (max-width: 768px) {
   .proto-layout { grid-template-columns: 1fr; gap: 40px; }
   .proto-phone { position: static; }
   .proto-step:not(.active) { opacity: 1; }
+  .proto-step:hover:not(.active) { opacity: 1; }
 }
   /* Journey Map */
   .journey-section { padding: 80px 48px; border-top: 1px solid var(--g200); border-bottom: 1px solid var(--g200); background: var(--white); }
@@ -305,6 +308,9 @@ footer{border-top:1px solid var(--g200);padding:32px 48px;display:flex;align-ite
 </style>
 </head>
 <body>
+<!-- IMAGE AUDIT
+  1. src="nike_hero_brand_identity.webp" — NEEDS VERIFICATION (relative path, hero background)
+-->
 <nav id="site-nav">
   <div class="nav-main">
     <div class="nav-left"><a href="/" target="_parent">Work</a><a href="/#about" target="_parent">About</a></div>
@@ -567,35 +573,36 @@ footer{border-top:1px solid var(--g200);padding:32px 48px;display:flex;align-ite
       <iframe src="snkrs-app.html" title="Nike SNKRS App Prototype" scrolling="yes"></iframe>
     </div>
     <div class="proto-steps">
-      <div class="proto-step" data-step="1">
+      <!-- TODO: Replace data-src values with actual per-screen Figma embed URLs -->
+      <div class="proto-step" data-step="1" data-src="snkrs-app.html">
         <div class="proto-step-num">01</div>
         <div class="proto-step-body">
           <div class="proto-step-title">Feed Discovery</div>
           <div class="proto-step-desc">The app opens to a dark feed. The Confidence Drop card leads &mdash; darker background, volt chip, lock icon, challenge CTA &mdash; establishes the access model before mechanics. The live drop below uses &ldquo;Style Gym Ready&rdquo; to signal styling context. None of these compete. They sequence.</div>
         </div>
       </div>
-      <div class="proto-step" data-step="2">
+      <div class="proto-step" data-step="2" data-src="snkrs-app.html"><!-- TODO: Product Page screen URL -->
         <div class="proto-step-num">02</div>
         <div class="proto-step-body">
           <div class="proto-step-title">Product Page</div>
           <div class="proto-step-desc">Taller hero image, occasion-first context pills sit directly on the image. The Confidence Score is the first data point after the name. Every element earns its position through documented product decisions.</div>
         </div>
       </div>
-      <div class="proto-step" data-step="3">
+      <div class="proto-step" data-step="3" data-src="snkrs-app.html"><!-- TODO: Style Gym screen URL -->
         <div class="proto-step-num">03</div>
         <div class="proto-step-body">
           <div class="proto-step-title">Style Gym</div>
           <div class="proto-step-desc">The Wardrobe Insight card names the specific gap this shoe closes. Three outfit rows follow with shoppable Nike links. &ldquo;Add Look&rdquo; adds the entire outfit to cart &mdash; the AOV lever.</div>
         </div>
       </div>
-      <div class="proto-step" data-step="4">
+      <div class="proto-step" data-step="4" data-src="snkrs-app.html"><!-- TODO: Confidence Drop screen URL -->
         <div class="proto-step-num">04</div>
         <div class="proto-step-body">
           <div class="proto-step-title">Confidence Drop</div>
           <div class="proto-step-desc">Access is gated by participation. Completing styling challenges earns Confidence Pass points and queue priority. Scarcity is not abolished; it is deprecated for specific releases.</div>
         </div>
       </div>
-      <div class="proto-step" data-step="5">
+      <div class="proto-step" data-step="5" data-src="snkrs-app.html"><!-- TODO: Style Profile screen URL -->
         <div class="proto-step-num">05</div>
         <div class="proto-step-body">
           <div class="proto-step-title">Style Profile</div>
@@ -836,17 +843,17 @@ function toggleJourney(el) {
 <script>
 (function() {
   const steps = document.querySelectorAll('.proto-step');
-  if (!steps.length) return;
+  const iframe = document.querySelector('.proto-phone iframe');
+  if (!steps.length || !iframe) return;
   steps[0].classList.add('active');
-  const obs = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        steps.forEach(s => s.classList.remove('active'));
-        e.target.classList.add('active');
-      }
+  steps.forEach(step => {
+    step.addEventListener('click', () => {
+      steps.forEach(s => s.classList.remove('active'));
+      step.classList.add('active');
+      const src = step.dataset.src;
+      if (src) iframe.src = src;
     });
-  }, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
-  steps.forEach(s => obs.observe(s));
+  });
 })();
 </script>
 </body>
