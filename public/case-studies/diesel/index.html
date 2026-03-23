@@ -144,52 +144,51 @@ body { font-family: var(--font); background: var(--white); color: var(--black); 
 .act-desc { font-size: 13px; line-height: 1.75; color: var(--g500); }
 .act-desc strong { color: var(--black); font-weight: 500; }
 
-/* Floor layout */
-.floor { display: grid; grid-template-columns: 72px 1fr 1fr; border-bottom: 1px solid var(--g200); min-height: 420px; }
-.floor:last-child { border-bottom: none; }
-.floor-spine { border-right: 1px solid var(--g200); display: flex; flex-direction: column; align-items: center; padding: 36px 0; gap: 10px; }
-.f-num { font-size: 48px; font-weight: 300; letter-spacing: -.04em; line-height: 1; color: var(--g300); transition: color var(--ease-fast); }
-.floor:hover .f-num { color: var(--black); }
-.f-vert { font-size: 7px; letter-spacing: .16em; text-transform: uppercase; color: var(--g400); writing-mode: vertical-lr; transform: rotate(180deg); }
-.floor-info { padding: 44px 32px; border-right: 1px solid var(--g200); display: flex; flex-direction: column; }
-.f-kicker { font-size: 9px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--g400); margin-bottom: 12px; }
-.f-name { font-size: clamp(22px,2.5vw,30px); font-weight: 400; letter-spacing: .03em; text-transform: uppercase; line-height: 1.1; margin-bottom: 24px; color: var(--black); }
-.f-desc { font-size: 13px; line-height: 1.8; color: var(--g500); flex: 1; }
+/* Floor layout — Immersive Sticky Sticky */
+.floor-container { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-top: 1px solid var(--g200); }
+.floor-text-track { border-right: 1px solid var(--g200); }
+.floor-visual-track { position: sticky; top: var(--nav-h); height: calc(100vh - var(--nav-h)); overflow: hidden; background: var(--black); }
+
+.floor-item { min-height: 80vh; padding: 64px 48px; border-bottom: 1px solid var(--g100); display: flex; flex-direction: column; justify-content: center; }
+.floor-item:last-child { border-bottom: none; }
+
+.f-num-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--g300); margin-bottom: 16px; display: block; }
+.f-name { font-size: clamp(28px,3.5vw,42px); font-weight: 300; letter-spacing: .02em; text-transform: uppercase; line-height: 1; margin-bottom: 28px; color: var(--black); }
+.f-desc { font-size: 15px; line-height: 1.8; color: var(--g500); margin-bottom: 32px; }
 .f-desc strong { color: var(--black); font-weight: 500; }
-.f-desc em { font-style: italic; }
-.f-strategy { margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--g200); }
-.f-s-label { font-size: 8px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--g400); margin-bottom: 8px; }
-.f-s-text { font-size: 12px; line-height: 1.72; color: var(--g500); font-style: italic; }
-.f-s-text strong { color: var(--g700); font-style: normal; font-weight: 500; }
-.f-phone-badge { display: inline-flex; align-items: center; gap: 8px; margin-top: 18px; font-size: 8px; letter-spacing: .14em; text-transform: uppercase; padding: 6px 12px; border: 1px solid var(--g200); color: var(--g500); }
-.f-phone-badge.off { border-color: var(--g300); color: var(--g700); background: var(--g100); }
-.f-phone-badge.on { border-color: var(--g200); color: var(--g500); }
-.badge-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--g400); }
-.f-phone-badge.off .badge-dot { background: var(--black); }
-.f-phone-badge.on .badge-dot { background: var(--g400); }
-.floor-visual { overflow: hidden; position: relative; }
-.floor-visual img { width: 100%; height: 100%; object-fit: cover; min-height: 320px; }
-.fv-tag { position: absolute; bottom: 16px; left: 16px; z-index: 2; font-size: 8px; letter-spacing: .12em; text-transform: uppercase; color: var(--g400); background: rgba(255,255,255,.9); padding: 5px 9px; border: 1px solid var(--g200); }
 
-/* Market stats */
-.market-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--g200); margin-bottom: 28px; }
-.m-cell { padding: 52px 32px; background: var(--white); }
-.m-big { font-size: clamp(42px,5vw,72px); font-weight: 300; line-height: 1; letter-spacing: -.03em; margin-bottom: 6px; color: var(--black); }
-.m-big span { color: var(--black); font-weight: 500; }
-.m-unit { font-size: 8.5px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--g400); margin-bottom: 18px; }
-.m-desc { font-size: 12px; line-height: 1.75; color: var(--g500); }
+.f-strategy-box { background: var(--g100); padding: 28px; border-left: 2px solid var(--black); }
+.f-s-label { font-size: 9px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--g400); margin-bottom: 10px; }
+.f-s-text { font-size: 13px; line-height: 1.7; color: var(--g700); font-style: italic; }
 
-/* Competitor table */
-.comp-wrap { border-top: 1px solid var(--g200); }
-.comp-row { display: grid; grid-template-columns: 140px 1fr 100px 80px; gap: 24px; align-items: center; padding: 18px 32px; border-bottom: 1px solid var(--g200); transition: background var(--ease-fast); }
-.comp-row:hover { background: var(--g100); }
-.comp-row.hdr { background: var(--g100); padding: 12px 32px; }
-.comp-row.hdr span { font-size: 8px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--g400); }
-.c-brand { font-size: 17px; font-weight: 700; text-transform: uppercase; letter-spacing: -.01em; color: var(--black); }
-.c-move { font-size: 12px; line-height: 1.65; color: var(--g500); }
-.c-loc { font-size: 9px; color: var(--g400); letter-spacing: .06em; }
-.c-yr { font-size: 20px; font-weight: 700; color: var(--g300); letter-spacing: -.02em; }
-.comp-row.diesel .c-brand, .comp-row.diesel .c-loc, .comp-row.diesel .c-yr { color: var(--black); font-weight: 700; }
+.floor-img-wrap { position: absolute; inset: 0; opacity: 0; transition: opacity 0.6s ease-in-out; }
+.floor-img-wrap.active { opacity: 1; }
+.floor-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+.floor-img-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.4) 0%, transparent 40%); }
+.floor-img-label { position: absolute; bottom: 32px; right: 32px; font-size: 10px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--white); border: 1px solid rgba(255,255,255,0.3); padding: 8px 16px; background: rgba(0,0,0,0.5); backdrop-filter: blur(8px); }
+
+/* Content Engine Visual */
+.engine-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 32px; }
+.engine-act { background: var(--g100); padding: 32px; border: 1px solid var(--g200); position: relative; display: flex; flex-direction: column; gap: 16px; }
+.engine-act::after { content: '→'; position: absolute; right: -16px; top: 50%; transform: translateY(-50%); font-size: 20px; color: var(--g300); z-index: 2; }
+.engine-act:last-child::after { display: none; }
+.engine-num { font-size: 42px; font-weight: 300; line-height: 1; color: var(--black); opacity: 0.1; position: absolute; top: 24px; right: 24px; }
+.engine-title { font-size: 14px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--black); }
+.engine-desc { font-size: 13px; line-height: 1.6; color: var(--g500); }
+.engine-tag { align-self: flex-start; font-size: 9px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: 4px 8px; background: var(--black); color: var(--white); }
+
+/* Competitor Grid — Premium Upgrade */
+.comp-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1px; background: var(--g200); border: 1px solid var(--g200); margin-top: 32px; }
+.comp-card { background: var(--white); padding: 32px; display: flex; flex-direction: column; gap: 16px; transition: background var(--ease-fast); }
+.comp-card:hover { background: var(--g100); }
+.comp-card.diesel { background: var(--black); color: var(--white); }
+.comp-card.diesel .c-brand, .comp-card.diesel .c-move, .comp-card.diesel .c-yr { color: var(--white); }
+.c-brand { font-size: 18px; font-weight: 700; text-transform: uppercase; letter-spacing: -.01em; }
+.c-move { font-size: 13px; line-height: 1.6; color: var(--g500); }
+.c-meta { display: flex; justify-content: space-between; align-items: flex-end; margin-top: auto; padding-top: 16px; border-top: 1px solid var(--g100); }
+.comp-card.diesel .c-meta { border-top-color: rgba(255,255,255,0.1); }
+.c-loc { font-size: 10px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--g400); }
+.c-yr { font-size: 24px; font-weight: 300; letter-spacing: -.02em; color: var(--g300); }
 
 /* Returns list */
 .ret-item { padding: 26px 0; border-bottom: 1px solid var(--g200); }
@@ -255,22 +254,27 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
      grid-template-columns: 1fr !important; 
      gap: 16px !important; 
    }
-   .cs-exec-meta-grid { 
+  .cs-exec-meta-grid { 
      grid-template-columns: 1fr 1fr !important; 
      gap: 1px !important; 
      background: var(--g200) !important;
      border: 1px solid var(--g200) !important;
    }
-  .outcome-stats, .cs-img-2col, .cs-img-3col, .hara-split, .market-stats, .img-pair, .meta-strip, .act-row, .floor { 
+  .outcome-stats, .cs-img-2col, .cs-img-3col, .hara-split, .market-stats, .img-pair, .meta-strip, .act-row { 
     grid-template-columns: 1fr !important; 
     gap: 24px !important; 
   }
+
+  .floor-container { grid-template-columns: 1fr !important; }
+  .floor-visual-track { position: relative !important; top: 0 !important; height: 350px !important; }
+  .floor-text-track { border-right: none !important; }
+  .floor-img-label { bottom: 16px !important; right: 16px !important; }
+  .floor-item { min-height: auto !important; padding: 40px 20px !important; }
   
-  .floor-spine { border-right: none !important; border-bottom: 1px solid var(--g200) !important; flex-direction: row !important; padding: 20px !important; justify-content: flex-start !important; }
-  .f-vert { writing-mode: horizontal-tb !important; transform: none !important; margin-left: 10px !important; }
-  .floor-visual { display: block !important; height: 300px !important; }
+  .comp-grid { grid-template-columns: 1fr !important; }
   
   .comp-row { grid-template-columns: 1fr !important; gap: 8px !important; }
+
   .comp-row.hdr { display: none !important; }
   .c-yr { font-size: 14px !important; margin-top: 4px !important; }
 
@@ -454,29 +458,27 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
             <div class="cs-section-eyebrow" style="margin-top:36px;margin-bottom:16px;"><span class="cs-section-num">—</span><span class="cs-section-title">The Three-Act Content Engine</span></div>
             <p class="cs-body" style="max-width:420px;margin-bottom:24px;">The phone-free floors don't kill the content pipeline. They upgrade it into three distinct acts.</p>
 
-            <div class="content-acts">
-              <div class="act-row">
-                <div class="act-num">1</div>
-                <div class="act-body">
-                  <div class="act-title">Before You Enter</div>
-                  <p class="act-desc">The phone check-in <strong>is</strong> the first content. The brass token, the ritual of surrender, the decision to go in — people document themselves giving up their phone more enthusiastically than they document themselves shopping.</p>
-                </div>
+            <div class="engine-container">
+              <div class="engine-act">
+                <div class="engine-num">01</div>
+                <span class="engine-tag">The Surrender</span>
+                <span class="engine-title">Before You Enter</span>
+                <p class="engine-desc">The phone check-in is the first ritual. The brass token and the act of surrender become the first documented "moment."</p>
               </div>
-              <div class="act-row">
-                <div class="act-num">2</div>
-                <div class="act-body">
-                  <div class="act-title">The Absence</div>
-                  <p class="act-desc">Nothing generates more content than a conspicuous absence from content. <strong>"I just spent an hour phone-free in Diesel Tokyo and I don't know how to describe what happened but—"</strong> That sentence writes itself. Anticipation content, reflection content, "I need to go back" content.</p>
-                </div>
+              <div class="engine-act">
+                <div class="engine-num">02</div>
+                <span class="engine-tag">The Absence</span>
+                <span class="engine-title">The Hour Offline</span>
+                <p class="engine-desc">Conspicuous absence generates anticipation. "I don't know how to describe what happened but—" That sentence writes itself.</p>
               </div>
-              <div class="act-row">
-                <div class="act-num">3</div>
-                <div class="act-body">
-                  <div class="act-title">Ghiaccio — The Reward</div>
-                  <p class="act-desc">The top floor is fully phone-enabled. But by then, the person posting has spent an hour making real decisions about who they are without algorithmic input. <strong>The content from Ghiaccio will read differently — slower, more considered, more authentic.</strong></p>
-                </div>
+              <div class="engine-act">
+                <div class="engine-num">03</div>
+                <span class="engine-tag">The Reward</span>
+                <span class="engine-title">Ghiaccio Apex</span>
+                <p class="engine-desc">The reward for effort. Content from the apex floor is slower, more considered, and carries higher brand authority.</p>
               </div>
             </div>
+
           </div>
         </div>
       </section>
@@ -489,73 +491,103 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
           <span class="cs-divider-end">Five Floors / One Descent</span>
         </div>
 
-        <div class="floor">
-          <div class="floor-spine"><div class="f-num">F1</div><div class="f-vert">Street Level</div></div>
-          <div class="floor-info">
-            <div><div class="f-kicker">Entry — The Provocation Begins</div><div class="f-name">High-Velocity Retail</div></div>
-            <p class="f-desc">The ground floor runs at full commercial intensity — but in a gallery setting. Lighting is calibrated for the body, not the phone. <strong>There are no mirrors on the floor.</strong> The Cash Wrap is carved from rough-hewn volcanic stone. Product is displayed with the restraint of a concept store. <em>Welcome to the building. It already has a point of view.</em></p>
-            <div class="f-strategy"><div class="f-s-label">Strategic Intent</div><div class="f-s-text"><strong>Close the gap between creative output and physical environment.</strong> The first thing a customer feels is the disconnect between what they expected and what they walked into. That gap converts before a word is spoken.</div></div>
-            <div class="f-phone-badge off"><div class="badge-dot"></div>Phone-Free Floor</div>
+        <div class="floor-container">
+          <div class="floor-text-track">
+            <div class="floor-item" data-floor="0">
+              <span class="f-num-eyebrow">Floor 01 · Street Level</span>
+              <h3 class="f-name">High-Velocity Retail</h3>
+              <p class="f-desc">The ground floor runs at full commercial intensity — but in a gallery setting. Lighting is calibrated for the body, not the phone. <strong>There are no mirrors on the floor.</strong> The Cash Wrap is carved from rough-hewn volcanic stone. Product is displayed with the restraint of a concept store.</p>
+              <div class="f-strategy-box">
+                <div class="f-s-label">Strategic Intent</div>
+                <div class="f-s-text"><strong>Close the gap between creative output and physical environment.</strong> The first thing a customer feels is the disconnect between what they expected and what they walked into.</div>
+              </div>
+            </div>
+
+            <div class="floor-item" data-floor="1">
+              <span class="f-num-eyebrow">Floor 02 · The Edit</span>
+              <h3 class="f-name">The Premium Edit</h3>
+              <p class="f-desc">One wall. Forty pieces. No racks. <strong>A stylist — not a sales associate — who opens with one question: what version of yourself are you not wearing yet?</strong> Black marble with gold kintsugi joinery. <em>The art of repair applied to a brand that has broken and rebuilt itself.</em></p>
+              <div class="f-strategy-box">
+                <div class="f-s-label">Strategic Intent</div>
+                <div class="f-s-text"><strong>Reposition Diesel within the premium tier.</strong> Japan's luxury buyer purchases for intrinsic self-reward. Without a phone, the only input is the fabric and the stylist.</div>
+              </div>
+            </div>
+
+            <div class="floor-item" data-floor="2">
+              <span class="f-num-eyebrow">Floor 03 · Denim Lab</span>
+              <h3 class="f-name">The Destruction Ceremony</h3>
+              <p class="f-desc">A glass-walled theater of craftsmanship. Bring in your most worn-out pair of jeans. An artisan documents them, repairs or transforms them. <strong>The documentation is a physical artifact printed on-site.</strong> Your jeans as autobiography.</p>
+              <div class="f-strategy-box">
+                <div class="f-s-label">Strategic Intent</div>
+                <div class="f-s-text"><strong>Monetise craft and embed loyalty.</strong> A garment someone helped make isn't returned. Maps to Japanese <em>monozukuri</em> — the art of making things with care.</div>
+              </div>
+            </div>
+
+            <div class="floor-item" data-floor="3">
+              <span class="f-num-eyebrow">Floor 04 · Archive</span>
+              <h3 class="f-name">Café 1978 + The Banned Shelf</h3>
+              <p class="f-desc">A coworking café built around a library of visual history. <strong>At the centre: The Banned Shelf.</strong> Every campaign Diesel has ever had pulled or censored — displayed in full with the original complaint letters.</p>
+              <div class="f-strategy-box">
+                <div class="f-s-label">Strategic Intent</div>
+                <div class="f-s-text"><strong>Convert non-purchasers through provocation.</strong> The Banned Shelf is the most efficient brand-building asset in the building.</div>
+              </div>
+            </div>
+
+            <div class="floor-item" data-floor="4">
+              <span class="f-num-eyebrow">Floor 05 · The Apex</span>
+              <h3 class="f-name">Ghiaccio Ice Bar</h3>
+              <p class="f-desc">The building's apex. A monolithic bar constructed from molded glass, internally cooled to appear perpetually frozen. <strong>Phones fully permitted.</strong> Because by this point, the person posting has earned it.</p>
+              <div class="f-strategy-box">
+                <div class="f-s-label">Strategic Intent</div>
+                <div class="f-s-text"><strong>Reward for effort.</strong> The "Ghiaccio Table" becomes Tokyo's most coveted reservation precisely because it isn't easy to reach.</div>
+              </div>
+            </div>
           </div>
-          <div class="floor-visual"><img src="diesel-038.jpg" alt="F1 — High Velocity Retail"><div class="fv-tag">F1 — Gallery Retail</div></div>
+
+          <div class="floor-visual-track">
+            <div class="floor-img-wrap active" data-floor-img="0">
+              <img src="/img/case-studies/diesel/f1.png" alt="F1 Gallery">
+              <div class="floor-img-overlay"></div>
+              <div class="floor-img-label">F1 · Street Level</div>
+            </div>
+            <div class="floor-img-wrap" data-floor-img="1">
+              <img src="/img/case-studies/diesel/f2.png" alt="F2 Premium">
+              <div class="floor-img-overlay"></div>
+              <div class="floor-img-label">F2 · The Edit</div>
+            </div>
+            <div class="floor-img-wrap" data-floor-img="2">
+              <img src="/img/case-studies/diesel/f3.png" alt="F3 Lab">
+              <div class="floor-img-overlay"></div>
+              <div class="floor-img-label">F3 · Denim Lab</div>
+            </div>
+            <div class="floor-img-wrap" data-floor-img="3">
+              <img src="/img/case-studies/diesel/f4.png" alt="F4 Cafe">
+              <div class="floor-img-overlay"></div>
+              <div class="floor-img-label">F4 · Café 1978</div>
+            </div>
+            <div class="floor-img-wrap" data-floor-img="4">
+              <img src="/img/case-studies/diesel/f5.png" alt="F5 Ghiaccio">
+              <div class="floor-img-overlay"></div>
+              <div class="floor-img-label">F5 · Ghiaccio</div>
+            </div>
+          </div>
         </div>
 
-        <div class="floor">
-          <div class="floor-spine"><div class="f-num">F2</div><div class="f-vert">The Edit</div></div>
-          <div class="floor-info">
-            <div><div class="f-kicker">Considered Selection — Premium Lines</div><div class="f-name">The Edit</div></div>
-            <p class="f-desc">One wall. Forty pieces. No racks. <strong>A stylist — not a sales associate — who opens with one question: what version of yourself are you not wearing yet?</strong> Richer materials: dark walnut, hammered brass, black marble with gold kintsugi joinery. <em>The Japanese art of repair with gold, applied to a brand that has broken and rebuilt itself.</em></p>
-            <div class="f-strategy"><div class="f-s-label">Strategic Intent</div><div class="f-s-text"><strong>Reposition Diesel within the premium tier.</strong> Japan's luxury buyer purchases for intrinsic self-reward, not status signaling. Without a phone to check, the only input is the fabric, the stylist, and the question they asked you at the door.</div></div>
-            <div class="f-phone-badge off"><div class="badge-dot"></div>Phone-Free Floor</div>
-          </div>
-          <div class="floor-visual"><img src="diesel-046.jpg" alt="F2 — The Edit"><div class="fv-tag">F2 — The Edit</div></div>
-        </div>
 
-        <div class="floor">
-          <div class="floor-spine"><div class="f-num">F3</div><div class="f-vert">Denim Lab</div></div>
-          <div class="floor-info">
-            <div><div class="f-kicker">Co-Creation — The Destruction Ceremony</div><div class="f-name">Denim Lab</div></div>
-            <p class="f-desc">A glass-walled theater of craftsmanship. The signature experience: <strong>The Destruction Ceremony.</strong> Bring in your most worn-out pair of jeans — any brand. An artisan documents them, repairs or transforms them. The documentation — a physical artifact printed on-site — is yours to keep. <em>Your jeans as autobiography.</em> Completed pieces are vacuum-sealed in "Diesel Edited Denim" packaging.</p>
-            <div class="f-strategy"><div class="f-s-label">Strategic Intent</div><div class="f-s-text"><strong>Monetise craft and embed loyalty at the product level.</strong> A garment someone helped make isn't returned. The Destruction Ceremony maps to Japanese <em>monozukuri</em> — the art of making things with care.</div></div>
-            <div class="f-phone-badge off"><div class="badge-dot"></div>Phone-Free Floor</div>
-          </div>
-          <div class="floor-visual"><img src="diesel-064.jpg" alt="F3 — Denim Lab"><div class="fv-tag">F3 — Denim Lab</div></div>
-        </div>
-
-        <div class="floor">
-          <div class="floor-spine"><div class="f-num">F4</div><div class="f-vert">Archive</div></div>
-          <div class="floor-info">
-            <div><div class="f-kicker">Brand Heritage — Café 1978</div><div class="f-name">Café 1978 + The Banned Shelf</div></div>
-            <p class="f-desc">Named for the founding year. A coworking café built around a curated library of the brand's visual history. <strong>At the centre: The Banned Shelf.</strong> Every campaign Diesel has ever had pulled, censored, or officially complained about — displayed in full. With the complaint letters mounted alongside. <em>Italian warmth and Tokyo's appetite for third-place culture, wrapped around a brand that has always known that being complained about means you said something real.</em></p>
-            <div class="f-strategy"><div class="f-s-label">Strategic Intent</div><div class="f-s-text"><strong>Convert non-purchasers into brand loyalists through provocation-as-education.</strong> The Banned Shelf is the most efficient brand-building asset in the building.</div></div>
-            <div class="f-phone-badge off"><div class="badge-dot"></div>Phone-Free Floor</div>
-          </div>
-          <div class="floor-visual"><img src="diesel-086.jpg" alt="F4 — Café 1978"><div class="fv-tag">F4 — Café 1978</div></div>
-        </div>
-
-        <div class="floor">
-          <div class="floor-spine"><div class="f-num">F5</div><div class="f-vert">Ghiaccio</div></div>
-          <div class="floor-info">
-            <div><div class="f-kicker">Premier Dining — The Social Apex</div><div class="f-name">Ghiaccio Ice Bar</div></div>
-            <p class="f-desc">The building's apex. A monolithic bar constructed from molded glass, internally cooled to appear perpetually frozen. <strong>Phones fully permitted.</strong> Because by this point, the person posting has earned it. Kintsugi gold seams run through the walls — brokenness as beauty. One-page menu. Handwritten in Italian. No English translation unless you ask. <em>The friction is the point.</em></p>
-            <div class="f-strategy"><div class="f-s-label">Strategic Intent</div><div class="f-s-text"><strong>The top of the building is the reward for going further than you planned.</strong> The "Ghiaccio Table" becomes Tokyo's most coveted reservation precisely because it isn't easy to reach.</div></div>
-            <div class="f-phone-badge on"><div class="badge-dot"></div>Phones Permitted — You Earned It</div>
-          </div>
-          <div class="floor-visual"><img src="diesel-106.jpg" alt="F5 — Ghiaccio"><div class="fv-tag">F5 — Ghiaccio</div></div>
-        </div>
       </section>
 
       <!-- Image pair -->
       <div class="img-pair">
         <div class="img-cell">
-          <img src="diesel-130.jpg" alt="Denim napkins and kintsugi placemats at Ghiaccio">
-          <div class="img-cap">Ghiaccio — Denim Napkins / Kintsugi Placemats</div>
+          <img src="/img/case-studies/diesel/f5.png" alt="Ghiaccio — Denim details">
+          <div class="img-cap">Ghiaccio — Atmospheric Detail</div>
         </div>
         <div class="img-cell">
-          <img src="diesel-128.jpg" alt="Gold-rim crystal glassware at Ghiaccio bar">
-          <div class="img-cap">Ghiaccio — Custom Gold-Rim Crystal Service</div>
+          <img src="/img/case-studies/diesel/f5.png" alt="Ghiaccio — Glassware detail">
+          <div class="img-cap">Ghiaccio — Bar Detail</div>
         </div>
       </div>
+
 
       <!-- 05 MARKET -->
       <section class="cs-section" id="cs-section-05" data-cs-section="section-05">
@@ -582,42 +614,29 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
           </div>
         </div>
 
-        <div class="comp-wrap">
-          <div class="cs-divider"><span class="cs-divider-text">Competitive Context — Recent Tokyo Flagship Entries</span><div class="cs-divider-line"></div></div>
-          <div class="comp-row hdr">
-            <span>Brand</span><span>Strategic Move</span><span>District</span><span>Year</span>
+        <div class="comp-grid">
+          <div class="comp-card">
+            <span class="c-brand">Calvin Klein</span>
+            <p class="c-move">Minimalism merged with Japanese craft. Large lifestyle destination focusing on commercial breadth.</p>
+            <div class="c-meta"><span class="c-loc">Harajuku</span><span class="c-yr">2025</span></div>
           </div>
-          <div class="comp-row">
-            <div class="c-brand">Calvin Klein</div>
-            <div class="c-move">Largest lifestyle store globally. Minimalism merged with Japanese craft. Cultural and commercial destination.</div>
-            <div class="c-loc">Harajuku</div>
-            <div class="c-yr">2025</div>
+          <div class="comp-card">
+            <span class="c-brand">Jordan Brand</span>
+            <p class="c-move">World-class flagship leveraging Tokyo's streetwear credibility to anchor global product drops.</p>
+            <div class="c-meta"><span class="c-loc">Harajuku</span><span class="c-yr">2024</span></div>
           </div>
-          <div class="comp-row">
-            <div class="c-brand">Jordan Brand</div>
-            <div class="c-move">Second worldwide flagship — Tokyo chosen for its role in defining global streetwear credibility.</div>
-            <div class="c-loc">Harajuku</div>
-            <div class="c-yr">Recent</div>
+          <div class="comp-card">
+            <span class="c-brand">Louis Vuitton</span>
+            <p class="c-move">High-concept renovation reaffirming physical commitment to the luxury 'Honne' buyer.</p>
+            <div class="c-meta"><span class="c-loc">Ginza</span><span class="c-yr">2021</span></div>
           </div>
-          <div class="comp-row">
-            <div class="c-brand">Louis Vuitton</div>
-            <div class="c-move">Full renovation of iconic Ginza boutique. Reaffirming physical retail commitment amid global e-com shift.</div>
-            <div class="c-loc">Ginza</div>
-            <div class="c-yr">2021</div>
-          </div>
-          <div class="comp-row">
-            <div class="c-brand">Gucci</div>
-            <div class="c-move">Second Tokyo flagship. Japan remains one of Gucci's most profitable and brand-critical markets.</div>
-            <div class="c-loc">Ginza</div>
-            <div class="c-yr">2021</div>
-          </div>
-          <div class="comp-row diesel">
-            <div class="c-brand">Diesel ↗</div>
-            <div class="c-move">The Iceberg — Harajuku's first phone-free flagship. A cultural reclamation. The first store designed entirely in Glenn Martens' creative era.</div>
-            <div class="c-loc">Harajuku</div>
-            <div class="c-yr">F25</div>
+          <div class="comp-card diesel">
+            <span class="c-brand">Diesel ↗</span>
+            <p class="c-move">The Iceberg. Harajuku's first phone-free flagship. A cultural reclamation and brand reset.</p>
+            <div class="c-meta"><span class="c-loc">Harajuku</span><span class="c-yr">F25</span></div>
           </div>
         </div>
+
       </section>
 
       <!-- 06 RETURNS -->
@@ -662,14 +681,16 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
       <!-- Image pair -->
       <div class="img-pair">
         <div class="img-cell">
-          <img src="diesel-124.jpg" alt="Staff as curators">
-          <div class="img-cap">Staff as Curators — Current Season Utilitarian Uniform</div>
+          <img src="/img/case-studies/diesel/team.png" alt="Staff as curators">
+          <div class="img-cap">Staff as Curators — Current Season Tonal Style</div>
         </div>
         <div class="img-cell">
-          <img src="diesel-048.jpg" alt="Vacuum sealed Denim Lab packaging">
+          <img src="/img/case-studies/diesel/packaging.png" alt="Vacuum sealed Denim Lab packaging">
           <div class="img-cap">Denim Lab — Vacuum-Sealed Take-Home Packaging</div>
         </div>
       </div>
+
+
 
       <!-- 07 CLOSE / OUTCOME -->
       <section class="cs-section" id="cs-outcome" data-cs-section="outcome">
@@ -715,6 +736,20 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
 </footer>
 
 <script>
+// Floor Visual Switcher
+const floorObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const f = entry.target.getAttribute('data-floor');
+      document.querySelectorAll('.floor-img-wrap').forEach(img => {
+        img.classList.remove('active');
+        if (img.getAttribute('data-floor-img') === f) img.classList.add('active');
+      });
+    }
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('.floor-item').forEach(item => floorObserver.observe(item));
+
 window.addEventListener('scroll', () => {
   const s = window.scrollY, t = document.documentElement.scrollHeight - window.innerHeight;
   document.getElementById('scroll-progress').style.width = (t ? s/t*100 : 0) + '%';
