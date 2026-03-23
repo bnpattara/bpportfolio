@@ -247,15 +247,6 @@ export default function Home() {
                     <span>{cs.badge}</span>
                   </div>
                   <div className="accordion-body">
-                    {/* ▼ Key Metrics dropdown – placeholder for each case study */}
-                    <details className="case-metrics">
-                      <summary>Key Metrics</summary>
-                      <ul>
-                        <li>Metric 1: TBD</li>
-                        <li>Metric 2: TBD</li>
-                        <li>Metric 3: TBD</li>
-                      </ul>
-                    </details>
                     <div className="accordion-title">{cs.title}</div>
                     <div className="accordion-insight">{cs.insight}</div>
                     <button
