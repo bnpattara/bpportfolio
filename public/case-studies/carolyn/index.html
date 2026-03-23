@@ -117,19 +117,25 @@
     #cs-exec-summary, .cs-section { padding: 40px 20px; }
     .cs-exec-inner { grid-template-columns: 1fr; gap: 32px; }
   }
+
+  .cs-next-label { font-size: 8px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--g300); margin-bottom: 12px; }
+  .cs-next-link { text-decoration: none; display: inline-block; }
+  .cs-next-meta { font-size: 10px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--g400); margin-bottom: 6px; }
+  .cs-next-title { font-size: 28px; font-weight: 300; color: var(--black); transition: color var(--ease-fast); }
+  .cs-next-link:hover .cs-next-title { color: var(--g500); }
   </style>
 </head>
 <body>
   <header id="site-nav">
     <div class="nav-main">
       <div class="nav-left">
-        <a href="/#work">Work</a>
-        <a href="/#about">About</a>
-        <a href="/blog">Essays</a>
+        <a href="/#work" target="_parent">Work</a>
+        <a href="/#about" target="_parent">About</a>
+        <a href="/blog" target="_parent">Essays</a>
       </div>
-      <a href="/" class="nav-wordmark">Benn Pattara</a>
+      <a href="/" class="nav-wordmark" target="_parent">Benn Pattara</a>
       <div class="nav-right">
-        <a href="/#contact">Contact</a>
+        <a href="/#contact" target="_parent">Contact</a>
       </div>
     </div>
   </header>
@@ -517,6 +523,13 @@
               <p class="cs-meta-strip"><strong>Status:</strong> Independent brand strategy and product development work, 2026</p>
             </div>
           </details>
+          <div class="cs-next">
+            <div class="cs-next-label">Next Case Study</div>
+            <a href="/work/diesel" class="cs-next-link" target="_parent">
+              <div class="cs-next-meta">Diesel · Experiential Retail · 2026</div>
+              <div class="cs-next-title">The Iceberg &rarr;</div>
+            </a>
+          </div>
         </section>
       </div>
     </div>
