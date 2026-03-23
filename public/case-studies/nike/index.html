@@ -221,23 +221,12 @@ footer{border-top:1px solid var(--g200);padding:32px 48px;display:flex;align-ite
 .footer-link:hover{color:var(--black);}
 .footer-copy{font-size:11px;color:var(--g300);font-family:var(--font);}
 @media (max-width: 768px) {
-  /* Token Accordion */
-  .token-table-desktop { display: none !important; }
-  .token-accordion-mobile { display: block !important; border-top: 1px solid var(--g200); }
-  .token-item { border-bottom: 1px solid var(--g200); }
-  .token-header { 
-    display: flex; justify-content: space-between; align-items: center; 
-    padding: 16px 0; font-size: 11px; font-weight: 600; text-transform: uppercase; 
-    letter-spacing: .08em; cursor: pointer; color: var(--black);
-  }
-  .token-panel { 
+  .token-panel {
     max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; 
     background: var(--white);
   }
   .token-row { font-size: 12px; color: var(--g500); line-height: 1.6; margin-bottom: 12px; }
   .token-icon { font-size: 14px; color: var(--g300); }
-  .token-item.active .token-panel { max-height: 200px; padding-bottom: 8px; }
-  .token-item.active .token-icon { transform: rotate(45deg); color: var(--black); }
   #cs-sidenav { display: none !important; }
   .cs-body-wrap { grid-template-columns: 1fr !important; }
   #cs-exec-summary, .cs-section { padding: 40px 20px !important; }
@@ -306,8 +295,8 @@ footer{border-top:1px solid var(--g200);padding:32px 48px;display:flex;align-ite
   @media (max-width: 768px) {
     #cs-screens, .cs-screens-section, [data-target="cs-screens"] { display: none !important; }
     
-    .token-table-desktop, .decision-table-desktop { display: none !important; }
-    .token-accordion-mobile, .decision-accordion-mobile { display: block !important; }
+    .decision-table-desktop { display: none !important; }
+    .decision-accordion-mobile { display: block !important; }
     
     .metrics-card-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 8px !important; }
     .metric-target { font-size: 18px !important; }
@@ -341,7 +330,6 @@ footer{border-top:1px solid var(--g200);padding:32px 48px;display:flex;align-ite
   <a class="cs-sidenav-link" data-target="cs-insight" onclick="scrollToSection('cs-insight')"><span class="cs-sidenav-num">02</span><span class="cs-sidenav-text">The Insight</span></a>
   <a class="cs-sidenav-link" data-target="cs-users" onclick="scrollToSection('cs-users')"><span class="cs-sidenav-num">03</span><span class="cs-sidenav-text">The Users</span></a>
   <a class="cs-sidenav-link" data-target="cs-product" onclick="scrollToSection('cs-product')"><span class="cs-sidenav-num">04</span><span class="cs-sidenav-text">The Product</span></a>
-  <a class="cs-sidenav-link" data-target="cs-design" onclick="scrollToSection('cs-design')"><span class="cs-sidenav-num">05</span><span class="cs-sidenav-text">Design System</span></a>
   <a class="cs-sidenav-link" data-target="prototype" onclick="scrollToSection('prototype')"><span class="cs-sidenav-num">&mdash;</span><span class="cs-sidenav-text">Prototype</span></a>
   <a class="cs-sidenav-link" data-target="cs-decisions" onclick="scrollToSection('cs-decisions')"><span class="cs-sidenav-num">07</span><span class="cs-sidenav-text">Decision Log</span></a>
   <a class="cs-sidenav-link" data-target="cs-outcome" onclick="scrollToSection('cs-outcome')"><span class="cs-sidenav-num">08</span><span class="cs-sidenav-text">Outcome</span></a>
@@ -546,55 +534,6 @@ footer{border-top:1px solid var(--g200);padding:32px 48px;display:flex;align-ite
     </div>
   </div>
 
-  <!-- Token table -->
-  <div style="margin-bottom:28px;">
-    <div style="font-size:8px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--g300);margin-bottom:14px;font-family:var(--font);">Key Token Decisions &mdash; Design System Rationale</div>
-    
-    <!-- Desktop Table -->
-    <table class="cs-table token-table-desktop" style="margin-bottom:0;">
-      <thead><tr><th>Token</th><th>Value</th><th>Role &amp; Rationale</th><th>Contrast</th></tr></thead>
-      <tbody>
-        <tr><td>Background</td><td>#ffffff / #f5f5f3</td><td>White body, off-white alt sections. More editorial than existing SNKRS dark mode &mdash; the Confidence Hub is a lighter, more considered experience that leans into lifestyle rather than hype.</td><td>N/A</td></tr>
-        <tr><td>Text Primary</td><td>#0a0a0a</td><td>Near-black rather than pure black. Warmer and less clinical on white backgrounds. Passes WCAG AAA at 19.4:1 on white.</td><td>AAA 19.4:1</td></tr>
-        <tr><td>Text Secondary</td><td>#444444</td><td>Secondary body copy and labels. Used for colorway descriptions, product details, outfit item names. Passes WCAG AA at 9.7:1.</td><td>AA 9.7:1</td></tr>
-        <tr><td>Text Tertiary</td><td>#767676</td><td>Exactly WCAG AA threshold at 4.54:1. Used for DM Mono metadata: size labels, purchase dates, brand kickers, timestamps.</td><td>AA 4.54:1</td></tr>
-        <tr><td>Volt (Accent)</td><td>#D4FF00</td><td>Nike&rsquo;s existing volt used across the performance line. In Confidence Hub it replaces red as the energy signal &mdash; volt on black surfaces exclusively. Confidence Scores, Anchor badges, Drop CTAs. Never on white.</td><td>On black only</td></tr>
-        <tr><td>Signal Live</td><td>#e52222</td><td>Reserved exclusively for live drop states, countdown timers, and destructive actions. Not for branding or emphasis. Its scarcity makes it readable as urgency when it appears.</td><td>AA on white</td></tr>
-      </tbody>
-    </table>
-
-    <!-- Mobile Accordion -->
-    <div class="token-accordion-mobile">
-      <div class="token-item">
-        <div class="token-header" onclick="toggleToken(this)"><span>Background</span><span class="token-icon">+</span></div>
-        <div class="token-panel">
-          <div class="token-row"><strong>Value:</strong> #ffffff / #f5f5f3</div>
-          <div class="token-row"><strong>Role:</strong> White body, off-white alt sections. More editorial than existing SNKRS dark mode.</div>
-        </div>
-      </div>
-      <div class="token-item">
-        <div class="token-header" onclick="toggleToken(this)"><span>Text Primary</span><span class="token-icon">+</span></div>
-        <div class="token-panel">
-          <div class="token-row"><strong>Value:</strong> #0a0a0a</div>
-          <div class="token-row"><strong>Rationale:</strong> Near-black rather than pure black. Passes WCAG AAA at 19.4:1.</div>
-        </div>
-      </div>
-      <div class="token-item">
-        <div class="token-header" onclick="toggleToken(this)"><span>Volt (Accent)</span><span class="token-icon">+</span></div>
-        <div class="token-panel">
-          <div class="token-row"><strong>Value:</strong> #D4FF00</div>
-          <div class="token-row"><strong>Rationale:</strong> Energy signal on black surfaces exclusively. Confidence Scores, Anchor badges, Drop CTAs.</div>
-        </div>
-      </div>
-      <div class="token-item">
-        <div class="token-header" onclick="toggleToken(this)"><span>Signal Live</span><span class="token-icon">+</span></div>
-        <div class="token-panel">
-          <div class="token-row"><strong>Value:</strong> #e52222</div>
-          <div class="token-row"><strong>Rationale:</strong> Reserved for live drop states and countdowns. Read as urgency.</div>
-        </div>
-      </div>
-    </div>
-  </div>
 
 </section>
 
