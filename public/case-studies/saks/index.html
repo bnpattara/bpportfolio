@@ -296,6 +296,22 @@ body { font-family: var(--font); background: var(--white); color: var(--black); 
 .pm-lens-label { font-size: 8px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--g300); margin-bottom: 10px; }
 .pm-lens-text { font-size: 13px; color: var(--g500); line-height: 1.75; font-style: italic; }
 
+/* NODE WALKTHROUGH */
+.node-walkthrough { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; background: var(--white); padding: 48px 56px; border-bottom: 1px solid var(--g200); }
+.node-visual { position: sticky; top: calc(var(--nav-h) + 64px); height: fit-content; background: var(--g100); }
+.node-visual-inner { aspect-ratio: 4/5; overflow: hidden; position: relative; }
+.node-visual img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; opacity: 0; transition: opacity 400ms ease; }
+.node-visual img.active { opacity: 1; }
+.node-steps { display: flex; flex-direction: column; gap: 160px; padding: 64px 0 240px; }
+.node-step { opacity: 0.15; transition: opacity 400ms ease; }
+.node-step.active { opacity: 1; }
+.node-step-num { font-size: 9px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--g400); margin-bottom: 16px; }
+.node-step-title { font-size: 26px; font-weight: 300; letter-spacing: .04em; text-transform: uppercase; color: var(--black); margin-bottom: 16px; line-height: 1.1; }
+.node-step-body { font-size: 14px; color: var(--g500); line-height: 1.75; margin-bottom: 24px; }
+.node-step-meta { display: flex; flex-direction: column; gap: 8px; }
+.node-step-tag { font-size: 10px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--g500); background: var(--g200); padding: 6px 14px; align-self: flex-start; }
+.node-step-signal { font-size: 10px; font-style: italic; color: var(--g400); margin-top: 12px; }
+
 /* ENDING BLOCK — emphasis for closing thesis */
 .cs-ending-block { background: var(--black); padding: 48px 56px; margin-top: 40px; margin-bottom: 0; border-left: 3px solid var(--black); }
 .cs-ending-text { font-size: 18px; font-weight: 300; line-height: 1.7; color: rgba(255,255,255,.9); margin: 0; max-width: 720px; font-style: italic; }
@@ -374,6 +390,18 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
   .rotation-detail-inner { min-height: auto !important; }
   .rotation-detail-panel { position: static !important; display: none !important; opacity: 1 !important; }
   .rotation-detail-panel.active { display: block !important; }
+  .cs-body-2col { grid-template-columns: 1fr !important; }
+  .cs-stats-3, .cs-stats-4 { grid-template-columns: 1fr 1fr !important; }
+  .node-walkthrough { grid-template-columns: 1fr !important; gap: 32px !important; padding: 40px 20px !important; }
+  .node-visual { position: static !important; }
+  .cs-table { display: block; overflow-x: auto; width: 100%; }
+  .cs-next { flex-direction: column !important; gap: 16px !important; align-items: flex-start !important; }
+  .cs-next-link { text-align: left !important; }
+  footer { flex-direction: column !important; gap: 16px !important; padding: 32px 20px !important; align-items: flex-start !important; }
+}
+@media (max-width: 640px) {
+  .cs-img-3col { grid-template-columns: 1fr; gap: 12px; }
+  .cs-img-3col-item img { width: 100%; height: auto; }
 }
 </style>
 </head>
@@ -454,6 +482,27 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
       <section class="cs-section" id="cs-background" data-cs-section="background">
         <div class="cs-section-inner" style="max-width:100%">
           <div class="cs-section-eyebrow"><span class="cs-section-num">01</span><span class="cs-section-title">The Context</span></div>
+          <h2 class="cs-heading">The Flagship is Dead. Long Live the Node.</h2>
+          
+          <div class="metrics-grid-mobile">
+            <div class="metric-card"><div class="metric-card-title">Foot traffic</div><div class="metric-card-val">-14%</div><div class="metric-card-method">Global flagship avg. '23–'24</div></div>
+            <div class="metric-card"><div class="metric-card-title">Inventory turn</div><div class="metric-card-val">~210d</div><div class="metric-card-method">Average days on shelf</div></div>
+            <div class="metric-card"><div class="metric-card-title">Lease cost</div><div class="metric-card-val">$9.2M</div><div class="metric-card-method">Per 10K sq ft / NYC avg</div></div>
+            <div class="metric-card"><div class="metric-card-title">EBITDA margin</div><div class="metric-card-val">-2.4%</div><div class="metric-card-method">After carrying costs</div></div>
+          </div>
+
+          <div class="cs-body" style="margin-top:24px;">Traditional luxury retail is built on a structural lie: that 42,000 square feet of fixed overhead in high-rent gateway cities can survive 210-day inventory turns and -14% foot traffic. It cannot. The Chapter 11 filing was not a failure of brand; it was a failure of physics. The model is too slow for the velocity of the cultural signal.</div>
+
+          <div class="cs-img-2col" style="margin-top:32px;">
+            <div class="cs-img-2col-item">
+              <div class="cs-img-contain" style="aspect-ratio:3/4;min-height:240px;"><img src="saks-02.png" alt="Saks Fifth Avenue flagship exterior" /></div>
+              <span class="img-caption">The Flagship: 42,000 sq ft of legacy overhead. A model that requires mass traffic to justify its existence.</span>
+            </div>
+            <div class="cs-img-2col-item">
+              <div class="cs-img-contain" style="aspect-ratio:3/4;min-height:240px;"><img src="saks-03.png" alt="Saks Orbit Node exterior" /></div>
+              <span class="img-caption">The Node: 3,500 sq ft of modular scale. A model that requires depth of relationship, not volume of traffic.</span>
+            </div>
+          </div>
           <h2 class="cs-heading">Six Structural Failures. Not One Bad Decision.</h2>
           <p class="cs-body">Saks Global&rsquo;s Chapter 11 filing in January 2026 was not a story of bad management. It was a structural model, inventory ownership, long-term leases, slow buying cycles, mass digital partnership, that the market outran on every front simultaneously. The $4.7B debt load following the HBC-Neiman Marcus merger, $600M/yr in synergies projected and zero delivered before bankruptcy, was only the starting condition for a cascade that took down every pillar at once.</p>
           <p class="cs-body">Each failure was mechanically distinct and structurally related. $700M+ in unpaid vendor invoices destroyed in one cycle the trust built over sixty years. A 180-day buying cycle in a 14-day trend market meant inventory was locked six months before the season opened. 65% of HNW Gen Z luxury spenders lived in markets with no physical Saks presence. The $475M Amazon investment proved luxury brand equity cannot survive mass marketplace distribution.</p>
@@ -463,16 +512,6 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
             <div class="cs-stat-cell"><div class="cs-stat-num">$700M+</div><div class="cs-stat-eyebrow">03 · Vendor Debt</div><div class="cs-stat-label">Unpaid vendor invoices. 18-month payment backlog. Sixty years of trust destroyed in one cycle.</div></div>
             <div class="cs-stat-cell"><div class="cs-stat-num">65%</div><div class="cs-stat-eyebrow">04 · Market Gap</div><div class="cs-stat-label">HNW Gen Z luxury spenders in markets with no physical Saks. 57 Off 5th stores closed February 2026.</div></div>
           </div>
-          <div class="cs-img-2col">
-            <div class="cs-img-2col-item">
-              <div class="cs-img-contain" style="aspect-ratio:4/3;"><img src="saks-02.png" alt="Exterior detail — street-level intrigue; dusk passerby" /></div>
-              <span class="img-caption">Stage 01: Street-Level Intrigue. You pause. You look. You either know what this is or you don&rsquo;t.</span>
-            </div>
-            <div class="cs-img-2col-item">
-              <div class="cs-img-contain" style="aspect-ratio:4/3;"><img src="saks-03.png" alt="Corner node at night — interior glow from within" /></div>
-              <span class="img-caption">Corner node at night. The interior glows. Brass letterforms mark the entrance.</span>
-            </div>
-          </div>
         </div>
       </section>
 
@@ -480,8 +519,21 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
       <section class="cs-section cs-section-alt" id="cs-insight" data-cs-section="insight">
         <div class="cs-section-inner" style="max-width:100%">
           <div class="cs-section-eyebrow"><span class="cs-section-num">02</span><span class="cs-section-title">Strategic Insight</span></div>
-          <div class="cs-pull-quote">&ldquo;Digital-only failed. Owned real estate failed. The answer isn&rsquo;t less physical, it&rsquo;s less permanent. Nodes over flagships. Subscriptions over leases. Data over square footage.&rdquo;</div>
-          <div class="cs-body-2col">
+          <h2 class="cs-heading">The Inversion of Luxury Retail.</h2>
+          <div class="cs-pullquote">"Most retailers are in the business of selling products to people. Vault is in the business of managing access to relationships."</div>
+          
+          <div class="metrics-grid-mobile">
+            <div class="metric-card"><div class="metric-card-title">Customer CAC</div><div class="metric-card-val">-60%</div><div class="metric-card-method">Referral-based membership</div></div>
+            <div class="metric-card"><div class="metric-card-title">Inventory turn</div><div class="metric-card-val">14d</div><div class="metric-card-method">Total node rotation cycle</div></div>
+            <div class="metric-card"><div class="metric-card-title">LTV target</div><div class="metric-card-val">2.8x</div><div class="metric-card-method">vs. legacy retail customer</div></div>
+          </div>
+
+          <div class="cs-img-full" style="margin-top:32px;">
+            <div class="cs-img-contain" style="min-height:400px;aspect-ratio:16/9;"><img src="saks-04.png" alt="Vault by Saks logo mark on texture" /></div>
+            <span class="img-caption">The Brand Identity: A shift from "Everything for Everyone" to a curated, high-conviction edit.</span>
+          </div>
+
+          <div class="cs-body-2col" style="margin-top:40px;">
             <p>The insight didn&rsquo;t come from the financial model; it came from a behavioral one. There&rsquo;s a 27-year-old in Austin earning $180K who has never set foot in a Saks. She follows three Ukrainian designers. She will spend 30 years and a significant fraction of her income on fashion. The 65% figure isn&rsquo;t a missed acquisition opportunity. It&rsquo;s a design problem.</p>
             <p>The inventory ownership shift is the structural decision that makes the asset-light claim true, not just operationally, but balance-sheet true. Vault operates on consignment: designers retain ownership until point of sale. Vault&rsquo;s inventory exposure at any moment is a fraction of the legacy model&rsquo;s $1.8B average. That single design decision changes the risk profile of the entire business.</p>
           </div>
@@ -757,16 +809,23 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
                 <div class="tier-feature">96hr early access to each rotation</div>
                 <div class="tier-feature">Named stylist direct line</div>
                 <div class="tier-feature">3-piece hold, 72hr hold window</div>
-                <div class="tier-feature">Stylist-curated 6-piece edit delivered at home</div>
-                <div class="tier-feature">Private preview events + backstage designer access</div>
-                <div class="tier-feature">Metal card · 10% back in credit · Unlimited wishlist</div>
+                <div class="tier-feature">6-piece edit delivered at home</div>
+                <div class="tier-feature">Titanium black card · NFC-enabled</div>
+                <div class="tier-feature">4 guest passes · Unlimited wishlists</div>
               </div>
               <div class="tier-persona">
                 <div class="tier-persona-label">Designed for</div>
                 <div class="tier-persona-name">Margaux Delacroix</div>
-                <div class="tier-persona-role">Miami · PE Partner · High-LTV anchor</div>
+                <div class="tier-persona-role">Miami · Partner, PE · High-LTV anchor</div>
               </div>
             </div>
+          </div>
+
+          <!-- Membership Physicals: 3-col -->
+          <div class="cs-img-3col" style="margin-top:8px;">
+            <div class="cs-img-3col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:220px;"><img src="saks-06.png" alt="The membership cards" /></div><span class="img-caption">The Artifact: Entry into the node is physically gated.</span></div>
+            <div class="cs-img-3col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:220px;"><img src="saks-23.png" alt="The at-home box" /></div><span class="img-caption">The Delivery: The Black-tier edit arrives 96hr early.</span></div>
+            <div class="cs-img-3col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:220px;"><img src="saks-22.png" alt="The seal" /></div><span class="img-caption">The Detail: Every touchpoint is a material constant.</span></div>
           </div>
         </div>
       </section>
@@ -866,40 +925,85 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
         <div class="cs-section-inner" style="max-width:100%">
           <div class="cs-section-eyebrow"><span class="cs-section-num">05</span><span class="cs-section-title">The Experience</span></div>
           <h2 class="cs-heading">Physical Design as a Product System.</h2>
-          <div class="cs-img-full">
-            <div class="cs-img-contain" style="min-height:360px;aspect-ratio:16/9;"><img src="saks-10.png" alt="NYC concept store exterior, golden hour" /></div>
+          
+          <div class="node-walkthrough">
+            <div class="node-visual">
+              <div class="node-visual-inner">
+                <img src="saks-10.png" alt="Node Exterior" class="active" id="node-img-1" />
+                <img src="saks-18.png" alt="Threshold" id="node-img-2" />
+                <img src="saks-17.png" alt="Discovery" id="node-img-3" />
+                <img src="saks-14.png" alt="Interaction" id="node-img-4" />
+                <img src="saks-11.png" alt="Capture" id="node-img-5" />
+                <img src="saks-22.png" alt="Reflection" id="node-img-6" />
+                <img src="saks-15.png" alt="Return" id="node-img-7" />
+              </div>
+            </div>
+            <div class="node-steps">
+              <div class="node-step active" data-step="1">
+                <div class="node-step-num">Stage 01</div>
+                <div class="node-step-title">Street-Level Intrigue</div>
+                <div class="node-step-body">The node must prove itself under scrutiny. Minimal exterior. Single window. Address only. You pause. You look. You either know what this is or you don&rsquo;t.</div>
+                <div class="node-step-meta">
+                  <span class="node-step-tag">Environmental Signal: Minimal Exterior</span>
+                  <span class="node-step-tag">Metric: Foot-traffic pause rate</span>
+                </div>
+              </div>
+              <div class="node-step" data-step="2">
+                <div class="node-step-num">Stage 02</div>
+                <div class="node-step-title">Threshold</div>
+                <div class="node-step-body">Slow down. Register this is different. Empty entrance. No greeter. No music for three seconds at the transition point. Physical design as a cognitive reset.</div>
+                <div class="node-step-meta">
+                  <span class="node-step-tag">Environmental Signal: Empty Entrance</span>
+                  <span class="node-step-tag">Metric: Dwell at entry (seconds)</span>
+                </div>
+              </div>
+              <div class="node-step" data-step="3">
+                <div class="node-step-num">Stage 03</div>
+                <div class="node-step-title">Discovery</div>
+                <div class="node-step-body">Explore without prompting. 80-120 pieces grouped by mood, not brand. The edit speaks before any human does. Each niche is a curated argument for a personal style.</div>
+                <div class="node-step-meta">
+                  <span class="node-step-tag">Environmental Signal: Mood-based curation</span>
+                  <span class="node-step-tag">Metric: Time before first interaction</span>
+                </div>
+              </div>
+              <div class="node-step" data-step="4">
+                <div class="node-step-num">Stage 04</div>
+                <div class="node-step-title">Interaction</div>
+                <div class="node-step-body">The QR on each piece is not a price tag; it is a curation credential. Scan = data point. Each interaction feeds the cultural brief for the next rotation.</div>
+                <div class="node-step-meta">
+                  <span class="node-step-tag">Environmental Signal: Provenance QR Tags</span>
+                  <span class="node-step-tag">Metric: Stylist conversation rate</span>
+                </div>
+              </div>
+              <div class="node-step" data-step="5">
+                <div class="node-step-num">Stage 05</div>
+                <div class="node-step-title">Capture</div>
+                <div class="node-step-body">Member check-in at the hold station. No pressure. Wishlist or hold an item for a 14-day rotation. The modular fixture system supports rapid re-staging.</div>
+                <div class="node-step-meta">
+                  <span class="node-step-tag">Environmental Signal: Hold Station</span>
+                  <span class="node-step-tag">Metric: Wishlist + hold conversion</span>
+                </div>
+              </div>
+              <div class="node-step" data-step="6">
+                <div class="node-step-num">Stage 06</div>
+                <div class="node-step-title">Reflection</div>
+                <div class="node-step-body">Leave with something, even if not a purchase. A printed rotation card. A wax-sealed at-home edit. The bag moves through the street as an organic content moment.</div>
+                <div class="node-step-meta">
+                  <span class="node-step-tag">Environmental Signal: Physical Branding</span>
+                  <span class="node-step-tag">Metric: Organic content rate (48hr)</span>
+                </div>
+              </div>
+              <div class="node-step" data-step="7">
+                <div class="node-step-num">Stage 07</div>
+                <div class="node-step-title">Return</div>
+                <div class="node-step-body">The 14-day cycle resets. Personal preview note from a stylist arrives 96hrs before the drop. The relationship anchors the membership value.</div>
+                <div class="node-step-meta">
+                  <span class="node-step-tag">Environmental Signal: 1:1 Stylist Outreach</span>
+                  <span class="node-step-tag">Metric: Repeat-visit rate (30 days)</span>
+                </div>
+              </div>
+            </div>
           </div>
-          <span class="img-caption">New York City. The first node. Where the concept proves itself under scrutiny. One mannequin. One piece. The entire argument in the window.</span>
-          <p class="cs-body" style="margin-top:20px;">The node is designed as a seven-stage experience with intended behaviors, environmental signals, and per-stage metrics at each step. Every design decision is a product decision, and every product decision is measurable. The physical experience and the data flywheel are not separate systems. A QR scan at Stage 04 is both an experience mechanic and a data collection mechanism that feeds the demand model.</p>
-
-          <table class="cs-table" style="margin-bottom:32px;">
-            <thead><tr><th>Stage</th><th>Name</th><th>Intended Behavior</th><th>Environmental Signal</th><th>Metric</th></tr></thead>
-            <tbody>
-              <tr><td>01</td><td>Street-Level Intrigue</td><td>Pause. Look. Enter.</td><td>Minimal exterior. Single window. Address only.</td><td>Foot-traffic pause rate</td></tr>
-              <tr><td>02</td><td>Threshold</td><td>Slow down. Register this is different.</td><td>Empty entrance. No greeter. No music for three seconds.</td><td>Dwell at entry (seconds)</td></tr>
-              <tr><td>03</td><td>Discovery</td><td>Explore without prompting.</td><td>80-120 pieces grouped by mood, not brand.</td><td>Time before first interaction</td></tr>
-              <tr><td>04</td><td>Interaction</td><td>Ask a question. Start a stylist conversation.</td><td>QR on each piece links to provenance + styling context. Scan = data point.</td><td>Stylist conversation rate</td></tr>
-              <tr><td>05</td><td>Capture</td><td>Wishlist or hold an item.</td><td>Member check-in at hold station. No pressure.</td><td>Wishlist + hold conversion</td></tr>
-              <tr><td>06</td><td>Reflection</td><td>Leave with something, even if not a purchase.</td><td>Printed rotation card. No receipt marketing.</td><td>Organic content rate (48hr)</td></tr>
-              <tr><td>07</td><td>Return</td><td>Come back for the next rotation.</td><td>Personal preview note from stylist, 96hrs before drop.</td><td>Repeat-visit rate (30 days)</td></tr>
-            </tbody>
-          </table>
-
-          <!-- Interior sequence: 4-col full width -->
-          <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;margin-bottom:8px;">
-            <div><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:180px;"><img src="saks-11.png" alt="Ceiling fixture, modular. Dark bg, cream knitwear" /></div><span class="img-caption" style="padding-bottom:0">Ceiling fixture. Modular.</span></div>
-            <div><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:180px;"><img src="saks-12.png" alt="Floor bar fixture close-up. Mood, not brand" /></div><span class="img-caption" style="padding-bottom:0">Grouped by mood, not brand.</span></div>
-            <div><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:180px;"><img src="saks-13.png" alt="Capsule wall niche — clothing + boots. Curated edit" /></div><span class="img-caption" style="padding-bottom:0">Each niche is a curated edit.</span></div>
-            <div><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:180px;"><img src="saks-14.png" alt="Brass pipe joint detail. Material constant" /></div><span class="img-caption" style="padding-bottom:0">Brass pipe. The material constant.</span></div>
-          </div>
-
-          <div class="cs-img-2col" style="margin-top:8px;">
-            <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:16/10;min-height:200px;"><img src="saks-15.png" alt="Reserve fitting room — navy sofa, pieces laid out" /></div><span class="img-caption">The Reserve fitting room. Pieces laid out before you arrive.</span></div>
-            <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:16/10;min-height:200px;"><img src="saks-16.png" alt="Black fitting room — champagne, ranunculus" /></div><span class="img-caption">The Black fitting room. Everything already ready.</span></div>
-          </div>
-
-          <div class="cs-img-full" style="margin-top:8px;"><div class="cs-img-contain" style="min-height:300px;aspect-ratio:16/9;"><img src="saks-17.png" alt="Capsule aesthetic — stylist past illuminated racks" /></div></div>
-          <span class="img-caption">Stage 03 · Discovery. The stylist moves through the floor. The edit speaks before anyone does.</span>
 
           <!-- Brand in World -->
           <div class="cs-section-eyebrow" style="margin-top:48px;margin-bottom:20px;"><span class="cs-section-num">05B</span><span class="cs-section-title">Brand in the World</span></div>
@@ -911,25 +1015,13 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
             <div class="cs-img-3col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="saks-20.png" alt="Corner node at night. Two markets, one system" /></div><span class="img-caption">Corner node. Two markets. One system.</span></div>
           </div>
 
-          <!-- Packaging -->
-          <div class="cs-img-3col" style="margin-top:8px;">
-            <div class="cs-img-3col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="saks-21.png" alt="Designer hang tags. Curation credential" /></div><span class="img-caption">The tag is not a price tag. It is a curation credential.</span></div>
-            <div class="cs-img-3col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="saks-22.png" alt="Tissue, VBS wax seal. At-home edit, 1:1 brand" /></div><span class="img-caption">The at-home edit arrives sealed. The wax seal is the brand at 1:1 scale.</span></div>
-            <div class="cs-img-3col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="saks-23.png" alt="Black box, grosgrain bow. Six pieces, 96hr before public" /></div><span class="img-caption">Six pieces, stylist-curated, 96 hours before the rotation is public.</span></div>
-          </div>
-
-          <div class="cs-img-2col" style="margin-top:8px;">
-            <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:4/3;min-height:220px;"><img src="saks-24.png" alt="Customer with bag on street, store in background" /></div><span class="img-caption">The bag leaves the node. The brand in motion on the street.</span></div>
-            <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:4/3;min-height:220px;"><img src="saks-25.png" alt="Apple Wallet pass — Black tier. 14-day cycle becomes personal" /></div><span class="img-caption">The 14-day cycle becomes personal. This is the moment the rotation starts being yours.</span></div>
-          </div>
-
           <!-- Identity details -->
           <div class="cs-img-2col" style="margin-top:8px;">
             <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:4/3;min-height:220px;"><img src="saks-26.png" alt="2x2 material grid — wool, silk, VBS button, boot. Monogram once" /></div><span class="img-caption">VBS engraved on the button hardware. The monogram appears once: engraved, functional, invisible until you look.</span></div>
             <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:4/3;min-height:220px;"><img src="saks-27.png" alt="Hand, ring, watch, boot, wool. One statement piece; none branded" /></div><span class="img-caption">The one statement piece rule at 1:1. Three objects. None of them branded.</span></div>
           </div>
 
-          <!-- Team -->
+          <!-- Team & Style -->
           <div class="cs-img-full" style="margin-top:8px;"><div class="cs-img-contain" style="min-height:320px;aspect-ratio:16/9;"><img src="saks-28.png" alt="Team portrait in node — three people, tonal dressing, brass rail" /></div></div>
           <span class="img-caption">The team is the editorial signal before a member touches anything. Tonal dressing. One statement piece. No branded product.</span>
 
@@ -956,21 +1048,18 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
         </div>
         <div class="artifact-expand" id="art2-expand">
             <div class="artifact-inner">
-            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px;background:#1a1a1a;padding:16px;padding-top:2px;">
-              <div class="cs-img-contain" style="aspect-ratio:4/3;background:#111;"><img src="saks-31.png" alt="Extended gallery 31" /></div>
-              <div class="cs-img-contain" style="aspect-ratio:4/3;background:#111;"><img src="saks-32.png" alt="Extended gallery 32" /></div>
-              <div class="cs-img-contain" style="aspect-ratio:4/3;background:#111;"><img src="saks-33.png" alt="Extended gallery 33" /></div>
-              <div class="cs-img-contain" style="aspect-ratio:4/3;background:#111;"><img src="saks-34.png" alt="Extended gallery 34" /></div>
-              <div class="cs-img-contain" style="aspect-ratio:4/3;background:#111;"><img src="saks-35.png" alt="Extended gallery 35" /></div>
-              <div class="img-placeholder" style="aspect-ratio:4/3;background:#111;border-color:#333;"><span class="img-placeholder-num" style="color:rgba(255,255,255,.4)">[36]</span></div>
-              <div class="img-placeholder" style="aspect-ratio:4/3;background:#111;border-color:#333;"><span class="img-placeholder-num" style="color:rgba(255,255,255,.4)">[37]</span></div>
-              <div class="img-placeholder" style="aspect-ratio:4/3;background:#111;border-color:#333;"><span class="img-placeholder-num" style="color:rgba(255,255,255,.4)">[38]</span></div>
-              <div class="img-placeholder" style="aspect-ratio:4/3;background:#111;border-color:#333;"><span class="img-placeholder-num" style="color:rgba(255,255,255,.4)">[39]</span></div>
-              <div class="img-placeholder" style="aspect-ratio:4/3;background:#111;border-color:#333;"><span class="img-placeholder-num" style="color:rgba(255,255,255,.4)">[40]</span></div>
-              <div class="img-placeholder" style="aspect-ratio:4/3;background:#111;border-color:#333;"><span class="img-placeholder-num" style="color:rgba(255,255,255,.4)">[41]</span></div>
-              <div class="img-placeholder" style="aspect-ratio:4/3;background:#111;border-color:#333;"><span class="img-placeholder-num" style="color:rgba(255,255,255,.4)">[42]</span></div>
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px;background:#1a1a1a;padding:16px;">
+              <div class="cs-img-contain" style="aspect-ratio:4/3;background:#111;"><img src="saks-31.png" alt="Interior Sequence 01" /></div>
+              <div class="cs-img-contain" style="aspect-ratio:4/3;background:#111;"><img src="saks-32.png" alt="Interior Sequence 02" /></div>
+              <div class="cs-img-contain" style="aspect-ratio:4/3;background:#111;"><img src="saks-33.png" alt="Interior Sequence 03" /></div>
+              <div class="cs-img-contain" style="aspect-ratio:4/3;background:#111;"><img src="saks-34.png" alt="Interior Sequence 04" /></div>
+              <div class="cs-img-contain" style="aspect-ratio:4/3;background:#111;"><img src="saks-35.png" alt="Interior Sequence 05" /></div>
+              <div class="cs-img-contain" style="aspect-ratio:4/3;background:#111;"><img src="saks-21.png" alt="Packaging Detail" /></div>
+              <div class="cs-img-contain" style="aspect-ratio:4/3;background:#111;"><img src="saks-24.png" alt="Street Scene" /></div>
+              <div class="cs-img-contain" style="aspect-ratio:4/3;background:#111;"><img src="saks-25.png" alt="Wallet Pass" /></div>
+              <div class="cs-img-contain" style="aspect-ratio:4/3;background:#111;"><img src="saks-20.png" alt="Night Exterior" /></div>
             </div>
-            <p style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#444;padding:12px 16px;">Extended gallery: use images from [10]–[30] or add new assets; slots [31]–[42].</p>
+            <p style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#444;padding:12px 16px;">Materiality & Experience Archive · All touchpoints in alignment.</p>
           </div>
         </div>
       </div>
@@ -1496,6 +1585,21 @@ function prevPhase() { showPhase((currentPhase-1+totalPhases) % totalPhases); }
 // MOBILE INTERACTIVES
 function toggleDecision(header) { header.parentElement.classList.toggle('active'); }
 function toggleMetric(el) { el.classList.toggle('active'); }
+// NODE WALKTHROUGH OBSERVER
+const nodeObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const step = entry.target.dataset.step;
+      document.querySelectorAll('.node-step').forEach(s => s.classList.remove('active'));
+      entry.target.classList.add('active');
+      
+      document.querySelectorAll('.node-visual img').forEach(img => img.classList.remove('active'));
+      const activeImg = document.getElementById('node-img-' + step);
+      if (activeImg) activeImg.classList.add('active');
+    }
+  });
+}, { threshold: 0.5, rootMargin: '-10% 0px -20% 0px' });
+document.querySelectorAll('.node-step').forEach(s => nodeObserver.observe(s));
 </script>
 </body>
 </html>
