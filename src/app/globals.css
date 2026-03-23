@@ -2527,8 +2527,8 @@ body>* {
   padding: 0;
   background: #080706;
   padding-top: 52px;
-  /* nav-main height - accordion fills below nav */
-  height: calc(100vh - 52px);
+  /* nav-main height - accordion fills below nav; full 100vh so padding-top + panels = viewport */
+  height: 100vh;
   overflow: hidden;
 }
 
