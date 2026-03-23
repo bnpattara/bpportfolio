@@ -97,6 +97,11 @@ body { font-family: var(--font); background: var(--white); color: var(--black); 
 .cs-body:last-child { margin-bottom: 0; }
 .cs-pull-quote { font-size: clamp(20px,2.2vw,28px); font-weight: 300; font-style: italic; color: var(--black); line-height: 1.4; border-left: 2px solid var(--black); padding-left: 28px; margin-bottom: 28px; }
 .cs-body-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 28px; }
+.cs-exec-body { display: flex; flex-direction: column; gap: 24px; }
+.cs-exec-heading { font-size: 32px; font-weight: 300; letter-spacing: .04em; text-transform: uppercase; color: var(--black); margin-bottom: 8px; }
+.cs-exec-thesis { border-top: 1px solid var(--g200); border-bottom: 1px solid var(--g200); padding: 24px 0; margin: 12px 0; }
+.cs-exec-thesis-label { font-size: 9px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--g300); margin-bottom: 12px; }
+.cs-exec-thesis-text { font-family: "Big Caslon", "Book Antiqua", "Palatino Linotype", Georgia, serif; font-size: 24px; font-style: italic; color: var(--black); line-height: 1.2; }
 .cs-body-2col p { font-size: 13px; color: var(--g500); line-height: 1.75; }
 .cs-stats { display: grid; gap: 1px; background: var(--g200); margin-bottom: 28px; }
 .cs-stats-3 { grid-template-columns: repeat(3,1fr); }
@@ -197,35 +202,65 @@ body { font-family: var(--font); background: var(--white); color: var(--black); 
 .product-card-stat-label { font-size: 10px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--g400); line-height: 1.4; padding-bottom: 3px; }
 .product-card-img { width: 100%; aspect-ratio: 16/10; object-fit: cover; display: block; margin-bottom: 20px; }
 
-/* 14-DAY ROTATION CAROUSEL */
-.rotation-carousel { background: var(--black); padding: 48px 56px; margin-bottom: 0; }
-.rotation-carousel-head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 36px; }
+/* 14-DAY ROTATION CAROUSEL — Horizontal Track */
+.rotation-carousel { background: var(--black); padding: 64px 56px; margin-bottom: 0; overflow: hidden; }
+.rotation-carousel-head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; }
 .rotation-carousel-title { font-size: 11px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.4); }
 .rotation-carousel-counter { font-size: 32px; font-weight: 300; color: var(--white); letter-spacing: -.02em; line-height: 1; }
 .rotation-carousel-counter span { font-size: 14px; color: rgba(255,255,255,.3); font-weight: 300; }
-.rotation-track { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start; }
-.rotation-phases { display: flex; flex-direction: column; gap: 0; }
-.rotation-phase { border-left: 2px solid #222; padding: 14px 20px; cursor: pointer; transition: border-color var(--ease-fast), background var(--ease-fast); }
-.rotation-phase:hover { background: rgba(255,255,255,.03); }
-.rotation-phase.active { border-left-color: var(--white); background: rgba(255,255,255,.04); }
-.rotation-phase-days { font-size: 9px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: rgba(255,255,255,.25); margin-bottom: 4px; }
-.rotation-phase.active .rotation-phase-days { color: rgba(255,255,255,.5); }
-.rotation-phase-name { font-size: 13px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; color: rgba(255,255,255,.4); }
-.rotation-phase.active .rotation-phase-name { color: var(--white); }
-/* Fixed height container — switching panels never changes the carousel's overall height */
-.rotation-detail { position: relative; }
-.rotation-detail-inner { position: relative; min-height: 240px; }
-.rotation-detail-panel { position: absolute; top: 0; left: 0; right: 0; opacity: 0; pointer-events: none; transition: opacity 180ms ease; }
-.rotation-detail-panel.active { position: relative; opacity: 1; pointer-events: auto; }
-.rotation-detail-title { font-size: 28px; font-weight: 300; letter-spacing: .04em; text-transform: uppercase; color: var(--white); line-height: 1.1; margin-bottom: 16px; }
-.rotation-detail-body { font-size: 14px; color: rgba(255,255,255,.5); line-height: 1.8; margin-bottom: 28px; }
-.rotation-detail-metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: rgba(255,255,255,.06); }
-.rotation-metric { padding: 16px 20px; background: rgba(255,255,255,.02); }
-.rotation-metric-label { font-size: 8px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.25); margin-bottom: 6px; }
-.rotation-metric-val { font-size: 20px; font-weight: 300; color: var(--white); letter-spacing: -.01em; }
-.rotation-nav { display: flex; gap: 8px; margin-top: 28px; }
-.rotation-nav-btn { background: transparent; border: 1px solid rgba(255,255,255,.15); color: rgba(255,255,255,.4); padding: 8px 16px; font-size: 11px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; cursor: pointer; font-family: var(--font); transition: all var(--ease-fast); }
-.rotation-nav-btn:hover { border-color: rgba(255,255,255,.4); color: var(--white); }
+
+.rotation-viewport { width: 100%; position: relative; }
+.rotation-track { 
+  display: flex; 
+  gap: 32px; 
+  overflow-x: auto; 
+  scroll-snap-type: x mandatory; 
+  scrollbar-width: none; 
+  -ms-overflow-style: none;
+  padding-bottom: 40px;
+}
+.rotation-track::-webkit-scrollbar { display: none; }
+
+.rotation-card { 
+  min-width: 380px; 
+  width: 380px; 
+  scroll-snap-align: start; 
+  background: rgba(255,255,255,0.03); 
+  border: 1px solid rgba(255,255,255,0.08); 
+  padding: 32px; 
+  display: flex; 
+  flex-direction: column; 
+  gap: 20px; 
+  transition: border-color 0.3s ease, background 0.3s ease;
+}
+.rotation-card:hover { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.2); }
+.rotation-card.active { border-color: var(--white); background: rgba(255,255,255,0.06); }
+
+.rotation-card-days { font-size: 9px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: rgba(255,255,255,0.3); }
+.rotation-card-name { font-size: 24px; font-weight: 300; letter-spacing: .04em; text-transform: uppercase; color: var(--white); margin-bottom: 8px; }
+.rotation-card-body { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.7; min-height: 120px; }
+
+.rotation-card-metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: rgba(255,255,255,0.1); margin-top: auto; }
+.rotation-metric { padding: 12px 16px; background: #0c0c0c; }
+.rotation-metric-label { font-size: 8px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 4px; }
+.rotation-metric-val { font-size: 16px; font-weight: 300; color: var(--white); }
+
+.rotation-nav { display: flex; gap: 12px; margin-top: 12px; }
+.rotation-nav-btn { 
+  background: transparent; 
+  border: 1px solid rgba(255,255,255,0.15); 
+  color: rgba(255,255,255,0.4); 
+  width: 44px; 
+  height: 44px; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  cursor: pointer; 
+  transition: all 0.2s ease; 
+  border-radius: 50%;
+}
+.rotation-nav-btn:hover { border-color: var(--white); color: var(--white); }
+.rotation-nav-btn svg { width: 18px; height: 18px; fill: currentColor; }
 
 /* MEMBERSHIP TIER COMPARISON */
 .tier-compare { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1px; background: var(--g200); margin-bottom: 28px; }
@@ -459,7 +494,16 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
       <!-- 00 EXECUTIVE SUMMARY -->
       <section id="cs-exec-summary" data-cs-section="exec-summary" style="padding:64px 56px;border-bottom:1px solid var(--g200);">
         <div class="cs-exec-inner">
-          <div>
+          <div class="cs-exec-body">
+            <h2 class="cs-exec-heading">The 14-Day Recovery</h2>
+            <p class="cs-body">Vault by Saks is a structural response to a physics problem. Between 2023 and 2026, the legacy luxury model collapsed under the weight of $1.8B in owned inventory and $9.2M/yr flagship leases that no longer converted. Vault replaces the flagship with the **Node**: a 3,500 sq ft modular infrastructure built for 14-day inventory cycles and access managed by membership, not foot traffic.</p>
+            <p class="cs-body">This is not a story of brand marketing; it is a story of **inventory velocity**. By shifting to a consignment-based designer platform and a subscription-based physical footprint, Vault achieved an 84% reduction in capital exposure before the first node opened. This case study documents the design of that flywheel.</p>
+            
+            <div class="cs-exec-thesis">
+              <div class="cs-exec-thesis-label">Strategic Thesis</div>
+              <div class="cs-exec-thesis-text">Invert the balance sheet. Digitize the relationship. Modularize the store.</div>
+            </div>
+
             <div class="cs-exec-kpis" style="margin-top:24px;">
               <div class="cs-exec-kpi"><div class="cs-exec-kpi-num">$964M</div><div class="cs-exec-kpi-eyebrow">Annual Savings</div><div class="cs-exec-kpi-label">Projected run-rate</div></div>
               <div class="cs-exec-kpi"><div class="cs-exec-kpi-num">1mo</div><div class="cs-exec-kpi-eyebrow">Payback Period</div><div class="cs-exec-kpi-label">On $81M investment</div></div>
@@ -833,90 +877,72 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
       <!-- 14-DAY ROTATION CAROUSEL -->
       <div class="rotation-carousel" id="rotation-section">
         <div class="rotation-carousel-head">
-          <div class="rotation-carousel-title">The 14-Day Rotation</div>
+          <div class="rotation-carousel-title">The 14-Day Rotation Cycle</div>
           <div class="rotation-carousel-counter" id="rotation-counter">01 <span>/ 05</span></div>
         </div>
-        <div class="rotation-track">
-          <div class="rotation-phases" id="rotation-phases">
-            <div class="rotation-phase active" onclick="showPhase(0)">
-              <div class="rotation-phase-days">Days 0-2</div>
-              <div class="rotation-phase-name">Cultural Brief</div>
+        
+        <div class="rotation-viewport">
+          <div class="rotation-track" id="rotation-track">
+            <!-- Phase 01 -->
+            <div class="rotation-card active" data-index="1">
+              <div class="rotation-card-days">Days 00-02</div>
+              <div class="rotation-card-name">01 · Cultural Brief</div>
+              <div class="rotation-card-body">The curation team reads signal. TikTok velocity, editorial coverage, resale premiums on secondary markets, and designer performance scores from the previous rotation. No editorial hunch without data, and no data without editorial judgment.</div>
+              <div class="rotation-card-metrics">
+                <div class="rotation-metric"><div class="rotation-metric-label">Signal inputs</div><div class="rotation-metric-val">4 Sources</div></div>
+                <div class="rotation-metric"><div class="rotation-metric-label">Designers eval</div><div class="rotation-metric-val">50-80</div></div>
+              </div>
             </div>
-            <div class="rotation-phase" onclick="showPhase(1)">
-              <div class="rotation-phase-days">Days 3-6</div>
-              <div class="rotation-phase-name">Designer Pull</div>
+            <!-- Phase 02 -->
+            <div class="rotation-card" data-index="2">
+              <div class="rotation-card-days">Days 03-06</div>
+              <div class="rotation-card-name">02 · Designer Pull</div>
+              <div class="rotation-card-body">20 designers confirmed. 80-120 SKUs selected. Smart contract terms locked before any piece ships. Designers retain ownership of all goods through this phase and until point of sale. No consignment exposure for Vault.</div>
+              <div class="rotation-card-metrics">
+                <div class="rotation-metric"><div class="rotation-metric-label">SKUs Selected</div><div class="rotation-metric-val">80-120</div></div>
+                <div class="rotation-metric"><div class="rotation-metric-label">Vault Risk</div><div class="rotation-metric-val">$0</div></div>
+              </div>
             </div>
-            <div class="rotation-phase" onclick="showPhase(2)">
-              <div class="rotation-phase-days">Days 7-10</div>
-              <div class="rotation-phase-name">Transit &amp; Prep</div>
+            <!-- Phase 03 -->
+            <div class="rotation-card" data-index="3">
+              <div class="rotation-card-days">Days 07-10</div>
+              <div class="rotation-card-name">03 · Transit & Prep</div>
+              <div class="rotation-card-body">Physical logistics to node. Steam, tag, style. No back-stock; everything on the floor. Everything is staged by mood rather than brand, tagged with QR provenance links that feed directly into the designer's demand dashboard.</div>
+              <div class="rotation-card-metrics">
+                <div class="rotation-metric"><div class="rotation-metric-label">Floor Reset</div><div class="rotation-metric-val">&lt; 48hr</div></div>
+                <div class="rotation-metric"><div class="rotation-metric-label">Back Stock</div><div class="rotation-metric-val">Zero</div></div>
+              </div>
             </div>
-            <div class="rotation-phase" onclick="showPhase(3)">
-              <div class="rotation-phase-days">Days 11-13</div>
-              <div class="rotation-phase-name">Member Preview</div>
+            <!-- Phase 04 -->
+            <div class="rotation-card" data-index="4">
+              <div class="rotation-card-days">Days 11-13</div>
+              <div class="rotation-card-name">04 · Member Preview</div>
+              <div class="rotation-card-body">Black tier: 96hr. Reserve: 72hr. Member tier: 48hr. Staged access is a revenue architecture decision. Wishlist and hold mechanics activate, driving at-home edit delivery and stylist booking prior to the public drop.</div>
+              <div class="rotation-card-metrics">
+                <div class="rotation-metric"><div class="rotation-metric-label">Staged lead</div><div class="rotation-metric-val">96-48hr</div></div>
+                <div class="rotation-metric"><div class="rotation-metric-label">Hold Conv.</div><div class="rotation-metric-val">&gt; 45%</div></div>
+              </div>
             </div>
-            <div class="rotation-phase" onclick="showPhase(4)">
-              <div class="rotation-phase-days">Day 14</div>
-              <div class="rotation-phase-name">Drop Day</div>
+            <!-- Phase 05 -->
+            <div class="rotation-card" data-index="5">
+              <div class="rotation-card-days">Day 14</div>
+              <div class="rotation-card-name">05 · Drop Day</div>
+              <div class="rotation-card-body">The node opens to walk-in access. Organic content moment. Every scan, hold, purchase, and return feeds the cultural brief for the next rotation. Sell-through by 72hr validates the curation thesis for the cycle.</div>
+              <div class="rotation-card-metrics">
+                <div class="rotation-metric"><div class="rotation-metric-label">72hr target</div><div class="rotation-metric-val">&gt; 40%</div></div>
+                <div class="rotation-metric"><div class="rotation-metric-label">Rotations / yr</div><div class="rotation-metric-val">26</div></div>
+              </div>
             </div>
           </div>
-          <div class="rotation-detail">
-            <div class="rotation-detail-inner">
-            <div class="rotation-detail-panel active" id="rphase-0">
-              <div class="rotation-detail-title">Cultural Brief</div>
-              <div class="rotation-detail-body">The curation team reads signal. TikTok velocity, editorial coverage, resale premiums on secondary markets, and designer performance scores from the previous rotation. No editorial hunch without data, and no data without editorial judgment. Both have to agree before a designer is confirmed for the next rotation.</div>
-              <div class="rotation-detail-metrics">
-                <div class="rotation-metric"><div class="rotation-metric-label">Signal sources</div><div class="rotation-metric-val">4 inputs</div></div>
-                <div class="rotation-metric"><div class="rotation-metric-label">Cycle frequency</div><div class="rotation-metric-val">Every 14d</div></div>
-                <div class="rotation-metric"><div class="rotation-metric-label">Designers evaluated</div><div class="rotation-metric-val">50-80</div></div>
-                <div class="rotation-metric"><div class="rotation-metric-label">Designers confirmed</div><div class="rotation-metric-val">20</div></div>
-              </div>
-            </div>
-            <div class="rotation-detail-panel" id="rphase-1">
-              <div class="rotation-detail-title">Designer Pull</div>
-              <div class="rotation-detail-body">20 designers confirmed. 80-120 SKUs selected. Smart contract terms locked before any piece ships. Designers retain ownership of all goods through this phase and until point of sale. No advance purchase order. No consignment exposure for Vault. The inventory is on the balance sheet of the designer, not the platform.</div>
-              <div class="rotation-detail-metrics">
-                <div class="rotation-metric"><div class="rotation-metric-label">Designers confirmed</div><div class="rotation-metric-val">20</div></div>
-                <div class="rotation-metric"><div class="rotation-metric-label">SKUs per rotation</div><div class="rotation-metric-val">80-120</div></div>
-                <div class="rotation-metric"><div class="rotation-metric-label">Inventory value</div><div class="rotation-metric-val">$180-240K</div></div>
-                <div class="rotation-metric"><div class="rotation-metric-label">Vault inventory risk</div><div class="rotation-metric-val">$0</div></div>
-              </div>
-            </div>
-            <div class="rotation-detail-panel" id="rphase-2">
-              <div class="rotation-detail-title">Transit &amp; Prep</div>
-              <div class="rotation-detail-body">Physical logistics to node. Steam, tag, style. No back-stock; everything on the floor. This phase is where the 14-day velocity claim becomes operationally real. The modular fixture system is designed to be fully reconfigured in under 48 hours. What arrives is styled, tagged with QR provenance links, and staged by mood rather than brand.</div>
-              <div class="rotation-detail-metrics">
-                <div class="rotation-metric"><div class="rotation-metric-label">Floor reset time</div><div class="rotation-metric-val">&lt; 48hr</div></div>
-                <div class="rotation-metric"><div class="rotation-metric-label">Back stock held</div><div class="rotation-metric-val">Zero</div></div>
-                <div class="rotation-metric"><div class="rotation-metric-label">QR tags active</div><div class="rotation-metric-val">Each piece</div></div>
-                <div class="rotation-metric"><div class="rotation-metric-label">Merchandising logic</div><div class="rotation-metric-val">Mood, not brand</div></div>
-              </div>
-            </div>
-            <div class="rotation-detail-panel" id="rphase-3">
-              <div class="rotation-detail-title">Member Preview</div>
-              <div class="rotation-detail-body">Black tier members receive 96hr access. Reserve receives 72hr. Member tier receives 48hr. Each access window activates wishlists and hold mechanics for that tier. This staged access is not a marketing decision; it is a revenue architecture decision. The Black tier&rsquo;s 3-piece hold at 72hr drives at-home edit delivery. Reserve&rsquo;s 1-piece hold at 24hr drives the stylist relationship that anchors the $900 tier.</div>
-              <div class="rotation-detail-metrics">
-                <div class="rotation-metric"><div class="rotation-metric-label">Black access</div><div class="rotation-metric-val">96hr prior</div></div>
-                <div class="rotation-metric"><div class="rotation-metric-label">Reserve access</div><div class="rotation-metric-val">72hr prior</div></div>
-                <div class="rotation-metric"><div class="rotation-metric-label">Member access</div><div class="rotation-metric-val">48hr prior</div></div>
-                <div class="rotation-metric"><div class="rotation-metric-label">Target: hold conversion</div><div class="rotation-metric-val">&gt; 45%</div></div>
-              </div>
-            </div>
-            <div class="rotation-detail-panel" id="rphase-4">
-              <div class="rotation-detail-title">Drop Day</div>
-              <div class="rotation-detail-body">The node opens to walk-in access. Organic content moment. Designer data updates in real time as pieces sell. The cycle resets immediately. Every scan, hold, purchase, and return feeds the cultural brief for the next rotation. Drop day is also the measurement event: sell-through by 72hr is the leading indicator that validates the curation thesis for that rotation.</div>
-              <div class="rotation-detail-metrics">
-                <div class="rotation-metric"><div class="rotation-metric-label">Sell-through target (72hr)</div><div class="rotation-metric-val">&gt; 40%</div></div>
-                <div class="rotation-metric"><div class="rotation-metric-label">Organic content target</div><div class="rotation-metric-val">&gt; 15%</div></div>
-                <div class="rotation-metric"><div class="rotation-metric-label">Next brief starts</div><div class="rotation-metric-val">Day 14+1</div></div>
-                <div class="rotation-metric"><div class="rotation-metric-label">Annual rotations</div><div class="rotation-metric-val">26</div></div>
-              </div>
-            </div>
-            </div><!-- /rotation-detail-inner -->
-            <div class="rotation-nav">
-              <button class="rotation-nav-btn" onclick="prevPhase()">&#8592; Prev</button>
-              <button class="rotation-nav-btn" onclick="nextPhase()">Next &#8594;</button>
-            </div>
-          </div>
+        </div>
+
+        <div class="rotation-nav">
+          <button class="rotation-nav-btn" id="rot-prev" onclick="scrollRotation(-1)">
+            <svg viewBox="0 0 24 24"><path d="M15.41 16.59L10.83 12.00L15.41 7.41L14.00 6.00L8.00 12.00L14.00 18.00L15.41 16.59Z"/></svg>
+          </button>
+          <button class="rotation-nav-btn" id="rot-next" onclick="scrollRotation(1)">
+            <svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12.00L8.59 7.41L10.00 6.00L16.00 12.00L10.00 18.00L8.59 16.59Z"/></svg>
+          </button>
         </div>
       </div>
 
@@ -1008,29 +1034,45 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
           <!-- Brand in World -->
           <div class="cs-section-eyebrow" style="margin-top:48px;margin-bottom:20px;"><span class="cs-section-num">05B</span><span class="cs-section-title">Brand in the World</span></div>
 
-          <!-- Exteriors -->
+          <!-- Sub-section: Store Facades -->
+          <div class="cs-body-2col" style="margin-bottom:16px;">
+            <div>
+              <h3 style="font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--black);margin-bottom:8px;">01 · Store Facades</h3>
+              <p class="cs-body">The node communicates through architectural restraint. Brass letterforms on dark brick or rammed earth. No tagline. The identity is recognizable to those who know it and invisible to those who don&rsquo;t.</p>
+            </div>
+          </div>
           <div class="cs-img-3col">
-            <div class="cs-img-3col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="saks-18.png" alt="Logo on exterior — brass on dark brick. No tagline" /></div><span class="img-caption">Dark brick. Brass type. No tagline.</span></div>
-            <div class="cs-img-3col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="saks-19.png" alt="Exterior detail dusk, passerby. Stage 01" /></div><span class="img-caption">Stage 01: You pause. You look. You either know or you don&rsquo;t.</span></div>
-            <div class="cs-img-3col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="saks-20.png" alt="Corner node at night. Two markets, one system" /></div><span class="img-caption">Corner node. Two markets. One system.</span></div>
+            <div class="cs-img-3col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="saks-18.png" alt="Logo on exterior — brass on dark brick." /></div><span class="img-caption">Identity: Brass on dark brick.</span></div>
+            <div class="cs-img-3col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="saks-19.png" alt="Exterior detail dusk" /></div><span class="img-caption">The Pause: Street-level intrigue.</span></div>
+            <div class="cs-img-3col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="saks-20.png" alt="Corner node at night" /></div><span class="img-caption">Nodes: Two markets, one system.</span></div>
           </div>
 
-          <!-- Identity details -->
+          <!-- Sub-section: Packaging System -->
+          <div class="cs-body-2col" style="margin-top:40px;margin-bottom:16px;">
+            <div>
+              <h3 style="font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--black);margin-bottom:8px;">02 · Packaging System</h3>
+              <p class="cs-body">Material constants. The monogram appears once: engraved, functional, and small. Every touchpoint, from the wax seal to the titanium member card, is a tactile credential of the relationship.</p>
+            </div>
+          </div>
+          <div class="cs-img-2col">
+            <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:4/3;min-height:220px;"><img src="saks-26.png" alt="Material grid" /></div><span class="img-caption">Monogram: Engraved and functional.</span></div>
+            <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:4/3;min-height:220px;"><img src="saks-21.png" alt="Packaging Detail" /></div><span class="img-caption">The Detail: Material constants.</span></div>
+          </div>
+
+          <!-- Sub-section: Employee Style Guide -->
+          <div class="cs-body-2col" style="margin-top:40px;margin-bottom:16px;">
+            <div>
+              <h3 style="font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--black);margin-bottom:8px;">03 · Style Guide</h3>
+              <p class="cs-body">The team is the editorial signal. Tonal dressing, one statement piece, and no branded products. The stylist relationship is the moat that anchors the premium tiers.</p>
+            </div>
+          </div>
+          <div class="cs-img-full"><div class="cs-img-contain" style="min-height:320px;aspect-ratio:16/9;"><img src="saks-28.png" alt="Team portrait" /></div></div>
+          <span class="img-caption">The Team: Tonal dressing and high-conviction style.</span>
+
           <div class="cs-img-2col" style="margin-top:8px;">
-            <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:4/3;min-height:220px;"><img src="saks-26.png" alt="2x2 material grid — wool, silk, VBS button, boot. Monogram once" /></div><span class="img-caption">VBS engraved on the button hardware. The monogram appears once: engraved, functional, invisible until you look.</span></div>
-            <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:4/3;min-height:220px;"><img src="saks-27.png" alt="Hand, ring, watch, boot, wool. One statement piece; none branded" /></div><span class="img-caption">The one statement piece rule at 1:1. Three objects. None of them branded.</span></div>
+            <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:4/3;min-height:220px;"><img src="saks-29.png" alt="Female stylist" /></div><span class="img-caption">Member Tier: The named relationship.</span></div>
+            <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:4/3;min-height:220px;"><img src="saks-30.png" alt="Male stylist" /></div><span class="img-caption">Tonal: No logo. One material story.</span></div>
           </div>
-
-          <!-- Team & Style -->
-          <div class="cs-img-full" style="margin-top:8px;"><div class="cs-img-contain" style="min-height:320px;aspect-ratio:16/9;"><img src="saks-28.png" alt="Team portrait in node — three people, tonal dressing, brass rail" /></div></div>
-          <span class="img-caption">The team is the editorial signal before a member touches anything. Tonal dressing. One statement piece. No branded product.</span>
-
-          <div class="cs-img-2col" style="margin-top:8px;">
-            <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:4/3;min-height:220px;"><img src="saks-29.png" alt="Female stylist — blazer, silk, gold chains. Reserve; $900 relationship" /></div><span class="img-caption">The Reserve stylist. The named relationship behind the $900 membership.</span></div>
-            <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:4/3;min-height:220px;"><img src="saks-30.png" alt="Male stylist — turtleneck, grey trousers. Tonal; style code applied" /></div><span class="img-caption">Tonal. No logo. One material story. The style code applied.</span></div>
-          </div>
-
-          <p class="cs-body" style="margin-top:20px;">The identity is built on restraint. Brass letterforms on dark brick. VBS monogram on the zip pull. The monogram appears once: engraved, functional, invisible until you look. Recognizable to those who know it and invisible to those who don&rsquo;t. That is the correct luxury register for a brand whose physical presence communicates through material and craft.</p>
         </div>
       </section>
 
@@ -1484,7 +1526,7 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
             </tbody>
           </table>
           <div class="cs-ending-block">
-            <p class="cs-ending-text">The brands that survive the next decade of luxury won&rsquo;t be the ones with the most square footage. They&rsquo;ll be the ones with the most data about desire and the operational model to act on it in 14 days. Vault proves the asset-light claim can be structurally true at the balance sheet level, not just operationally true. The consignment model, the flex lease, and the subscription revenue engine are not features; they are the preconditions for everything else the model claims to deliver.</p>
+            <p class="cs-ending-text">The brands that survive the next decade of luxury won&rsquo;t be the ones with the most square footage. They&rsquo;ll be the ones that structurally prioritize the **depth of the relationship** over the breadth of the traffic. Vault proves that an asset-light model is not just a financial hedge, but a creative precondition. By stripping away the legacy friction of flagships and inventory risk, we cleared the floor for the only thing that actually converts: high-conviction curation in 14-day cycles.</p>
           </div>
           <div class="cs-next">
             <div class="cs-next-label">Next Case Study</div>
@@ -1567,20 +1609,46 @@ function showScreen(n) {
   document.getElementById('screen-'+n).classList.add('active');
 }
 
-// 14-DAY ROTATION CAROUSEL
-let currentPhase = 0;
-const totalPhases = 5;
+// 14-DAY ROTATION CAROUSEL (Horizontal)
+const track = document.getElementById('rotation-track');
+const cards = document.querySelectorAll('.rotation-card');
+const counter = document.getElementById('rotation-counter');
 
-function showPhase(n) {
-  document.querySelectorAll('.rotation-phase').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.rotation-detail-panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.rotation-phase')[n].classList.add('active');
-  document.getElementById('rphase-'+n).classList.add('active');
-  document.getElementById('rotation-counter').innerHTML = (n+1<10?'0'+(n+1):n+1) + ' <span>/ 05</span>';
-  currentPhase = n;
+function scrollRotation(dir) {
+  const currentCard = document.querySelector('.rotation-card.active');
+  let index = parseInt(currentCard.dataset.index);
+  let nextIndex = index + dir;
+  
+  if (nextIndex < 1) nextIndex = 1;
+  if (nextIndex > cards.length) nextIndex = cards.length;
+  
+  const nextCard = document.querySelector(`.rotation-card[data-index="${nextIndex}"]`);
+  
+  // Update Active State
+  cards.forEach(c => c.classList.remove('active'));
+  nextCard.classList.add('active');
+  
+  // Scroll to Card
+  const gap = 32;
+  const scrollOffset = nextCard.offsetLeft - track.offsetLeft;
+  track.scrollTo({ left: scrollOffset, behavior: 'smooth' });
+  
+  // Update Counter
+  counter.innerHTML = (nextIndex < 10 ? '0' + nextIndex : nextIndex) + ` <span>/ 0${cards.length}</span>`;
 }
-function nextPhase() { showPhase((currentPhase+1) % totalPhases); }
-function prevPhase() { showPhase((currentPhase-1+totalPhases) % totalPhases); }
+
+// Optional: Link scroll position to active state
+track.addEventListener('scroll', () => {
+  const scrollPos = track.scrollLeft;
+  const cardWidth = cards[0].offsetWidth + 32;
+  const activeIndex = Math.round(scrollPos / cardWidth) + 1;
+  
+  if (activeIndex >= 1 && activeIndex <= cards.length) {
+    cards.forEach(c => c.classList.remove('active'));
+    cards[activeIndex - 1].classList.add('active');
+    counter.innerHTML = (activeIndex < 10 ? '0' + activeIndex : activeIndex) + ` <span>/ 0${cards.length}</span>`;
+  }
+});
 
 // MOBILE INTERACTIVES
 function toggleDecision(header) { header.parentElement.classList.toggle('active'); }
