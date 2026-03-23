@@ -400,7 +400,7 @@ export default function Home() {
       <section id="about" className="about-hero">
         <div>
           <h2 className="about-hero-title" data-animate="fade-up" data-animate-delay="0">
-            The fashion brands that last don&rsquo;t just sell clothes, makeup, or accessories. They sell a version of yourself you want to be.
+            THE FASHION BRANDS THAT LAST DON&rsquo;T JUST SELL CLOTHES, MAKEUP, OR ACCESSORIES. THEY SELL A VERSION OF YOURSELF YOU WANT TO BE.
           </h2>
           <p className="about-hero-body" data-animate="fade-up" data-animate-delay="80">
             The most powerful ones make people feel like themselves. The smile when a pair of jeans fits perfectly. The satisfaction of redeeming rewards with your favorite retail card. The feeling of the perfect outfit making you stand just a little taller. These are the moments where confidence compounds &mdash; where the items we connect with stop being transactions and start being part of how we see ourselves.
@@ -555,17 +555,17 @@ export default function Home() {
             <div className="section-title-label">Experience</div>
           </div>
           <div>
-            <div className="exp-intro" data-animate="fade-up" data-animate-delay="0">An unusual path.<br />An intentional practice.</div>
+            <div className="exp-intro" data-animate="fade-up" data-animate-delay="0">AN UNUSUAL PATH.<br />AN INTENTIONAL PRACTICE.</div>
             <p className="exp-intro-body">A background in graphic design, trained on visual systems and narrative craft, combined with frontline retail experience where loyalty isn&rsquo;t a program &mdash; it&rsquo;s a feeling you either engineer or lose.</p>
 
             {/* Role 01 */}
             <div className="role-row" data-animate="fade-left" data-animate-delay="0">
               <div>
-                <div className="role-date">Apr 2025 &ndash; Present</div>
-                <div className="role-company">Gap Inc. &middot; #1224</div>
+                <div className="role-date">APR 2025 &ndash; PRESENT</div>
+                <div className="role-company">GAP INC. &middot; #1224</div>
               </div>
               <div>
-                <div className="role-title">Loyalty Lead</div>
+                <div className="role-title">LOYALTY LEAD</div>
                 <div className="role-desc">
                   <ul>
                     <li>Spearheaded Encore Madness, a Mid-Atlantic district loyalty acquisition initiative spanning 11 stores, partnering with GM/DM to build program infrastructure.</li>
@@ -573,15 +573,15 @@ export default function Home() {
                     <li>Drove +11% comp YTD and a 40% increase in team acquisition goal attainment through proprietary KPI-based coaching methodology.</li>
                   </ul>
                 </div>
-                <div className="role-highlight">~10x loyalty conversion improvement &middot; #1 acquisition in district YTD</div>
+                <div className="role-highlight">~10X LOYALTY CONVERSION IMPROVEMENT &middot; #1 ACQUISITION IN DISTRICT YTD</div>
               </div>
             </div>
 
             {/* Role 02 */}
             <div className="role-row" data-animate="fade-left" data-animate-delay="100">
               <div>
-                <div className="role-date">Mar 2025 &ndash; Present</div>
-                <div className="role-company">Branch Museum of Architecture and Design</div>
+                <div className="role-date">MAR 2025 &ndash; PRESENT</div>
+                <div className="role-company">BRANCH MUSEUM OF ARCHITECTURE AND DESIGN</div>
               </div>
               <div>
                 <div className="role-desc">
@@ -598,8 +598,8 @@ export default function Home() {
             {/* Role 03 */}
             <div className="role-row" data-animate="fade-left" data-animate-delay="200" style={{ borderBottom: "1px solid var(--g200)", paddingBottom: 32 }}>
               <div>
-                <div className="role-date">Jan 2025 &ndash; Present</div>
-                <div className="role-company">The Rev. Factory</div>
+                <div className="role-date">JAN 2025 &ndash; PRESENT</div>
+                <div className="role-company">THE REV. FACTORY</div>
               </div>
               <div>
                 <div className="role-desc">
@@ -623,16 +623,16 @@ export default function Home() {
           </div>
           <div className="edu-grid">
             <div className="edu-cell">
-              <div className="edu-level">Graduate</div>
+              <div className="edu-level">GRADUATE</div>
               <div className="edu-degree">M.S. Business/<br />Branding</div>
-              <div className="edu-focus">Experiential Design</div>
+              <div className="edu-focus">EXPERIENTIAL DESIGN</div>
               <div className="edu-school">VCU Brandcenter &middot; Expected May 2026</div>
               <div className="edu-note">Research: consumer behavior, AI-driven product design &amp; data-driven brand strategy.</div>
             </div>
             <div className="edu-cell">
-              <div className="edu-level">Undergraduate</div>
+              <div className="edu-level">UNDERGRADUATE</div>
               <div className="edu-degree">B.S. Studio &amp;<br />Digital Arts</div>
-              <div className="edu-focus">Graphic Design</div>
+              <div className="edu-focus">GRAPHIC DESIGN</div>
               <div className="edu-school">Liberty University &middot; May 2024</div>
               <div className="edu-note">Core: visual systems, narrative craft. Minors: Business Marketing, Journalism.</div>
             </div>
@@ -648,7 +648,7 @@ export default function Home() {
             <div className="section-title-label">Contact</div>
           </div>
           <div>
-            <h2 className="contact-heading" data-animate="fade-up" data-animate-delay="0">Let&rsquo;s Make<br />Something<br />Worth Doing.</h2>
+            <h2 className="contact-heading" data-animate="fade-up" data-animate-delay="0">LET&rsquo;S MAKE SOMETHING WORTH DOING.</h2>
             <p className="contact-body" data-animate="fade-up" data-animate-delay="80">Open to full-time brand strategy, experience design, and creative direction roles. Also available for consulting and collaborative projects. Response within 48 hours.</p>
 
             <div className="contact-links" style={{ background: 'transparent' }}>
@@ -675,8 +675,8 @@ export default function Home() {
       {/* ── FOOTER ── */}
       <footer>
         <div className="footer-left">
-          <span className="footer-name">Benn Pattara</span>
-          <span className="footer-role">Brand &amp; Product Strategist</span>
+          <span className="footer-name">BENN PATTARA</span>
+          <span className="footer-role">BRAND &amp; PRODUCT STRATEGIST</span>
           <span className="footer-qualifier">from cultural insight to shipped product specs</span>
         </div>
         <div className="footer-links">
@@ -685,7 +685,7 @@ export default function Home() {
           <a href="/13" className="footer-link">13</a>
           <a href="#contact" className="footer-link">Contact</a>
         </div>
-        <span className="footer-copy">&copy; 2026 Benn Pattara &middot; bennpattara.com</span>
+        <span className="footer-copy">&copy; 2026 BENN PATTARA &middot; BENNPATTARA.COM</span>
       </footer>
 
       <div id="cs-transition-overlay" ref={overlayRef} />
