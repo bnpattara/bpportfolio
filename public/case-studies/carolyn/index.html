@@ -111,11 +111,19 @@
   .cs-meta-strip { font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--g400); margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--g200); }
   .cs-meta-strip strong { color: var(--black); }
 
-  @media (max-width: 960px) {
+  @media (max-width: 768px) {
     .cs-body-wrap { grid-template-columns: 1fr; }
     #cs-sidenav { position: static; height: auto; border-right: none; border-bottom: 1px solid var(--g200); padding: 16px 0; display: none; }
     #cs-exec-summary, .cs-section { padding: 40px 20px; }
     .cs-exec-inner { grid-template-columns: 1fr; gap: 32px; }
+    .nav-left { display: none; }
+    .nav-main { padding: 0 20px !important; }
+    .nav-right { right: 20px !important; }
+    .cs-hero-title-wrap { padding: 40px 20px 48px !important; }
+    .cs-exec-meta-grid { grid-template-columns: 1fr 1fr !important; }
+    .cs-kpi-grid { grid-template-columns: 1fr !important; }
+    .cs-do-donot { grid-template-columns: 1fr !important; }
+    .cs-table { display: block; overflow-x: auto; width: 100%; }
   }
 
   .cs-next { margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--g200); }
