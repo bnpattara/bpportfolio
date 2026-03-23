@@ -324,12 +324,32 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
 .priority-feature { font-size: 14px; font-weight: 500; color: var(--black); margin-bottom: 6px; letter-spacing: .02em; }
 .priority-desc { font-size: 11px; color: var(--g500); line-height: 1.65; }
 .priority-prd { font-size: 9px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--g300); margin-top: 12px; }
+@media (max-width: 900px) {
+  .app-showcase-layout { grid-template-columns: 1fr !important; gap: 48px !important; }
+  .app-screen-nav { position: static !important; }
+}
 @media (max-width: 768px) {
   #cs-sidenav { display: none !important; }
   .cs-body-wrap { grid-template-columns: 1fr !important; }
   #cs-exec-summary, .cs-section { padding: 40px 20px !important; }
   .cs-exec-inner { grid-template-columns: 1fr !important; gap: 32px !important; }
   .cs-hero-title-wrap { padding: 40px 20px 48px !important; }
+  .nav-left { display: none; }
+  .nav-main { padding: 0 20px !important; }
+  .nav-right { right: 20px !important; }
+  .cs-exec-meta-grid { grid-template-columns: 1fr !important; }
+  .cs-stats-3, .cs-stats-4 { grid-template-columns: 1fr 1fr !important; }
+  .cs-body-2col { grid-template-columns: 1fr !important; }
+  .persona-grid { grid-template-columns: 1fr !important; }
+  .research-drawer-grid { grid-template-columns: 1fr !important; }
+  .user-compare { grid-template-columns: 1fr !important; }
+  .priority-grid { grid-template-columns: 1fr !important; }
+  .not-built, .outcome-stats { grid-template-columns: 1fr !important; }
+  .app-showcase { padding: 40px 20px !important; }
+  .artifact-trigger { padding: 16px 20px !important; }
+  .cs-table, .decision-log { display: block; overflow-x: auto; width: 100%; }
+  .cs-next { flex-direction: column; gap: 16px; align-items: flex-start; }
+  .cs-next-link { text-align: left; }
 }
 </style>
 </head>
