@@ -166,9 +166,27 @@ body { font-family: var(--font); background: var(--white); color: var(--black); 
 .artifact-iframe-wrap iframe { width: 100%; height: 85vh; min-height: 600px; border: none; display: block; }
 
 /* ── PROTOTYPE LAYOUT ── */
-.proto-layout { display: flex; justify-content: center; padding: 48px 0; }
-.proto-phone { width: 320px; height: 693px; border-radius: 44px; border: 8px solid #000; overflow: hidden; background: #000; box-shadow: 0 0 0 1px #e8e8e8; display: flex; justify-content: center; align-items: flex-start; }
+.proto-section { padding: 80px 0; }
+.proto-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+.proto-phone { position: sticky; top: 40px; width: 320px; height: 693px; border-radius: 44px; border: 8px solid #000; overflow: hidden; background: #000; box-shadow: 0 0 0 1px #e8e8e8; display: flex; justify-content: center; align-items: flex-start; margin: 0 auto; }
 .proto-phone iframe { width: 375px; height: 812px; border: none; display: block; transform: scale(0.8533); transform-origin: top center; flex-shrink: 0; pointer-events: auto; }
+.proto-steps { display: flex; flex-direction: column; gap: 0; }
+.proto-step { padding: 24px 0; border-bottom: 1px solid var(--g200); cursor: pointer; transition: opacity 0.2s; }
+.proto-step:first-child { border-top: 1px solid var(--g200); }
+.proto-step-num { font-size: 9px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--g300); margin-bottom: 8px; font-family: var(--mono, 'DM Mono', monospace); }
+.proto-step-title { font-size: 14px; font-weight: 500; color: var(--black); margin-bottom: 6px; letter-spacing: -.01em; }
+.proto-step-desc { font-size: 13px; font-weight: 300; color: var(--g500); line-height: 1.65; }
+.proto-step.active .proto-step-num { color: var(--black); }
+.proto-step.active .proto-step-title { color: var(--black); }
+.proto-step.active { opacity: 1; }
+.proto-step:not(.active) { opacity: 0.5; }
+.proto-step:hover:not(.active) { opacity: 0.75; }
+@media (max-width: 768px) {
+  .proto-layout { grid-template-columns: 1fr; gap: 40px; }
+  .proto-phone { position: static; }
+  .proto-step:not(.active) { opacity: 1; }
+  .proto-step:hover:not(.active) { opacity: 1; }
+}
 
 /* ── USER FLOW CAROUSEL — light mode, warm ground ── */
 .flow-carousel { background: var(--g100); padding: 72px 56px; border-top: 1px solid var(--g200); border-bottom: 1px solid var(--g200); }
@@ -354,7 +372,7 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
     <a class="cs-sidenav-link" data-target="cs-product" onclick="scrollToSection('cs-product')"><span class="cs-sidenav-num">04</span><span class="cs-sidenav-text">The Product</span></a>
     <a class="cs-sidenav-link" data-target="cs-design" onclick="scrollToSection('cs-design')"><span class="cs-sidenav-num">05</span><span class="cs-sidenav-text">Design System</span></a>
     <a class="cs-sidenav-link" data-target="cs-screens" onclick="scrollToSection('cs-screens')"><span class="cs-sidenav-num">06</span><span class="cs-sidenav-text">Key Screens</span></a>
-    <a class="cs-sidenav-link" data-target="cs-flow" onclick="scrollToSection('cs-flow')"><span class="cs-sidenav-num">—</span><span class="cs-sidenav-text">User Flow</span></a>
+    <a class="cs-sidenav-link" data-target="prototype" onclick="scrollToSection('prototype')"><span class="cs-sidenav-num">—</span><span class="cs-sidenav-text">Prototype</span></a>
     <a class="cs-sidenav-link" data-target="cs-decisions" onclick="scrollToSection('cs-decisions')"><span class="cs-sidenav-num">07</span><span class="cs-sidenav-text">Decision Log</span></a>
     <a class="cs-sidenav-link" data-target="cs-outcome" onclick="scrollToSection('cs-outcome')"><span class="cs-sidenav-num">08</span><span class="cs-sidenav-text">Outcome</span></a>
     <div class="cs-sidenav-exec">
@@ -1055,157 +1073,86 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
     </section>
 
     <!-- ══ USER FLOW CAROUSEL ══ -->
-    <div class="flow-carousel" id="cs-flow" data-cs-section="flow">
-      <div class="flow-head">
-        <div class="flow-title">The 10-Step Journey · Brief to Fitting Room · PRD §5</div>
-        <div class="flow-counter" id="flow-counter">01 <span>/ 10</span></div>
-      </div>
-      <div class="flow-track">
-        <div class="flow-steps" id="flow-steps">
-          <div class="flow-step active" onclick="showFlow(0)"><div class="flow-step-num">Step 01</div><div class="flow-step-name">Landing</div></div>
-          <div class="flow-step" onclick="showFlow(1)"><div class="flow-step-num">Step 02</div><div class="flow-step-name">Brief Builder</div></div>
-          <div class="flow-step" onclick="showFlow(2)"><div class="flow-step-num">Step 03</div><div class="flow-step-name">Stylist Match</div></div>
-          <div class="flow-step" onclick="showFlow(3)"><div class="flow-step-num">Step 04</div><div class="flow-step-name">Chat</div></div>
-          <div class="flow-step" onclick="showFlow(4)"><div class="flow-step-num">Step 05</div><div class="flow-step-name">Shortlist</div></div>
-          <div class="flow-step" onclick="showFlow(5)"><div class="flow-step-num">Step 06</div><div class="flow-step-name">Decision</div></div>
-          <div class="flow-step" onclick="showFlow(6)"><div class="flow-step-num">Step 07</div><div class="flow-step-name">Store Visit</div></div>
-          <div class="flow-step" onclick="showFlow(7)"><div class="flow-step-num">Step 08</div><div class="flow-step-name">Checkout</div></div>
-          <div class="flow-step" onclick="showFlow(8)"><div class="flow-step-num">Step 09</div><div class="flow-step-name">Follow-Up</div></div>
-          <div class="flow-step" onclick="showFlow(9)"><div class="flow-step-num">Step 10</div><div class="flow-step-name">Metric</div></div>
+    <!-- PROTOTYPE + WALKTHROUGH -->
+    <section class="proto-section" id="prototype" data-cs-section="prototype">
+      <div class="proto-layout">
+        <div class="proto-phone">
+          <iframe src="stylect-app.html" title="Stylect App Prototype" scrolling="yes"></iframe>
         </div>
-        <div class="flow-detail">
-          <div class="flow-detail-inner">
-            <div class="flow-panel active" id="fp-0">
-              <div class="flow-panel-title">Opens app. Taps <em>"Find one perfect item."</em></div>
-              <div class="flow-panel-body">Sarah has a wedding in 36 hours. She's tried two fashion apps and abandoned both. She opens Stylect, sees the onboarding prompt — no search bar, no filters, no browse grid. Just a brief builder and a gallery of real stylists with real ratings. The product makes one thing clear: you won't be shopping here. You'll be having a conversation.</div>
-              <div class="flow-panel-metrics">
-                <div class="flow-metric"><div class="flow-metric-label">PRD Feature</div><div class="flow-metric-val">F2</div></div>
-                <div class="flow-metric"><div class="flow-metric-label">Screen</div><div class="flow-metric-val accent">1.1 Onboarding</div></div>
-                <div class="flow-metric"><div class="flow-metric-label">Design decision</div><div class="flow-metric-val">No browse grid on home</div></div>
-                <div class="flow-metric"><div class="flow-metric-label">Goal card</div><div class="flow-metric-val accent">Overwhelmed Shopper</div></div>
-              </div>
-            </div>
-            <div class="flow-panel" id="fp-1">
-              <div class="flow-panel-title">Completes the <em>Occasion Brief.</em></div>
-              <div class="flow-panel-body">Five questions. Occasion: outdoor wedding. Dress code: cocktail attire. Budget: ≤$250. Vibe: Modern Romantic. Context: 65°F afternoon, ivory 2-inch block heels, needs to stay on all day. Auto-generates a shareable brief card visible to the matched stylist. This brief is the contract for the session — it defines everything the stylist is accountable to.</div>
-              <div class="flow-panel-metrics">
-                <div class="flow-metric"><div class="flow-metric-label">PRD Feature</div><div class="flow-metric-val">F2</div></div>
-                <div class="flow-metric"><div class="flow-metric-label">Time on step</div><div class="flow-metric-val accent">&lt; 2 min</div></div>
-                <div class="flow-metric"><div class="flow-metric-label">Questions</div><div class="flow-metric-val">5</div></div>
-                <div class="flow-metric"><div class="flow-metric-label">Output</div><div class="flow-metric-val accent">Shared Brief Card</div></div>
-              </div>
-            </div>
-            <div class="flow-panel" id="fp-2">
-              <div class="flow-panel-title">App surfaces <em>3 available stylists.</em></div>
-              <div class="flow-panel-body">Algorithm scores in-store associates at partner retailers by inventory overlap, occasion specialty, rating, and live availability. Sarah sees three options. She picks Amara Kofi at Nordstrom — Gold Tier, 4.97 stars, "Cocktail &amp; Event" specialist, available now with an 8-minute average response time. The algorithm surfaces. The human selects. That sequence matters.</div>
-              <div class="flow-panel-metrics">
-                <div class="flow-metric"><div class="flow-metric-label">PRD Feature</div><div class="flow-metric-val">F1</div></div>
-                <div class="flow-metric"><div class="flow-metric-label">Stylists shown</div><div class="flow-metric-val accent">3</div></div>
-                <div class="flow-metric"><div class="flow-metric-label">Top match cue</div><div class="flow-metric-val">Inventory overlap</div></div>
-                <div class="flow-metric"><div class="flow-metric-label">Amara's response avg</div><div class="flow-metric-val accent">8 min</div></div>
-              </div>
-            </div>
-            <div class="flow-panel" id="fp-3">
-              <div class="flow-panel-title">Amara confirms the brief. <em>Asks one question.</em></div>
-              <div class="flow-panel-body">"The Modern Romantic vibe for an outdoor wedding is beautiful. To nail the hemline — what's your preferred shoe height?" One clarifying question, delivered in 8 minutes. The SLA is 2 hours. Amara responds in 8 minutes. That delta is not a UX detail; it's a trust signal. Sarah replies: 2-inch block heel, ivory, all day. Amara has everything she needs.</div>
-              <div class="flow-panel-metrics">
-                <div class="flow-metric"><div class="flow-metric-label">PRD Feature</div><div class="flow-metric-val">F1</div></div>
-                <div class="flow-metric"><div class="flow-metric-label">SLA</div><div class="flow-metric-val">2h max</div></div>
-                <div class="flow-metric"><div class="flow-metric-label">Actual response</div><div class="flow-metric-val accent">8 min</div></div>
-                <div class="flow-metric"><div class="flow-metric-label">Clarifying questions</div><div class="flow-metric-val accent">1</div></div>
-              </div>
-            </div>
-            <div class="flow-panel" id="fp-4">
-              <div class="flow-panel-title">Amara sends <em>3 dresses with notes.</em></div>
-              <div class="flow-panel-body">Within the hour, three shortlist cards arrive — each with an image, price, nearby stock indicator, and Amara's personal "why-it-works" note. "#1: The emerald silk wrap accentuates your waist and pairs beautifully with your auburn hair. The wrap silhouette photographs exceptionally at outdoor settings." The note is the product. Without it, this is just another grid of dresses.</div>
-              <div class="flow-panel-metrics">
-                <div class="flow-metric"><div class="flow-metric-label">PRD Feature</div><div class="flow-metric-val">F3</div></div>
-                <div class="flow-metric"><div class="flow-metric-label">Items in shortlist</div><div class="flow-metric-val accent">3 (max)</div></div>
-                <div class="flow-metric"><div class="flow-metric-label">Mandatory note</div><div class="flow-metric-val sage">Yes · enforced</div></div>
-                <div class="flow-metric"><div class="flow-metric-label">Revision option</div><div class="flow-metric-val">F3 revision loop</div></div>
-              </div>
-            </div>
-            <div class="flow-panel" id="fp-5">
-              <div class="flow-panel-title">Sarah hearts <em>#1.</em> Stock shown. She taps Reserve.</div>
-              <div class="flow-panel-body">Sarah hearts the emerald wrap. The app immediately shows: "Size 6 in stock at Nordstrom Short Pump · 0.8 miles away." She taps "Reserve &amp; Try In-Store." A QR code is generated. No checkout required yet. No credit card. The product removes friction at the highest-anxiety decision point — the moment of commitment — by making the next action feel reversible.</div>
-              <div class="flow-panel-metrics">
-                <div class="flow-metric"><div class="flow-metric-label">PRD Feature</div><div class="flow-metric-val">F3 · F4</div></div>
-                <div class="flow-metric"><div class="flow-metric-label">Hold duration</div><div class="flow-metric-val accent">4 hours</div></div>
-                <div class="flow-metric"><div class="flow-metric-label">Distance shown</div><div class="flow-metric-val">0.8 mi</div></div>
-                <div class="flow-metric"><div class="flow-metric-label">Commitment required</div><div class="flow-metric-val sage">None yet</div></div>
-              </div>
-            </div>
-            <div class="flow-panel" id="fp-6">
-              <div class="flow-panel-title">QR scanned at Nordstrom. <em>Dress is waiting.</em></div>
-              <div class="flow-panel-body">Sarah arrives at the Nordstrom pickup counter. QR code is scanned. The dress is already pulled in her size. She tries it on. She loves it. This is the moment the platform is designed for. Every prior step — the brief, the match, the note, the QR — was infrastructure for this 90 seconds in the fitting room. The product doesn't end at the screen. It ends at the fitting room mirror.</div>
-              <div class="flow-panel-metrics">
-                <div class="flow-metric"><div class="flow-metric-label">PRD Feature</div><div class="flow-metric-val">F4</div></div>
-                <div class="flow-metric"><div class="flow-metric-label">Attribution</div><div class="flow-metric-val accent">QR scan tracked</div></div>
-                <div class="flow-metric"><div class="flow-metric-label">Store friction</div><div class="flow-metric-val sage">Zero — already pulled</div></div>
-                <div class="flow-metric"><div class="flow-metric-label">Stylist commission</div><div class="flow-metric-val">Fires on purchase</div></div>
-              </div>
-            </div>
-            <div class="flow-panel" id="fp-7">
-              <div class="flow-panel-title">In-app Apple Pay. <em>Affiliate cookie fires.</em></div>
-              <div class="flow-panel-body">She completes the purchase in-app using Apple Pay. The affiliate cookie fires on the Nordstrom transaction. Stylect earns its margin. Amara's commission is logged. The Brand Manager's dashboard updates: one more QR-attributed in-store sale. All three users win on the same transaction — which is the only incentive structure that makes a three-sided marketplace sustainable.</div>
-              <div class="flow-panel-metrics">
-                <div class="flow-metric"><div class="flow-metric-label">Revenue model</div><div class="flow-metric-val accent">Affiliate at purchase</div></div>
-                <div class="flow-metric"><div class="flow-metric-label">Stylist earns</div><div class="flow-metric-val accent">Commission</div></div>
-                <div class="flow-metric"><div class="flow-metric-label">Manager sees</div><div class="flow-metric-val">QR-attributed sale</div></div>
-                <div class="flow-metric"><div class="flow-metric-label">PRD metric fires</div><div class="flow-metric-val sage">Business Viability KPI</div></div>
-              </div>
-            </div>
-            <div class="flow-panel" id="fp-8">
-              <div class="flow-panel-title">Next day push: <em>"Upload to your Style Vault?"</em></div>
-              <div class="flow-panel-body">The next morning, Sarah receives a push notification: "You kept the emerald wrap! Add it to your Style Vault to track cost-per-wear and help Amara build better shortlists for you next time." This is the secondary JTBD activating. The Style Vault (F6, Supporting) isn't a feature for Day 1 — it's the feature that turns a transaction into a relationship.</div>
-              <div class="flow-panel-metrics">
-                <div class="flow-metric"><div class="flow-metric-label">PRD Feature</div><div class="flow-metric-val">F6 · Supporting</div></div>
-                <div class="flow-metric"><div class="flow-metric-label">Secondary JTBD</div><div class="flow-metric-val accent">Style identity building</div></div>
-                <div class="flow-metric"><div class="flow-metric-label">Retention signal</div><div class="flow-metric-val">Day-60 reopen rate</div></div>
-                <div class="flow-metric"><div class="flow-metric-label">Data to Amara</div><div class="flow-metric-val sage">Vault history for future</div></div>
-              </div>
-            </div>
-            <div class="flow-panel" id="fp-9">
-              <div class="flow-panel-title">Time to buy: <em>18 hours.</em> NPS: 10.</div>
-              <div class="flow-panel-body">Brief submitted to purchase completed in 18 hours — against a 24-hour target. NPS survey response: 10. "My stylist understood me" rating: 5/5. Time-to-solve beats the median target by 25%. This is the outcome the PRD was built to produce. Not a beautiful product. A product that works — that closes the gap between discovery and the fitting room, on time, with a human in the loop.</div>
-              <div class="flow-panel-metrics">
-                <div class="flow-metric"><div class="flow-metric-label">Time to purchase</div><div class="flow-metric-val accent">18 hours</div></div>
-                <div class="flow-metric"><div class="flow-metric-label">Target</div><div class="flow-metric-val">&lt; 24 hours</div></div>
-                <div class="flow-metric"><div class="flow-metric-label">NPS</div><div class="flow-metric-val accent">10 / 10</div></div>
-                <div class="flow-metric"><div class="flow-metric-label">Trust Index</div><div class="flow-metric-val sage">5 / 5</div></div>
-              </div>
+        <div class="proto-steps">
+          <div class="proto-step" data-step="1">
+            <div class="proto-step-num">01</div>
+            <div class="proto-step-body">
+              <div class="proto-step-title">Landing</div>
+              <div class="proto-step-desc">Sarah has a wedding in 36 hours. She&rsquo;s tried two fashion apps and abandoned both. She opens Stylect, sees the onboarding prompt &mdash; no search bar, no filters, no browse grid. Just a brief builder and a gallery of real stylists with real ratings. The product makes one thing clear: you won&rsquo;t be shopping here. You&rsquo;ll be having a conversation.</div>
             </div>
           </div>
-          <div class="flow-nav">
-            <button class="flow-nav-btn" onclick="prevFlow()">← Prev</button>
-            <button class="flow-nav-btn" onclick="nextFlow()">Next →</button>
+          <div class="proto-step" data-step="2">
+            <div class="proto-step-num">02</div>
+            <div class="proto-step-body">
+              <div class="proto-step-title">Brief Builder</div>
+              <div class="proto-step-desc">Five questions. Occasion: outdoor wedding. Dress code: cocktail attire. Budget: &le;$250. Vibe: Modern Romantic. Context: 65&deg;F afternoon, ivory 2-inch block heels, needs to stay on all day. Auto-generates a shareable brief card visible to the matched stylist. This brief is the contract for the session &mdash; it defines everything the stylist is accountable to.</div>
+            </div>
           </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ══ APP PROTOTYPE ARTIFACT ══ -->
-    <div class="artifact-strip" id="artifact-app">
-      <div class="artifact-trigger" id="art2-trigger" onclick="toggleArtifact(2)">
-        <div class="artifact-left">
-          <div class="artifact-badge"><span>Interactive Prototype</span></div>
-          <div class="artifact-meta">
-            <div class="artifact-name">Stylect App · Full Prototype</div>
-            <div class="artifact-desc">All 3 user flows · F1–F13 features · Full PRD coverage · Stylist workspace · Brand Manager dashboard</div>
+          <div class="proto-step" data-step="3">
+            <div class="proto-step-num">03</div>
+            <div class="proto-step-body">
+              <div class="proto-step-title">Stylist Match</div>
+              <div class="proto-step-desc">Algorithm scores in-store associates at partner retailers by inventory overlap, occasion specialty, rating, and live availability. Sarah sees three options. She picks Amara Kofi at Nordstrom &mdash; Gold Tier, 4.97 stars, &ldquo;Cocktail &amp; Event&rdquo; specialist, available now with an 8-minute average response time. The algorithm surfaces. The human selects. That sequence matters.</div>
+            </div>
           </div>
-        </div>
-        <div class="artifact-right"><span class="artifact-toggle" id="art2-cta">+</span></div>
-      </div>
-      <div class="artifact-expand" id="art2-expand">
-        <div class="artifact-inner">
-          <div class="proto-layout">
-            <div class="proto-phone">
-              <iframe src="stylect-app.html" title="Stylect App Prototype" scrolling="yes"></iframe>
+          <div class="proto-step" data-step="4">
+            <div class="proto-step-num">04</div>
+            <div class="proto-step-body">
+              <div class="proto-step-title">Chat</div>
+              <div class="proto-step-desc">&ldquo;The Modern Romantic vibe for an outdoor wedding is beautiful. To nail the hemline &mdash; what&rsquo;s your preferred shoe height?&rdquo; One clarifying question, delivered in 8 minutes. The SLA is 2 hours. Amara responds in 8 minutes. That delta is not a UX detail; it&rsquo;s a trust signal. Sarah replies: 2-inch block heel, ivory, all day. Amara has everything she needs.</div>
+            </div>
+          </div>
+          <div class="proto-step" data-step="5">
+            <div class="proto-step-num">05</div>
+            <div class="proto-step-body">
+              <div class="proto-step-title">Shortlist</div>
+              <div class="proto-step-desc">Within the hour, three shortlist cards arrive &mdash; each with an image, price, nearby stock indicator, and Amara&rsquo;s personal &ldquo;why-it-works&rdquo; note. &ldquo;#1: The emerald silk wrap accentuates your waist and pairs beautifully with your auburn hair. The wrap silhouette photographs exceptionally at outdoor settings.&rdquo; The note is the product. Without it, this is just another grid of dresses.</div>
+            </div>
+          </div>
+          <div class="proto-step" data-step="6">
+            <div class="proto-step-num">06</div>
+            <div class="proto-step-body">
+              <div class="proto-step-title">Decision</div>
+              <div class="proto-step-desc">Sarah hearts the emerald wrap. The app immediately shows: &ldquo;Size 6 in stock at Nordstrom Short Pump &middot; 0.8 miles away.&rdquo; She taps &ldquo;Reserve &amp; Try In-Store.&rdquo; A QR code is generated. No checkout required yet. No credit card. The product removes friction at the highest-anxiety decision point &mdash; the moment of commitment &mdash; by making the next action feel reversible.</div>
+            </div>
+          </div>
+          <div class="proto-step" data-step="7">
+            <div class="proto-step-num">07</div>
+            <div class="proto-step-body">
+              <div class="proto-step-title">Store Visit</div>
+              <div class="proto-step-desc">Sarah arrives at the Nordstrom pickup counter. QR code is scanned. The dress is already pulled in her size. She tries it on. She loves it. This is the moment the platform is designed for. Every prior step &mdash; the brief, the match, the note, the QR &mdash; was infrastructure for this 90 seconds in the fitting room. The product doesn&rsquo;t end at the screen. It ends at the fitting room mirror.</div>
+            </div>
+          </div>
+          <div class="proto-step" data-step="8">
+            <div class="proto-step-num">08</div>
+            <div class="proto-step-body">
+              <div class="proto-step-title">Checkout</div>
+              <div class="proto-step-desc">She completes the purchase in-app using Apple Pay. The affiliate cookie fires on the Nordstrom transaction. Stylect earns its margin. Amara&rsquo;s commission is logged. The Brand Manager&rsquo;s dashboard updates: one more QR-attributed in-store sale. All three users win on the same transaction &mdash; which is the only incentive structure that makes a three-sided marketplace sustainable.</div>
+            </div>
+          </div>
+          <div class="proto-step" data-step="9">
+            <div class="proto-step-num">09</div>
+            <div class="proto-step-body">
+              <div class="proto-step-title">Follow-Up</div>
+              <div class="proto-step-desc">The next morning, Sarah receives a push notification: &ldquo;You kept the emerald wrap! Add it to your Style Vault to track cost-per-wear and help Amara build better shortlists for you next time.&rdquo; This is the secondary JTBD activating. The Style Vault (F6, Supporting) isn&rsquo;t a feature for Day 1 &mdash; it&rsquo;s the feature that turns a transaction into a relationship.</div>
+            </div>
+          </div>
+          <div class="proto-step" data-step="10">
+            <div class="proto-step-num">10</div>
+            <div class="proto-step-body">
+              <div class="proto-step-title">Metric</div>
+              <div class="proto-step-desc">Brief submitted to purchase completed in 18 hours &mdash; against a 24-hour target. NPS survey response: 10. &ldquo;My stylist understood me&rdquo; rating: 5/5. Time-to-solve beats the median target by 25%. This is the outcome the PRD was built to produce. Not a beautiful product. A product that works &mdash; that closes the gap between discovery and the fitting room, on time, with a human in the loop.</div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
 
     <!-- ══ 07 DECISION LOG ══ -->
     <section class="cs-section" id="cs-decisions" data-cs-section="decisions">
@@ -1446,22 +1393,6 @@ function toggleResearch() {
   icon.textContent = open ? '+' : '\u00d7';
 }
 
-// USER FLOW CAROUSEL
-let currentFlow = 0;
-const totalFlow = 10;
-
-function showFlow(n) {
-  document.querySelectorAll('.flow-step').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.flow-panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.flow-step')[n].classList.add('active');
-  document.getElementById('fp-'+n).classList.add('active');
-  const num = String(n+1).padStart(2,'0');
-  document.getElementById('flow-counter').innerHTML = num + ' <span>/ 10</span>';
-  currentFlow = n;
-}
-function nextFlow() { showFlow((currentFlow+1) % totalFlow); }
-function prevFlow() { showFlow((currentFlow-1+totalFlow) % totalFlow); }
-
 // KEY SCREENS SHOWCASE
 function showScreen(n) {
   document.querySelectorAll('.app-screen-btn').forEach(b => b.classList.remove('active'));
@@ -1469,6 +1400,22 @@ function showScreen(n) {
   document.querySelector('.app-screen-btn[data-screen="'+n+'"]').classList.add('active');
   document.getElementById('screen-'+n).classList.add('active');
 }
+</script>
+<script>
+(function() {
+  const steps = document.querySelectorAll('.proto-step');
+  if (!steps.length) return;
+  steps[0].classList.add('active');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        steps.forEach(s => s.classList.remove('active'));
+        e.target.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
+  steps.forEach(s => obs.observe(s));
+})();
 </script>
 </body>
 </html>
