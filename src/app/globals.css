@@ -2543,7 +2543,7 @@ body>* {
 .accordion-panels {
   display: flex;
   width: 100%;
-  min-height: calc(100vh - 52px);
+  height: calc(100vh - 52px);
   overflow: visible;
 }
 
