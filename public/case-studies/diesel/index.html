@@ -88,30 +88,23 @@ body { font-family: var(--font); background: var(--white); color: var(--black); 
 .cs-body { font-size: 15px; color: var(--g500); line-height: 1.8; margin-bottom: 20px; }
 .cs-body:last-child { margin-bottom: 0; }
 .cs-pull-quote { font-size: clamp(20px,2.2vw,28px); font-weight: 300; font-style: italic; color: var(--black); line-height: 1.4; border-left: 2px solid var(--black); padding-left: 28px; margin-bottom: 28px; }
-.cs-body-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 28px; }
-.cs-body-2col p { font-size: 13px; color: var(--g500); line-height: 1.75; }
+/* Strategic Tension Grid */
+.tension-intro { max-width: 800px; margin-bottom: 48px; }
+.tension-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 48px; }
 
 /* Accusation cards */
-.acc-card { border: 1px solid var(--g200); background: var(--white); padding: 28px 28px 24px; margin-bottom: 16px; position: relative; }
-.acc-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: var(--g200); }
-.acc-card.live::before { background: var(--black); }
-.acc-label { font-size: 8px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--g400); margin-bottom: 12px; }
-.acc-text { font-size: 15px; font-weight: 400; line-height: 1.6; letter-spacing: .02em; color: var(--g700); }
-.acc-text span { color: var(--black); }
+.acc-card { border-top: 1px solid var(--g200); background: var(--white); padding: 32px 0; position: relative; }
+.acc-card.live { border-top-color: var(--black); }
+.acc-label { font-size: 9px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--g300); margin-bottom: 16px; display: block; }
+.acc-text { font-size: 16px; font-weight: 400; line-height: 1.5; color: var(--g700); }
+.acc-text span { color: var(--black); font-weight: 700; }
 
-/* Harajuku split */
-.hara-split { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--g200); }
-.hara-col { padding: 40px 32px; border-right: 1px solid var(--g200); }
-.hara-col:last-child { border-right: none; }
-.hara-era { font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--g400); margin-bottom: 16px; }
-.hara-era.now { color: var(--black); font-weight: 700; }
-.hara-h { font-size: clamp(22px,2.5vw,30px); font-weight: 400; letter-spacing: .03em; text-transform: uppercase; line-height: 1.1; margin-bottom: 16px; color: var(--black); }
+/* Strategic Thesis — Integrated / Premium */
+.thesis-wrap { padding: 80px 0; border-top: 1px solid var(--g200); border-bottom: 1px solid var(--g200); margin: 60px 0; text-align: center; }
+.thesis-label { font-size: 10px; font-weight: 700; letter-spacing: .24em; text-transform: uppercase; color: var(--g300); margin-bottom: 24px; }
+.thesis-text { font-size: clamp(24px, 4vw, 42px); font-weight: 300; line-height: 1.1; letter-spacing: .02em; text-transform: uppercase; color: var(--black); max-width: 1000px; margin: 0 auto; }
+.thesis-text em { font-style: italic; font-weight: 300; color: var(--g500); }
 
-/* Thesis pill */
-.thesis-pill { border: 1px solid var(--g200); padding: 20px 32px; max-width: 680px; margin: 0 auto; text-align: center; }
-.thesis-pill-label { font-size: 8px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--g400); margin-bottom: 12px; }
-.thesis-pill-text { font-size: clamp(18px,2.2vw,26px); font-weight: 400; line-height: 1.3; letter-spacing: .03em; text-transform: uppercase; color: var(--black); }
-.thesis-pill-text em { font-style: italic; font-weight: 300; }
 
 /* Token block */
 .token-block { border: 1px solid var(--g200); background: var(--g100); padding: 32px; margin-top: 28px; display: flex; align-items: center; gap: 32px; }
@@ -167,15 +160,17 @@ body { font-family: var(--font); background: var(--white); color: var(--black); 
 .floor-img-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.4) 0%, transparent 40%); }
 .floor-img-label { position: absolute; bottom: 32px; right: 32px; font-size: 10px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--white); border: 1px solid rgba(255,255,255,0.3); padding: 8px 16px; background: rgba(0,0,0,0.5); backdrop-filter: blur(8px); }
 
-/* Content Engine Visual */
-.engine-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 32px; }
-.engine-act { background: var(--g100); padding: 32px; border: 1px solid var(--g200); position: relative; display: flex; flex-direction: column; gap: 16px; }
-.engine-act::after { content: '→'; position: absolute; right: -16px; top: 50%; transform: translateY(-50%); font-size: 20px; color: var(--g300); z-index: 2; }
-.engine-act:last-child::after { display: none; }
-.engine-num { font-size: 42px; font-weight: 300; line-height: 1; color: var(--black); opacity: 0.1; position: absolute; top: 24px; right: 24px; }
-.engine-title { font-size: 14px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--black); }
-.engine-desc { font-size: 13px; line-height: 1.6; color: var(--g500); }
-.engine-tag { align-self: flex-start; font-size: 9px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: 4px 8px; background: var(--black); color: var(--white); }
+/* Thumbnail Switcher */
+.floor-thumbs { position: absolute; bottom: 82px; right: 32px; display: flex; gap: 12px; z-index: 10; }
+.f-thumb { width: 64px; height: 42px; border: 1px solid rgba(255,255,255,0.3); cursor: pointer; opacity: 0.6; transition: all var(--ease-base); overflow: hidden; }
+.f-thumb:hover, .f-thumb.active { opacity: 1; border-color: var(--white); transform: translateY(-2px); }
+.f-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+/* Flagship Exterior Intro */
+.ext-visual { width: 100%; height: 60vh; background: var(--black); margin-bottom: 64px; border-top: 1px solid var(--g200); position: relative; }
+.ext-visual img { width: 100%; height: 100%; object-fit: cover; }
+.ext-label { position: absolute; top: 32px; right: 48px; font-size: 10px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--white); border-bottom: 1px solid var(--white); padding-bottom: 4px; }
+
 
 /* Competitor Grid — Premium Upgrade */
 .comp-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1px; background: var(--g200); border: 1px solid var(--g200); margin-top: 32px; }
@@ -212,17 +207,28 @@ body { font-family: var(--font); background: var(--white); color: var(--black); 
 .cs-stat-num { font-size: 48px; font-weight: 300; color: var(--black); letter-spacing: -.02em; line-height: 1; margin-bottom: 8px; }
 .cs-stat-label { font-size: 12px; color: var(--g500); line-height: 1.65; }
 
-.outcome-stat { background: var(--white); padding: 28px 24px; border-top: 3px solid var(--black); display: flex; flex-direction: column; gap: 4px; }
-.outcome-stat-num { font-size: 52px; font-weight: 300; color: var(--black); letter-spacing: -.02em; line-height: 1; }
-.outcome-stat-eyebrow { font-size: 9px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--g300); }
-.outcome-stat-label { font-size: 12px; color: var(--g500); line-height: 1.65; }
-.cs-next { border-top: 1px solid var(--g200); padding-top: 32px; display: flex; justify-content: space-between; align-items: center; margin-top: 48px; }
-.cs-next-label { font-size: 9px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--g300); }
-.cs-next-link { text-align: right; text-decoration: none; display: block; }
-.cs-next-meta { font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: var(--g400); margin-bottom: 5px; }
-.cs-next-title { font-size: 22px; font-weight: 400; letter-spacing: .04em; text-transform: uppercase; color: var(--black); transition: color var(--ease-fast); }
-.cs-next-link:hover .cs-next-title { color: var(--g500); }
-footer { background: var(--black); padding: 32px 48px; display: flex; justify-content: space-between; align-items: center; }
+/* Business Case Carousel (Saks Style) */
+.carousel-container { position: relative; margin: 40px -56px 0; padding: 0 56px; overflow: hidden; cursor: grab; }
+.carousel-track { display: flex; transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1); gap: 24px; padding-bottom: 40px; }
+.carousel-item { flex: 0 0 350px; background: var(--white); border-top: 2px solid var(--black); padding: 32px 24px; }
+.c-num { font-size: 10px; font-weight: 700; color: var(--g300); margin-bottom: 12px; display: block; }
+.c-h { font-size: 18px; font-weight: 600; text-transform: uppercase; margin-bottom: 12px; color: var(--black); }
+.c-p { font-size: 13px; line-height: 1.6; color: var(--g500); }
+
+/* Brand in the World Grid */
+.world-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--g200); margin-top: 48px; border: 1px solid var(--g200); }
+.world-cell { background: var(--white); position: relative; height: 350px; overflow: hidden; }
+.world-cell img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+.world-cell:hover img { transform: scale(1.04); }
+.world-cap { position: absolute; bottom: 16px; left: 18px; z-index: 2; font-size: 8px; letter-spacing: .12em; text-transform: uppercase; color: var(--white); background: rgba(0,0,0,.65); padding: 6px 10px; }
+
+/* Outcome Stats — Horizontal */
+.outcome-stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; border-top: 1px solid var(--g200); padding-top: 32px; margin-top: 48px; }
+.outcome-cell { padding-right: 24px; }
+.o-num { font-size: 42px; font-weight: 300; letter-spacing: -.02em; color: var(--black); line-height: 1; margin-bottom: 8px; }
+.o-label { font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--g300); margin-bottom: 4px; }
+.o-desc { font-size: 12px; color: var(--g500); line-height: 1.5; }
+
 .footer-id { display: flex; flex-direction: column; gap: 4px; }
 .footer-name { font-size: 12px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--white); }
 .footer-role { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.28); }
@@ -366,28 +372,27 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
       <!-- 01 THE ENEMY -->
       <section class="cs-section" id="cs-section-01" data-cs-section="section-01">
         <div class="cs-section-eyebrow"><span class="cs-section-num">01</span><span class="cs-section-title">The Strategic Tension</span></div>
-        <h2 class="cs-heading">Diesel is against the pose.</h2>
-        <div class="cs-body-2col" style="gap:48px;margin-bottom:32px;">
-          <div>
-            <p class="cs-body">In 2025, self-expression has become the most carefully managed performance in the world. The algorithm decides what's brave. The feed decides what's authentic. Even the "weird" looks are weird in pre-approved ways — rebellious within acceptable parameters, optimized for approval from people who aren't in the room.</p>
-            <p class="cs-body"><strong>Diesel's enemy isn't conformity.</strong> The brand has always known conformity is a boring target. <em>The real enemy is fake nonconformity</em> — the three-hour "effortless" fit, the "I don't care what people think" outfit engineered for 50K likes. The performance of a self that hasn't been decided yet.</p>
-            <p class="cs-body">Diesel has always made clothes for people who have actually decided. <strong>The Tokyo flagship is built to help people get there.</strong></p>
+        <div class="tension-intro">
+          <h2 class="cs-heading">Diesel is against the pose.</h2>
+          <p class="cs-body">In 2025, self-expression has become the most carefully managed performance in the world. The algorithm decides what's brave. The feed decides what's authentic. Even the "weird" looks are weird in pre-approved ways — rebellious within acceptable parameters, optimized for approval from people who aren't in the room.</p>
+          <p class="cs-body"><strong>Diesel's enemy isn't conformity.</strong> The brand has always known conformity is a boring target. <em>The real enemy is fake nonconformity</em> — the three-hour "effortless" fit, the "I don't care what people think" outfit engineered for 50K likes. The performance of a self that hasn't been decided yet.</p>
+        </div>
+
+        <div class="tension-grid">
+          <div class="acc-card">
+            <span class="acc-label">Industry Does</span>
+            <div class="acc-text">Brands build "Instagrammable moments." They lay out a red carpet <span>for your phone.</span></div>
           </div>
-          <div>
-            <div class="acc-card">
-              <div class="acc-label">What The Industry Does</div>
-              <div class="acc-text">Brands build "Instagrammable moments."<br>They lay out a red carpet <span>for your phone.</span></div>
-            </div>
-            <div class="acc-card">
-              <div class="acc-label">What The Consumer Does</div>
-              <div class="acc-text">Dresses for an audience<br>that isn't in the room.<br><span>Performs. Never decides.</span></div>
-            </div>
-            <div class="acc-card live">
-              <div class="acc-label">What Diesel Does</div>
-              <div class="acc-text">Removes the apparatus.<br>Forces the question.<br><span>Find out who you are first.</span></div>
-            </div>
+          <div class="acc-card">
+            <span class="acc-label">Consumer Does</span>
+            <div class="acc-text">Dresses for an audience that isn't in the room. <span>Performs. Never decides.</span></div>
+          </div>
+          <div class="acc-card live">
+            <span class="acc-label">Diesel Does</span>
+            <div class="acc-text">Removes the apparatus. Forces the question. <span>Find out who you are first.</span></div>
           </div>
         </div>
+
 
         <div class="cs-divider">
           <span class="cs-divider-text">The Cultural Context</span>
@@ -414,14 +419,16 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
       <section class="cs-section cs-section-alt" id="cs-section-02" data-cs-section="section-02">
         <div class="cs-section-eyebrow"><span class="cs-section-num">02</span><span class="cs-section-title">The Strategic Concept</span></div>
         <h2 class="cs-heading">A flagship designed for self-knowledge.</h2>
-        <p class="cs-body">Every other brand has spent the last decade optimising their stores for content creation — better lighting for fit checks, designated photo walls, engineered "moments." <strong>Diesel Tokyo does the opposite.</strong> It is designed to strip away the apparatus of performed self-expression and force a more fundamental question: who are you when nobody's watching?</p>
-        <div class="thesis-pill" style="margin-top:36px;">
-          <div class="thesis-pill-label">The Strategic Thesis</div>
-          <div class="thesis-pill-text">
+        <p class="cs-body" style="max-width:800px;">Every other brand has spent the last decade optimising their stores for content creation — photo walls, engineered "moments," lighting for fit checks. <strong>Diesel Tokyo does the opposite.</strong> It strips away the apparatus of performed self-expression to force a more fundamental question: who are you when nobody's watching?</p>
+        
+        <div class="thesis-wrap">
+          <div class="thesis-label">The Strategic Thesis</div>
+          <div class="thesis-text">
             We don't need you to see it. <em>We need you to feel it.</em><br>
             Find out who you are first. Post later.
           </div>
         </div>
+
       </section>
 
       <!-- 03 THE PROVOCATION -->
@@ -491,6 +498,12 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
           <span class="cs-divider-end">Five Floors / One Descent</span>
         </div>
 
+        <div class="ext-visual">
+          <img src="/img/case-studies/diesel/exterior.png" alt="Diesel Tokyo — Harajuku Flagship Exterior">
+          <div class="ext-label">Harajuku Flagship · Exterior</div>
+        </div>
+
+
         <div class="floor-container">
           <div class="floor-text-track">
             <div class="floor-item" data-floor="0">
@@ -545,32 +558,63 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
           </div>
 
           <div class="floor-visual-track">
+            <!-- F1 -->
             <div class="floor-img-wrap active" data-floor-img="0">
-              <img src="/img/case-studies/diesel/f1.png" alt="F1 Gallery">
+              <img src="/img/case-studies/diesel/f1.png" alt="F1 Gallery" data-view="primary">
+              <img src="/img/case-studies/diesel/f1_detail.png" alt="F1 Detail" data-view="detail" style="display:none;">
               <div class="floor-img-overlay"></div>
               <div class="floor-img-label">F1 · Street Level</div>
+              <div class="floor-thumbs" data-for-floor="0">
+                <div class="f-thumb active" onclick="switchView(0, 'primary')"><img src="/img/case-studies/diesel/f1.png"></div>
+                <div class="f-thumb" onclick="switchView(0, 'detail')"><img src="/img/case-studies/diesel/f1_detail.png"></div>
+              </div>
             </div>
+            <!-- F2 -->
             <div class="floor-img-wrap" data-floor-img="1">
-              <img src="/img/case-studies/diesel/f2.png" alt="F2 Premium">
+              <img src="/img/case-studies/diesel/f2.png" alt="F2 Premium" data-view="primary">
+              <img src="/img/case-studies/diesel/f2_detail.png" alt="F2 Detail" data-view="detail" style="display:none;">
               <div class="floor-img-overlay"></div>
               <div class="floor-img-label">F2 · The Edit</div>
+              <div class="floor-thumbs" data-for-floor="1">
+                <div class="f-thumb active" onclick="switchView(1, 'primary')"><img src="/img/case-studies/diesel/f2.png"></div>
+                <div class="f-thumb" onclick="switchView(1, 'detail')"><img src="/img/case-studies/diesel/f2_detail.png"></div>
+              </div>
             </div>
+            <!-- F3 -->
             <div class="floor-img-wrap" data-floor-img="2">
-              <img src="/img/case-studies/diesel/f3.png" alt="F3 Lab">
+              <img src="/img/case-studies/diesel/f3.png" alt="F3 Lab" data-view="primary">
+              <img src="/img/case-studies/diesel/f3_detail.png" alt="F3 Detail" data-view="detail" style="display:none;">
               <div class="floor-img-overlay"></div>
               <div class="floor-img-label">F3 · Denim Lab</div>
+              <div class="floor-thumbs" data-for-floor="2">
+                <div class="f-thumb active" onclick="switchView(2, 'primary')"><img src="/img/case-studies/diesel/f3.png"></div>
+                <div class="f-thumb" onclick="switchView(2, 'detail')"><img src="/img/case-studies/diesel/f3_detail.png"></div>
+              </div>
             </div>
+            <!-- F4 -->
             <div class="floor-img-wrap" data-floor-img="3">
-              <img src="/img/case-studies/diesel/f4.png" alt="F4 Cafe">
+              <img src="/img/case-studies/diesel/f4.png" alt="F4 Cafe" data-view="primary">
+              <img src="/img/case-studies/diesel/f4_detail.png" alt="F4 Detail" data-view="detail" style="display:none;">
               <div class="floor-img-overlay"></div>
               <div class="floor-img-label">F4 · Café 1978</div>
+              <div class="floor-thumbs" data-for-floor="3">
+                <div class="f-thumb active" onclick="switchView(3, 'primary')"><img src="/img/case-studies/diesel/f4.png"></div>
+                <div class="f-thumb" onclick="switchView(3, 'detail')"><img src="/img/case-studies/diesel/f4_detail.png"></div>
+              </div>
             </div>
+            <!-- F5 -->
             <div class="floor-img-wrap" data-floor-img="4">
-              <img src="/img/case-studies/diesel/f5.png" alt="F5 Ghiaccio">
+              <img src="/img/case-studies/diesel/f5.png" alt="F5 Ghiaccio" data-view="primary">
+              <img src="/img/case-studies/diesel/f5_detail.png" alt="F5 Detail" data-view="detail" style="display:none;">
               <div class="floor-img-overlay"></div>
               <div class="floor-img-label">F5 · Ghiaccio</div>
+              <div class="floor-thumbs" data-for-floor="4">
+                <div class="f-thumb active" onclick="switchView(4, 'primary')"><img src="/img/case-studies/diesel/f5.png"></div>
+                <div class="f-thumb" onclick="switchView(4, 'detail')"><img src="/img/case-studies/diesel/f5_detail.png"></div>
+              </div>
             </div>
           </div>
+
         </div>
 
 
@@ -616,9 +660,9 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
 
         <div class="comp-grid">
           <div class="comp-card">
-            <span class="c-brand">Calvin Klein</span>
-            <p class="c-move">Minimalism merged with Japanese craft. Large lifestyle destination focusing on commercial breadth.</p>
-            <div class="c-meta"><span class="c-loc">Harajuku</span><span class="c-yr">2025</span></div>
+            <span class="c-brand">Louis Vuitton</span>
+            <p class="c-move">High-concept renovation reaffirming physical commitment to the luxury 'Honne' buyer.</p>
+            <div class="c-meta"><span class="c-loc">Ginza</span><span class="c-yr">2021</span></div>
           </div>
           <div class="comp-card">
             <span class="c-brand">Jordan Brand</span>
@@ -626,16 +670,17 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
             <div class="c-meta"><span class="c-loc">Harajuku</span><span class="c-yr">2024</span></div>
           </div>
           <div class="comp-card">
-            <span class="c-brand">Louis Vuitton</span>
-            <p class="c-move">High-concept renovation reaffirming physical commitment to the luxury 'Honne' buyer.</p>
-            <div class="c-meta"><span class="c-loc">Ginza</span><span class="c-yr">2021</span></div>
+            <span class="c-brand">Calvin Klein</span>
+            <p class="c-move">Minimalism merged with Japanese craft. Large lifestyle destination focusing on commercial breadth.</p>
+            <div class="c-meta"><span class="c-loc">Harajuku</span><span class="c-yr">2025</span></div>
           </div>
           <div class="comp-card diesel">
             <span class="c-brand">Diesel ↗</span>
             <p class="c-move">The Iceberg. Harajuku's first phone-free flagship. A cultural reclamation and brand reset.</p>
-            <div class="c-meta"><span class="c-loc">Harajuku</span><span class="c-yr">F25</span></div>
+            <div class="c-meta"><span class="c-loc">Harajuku</span><span class="c-yr">2026</span></div>
           </div>
         </div>
+
 
       </section>
 
@@ -645,50 +690,57 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
         <h2 class="cs-heading">What the building returns.</h2>
         <p class="cs-body">A flagship of this scale is a brand statement. <strong>The real value is what happens to the brand's position globally when this exists.</strong></p>
         <p class="cs-body">One number worth holding: the brands that have committed flagship infrastructure to Japan have reported Japan as a top-three market for global profitability within 36 months.</p>
-        <div class="cs-body-2col" style="gap:24px;margin-top:40px;">
-          <div>
-            <div class="ret-item">
-              <div class="ret-n">Return 01 — Brand Equity</div>
-              <div class="ret-title">Global Prestige Signal</div>
-              <p class="ret-body">Success in Japan's discerning market is internationally recognised as a quality benchmark. A Harajuku flagship communicates to press, wholesale buyers, and consumers across every market that Diesel operates at the prestige tier.</p>
+        <div class="carousel-container" id="business-carousel">
+          <div class="carousel-track">
+            <div class="carousel-item">
+              <span class="c-num">01</span>
+              <div class="c-h">Global Prestige Signal</div>
+              <p class="c-p">Success in Japan's discerning market is internationally recognised as a quality benchmark. A Harajuku flagship communicates prestige to global press and wholesale.</p>
             </div>
-            <div class="ret-item">
-              <div class="ret-n">Return 02 — Market Access</div>
-              <div class="ret-title">Asian Market Gateway</div>
-              <p class="ret-body">Japan's "Cool Japan" cultural influence creates an amplification effect. A successful flagship generates press and brand equity that radiates into markets Diesel has not yet entered. Tokyo is the beachhead.</p>
+            <div class="carousel-item">
+              <span class="c-num">02</span>
+              <div class="c-h">Asian Market Gateway</div>
+              <p class="c-p">Japan's cultural influence creates an amplification effect. A successful flagship generates brand equity that radiates into emerging markets. Tokyo is the beachhead.</p>
             </div>
-            <div class="ret-item">
-              <div class="ret-n">Return 03 — Loyalty Infrastructure</div>
-              <div class="ret-title">Highest-LTV Consumer Base</div>
-              <p class="ret-body">The Destruction Ceremony, the Ghiaccio table, the brass token — these are loyalty mechanics. Japan's propensity for deep brand loyalty, once earned, makes this the highest-lifetime-value customer base Diesel can cultivate.</p>
+            <div class="carousel-item">
+              <span class="c-num">03</span>
+              <div class="c-h">Loyalty Infrastructure</div>
+              <p class="c-p">The Destruction Ceremony and brass tokens are loyalty mechanics. Japan's deep brand loyalty makes this the highest-LTV consumer base Diesel can cultivate.</p>
             </div>
-          </div>
-          <div>
-            <div class="ret-item">
-              <div class="ret-n">Return 04 — Content Quality</div>
-              <div class="ret-title">Earned Organic Reach</div>
-              <p class="ret-body">The phone-free floors don't suppress content — they upgrade it. Diesel gets better organic distribution by engineering the conditions for authenticity. Content strategy built into the architecture.</p>
+            <div class="carousel-item">
+              <span class="c-num">04</span>
+              <div class="c-h">Earned Organic Reach</div>
+              <p class="c-p">Phone-free floors don't suppress content — they upgrade it. Diesel gets better organic distribution by engineering the conditions for authenticity.</p>
             </div>
-            <div class="ret-item">
-              <div class="ret-n">Return 05 — Proof of Concept</div>
-              <div class="ret-title">The Expansion Template</div>
-              <p class="ret-body">This flagship demonstrates that Diesel can execute at prestige-tier retail globally under the Martens creative vision. If the Iceberg works in Harajuku, the brief for Seoul, Shanghai, and London is already written.</p>
+            <div class="carousel-item">
+              <span class="c-num">05</span>
+              <div class="c-h">The Expansion Template</div>
+              <p class="c-p">Proof that Diesel can execute prestige retail globally under Martens. If the Iceberg works here, the brief for London and Shanghai is written.</p>
             </div>
           </div>
         </div>
-      </section>
 
-      <!-- Image pair -->
-      <div class="img-pair">
-        <div class="img-cell">
-          <img src="/img/case-studies/diesel/team.png" alt="Staff as curators">
-          <div class="img-cap">Staff as Curators — Current Season Tonal Style</div>
+        <div class="cs-divider" style="margin-top:64px;">
+          <span class="cs-divider-text">The Brand in the World</span>
+          <div class="cs-divider-line"></div>
+          <span class="cs-divider-end">Fixtures / Packaging / Style</span>
         </div>
-        <div class="img-cell">
-          <img src="/img/case-studies/diesel/packaging.png" alt="Vacuum sealed Denim Lab packaging">
-          <div class="img-cap">Denim Lab — Vacuum-Sealed Take-Home Packaging</div>
+
+        <div class="world-grid">
+          <div class="world-cell">
+            <img src="/img/case-studies/diesel/fixture.png" alt="Diesel Fixture Detail">
+            <div class="world-cap">Store Fixtures — Volcanic Stone & Steel</div>
+          </div>
+          <div class="world-cell">
+            <img src="/img/case-studies/diesel/packaging.png" alt="Diesel Packaging Detail">
+            <div class="world-cap">Packaging System — Vacuum-Sealed Lab Kits</div>
+          </div>
+          <div class="world-cell">
+            <img src="/img/case-studies/diesel/uniform.png" alt="Diesel Uniform Detail">
+            <div class="world-cap">Employee Style Guide — Tonal Denim Utility</div>
+          </div>
         </div>
-      </div>
+
 
 
 
@@ -696,17 +748,26 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
       <section class="cs-section" id="cs-outcome" data-cs-section="outcome">
         <div class="cs-section-eyebrow"><span class="cs-section-num">07</span><span class="cs-section-title">The Proposition</span></div>
         <h2 class="cs-heading">Don't open a store. Open the space Harajuku forgot it had.</h2>
-        <p class="cs-body">Diesel's creative momentum is real and finite. The window to make a physical statement that matches the cultural moment is open now. <strong>The Iceberg is not a retail expansion. It is a reclamation — of Harajuku, of authentic self-expression, of the version of "For Successful Living" that has always meant deciding who you are before performing it.</strong></p>
-        <div class="meta-strip" style="margin-top:40px;border-top:1px solid var(--g200);">
-          <span>Enemy — <b>Performative Self-Expression</b></span>
-          <span>Provocation — <b>Phone-Free Retail Floors</b></span>
-          <span>Thesis — <b>Find Out First. Post Later.</b></span>
+        <p class="cs-body" style="max-width:800px;">Diesel Tokyo is not a retail expansion. It is a reclamation — of Harajuku, of authentic self-expression, and of the version of "For Successful Living" that has always meant deciding who you are before performing it. <strong>The Iceberg resets the brand's physical gravity for the next decade of creative leadership.</strong></p>
+        
+        <div class="outcome-stats-row">
+          <div class="outcome-cell">
+            <div class="o-label">Physical Scale</div>
+            <div class="o-num">05</div>
+            <p class="o-desc">Five immersive floors including High-Velocity Retail, The Edit, Denim Lab, Café 1978, and Ghiaccio.</p>
+          </div>
+          <div class="outcome-cell">
+            <div class="o-label">Product Mix</div>
+            <div class="o-num">10/90</div>
+            <p class="o-desc">A 10% product to 90% soul ratio. The space carries the brand weight, not the sheer SKU count.</p>
+          </div>
+          <div class="outcome-cell">
+            <div class="o-label">Creative Era</div>
+            <div class="o-num">2026</div>
+            <p class="o-desc">The ultimate physical expression of the brand's reclaimed cultural momentum.</p>
+          </div>
         </div>
-        <div class="outcome-stats" style="margin-top:40px;">
-          <div class="outcome-stat"><div class="outcome-stat-num">05</div><div class="outcome-stat-eyebrow">Physical Scale</div><div class="outcome-stat-label">Floors — High-Velocity Retail, The Edit, Denim Lab, Café 1978, Ghiaccio</div></div>
-          <div class="outcome-stat"><div class="outcome-stat-num">10/90</div><div class="outcome-stat-eyebrow">Product Mix</div><div class="outcome-stat-label">Product vs. Soul — The space carries the brand, not the SKU count</div></div>
-          <div class="outcome-stat"><div class="outcome-stat-num">F25</div><div class="outcome-stat-eyebrow">Creative Era</div><div class="outcome-stat-label">First flagship designed in Glenn Martens' creative era</div></div>
-        </div>
+
         <div class="cs-next">
           <div class="cs-next-label">Next Case Study</div>
           <a href="/work/stylect" class="cs-next-link" target="_parent">
@@ -750,10 +811,57 @@ const floorObserver = new IntersectionObserver(entries => {
 }, { threshold: 0.5 });
 document.querySelectorAll('.floor-item').forEach(item => floorObserver.observe(item));
 
+function switchView(floorIndex, view) {
+  const wrap = document.querySelector(`.floor-img-wrap[data-floor-img="${floorIndex}"]`);
+  if (!wrap) return;
+  
+  // Update images
+  wrap.querySelectorAll('img[data-view]').forEach(img => {
+    img.style.display = (img.getAttribute('data-view') === view) ? 'block' : 'none';
+  });
+  
+  // Update thumbs
+  wrap.querySelectorAll('.f-thumb').forEach(thumb => {
+    thumb.classList.remove('active');
+  });
+  event.currentTarget.classList.add('active');
+}
+
+
+// Business Case Carousel (Draggable)
+const carousel = document.getElementById('business-carousel');
+const track = carousel.querySelector('.carousel-track');
+let isDown = false;
+let startX;
+let scrollLeft;
+
+carousel.addEventListener('mousedown', (e) => {
+  isDown = true;
+  carousel.classList.add('active');
+  startX = e.pageX - carousel.offsetLeft;
+  scrollLeft = carousel.scrollLeft;
+});
+carousel.addEventListener('mouseleave', () => {
+  isDown = false;
+  carousel.classList.remove('active');
+});
+carousel.addEventListener('mouseup', () => {
+  isDown = false;
+  carousel.classList.remove('active');
+});
+carousel.addEventListener('mousemove', (e) => {
+  if(!isDown) return;
+  e.preventDefault();
+  const x = e.pageX - carousel.offsetLeft;
+  const walk = (x - startX) * 2;
+  carousel.scrollLeft = scrollLeft - walk;
+});
+
 window.addEventListener('scroll', () => {
   const s = window.scrollY, t = document.documentElement.scrollHeight - window.innerHeight;
   document.getElementById('scroll-progress').style.width = (t ? s/t*100 : 0) + '%';
 });
+
 const sectionObserver = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
