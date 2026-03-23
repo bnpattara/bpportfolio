@@ -87,9 +87,10 @@ body { font-family: var(--font); background: var(--white); color: var(--black); 
 .cs-heading { font-size: clamp(22px,2.5vw,30px); font-weight: 400; letter-spacing: .03em; text-transform: uppercase; color: var(--black); line-height: 1.1; margin-bottom: 28px; }
 .cs-body { font-size: 15px; color: var(--g500); line-height: 1.8; margin-bottom: 20px; }
 .cs-body:last-child { margin-bottom: 0; }
+.cs-body-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
 .cs-pull-quote { font-size: clamp(20px,2.2vw,28px); font-weight: 300; font-style: italic; color: var(--black); line-height: 1.4; border-left: 2px solid var(--black); padding-left: 28px; margin-bottom: 28px; }
 /* Strategic Tension Grid */
-.tension-intro { max-width: 800px; margin-bottom: 48px; }
+.tension-intro { margin-bottom: 48px; }
 .tension-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 48px; }
 
 /* Accusation cards */
@@ -99,11 +100,20 @@ body { font-family: var(--font); background: var(--white); color: var(--black); 
 .acc-text { font-size: 16px; font-weight: 400; line-height: 1.5; color: var(--g700); }
 .acc-text span { color: var(--black); font-weight: 700; }
 
-/* Strategic Thesis — Integrated / Premium */
-.thesis-wrap { padding: 80px 0; border-top: 1px solid var(--g200); border-bottom: 1px solid var(--g200); margin: 60px 0; text-align: center; }
-.thesis-label { font-size: 10px; font-weight: 700; letter-spacing: .24em; text-transform: uppercase; color: var(--g300); margin-bottom: 24px; }
-.thesis-text { font-size: clamp(24px, 4vw, 42px); font-weight: 300; line-height: 1.1; letter-spacing: .02em; text-transform: uppercase; color: var(--black); max-width: 1000px; margin: 0 auto; }
-.thesis-text em { font-style: italic; font-weight: 300; color: var(--g500); }
+/* Hara Split — Why Tokyo Context */
+.hara-split { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin-top: 48px; border-top: 1px solid var(--g200); }
+.hara-col { padding: 48px 40px; border-right: 1px solid var(--g200); }
+.hara-col:last-child { border-right: none; }
+.hara-col:first-child { border-left: 3px solid var(--black); }
+.hara-era { font-size: 9px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--g300); margin-bottom: 14px; display: block; }
+.hara-era.now { color: var(--black); }
+.hara-h { font-size: clamp(16px, 2vw, 20px); font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--black); margin-bottom: 20px; line-height: 1.2; }
+
+/* Strategic Thesis — Large Typographic Display */
+.thesis-wrap { padding: 72px 0 48px; border-top: 1px solid var(--g200); margin: 60px 0 0; }
+.thesis-label { font-size: 9px; font-weight: 700; letter-spacing: .24em; text-transform: uppercase; color: var(--g300); margin-bottom: 28px; }
+.thesis-text { font-size: clamp(40px, 6vw, 88px); font-weight: 800; line-height: .92; letter-spacing: -.03em; text-transform: uppercase; color: var(--black); }
+.thesis-text em { font-style: normal; color: var(--g400); font-weight: 800; }
 
 
 /* Token block */
@@ -208,14 +218,18 @@ body { font-family: var(--font); background: var(--white); color: var(--black); 
 .cs-stat-label { font-size: 12px; color: var(--g500); line-height: 1.65; }
 
 /* Business Case Carousel (Saks Style) */
-.carousel-container { position: relative; margin: 40px -56px 0; padding: 0 56px; overflow: hidden; cursor: grab; }
-.carousel-track { display: flex; transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1); gap: 24px; padding-bottom: 40px; }
-.carousel-item { flex: 0 0 350px; background: var(--white); border-top: 2px solid var(--black); padding: 32px 24px; }
+.carousel-container { position: relative; margin: 40px -56px 0; padding: 0 56px; overflow-x: auto; overflow-y: hidden; cursor: grab; scroll-behavior: smooth; scrollbar-width: none; }
+.carousel-container::-webkit-scrollbar { display: none; }
+.carousel-track { display: flex; gap: 24px; padding-bottom: 40px; }
+.carousel-item { flex: 0 0 360px; background: var(--white); border-top: 2px solid var(--black); border-radius: 0; padding: 32px 24px; }
+.carousel-controls { display: flex; gap: 12px; justify-content: flex-end; margin-top: 20px; }
+.carousel-btn { width: 44px; height: 44px; border: 1px solid var(--black); border-radius: 0; background: var(--white); cursor: pointer; font-size: 18px; display: flex; align-items: center; justify-content: center; transition: all var(--ease-fast); }
+.carousel-btn:hover { background: var(--black); color: var(--white); }
 .c-num { font-size: 10px; font-weight: 700; color: var(--g300); margin-bottom: 12px; display: block; }
 .c-h { font-size: 18px; font-weight: 600; text-transform: uppercase; margin-bottom: 12px; color: var(--black); }
 .c-p { font-size: 13px; line-height: 1.6; color: var(--g500); }
 
-/* Brand in the World Grid */
+/* Brand in the World Grid — 6 Items */
 .world-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--g200); margin-top: 48px; border: 1px solid var(--g200); }
 .world-cell { background: var(--white); position: relative; height: 350px; overflow: hidden; }
 .world-cell img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
@@ -266,10 +280,16 @@ body { font-family: var(--font); background: var(--white); color: var(--black); 
      background: var(--g200) !important;
      border: 1px solid var(--g200) !important;
    }
-  .outcome-stats, .cs-img-2col, .cs-img-3col, .hara-split, .market-stats, .img-pair, .meta-strip, .act-row { 
-    grid-template-columns: 1fr !important; 
-    gap: 24px !important; 
+  .outcome-stats, .cs-img-2col, .cs-img-3col, .hara-split, .market-stats, .img-pair, .meta-strip, .act-row {
+    grid-template-columns: 1fr !important;
+    gap: 0 !important;
   }
+  .hara-col { border-right: none !important; border-left: 3px solid var(--g200) !important; }
+  .hara-col:first-child { border-left: 3px solid var(--black) !important; }
+  .cs-body-2col { grid-template-columns: 1fr !important; gap: 32px !important; }
+  .world-grid { grid-template-columns: 1fr 1fr !important; }
+  .world-cell { height: 200px !important; }
+  .carousel-controls { justify-content: flex-start !important; }
 
   .floor-container { grid-template-columns: 1fr !important; }
   .floor-visual-track { position: relative !important; top: 0 !important; height: 350px !important; }
@@ -620,17 +640,6 @@ body { font-family: var(--font); background: var(--white); color: var(--black); 
 
       </section>
 
-      <!-- Image pair -->
-      <div class="img-pair">
-        <div class="img-cell">
-          <img src="/img/case-studies/diesel/f5.png" alt="Ghiaccio — Denim details">
-          <div class="img-cap">Ghiaccio — Atmospheric Detail</div>
-        </div>
-        <div class="img-cell">
-          <img src="/img/case-studies/diesel/f5.png" alt="Ghiaccio — Glassware detail">
-          <div class="img-cap">Ghiaccio — Bar Detail</div>
-        </div>
-      </div>
 
 
       <!-- 05 MARKET -->
@@ -719,6 +728,10 @@ body { font-family: var(--font); background: var(--white); color: var(--black); 
             </div>
           </div>
         </div>
+        <div class="carousel-controls">
+          <button class="carousel-btn" onclick="carouselNav(-1)" aria-label="Previous">&#8592;</button>
+          <button class="carousel-btn" onclick="carouselNav(1)" aria-label="Next">&#8594;</button>
+        </div>
 
         <div class="cs-divider" style="margin-top:64px;">
           <span class="cs-divider-text">The Brand in the World</span>
@@ -739,6 +752,18 @@ body { font-family: var(--font); background: var(--white); color: var(--black); 
             <img src="/img/case-studies/diesel/uniform.png" alt="Diesel Uniform Detail">
             <div class="world-cap">Employee Style Guide — Tonal Denim Utility</div>
           </div>
+          <div class="world-cell">
+            <img src="/img/case-studies/diesel/token.png" alt="Diesel Brass Token">
+            <div class="world-cap">Brass Token — For Successful Living · 1978</div>
+          </div>
+          <div class="world-cell">
+            <img src="/img/case-studies/diesel/signage.png" alt="Diesel In-Store Signage">
+            <div class="world-cap">In-Store Signage — Brutalist Typography</div>
+          </div>
+          <div class="world-cell">
+            <img src="/img/case-studies/diesel/architecture.png" alt="Diesel Architectural Detail">
+            <div class="world-cap">Architecture — Raw Concrete & Kintsugi Joinery</div>
+          </div>
         </div>
 
 
@@ -746,9 +771,9 @@ body { font-family: var(--font); background: var(--white); color: var(--black); 
 
       <!-- 07 CLOSE / OUTCOME -->
       <section class="cs-section" id="cs-outcome" data-cs-section="outcome">
-        <div class="cs-section-eyebrow"><span class="cs-section-num">07</span><span class="cs-section-title">The Proposition</span></div>
-        <h2 class="cs-heading">Don't open a store. Open the space Harajuku forgot it had.</h2>
-        <p class="cs-body" style="max-width:800px;">Diesel Tokyo is not a retail expansion. It is a reclamation — of Harajuku, of authentic self-expression, and of the version of "For Successful Living" that has always meant deciding who you are before performing it. <strong>The Iceberg resets the brand's physical gravity for the next decade of creative leadership.</strong></p>
+        <div class="cs-section-eyebrow"><span class="cs-section-num">07</span><span class="cs-section-title">Final Position</span></div>
+        <h2 class="cs-heading" style="font-size:clamp(28px,4vw,52px);font-weight:700;letter-spacing:-.01em;max-width:900px;line-height:1.05;">Don't open a store. Open the space Harajuku forgot it had.</h2>
+        <p class="cs-body" style="max-width:800px;margin-top:24px;">Diesel Tokyo is not a retail expansion. It is a reclamation — of Harajuku, of authentic self-expression, and of the version of "For Successful Living" that has always meant deciding who you are before performing it. <strong>The Iceberg resets the brand's physical gravity for the next decade of creative leadership.</strong></p>
         
         <div class="outcome-stats-row">
           <div class="outcome-cell">
@@ -828,7 +853,12 @@ function switchView(floorIndex, view) {
 }
 
 
-// Business Case Carousel (Draggable)
+// Business Case Carousel (Draggable + Arrows)
+function carouselNav(dir) {
+  const c = document.getElementById('business-carousel');
+  c.scrollLeft += dir * 384;
+}
+
 const carousel = document.getElementById('business-carousel');
 const track = carousel.querySelector('.carousel-track');
 let isDown = false;
