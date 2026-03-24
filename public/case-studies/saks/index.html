@@ -47,8 +47,16 @@ body { font-family: var(--font); background: var(--white); color: var(--black); 
 .img-placeholder-num { font-size: 11px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--g400); margin-bottom: 8px; }
 .img-placeholder-desc { font-size: 11px; color: var(--g500); line-height: 1.5; max-width: 320px; }
 /* Images fill placeholders perfectly — cover with center focus */
-.cs-img-contain { overflow: hidden; display: block; background: var(--g100); width: 100%; }
-.cs-img-contain img { width: 100%; height: 100%; object-fit: cover; object-position: center center; display: block; }
+.cs-img-contain { overflow: hidden; display: block; background: var(--g100); width: 100%; position: relative; }
+.cs-img-contain img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  display: block;
+}
 
 /* LAYOUT */
 .cs-body-wrap { display: grid; grid-template-columns: var(--sidenav-w) 1fr; align-items: start; min-height: 100vh; }
@@ -75,14 +83,22 @@ body { font-family: var(--font); background: var(--white); color: var(--black); 
 /* EXEC SUMMARY */
 #cs-exec-summary { padding: 64px 56px; border-bottom: 1px solid var(--g200); }
 .cs-exec-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+.cs-exec-inner .cs-exec-ii-row { grid-column: 1 / -1; width: 100%; margin-top: 8px; }
+.cs-exec-ii-row .cs-stat-num {
+  font-size: clamp(18px, 2vw, 26px);
+  font-weight: 300;
+  letter-spacing: .02em;
+  line-height: 1.15;
+  margin-bottom: 12px;
+}
 .cs-exec-eyebrow { font-size: 8px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--g300); margin-bottom: 16px; }
 .cs-exec-body { font-size: 13px; color: var(--g500); line-height: 1.85; margin-bottom: 32px; }
 .cs-exec-kpis { display: flex; flex-wrap: wrap; gap: 8px; }
 .cs-exec-kpi { display: flex; align-items: center; gap: 10px; border: 1px solid var(--g200); padding: 8px 14px; }
 .cs-exec-kpi-num { font-size: 18px; font-weight: 300; color: var(--black); letter-spacing: -.01em; line-height: 1; }
 .cs-exec-kpi-label { font-size: 9px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--g400); line-height: 1.4; }
-.cs-exec-meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--g200); margin-bottom: 24px; }
-.cs-exec-meta-cell { background: var(--white); padding: 20px; }
+.cs-exec-meta-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: var(--g200); margin-bottom: 24px; }
+.cs-exec-meta-cell { background: var(--white); padding: 20px; min-width: 0; overflow-wrap: break-word; }
 .cs-exec-meta-label { font-size: 8px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--g300); margin-bottom: 6px; }
 .cs-exec-meta-val { font-size: 12px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; color: var(--black); }
 
@@ -93,6 +109,8 @@ body { font-family: var(--font); background: var(--white); color: var(--black); 
 .cs-section-num { font-size: 9px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--g300); }
 .cs-section-title { font-size: 11px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--black); }
 .cs-heading { font-size: clamp(22px,2.5vw,30px); font-weight: 400; letter-spacing: .03em; text-transform: uppercase; color: var(--black); line-height: 1.1; margin-bottom: 28px; }
+.cs-heading-serif { font-family: var(--font); font-size: clamp(26px,3vw,40px); font-weight: 300; color: var(--black); line-height: 1.1; margin-bottom: 28px; letter-spacing: .02em; }
+.cs-heading-serif em { font-style: italic; color: var(--g500); }
 .cs-body { font-size: 15px; color: var(--g500); line-height: 1.8; margin-bottom: 20px; }
 .cs-body:last-child { margin-bottom: 0; }
 .cs-pull-quote { font-size: clamp(20px,2.2vw,28px); font-weight: 300; font-style: italic; color: var(--black); line-height: 1.4; border-left: 2px solid var(--black); padding-left: 28px; margin-bottom: 28px; }
@@ -104,26 +122,65 @@ body { font-family: var(--font); background: var(--white); color: var(--black); 
 .cs-exec-thesis-text { font-family: "Big Caslon", "Book Antiqua", "Palatino Linotype", Georgia, serif; font-size: 24px; font-style: italic; color: var(--black); line-height: 1.2; }
 .cs-body-2col p { font-size: 13px; color: var(--g500); line-height: 1.75; }
 .cs-stats { display: grid; gap: 1px; background: var(--g200); margin-bottom: 28px; }
-.cs-stats-3 { grid-template-columns: repeat(3,1fr); }
-.cs-stats-4 { grid-template-columns: repeat(4,1fr); }
-.cs-stat-cell { background: var(--white); padding: 28px 24px; }
+.cs-stats-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.cs-stats-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.cs-stat-cell { background: var(--white); padding: 28px 24px; min-width: 0; overflow-wrap: break-word; }
 .cs-stat-eyebrow { font-size: 9px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--g300); margin-bottom: 12px; }
 .cs-stat-num { font-size: 48px; font-weight: 300; color: var(--black); letter-spacing: -.02em; line-height: 1; margin-bottom: 8px; }
 .cs-stat-num-inline { font-size: 28px; font-weight: 300; letter-spacing: -.01em; margin-bottom: 12px; white-space: nowrap; }
 .cs-stat-label { font-size: 12px; color: var(--g500); line-height: 1.65; }
+
+/* Collapsible narrative (Context + Strategy) */
+.cs-fold { margin: 0; border: 1px solid var(--g200); padding: 0 24px 24px; background: var(--white); }
+.cs-section-alt .cs-fold { background: var(--g100); border-color: var(--g200); }
+.cs-fold summary { list-style: none; cursor: pointer; padding: 24px 0 0; }
+.cs-fold summary::-webkit-details-marker { display: none; }
+.cs-fold-headline { margin: 0 0 12px; font-size: clamp(20px,2.2vw,28px); }
+.cs-fold-lede { font-size: 15px; color: var(--g500); line-height: 1.65; max-width: 44em; margin: 0 0 8px; }
+.cs-fold-hint { font-size: 9px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--g400); display: inline-block; margin-top: 12px; }
+.cs-fold[open] .cs-fold-hint { color: var(--black); }
+.cs-fold-content { padding-top: 28px; border-top: 1px solid var(--g200); margin-top: 20px; }
+.cs-fold-content .cs-section-eyebrow { margin-top: 0; }
+
+/* Structural context — expanded narrative (inside fold) */
+.cs-context-open { margin-top: 28px; margin-bottom: 28px; }
+.cs-context-open .cs-pull-quote { margin-bottom: 0; font-size: clamp(17px, 1.9vw, 22px); line-height: 1.5; }
+.cs-context-pillars { display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--g200); margin-bottom: 32px; }
+.cs-context-card { background: var(--white); padding: 26px 24px 28px; min-width: 0; }
+.cs-context-card-top { display: flex; align-items: baseline; gap: 16px; margin-bottom: 14px; flex-wrap: wrap; row-gap: 6px; }
+.cs-context-card-num { font-size: 9px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--g300); flex-shrink: 0; min-width: 2em; }
+.cs-context-card-title { font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--black); }
+.cs-context-card-body { font-size: 14px; color: var(--g500); line-height: 1.75; margin: 0; }
+.cs-context-closure { border-top: 1px solid var(--g200); padding-top: 32px; margin-top: 4px; }
+.cs-context-closure > .cs-heading { margin-bottom: 14px; }
+.cs-context-closure > .cs-body { margin-bottom: 22px; max-width: 48em; }
+@media (min-width: 900px) {
+  .cs-context-pillars { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cs-context-card--wide { grid-column: 1 / -1; }
+}
 
 /* IMAGE LAYOUTS */
 .cs-img-full { width: 100%; margin-bottom: 8px; overflow: hidden; }
 .cs-img-full img { width: 100%; display: block; object-fit: cover; }
 .cs-img-full .cs-img-contain img { object-fit: cover; }
 .cs-img-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px; }
-.cs-img-2col-item img { width: 100%; display: block; object-fit: cover; aspect-ratio: 4/3; }
-.cs-img-2col-item .cs-img-contain img { object-fit: cover; }
+.cs-img-2col-item img { width: 100%; display: block; }
 .cs-img-3col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 8px; }
-.cs-img-3col-item img { width: 100%; display: block; object-fit: cover; aspect-ratio: 3/4; }
-.cs-img-3col-item .cs-img-contain img { object-fit: cover; }
+.cs-img-3col-item img { width: 100%; display: block; }
 .img-caption { font-size: 9px; letter-spacing: .12em; text-transform: uppercase; color: var(--g400); padding: 6px 0 20px; display: block; }
 .cs-img-2col-item .img-caption, .cs-img-3col-item .img-caption { padding: 6px 0 0; }
+
+/* Full-bleed width, height follows image — no cover crop */
+.cs-img-intrinsic { width: 100%; display: block; background: var(--white); }
+.cs-img-intrinsic img {
+  position: static;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  display: block;
+  object-fit: contain;
+  object-position: center top;
+}
 
 /* TABLE */
 .cs-table { width: 100%; border-collapse: collapse; margin-bottom: 28px; }
@@ -157,6 +214,7 @@ body { font-family: var(--font); background: var(--white); color: var(--black); 
 
 /* ARTIFACT STRIP */
 .artifact-strip { background: var(--black); }
+.cs-full-bleed { width: calc(100% + 112px); margin-left: -56px; margin-right: -56px; }
 .artifact-trigger { padding: 24px 56px; display: flex; align-items: stretch; justify-content: space-between; cursor: pointer; transition: background var(--ease-fast); }
 .artifact-trigger:hover { background: #111; }
 .artifact-left { display: flex; align-items: stretch; gap: 20px; }
@@ -172,13 +230,32 @@ body { font-family: var(--font); background: var(--white); color: var(--black); 
 .artifact-inner { background: #0a0a0a; padding: 0; }
 .artifact-iframe-wrap { width: 100%; }
 .artifact-iframe-wrap iframe { width: 100%; min-height: 700px; height: 85vh; border: none; display: block; }
+.artifact-model-open-btn {
+  display: none;
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0;
+  padding: 18px 20px;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--white);
+  text-decoration: none;
+  background: #141414;
+  border-top: 1px solid rgba(255,255,255,.1);
+  font-family: var(--font);
+  -webkit-tap-highlight-color: transparent;
+}
+.artifact-model-open-btn:active { background: #1a1a1a; }
 .proto-layout { display: flex; justify-content: center; padding: 48px; }
 .proto-phone { width: 375px; height: 812px; border: 12px solid #333; border-radius: 40px; overflow: hidden; background: #000; box-shadow: 0 0 0 1px rgba(255,255,255,.1), 0 0 0 2px rgba(0,0,0,.5), 0 20px 60px rgba(0,0,0,.5); }
 .proto-phone iframe { width: 100%; height: 100%; border: none; display: block; }
 
 /* PERSONAS */
-.persona-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--g200); margin-bottom: 28px; }
-.persona-card { background: var(--white); padding: 28px 24px; }
+.persona-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--g200); margin-bottom: 28px; }
+.persona-card { background: var(--white); padding: 28px 24px; min-width: 0; overflow-wrap: break-word; }
 .persona-card-tier { font-size: 8px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--g300); margin-bottom: 12px; }
 .persona-card-name { font-size: 16px; font-weight: 400; letter-spacing: .04em; color: var(--black); margin-bottom: 4px; }
 .persona-card-city { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--g400); margin-bottom: 16px; }
@@ -187,8 +264,8 @@ body { font-family: var(--font); background: var(--white); color: var(--black); 
 .persona-card-tension { font-size: 11px; font-weight: 500; color: var(--black); margin-top: 12px; }
 
 /* PRODUCT CARDS — Section 04 */
-.product-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--g200); margin-bottom: 32px; }
-.product-card { background: var(--white); padding: 32px 28px; display: flex; flex-direction: column; }
+.product-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: var(--g200); margin-bottom: 32px; }
+.product-card { background: var(--white); padding: 32px 28px; display: flex; flex-direction: column; min-width: 0; overflow-wrap: break-word; }
 .product-card-num { font-size: 9px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--g300); margin-bottom: 16px; }
 .product-card-title { font-size: 18px; font-weight: 400; letter-spacing: .04em; text-transform: uppercase; color: var(--black); margin-bottom: 6px; line-height: 1.1; }
 .product-card-sub { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--g400); margin-bottom: 20px; }
@@ -204,6 +281,7 @@ body { font-family: var(--font); background: var(--white); color: var(--black); 
 
 /* 14-DAY ROTATION CAROUSEL — Horizontal Track */
 .rotation-carousel { background: var(--black); padding: 64px 56px; margin-bottom: 0; overflow: hidden; }
+.rotation-carousel-bleed { width: calc(100% + 112px); margin-left: -56px; margin-right: -56px; }
 .rotation-carousel-head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; }
 .rotation-carousel-title { font-size: 11px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.4); }
 .rotation-carousel-counter { font-size: 32px; font-weight: 300; color: var(--white); letter-spacing: -.02em; line-height: 1; }
@@ -263,8 +341,8 @@ body { font-family: var(--font); background: var(--white); color: var(--black); 
 .rotation-nav-btn svg { width: 18px; height: 18px; fill: currentColor; }
 
 /* MEMBERSHIP TIER COMPARISON */
-.tier-compare { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1px; background: var(--g200); margin-bottom: 28px; }
-.tier-col { background: var(--white); }
+.tier-compare { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--g200); margin-bottom: 28px; }
+.tier-col { background: var(--white); min-width: 0; }
 .tier-col-head { padding: 24px 20px; border-bottom: 1px solid var(--g200); }
 .tier-col-head.black-head { background: var(--black); }
 .tier-tier { font-size: 8px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--g300); margin-bottom: 8px; }
@@ -291,7 +369,40 @@ body { font-family: var(--font); background: var(--white); color: var(--black); 
 .app-showcase-heading { font-size: clamp(18px,2.2vw,26px); font-weight: 300; letter-spacing: .05em; text-transform: uppercase; color: var(--white); line-height: 1.1; margin-bottom: 12px; }
 .app-showcase-sub { font-size: 13px; color: rgba(255,255,255,.35); line-height: 1.7; margin-bottom: 40px; max-width: 560px; }
 .app-showcase-layout { display: grid; grid-template-columns: 220px 1fr; gap: 40px; align-items: start; }
-.app-screen-nav { display: flex; flex-direction: column; position: sticky; top: calc(var(--nav-h) + 20px); }
+.app-screen-nav-wrap {
+  align-self: start;
+  position: sticky;
+  top: calc(var(--nav-h) + 20px);
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  min-width: 0;
+}
+.app-screen-nav { display: flex; flex-direction: column; position: static; flex-shrink: 0; }
+.app-screen-side-panel {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 22px;
+  min-height: 0;
+}
+.app-screen-desc-panel { display: none; }
+.app-screen-desc-panel.active { display: block; }
+.app-screen-side-panel .app-screen-desc-label { margin-bottom: 10px; }
+.app-screen-side-panel .app-screen-desc-text {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.42);
+  line-height: 1.65;
+  margin: 0;
+}
+.app-screen-counter--side {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 11px;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.22);
+  white-space: nowrap;
+}
 .app-screen-btn { background: transparent; border: none; border-left: 2px solid #222; padding: 16px 20px; text-align: left; cursor: pointer; font-family: var(--font); transition: border-color var(--ease-fast); }
 .app-screen-btn:hover { background: rgba(255,255,255,.03); border-left-color: #444; }
 .app-screen-btn.active { border-left-color: var(--white); }
@@ -304,32 +415,23 @@ body { font-family: var(--font); background: var(--white); color: var(--black); 
 @keyframes screenFadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
 .app-screen-visual { width: 100%; aspect-ratio: 16/9; background: #111; border: 1px solid rgba(255,255,255,.06); display: flex; align-items: stretch; justify-content: stretch; margin-bottom: 20px; overflow: hidden; position: relative; }
 .app-screen-visual svg { width: 100%; height: 100%; }
-.app-screen-meta { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 32px; }
 .app-screen-desc-label { font-size: 9px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: rgba(255,255,255,.3); margin-bottom: 6px; }
 .app-screen-desc-text { font-size: 13px; color: rgba(255,255,255,.5); line-height: 1.7; max-width: 480px; }
-.app-screen-counter { font-size: 11px; font-weight: 300; letter-spacing: .1em; color: rgba(255,255,255,.2); white-space: nowrap; padding-top: 20px; }
 
 /* OUTCOME */
-.outcome-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--g200); margin-bottom: 32px; }
-.outcome-stat { background: var(--white); padding: 28px 24px; border-top: 3px solid var(--black); }
+.outcome-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--g200); margin-bottom: 32px; }
+.outcome-stat { background: var(--white); padding: 28px 24px; border-top: 3px solid var(--black); min-width: 0; overflow-wrap: break-word; }
 .outcome-stat-num { font-size: 52px; font-weight: 300; color: var(--black); letter-spacing: -.02em; line-height: 1; margin-bottom: 10px; }
 .outcome-stat-label { font-size: 12px; color: var(--g500); line-height: 1.65; }
-
-/* IMAGE CROPPING — PRESERVE FOCAL POINTS */
-.cs-img-full img,
-.cs-img-2col-item img,
-.cs-img-3col-item img {
-  width: 100%;
-  height: auto !important;
-  max-height: none !important;
-  object-fit: contain !important;
-}
-
 
 /* PM LENS */
 .pm-lens { border: 1px solid var(--g200); padding: 24px 28px; margin-bottom: 28px; background: #fafafa; }
 .pm-lens-label { font-size: 8px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--g300); margin-bottom: 10px; }
 .pm-lens-text { font-size: 13px; color: var(--g500); line-height: 1.75; font-style: italic; }
+.cs-ui-placeholder { font-size: 10px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--g500); border: 1px dashed var(--g300); padding: 14px 18px; margin: 24px 0; background: var(--g100); max-width: 44em; line-height: 1.5; }
+.cs-revenue-list { list-style: none; padding: 0; margin: 0 0 28px; display: flex; flex-direction: column; gap: 20px; max-width: 44em; }
+.cs-revenue-list li { font-size: 15px; color: var(--g500); line-height: 1.65; padding-left: 0; }
+.cs-revenue-list strong { display: block; font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--black); margin-bottom: 6px; }
 
 /* NODE WALKTHROUGH */
 .node-walkthrough { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; background: var(--white); padding: 48px 56px; border-bottom: 1px solid var(--g200); }
@@ -350,6 +452,15 @@ body { font-family: var(--font); background: var(--white); color: var(--black); 
 /* ENDING BLOCK — emphasis for closing thesis */
 .cs-ending-block { background: var(--black); padding: 48px 56px; margin-top: 40px; margin-bottom: 0; border-left: 3px solid var(--black); }
 .cs-ending-text { font-size: 18px; font-weight: 300; line-height: 1.7; color: rgba(255,255,255,.9); margin: 0; max-width: 720px; font-style: italic; }
+.cs-conclusion-header {
+  font-size: 11px; font-weight: 600; letter-spacing: .15em; text-transform: uppercase;
+  color: var(--black); margin-top: 40px; margin-bottom: 12px; font-family: var(--font);
+}
+.metrics-container { margin-bottom: 40px; }
+.metrics-grid-header {
+  font-size: 8px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--g300); margin-bottom: 16px; font-family: var(--font);
+}
 
 /* NEXT + FOOTER */
 .cs-next { border-top: 1px solid var(--g200); padding-top: 32px; display: flex; justify-content: space-between; align-items: center; margin-top: 48px; }
@@ -367,8 +478,10 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
 .footer-link { font-size: 10px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.35); text-decoration: none; transition: color var(--ease-fast); }
 .footer-link:hover { color: var(--white); }
 .footer-copy { font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: rgba(255,255,255,.18); }
-    /* Success Metrics Grid — Mobile */
+    /* Success Metrics Grid — Mobile (exec fold); bottom line overrides below */
     .metrics-grid-mobile { display: none; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 32px; }
+    #cs-exec-summary .cs-fold .metrics-grid-mobile { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-bottom: 20px; }
+    #cs-bottom-line .metrics-grid-mobile { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-bottom: 32px; }
     .metric-card { background: #fff; border: 1px solid var(--g200); padding: 16px; display: flex; flex-direction: column; gap: 8px; }
     .metric-card-title { font-size: 8px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--g300); }
     .metric-card-val { font-size: 20px; font-weight: 200; color: var(--black); }
@@ -401,13 +514,16 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
   #cs-sidenav { display: none !important; }
   .cs-body-wrap { grid-template-columns: 1fr !important; }
   #cs-exec-summary, .cs-section, .app-showcase, .rotation-carousel, .cs-hero-title-wrap { padding: 40px 20px !important; }
+  .rotation-carousel-bleed, .cs-full-bleed { width: calc(100% + 40px) !important; margin-left: -20px !important; margin-right: -20px !important; }
+  .cs-fold { padding-left: 16px !important; padding-right: 16px !important; }
   
   .cs-exec-meta-grid, .product-cards, .rotation-track, .tier-compare, .app-showcase-layout, .outcome-stats, .cs-img-2col, .cs-img-3col, .research-drawer-grid, .persona-grid { 
     grid-template-columns: 1fr !important; 
     gap: 24px !important; 
   }
-  .cs-metrics-table, .rollout-table { display: none !important; }
+  #cs-bottom-line .cs-metrics-table { display: none !important; }
   .metrics-grid-mobile, .decision-accordion-mobile { display: grid !important; grid-template-columns: 1fr !important; }
+  table.legacy-vault-compare-table { display: none !important; }
   
   .cs-hero { min-height: 60vh !important; }
   .cs-hero-title { font-size: 32px !important; }
@@ -417,26 +533,43 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
   .artifact-name { font-size: 12px !important; }
   .artifact-badge { display: none !important; }
   
-  .app-screen-nav { position: static !important; margin-bottom: 20px !important; flex-direction: row !important; overflow-x: auto !important; }
+  .app-screen-nav-wrap {
+    position: static !important;
+    gap: 20px !important;
+    width: 100% !important;
+  }
+  .app-screen-nav {
+    position: static !important;
+    margin-bottom: 0 !important;
+    flex-direction: row !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .app-screen-nav::-webkit-scrollbar { display: none; }
+  .app-screen-side-panel { padding-top: 18px !important; border-top-color: rgba(255,255,255,.12) !important; }
   .app-screen-btn { border-left: none !important; border-bottom: 2px solid #222 !important; padding: 8px 12px !important; white-space: nowrap !important; }
   .app-screen-btn.active { border-bottom-color: #fff !important; }
   
+  .rotation-card { min-width: 85vw !important; width: 85vw !important; }
   .rotation-counter { font-size: 24px !important; }
   .rotation-detail-inner { min-height: auto !important; }
   .rotation-detail-panel { position: static !important; display: none !important; opacity: 1 !important; }
   .rotation-detail-panel.active { display: block !important; }
   .cs-body-2col { grid-template-columns: 1fr !important; }
-  .cs-stats-3, .cs-stats-4 { grid-template-columns: 1fr 1fr !important; }
+  .cs-stats-3, .cs-stats-4 { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
   .node-walkthrough { grid-template-columns: 1fr !important; gap: 32px !important; padding: 40px 20px !important; }
   .node-visual { position: static !important; }
   .cs-table { display: block; overflow-x: auto; width: 100%; }
   .cs-next { flex-direction: column !important; gap: 16px !important; align-items: flex-start !important; }
   .cs-next-link { text-align: left !important; }
   footer { flex-direction: column !important; gap: 16px !important; padding: 32px 20px !important; align-items: flex-start !important; }
+
+  .artifact-iframe-wrap iframe { pointer-events: none !important; }
+  .artifact-model-open-btn { display: block !important; }
 }
 @media (max-width: 640px) {
   .cs-img-3col { grid-template-columns: 1fr; gap: 12px; }
-  .cs-img-3col-item img { width: 100%; height: auto; }
 }
 </style>
 </head>
@@ -462,7 +595,7 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
   <section class="cs-hero" id="cs-hero">
     <div class="cs-hero-ghost">Vault</div>
     <div class="cs-hero-bg">
-      <img src="saks_hero_exterior.webp" alt="Vault by Saks — luxury storefront at night with golden interior" />
+      <img src="saks_hero_exterior.webp" alt="Vault by Saks — luxury storefront at night with golden interior" fetchpriority="high" decoding="async" />
     </div>
     <div class="cs-hero-scrim"></div>
     <div class="cs-hero-title-wrap">
@@ -473,42 +606,30 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
   <div class="cs-body-wrap">
     <aside id="cs-sidenav">
       <div class="cs-sidenav-label">Index</div>
-      <a class="cs-sidenav-link active" data-target="cs-exec-summary" onclick="scrollToSection('cs-exec-summary')"><span class="cs-sidenav-num">00</span><span class="cs-sidenav-text">Exec Summary</span></a>
+      <a class="cs-sidenav-link active" data-target="cs-exec-summary" onclick="scrollToSection('cs-exec-summary')"><span class="cs-sidenav-num">00</span><span class="cs-sidenav-text">Summary</span></a>
       <div class="cs-sidenav-divider"></div>
-      <a class="cs-sidenav-link" data-target="cs-background" onclick="scrollToSection('cs-background')"><span class="cs-sidenav-num">01</span><span class="cs-sidenav-text">The Context</span></a>
-      <a class="cs-sidenav-link" data-target="cs-insight" onclick="scrollToSection('cs-insight')"><span class="cs-sidenav-num">02</span><span class="cs-sidenav-text">Strategic Insight</span></a>
-      <a class="cs-sidenav-link" data-target="cs-strategy" onclick="scrollToSection('cs-strategy')"><span class="cs-sidenav-num">03</span><span class="cs-sidenav-text">Strategy</span></a>
-      <a class="cs-sidenav-link" data-target="cs-execution" onclick="scrollToSection('cs-execution')"><span class="cs-sidenav-num">04</span><span class="cs-sidenav-text">The Product</span></a>
-      <a class="cs-sidenav-link" data-target="cs-creative" onclick="scrollToSection('cs-creative')"><span class="cs-sidenav-num">05</span><span class="cs-sidenav-text">The Experience</span></a>
-      <a class="cs-sidenav-link" data-target="cs-platform" onclick="scrollToSection('cs-platform')"><span class="cs-sidenav-num">05B</span><span class="cs-sidenav-text">Platform</span></a>
-      <a class="cs-sidenav-link" data-target="cs-outcome" onclick="scrollToSection('cs-outcome')"><span class="cs-sidenav-num">06</span><span class="cs-sidenav-text">Outcome</span></a>
+      <a class="cs-sidenav-link" data-target="cs-revenue-model" onclick="scrollToSection('cs-revenue-model')"><span class="cs-sidenav-num">01</span><span class="cs-sidenav-text">Revenue model</span></a>
+      <a class="cs-sidenav-link" data-target="cs-spaces-tiers" onclick="scrollToSection('cs-spaces-tiers')"><span class="cs-sidenav-num">02</span><span class="cs-sidenav-text">Spaces &amp; access</span></a>
+      <a class="cs-sidenav-link" data-target="cs-cultural-velocity" onclick="scrollToSection('cs-cultural-velocity')"><span class="cs-sidenav-num">03</span><span class="cs-sidenav-text">Cultural velocity</span></a>
+      <a class="cs-sidenav-link" data-target="cs-designer-partnership" onclick="scrollToSection('cs-designer-partnership')"><span class="cs-sidenav-num">04</span><span class="cs-sidenav-text">Designer platform</span></a>
+      <a class="cs-sidenav-link" data-target="cs-bottom-line" onclick="scrollToSection('cs-bottom-line')"><span class="cs-sidenav-num">05</span><span class="cs-sidenav-text">Bottom line</span></a>
+      <a class="cs-sidenav-link" data-target="cs-appendix" onclick="scrollToSection('cs-appendix')"><span class="cs-sidenav-num">06</span><span class="cs-sidenav-text">Appendix</span></a>
       <div class="cs-sidenav-exec">
         <div class="cs-sidenav-exec-label">TL;DR</div>
-        <p class="cs-sidenav-exec-text">Nodes over flagships. Subscriptions over leases. Data over square footage.</p>
+        <p class="cs-sidenav-exec-text">Three revenue lines · 14-day rotation · ~$964M/yr out</p>
         <a class="cs-sidenav-exec-link" onclick="scrollToSection('cs-exec-summary')">Read summary &rarr;</a>
       </div>
     </aside>
 
     <div class="cs-content">
 
-      <!-- 00 EXECUTIVE SUMMARY -->
+      <!-- 00 EXECUTIVE SUMMARY & METADATA -->
       <section id="cs-exec-summary" data-cs-section="exec-summary" style="padding:64px 56px;border-bottom:1px solid var(--g200);">
         <div class="cs-exec-inner">
           <div class="cs-exec-body">
-            <h2 class="cs-exec-heading">The 14-Day Recovery</h2>
-            <p class="cs-body">Vault by Saks is a structural response to a physics problem. Between 2023 and 2026, the legacy luxury model collapsed under the weight of $1.8B in owned inventory and $9.2M/yr flagship leases that no longer converted. Vault replaces the flagship with the **Node**: a 3,500 sq ft modular infrastructure built for 14-day inventory cycles and access managed by membership, not foot traffic.</p>
-            <p class="cs-body">This is not a story of brand marketing; it is a story of **inventory velocity**. By shifting to a consignment-based designer platform and a subscription-based physical footprint, Vault achieved an 84% reduction in capital exposure before the first node opened. This case study documents the design of that flywheel.</p>
-            
-            <div class="cs-exec-thesis">
-              <div class="cs-exec-thesis-label">Strategic Thesis</div>
-              <div class="cs-exec-thesis-text">Invert the balance sheet. Digitize the relationship. Modularize the store.</div>
-            </div>
-
-            <div class="cs-exec-kpis" style="margin-top:24px;">
-              <div class="cs-exec-kpi"><div class="cs-exec-kpi-num">$964M</div><div class="cs-exec-kpi-eyebrow">Annual Savings</div><div class="cs-exec-kpi-label">Projected run-rate</div></div>
-              <div class="cs-exec-kpi"><div class="cs-exec-kpi-num">1mo</div><div class="cs-exec-kpi-eyebrow">Payback Period</div><div class="cs-exec-kpi-label">On $81M investment</div></div>
-              <div class="cs-exec-kpi"><div class="cs-exec-kpi-num">01</div><div class="cs-exec-kpi-eyebrow">Primary Target</div><div class="cs-exec-kpi-label">Chapter 11 Exit F26</div></div>
-            </div>
+            <h2 class="cs-exec-heading">Executive summary</h2>
+            <p class="cs-body">The legacy <strong>42,000 sq ft</strong> flagship model is structurally obsolete: it carries too much owned inventory and depends on mass foot traffic. Vault replaces it with an intimate, <strong>data-driven membership</strong> system — curated access, consignment, and <strong>14-day</strong> rotation at <strong>~3,500 sq ft</strong> nodes. The shift is strategic: from <strong>passive gatekeeper of labels</strong> to <strong>active steward of bespoke relationships</strong> and first-party signal.</p>
+            <p class="cs-body">Houses already own DTC and first-party data. Vault earns relevance by stewarding <strong>consented</strong> member behavior — rotation, styling, holds — visible to designers in ways wholesale cannot match. Consignment and fast settlement make that contract credible to the trade.</p>
           </div>
           <div>
             <div class="cs-exec-meta-grid">
@@ -519,286 +640,147 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
               <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Tools</div><div class="cs-exec-meta-val">HTML · Node Architecture · Financial Modeling</div></div>
             </div>
           </div>
-        </div>
-      </section>
-
-      <!-- 01 THE CONTEXT -->
-      <section class="cs-section" id="cs-background" data-cs-section="background">
-        <div class="cs-section-inner" style="max-width:100%">
-          <div class="cs-section-eyebrow"><span class="cs-section-num">01</span><span class="cs-section-title">The Context</span></div>
-          <h2 class="cs-heading">The Flagship is Dead. Long Live the Node.</h2>
-          
-          <div class="metrics-grid-mobile">
-            <div class="metric-card"><div class="metric-card-title">Foot traffic</div><div class="metric-card-val">-14%</div><div class="metric-card-method">Global flagship avg. '23–'24</div></div>
-            <div class="metric-card"><div class="metric-card-title">Inventory turn</div><div class="metric-card-val">~210d</div><div class="metric-card-method">Average days on shelf</div></div>
-            <div class="metric-card"><div class="metric-card-title">Lease cost</div><div class="metric-card-val">$9.2M</div><div class="metric-card-method">Per 10K sq ft / NYC avg</div></div>
-            <div class="metric-card"><div class="metric-card-title">EBITDA margin</div><div class="metric-card-val">-2.4%</div><div class="metric-card-method">After carrying costs</div></div>
-          </div>
-
-          <div class="cs-body" style="margin-top:24px;">Traditional luxury retail is built on a structural lie: that 42,000 square feet of fixed overhead in high-rent gateway cities can survive 210-day inventory turns and -14% foot traffic. It cannot. The Chapter 11 filing was not a failure of brand; it was a failure of physics. The model is too slow for the velocity of the cultural signal.</div>
-
-          <div class="cs-img-2col" style="margin-top:32px;">
-            <div class="cs-img-2col-item">
-              <div class="cs-img-contain" style="aspect-ratio:3/4;min-height:240px;"><img src="saks-02.png" alt="Saks Fifth Avenue flagship exterior" /></div>
-              <span class="img-caption">The Flagship: 42,000 sq ft of legacy overhead. A model that requires mass traffic to justify its existence.</span>
+          <div class="cs-stats cs-stats-3 cs-exec-ii-row">
+            <div class="cs-stat-cell">
+              <div class="cs-stat-eyebrow">Insight</div>
+              <div class="cs-stat-num">Inventory &amp; footprint</div>
+              <div class="cs-stat-label">Owned stock and flagship square footage diverged from how demand and culture move. Traffic retail never delivered consented first-party signal.</div>
             </div>
-            <div class="cs-img-2col-item">
-              <div class="cs-img-contain" style="aspect-ratio:3/4;min-height:240px;"><img src="saks-03.png" alt="Saks Orbit Node exterior" /></div>
-              <span class="img-caption">The Node: 3,500 sq ft of modular scale. A model that requires depth of relationship, not volume of traffic.</span>
+            <div class="cs-stat-cell">
+              <div class="cs-stat-eyebrow">Idea</div>
+              <div class="cs-stat-num">Vault</div>
+              <div class="cs-stat-label">Membership ARR, designer platform fees, and node GMV as margin. Nodes at cultural speed, not seasonal bulk.</div>
             </div>
-          </div>
-          <h2 class="cs-heading">Six Structural Failures. Not One Bad Decision.</h2>
-          <p class="cs-body">Saks Global&rsquo;s Chapter 11 filing in January 2026 was not a story of bad management. It was a structural model, inventory ownership, long-term leases, slow buying cycles, mass digital partnership, that the market outran on every front simultaneously. The $4.7B debt load following the HBC-Neiman Marcus merger, $600M/yr in synergies projected and zero delivered before bankruptcy, was only the starting condition for a cascade that took down every pillar at once.</p>
-          <p class="cs-body">Each failure was mechanically distinct and structurally related. $700M+ in unpaid vendor invoices destroyed in one cycle the trust built over sixty years. A 180-day buying cycle in a 14-day trend market meant inventory was locked six months before the season opened. 65% of HNW Gen Z luxury spenders lived in markets with no physical Saks presence. The $475M Amazon investment proved luxury brand equity cannot survive mass marketplace distribution.</p>
-          <div class="cs-stats cs-stats-4">
-            <div class="cs-stat-cell"><div class="cs-stat-num">$4.7B</div><div class="cs-stat-eyebrow">01 · Debt Load</div><div class="cs-stat-label">Debt following HBC-Neiman merger. $600M/yr in synergies projected. Zero delivered before bankruptcy.</div></div>
-            <div class="cs-stat-cell"><div class="cs-stat-num">180d</div><div class="cs-stat-eyebrow">02 · Buying Cycle</div><div class="cs-stat-label">Average buying cycle in a 14-day trend market. Inventory locked six months before the season opens.</div></div>
-            <div class="cs-stat-cell"><div class="cs-stat-num">$700M+</div><div class="cs-stat-eyebrow">03 · Vendor Debt</div><div class="cs-stat-label">Unpaid vendor invoices. 18-month payment backlog. Sixty years of trust destroyed in one cycle.</div></div>
-            <div class="cs-stat-cell"><div class="cs-stat-num">65%</div><div class="cs-stat-eyebrow">04 · Market Gap</div><div class="cs-stat-label">HNW Gen Z luxury spenders in markets with no physical Saks. 57 Off 5th stores closed February 2026.</div></div>
+            <div class="cs-stat-cell">
+              <div class="cs-stat-eyebrow">Impact</div>
+              <div class="cs-stat-num">~$964M / yr</div>
+              <div class="cs-stat-label">Run-rate cost-out vs. legacy stack. ~$6.1B NPV. Payback on ~$81M transform in under one month at stated savings.</div>
+            </div>
           </div>
         </div>
-      </section>
-
-      <!-- 02 STRATEGIC INSIGHT -->
-      <section class="cs-section cs-section-alt" id="cs-insight" data-cs-section="insight">
-        <div class="cs-section-inner" style="max-width:100%">
-          <div class="cs-section-eyebrow"><span class="cs-section-num">02</span><span class="cs-section-title">Strategic Insight</span></div>
-          <h2 class="cs-heading">The Inversion of Luxury Retail.</h2>
-          <div class="cs-pullquote">"Most retailers are in the business of selling products to people. Vault is in the business of managing access to relationships."</div>
-          
-          <div class="metrics-grid-mobile">
-            <div class="metric-card"><div class="metric-card-title">Customer CAC</div><div class="metric-card-val">-60%</div><div class="metric-card-method">Referral-based membership</div></div>
-            <div class="metric-card"><div class="metric-card-title">Inventory turn</div><div class="metric-card-val">14d</div><div class="metric-card-method">Total node rotation cycle</div></div>
-            <div class="metric-card"><div class="metric-card-title">LTV target</div><div class="metric-card-val">2.8x</div><div class="metric-card-method">vs. legacy retail customer</div></div>
-          </div>
-
-          <div class="cs-img-full" style="margin-top:32px;">
-            <div class="cs-img-contain" style="min-height:400px;aspect-ratio:16/9;"><img src="saks-04.png" alt="Vault by Saks logo mark on texture" /></div>
-            <span class="img-caption">The Brand Identity: A shift from "Everything for Everyone" to a curated, high-conviction edit.</span>
-          </div>
-
-          <div class="cs-body-2col" style="margin-top:40px;">
-            <p>The insight didn&rsquo;t come from the financial model; it came from a behavioral one. There&rsquo;s a 27-year-old in Austin earning $180K who has never set foot in a Saks. She follows three Ukrainian designers. She will spend 30 years and a significant fraction of her income on fashion. The 65% figure isn&rsquo;t a missed acquisition opportunity. It&rsquo;s a design problem.</p>
-            <p>The inventory ownership shift is the structural decision that makes the asset-light claim true, not just operationally, but balance-sheet true. Vault operates on consignment: designers retain ownership until point of sale. Vault&rsquo;s inventory exposure at any moment is a fraction of the legacy model&rsquo;s $1.8B average. That single design decision changes the risk profile of the entire business.</p>
-          </div>
-          <div class="cs-stats cs-stats-3">
-            <div class="cs-stat-cell"><div class="cs-stat-eyebrow">01 · Inventory Turns</div><div class="cs-stat-num">26&times;</div><div class="cs-stat-label">Projected annual inventory cycles vs. 2x for legacy Saks. 14-day rotation on real-time cultural signals.</div></div>
-            <div class="cs-stat-cell"><div class="cs-stat-eyebrow">02 · Balance Sheet</div><div class="cs-stat-num">81%</div><div class="cs-stat-label">Reduction in balance sheet inventory exposure. $345M designer-owned vs. $1.8B legacy average.</div></div>
-            <div class="cs-stat-cell"><div class="cs-stat-eyebrow">03 · Media Cost</div><div class="cs-stat-num">$0</div><div class="cs-stat-label">CPM vs. $350-600 CPM brand media for legacy Saks. Members opt in for discovery. Acquisition runs through word of mouth.</div></div>
-          </div>
-          <div class="cs-img-full">
-            <div class="cs-img-contain" style="min-height:320px;aspect-ratio:16/9;"><img src="saks-04.png" alt="Warm-climate exterior — brass letterforms on rammed earth" /></div>
-            <span class="img-caption">The identity is not dependent on the dark brick aesthetic. Same brass mark on rammed earth. Two climates, one system.</span>
-          </div>
-
-          <!-- PERSONAS -->
-          <div class="cs-section-eyebrow" style="margin-top:48px;margin-bottom:20px;"><span class="cs-section-num">02B</span><span class="cs-section-title">The People: Three Users, Three Tiers, Three Cities</span></div>
-          <p class="cs-body" style="margin-bottom:24px;">Vault&rsquo;s three membership tiers are not price brackets. They are three distinct relationships with fashion, time, and discovery. Every product decision in this case study was made for one of these three people.</p>
-          <div class="persona-grid">
-            <div class="persona-card">
-              <div class="persona-card-tier">Member Tier · $500/yr · NYC</div>
-              <div class="persona-card-name">Camille Osei</div>
-              <div class="persona-card-city">29 · $95K · Associate Strategist, Tribeca</div>
-              <div class="persona-card-quote">&ldquo;I know who the good designers are before they&rsquo;re on Ssense. My job is to make things make sense. My taste does the same thing.&rdquo;</div>
-              <div class="persona-card-detail">Culturally fluent and fashion-forward but not yet high-income. Buys selectively: one or two pieces per rotation when something is exactly right. $2,400/yr fashion spend.</div>
-              <div class="persona-card-tension">Core role: The word-of-mouth engine. The $0 CPM acquisition model runs through her.</div>
+        <details class="cs-fold" style="margin-top:48px;border:1px solid var(--g200);padding:0 24px 24px;background:var(--g100);">
+          <summary style="list-style:none;cursor:pointer;padding:24px 0 0;">
+            <h2 class="cs-heading cs-fold-headline" style="margin-bottom:12px;">Structural context</h2>
+            <p class="cs-fold-lede">Chapter 11, debt, buying cadence, and vendor terms — why the flagship stack failed.</p>
+            <span class="cs-fold-hint">Expand full context</span>
+          </summary>
+          <div class="cs-fold-content">
+            <div class="metrics-grid-mobile">
+              <div class="metric-card"><div class="metric-card-title">Foot traffic</div><div class="metric-card-val">-14%</div><div class="metric-card-method">Global flagship avg. &rsquo;23&ndash;&rsquo;24</div></div>
+              <div class="metric-card"><div class="metric-card-title">Inventory turn</div><div class="metric-card-val">~210d</div><div class="metric-card-method">Average days on shelf</div></div>
+              <div class="metric-card"><div class="metric-card-title">Lease cost</div><div class="metric-card-val">$9.2M</div><div class="metric-card-method">Per 10K sq ft / NYC avg</div></div>
+              <div class="metric-card"><div class="metric-card-title">EBITDA margin</div><div class="metric-card-val">-2.4%</div><div class="metric-card-method">After carrying costs</div></div>
             </div>
-            <div class="persona-card">
-              <div class="persona-card-tier">Reserve Tier · $900/yr · Los Angeles</div>
-              <div class="persona-card-name">Daniela Reyes</div>
-              <div class="persona-card-city">34 · $165K · Creative Director, Silver Lake</div>
-              <div class="persona-card-quote">&ldquo;I know what I like. I just don&rsquo;t have time to find it anymore. If someone can do that work for me, really do it, not algorithmically, I&rsquo;ll pay for that.&rdquo;</div>
-              <div class="persona-card-detail">Has the income and the taste but not the time. Buys fewer pieces, spends more per piece. Returns almost nothing. $8,500/yr fashion spend.</div>
-              <div class="persona-card-tension">Core role: The revenue engine. The named stylist relationship produces the repeat-booking data that proves the moat.</div>
+            <div class="cs-context-open">
+              <div class="cs-pull-quote">Traditional luxury retail assumed that <strong>42,000 sq ft</strong> retail stores in gateway cities could absorb <strong>~210-day</strong> inventory turns and traffic that no longer shows up at that density. When Saks Global entered <strong>Chapter 11</strong>, the story was liquidity, leverage, and velocity — not a failure of taste.</div>
             </div>
-            <div class="persona-card">
-              <div class="persona-card-tier">Black Tier · $4,500/yr · Miami</div>
-              <div class="persona-card-name">Margaux Delacroix</div>
-              <div class="persona-card-city">41 · $380K+ · Partner, Private Equity, Brickell</div>
-              <div class="persona-card-quote">&ldquo;I don&rsquo;t shop. I acquire. There&rsquo;s a difference, and it&rsquo;s mostly time. Show me what&rsquo;s right and bring it to me.&rdquo;</div>
-              <div class="persona-card-detail">Wardrobe of ~60 pieces, half investment garments. Buys fewer than 10 new pieces per year. Has not browsed in a store by choice in four years. $28,000/yr fashion spend.</div>
-              <div class="persona-card-tension">Core role: High-LTV anchor. At-home trial conversion (3-4 of 6 pieces) drives Black-tier unit economics.</div>
-            </div>
-          </div>
 
-          <!-- RESEARCH DRAWER -->
-          <div class="research-drawer">
-            <div class="research-drawer-trigger" onclick="toggleResearch()">
-              <div class="research-drawer-label">
-                <span class="research-drawer-eyebrow">Research</span>
-                <span class="research-drawer-title">View Research Stack</span>
-                <span class="research-drawer-count">4 Methods</span>
+            <div class="cs-context-pillars">
+              <div class="cs-context-card">
+                <div class="cs-context-card-top">
+                  <span class="cs-context-card-num">01</span>
+                  <span class="cs-context-card-title">Balance sheet &amp; filing</span>
+                </div>
+                <p class="cs-context-card-body">The post-merger capital structure carried roughly <strong>$4.7B</strong> in debt against synergy promises of <strong>~$600M/year</strong> that did not materialize ahead of the filing. Owned inventory, long-dated leases, and interest load compounded: each slow turn and markdown hit the same balance sheet. The reorganization was the exhaust port for a model that optimized for square footage and wholesale scale, not for cash conversion.</p>
               </div>
-              <span class="research-drawer-icon" id="research-icon">+</span>
-            </div>
-            <div class="research-drawer-body" id="research-body">
-              <div class="research-drawer-grid">
-                <div class="research-method"><div class="research-method-type">Market · Financial Analysis</div><div class="research-method-name">Saks Global Chapter 11 Filing Analysis</div><div class="research-method-meta">Bankruptcy filings, creditor schedules, debt structure, Amazon partnership terms, vendor invoice backlog. Identified the six structural failure modes.</div><span class="research-method-scale">Jan 2026 Filing · $4.7B Debt Stack</span></div>
-                <div class="research-method"><div class="research-method-type">Market · Competitive Audit</div><div class="research-method-name">Luxury Membership Model Benchmarking</div><div class="research-method-meta">Pricing and value analysis of Soho House ($2,600/yr), Zero Bond ($4,400/yr), Core Club ($15,000-$18,000/yr), Aman ($15,000/yr). Validated tier pricing against social club comps, not fashion rental comps.</div><span class="research-method-scale">5 Comps · 3 Categories</span></div>
-                <div class="research-method"><div class="research-method-type">Cultural · Geographic Analysis</div><div class="research-method-name">HNW Gen Z Geographic Demand Mapping</div><div class="research-method-meta">Cross-referenced HNW Gen Z concentration data with existing Saks gateway city footprint. Identified 65% of target spenders in markets without physical access. Informed Year 1 launch sequence.</div><span class="research-method-scale">12 Gateway Cities · US + International</span></div>
-                <div class="research-method"><div class="research-method-type">Primary · Behavioral Modeling</div><div class="research-method-name">Persona Development and LTV Modeling</div><div class="research-method-meta">Three archetype personas developed across income, time-sensitivity, and discovery behavior. Each mapped to a membership tier, node experience stage, and success metric. LTV modeled by tier against blended ARR, GMV conversion, and churn assumptions.</div><span class="research-method-scale">3 Personas · Bear/Base/Bull Scenarios</span></div>
+              <div class="cs-context-card">
+                <div class="cs-context-card-top">
+                  <span class="cs-context-card-num">02</span>
+                  <span class="cs-context-card-title">Buying cadence &amp; inventory</span>
+                </div>
+                <p class="cs-context-card-body">Legacy department-store buying runs a <strong>~180-day</strong> forward commit: capital locks before TikTok, editorial, and resale premiums can move demand. Culture operates on two-week cycles; the buy sheet operates on two quarters. That mismatch shows up as <strong>~210 days</strong> on shelf, write-downs, and margin that never recovers — the opposite of the 14-day rotation Vault is built to run.</p>
               </div>
-              <div class="research-sources">
-                <span class="research-source-label">Sources</span>
-                <span class="research-source-tag">Saks Global Chapter 11 Filing</span>
-                <span class="research-source-tag">Bloomberg Luxury Index</span>
-                <span class="research-source-tag">Soho House Annual Report</span>
-                <span class="research-source-tag">Business of Fashion</span>
-                <span class="research-source-tag">Vogue Business</span>
-                <span class="research-source-tag">Deloitte Luxury Study</span>
-                <span class="research-source-tag">McKinsey State of Fashion 2026</span>
+              <div class="cs-context-card">
+                <div class="cs-context-card-top">
+                  <span class="cs-context-card-num">03</span>
+                  <span class="cs-context-card-title">Vendor terms &amp; trade trust</span>
+                </div>
+                <p class="cs-context-card-body">Net-90 stretched into effective non-payment: <strong>$700M+</strong> in unpaid invoices and an <strong>18-month</strong> vendor backlog were not accounting footnotes; they were the trade&rsquo;s verdict on the relationship. When settlement is uncertain, designers withhold the best SKUs and invest elsewhere. Vault&rsquo;s consignment plus fast settlement is not a perk — it is structural repair for a contract the legacy stack broke.</p>
+              </div>
+              <div class="cs-context-card">
+                <div class="cs-context-card-top">
+                  <span class="cs-context-card-num">04</span>
+                  <span class="cs-context-card-title">Footprint, traffic &amp; demand</span>
+                </div>
+                <p class="cs-context-card-body">Flagship economics assumed rent ladders like <strong>~$9.2M</strong> per 10K sq ft (NYC reference) could be amortized across mass traffic. With flagship traffic down <strong>~14%</strong> year over year, the denominator disappeared while the numerator held. At the same time, roughly <strong>65%</strong> of HNW Gen Z luxury spend sits in markets with no Saks door — the old footprint maps yesterday&rsquo;s geography, not tomorrow&rsquo;s wallets.</p>
+              </div>
+              <div class="cs-context-card cs-context-card--wide">
+                <div class="cs-context-card-top">
+                  <span class="cs-context-card-num">05</span>
+                  <span class="cs-context-card-title">Digital distribution</span>
+                </div>
+                <p class="cs-context-card-body">The <strong>$475M</strong> Amazon partnership bet scale over controlled distribution; luxury has since learned what mass marketplaces do to brand equity. Vault assumes no mass marketplace rescue — only owned rails and consented first-party signal. Full Legacy vs. Vault comparison lives in the <a href="#cs-appendix" style="color:inherit;text-decoration:underline;text-underline-offset:3px;">Appendix</a>.</p>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
 
-      <!-- 03 STRATEGY -->
-      <section class="cs-section" id="cs-strategy" data-cs-section="strategy">
-        <div class="cs-section-inner" style="max-width:100%">
-          <div class="cs-section-eyebrow"><span class="cs-section-num">03</span><span class="cs-section-title">Strategy</span></div>
-          <h2 class="cs-heading">Three Pillars. One Coherent Thesis.</h2>
-          <div class="cs-stats cs-stats-3">
-            <div class="cs-stat-cell"><div class="cs-stat-eyebrow">Pillar 01 · Asset-Light Physical Infrastructure</div><div class="cs-stat-num cs-stat-num-inline">3,500 sq ft</div><div class="cs-stat-label">Discovery nodes on month-to-month leases. No permanent buildout. Designers retain ownership until sale. First three nodes: NYC, LA, Miami. Nodes are the brand signal.</div></div>
-            <div class="cs-stat-cell"><div class="cs-stat-eyebrow">Pillar 02 · Membership as the Revenue Engine</div><div class="cs-stat-num cs-stat-num-inline">$1,188 blended ARR</div><div class="cs-stat-label">Three-tier annual subscription ($500 / $900 / $4,500). Membership fees cover all fixed node costs before a single piece of retail sells. GMV is margin upside.</div></div>
-            <div class="cs-stat-cell"><div class="cs-stat-eyebrow">Pillar 03 · The Loyalty Data Flywheel</div><div class="cs-stat-num cs-stat-num-inline">$2,500 /mo per designer</div><div class="cs-stat-label">Member data + styling requests + designer feedback creates a predictive demand model driving inventory decisions, higher sell-through, lower markdowns. This loop is the moat.</div></div>
-          </div>
-          <p class="cs-body">Vault is not a repositioning of Saks. It is a new business model that uses the Saks name as its only inheritance and earns everything else from scratch. Membership fees cover fixed costs. Designer subscriptions fund the platform. Retail GMV is pure margin upside. This is the only luxury model where the business doesn&rsquo;t need a hit season to stay solvent.</p>
-          <div class="cs-img-full" style="margin:32px 0 8px;">
-            <div class="cs-img-contain" style="min-height:380px;aspect-ratio:4/3;"><img src="saks-05.png" alt="Still life — black marble, folded cashmere, single Vault tag" /></div>
-          </div>
-          <span class="img-caption">The rotation reduced to a still life. The Vault tag on the knitwear is the only brand signal in the frame.</span>
-          <div class="cs-section-eyebrow" style="margin-top:40px;margin-bottom:20px;"><span class="cs-section-title">Legacy Saks vs. Vault: The Model Shift</span></div>
-          <table class="cs-table">
-            <thead><tr><th>Dimension</th><th>Legacy Saks</th><th>Vault by Saks</th></tr></thead>
-            <tbody>
-              <tr><td>Real Estate</td><td>8M+ sq ft owned flagship space</td><td>3,500 sq ft nodes, month-to-month lease</td></tr>
-              <tr><td>Buying Cycle</td><td>180-day forward inventory buy</td><td>14-day rotation on cultural signal</td></tr>
-              <tr><td>Inventory Ownership</td><td>Saks owns all inventory</td><td>Designers retain ownership until sale</td></tr>
-              <tr><td>Vendor Payment</td><td>Net-90 (or not at all)</td><td>Same-day smart contract settlement</td></tr>
-              <tr><td>SKU Density</td><td>12,000+ SKUs per location</td><td>80-120 curated SKUs per node per rotation</td></tr>
-              <tr><td>Inventory Turns</td><td>2.5x annual</td><td>26x projected annual</td></tr>
-              <tr><td>Media Cost</td><td>$350-600 CPM brand media</td><td>$0 CPM; members opt in for discovery</td></tr>
-              <tr><td>Digital Strategy</td><td>$475M Amazon partnership</td><td>Platform infrastructure only; no mass marketplace</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <!-- ARTIFACT 01: Financial Model -->
-      <div class="artifact-strip" id="artifact-financial">
-        <div class="artifact-trigger" id="art1-trigger" onclick="toggleArtifact(1)">
-          <div class="artifact-left">
-            <div class="artifact-badge"><span>Interactive Model</span></div>
-            <div class="artifact-meta">
-              <div class="artifact-name">Financial Model</div>
-              <div class="artifact-desc">Adjustable sliders · Bear / Base / Bull scenarios · Real-time P&amp;L output · 10-year NPV</div>
+            <div class="cs-context-closure">
+              <div class="cs-section-eyebrow" style="margin-bottom:16px;"><span class="cs-section-title">Shorthand · evidence</span></div>
+              <h2 class="cs-heading">Six structural failures</h2>
+              <p class="cs-body">The filing exposed owned inventory, long leases, slow buying cycles, vendor breakage, footprint drag, and mass digital bets as <strong>one connected stack</strong> — not six isolated mistakes. The grid below is the shorthand; decision log and tables are in the Appendix.</p>
+              <div class="cs-stats cs-stats-4">
+              <div class="cs-stat-cell"><div class="cs-stat-num">$4.7B</div><div class="cs-stat-eyebrow">Debt</div><div class="cs-stat-label">Post-merger stack. $600M/yr synergies projected; none delivered pre-filing.</div></div>
+              <div class="cs-stat-cell"><div class="cs-stat-num">180d</div><div class="cs-stat-eyebrow">Buy cycle</div><div class="cs-stat-label">Six-month buy in a two-week culture. Inventory commits before the season opens.</div></div>
+              <div class="cs-stat-cell"><div class="cs-stat-num">$700M+</div><div class="cs-stat-eyebrow">Vendors</div><div class="cs-stat-label">Unpaid invoices; 18-month backlog.</div></div>
+              <div class="cs-stat-cell"><div class="cs-stat-num">65%</div><div class="cs-stat-eyebrow">Gap</div><div class="cs-stat-label">HNW Gen Z spend in markets with no Saks door.</div></div>
+            </div>
             </div>
           </div>
-          <div class="artifact-right"><span class="artifact-toggle" id="art1-cta">+</span></div>
-        </div>
-        <div class="artifact-expand" id="art1-expand">
-          <div class="artifact-inner">
-            <div class="artifact-iframe-wrap">
-              <iframe src="vault-financial-model.html" title="Vault by Saks Financial Model" scrolling="yes"></iframe>
-            </div>
-          </div>
-        </div>
-      </div>
+        </details>
+      </section>
 
-
-      <!-- 04 THE PRODUCT -->
-      <section class="cs-section cs-section-alt" id="cs-execution" data-cs-section="execution">
+      <!-- 01 THE BUSINESS MODEL: THREE REVENUE STREAMS -->
+      <section class="cs-section" id="cs-revenue-model" data-cs-section="revenue-model">
         <div class="cs-section-inner" style="max-width:100%">
-          <div class="cs-section-eyebrow"><span class="cs-section-num">04</span><span class="cs-section-title">The Product</span></div>
-          <h2 class="cs-heading">Four Interlocking Products. One Platform.</h2>
-
-          <!-- Product cards with images -->
-          <div class="product-cards">
+          <div class="cs-section-eyebrow"><span class="cs-section-num">01</span><span class="cs-section-title">The business model</span></div>
+          <h2 class="cs-heading">Three interlocking revenue streams</h2>
+          <p class="cs-body">The model is viable because three lines hit the P&amp;L on different clocks. None depends on a single perfect season. Subscriptions underwrite the real estate and the product org; retail is not the sole solvency bet.</p>
+          <div class="product-cards" style="margin-top:8px;grid-template-columns:repeat(3,minmax(0,1fr));">
             <div class="product-card">
-              <div class="product-card-num">01</div>
-              <div class="cs-img-contain product-card-img" style="aspect-ratio:16/10;min-height:140px;"><img src="saks-06.png" alt="Membership cards on brass tray — Black, Reserve, Member" /></div>
-              <div class="product-card-title">Membership Tiers</div>
-              <div class="product-card-sub">Three relationships, not three price points</div>
-              <div class="product-card-body">Pricing benchmarked against Soho House, Zero Bond, and Core Club, not fashion rental services. Each tier unlocks something qualitatively different.</div>
-              <span class="product-card-list-label">Member $500/yr</span>
-              <ul class="product-card-list">
-                <li>48hr early access · digital lookbook · 1 guest pass</li>
-                <li>Matte card · up to 5 wishlists</li>
-              </ul>
-              <span class="product-card-list-label">Reserve $900/yr</span>
-              <ul class="product-card-list">
-                <li>72hr early access · named stylist in-app</li>
-                <li>1-piece hold · embossed card · 5% purchase discount</li>
-              </ul>
-              <span class="product-card-list-label">Black $4,500/yr</span>
-              <ul class="product-card-list">
-                <li>96hr early access · named stylist direct line</li>
-                <li>6-piece home edit · metal card · 10% back in credit</li>
-              </ul>
+              <div class="product-card-num">01 · Membership ARR</div>
+              <div class="product-card-title">Cover the node before the first sale</div>
+              <div class="product-card-sub">$500 / $900 / $4,500 tiers</div>
+              <div class="product-card-body">Annual subscriptions with <strong>$1,188</strong> blended ARR. Fixed node cost is covered <strong>before</strong> the first garment sells — retail is not the solvency bet.</div>
               <div class="product-card-stat">
                 <div class="product-card-stat-num">$1,188</div>
-                <div class="product-card-stat-label">Blended ARR<br>per member</div>
+                <div class="product-card-stat-label">Blended ARR / member</div>
               </div>
             </div>
             <div class="product-card">
-              <div class="product-card-num">02</div>
-              <div class="cs-img-contain product-card-img" style="aspect-ratio:16/10;min-height:140px;"><img src="saks-07.png" alt="Sales floor interior — VBS monogram visible" /></div>
-              <div class="product-card-title">The Node</div>
-              <div class="product-card-sub">3,500 sq ft discovery as physical product</div>
-              <div class="product-card-body">Each node is a self-contained P&L. Month-to-month lease with 90-day exit. No permanent buildout. Modular fixtures only.</div>
-              <ul class="product-card-list" style="margin-top:16px;">
-                <li>$75/sq ft/yr · 90-day exit clause if market underperforms</li>
-                <li>$2.8M build-out CapEx per node · modular fixtures only</li>
-                <li>80-120 SKUs across 20 designers per rotation</li>
-                <li>$180K-$240K inventory value · all designer-owned until sale</li>
-                <li>2 Vault stylists + 1 floor lead per shift</li>
-              </ul>
+              <div class="product-card-num">02 · Designer platform</div>
+              <div class="product-card-title">Demand rails paid ahead of scale</div>
+              <div class="product-card-sub">Per designer · monthly</div>
+              <div class="product-card-body"><strong>$2,500/month</strong> buys sell-through visibility, rotation scoring, anonymous member aggregates, and settlement rails — revenue that lands <strong>before</strong> membership fully carries the platform.</div>
               <div class="product-card-stat">
-                <div class="product-card-stat-num">$18M</div>
-                <div class="product-card-stat-label">Revenue per<br>node / year</div>
+                <div class="product-card-stat-num">$2.5K</div>
+                <div class="product-card-stat-label">Per designer / mo</div>
               </div>
             </div>
             <div class="product-card">
-              <div class="product-card-num">03</div>
-              <div class="cs-img-contain product-card-img" style="aspect-ratio:16/10;min-height:140px;"><img src="saks-08.png" alt="Designer hang tags on black marble — fanned" /></div>
-              <div class="product-card-title">The Designer Platform</div>
-              <div class="product-card-sub">Subscription revenue before any retail sale</div>
-              <div class="product-card-body">Designers subscribe to the platform at $2,500/month. This generates revenue before any GMV and aligns designer incentives with sell-through.</div>
-              <ul class="product-card-list" style="margin-top:16px;">
-                <li>Real-time sell-through + wishlist rate per piece</li>
-                <li>Anonymous style profile aggregates from Reserve + Black</li>
-                <li>Rotation-by-rotation performance scoring</li>
-                <li>Smart contract settlement within 14 days of sale</li>
-                <li>Bi-weekly trend velocity digest from curation team</li>
-              </ul>
+              <div class="product-card-num">03 · Node retail</div>
+              <div class="product-card-title">GMV as margin upside</div>
+              <div class="product-card-sub">Consignment · no Vault inventory risk</div>
+              <div class="product-card-body">Floor sales accrue once fixed cost is already covered. Designers retain ownership until sale; Vault captures margin without carrying wholesale inventory.</div>
               <div class="product-card-stat">
-                <div class="product-card-stat-num">$36M</div>
-                <div class="product-card-stat-label">Platform revenue<br>Year 5 (1,200 designers)</div>
-              </div>
-            </div>
-            <div class="product-card">
-              <div class="product-card-num">04</div>
-              <div class="cs-img-contain product-card-img" style="aspect-ratio:16/10;min-height:140px;"><img src="saks-09.png" alt="Ceiling-hung brass bar, dark bg, cream knitwear" /></div>
-              <div class="product-card-title">The 14-Day Rotation</div>
-              <div class="product-card-sub">The operational thesis made tangible</div>
-              <div class="product-card-body">26 rotations per year vs. 2.5 annual cycles for the legacy Saks model. Each phase generates data as well as revenue.</div>
-              <ul class="product-card-list" style="margin-top:16px;">
-                <li>Days 0-2: Cultural brief from TikTok, editorial, resale signal</li>
-                <li>Days 3-6: 20 designers confirmed, 80-120 SKUs, contracts locked</li>
-                <li>Days 7-10: Logistics, steam, tag, floor reset in under 48hr</li>
-                <li>Days 11-13: Staged member preview by tier (96hr / 72hr / 48hr)</li>
-                <li>Day 14: Drop day opens · data updates · next brief starts</li>
-              </ul>
-              <div class="product-card-stat">
-                <div class="product-card-stat-num">26&times;</div>
-                <div class="product-card-stat-label">Annual inventory<br>cycles vs. 2.5x legacy</div>
+                <div class="product-card-stat-num">Upside</div>
+                <div class="product-card-stat-label">After fixed cost cleared</div>
               </div>
             </div>
           </div>
+        </div>
+      </section>
 
-          <!-- MEMBERSHIP TIER COMPARISON TABLE -->
-          <div class="cs-section-eyebrow" style="margin-top:8px;margin-bottom:24px;"><span class="cs-section-title">Tier Benefits Comparison</span></div>
+      <!-- 02 INTIMATE SPACES & TIERED ACCESS -->
+      <section class="cs-section cs-section-alt" id="cs-spaces-tiers" data-cs-section="spaces-tiers">
+        <div class="cs-section-inner" style="max-width:100%">
+          <div class="cs-section-eyebrow"><span class="cs-section-num">02</span><span class="cs-section-title">Intimate spaces &amp; tiered access</span></div>
+          <h2 class="cs-heading">Nodes, tiers, and the human engine</h2>
+          <p class="cs-body">Vault replaces flagship square footage with <strong>~3,500 sq ft</strong> nodes: month-to-month lease, modular build, designer-owned stock on the floor. Access runs through <strong>Member</strong>, <strong>Reserve</strong>, and <strong>Black</strong> — staged early access, stylist depth, and at-home edit where the LTV sits.</p>
+          <p class="cs-pull-quote">&ldquo;Most retailers sell products to people. Vault manages access to relationships.&rdquo;</p>
+          <div class="cs-img-full" style="margin-top:24px;">
+            <div class="cs-img-contain" style="min-height:400px;aspect-ratio:16/9;"><img src="saks-04.png" alt="Vault by Saks brass mark on charcoal texture" loading="lazy" decoding="async" /></div>
+            <span class="img-caption">Identity scales to each market; the node stays small by design.</span>
+          </div>
+          <div class="cs-section-eyebrow" style="margin-top:40px;margin-bottom:20px;"><span class="cs-section-title">Tier benefits</span></div>
           <div class="tier-compare">
             <div class="tier-col">
               <div class="tier-col-head">
@@ -864,17 +846,49 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
               </div>
             </div>
           </div>
-
-          <!-- Membership Physicals: 3-col -->
-          <div class="cs-img-3col" style="margin-top:8px;">
-            <div class="cs-img-3col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:220px;"><img src="saks-06.png" alt="The membership cards" /></div><span class="img-caption">The Artifact: Entry into the node is physically gated.</span></div>
-            <div class="cs-img-3col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:220px;"><img src="saks-23.png" alt="The at-home box" /></div><span class="img-caption">The Delivery: The Black-tier edit arrives 96hr early.</span></div>
-            <div class="cs-img-3col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:220px;"><img src="saks-22.png" alt="The seal" /></div><span class="img-caption">The Detail: Every touchpoint is a material constant.</span></div>
+          <div class="persona-grid" style="margin-top:28px;">
+            <div class="persona-card">
+              <div class="persona-card-tier">Member Tier · $500/yr · NYC</div>
+              <div class="persona-card-name">Camille Osei</div>
+              <div class="persona-card-city">29 · $95K · Associate Strategist, Tribeca</div>
+              <div class="persona-card-quote">&ldquo;I know who the good designers are before they&rsquo;re on Ssense. My job is to make things make sense. My taste does the same thing.&rdquo;</div>
+              <div class="persona-card-detail">Culturally fluent and fashion-forward but not yet high-income. Buys selectively: one or two pieces per rotation when something is exactly right. $2,400/yr fashion spend.</div>
+              <div class="persona-card-tension">Core role: The word-of-mouth engine. The $0 CPM acquisition model runs through her.</div>
+            </div>
+            <div class="persona-card">
+              <div class="persona-card-tier">Reserve Tier · $900/yr · Los Angeles</div>
+              <div class="persona-card-name">Daniela Reyes</div>
+              <div class="persona-card-city">34 · $165K · Creative Director, Silver Lake</div>
+              <div class="persona-card-quote">&ldquo;I know what I like. I just don&rsquo;t have time to find it anymore. If someone can do that work for me, really do it, not algorithmically, I&rsquo;ll pay for that.&rdquo;</div>
+              <div class="persona-card-detail">Has the income and the taste but not the time. Buys fewer pieces, spends more per piece. Returns almost nothing. $8,500/yr fashion spend.</div>
+              <div class="persona-card-tension">Core role: The revenue engine. The named stylist relationship produces the repeat-booking data that proves the moat.</div>
+            </div>
+            <div class="persona-card">
+              <div class="persona-card-tier">Black Tier · $4,500/yr · Miami</div>
+              <div class="persona-card-name">Margaux Delacroix</div>
+              <div class="persona-card-city">41 · $380K+ · Partner, Private Equity, Brickell</div>
+              <div class="persona-card-quote">&ldquo;I don&rsquo;t shop. I acquire. There&rsquo;s a difference, and it&rsquo;s mostly time. Show me what&rsquo;s right and bring it to me.&rdquo;</div>
+              <div class="persona-card-detail">Wardrobe of ~60 pieces, half investment garments. Buys fewer than 10 new pieces per year. Has not browsed in a store by choice in four years. $28,000/yr fashion spend.</div>
+              <div class="persona-card-tension">Core role: High-LTV anchor. At-home trial conversion (3-4 of 6 pieces) drives Black-tier unit economics.</div>
+            </div>
           </div>
         </div>
       </section>
 
-      <!-- 14-DAY ROTATION CAROUSEL -->
+      <!-- 03 CULTURAL VELOCITY -->
+      <section class="cs-section" id="cs-cultural-velocity" data-cs-section="cultural-velocity">
+        <div class="cs-section-inner" style="max-width:100%">
+          <div class="cs-section-eyebrow"><span class="cs-section-num">03</span><span class="cs-section-title">Cultural velocity</span></div>
+          <h2 class="cs-heading">Buying cadence matches the feed, not the season</h2>
+          <p class="cs-body">Legacy wholesale assumed a <strong>180-day</strong> forward buy. Vault runs a <strong>14-day</strong> rotation: the cultural brief pulls <strong>TikTok velocity</strong>, <strong>editorial</strong> coverage, and resale signal in real time. <strong>Twenty-six</strong> cycles per year vs. ~<strong>2.5</strong> legacy turns.</p>
+          <div class="cs-stats cs-stats-3" style="margin-top:24px;">
+            <div class="cs-stat-cell"><div class="cs-stat-eyebrow">Cycle</div><div class="cs-stat-num cs-stat-num-inline">14 days</div><div class="cs-stat-label">One full brief-to-drop loop on the node clock.</div></div>
+            <div class="cs-stat-cell"><div class="cs-stat-eyebrow">Signal</div><div class="cs-stat-num cs-stat-num-inline">Social + edit</div><div class="cs-stat-label">TikTok, editorial, secondary-market premiums, prior rotation scores.</div></div>
+            <div class="cs-stat-cell"><div class="cs-stat-eyebrow">Throughput</div><div class="cs-stat-num">26&times;</div><div class="cs-stat-label">Projected annual inventory cycles vs. legacy department-store cadence.</div></div>
+          </div>
+        </div>
+
+      <div class="rotation-carousel-bleed">
       <div class="rotation-carousel" id="rotation-section">
         <div class="rotation-carousel-head">
           <div class="rotation-carousel-title">The 14-Day Rotation Cycle</div>
@@ -883,7 +897,6 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
         
         <div class="rotation-viewport">
           <div class="rotation-track" id="rotation-track">
-            <!-- Phase 01 -->
             <div class="rotation-card active" data-index="1">
               <div class="rotation-card-days">Days 00-02</div>
               <div class="rotation-card-name">01 · Cultural Brief</div>
@@ -893,7 +906,6 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
                 <div class="rotation-metric"><div class="rotation-metric-label">Designers eval</div><div class="rotation-metric-val">50-80</div></div>
               </div>
             </div>
-            <!-- Phase 02 -->
             <div class="rotation-card" data-index="2">
               <div class="rotation-card-days">Days 03-06</div>
               <div class="rotation-card-name">02 · Designer Pull</div>
@@ -903,17 +915,15 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
                 <div class="rotation-metric"><div class="rotation-metric-label">Vault Risk</div><div class="rotation-metric-val">$0</div></div>
               </div>
             </div>
-            <!-- Phase 03 -->
             <div class="rotation-card" data-index="3">
               <div class="rotation-card-days">Days 07-10</div>
-              <div class="rotation-card-name">03 · Transit & Prep</div>
+              <div class="rotation-card-name">03 · Transit &amp; Prep</div>
               <div class="rotation-card-body">Physical logistics to node. Steam, tag, style. No back-stock; everything on the floor. Everything is staged by mood rather than brand, tagged with QR provenance links that feed directly into the designer's demand dashboard.</div>
               <div class="rotation-card-metrics">
                 <div class="rotation-metric"><div class="rotation-metric-label">Floor Reset</div><div class="rotation-metric-val">&lt; 48hr</div></div>
                 <div class="rotation-metric"><div class="rotation-metric-label">Back Stock</div><div class="rotation-metric-val">Zero</div></div>
               </div>
             </div>
-            <!-- Phase 04 -->
             <div class="rotation-card" data-index="4">
               <div class="rotation-card-days">Days 11-13</div>
               <div class="rotation-card-name">04 · Member Preview</div>
@@ -923,7 +933,6 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
                 <div class="rotation-metric"><div class="rotation-metric-label">Hold Conv.</div><div class="rotation-metric-val">&gt; 45%</div></div>
               </div>
             </div>
-            <!-- Phase 05 -->
             <div class="rotation-card" data-index="5">
               <div class="rotation-card-days">Day 14</div>
               <div class="rotation-card-name">05 · Drop Day</div>
@@ -937,188 +946,157 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
         </div>
 
         <div class="rotation-nav">
-          <button class="rotation-nav-btn" id="rot-prev" onclick="scrollRotation(-1)">
+          <button type="button" class="rotation-nav-btn" id="rot-prev" onclick="scrollRotation(-1)" aria-label="Previous phase">
             <svg viewBox="0 0 24 24"><path d="M15.41 16.59L10.83 12.00L15.41 7.41L14.00 6.00L8.00 12.00L14.00 18.00L15.41 16.59Z"/></svg>
           </button>
-          <button class="rotation-nav-btn" id="rot-next" onclick="scrollRotation(1)">
+          <button type="button" class="rotation-nav-btn" id="rot-next" onclick="scrollRotation(1)" aria-label="Next phase">
             <svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12.00L8.59 7.41L10.00 6.00L16.00 12.00L10.00 18.00L8.59 16.59Z"/></svg>
           </button>
         </div>
       </div>
+      </div>
+      </section>
 
-      <!-- 05 THE EXPERIENCE -->
-      <section class="cs-section" id="cs-creative" data-cs-section="creative">
+      <!-- 02 (continued) · NODE EXPRESSION -->
+      <section class="cs-section" id="cs-node-expression">
         <div class="cs-section-inner" style="max-width:100%">
-          <div class="cs-section-eyebrow"><span class="cs-section-num">05</span><span class="cs-section-title">The Experience</span></div>
-          <h2 class="cs-heading">Physical Design as a Product System.</h2>
-          
-          <div class="node-walkthrough">
-            <div class="node-visual">
-              <div class="node-visual-inner">
-                <img src="saks-10.png" alt="Node Exterior" class="active" id="node-img-1" />
-                <img src="saks-18.png" alt="Threshold" id="node-img-2" />
-                <img src="saks-17.png" alt="Discovery" id="node-img-3" />
-                <img src="saks-14.png" alt="Interaction" id="node-img-4" />
-                <img src="saks-11.png" alt="Capture" id="node-img-5" />
-                <img src="saks-22.png" alt="Reflection" id="node-img-6" />
-                <img src="saks-15.png" alt="Return" id="node-img-7" />
-              </div>
-            </div>
-            <div class="node-steps">
-              <div class="node-step active" data-step="1">
-                <div class="node-step-num">Stage 01</div>
-                <div class="node-step-title">Street-Level Intrigue</div>
-                <div class="node-step-body">The node must prove itself under scrutiny. Minimal exterior. Single window. Address only. You pause. You look. You either know what this is or you don&rsquo;t.</div>
-                <div class="node-step-meta">
-                  <span class="node-step-tag">Environmental Signal: Minimal Exterior</span>
-                  <span class="node-step-tag">Metric: Foot-traffic pause rate</span>
-                </div>
-              </div>
-              <div class="node-step" data-step="2">
-                <div class="node-step-num">Stage 02</div>
-                <div class="node-step-title">Threshold</div>
-                <div class="node-step-body">Slow down. Register this is different. Empty entrance. No greeter. No music for three seconds at the transition point. Physical design as a cognitive reset.</div>
-                <div class="node-step-meta">
-                  <span class="node-step-tag">Environmental Signal: Empty Entrance</span>
-                  <span class="node-step-tag">Metric: Dwell at entry (seconds)</span>
-                </div>
-              </div>
-              <div class="node-step" data-step="3">
-                <div class="node-step-num">Stage 03</div>
-                <div class="node-step-title">Discovery</div>
-                <div class="node-step-body">Explore without prompting. 80-120 pieces grouped by mood, not brand. The edit speaks before any human does. Each niche is a curated argument for a personal style.</div>
-                <div class="node-step-meta">
-                  <span class="node-step-tag">Environmental Signal: Mood-based curation</span>
-                  <span class="node-step-tag">Metric: Time before first interaction</span>
-                </div>
-              </div>
-              <div class="node-step" data-step="4">
-                <div class="node-step-num">Stage 04</div>
-                <div class="node-step-title">Interaction</div>
-                <div class="node-step-body">The QR on each piece is not a price tag; it is a curation credential. Scan = data point. Each interaction feeds the cultural brief for the next rotation.</div>
-                <div class="node-step-meta">
-                  <span class="node-step-tag">Environmental Signal: Provenance QR Tags</span>
-                  <span class="node-step-tag">Metric: Stylist conversation rate</span>
-                </div>
-              </div>
-              <div class="node-step" data-step="5">
-                <div class="node-step-num">Stage 05</div>
-                <div class="node-step-title">Capture</div>
-                <div class="node-step-body">Member check-in at the hold station. No pressure. Wishlist or hold an item for a 14-day rotation. The modular fixture system supports rapid re-staging.</div>
-                <div class="node-step-meta">
-                  <span class="node-step-tag">Environmental Signal: Hold Station</span>
-                  <span class="node-step-tag">Metric: Wishlist + hold conversion</span>
-                </div>
-              </div>
-              <div class="node-step" data-step="6">
-                <div class="node-step-num">Stage 06</div>
-                <div class="node-step-title">Reflection</div>
-                <div class="node-step-body">Leave with something, even if not a purchase. A printed rotation card. A wax-sealed at-home edit. The bag moves through the street as an organic content moment.</div>
-                <div class="node-step-meta">
-                  <span class="node-step-tag">Environmental Signal: Physical Branding</span>
-                  <span class="node-step-tag">Metric: Organic content rate (48hr)</span>
-                </div>
-              </div>
-              <div class="node-step" data-step="7">
-                <div class="node-step-num">Stage 07</div>
-                <div class="node-step-title">Return</div>
-                <div class="node-step-body">The 14-day cycle resets. Personal preview note from a stylist arrives 96hrs before the drop. The relationship anchors the membership value.</div>
-                <div class="node-step-meta">
-                  <span class="node-step-tag">Environmental Signal: 1:1 Stylist Outreach</span>
-                  <span class="node-step-tag">Metric: Repeat-visit rate (30 days)</span>
-                </div>
-              </div>
-            </div>
-          </div>
+          <div class="cs-section-eyebrow"><span class="cs-section-num">02</span><span class="cs-section-title">Node expression</span></div>
+          <h2 class="cs-heading">Facades, packaging, fixtures, uniforms — one system per market.</h2>
+          <p class="cs-body" style="margin-top:-8px;">Physical layer for the 3,500 sq ft node: environmental read, packaging stack, modular fixtures, team styling.</p>
 
-          <!-- Brand in World -->
-          <div class="cs-section-eyebrow" style="margin-top:48px;margin-bottom:20px;"><span class="cs-section-num">05B</span><span class="cs-section-title">Brand in the World</span></div>
-
-          <!-- Sub-section: Store Facades -->
+          <!-- 01 · Environmental Design -->
           <div class="cs-body-2col" style="margin-bottom:16px;">
             <div>
-              <h3 style="font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--black);margin-bottom:8px;">01 · Store Facades</h3>
-              <p class="cs-body">The node communicates through architectural restraint. Brass letterforms on dark brick or rammed earth. No tagline. The identity is recognizable to those who know it and invisible to those who don&rsquo;t.</p>
-            </div>
-          </div>
-          <div class="cs-img-3col">
-            <div class="cs-img-3col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="saks-18.png" alt="Logo on exterior — brass on dark brick." /></div><span class="img-caption">Identity: Brass on dark brick.</span></div>
-            <div class="cs-img-3col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="saks-19.png" alt="Exterior detail dusk" /></div><span class="img-caption">The Pause: Street-level intrigue.</span></div>
-            <div class="cs-img-3col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="saks-20.png" alt="Corner node at night" /></div><span class="img-caption">Nodes: Two markets, one system.</span></div>
-          </div>
-
-          <!-- Sub-section: Packaging System -->
-          <div class="cs-body-2col" style="margin-top:40px;margin-bottom:16px;">
-            <div>
-              <h3 style="font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--black);margin-bottom:8px;">02 · Packaging System</h3>
-              <p class="cs-body">Material constants. The monogram appears once: engraved, functional, and small. Every touchpoint, from the wax seal to the titanium member card, is a tactile credential of the relationship.</p>
+              <h3 style="font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--black);margin-bottom:8px;">01 · Environmental Design</h3>
+              <p class="cs-body">Each node&rsquo;s facade matches the atmosphere and urban design of its market — the same system, read through local context.</p>
             </div>
           </div>
           <div class="cs-img-2col">
-            <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:4/3;min-height:220px;"><img src="saks-26.png" alt="Material grid" /></div><span class="img-caption">Monogram: Engraved and functional.</span></div>
-            <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:4/3;min-height:220px;"><img src="saks-21.png" alt="Packaging Detail" /></div><span class="img-caption">The Detail: Material constants.</span></div>
+            <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:4/3;min-height:200px;"><img src="facades/Saks_LA_Facade.png" alt="Vault node facade — Los Angeles" loading="lazy" /></div><span class="img-caption">Los Angeles</span></div>
+            <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:4/3;min-height:200px;"><img src="facades/Saks_Miami_Facade.png" alt="Vault node facade — Miami" loading="lazy" /></div><span class="img-caption">Miami</span></div>
+          </div>
+          <div class="cs-img-2col" style="margin-top:8px;">
+            <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:4/3;min-height:200px;"><img src="facades/Saks_NYC_Facade.png" alt="Vault node facade — New York" loading="lazy" /></div><span class="img-caption">New York</span></div>
+            <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:4/3;min-height:200px;"><img src="facades/Saks_chicago_Facade.png" alt="Vault node facade — Chicago" loading="lazy" /></div><span class="img-caption">Chicago</span></div>
           </div>
 
-          <!-- Sub-section: Employee Style Guide -->
+          <!-- 02 · Packaging -->
           <div class="cs-body-2col" style="margin-top:40px;margin-bottom:16px;">
             <div>
-              <h3 style="font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--black);margin-bottom:8px;">03 · Style Guide</h3>
-              <p class="cs-body">The team is the editorial signal. Tonal dressing, one statement piece, and no branded products. The stylist relationship is the moat that anchors the premium tiers.</p>
+              <h3 style="font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--black);margin-bottom:8px;">02 · Packaging</h3>
+              <p class="cs-body">From shopping bags to garment wraps and tags — every layer is considered down to the smallest detail.</p>
             </div>
           </div>
-          <div class="cs-img-full"><div class="cs-img-contain" style="min-height:320px;aspect-ratio:16/9;"><img src="saks-28.png" alt="Team portrait" /></div></div>
-          <span class="img-caption">The Team: Tonal dressing and high-conviction style.</span>
+          <div class="cs-img-2col">
+            <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="packaging/Saks_shoppingbag_packaging.png" alt="Vault shopping bag packaging" loading="lazy" /></div><span class="img-caption">Shopping bag</span></div>
+            <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="packaging/Saks_ribbonbox_packaging.png" alt="Ribbon-tied gift box" loading="lazy" /></div><span class="img-caption">Ribbon box</span></div>
+          </div>
+          <div class="cs-img-2col" style="margin-top:8px;">
+            <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="packaging/Saks_Garmentbag_packaging.png" alt="Garment bag" loading="lazy" /></div><span class="img-caption">Garment bag</span></div>
+            <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="packaging/Saks_linentissueswrapping_packaging.png" alt="Tissue and linen wrapping" loading="lazy" /></div><span class="img-caption">Tissue &amp; wrap</span></div>
+          </div>
+
+          <!-- 03 · Fixtures -->
+          <div class="cs-body-2col" style="margin-top:40px;margin-bottom:16px;">
+            <div>
+              <h3 style="font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--black);margin-bottom:8px;">03 · Fixtures</h3>
+              <p class="cs-body">Modular fixtures and focal moments repeat across the node — cashwrap, bar, windows, capsules, and fitting rooms in one coherent language.</p>
+            </div>
+          </div>
+          <div class="cs-img-3col">
+            <div class="cs-img-3col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="fixtures/Saks_Cashwrap_Fixtures.png" alt="Cashwrap fixtures" loading="lazy" /></div><span class="img-caption">Cashwrap</span></div>
+            <div class="cs-img-3col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="fixtures/Saks_primarybar_fixture.png" alt="Primary bar fixture" loading="lazy" /></div><span class="img-caption">Primary bar</span></div>
+            <div class="cs-img-3col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="fixtures/Saks_Bar_Fixture.png" alt="Bar fixture" loading="lazy" /></div><span class="img-caption">Bar</span></div>
+          </div>
+          <div class="cs-img-3col" style="margin-top:8px;">
+            <div class="cs-img-3col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="fixtures/Saks_Ceilingbar_Fixture.png" alt="Ceiling bar fixture" loading="lazy" /></div><span class="img-caption">Ceiling bar</span></div>
+            <div class="cs-img-3col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="fixtures/Saks_Wallshelf_Fixture.png" alt="Wall shelf fixture" loading="lazy" /></div><span class="img-caption">Wall shelf</span></div>
+            <div class="cs-img-3col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="fixtures/Saks_Wallhooks_fixture.png" alt="Wall hooks fixture" loading="lazy" /></div><span class="img-caption">Wall hooks</span></div>
+          </div>
+          <div class="cs-img-2col" style="margin-top:8px;">
+            <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="fixtures/Saks_WindowChest_Fixture.png" alt="Window chest display" loading="lazy" /></div><span class="img-caption">Window chest</span></div>
+            <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="fixtures/Saks_WindowLighting_Fixture.png" alt="Window lighting" loading="lazy" /></div><span class="img-caption">Window lighting</span></div>
+          </div>
+          <div class="cs-img-2col" style="margin-top:8px;">
+            <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="fixtures/Saks_CapsuleHighlight_Fixture.png" alt="Capsule highlight" loading="lazy" /></div><span class="img-caption">Capsule highlight</span></div>
+            <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="fixtures/Saks_Cornerhighlight_fixture.png" alt="Corner highlight fixture" loading="lazy" /></div><span class="img-caption">Corner highlight</span></div>
+          </div>
+          <div class="cs-img-2col" style="margin-top:8px;">
+            <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="fixtures/Saks_Manaquines_Fixture.png" alt="Mannequins on floor" loading="lazy" /></div><span class="img-caption">Mannequins</span></div>
+            <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="fixtures/Brand_Identity_In_a_boutique_retail_display_folded_sweaters_and_U_zxkutd.png" alt="Boutique display with folded knitwear" loading="lazy" /></div><span class="img-caption">Folded retail display</span></div>
+          </div>
+
+          <!-- 04 · Uniform Styling Guide -->
+          <div class="cs-body-2col" style="margin-top:40px;margin-bottom:16px;">
+            <div>
+              <h3 style="font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--black);margin-bottom:8px;">04 · Uniform Styling Guide</h3>
+              <p class="cs-body">Group direction, individual styling, accessory detail, and flatlay references — a practical guide for how the team shows up in the node.</p>
+            </div>
+          </div>
+          <div class="cs-img-full"><div class="cs-img-contain" style="min-height:320px;aspect-ratio:16/9;"><img src="style-guide/Saks_teamstylingexamplegroupshot_styleguide.png" alt="Team styling group shot" loading="lazy" /></div></div>
+          <span class="img-caption">Group · team styling reference</span>
+
+          <div class="cs-img-3col" style="margin-top:8px;">
+            <div class="cs-img-3col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:220px;"><img src="style-guide/Saks_femalestylistguide_stylelguide.png" alt="Female stylist styling guide" loading="lazy" /></div><span class="img-caption">Individual · stylist A</span></div>
+            <div class="cs-img-3col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:220px;"><img src="style-guide/Saks_managerstylecloseup_styleguide.png" alt="Manager style close-up" loading="lazy" /></div><span class="img-caption">Individual · management</span></div>
+            <div class="cs-img-3col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:220px;"><img src="style-guide/Saks_malestylistcloseup_styleguide.png" alt="Male stylist close-up" loading="lazy" /></div><span class="img-caption">Individual · stylist B</span></div>
+          </div>
+
+          <div class="cs-img-3col" style="margin-top:8px;">
+            <div class="cs-img-3col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:220px;"><img src="style-guide/Saks_beltcloseup_styleguide.png" alt="Belt styling detail" loading="lazy" /></div><span class="img-caption">Detail · belt</span></div>
+            <div class="cs-img-3col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:220px;"><img src="style-guide/Saks_Jewelrycloseup_styleguide.png" alt="Bracelet styling detail" loading="lazy" /></div><span class="img-caption">Detail · bracelet</span></div>
+            <div class="cs-img-3col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:220px;"><img src="style-guide/Saks_necklaceexample_styleguide.png" alt="Necklace styling example" loading="lazy" /></div><span class="img-caption">Detail · necklace</span></div>
+          </div>
 
           <div class="cs-img-2col" style="margin-top:8px;">
-            <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:4/3;min-height:220px;"><img src="saks-29.png" alt="Female stylist" /></div><span class="img-caption">Member Tier: The named relationship.</span></div>
-            <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:4/3;min-height:220px;"><img src="saks-30.png" alt="Male stylist" /></div><span class="img-caption">Tonal: No logo. One material story.</span></div>
+            <div class="cs-img-2col-item"><div class="cs-img-intrinsic"><img src="style-guide/Saks_clothingflatlay_styleguide.png" alt="Clothing flatlay style reference" loading="lazy" /></div><span class="img-caption">Flatlay · apparel</span></div>
+            <div class="cs-img-2col-item"><div class="cs-img-intrinsic"><img src="style-guide/Saks_jewelryflatlay_styleguide.png" alt="Jewelry flatlay style reference" loading="lazy" /></div><span class="img-caption">Flatlay · jewelry</span></div>
           </div>
         </div>
       </section>
 
-      <!-- ARTIFACT 02: Extended Gallery -->
-      <div class="artifact-strip">
-        <div class="artifact-trigger" id="art2-trigger" onclick="toggleArtifact(2)">
-          <div class="artifact-left">
-            <div class="artifact-badge"><span>Image Gallery</span></div>
-            <div class="artifact-meta">
-              <div class="artifact-name">Extended Visual Archive</div>
-              <div class="artifact-desc">Additional node photography · Interior sequence · Packaging system · Full team style guide</div>
-            </div>
-          </div>
-          <div class="artifact-right"><span class="artifact-toggle" id="art2-cta">+</span></div>
-        </div>
-        <div class="artifact-expand" id="art2-expand">
-            <div class="artifact-inner">
-            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px;background:#1a1a1a;padding:16px;">
-              <div class="cs-img-contain" style="aspect-ratio:4/3;background:#111;"><img src="saks-31.png" alt="Interior Sequence 01" /></div>
-              <div class="cs-img-contain" style="aspect-ratio:4/3;background:#111;"><img src="saks-32.png" alt="Interior Sequence 02" /></div>
-              <div class="cs-img-contain" style="aspect-ratio:4/3;background:#111;"><img src="saks-33.png" alt="Interior Sequence 03" /></div>
-              <div class="cs-img-contain" style="aspect-ratio:4/3;background:#111;"><img src="saks-34.png" alt="Interior Sequence 04" /></div>
-              <div class="cs-img-contain" style="aspect-ratio:4/3;background:#111;"><img src="saks-35.png" alt="Interior Sequence 05" /></div>
-              <div class="cs-img-contain" style="aspect-ratio:4/3;background:#111;"><img src="saks-21.png" alt="Packaging Detail" /></div>
-              <div class="cs-img-contain" style="aspect-ratio:4/3;background:#111;"><img src="saks-24.png" alt="Street Scene" /></div>
-              <div class="cs-img-contain" style="aspect-ratio:4/3;background:#111;"><img src="saks-25.png" alt="Wallet Pass" /></div>
-              <div class="cs-img-contain" style="aspect-ratio:4/3;background:#111;"><img src="saks-20.png" alt="Night Exterior" /></div>
-            </div>
-            <p style="font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#444;padding:12px 16px;">Materiality & Experience Archive · All touchpoints in alignment.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- 05B DESIGNER PLATFORM SHOWCASE -->
-      <section class="app-showcase" id="cs-platform" data-cs-section="platform">
-        <div class="app-showcase-eyebrow"><span class="app-showcase-num">05C</span><span class="app-showcase-label">Product Showcase</span></div>
-        <h2 class="app-showcase-heading">The Designer Platform</h2>
-        <p class="app-showcase-sub">$2,500/month gives designers demand intelligence that no other retailer offers. Real-time sell-through, anonymous member profiles, smart contract settlement in 14 days. Designers pay to access the flywheel, which funds the platform before membership scales.</p>
+      <!-- 04 DESIGNER PARTNERSHIP -->
+      <section class="app-showcase" id="cs-designer-partnership" data-cs-section="designer-partnership">
+        <div class="app-showcase-eyebrow"><span class="app-showcase-num">04</span><span class="app-showcase-label">Designer partnership</span></div>
+        <h2 class="app-showcase-heading">B2B platform · data in exchange for consignment</h2>
+        <p class="app-showcase-sub">Designers keep ownership until sale. Vault does not take inventory risk. They receive <strong>real-time sell-through</strong>, <strong>anonymous member aggregates</strong>, rotation scoring, trend-velocity reporting, and <strong>14-day smart-contract settlement</strong>. <strong>$2,500/month</strong> per designer pays for the rails before membership fully scales the platform.</p>
         <div class="app-showcase-layout">
-          <nav class="app-screen-nav">
-            <button class="app-screen-btn active" data-screen="1" onclick="showScreen(1)"><div class="app-screen-btn-num">01</div><div class="app-screen-btn-name">Performance Dashboard</div></button>
-            <button class="app-screen-btn" data-screen="2" onclick="showScreen(2)"><div class="app-screen-btn-num">02</div><div class="app-screen-btn-name">Member Profile Aggregates</div></button>
-            <button class="app-screen-btn" data-screen="3" onclick="showScreen(3)"><div class="app-screen-btn-num">03</div><div class="app-screen-btn-name">Rotation Scoring</div></button>
-            <button class="app-screen-btn" data-screen="4" onclick="showScreen(4)"><div class="app-screen-btn-num">04</div><div class="app-screen-btn-name">Smart Contract Settlement</div></button>
-            <button class="app-screen-btn" data-screen="5" onclick="showScreen(5)"><div class="app-screen-btn-num">05</div><div class="app-screen-btn-name">Trend Velocity Reports</div></button>
-          </nav>
+          <div class="app-screen-nav-wrap">
+            <nav class="app-screen-nav" aria-label="Designer platform screens">
+              <button class="app-screen-btn active" type="button" data-screen="1" onclick="showScreen(1)"><div class="app-screen-btn-num">01</div><div class="app-screen-btn-name">Performance Dashboard</div></button>
+              <button class="app-screen-btn" type="button" data-screen="2" onclick="showScreen(2)"><div class="app-screen-btn-num">02</div><div class="app-screen-btn-name">Member Profile Aggregates</div></button>
+              <button class="app-screen-btn" type="button" data-screen="3" onclick="showScreen(3)"><div class="app-screen-btn-num">03</div><div class="app-screen-btn-name">Rotation Scoring</div></button>
+              <button class="app-screen-btn" type="button" data-screen="4" onclick="showScreen(4)"><div class="app-screen-btn-num">04</div><div class="app-screen-btn-name">Smart Contract Settlement</div></button>
+              <button class="app-screen-btn" type="button" data-screen="5" onclick="showScreen(5)"><div class="app-screen-btn-num">05</div><div class="app-screen-btn-name">Trend Velocity Reports</div></button>
+            </nav>
+            <div class="app-screen-side-panel" aria-live="polite">
+              <div class="app-screen-desc-panel active" data-desc-screen="1">
+                <div class="app-screen-desc-label">What this screen does</div>
+                <p class="app-screen-desc-text">Real-time sell-through rate, wishlist velocity, and hold conversion per piece. Designers see demand signal before committing to the next production run. Something no wholesale relationship offers.</p>
+                <div class="app-screen-counter app-screen-counter--side">01 / 05</div>
+              </div>
+              <div class="app-screen-desc-panel" data-desc-screen="2">
+                <div class="app-screen-desc-label">What this screen does</div>
+                <p class="app-screen-desc-text">Anonymous style profile aggregates across Reserve and Black tier members. Informs silhouette, color, and fabrication decisions before the sample is cut. Designers act on this 12 weeks earlier than wholesale buyers can.</p>
+                <div class="app-screen-counter app-screen-counter--side">02 / 05</div>
+              </div>
+              <div class="app-screen-desc-panel" data-desc-screen="3">
+                <div class="app-screen-desc-label">What this screen does</div>
+                <p class="app-screen-desc-text">Designer performance vs. node average across each rotation. Competitive positioning that incentivizes quality over volume and signals which designers are driving member re-engagement.</p>
+                <div class="app-screen-counter app-screen-counter--side">03 / 05</div>
+              </div>
+              <div class="app-screen-desc-panel" data-desc-screen="4">
+                <div class="app-screen-desc-label">What this screen does</div>
+                <p class="app-screen-desc-text">Payment within 14 days of sale, blockchain-verified. The first luxury retailer to offer this. No net-90 risk. The mechanism that rebuilds vendor trust in one rotation cycle rather than one fiscal year.</p>
+                <div class="app-screen-counter app-screen-counter--side">04 / 05</div>
+              </div>
+              <div class="app-screen-desc-panel" data-desc-screen="5">
+                <div class="app-screen-desc-label">What this screen does</div>
+                <p class="app-screen-desc-text">Bi-weekly cultural signal digest: TikTok velocity, editorial coverage, resale premiums. Proprietary intelligence included in the platform subscription. Designers act on demand signals weeks before wholesale buyers receive trend reports.</p>
+                <div class="app-screen-counter app-screen-counter--side">05 / 05</div>
+              </div>
+            </div>
+          </div>
           <div class="app-screen-display">
 
             <!-- SCREEN 01: Performance Dashboard -->
@@ -1191,10 +1169,6 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
                   <text x="776" y="416" fill="#4A8C5C" font-family="monospace" font-size="13" text-anchor="end">ALL SETTLEMENTS CURRENT</text>
                 </svg>
               </div>
-              <div class="app-screen-meta">
-                <div><div class="app-screen-desc-label">What this screen does</div><p class="app-screen-desc-text">Real-time sell-through rate, wishlist velocity, and hold conversion per piece. Designers see demand signal before committing to the next production run. Something no wholesale relationship offers.</p></div>
-                <div class="app-screen-counter">01 / 05</div>
-              </div>
             </div>
 
             <!-- SCREEN 02: Member Profile Aggregates -->
@@ -1249,10 +1223,6 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
                   <text x="36" y="408" fill="rgba(232,224,204,0.4)" font-family="monospace" font-size="10">Recommend increasing oversized coat SKUs 30% for Q3 curation. Bias toward cream and off-white colorways.</text>
                 </svg>
               </div>
-              <div class="app-screen-meta">
-                <div><div class="app-screen-desc-label">What this screen does</div><p class="app-screen-desc-text">Anonymous style profile aggregates across Reserve and Black tier members. Informs silhouette, color, and fabrication decisions before the sample is cut. Designers act on this 12 weeks earlier than wholesale buyers can.</p></div>
-                <div class="app-screen-counter">02 / 05</div>
-              </div>
             </div>
 
             <!-- SCREEN 03: Rotation Scoring -->
@@ -1264,15 +1234,15 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
                   <text x="24" y="36" fill="rgba(255,255,255,0.3)" font-family="monospace" font-size="9" letter-spacing="2">DESIGNER PLATFORM · ROTATION SCORING · LITKOVSKA</text>
                   <text x="776" y="28" fill="rgba(255,255,255,0.2)" font-family="monospace" font-size="9" text-anchor="end">LAST 8 ROTATIONS</text>
                   <!-- Score summary -->
-                  <rect x="24" y="64" width="220" height="100" fill="#161616"/>
-                  <text x="36" y="84" fill="rgba(255,255,255,0.3)" font-family="monospace" font-size="7" letter-spacing="2">CURRENT SCORE</text>
-                  <text x="36" y="120" fill="#B8952A" font-family="monospace" font-size="48" font-weight="300">94</text>
-                  <text x="36" y="140" fill="#4A8C5C" font-family="monospace" font-size="9">+7pts vs node average</text>
-                  <rect x="256" y="64" width="220" height="100" fill="#161616"/>
-                  <text x="268" y="84" fill="rgba(255,255,255,0.3)" font-family="monospace" font-size="7" letter-spacing="2">NODE AVERAGE</text>
-                  <text x="268" y="120" fill="rgba(232,224,204,0.5)" font-family="monospace" font-size="48" font-weight="300">87</text>
-                  <text x="268" y="140" fill="rgba(255,255,255,0.3)" font-family="monospace" font-size="9">All designers this rotation</text>
-                  <rect x="488" y="64" width="288" height="100" fill="#161616"/>
+                  <rect x="24" y="64" width="220" height="108" fill="#161616"/>
+                  <text x="36" y="78" fill="rgba(255,255,255,0.3)" font-family="monospace" font-size="7" letter-spacing="2">CURRENT SCORE</text>
+                  <text x="36" y="136" fill="#B8952A" font-family="monospace" font-size="48" font-weight="300">94</text>
+                  <text x="36" y="156" fill="#4A8C5C" font-family="monospace" font-size="9">+7pts vs node average</text>
+                  <rect x="256" y="64" width="220" height="108" fill="#161616"/>
+                  <text x="268" y="78" fill="rgba(255,255,255,0.3)" font-family="monospace" font-size="7" letter-spacing="2">NODE AVERAGE</text>
+                  <text x="268" y="136" fill="rgba(232,224,204,0.5)" font-family="monospace" font-size="48" font-weight="300">87</text>
+                  <text x="268" y="156" fill="rgba(255,255,255,0.3)" font-family="monospace" font-size="9">All designers this rotation</text>
+                  <rect x="488" y="64" width="288" height="108" fill="#161616"/>
                   <text x="500" y="84" fill="rgba(255,255,255,0.3)" font-family="monospace" font-size="7" letter-spacing="2">TIER BREAKDOWN</text>
                   <text x="500" y="104" fill="rgba(232,224,204,0.4)" font-family="monospace" font-size="9">Sell-through: 87%</text>
                   <text x="500" y="118" fill="rgba(232,224,204,0.4)" font-family="monospace" font-size="9">Wishlist rate: 41%</text>
@@ -1284,9 +1254,9 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
                   <!-- Axis -->
                   <line x1="60" y1="210" x2="60" y2="350" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
                   <line x1="60" y1="350" x2="760" y2="350" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
-                  <!-- Node avg reference line -->
-                  <line x1="60" y1="280" x2="760" y2="280" stroke="rgba(184,149,42,0.2)" stroke-width="1" stroke-dasharray="4,4"/>
-                  <text x="762" y="284" fill="rgba(184,149,42,0.4)" font-family="monospace" font-size="7">avg</text>
+                  <!-- Node average reference (score trend) — horizontal at 87 on axis -->
+                  <line x1="60" y1="280" x2="760" y2="280" stroke="rgba(184,149,42,0.45)" stroke-width="1.25" stroke-dasharray="6,5"/>
+                  <text x="768" y="283" fill="rgba(184,149,42,0.55)" font-family="monospace" font-size="7" text-anchor="end">87 · NODE AVG</text>
                   <!-- Score dots and line for Litkovska -->
                   <polyline points="110,310 210,295 310,288 360,272 460,265 560,252 660,245 760,228" stroke="#B8952A" stroke-width="1.5" fill="none"/>
                   <circle cx="110" cy="310" r="4" fill="#B8952A" opacity="0.7"/>
@@ -1307,10 +1277,6 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
                   <text x="36" y="392" fill="rgba(255,255,255,0.2)" font-family="monospace" font-size="8" letter-spacing="2">CURATION STATUS</text>
                   <text x="36" y="414" fill="#4A8C5C" font-family="monospace" font-size="11">Confirmed for Rotation 15 · 6 SKUs selected · Smart contract terms sent</text>
                 </svg>
-              </div>
-              <div class="app-screen-meta">
-                <div><div class="app-screen-desc-label">What this screen does</div><p class="app-screen-desc-text">Designer performance vs. node average across each rotation. Competitive positioning that incentivizes quality over volume and signals which designers are driving member re-engagement.</p></div>
-                <div class="app-screen-counter">03 / 05</div>
               </div>
             </div>
 
@@ -1368,10 +1334,6 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
                   <text x="36" y="398" fill="#4A8C5C" font-family="monospace" font-size="9">Avg 11 days. Blockchain-verified. Structurally impossible to have an accounts payable backlog. First luxury retailer to offer this.</text>
                 </svg>
               </div>
-              <div class="app-screen-meta">
-                <div><div class="app-screen-desc-label">What this screen does</div><p class="app-screen-desc-text">Payment within 14 days of sale, blockchain-verified. The first luxury retailer to offer this. No net-90 risk. The mechanism that rebuilds vendor trust in one rotation cycle rather than one fiscal year.</p></div>
-                <div class="app-screen-counter">04 / 05</div>
-              </div>
             </div>
 
             <!-- SCREEN 05: Trend Velocity -->
@@ -1428,28 +1390,26 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
                   <text x="36" y="410" fill="rgba(184,149,42,0.5)" font-family="monospace" font-size="9">Signal confidence: HIGH · All three sources in alignment · No conflicting editorial signal</text>
                 </svg>
               </div>
-              <div class="app-screen-meta">
-                <div><div class="app-screen-desc-label">What this screen does</div><p class="app-screen-desc-text">Bi-weekly cultural signal digest: TikTok velocity, editorial coverage, resale premiums. Proprietary intelligence included in the platform subscription. Designers act on demand signals weeks before wholesale buyers receive trend reports.</p></div>
-                <div class="app-screen-counter">05 / 05</div>
-              </div>
             </div>
 
           </div>
         </div>
       </section>
 
-      <!-- 06 OUTCOME -->
-      <section class="cs-section" id="cs-outcome" data-cs-section="outcome">
+      <!-- 05 THE BOTTOM LINE -->
+      <section class="cs-section" id="cs-bottom-line" data-cs-section="bottom-line">
         <div class="cs-section-inner" style="max-width:100%">
-          <div class="cs-section-eyebrow"><span class="cs-section-num">06</span><span class="cs-section-title">Outcome</span></div>
-          <h2 class="cs-heading">$964M in Annual Savings. $6.1B in 10-Year Value. $81M to Get There.</h2>
+          <div class="cs-section-eyebrow"><span class="cs-section-num">05</span><span class="cs-section-title">The bottom line</span></div>
+          <h2 class="cs-heading-serif">Cost-out at flagship scale. <em>Revenue that does not have to carry the whole building.</em></h2>
+          <p class="cs-body" style="margin-top:-8px;margin-bottom:24px;">Same case as the model: remove the old stack&rsquo;s carrying cost, then scale. NPV and payback below; Y1&ndash;Y5 revenue grid in the <a href="#appendix-financial-export" style="color:inherit;text-decoration:underline;text-underline-offset:3px;">Appendix</a>. Use the live model to stress Bear / Base / Bull, node count, and member assumptions.</p>
           <div class="outcome-stats">
             <div class="outcome-stat"><div class="outcome-stat-num">$964M</div><div class="outcome-stat-label">Annual run-rate savings vs. the legacy model across inventory carrying cost, write-downs, lease costs, labor, interest, and markdowns. The primary financial argument is cost elimination, not revenue growth.</div></div>
             <div class="outcome-stat"><div class="outcome-stat-num">$6.1B</div><div class="outcome-stat-label">10-year NPV at 9% WACC, discounted against an $81M transformation investment. Sensitivity: at 12% WACC and bear-case savings, NPV falls to ~$3.8B; still 47x the investment.</div></div>
             <div class="outcome-stat"><div class="outcome-stat-num">&lt;1mo</div><div class="outcome-stat-label">Payback period at $964M/yr run-rate savings against $81M CapEx ($78.4M node build-out + $45M tech platform). The transformation investment is a rounding error against the cost structure it eliminates.</div></div>
           </div>
-          <div class="cs-section-eyebrow" style="margin-bottom:20px;"><span class="cs-section-title">Revenue Model: Three Streams</span></div>
-          <div class="metrics-grid-mobile">
+          <div class="metrics-container">
+            <div class="metrics-grid-header">Year 1 revenue mix · Base case</div>
+            <div class="metrics-grid-mobile">
             <div class="metric-card">
               <div class="metric-card-title">Node Retail Revenue</div>
               <div class="metric-card-val">$144M</div>
@@ -1470,18 +1430,57 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
               <div class="metric-card-val" style="color:var(--black);font-weight:600;">$210.9M</div>
               <div class="metric-card-method">Blended revenue model</div>
             </div>
+            </div>
           </div>
+        </div>
 
-          <table class="cs-table cs-metrics-table" style="margin-bottom:32px;">
-            <thead><tr><th>Revenue Stream</th><th>Year 1</th><th>Year 3 (Break-Even)</th><th>Year 5</th></tr></thead>
-            <tbody>
-              <tr><td>Node Retail Revenue</td><td>$144M (8 nodes)</td><td>$504M (28 nodes)</td><td>$990M (55 nodes)</td></tr>
-              <tr><td>Membership ARR (blended $1,188/member)</td><td>$59.4M (50K members)</td><td>$83.2M (70K members)</td><td>$237.6M (200K members)</td></tr>
-              <tr><td>Designer Platform Subscriptions</td><td>$7.5M (250 designers)</td><td>$21M (700 designers)</td><td>$36M (1,200 designers)</td></tr>
-              <tr><td><strong>Total Revenue</strong></td><td><strong>$210.9M</strong></td><td><strong>$608.2M</strong></td><td><strong>$1,263.6M</strong></td></tr>
-            </tbody>
-          </table>
-          <div class="cs-section-eyebrow" style="margin-bottom:20px;"><span class="cs-section-title">Decision Log: What We Built and Why</span></div>
+        <div class="cs-full-bleed">
+          <div class="artifact-strip" id="artifact-financial">
+            <div class="artifact-trigger" id="art1-trigger" onclick="toggleArtifact(1)">
+              <div class="artifact-left">
+                <div class="artifact-badge"><span>Interactive Artifact</span></div>
+                <div class="artifact-meta">
+                  <div class="artifact-name">Financial model</div>
+                  <div class="artifact-desc">Bear / Base / Bull · P&amp;L · EBITDA · break-even · 10-year NPV (~$6.1B base · ~$964M/yr savings)</div>
+                </div>
+              </div>
+              <div class="artifact-right"><span class="artifact-toggle" id="art1-cta">+</span></div>
+            </div>
+            <div class="artifact-expand" id="art1-expand">
+              <div class="artifact-inner">
+                <div class="artifact-iframe-wrap">
+                  <iframe src="vault-financial-model.html" title="Vault by Saks Financial Model" scrolling="yes"></iframe>
+                </div>
+                <a class="artifact-model-open-btn" href="vault-financial-model.html" target="_blank" rel="noopener noreferrer">Open Interactive Model</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cs-section-inner" style="max-width:100%;padding-top:48px;">
+          <div class="cs-conclusion-header" style="margin-top:0;">Relationship over traffic</div>
+          <p class="cs-body">The brands that survive the next decade of luxury will not be the ones with the most square footage. They will be the ones that structurally prioritize the <strong>depth of the relationship</strong> over the breadth of traffic. Vault is the argument that intimacy and data stewardship can sit on the same balance sheet as cost elimination.</p>
+          <div class="cs-conclusion-header">Cadence as product</div>
+          <p class="cs-body">Asset-light is not only a hedge against inventory risk; it is the creative precondition for curation that moves at cultural speed. <strong>14-day</strong> rotation replaces the six-month buy with a loop the org can learn from every cycle. The financial model and the member experience share one clock.</p>
+          <div class="cs-next">
+            <div class="cs-next-label">Next Case Study</div>
+            <a href="/work/carolyn" class="cs-next-link" target="_parent">
+              <div class="cs-next-meta">Calvin Klein · The Carolyn · 2026</div>
+              <div class="cs-next-title">The Carolyn &rarr;</div>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- 06 APPENDIX -->
+      <section class="cs-section cs-section-alt" id="cs-appendix" data-cs-section="appendix">
+        <div class="cs-section-inner" style="max-width:100%">
+          <div class="cs-section-eyebrow"><span class="cs-section-num">06</span><span class="cs-section-title">Appendix</span></div>
+          <h2 class="cs-heading">Decision log · cost comparison · exports · research</h2>
+          <p class="cs-body">Scannable support for the main narrative: what shipped, how Legacy differs from Vault, Y1&ndash;Y5 revenue export, then methods and filing notes.</p>
+
+          <div class="cs-section-eyebrow" style="margin-top:40px;margin-bottom:16px;" id="appendix-decision-log"><span class="cs-section-title">01 · Decision log</span></div>
+          <p class="cs-body" style="margin-bottom:16px;">Forks we took and tradeoffs accepted.</p>
           <div class="decision-accordion-mobile">
             <div class="decision-item active">
               <div class="decision-header" onclick="toggleDecision(this)"><span>Revenue Model</span><span class="token-icon">+</span></div>
@@ -1512,8 +1511,7 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
               </div>
             </div>
           </div>
-
-          <table class="cs-table rollout-table">
+          <table class="cs-table rollout-table" style="margin-top:24px;">
             <thead><tr><th>Decision</th><th>What We Did</th><th>Tradeoff Accepted</th></tr></thead>
             <tbody>
               <tr><td>Revenue Model</td><td>Subscription-first (membership + designer platform). Retail GMV is upside.</td><td>Slower GMV growth early. Fixed costs covered before first sale.</td></tr>
@@ -1525,16 +1523,112 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
               <tr><td>Node Size</td><td>3,500 sq ft flex-lease vs. legacy 42,000 sq ft flagship.</td><td>Less brand presence per market. Zero capex entry, 90-day exit if underperforming, total lease cost 94% lower than flagship model.</td></tr>
             </tbody>
           </table>
-          <div class="cs-ending-block">
-            <p class="cs-ending-text">The brands that survive the next decade of luxury won&rsquo;t be the ones with the most square footage. They&rsquo;ll be the ones that structurally prioritize the **depth of the relationship** over the breadth of the traffic. Vault proves that an asset-light model is not just a financial hedge, but a creative precondition. By stripping away the legacy friction of flagships and inventory risk, we cleared the floor for the only thing that actually converts: high-conviction curation in 14-day cycles.</p>
+
+          <div class="cs-section-eyebrow" style="margin-top:48px;margin-bottom:16px;" id="appendix-legacy-vault"><span class="cs-section-title">02 · Legacy vs. Vault</span></div>
+          <table class="cs-table legacy-vault-compare-table">
+            <thead><tr><th>Dimension</th><th>Legacy Saks</th><th>Vault by Saks</th></tr></thead>
+            <tbody>
+              <tr><td>Real Estate</td><td>8M+ sq ft owned flagship space</td><td>3,500 sq ft nodes, month-to-month lease</td></tr>
+              <tr><td>Buying Cycle</td><td>180-day forward inventory buy</td><td>14-day rotation on cultural signal</td></tr>
+              <tr><td>Inventory Ownership</td><td>Saks owns all inventory</td><td>Designers retain ownership until sale</td></tr>
+              <tr><td>Vendor Payment</td><td>Net-90 (or not at all)</td><td>Same-day smart contract settlement</td></tr>
+              <tr><td>SKU Density</td><td>12,000+ SKUs per location</td><td>80-120 curated SKUs per node per rotation</td></tr>
+              <tr><td>Inventory Turns</td><td>2.5x annual</td><td>26x projected annual</td></tr>
+              <tr><td>Media Cost</td><td>$350-600 CPM brand media</td><td>$0 CPM; members opt in for discovery</td></tr>
+              <tr><td>Digital Strategy</td><td>$475M Amazon partnership</td><td>Platform infrastructure only; no mass marketplace</td></tr>
+            </tbody>
+          </table>
+          <div class="decision-accordion-mobile" aria-label="Legacy vs. Vault comparison">
+            <div class="decision-item active">
+              <div class="decision-header" onclick="toggleDecision(this)"><span>Real Estate</span><span class="token-icon">+</span></div>
+              <div class="token-panel">
+                <div class="token-row"><strong>Legacy Saks:</strong> 8M+ sq ft owned flagship space</div>
+                <div class="token-row"><strong>Vault by Saks:</strong> 3,500 sq ft nodes, month-to-month lease</div>
+              </div>
+            </div>
+            <div class="decision-item">
+              <div class="decision-header" onclick="toggleDecision(this)"><span>Buying Cycle</span><span class="token-icon">+</span></div>
+              <div class="token-panel">
+                <div class="token-row"><strong>Legacy Saks:</strong> 180-day forward inventory buy</div>
+                <div class="token-row"><strong>Vault by Saks:</strong> 14-day rotation on cultural signal</div>
+              </div>
+            </div>
+            <div class="decision-item">
+              <div class="decision-header" onclick="toggleDecision(this)"><span>Inventory Ownership</span><span class="token-icon">+</span></div>
+              <div class="token-panel">
+                <div class="token-row"><strong>Legacy Saks:</strong> Saks owns all inventory</div>
+                <div class="token-row"><strong>Vault by Saks:</strong> Designers retain ownership until sale</div>
+              </div>
+            </div>
+            <div class="decision-item">
+              <div class="decision-header" onclick="toggleDecision(this)"><span>Vendor Payment</span><span class="token-icon">+</span></div>
+              <div class="token-panel">
+                <div class="token-row"><strong>Legacy Saks:</strong> Net-90 (or not at all)</div>
+                <div class="token-row"><strong>Vault by Saks:</strong> Same-day smart contract settlement</div>
+              </div>
+            </div>
+            <div class="decision-item">
+              <div class="decision-header" onclick="toggleDecision(this)"><span>SKU Density</span><span class="token-icon">+</span></div>
+              <div class="token-panel">
+                <div class="token-row"><strong>Legacy Saks:</strong> 12,000+ SKUs per location</div>
+                <div class="token-row"><strong>Vault by Saks:</strong> 80-120 curated SKUs per node per rotation</div>
+              </div>
+            </div>
+            <div class="decision-item">
+              <div class="decision-header" onclick="toggleDecision(this)"><span>Inventory Turns</span><span class="token-icon">+</span></div>
+              <div class="token-panel">
+                <div class="token-row"><strong>Legacy Saks:</strong> 2.5x annual</div>
+                <div class="token-row"><strong>Vault by Saks:</strong> 26x projected annual</div>
+              </div>
+            </div>
+            <div class="decision-item">
+              <div class="decision-header" onclick="toggleDecision(this)"><span>Media Cost</span><span class="token-icon">+</span></div>
+              <div class="token-panel">
+                <div class="token-row"><strong>Legacy Saks:</strong> $350-600 CPM brand media</div>
+                <div class="token-row"><strong>Vault by Saks:</strong> $0 CPM; members opt in for discovery</div>
+              </div>
+            </div>
+            <div class="decision-item">
+              <div class="decision-header" onclick="toggleDecision(this)"><span>Digital Strategy</span><span class="token-icon">+</span></div>
+              <div class="token-panel">
+                <div class="token-row"><strong>Legacy Saks:</strong> $475M Amazon partnership</div>
+                <div class="token-row"><strong>Vault by Saks:</strong> Platform infrastructure only; no mass marketplace</div>
+              </div>
+            </div>
           </div>
-          <div class="cs-next">
-            <div class="cs-next-label">Next Case Study</div>
-            <a href="/work/carolyn" class="cs-next-link" target="_parent">
-              <div class="cs-next-meta">Calvin Klein · The Carolyn · 2026</div>
-              <div class="cs-next-title">The Carolyn &rarr;</div>
-            </a>
+
+          <div class="cs-section-eyebrow" style="margin-top:48px;margin-bottom:16px;" id="appendix-financial-export"><span class="cs-section-title">03 · Financial export (Y1&ndash;Y5)</span></div>
+          <table class="cs-table cs-metrics-table" style="margin-bottom:32px;">
+            <thead><tr><th>Revenue Stream</th><th>Year 1</th><th>Year 3 (Break-Even)</th><th>Year 5</th></tr></thead>
+            <tbody>
+              <tr><td>Node Retail Revenue</td><td>$144M (8 nodes)</td><td>$504M (28 nodes)</td><td>$990M (55 nodes)</td></tr>
+              <tr><td>Membership ARR (blended $1,188/member)</td><td>$59.4M (50K members)</td><td>$83.2M (70K members)</td><td>$237.6M (200K members)</td></tr>
+              <tr><td>Designer Platform Subscriptions</td><td>$7.5M (250 designers)</td><td>$21M (700 designers)</td><td>$36M (1,200 designers)</td></tr>
+              <tr><td><strong>Total Revenue</strong></td><td><strong>$210.9M</strong></td><td><strong>$608.2M</strong></td><td><strong>$1,263.6M</strong></td></tr>
+            </tbody>
+          </table>
+
+          <div class="cs-section-eyebrow" style="margin-top:40px;margin-bottom:16px;"><span class="cs-section-title">04 · Research &amp; competitive audit</span></div>
+          <div class="research-drawer-grid">
+            <div class="research-method"><div class="research-method-type">Market · Financial Analysis</div><div class="research-method-name">Saks Global Chapter 11 Filing Analysis</div><div class="research-method-meta">Bankruptcy filings, creditor schedules, debt structure, Amazon partnership terms, vendor invoice backlog. Identified the six structural failure modes.</div><span class="research-method-scale">Jan 2026 Filing · $4.7B Debt Stack</span></div>
+            <div class="research-method"><div class="research-method-type">Market · Competitive Audit</div><div class="research-method-name">Luxury Membership Model Benchmarking</div><div class="research-method-meta">Pricing and value analysis of Soho House ($2,600/yr), Zero Bond ($4,400/yr), Core Club ($15,000-$18,000/yr), Aman ($15,000/yr). Validated tier pricing against social club comps, not fashion rental comps.</div><span class="research-method-scale">5 Comps · 3 Categories</span></div>
+            <div class="research-method"><div class="research-method-type">Cultural · Geographic Analysis</div><div class="research-method-name">HNW Gen Z Geographic Demand Mapping</div><div class="research-method-meta">Cross-referenced HNW Gen Z concentration data with existing Saks gateway city footprint. Identified 65% of target spenders in markets without physical access. Informed Year 1 launch sequence.</div><span class="research-method-scale">12 Gateway Cities · US + International</span></div>
+            <div class="research-method"><div class="research-method-type">Primary · Behavioral Modeling</div><div class="research-method-name">Persona Development and LTV Modeling</div><div class="research-method-meta">Three archetype personas developed across income, time-sensitivity, and discovery behavior. Each mapped to a membership tier, node experience stage, and success metric. LTV modeled by tier against blended ARR, GMV conversion, and churn assumptions.</div><span class="research-method-scale">3 Personas · Bear/Base/Bull Scenarios</span></div>
           </div>
+          <div class="research-sources" style="margin-bottom:40px;">
+            <span class="research-source-label">Sources</span>
+            <span class="research-source-tag">Saks Global Chapter 11 Filing</span>
+            <span class="research-source-tag">Bloomberg Luxury Index</span>
+            <span class="research-source-tag">Soho House Annual Report</span>
+            <span class="research-source-tag">Business of Fashion</span>
+            <span class="research-source-tag">Vogue Business</span>
+            <span class="research-source-tag">Deloitte Luxury Study</span>
+            <span class="research-source-tag">McKinsey State of Fashion 2026</span>
+          </div>
+
+          <div class="cs-section-eyebrow" style="margin-bottom:16px;"><span class="cs-section-title">Structural collapse — extended notes</span></div>
+          <p class="cs-body">The Chapter 11 filing was not a story of bad management alone. It was a structural model — inventory ownership, long-term leases, slow buying cycles, mass digital partnership — that the market outran on every front at once. The <strong>$4.7B</strong> debt load following the HBC&ndash;Neiman Marcus merger, with <strong>$600M/yr</strong> in synergies projected and <strong>zero</strong> delivered before bankruptcy, was the opening condition for a cascade across every pillar.</p>
+          <p class="cs-body"><strong>$700M+</strong> in unpaid vendor invoices destroyed in one cycle trust built over sixty years. A <strong>180-day</strong> buying cycle in a <strong>14-day</strong> trend market meant inventory was committed six months before the season opened. <strong>65%</strong> of HNW Gen Z luxury spenders lived in markets with no physical Saks presence. The <strong>$475M</strong> Amazon investment demonstrated that luxury brand equity does not survive undifferentiated mass marketplace distribution.</p>
         </div>
       </section>
 
@@ -1582,31 +1676,29 @@ function scrollToSection(id) {
   window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 104, behavior: 'smooth' });
 }
 
-// ARTIFACTS
+// ARTIFACTS (financial model — collapsible strip)
 function toggleArtifact(n) {
-  const expand = document.getElementById('art'+n+'-expand');
-  const toggle = document.getElementById('art'+n+'-cta');
+  const expand = document.getElementById('art' + n + '-expand');
+  const toggle = document.getElementById('art' + n + '-cta');
+  if (!expand || !toggle) return;
   const isOpen = expand.dataset.open === 'true';
-  expand.style.maxHeight = isOpen ? '0' : (n===1 ? '900px' : '1200px');
+  expand.style.maxHeight = isOpen ? '0' : '5200px';
   expand.dataset.open = isOpen ? 'false' : 'true';
   toggle.textContent = isOpen ? '+' : '\u00d7';
 }
 
-// RESEARCH DRAWER
-function toggleResearch() {
-  const body = document.getElementById('research-body');
-  const icon = document.getElementById('research-icon');
-  const open = body.style.maxHeight && body.style.maxHeight !== '0px';
-  body.style.maxHeight = open ? '0' : '800px';
-  icon.textContent = open ? '+' : '\u00d7';
-}
-
 // PRODUCT SHOWCASE
 function showScreen(n) {
+  const btn = document.querySelector('.app-screen-btn[data-screen="' + n + '"]');
+  const frame = document.getElementById('screen-' + n);
+  if (!btn || !frame) return;
   document.querySelectorAll('.app-screen-btn').forEach(b => b.classList.remove('active'));
   document.querySelectorAll('.app-screen-frame').forEach(f => f.classList.remove('active'));
-  document.querySelector('.app-screen-btn[data-screen="'+n+'"]').classList.add('active');
-  document.getElementById('screen-'+n).classList.add('active');
+  document.querySelectorAll('.app-screen-desc-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  frame.classList.add('active');
+  const panel = document.querySelector('.app-screen-desc-panel[data-desc-screen="' + n + '"]');
+  if (panel) panel.classList.add('active');
 }
 
 // 14-DAY ROTATION CAROUSEL (Horizontal)
@@ -1615,59 +1707,38 @@ const cards = document.querySelectorAll('.rotation-card');
 const counter = document.getElementById('rotation-counter');
 
 function scrollRotation(dir) {
+  if (!track || !cards.length || !counter) return;
   const currentCard = document.querySelector('.rotation-card.active');
-  let index = parseInt(currentCard.dataset.index);
+  if (!currentCard) return;
+  let index = parseInt(currentCard.dataset.index, 10);
   let nextIndex = index + dir;
-  
   if (nextIndex < 1) nextIndex = 1;
   if (nextIndex > cards.length) nextIndex = cards.length;
-  
-  const nextCard = document.querySelector(`.rotation-card[data-index="${nextIndex}"]`);
-  
-  // Update Active State
+  const nextCard = document.querySelector('.rotation-card[data-index="' + nextIndex + '"]');
+  if (!nextCard) return;
   cards.forEach(c => c.classList.remove('active'));
   nextCard.classList.add('active');
-  
-  // Scroll to Card
-  const gap = 32;
   const scrollOffset = nextCard.offsetLeft - track.offsetLeft;
   track.scrollTo({ left: scrollOffset, behavior: 'smooth' });
-  
-  // Update Counter
-  counter.innerHTML = (nextIndex < 10 ? '0' + nextIndex : nextIndex) + ` <span>/ 0${cards.length}</span>`;
+  counter.innerHTML = (nextIndex < 10 ? '0' + nextIndex : nextIndex) + ' <span>/ 0' + cards.length + '</span>';
 }
 
-// Optional: Link scroll position to active state
-track.addEventListener('scroll', () => {
-  const scrollPos = track.scrollLeft;
-  const cardWidth = cards[0].offsetWidth + 32;
-  const activeIndex = Math.round(scrollPos / cardWidth) + 1;
-  
-  if (activeIndex >= 1 && activeIndex <= cards.length) {
-    cards.forEach(c => c.classList.remove('active'));
-    cards[activeIndex - 1].classList.add('active');
-    counter.innerHTML = (activeIndex < 10 ? '0' + activeIndex : activeIndex) + ` <span>/ 0${cards.length}</span>`;
-  }
-});
+if (track && cards.length && counter) {
+  track.addEventListener('scroll', () => {
+    const cardWidth = cards[0].offsetWidth + 32;
+    const activeIndex = Math.round(track.scrollLeft / cardWidth) + 1;
+    if (activeIndex >= 1 && activeIndex <= cards.length) {
+      cards.forEach(c => c.classList.remove('active'));
+      cards[activeIndex - 1].classList.add('active');
+      counter.innerHTML = (activeIndex < 10 ? '0' + activeIndex : activeIndex) + ' <span>/ 0' + cards.length + '</span>';
+    }
+  });
+}
 
 // MOBILE INTERACTIVES
 function toggleDecision(header) { header.parentElement.classList.toggle('active'); }
 function toggleMetric(el) { el.classList.toggle('active'); }
-// NODE WALKTHROUGH OBSERVER
-const nodeObserver = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      const step = entry.target.dataset.step;
-      document.querySelectorAll('.node-step').forEach(s => s.classList.remove('active'));
-      entry.target.classList.add('active');
-      
-      document.querySelectorAll('.node-visual img').forEach(img => img.classList.remove('active'));
-      const activeImg = document.getElementById('node-img-' + step);
-      if (activeImg) activeImg.classList.add('active');
-    }
-  });
-}, { threshold: 0.5, rootMargin: '-10% 0px -20% 0px' });
-document.querySelectorAll('.node-step').forEach(s => nodeObserver.observe(s));
 </script>
+<script src="/js/cs-stat-eyebrow-fit.js"></script>
 </body>
 </html>
