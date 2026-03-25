@@ -70,10 +70,25 @@ export default function PersonaTool() {
   };
 
   return (
-    <div style={{ display: 'flex', height: '560px', width: '100%', fontFamily: D.font, background: D.bg, overflow: 'hidden' }}>
+    <div
+      className="nike-pt-root"
+      style={{
+        display: 'flex',
+        flex: 1,
+        minHeight: 0,
+        height: '100%',
+        width: '100%',
+        fontFamily: D.font,
+        background: D.bg,
+        overflow: 'hidden',
+      }}
+    >
 
       {/* ─── SIDEBAR ──────────────────────────────────────────────────────────── */}
-      <aside style={{ width: '260px', flexShrink: 0, borderRight: `1px solid ${D.border}`, display: 'flex', flexDirection: 'column' }}>
+      <aside
+        className="nike-pt-aside"
+        style={{ width: 'min(280px, max(240px, 28vw))', flexShrink: 0, borderRight: `1px solid ${D.border}`, display: 'flex', flexDirection: 'column' }}
+      >
 
         {/* Header */}
         <div style={{ padding: '22px 20px 16px', borderBottom: `1px solid ${D.border}` }}>
@@ -175,7 +190,7 @@ export default function PersonaTool() {
       </aside>
 
       {/* ─── MAIN AREA ────────────────────────────────────────────────────────── */}
-      <main style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+      <main className="nike-pt-main" style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden', minWidth: 0 }}>
 
         {/* Status bar */}
         <div style={{ padding: '0 24px', height: '52px', borderBottom: `1px solid ${D.border}`, background: D.panel, display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexShrink: 0 }}>
@@ -272,7 +287,7 @@ export default function PersonaTool() {
               {canAsk ? 'Select Inquiry Topic' : !active.length ? 'Awaiting segment selection' : 'Processing response…'}
             </span>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1px', background: D.border }}>
+          <div className="nike-pt-question-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1px', background: D.border }}>
             {QUESTIONS.map(q => (
               <button key={q.id} onClick={() => ask(q)} disabled={!canAsk}
                 style={{
@@ -294,7 +309,15 @@ export default function PersonaTool() {
         </div>
       </main>
 
-      <style>{`@keyframes ptb{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-5px)}}`}</style>
+      <style>{`
+        @keyframes ptb{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-5px)}}
+        @media (max-width: 720px) {
+          .nike-pt-root{flex-direction:column!important;overflow:auto!important;height:auto!important;min-height:100dvh!important;-webkit-overflow-scrolling:touch}
+          .nike-pt-aside{width:100%!important;max-height:42vh;border-right:none!important;border-bottom:1px solid ${D.border}}
+          .nike-pt-main{min-height:min(58vh,520px);flex:1}
+          .nike-pt-question-grid{grid-template-columns:1fr!important}
+        }
+      `}</style>
     </div>
   );
 }

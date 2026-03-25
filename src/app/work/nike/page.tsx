@@ -14,10 +14,17 @@ export const metadata: Metadata = {
 };
 
 export default function NikeCaseStudy(): React.ReactElement {
+  // Iframe documents are cached aggressively; in dev, bump the URL on each render so
+  // edits to public/case-studies/nike/index.html show up after a normal refresh.
+  const caseStudySrc =
+    process.env.NODE_ENV === "development"
+      ? `/case-studies/nike/index.html?__dev=${Date.now()}`
+      : "/case-studies/nike/index.html";
+
   return (
     <div style={{ width: "100%", height: "100dvh", background: "#fff" }}>
       <iframe className="responsive-iframe"
-        src="/case-studies/nike/index.html"
+        src={caseStudySrc}
         title="Nike SNKRS — Confidence Hub"
         style={{ width: "100%", height: "100%", border: "none" }}
       />

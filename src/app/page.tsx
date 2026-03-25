@@ -432,7 +432,7 @@ export default function Home() {
           </div>
 
           <div className="about-hero-ctas">
-            <a href="/resume.pdf" className="about-cta-btn about-cta-btn--secondary" download>Download R&eacute;sum&eacute;</a>
+            <a href="/resume.pdf" className="about-cta-btn about-cta-btn--secondary" download="Benn_Pattara.pdf">Download R&eacute;sum&eacute;</a>
             <a href="#contact" className="about-cta-btn about-cta-btn--primary">Get in Touch</a>
           </div>
         </aside>
@@ -651,7 +651,7 @@ export default function Home() {
               </div>
               <div className="contact-link-cell" data-animate="fade-up" data-animate-delay="280">
                 <div className="contact-link-label">R&eacute;sum&eacute; PDF</div>
-                <a href="/resume.pdf" download>Download</a>
+                <a href="/resume.pdf" download="Benn_Pattara.pdf">Download</a>
               </div>
             </div>
           </div>

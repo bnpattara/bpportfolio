@@ -60,15 +60,12 @@ body{font-family:var(--font);background:var(--white);color:var(--black);line-hei
 .cs-exec-inner{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;}
 .cs-exec-eyebrow{font-size:8px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--g300);margin-bottom:16px;font-family:var(--font);}
 .cs-exec-body{font-size:13px;color:var(--g500);line-height:1.85;margin-bottom:20px;}
-.cs-exec-kpis{display:flex;flex-wrap:wrap;gap:8px;}
-.cs-exec-kpi{display:flex;align-items:center;gap:10px;border:1px solid var(--g200);padding:8px 14px;}
-.cs-exec-kpi-num{font-size:18px;font-weight:300;color:var(--black);letter-spacing:-.01em;line-height:1;font-family:var(--font);font-style:italic;}
-.cs-exec-kpi-label{font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--g400);line-height:1.4;font-family:var(--font);}
 .cs-exec-meta-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--g200);margin-bottom:24px;}
 .cs-exec-meta-cell{background:var(--white);padding:20px;min-width:0;overflow-wrap:break-word;}
 .cs-exec-meta-label{font-size:8px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--g300);margin-bottom:6px;font-family:var(--font);}
 .cs-exec-meta-val{font-size:12px;font-weight:500;letter-spacing:.04em;color:var(--black);}
 .cs-section{padding:72px 56px;border-bottom:1px solid #f0f0f0;}
+.cs-full-bleed{width:calc(100% + 112px);margin-left:-56px;margin-right:-56px;}
 .cs-section-alt{background:var(--g100);}
 .cs-section-eyebrow{display:flex;align-items:center;gap:14px;margin-bottom:28px;}
 .cs-section-num{font-size:9px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--g300);font-family:var(--font);}
@@ -103,7 +100,12 @@ body{font-family:var(--font);background:var(--white);color:var(--black);line-hei
 .persona-card-quote{font-family:var(--font);font-size:13px;font-style:italic;color:var(--g500);line-height:1.65;margin-bottom:16px;border-left:1px solid var(--g300);padding-left:12px;}
 .persona-card-detail{font-size:11px;color:var(--g500);line-height:1.7;}
 .persona-card-tension{font-size:11px;font-weight:500;color:var(--black);margin-top:12px;padding-top:12px;border-top:1px solid var(--g100);}
-.priority-grid{display:flex;flex-direction:column;gap:1px;margin-bottom:28px;}
+.persona-card-segment{font-size:8px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--g300);margin:0 0 10px;font-family:var(--font);}
+.persona-card-segment strong{color:var(--black);font-weight:600;}
+.nike-research-persona-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:1px;background:var(--g200);margin-bottom:28px;}
+.nike-research-persona-grid .persona-card{padding:22px 18px;}
+.nike-research-persona-grid .persona-card-name{font-size:17px;}
+.nike-persona-research-intro{margin-top:40px;margin-bottom:24px;}
 .priority-card{padding:24px 28px;border-left:3px solid transparent;background:var(--g100);}
 .priority-card.core{border-left-color:var(--black);background:var(--white);}
 .priority-card.supporting{border-left-color:var(--g300);}
@@ -116,6 +118,38 @@ body{font-family:var(--font);background:var(--white);color:var(--black);line-hei
 .priority-feature{font-size:13px;font-weight:500;color:var(--black);margin-bottom:6px;letter-spacing:.02em;}
 .priority-desc{font-size:12px;color:var(--g500);line-height:1.7;margin-bottom:8px;}
 .priority-prd{font-size:10px;font-family:var(--font);color:var(--g400);letter-spacing:.06em;}
+.nike-tri{margin-bottom:28px;}
+.nike-tri-tabs{display:none;gap:0;border-bottom:1px solid var(--g200);margin-bottom:20px;}
+.nike-tri-tab{flex:1;padding:14px 10px;border:none;background:transparent;font-family:var(--font);font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--g400);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;}
+.nike-tri-tab:hover{color:var(--black);}
+.nike-tri-tab.active{color:var(--black);border-bottom-color:var(--black);}
+.nike-tri-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;align-items:start;}
+.nike-tri-col-title{font-size:9px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--g300);margin-bottom:14px;font-family:var(--font);padding-bottom:10px;border-bottom:1px solid var(--g200);}
+.nike-tri-col .priority-card{margin-bottom:16px;}
+.nike-tri-col .priority-card:last-child{margin-bottom:0;}
+.nike-decision-card{background:var(--white);border:1px solid var(--g200);padding:12px 14px;margin-bottom:0;}
+.nike-decision-card.excluded{background:var(--g100);}
+.nike-decision-title{font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--black);margin-bottom:6px;}
+.nike-decision-built,.nike-decision-why{font-size:11px;color:var(--g500);line-height:1.5;margin:0 0 4px;}
+.nike-decision-why{margin-bottom:0;color:var(--g400);font-size:10px;}
+@media (min-width: 1100px) {
+  .nike-tri-decisions .nike-tri-grid > .nike-tri-col {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px 12px;
+    align-content: start;
+  }
+  .nike-tri-decisions .nike-tri-grid > .nike-tri-col > .nike-tri-col-title {
+    grid-column: 1 / -1;
+    margin-bottom: 4px;
+  }
+}
+.nike-persona-seg{margin-top:8px;margin-bottom:28px;}
+.nike-persona-seg-label{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--black);margin-bottom:10px;}
+.nike-persona-seg-body{font-size:13px;color:var(--g500);line-height:1.75;margin:0;max-width:52em;}
+.nike-persona-tool-wrap{margin-top:36px;padding-top:28px;border-top:1px solid var(--g200);}
+.nike-persona-tool-head{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--black);margin-bottom:8px;}
+.nike-persona-tool-desc{font-size:13px;color:var(--g500);line-height:1.7;margin-bottom:16px;max-width:52em;}
 .artifact-strip{background:var(--black);}
 .artifact-trigger{padding:24px 56px;display:flex;align-items:stretch;justify-content:space-between;cursor:pointer;transition:background var(--ease-fast);}
 .artifact-trigger:hover{background:#111;}
@@ -131,18 +165,20 @@ body{font-family:var(--font);background:var(--white);color:var(--black);line-hei
 .artifact-expand{max-height:0;overflow:hidden;transition:max-height 700ms ease;}
 .artifact-inner{background:#0a0a0a;}
 .artifact-close-btn{background:transparent;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.5);padding:9px 18px;font-size:9px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;font-family:var(--font);white-space:nowrap;margin-top:4px;}
-.artifact-iframe-wrap{width:100%;}
-.artifact-iframe-wrap iframe{width:100%;height:85vh;min-height:600px;border:none;display:block;}
-.proto-section { padding: 80px 0; }
-.proto-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
-.proto-phone { position: sticky; top: 40px; width: 320px; height: 693px; border-radius: 44px; border: 8px solid #000; overflow: hidden; background: #000; box-shadow: 0 0 0 1px #e8e8e8; display: flex; justify-content: center; align-items: flex-start; margin: 0 auto; }
+.artifact-iframe-wrap{width:100%;background:#0a0a0a;line-height:0;}
+.artifact-iframe-wrap iframe{width:100%;height:85vh;min-height:600px;border:none;display:block;vertical-align:top;background:#0a0a0a;}
+.artifact-model-open-btn{display:none;box-sizing:border-box;width:100%;margin:0;padding:18px 20px;text-align:center;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--white);text-decoration:none;background:#141414;border-top:1px solid rgba(255,255,255,.1);font-family:var(--font);-webkit-tap-highlight-color:transparent;}
+.artifact-model-open-btn:active{background:#1a1a1a;}
+.proto-section { padding: 80px clamp(24px, 5vw, 64px); box-sizing: border-box; border-bottom: 1px solid #f0f0f0; }
+.proto-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 28px; align-items: start; width: 100%; max-width: 100%; box-sizing: border-box; }
+.proto-phone { position: sticky; top: 40px; width: 320px; height: 693px; border-radius: 44px; border: 8px solid #000; overflow: hidden; background: #000; box-shadow: 0 0 0 1px #e8e8e8; display: flex; justify-content: center; align-items: flex-start; margin: 0; justify-self: center; align-self: center; }
 .proto-phone iframe { width: 375px; height: 812px; border: none; display: block; transform: scale(0.8533) translateX(7.33%); transform-origin: top left; flex-shrink: 0; pointer-events: auto; }
-.proto-steps { display: flex; flex-direction: column; gap: 0; }
+.proto-steps { display: flex; flex-direction: column; gap: 0; min-width: 0; }
 .proto-step { padding: 24px 0; border-bottom: 1px solid var(--g200); cursor: pointer; transition: opacity 0.2s; }
 .proto-step:first-child { border-top: 1px solid var(--g200); }
 .proto-step-num { font-size: 9px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--g300); margin-bottom: 8px; font-family: var(--mono, 'DM Mono', monospace); }
 .proto-step-title { font-size: 14px; font-weight: 500; color: var(--black); margin-bottom: 6px; letter-spacing: -.01em; }
-.proto-step-desc { font-size: 13px; font-weight: 300; color: var(--g500); line-height: 1.65; }
+.proto-step-desc { font-size: 13px; font-weight: 300; color: var(--g500); line-height: 1.65; overflow-wrap: break-word; word-break: break-word; }
 .proto-step.active .proto-step-num { color: var(--black); }
 .proto-step.active .proto-step-title { color: var(--black); }
 .proto-step.active { opacity: 1; }
@@ -150,7 +186,7 @@ body{font-family:var(--font);background:var(--white);color:var(--black);line-hei
 .proto-step:hover:not(.active) { opacity: 0.75; }
 @media (max-width: 768px) {
   .proto-layout { grid-template-columns: 1fr; gap: 40px; }
-  .proto-phone { position: static; }
+  .proto-phone { position: static; justify-self: center; align-self: center; }
   .proto-step:not(.active) { opacity: 1; }
   .proto-step:hover:not(.active) { opacity: 1; }
 }
@@ -200,14 +236,6 @@ body{font-family:var(--font);background:var(--white);color:var(--black);line-hei
 .app-screen-desc-label{font-size:8px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--g300);margin-bottom:14px;font-family:var(--font);}
 .app-screen-desc-text{font-size:13px;color:var(--g500);line-height:1.8;}
 .app-screen-counter{font-family:var(--font);font-size:32px;font-weight:300;font-style:italic;color:var(--g200);letter-spacing:-.01em;margin-top:24px;}
-.decision-table{width:100%;border-collapse:collapse;margin-bottom:28px;}
-.decision-table th{font-size:8px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--g300);padding:12px 16px;border-bottom:2px solid var(--g200);text-align:left;background:var(--g100);font-family:var(--font);}
-.decision-table td{font-size:12px;color:var(--g500);padding:16px;border-bottom:1px solid var(--g100);line-height:1.65;vertical-align:top;}
-.decision-table tr.deferred td{background:#fafafa;}
-.decision-table td:first-child{font-weight:500;color:var(--black);font-size:11px;letter-spacing:.03em;text-transform:uppercase;white-space:nowrap;}
-.decision-status{display:inline-block;font-size:8px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:3px 9px;font-family:var(--font);}
-.decision-status.shipped{background:var(--black);color:var(--white);}
-.decision-status.deferred{background:var(--g200);color:var(--g500);}
 .cs-next{border-top:1px solid var(--g200);padding-top:32px;margin-top:48px;}
 .cs-next-label{font-size:8px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--g300);margin-bottom:14px;font-family:var(--font);}
 .cs-next-link{text-decoration:none;display:inline-block;}
@@ -223,6 +251,9 @@ footer{border-top:1px solid var(--g200);padding:32px 48px;display:flex;align-ite
 .footer-link{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--g400);text-decoration:none;transition:color var(--ease-fast);}
 .footer-link:hover{color:var(--black);}
 .footer-copy{font-size:11px;color:var(--g300);font-family:var(--font);}
+@media (max-width: 1100px) {
+  .nike-research-persona-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
 @media (max-width: 768px) {
   .token-panel {
     max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; 
@@ -233,9 +264,11 @@ footer{border-top:1px solid var(--g200);padding:32px 48px;display:flex;align-ite
   #cs-sidenav { display: none !important; }
   .cs-body-wrap { grid-template-columns: 1fr !important; }
   #cs-exec-summary, .cs-section { padding: 40px 20px !important; }
+  .proto-section { padding: 40px clamp(20px, 5vw, 28px) !important; }
+  .cs-full-bleed { width: calc(100% + 40px) !important; margin-left: -20px !important; margin-right: -20px !important; }
   .cs-exec-inner { grid-template-columns: 1fr !important; gap: 32px !important; }
   .cs-hero-title-wrap { padding: 40px 20px 48px !important; }
-  .cs-stats, .cs-stats-3, .cs-stats-4, .persona-grid, .cs-body-2col { 
+  .cs-stats, .cs-stats-3, .cs-stats-4, .persona-grid, .nike-research-persona-grid, .cs-body-2col { 
      grid-template-columns: 1fr !important; 
      gap: 16px !important; 
      background: transparent !important;
@@ -246,8 +279,6 @@ footer{border-top:1px solid var(--g200);padding:32px 48px;display:flex;align-ite
      background: var(--g200) !important;
      border: 1px solid var(--g200) !important;
    }
-  .cs-exec-kpis { flex-direction: column !important; }
-  .cs-exec-kpi { width: 100% !important; }
   .cs-pull-quote { padding-left: 20px !important; font-size: 18px !important; }
   .cs-heading-serif { font-size: 24px !important; }
   
@@ -261,25 +292,19 @@ footer{border-top:1px solid var(--g200);padding:32px 48px;display:flex;align-ite
   .app-screen-frame.active { display: flex !important; flex-direction: column !important; }
   .app-showcase-eyebrow, .app-showcase-heading, .app-showcase-sub { padding-left: 20px !important; padding-right: 20px !important; }
   .artifact-trigger { padding: 16px 20px !important; }
-  .cs-table, .decision-table { display: block; overflow-x: auto; width: 100%; }
+  .cs-table { display: block; overflow-x: auto; width: 100%; }
+  .nike-tri-tabs { display: flex !important; }
+  .nike-tri-grid { display: block !important; }
+  .nike-tri-col { display: none !important; }
+  .nike-tri-col.active { display: block !important; }
+  .nike-tri-col .nike-tri-col-title { display: none !important; }
+  .nike-tri-decisions .nike-tri-col.active .nike-decision-card { margin-bottom: 10px; }
+  .nike-tri-decisions .nike-tri-col.active .nike-decision-card:last-child { margin-bottom: 0; }
+  .artifact-iframe-wrap iframe { pointer-events: none !important; }
+  .artifact-model-open-btn { display: block !important; }
   .cs-next { flex-direction: column !important; gap: 16px !important; align-items: flex-start !important; }
   footer { flex-direction: column !important; gap: 16px !important; padding: 32px 20px !important; align-items: flex-start !important; }
 }
-  /* Decision Accordion */
-  .decision-table-desktop { display: table !important; }
-  .decision-accordion-mobile { display: none; }
-
-  @media (max-width: 768px) {
-    .decision-table-desktop { display: none !important; }
-    .decision-accordion-mobile { display: block !important; border-top: 1px solid var(--g200); }
-    .decision-item { border-bottom: 1px solid var(--g200); }
-    .decision-header { 
-      display: flex; justify-content: space-between; align-items: center; 
-      padding: 18px 0; font-size: 13px; font-weight: 500; text-transform: none; 
-      letter-spacing: .02em; cursor: pointer; color: var(--black);
-    }
-    .decision-item.active .token-panel { max-height: 500px; padding-bottom: 16px; }
-  }
   /* Metrics Grid */
   .metrics-container { margin-bottom: 48px; }
   .metrics-grid-header { font-size: 8px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--g300); margin-bottom: 16px; font-family: var(--font); }
@@ -304,9 +329,6 @@ footer{border-top:1px solid var(--g200);padding:32px 48px;display:flex;align-ite
   /* Mobile Overrides */
   @media (max-width: 768px) {
     #cs-screens, .cs-screens-section, [data-target="cs-screens"] { display: none !important; }
-    
-    .decision-table-desktop { display: none !important; }
-    .decision-accordion-mobile { display: block !important; }
     
     .metrics-card-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 8px !important; }
     .metric-target { font-size: 18px !important; }
@@ -342,6 +364,8 @@ footer{border-top:1px solid var(--g200);padding:32px 48px;display:flex;align-ite
   <a class="cs-sidenav-link" data-target="cs-problem" onclick="scrollToSection('cs-problem')"><span class="cs-sidenav-num">01</span><span class="cs-sidenav-text">The Problem</span></a>
   <a class="cs-sidenav-link" data-target="cs-insight" onclick="scrollToSection('cs-insight')"><span class="cs-sidenav-num">02</span><span class="cs-sidenav-text">The Insight</span></a>
   <a class="cs-sidenav-link" data-target="cs-users" onclick="scrollToSection('cs-users')"><span class="cs-sidenav-num">03</span><span class="cs-sidenav-text">The Users</span></a>
+  <a class="cs-sidenav-link" data-target="cs-research-personas" onclick="scrollToSection('cs-research-personas')"><span class="cs-sidenav-num">&mdash;</span><span class="cs-sidenav-text">Research personas</span></a>
+  <a class="cs-sidenav-link" data-target="cs-persona-tool" onclick="scrollToPersonaLab(); return false;"><span class="cs-sidenav-num">&mdash;</span><span class="cs-sidenav-text">Persona model</span></a>
   <a class="cs-sidenav-link" data-target="cs-product" onclick="scrollToSection('cs-product')"><span class="cs-sidenav-num">04</span><span class="cs-sidenav-text">The Product</span></a>
   <a class="cs-sidenav-link" data-target="prototype" onclick="scrollToSection('prototype')"><span class="cs-sidenav-num">&mdash;</span><span class="cs-sidenav-text">Prototype</span></a>
   <a class="cs-sidenav-link" data-target="cs-decisions" onclick="scrollToSection('cs-decisions')"><span class="cs-sidenav-num">07</span><span class="cs-sidenav-text">Decision Log</span></a>
@@ -362,12 +386,6 @@ footer{border-top:1px solid var(--g200);padding:32px 48px;display:flex;align-ite
       <p class="cs-exec-body">Nike built a decade of dominance on artificial scarcity. The SNKRS lottery model generated cultural heat but became, over time, a symbol of inaccessibility, frustration, and bot exploitation. The consumers it was designed to serve &mdash; authentic sneaker enthusiasts, style-driven buyers, identity-led collectors &mdash; began to opt out entirely. Not to competitors. Just out.</p>
       <p class="cs-exec-body">629 research touchpoints surfaced a non-obvious finding: the barrier was never access. It was confidence. 80% of surveyed users called sneaker culture &ldquo;inaccessible or overhyped.&rdquo; The average consumer owns 16+ pairs but rotates only 2&ndash;5 regularly. The remaining 11 sit unworn &mdash; identity investments never activated. This is the museum mindset, and it breaks Nike&rsquo;s replacement cycle.</p>
       <p class="cs-exec-body">Confidence Hub is a platform pivot: from exclusivity engine to styling infrastructure. The app uses Nike&rsquo;s existing purchase history to understand what you own, surfaces what&rsquo;s genuinely missing, shows you how to wear it with three outfit formulas per shoe, and replaces the lottery with a participation-gated access model where confidence and engagement &mdash; not chance &mdash; determine the outcome.</p>
-      <div class="cs-exec-kpis" style="margin-top:24px;">
-        <div class="cs-exec-kpi"><div class="cs-exec-kpi-num">629</div><div class="cs-exec-kpi-label">Research touchpoints<br>Surveys &middot; interviews &middot; groups</div></div>
-        <div class="cs-exec-kpi"><div class="cs-exec-kpi-num">40%</div><div class="cs-exec-kpi-label">Target segment<br>Aesthetic Individualists</div></div>
-        <div class="cs-exec-kpi"><div class="cs-exec-kpi-num">5</div><div class="cs-exec-kpi-label">Interactive screens<br>Full purchase flow</div></div>
-        <div class="cs-exec-kpi"><div class="cs-exec-kpi-num">11</div><div class="cs-exec-kpi-label">Decisions logged<br>With tradeoffs</div></div>
-      </div>
     </div>
     <div>
       <div class="cs-exec-eyebrow">Project Details</div>
@@ -446,9 +464,13 @@ footer{border-top:1px solid var(--g200);padding:32px 48px;display:flex;align-ite
   <div class="cs-section-eyebrow"><span class="cs-section-num">03</span><span class="cs-section-title">The Users</span></div>
   <h2 class="cs-heading-serif">Three distinct consumer psychographics. <em>One platform pivot to serve all three.</em></h2>
   <p class="cs-body">The 629-touchpoint research surfaced three distinct user archetypes within the 18&ndash;34 sneaker market. Each has a different relationship with the drop model, a different definition of what winning looks like, and a different reason to adopt &mdash; or reject &mdash; a Confidence Hub. The platform had to address all three without compromising the product argument for any of them.</p>
+  <div class="nike-persona-seg">
+    <div class="nike-persona-seg-label">Audience segmentation</div>
+    <p class="nike-persona-seg-body">Strategy sorts the market into three <strong>audience segments</strong> the Confidence Hub must win at once: the opted-out high-LTV individualist, the engaged but disillusioned drop participant, and the museum-minded considered buyer. The cards below define each segment. Further down, <strong>five research personas</strong> translate those segments into concrete inquiry scripts for the interactive lab.</p>
+  </div>
   <div class="persona-grid">
     <div class="persona-card">
-      <div class="persona-card-tier">Persona 01 &middot; Primary Target</div>
+      <div class="persona-card-tier">Segment 01 &middot; Primary Target</div>
       <div class="persona-card-name">The Aesthetic Individualist</div>
       <div class="persona-card-city">Chicago &middot; 26 &middot; Creative Director</div>
       <div class="persona-card-quote">&ldquo;I have 14 pairs and I&rsquo;m wearing 3 of them. I don&rsquo;t even open SNKRS anymore. I lost 8 times in a row and stopped.&rdquo;</div>
@@ -456,7 +478,7 @@ footer{border-top:1px solid var(--g200);padding:32px 48px;display:flex;align-ite
       <div class="persona-card-tension">Core tension: Significant latent affinity for Nike product &mdash; actively alienated by the drop model. Will return if the system stops treating participation as random noise.</div>
     </div>
     <div class="persona-card">
-      <div class="persona-card-tier">Persona 02 &middot; Active User</div>
+      <div class="persona-card-tier">Segment 02 &middot; Active User</div>
       <div class="persona-card-name">The Culture Participant</div>
       <div class="persona-card-city">New York &middot; 23 &middot; Music Industry</div>
       <div class="persona-card-quote">&ldquo;I&rsquo;m in the app every release. I&rsquo;ve won a few. But I&rsquo;ve also lost 30 times to bots. It feels like the game is rigged.&rdquo;</div>
@@ -464,13 +486,76 @@ footer{border-top:1px solid var(--g200);padding:32px 48px;display:flex;align-ite
       <div class="persona-card-tension">Core tension: Deeply engaged with the category &mdash; feels the unfairness most acutely because they invest the most. The most loyal beneficiary of a participation-based system.</div>
     </div>
     <div class="persona-card">
-      <div class="persona-card-tier">Persona 03 &middot; Latent Prospect</div>
+      <div class="persona-card-tier">Segment 03 &middot; Latent Prospect</div>
       <div class="persona-card-name">The Considered Buyer</div>
       <div class="persona-card-city">Richmond &middot; 29 &middot; Financial Analyst</div>
       <div class="persona-card-quote">&ldquo;I want to buy better shoes but I can never figure out what actually goes with what I already own. So I just buy the same ones.&rdquo;</div>
       <div class="persona-card-detail">Purchases 2&ndash;3 pairs annually. Makes deliberate, researched decisions. Never participated in a drop. The museum mindset in its purest form: buys slowly, wears rarely, replaces infrequently. High income, high conversion probability if given styling confidence.</div>
       <div class="persona-card-tension">Core tension: Has the purchasing power and the intention &mdash; lacks the context to make the next purchase feel like the right decision. Style confidence is the unlock.</div>
     </div>
+  </div>
+  <div class="nike-persona-research-intro" id="cs-research-personas" data-cs-section="cs-research-personas">
+    <div class="nike-persona-seg-label">Research personas</div>
+    <p class="nike-persona-seg-body">Five inquiry profiles used in the lab below. Each is mapped to an <strong>audience segment</strong> so you can see which strategic bucket the script stress-tests &mdash; then open the model to run <strong>individual</strong> inquiry or <strong>focus</strong> comparison on the same characters.</p>
+  </div>
+  <div class="nike-research-persona-grid">
+    <div class="persona-card">
+      <div class="persona-card-segment">Audience segment: <strong>Aesthetic Individualist</strong></div>
+      <div class="persona-card-name">Maya</div>
+      <div class="persona-card-city">The Individualist &middot; Creative Professional &middot; 26</div>
+      <div class="persona-card-detail">Shops vintage Nike. Values provenance and circular economy. Represents the opted-out high-taste consumer SNKRS never rewarded &mdash; recovery depends on respect, not hype.</div>
+    </div>
+    <div class="persona-card">
+      <div class="persona-card-segment">Audience segment: <strong>Aesthetic Individualist</strong></div>
+      <div class="persona-card-name">Chloe</div>
+      <div class="persona-card-city">The Style Seeker &middot; Social Media Manager &middot; 24</div>
+      <div class="persona-card-detail">Dupe economy architect. Decouples aesthetic from brand. Zero loyalty. Probes whether Nikes styling authority can matter when taste is sourced off-platform.</div>
+    </div>
+    <div class="persona-card">
+      <div class="persona-card-segment">Audience segment: <strong>Culture Participant</strong></div>
+      <div class="persona-card-name">David</div>
+      <div class="persona-card-city">The Anxious Collector &middot; Tech Professional &middot; 29</div>
+      <div class="persona-card-detail">High earner with deadstock paralysis. Treats sneakers as assets. Embodies lottery fatigue and bot cynicism &mdash; the emotional damage of participation without payout.</div>
+    </div>
+    <div class="persona-card">
+      <div class="persona-card-segment">Audience segment: <strong>Culture Participant</strong></div>
+      <div class="persona-card-name">Alex</div>
+      <div class="persona-card-city">The Hypebeast &middot; Student / Reseller &middot; 22</div>
+      <div class="persona-card-detail">Views SNKRS drops as financial assets. Deep in cook groups. The pure drop-native stress test for fairness, access, and what replacing the lottery with participation-gated access actually feels like.</div>
+    </div>
+    <div class="persona-card">
+      <div class="persona-card-segment">Audience segment: <strong>Considered Buyer</strong></div>
+      <div class="persona-card-name">Sarah</div>
+      <div class="persona-card-city">The Pragmatist &middot; Project Manager &middot; 32</div>
+      <div class="persona-card-detail">Values efficiency and durability. Rejects hype. Buys on data. Stress-tests whether styling confidence and wardrobe logic can convert a slow, deliberate buyer who never needed drops.</div>
+    </div>
+  </div>
+  <div class="nike-persona-tool-wrap" id="cs-persona-tool" data-cs-section="cs-persona-tool">
+    <div class="nike-persona-tool-head">Interactive persona research model</div>
+    <p class="nike-persona-tool-desc">Tap the black strip to expand the full-viewport embedded lab. The five profiles above run here as scripted personas with guided questions: <strong>individual</strong> inquiry or <strong>focus</strong> mode side-by-side.</p>
+    <div class="cs-full-bleed">
+      <div class="artifact-strip" id="artifact-persona-lab">
+        <div class="artifact-trigger" id="art2-trigger" onclick="toggleArtifact(2)">
+          <div class="artifact-left">
+            <div class="artifact-badge"><span>Interactive Artifact</span></div>
+            <div class="artifact-meta">
+              <div class="artifact-name">Persona research model</div>
+              <div class="artifact-desc">Five lab profiles &middot; individual &amp; focus modes &middot; guided inquiry</div>
+            </div>
+          </div>
+          <div class="artifact-right"><span class="artifact-toggle" id="art2-cta">+</span></div>
+        </div>
+        <div class="artifact-expand" id="art2-expand">
+          <div class="artifact-inner">
+            <div class="artifact-iframe-wrap">
+              <iframe src="/work/nike/persona" title="Nike SNKRS research persona lab" loading="lazy" scrolling="yes"></iframe>
+            </div>
+            <a class="artifact-model-open-btn" href="/work/nike/persona" target="_parent">Open persona lab full screen</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="cs-body" style="margin-top:14px;font-size:12px;color:var(--g400);"><a href="/work/nike/persona" target="_parent" style="color:inherit;text-decoration:underline;text-underline-offset:3px;">Open persona lab full screen</a></p>
   </div>
 </section>
 
@@ -480,38 +565,54 @@ footer{border-top:1px solid var(--g200);padding:32px 48px;display:flex;align-ite
   <h2 class="cs-heading-serif">Four features. Each closing a specific failure point. <em>Nothing built for its own sake.</em></h2>
   <div class="cs-body-2col">
     <p>The Confidence Hub is four features, each addressing a discrete failure point in the current SNKRS experience. The Style Gym turns product pages from spec sheets into styling resources. The Style Profile replaces the photo-upload wardrobe scan with Nike&rsquo;s existing purchase history. Confidence Drops replace the lottery with a 48-hour participation-gated access model. The Confidence Index turns Nike&rsquo;s platform data into an annual cultural authority document.</p>
-    <p>Every feature was prioritized against the same question: does this earn its presence? Features that primarily served Nike&rsquo;s interests without serving consumers were excluded. Features that served consumers but had no path to Nike&rsquo;s business objectives were also excluded. The four that survived that filter are the four that shipped.</p>
+    <p>Every feature was prioritized against the same question: does this earn its presence? Features that primarily served Nike&rsquo;s interests without serving consumers were excluded. Features that served consumers but had no path to Nike&rsquo;s business objectives were also excluded. The map below sorts <strong>MVP</strong> builds, <strong>next phase</strong> bets, and explicit <strong>exclusions</strong>.</p>
   </div>
-  <div class="priority-grid">
-    <div class="priority-card core">
-      <div class="priority-tag p0">P0 &middot; MVP &middot; Consideration Layer</div>
-      <div class="priority-feature">The Style Gym</div>
-      <div class="priority-desc">Product pages reimagined as styling resources. Every shoe ships with three complete outfit formulas &mdash; Errand, Casual, After 5pm &mdash; using exclusively Nike pieces, each with shoppable links. The shoe becomes an entry point to a look, not a collectible object. Filterable by occasion context. The Style Gym is the product page that closes the confidence gap before the consumer reaches the size grid.</div>
-      <div class="priority-prd">PRD: P0 &middot; Primary metric: +35% avg session depth &middot; Secondary: &darr; return rate from aesthetic mismatch &middot; Nike-only items in all outfits &mdash; no third-party referrals</div>
+  <div class="nike-tri" data-nike-tri>
+    <div class="nike-tri-tabs" role="tablist" aria-label="Product roadmap columns">
+      <button type="button" class="nike-tri-tab active" data-nike-tab="mvp" aria-selected="true">MVP</button>
+      <button type="button" class="nike-tri-tab" data-nike-tab="next" aria-selected="false">Next phase</button>
+      <button type="button" class="nike-tri-tab" data-nike-tab="excl" aria-selected="false">Excluded</button>
     </div>
-    <div class="priority-card core">
-      <div class="priority-tag p0">P0 &middot; MVP &middot; Data Layer</div>
-      <div class="priority-feature">Style Profile &mdash; Purchase History as Wardrobe Graph</div>
-      <div class="priority-desc">The wardrobe scan that doesn&rsquo;t require a photo upload. Nike&rsquo;s existing purchase history from Nike.com and SNKRS becomes the wardrobe graph automatically. Nike Training Club and Run Club data identifies which shoes are in active rotation vs. sitting in the museum. A 20-second style quiz fills gaps for new users. The Gap Report surfaces what&rsquo;s genuinely missing with Nike product recommendations ranked by gap-fill score, not inventory surplus.</div>
-      <div class="priority-prd">PRD: P0 &middot; Primary metric: +60% purchase confidence score &middot; Secondary: &darr; 90-day return rate &middot; Key constraint: Purchase history opt-in required; quiz serves as fallback for users with no Nike account history</div>
-    </div>
-    <div class="priority-card supporting">
-      <div class="priority-tag p1">P1 &middot; Phase 2 &middot; Access Layer</div>
-      <div class="priority-feature">Confidence Drops &mdash; Participation-Gated Access</div>
-      <div class="priority-desc">Replaces the SNKRS Draw for mid-tier and general-release SKUs. 48-hour styling challenges open before each Confidence Drop. Completing a challenge earns Confidence Pass points and queue priority. Access is gated by participation, not chance. Standard queue always available &mdash; passes shift odds, they don&rsquo;t replace fairness. The lottery is not abolished; it is deprecated for SKUs where the relationship matters more than the heat of scarcity.</div>
-      <div class="priority-prd">PRD: P1 &middot; Primary metric: +40% Aesthetic Individualist segment capture &middot; Constraint: Legacy draw retained for top 20% highest-hype releases in Year 1 &middot; Bot resistance gates Phase 2 launch</div>
-    </div>
-    <div class="priority-card supporting">
-      <div class="priority-tag p1">P1/P2 &middot; Phase 2&ndash;3 &middot; Authority Layer</div>
-      <div class="priority-feature">The Confidence Index</div>
-      <div class="priority-desc">An annual data-driven cultural report transforming millions of SNKRS user interactions into the definitive guide to global street style. Nike as cultural authority &mdash; not just vendor. Distributed as editorial, press, and in-app feature. The Confidence Index makes Nike&rsquo;s aggregated platform data a public brand asset. Published annually. Written like editorial, not like a brand report.</div>
-      <div class="priority-prd">PRD: P2 &middot; Primary metric: share of voice in cultural press &middot; Secondary: brand authority survey scores &middot; Gated behind Phase 1 + 2 data volume</div>
-    </div>
-    <div class="priority-card deferred">
-      <div class="priority-tag deferred">Excluded &middot; All Phases &middot; Hard Constraint</div>
-      <div class="priority-feature">In-App Commerce &mdash; No Checkout, No Catalog, No Advertising</div>
-      <div class="priority-desc">The only commerce surfaces in the Confidence Hub are contextual: a Nike.com deep-link when the Style Profile recommends a gap-filling shoe, and Style Gym &ldquo;Shop &#x2197;&rdquo; links on each outfit item. No in-app checkout. No product catalog. No advertising. No promoted drops. Commerce is the consequence of the platform working &mdash; not its purpose. Every link goes exclusively to Nike.com or SNKRS, never to third-party retail.</div>
-      <div class="priority-prd">PRD: Hard constraint &middot; Rationale: Keeps incentive structure aligned &mdash; the platform earns on engagement and confidence, not transaction. Third-party referrals would dilute the brand relationship the entire platform is designed to rebuild.</div>
+    <div class="nike-tri-grid">
+      <div class="nike-tri-col active" data-nike-col="mvp">
+        <div class="nike-tri-col-title">MVP</div>
+        <div class="priority-card core">
+          <div class="priority-tag p0">P0 &middot; Consideration Layer</div>
+          <div class="priority-feature">The Style Gym</div>
+          <div class="priority-desc">Product pages reimagined as styling resources. Every shoe ships with three complete outfit formulas &mdash; Errand, Casual, After 5pm &mdash; using exclusively Nike pieces, each with shoppable links. The shoe becomes an entry point to a look, not a collectible object. Filterable by occasion context. The Style Gym is the product page that closes the confidence gap before the consumer reaches the size grid.</div>
+          <div class="priority-prd">PRD: P0 &middot; Primary metric: +35% avg session depth &middot; Secondary: &darr; return rate from aesthetic mismatch &middot; Nike-only items in all outfits &mdash; no third-party referrals</div>
+        </div>
+        <div class="priority-card core">
+          <div class="priority-tag p0">P0 &middot; Data Layer</div>
+          <div class="priority-feature">Style Profile &mdash; Purchase History as Wardrobe Graph</div>
+          <div class="priority-desc">The wardrobe scan that doesn&rsquo;t require a photo upload. Nike&rsquo;s existing purchase history from Nike.com and SNKRS becomes the wardrobe graph automatically. Nike Training Club and Run Club data identifies which shoes are in active rotation vs. sitting in the museum. A 20-second style quiz fills gaps for new users. The Gap Report surfaces what&rsquo;s genuinely missing with Nike product recommendations ranked by gap-fill score, not inventory surplus.</div>
+          <div class="priority-prd">PRD: P0 &middot; Primary metric: +60% purchase confidence score &middot; Secondary: &darr; 90-day return rate &middot; Key constraint: Purchase history opt-in required; quiz serves as fallback for users with no Nike account history</div>
+        </div>
+      </div>
+      <div class="nike-tri-col" data-nike-col="next">
+        <div class="nike-tri-col-title">Next phase</div>
+        <div class="priority-card supporting">
+          <div class="priority-tag p1">P1 &middot; Access Layer</div>
+          <div class="priority-feature">Confidence Drops &mdash; Participation-Gated Access</div>
+          <div class="priority-desc">Replaces the SNKRS Draw for mid-tier and general-release SKUs. 48-hour styling challenges open before each Confidence Drop. Completing a challenge earns Confidence Pass points and queue priority. Access is gated by participation, not chance. Standard queue always available &mdash; passes shift odds, they don&rsquo;t replace fairness. The lottery is not abolished; it is deprecated for SKUs where the relationship matters more than the heat of scarcity.</div>
+          <div class="priority-prd">PRD: P1 &middot; Primary metric: +40% Aesthetic Individualist segment capture &middot; Constraint: Legacy draw retained for top 20% highest-hype releases in Year 1 &middot; Bot resistance gates Phase 2 launch</div>
+        </div>
+        <div class="priority-card supporting">
+          <div class="priority-tag p1">P1/P2 &middot; Authority Layer</div>
+          <div class="priority-feature">The Confidence Index</div>
+          <div class="priority-desc">An annual data-driven cultural report transforming millions of SNKRS user interactions into the definitive guide to global street style. Nike as cultural authority &mdash; not just vendor. Distributed as editorial, press, and in-app feature. The Confidence Index makes Nike&rsquo;s aggregated platform data a public brand asset. Published annually. Written like editorial, not like a brand report.</div>
+          <div class="priority-prd">PRD: P2 &middot; Primary metric: share of voice in cultural press &middot; Secondary: brand authority survey scores &middot; Gated behind Phase 1 + 2 data volume</div>
+        </div>
+      </div>
+      <div class="nike-tri-col" data-nike-col="excl">
+        <div class="nike-tri-col-title">Excluded</div>
+        <div class="priority-card deferred">
+          <div class="priority-tag deferred">Hard constraint &middot; All phases</div>
+          <div class="priority-feature">In-App Commerce &mdash; No Checkout, No Catalog, No Advertising</div>
+          <div class="priority-desc">The only commerce surfaces in the Confidence Hub are contextual: a Nike.com deep-link when the Style Profile recommends a gap-filling shoe, and Style Gym &ldquo;Shop &#x2197;&rdquo; links on each outfit item. No in-app checkout. No product catalog. No advertising. No promoted drops. Commerce is the consequence of the platform working &mdash; not its purpose. Every link goes exclusively to Nike.com or SNKRS, never to third-party retail.</div>
+          <div class="priority-prd">PRD: Hard constraint &middot; Rationale: Keeps incentive structure aligned &mdash; the platform earns on engagement and confidence, not transaction. Third-party referrals would dilute the brand relationship the entire platform is designed to rebuild.</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -599,7 +700,7 @@ footer{border-top:1px solid var(--g200);padding:32px 48px;display:flex;align-ite
         <div class="proto-step-num">03</div>
         <div class="proto-step-body">
           <div class="proto-step-title">Style Gym</div>
-          <div class="proto-step-desc">The Wardrobe Insight card names the specific gap this shoe closes. Three outfit rows follow with shoppable Nike links. &ldquo;Add Look&rdquo; adds the entire outfit to cart &mdash; the AOV lever.</div>
+          <div class="proto-step-desc">The Wardrobe Insight card names the specific gap this shoe closes. Three outfit rows follow with shoppable Nike links. &ldquo;Add Look&rdquo; adds the entire outfit to cart &mdash; the average order value (AOV) lever.</div>
         </div>
       </div>
       <div class="proto-step" data-step="4" data-src="snkrs-app.html"><!-- TODO: Confidence Drop screen URL -->
@@ -624,62 +725,89 @@ footer{border-top:1px solid var(--g200);padding:32px 48px;display:flex;align-ite
 <section class="cs-section" id="cs-decisions" data-cs-section="cs-decisions">
   <div class="cs-section-eyebrow"><span class="cs-section-num">07</span><span class="cs-section-title">Decision Log</span></div>
   <h2 class="cs-heading-serif">11 decisions with documented tradeoffs. <em>Nothing shipped without a reason.</em></h2>
-  <p class="cs-body">The decision log is the discipline. Every shipped and deferred item represents a choice between options, with an explicit rationale for the path taken. The log is not a changelog &mdash; it is a product philosophy made visible at the component level  <!-- Desktop Decision Table -->
-  <!-- Desktop Decision Table -->
-  <table class="decision-table decision-table-desktop">
-    <thead>
-      <tr><th>Decision</th><th>What Was Built</th><th>Rationale &amp; Tradeoff</th><th>Status</th></tr>
-    </thead>
-    <tbody>
-      <tr class="shipped"><td>Light Mode First</td><td>White body, off-white segments, dark accents for badges.</td><td>Shifts from hype/FOMO to editorial experience. Contrast earned through light field.</td><td><span class="decision-status shipped">Shipped</span></td></tr>
-      <tr class="shipped"><td>Wardrobe Graph</td><td>Automated history sync from Nike.com/SNKRS.</td><td>Reduces cold-start friction. Uses data Nike already owns to be substantively useful.</td><td><span class="decision-status shipped">Shipped</span></td></tr>
-      <tr class="shipped"><td>Confidence Score</td><td>0-100 score on every product page based on compatibility.</td><td>Quantifies a previously qualitative signal. Reduces returns through pre-purchase matching.</td><td><span class="decision-status shipped">Shipped</span></td></tr>
-      <tr class="shipped"><td>Nike-Only Outfits</td><td>Style Gym links exclusively to Nike.com ecosystem.</td><td>Keeps incentive structure aligned. Drives AOV within Nike instead of referring outward.</td><td><span class="decision-status shipped">Shipped</span></td></tr>
-      <tr class="shipped"><td>Context Pills</td><td>Occasion pills positioned directly on product hero image.</td><td>Creates occasion-first read before price. Reduces hesitation for considered buyers.</td><td><span class="decision-status shipped">Shipped</span></td></tr>
-      <tr class="shipped"><td>Zero Border-Radius</td><td>Sharp edges on all UI components including buttons/cards.</td><td>Signals authority and precision. Matches Nike's aggressive hardware visual register.</td><td><span class="decision-status shipped">Shipped</span></td></tr>
-      <tr class="shipped"><td>Volt Energy</td><td>Volt replaces red as primary accent for positive signals.</td><td>Reduces alarmist UX. Volt reads as achievement/signal rather than urgency/FOMO.</td><td><span class="decision-status shipped">Shipped</span></td></tr>
-      <tr class="shipped"><td>Add Look</td><td>One-tap multi-item cart addition for styling outfits.</td><td>Core AOV lever. Turns styling service into direct revenue generation.</td><td><span class="decision-status shipped">Shipped</span></td></tr>
-      <tr class="deferred"><td>Lottery Retention</td><td>SNKRS Draw retained for top 20% highest-hype releases.</td><td>Protects cultural capital while transition to participation-model happens on mid-tier SKUs.</td><td><span class="decision-status deferred">Deferred</span></td></tr>
-      <tr class="deferred"><td>Index Publication</td><td>Annual cultural authority report mentioned in UI.</td><td>Gated on Phase 1+2 data volume to ensure report is definitively meaningful.</td><td><span class="decision-status deferred">Deferred</span></td></tr>
-      <tr class="deferred"><td>Bot Resistance</td><td>Placeholder anti-bot logic for styling challenges.</td><td>Full engineering layer deferred until production behavioral data can be analyzed.</td><td><span class="decision-status deferred">Deferred</span></td></tr>
-    </tbody>
-  </table>
-
-  <!-- Mobile Decision Accordion -->
-  <div class="decision-accordion-mobile">
-    <div class="decision-item active">
-      <div class="decision-header" onclick="toggleToken(this)"><span>Light Mode First</span><span class="token-icon">+</span></div>
-      <div class="token-panel">
-        <p><strong>Built:</strong> White body, off-white segments, dark accents for badges.</p>
-        <p><strong>Rationale:</strong> Shifts from hype/FOMO to editorial/considered experience. Contrast earned through light field.</p>
-      </div>
+  <p class="cs-body">The decision log is the discipline. Every shipped and deferred item represents a choice between options, with an explicit rationale for the path taken. The log is not a changelog &mdash; it is a product philosophy made visible at the component level. Same three-part structure as the product map: <strong>MVP</strong> (shipped), <strong>next phase</strong> (gated / deferred), and <strong>excluded</strong> (explicit non-goals).</p>
+  <div class="nike-tri nike-tri-decisions" data-nike-tri>
+    <div class="nike-tri-tabs" role="tablist" aria-label="Decision log columns">
+      <button type="button" class="nike-tri-tab active" data-nike-tab="mvp" aria-selected="true">MVP</button>
+      <button type="button" class="nike-tri-tab" data-nike-tab="next" aria-selected="false">Next phase</button>
+      <button type="button" class="nike-tri-tab" data-nike-tab="excl" aria-selected="false">Excluded</button>
     </div>
-    <div class="decision-item">
-      <div class="decision-header" onclick="toggleToken(this)"><span>Wardrobe Graph</span><span class="token-icon">+</span></div>
-      <div class="token-panel">
-        <p><strong>Built:</strong> Automated history sync from Nike.com/SNKRS. No photo uploads.</p>
-        <p><strong>Rationale:</strong> Reduces cold-start friction. Uses data Nike already owns to be substantively useful.</p>
+    <div class="nike-tri-grid">
+      <div class="nike-tri-col active" data-nike-col="mvp">
+        <div class="nike-tri-col-title">MVP &middot; Shipped</div>
+        <div class="nike-decision-card">
+          <div class="nike-decision-title">Light Mode First</div>
+          <p class="nike-decision-built"><strong>Built:</strong> White body, off-white segments, dark accents for badges.</p>
+          <p class="nike-decision-why"><strong>Tradeoff:</strong> Shifts from hype/FOMO to editorial experience. Contrast earned through light field.</p>
+        </div>
+        <div class="nike-decision-card">
+          <div class="nike-decision-title">Wardrobe Graph</div>
+          <p class="nike-decision-built"><strong>Built:</strong> Automated history sync from Nike.com/SNKRS.</p>
+          <p class="nike-decision-why"><strong>Tradeoff:</strong> Reduces cold-start friction. Uses data Nike already owns to be substantively useful.</p>
+        </div>
+        <div class="nike-decision-card">
+          <div class="nike-decision-title">Confidence Score</div>
+          <p class="nike-decision-built"><strong>Built:</strong> 0&ndash;100 score on every product page based on compatibility.</p>
+          <p class="nike-decision-why"><strong>Tradeoff:</strong> Quantifies a previously qualitative signal. Reduces returns through pre-purchase matching.</p>
+        </div>
+        <div class="nike-decision-card">
+          <div class="nike-decision-title">Nike-Only Outfits</div>
+          <p class="nike-decision-built"><strong>Built:</strong> Style Gym links exclusively to Nike.com ecosystem.</p>
+          <p class="nike-decision-why"><strong>Tradeoff:</strong> Keeps incentive structure aligned. Drives average order value (AOV) within Nike instead of referring outward.</p>
+        </div>
+        <div class="nike-decision-card">
+          <div class="nike-decision-title">Context Pills</div>
+          <p class="nike-decision-built"><strong>Built:</strong> Occasion pills positioned directly on product hero image.</p>
+          <p class="nike-decision-why"><strong>Tradeoff:</strong> Creates occasion-first read before price. Reduces hesitation for considered buyers.</p>
+        </div>
+        <div class="nike-decision-card">
+          <div class="nike-decision-title">Zero Border-Radius</div>
+          <p class="nike-decision-built"><strong>Built:</strong> Sharp edges on all UI components including buttons/cards.</p>
+          <p class="nike-decision-why"><strong>Tradeoff:</strong> Signals authority and precision. Matches Nike&apos;s aggressive hardware visual register.</p>
+        </div>
+        <div class="nike-decision-card">
+          <div class="nike-decision-title">Volt Energy</div>
+          <p class="nike-decision-built"><strong>Built:</strong> Volt replaces red as primary accent for positive signals.</p>
+          <p class="nike-decision-why"><strong>Tradeoff:</strong> Reduces alarmist UX. Volt reads as achievement/signal rather than urgency/FOMO.</p>
+        </div>
+        <div class="nike-decision-card">
+          <div class="nike-decision-title">Add Look</div>
+          <p class="nike-decision-built"><strong>Built:</strong> One-tap multi-item cart addition for styling outfits.</p>
+          <p class="nike-decision-why"><strong>Tradeoff:</strong> Core average order value (AOV) lever. Turns styling service into direct revenue generation.</p>
+        </div>
       </div>
-    </div>
-    <div class="decision-item">
-      <div class="decision-header" onclick="toggleToken(this)"><span>Confidence Score</span><span class="token-icon">+</span></div>
-      <div class="token-panel">
-        <p><strong>Built:</strong> 0-100 score based on inventory match and occasion logic.</p>
-        <p><strong>Rationale:</strong> Quantifies a previously qualitative signal. Reduces returns through pre-purchase matching.</p>
+      <div class="nike-tri-col" data-nike-col="next">
+        <div class="nike-tri-col-title">Next phase &middot; Deferred</div>
+        <div class="nike-decision-card">
+          <div class="nike-decision-title">Lottery Retention</div>
+          <p class="nike-decision-built"><strong>Plan:</strong> SNKRS Draw retained for top 20% highest-hype releases.</p>
+          <p class="nike-decision-why"><strong>Tradeoff:</strong> Protects cultural capital while transition to participation-model happens on mid-tier SKUs.</p>
+        </div>
+        <div class="nike-decision-card">
+          <div class="nike-decision-title">Index Publication</div>
+          <p class="nike-decision-built"><strong>Plan:</strong> Annual cultural authority report mentioned in UI.</p>
+          <p class="nike-decision-why"><strong>Tradeoff:</strong> Gated on Phase 1+2 data volume so the report is definitively meaningful.</p>
+        </div>
+        <div class="nike-decision-card">
+          <div class="nike-decision-title">Bot Resistance</div>
+          <p class="nike-decision-built"><strong>Plan:</strong> Placeholder anti-bot logic for styling challenges.</p>
+          <p class="nike-decision-why"><strong>Tradeoff:</strong> Full engineering layer deferred until production behavioral data can be analyzed.</p>
+        </div>
       </div>
-    </div>
-    <div class="decision-item">
-      <div class="decision-header" onclick="toggleToken(this)"><span>Zero Border-Radius</span><span class="token-icon">+</span></div>
-      <div class="token-panel">
-        <p><strong>Built:</strong> Sharp edges on all UI components including buttons/cards.</p>
-        <p><strong>Rationale:</strong> Signals authority and precision. Matches Nike's aggressive hardware visual register.</p>
-      </div>
-    </div>
-    <div class="decision-item">
-      <div class="decision-header" onclick="toggleToken(this)"><span>Add Look</span><span class="token-icon">+</span></div>
-      <div class="token-panel">
-        <p><strong>Built:</strong> One-tap multi-item cart addition for styling outfits.</p>
-        <p><strong>Rationale:</strong> Core AOV lever. Turns styling service into direct revenue generation.</p>
+      <div class="nike-tri-col" data-nike-col="excl">
+        <div class="nike-tri-col-title">Excluded</div>
+        <div class="nike-decision-card excluded">
+          <div class="nike-decision-title">In-app checkout &amp; catalog</div>
+          <p class="nike-decision-why">No Nike.com checkout inside Confidence Hub; no full product catalog or browsing mall. Commerce stays contextual deep-links only.</p>
+        </div>
+        <div class="nike-decision-card excluded">
+          <div class="nike-decision-title">Third-party retail from styling surfaces</div>
+          <p class="nike-decision-why">Style Gym and Profile links stay Nike.com/SNKRS-only so styling never trains members away from owned retail.</p>
+        </div>
+        <div class="nike-decision-card excluded">
+          <div class="nike-decision-title">In-hub ads &amp; promoted drops as revenue</div>
+          <p class="nike-decision-why">No advertising or paid placement in the hub; engagement and confidence are the product, not inventory clearance.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -711,7 +839,7 @@ footer{border-top:1px solid var(--g200);padding:32px 48px;display:flex;align-ite
     <div class="cs-stat-cell">
       <div class="cs-stat-eyebrow">PRD Metrics</div>
       <div class="cs-stat-num">7</div>
-      <div class="cs-stat-label">Success metrics specified with baselines, targets, and measurement methodology &mdash; from segment reactivation to return rate reduction to AOV lift.</div>
+      <div class="cs-stat-label">Success metrics specified with baselines, targets, and measurement methodology &mdash; from segment reactivation to return rate reduction to average order value (AOV) lift.</div>
     </div>
   </div>
 
@@ -725,9 +853,9 @@ footer{border-top:1px solid var(--g200);padding:32px 48px;display:flex;align-ite
         <div class="metric-desc">Segment survey + new account activations from lapsed cohort within 90 days.</div>
       </div>
       <div class="metric-card">
-        <div class="metric-label">App DAU (18&ndash;34)</div>
+        <div class="metric-label">App daily active users (DAU), 18&ndash;34</div>
         <div class="metric-target">+45% YOY</div>
-        <div class="metric-desc">App analytics comparison against same period prior year.</div>
+        <div class="metric-desc">Unique users who open the app on a given day; compared YOY in analytics.</div>
       </div>
       <div class="metric-card">
         <div class="metric-label">Return Rate</div>
@@ -746,8 +874,8 @@ footer{border-top:1px solid var(--g200);padding:32px 48px;display:flex;align-ite
       </div>
       <div class="metric-card">
         <div class="metric-label">Outfit Basket Size</div>
-        <div class="metric-target">+40% AOV</div>
-        <div class="metric-desc">Comparing &ldquo;Add Look&rdquo; vs. single-item purchase baseline revenue.</div>
+        <div class="metric-target">+40% avg. order value</div>
+        <div class="metric-desc">&ldquo;Add Look&rdquo; multi-item baskets vs. single-item purchase baseline (average order value / AOV).</div>
       </div>
     </div>
   </div>
@@ -799,17 +927,44 @@ const sectionObserver = new IntersectionObserver(entries => {
 }, { threshold: 0, rootMargin: '-10% 0px -80% 0px' });
 document.querySelectorAll('[data-cs-section]').forEach(s => sectionObserver.observe(s));
 
+(function initNikeTriTabs() {
+  document.querySelectorAll('[data-nike-tri]').forEach(function (wrap) {
+    wrap.querySelectorAll('[data-nike-tab]').forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        var id = tab.getAttribute('data-nike-tab');
+        wrap.querySelectorAll('[data-nike-tab]').forEach(function (t) {
+          var on = t === tab;
+          t.classList.toggle('active', on);
+          t.setAttribute('aria-selected', on ? 'true' : 'false');
+        });
+        wrap.querySelectorAll('[data-nike-col]').forEach(function (c) {
+          c.classList.toggle('active', c.getAttribute('data-nike-col') === id);
+        });
+      });
+    });
+  });
+})();
+
 function scrollToSection(id) {
   const el = document.getElementById(id);
   if (!el) return;
   window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 104, behavior: 'smooth' });
 }
 
+function scrollToPersonaLab() {
+  scrollToSection('cs-persona-tool');
+  setTimeout(function () {
+    var expand = document.getElementById('art2-expand');
+    if (expand && expand.dataset.open !== 'true') toggleArtifact(2);
+  }, 450);
+}
+
 function toggleArtifact(n) {
-  const expand = document.getElementById('art'+n+'-expand');
-  const toggle = document.getElementById('art'+n+'-cta');
+  const expand = document.getElementById('art' + n + '-expand');
+  const toggle = document.getElementById('art' + n + '-cta');
+  if (!expand || !toggle) return;
   const isOpen = expand.dataset.open === 'true';
-  expand.style.maxHeight = isOpen ? '0' : '960px';
+  expand.style.maxHeight = isOpen ? '0' : '5200px';
   expand.dataset.open = isOpen ? 'false' : 'true';
   toggle.textContent = isOpen ? '+' : '\u00d7';
 }
@@ -838,10 +993,6 @@ function showScreen(n) {
   document.querySelectorAll('.app-screen-frame').forEach(f => f.classList.remove('active'));
   document.querySelector('.app-screen-btn[data-screen="'+n+'"]').classList.add('active');
   document.getElementById('screen-'+n).classList.add('active');
-}
-function toggleToken(el) {
-  const item = el.parentElement;
-  item.classList.toggle('active');
 }
 function toggleJourney(el) {
   el.classList.toggle('active');

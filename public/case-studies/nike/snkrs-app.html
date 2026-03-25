@@ -116,6 +116,7 @@ body{background:#b8b8b8;font-family:var(--fu);display:flex;justify-content:cente
 .dc.cdrop{border-color:rgba(180,200,0,.3);}
 .dch{position:relative;overflow:hidden;background:#ccc;}
 .dch img{width:100%;height:100%;object-fit:cover;object-position:center 22%;transition:transform .4s ease;display:block;}
+.dch img.dch-focus-shoes{object-position:center bottom;}
 .dc:hover .dch img{transform:scale(1.025);}
 .dco{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(0,0,0,.75) 0%,transparent 100%);padding:20px 14px 14px;display:flex;justify-content:space-between;align-items:flex-end;}
 .dcn{font-family:var(--fd);font-size:22px;letter-spacing:.03em;color:#fff;line-height:1.0;}
@@ -132,9 +133,13 @@ body{background:#b8b8b8;font-family:var(--fu);display:flex;justify-content:cente
    SCREEN 2: PDP — single unified rhythm
 ══════════════════════════════════════════════════════ */
 .ph{position:relative;width:100%;height:430px;overflow:hidden;background:#d0ceca;flex-shrink:0;}
-.ph img{width:100%;height:100%;object-fit:cover;object-position:center 15%;display:block;}
-.ph::after{content:'';position:absolute;bottom:0;left:0;right:0;height:90px;background:linear-gradient(to bottom,transparent,#fff);}
-.ctxr{position:absolute;bottom:12px;left:20px;right:20px;z-index:10;display:flex;gap:6px;}
+.ph-stack{position:absolute;inset:0;}
+.ph-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 28%;opacity:0;transition:opacity .5s ease;display:block;pointer-events:none;}
+.ph-img.active{opacity:1;z-index:1;}
+/* Top scrim + blur: keeps status bar / SNKRS chrome readable over hero photography */
+.ph::before{content:'';position:absolute;top:0;left:0;right:0;height:min(220px,52%);z-index:3;pointer-events:none;background:linear-gradient(180deg,rgba(0,0,0,.44) 0%,rgba(0,0,0,.2) 35%,rgba(0,0,0,.06) 62%,rgba(0,0,0,0) 100%);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);-webkit-mask-image:linear-gradient(180deg,#000 0%,#000 6%,rgba(0,0,0,.7) 32%,rgba(0,0,0,.28) 58%,rgba(0,0,0,.06) 78%,transparent 100%);mask-image:linear-gradient(180deg,#000 0%,#000 6%,rgba(0,0,0,.7) 32%,rgba(0,0,0,.28) 58%,rgba(0,0,0,.06) 78%,transparent 100%);-webkit-mask-size:100% 100%;mask-size:100% 100%;}
+.ph::after{content:'';position:absolute;bottom:0;left:0;right:0;height:90px;background:linear-gradient(to bottom,transparent,#fff);z-index:2;pointer-events:none;}
+.ctxr{position:absolute;bottom:12px;left:20px;right:20px;z-index:11;display:flex;gap:6px;}
 .cp{padding:5px 12px;font-family:var(--fu);font-size:11px;font-weight:500;border:1px solid rgba(255,255,255,.45);color:rgba(255,255,255,.75);cursor:pointer;transition:all .12s;white-space:nowrap;background:rgba(0,0,0,.28);backdrop-filter:blur(4px);}
 .cp.on{background:#fff;color:var(--t1);border-color:#fff;font-weight:700;}
 
@@ -367,7 +372,7 @@ body{background:#b8b8b8;font-family:var(--fu);display:flex;justify-content:cente
     <!-- Confidence Drop -->
     <div class="dc cdrop" style="margin-top:10px;" onclick="go('s-drop')">
       <div class="dch" style="height:290px;background:#0e0e0a;">
-        <img src="https://www.figma.com/api/mcp/asset/c6c1dae2-9efc-4a26-abf6-1730bbee0103" alt="shoe" style="opacity:.8;" />
+        <img src="app%20mockups/waffle%20debut%20sanddrift.png" alt="Waffle Debut Sanddrift" />
         <div class="dco"><div class="dcn">Waffle Debut<br>'Sanddrift'</div><div class="dcp">$110</div></div>
         <div style="position:absolute;top:12px;left:12px;"><div class="chip vc"><div class="cd"></div>Confidence Drop</div></div>
       </div>
@@ -384,7 +389,7 @@ body{background:#b8b8b8;font-family:var(--fu);display:flex;justify-content:cente
     <!-- Live drop -->
     <div class="dc" onclick="go('s-pdp')">
       <div class="dch" style="height:260px;">
-        <img src="https://www.figma.com/api/mcp/asset/7ef7b18a-7606-489c-93b9-6b0ce2bf1955" alt="shoe" />
+        <img class="dch-focus-shoes" src="app%20mockups/waffleshoes%20with%20jeans.png" alt="Waffle Debut White Black — errand look" />
         <div class="dco"><div class="dcn">Waffle Debut<br>'White Black'</div><div class="dcp">$95</div></div>
         <div style="position:absolute;top:12px;left:12px;"><div class="chip sc"><div class="cd"></div>Today · 2PM</div></div>
         <div style="position:absolute;top:12px;right:12px;background:rgba(212,255,0,.9);padding:5px 10px;font-family:var(--fm);font-size:9px;letter-spacing:.14em;color:var(--t1);text-transform:uppercase;">Style Gym Ready</div>
@@ -457,11 +462,15 @@ body{background:#b8b8b8;font-family:var(--fu);display:flex;justify-content:cente
   <div class="sb">
     <!-- HERO -->
     <div class="ph">
-      <img src="https://www.figma.com/api/mcp/asset/7ef7b18a-7606-489c-93b9-6b0ce2bf1955" alt="Waffle Debut" />
-      <div class="ctxr">
-        <div class="cp on" onclick="ctxSw(this)">Errand</div>
-        <div class="cp" onclick="ctxSw(this)">Casual</div>
-        <div class="cp" onclick="ctxSw(this)">After 5pm</div>
+      <div class="ph-stack" aria-hidden="true">
+        <img class="ph-img active" data-ctx="errand" src="app%20mockups/waffleshoes%20with%20jeans.png" alt="" />
+        <img class="ph-img" data-ctx="casual" src="app%20mockups/waffle-shoes-with-cargos.png" alt="" />
+        <img class="ph-img" data-ctx="after" src="app%20mockups/waffle%20shoes%20with%20slacks.png" alt="" />
+      </div>
+      <div class="ctxr" role="tablist" aria-label="Occasion">
+        <div class="cp on" role="tab" aria-selected="true" data-ctx="errand" onclick="ctxSw(this)">Errand</div>
+        <div class="cp" role="tab" aria-selected="false" data-ctx="casual" onclick="ctxSw(this)">Casual</div>
+        <div class="cp" role="tab" aria-selected="false" data-ctx="after" onclick="ctxSw(this)">After 5pm</div>
       </div>
     </div>
 
@@ -518,9 +527,9 @@ body{background:#b8b8b8;font-family:var(--fu);display:flex;justify-content:cente
     <div class="or">
       <div class="orh"><div><div class="oc">Look 01 — Casual</div><div class="oname">The Sunday Reset</div></div><button class="btn bk bsm" onclick="addLook(this)">Add Look</button></div>
       <div class="osc">
-        <div class="op"><img src="https://www.figma.com/api/mcp/asset/3422ced9-23aa-49c7-ba1c-f2e54c282eef" alt="look" /></div>
-        <div class="op"><img src="https://www.figma.com/api/mcp/asset/a30c91e9-8833-4439-92e4-358e0b351439" alt="look" /></div>
-        <div class="op"><img src="https://www.figma.com/api/mcp/asset/bb974ce8-3c4e-49cc-a319-10387ccbc677" alt="look" /></div>
+        <div class="op"><img src="app%20mockups/model%20one%20pose.png" alt="Look 01 — on model" /></div>
+        <div class="op"><img src="app%20mockups/flatlay1.png" alt="Look 01 — flat lay one" /></div>
+        <div class="op"><img src="app%20mockups/model1.png" alt="Look 01 — model detail" /></div>
       </div>
       <div class="oit">
         <div class="oi"><div><div class="oin">Waffle Debut 'White Black'</div><div class="oib">NIKE · THIS SHOE</div></div><div class="oa">Anchor</div></div>
@@ -533,9 +542,9 @@ body{background:#b8b8b8;font-family:var(--fu);display:flex;justify-content:cente
     <div class="or">
       <div class="orh"><div><div class="oc">Look 02 — Errand</div><div class="oname">The Urban Trek</div></div><button class="btn bk bsm" onclick="addLook(this)">Add Look</button></div>
       <div class="osc">
-        <div class="op"><img src="https://www.figma.com/api/mcp/asset/9a0e9cc2-75f6-46a7-a5db-812e4329e35a" alt="look" /></div>
-        <div class="op"><img src="https://www.figma.com/api/mcp/asset/ed24ce99-c7e9-4fad-b3f4-4fac0ecf59e5" alt="look" /></div>
-        <div class="op"><img src="https://www.figma.com/api/mcp/asset/9c96df3a-8964-4334-af82-c22208e3b1a3" alt="look" /></div>
+        <div class="op"><img src="app%20mockups/model%20two%20pose.png" alt="Look 02 — on model" /></div>
+        <div class="op"><img src="app%20mockups/flatlay2.png" alt="Look 02 — flat lay two" /></div>
+        <div class="op"><img src="app%20mockups/model2.png" alt="Look 02 — model detail" /></div>
       </div>
       <div class="oit">
         <div class="oi"><div><div class="oin">Waffle Debut 'White Black'</div><div class="oib">NIKE · THIS SHOE</div></div><div class="oa">Anchor</div></div>
@@ -548,9 +557,9 @@ body{background:#b8b8b8;font-family:var(--fu);display:flex;justify-content:cente
     <div class="or">
       <div class="orh"><div><div class="oc">Look 03 — After 5pm</div><div class="oname">The Evening Edit</div></div><button class="btn bk bsm" onclick="addLook(this)">Add Look</button></div>
       <div class="osc">
-        <div class="op"><img src="https://www.figma.com/api/mcp/asset/9f277ac3-5e25-4e1b-bf9f-4e8443422e51" alt="look" /></div>
-        <div class="op"><img src="https://www.figma.com/api/mcp/asset/bcf2a211-2490-4ce1-9be2-9685355b3b3a" alt="look" /></div>
-        <div class="op"><img src="https://www.figma.com/api/mcp/asset/bd4a7a0f-0283-4953-abf9-7a08de527b06" alt="look" /></div>
+        <div class="op"><img src="app%20mockups/model%20three%20pose.png" alt="Look 03 — on model" /></div>
+        <div class="op"><img src="app%20mockups/flatlay3.png" alt="Look 03 — flat lay" /></div>
+        <div class="op"><img src="app%20mockups/model3.png" alt="Look 03 — model detail" /></div>
       </div>
       <div class="oit">
         <div class="oi"><div><div class="oin">Waffle Debut 'White Black'</div><div class="oib">NIKE · THIS SHOE</div></div><div class="oa">Anchor</div></div>
@@ -661,7 +670,7 @@ body{background:#b8b8b8;font-family:var(--fu);display:flex;justify-content:cente
   </div>
   <div class="sb" style="background:var(--t1);">
     <div class="drphr">
-      <img src="https://www.figma.com/api/mcp/asset/c6c1dae2-9efc-4a26-abf6-1730bbee0103" alt="shoe" />
+      <img src="app%20mockups/waffle%20debut%20sanddrift.png" alt="Waffle Debut Sanddrift" />
       <div class="dhc">
         <div class="dht"><div class="dhn">Waffle Debut<br>'Sanddrift'</div><div class="dhp">$110</div></div>
         <div class="dhc2">Sanddrift / Cool Grey / White</div>
@@ -785,7 +794,14 @@ function go(id){
   if(sc){const b=sc.querySelector('.sb');if(b)b.scrollTop=0;sc.classList.add('active');}
   const ti=S2T[id];if(ti){const t=document.getElementById(ti);if(t)t.classList.add('on');}
 }
-function ctxSw(el){el.closest('.ph').querySelectorAll('.cp').forEach(p=>p.classList.remove('on'));el.classList.add('on');}
+function ctxSw(el){
+  const ph=el.closest('.ph');
+  if(!ph)return;
+  const k=el.getAttribute('data-ctx');
+  ph.querySelectorAll('.cp').forEach(p=>{p.classList.remove('on');p.setAttribute('aria-selected','false');});
+  el.classList.add('on');el.setAttribute('aria-selected','true');
+  ph.querySelectorAll('.ph-img').forEach(img=>img.classList.toggle('active',img.getAttribute('data-ctx')===k));
+}
 document.querySelectorAll('.sz:not(.xx)').forEach(b=>b.addEventListener('click',function(){
   this.closest('.szg').querySelectorAll('.sz').forEach(x=>x.classList.remove('on'));
   this.classList.add('on');
