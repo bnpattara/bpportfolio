@@ -44,9 +44,6 @@ body { font-family: var(--font); background: var(--white); color: var(--black); 
 .cs-hero-title { font-size: clamp(32px,4vw,56px); font-weight: 300; letter-spacing: .04em; text-transform: uppercase; color: var(--white); line-height: .95; margin: 0; text-shadow: 0 2px 24px rgba(0,0,0,.5); }
 .cs-hero-ghost { position: absolute; bottom: -40px; right: -30px; font-size: clamp(100px,14vw,200px); font-weight: 300; color: rgba(255,255,255,.03); letter-spacing: -.03em; line-height: 1; white-space: nowrap; pointer-events: none; text-transform: uppercase; user-select: none; z-index: 1; }
 
-.img-placeholder { background: var(--g100); border: 1px dashed var(--g300); display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 200px; padding: 24px; text-align: center; }
-.img-placeholder-num { font-size: 11px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--g400); margin-bottom: 8px; }
-.img-placeholder-desc { font-size: 11px; color: var(--g500); line-height: 1.5; max-width: 320px; }
 
 .meta-strip { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--g200); }
 .meta-strip span { padding: 14px 32px; font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: var(--g400); border-right: 1px solid var(--g200); }
@@ -75,7 +72,7 @@ body { font-family: var(--font); background: var(--white); color: var(--black); 
 .cs-exec-eyebrow { font-size: 8px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--g300); margin-bottom: 16px; }
 .cs-exec-body { font-size: 13px; color: var(--g500); line-height: 1.85; margin-bottom: 32px; }
 .cs-exec-meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--g200); margin-bottom: 24px; }
-.cs-exec-meta-cell { background: var(--white); padding: 20px; }
+.cs-exec-meta-cell { background: var(--white); padding: 20px; min-width: 0; overflow-wrap: break-word; }
 .cs-exec-meta-label { font-size: 8px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--g300); margin-bottom: 6px; }
 .cs-exec-meta-val { font-size: 12px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; color: var(--black); }
 
@@ -88,7 +85,6 @@ body { font-family: var(--font); background: var(--white); color: var(--black); 
 .cs-body { font-size: 15px; color: var(--g500); line-height: 1.8; margin-bottom: 20px; }
 .cs-body:last-child { margin-bottom: 0; }
 .cs-body-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
-.cs-pull-quote { font-size: clamp(20px,2.2vw,28px); font-weight: 300; font-style: italic; color: var(--black); line-height: 1.4; border-left: 2px solid var(--black); padding-left: 28px; margin-bottom: 28px; }
 /* Strategic Tension Grid */
 .tension-intro { margin-bottom: 48px; }
 .tension-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 48px; }
@@ -195,30 +191,9 @@ body { font-family: var(--font); background: var(--white); color: var(--black); 
 .c-loc { font-size: 10px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--g400); }
 .c-yr { font-size: 24px; font-weight: 300; letter-spacing: -.02em; color: var(--g300); }
 
-/* Returns list */
-.ret-item { padding: 26px 0; border-bottom: 1px solid var(--g200); }
-.ret-item:first-child { padding-top: 0; }
-.ret-item:last-child { border-bottom: none; padding-bottom: 0; }
-.ret-n { font-size: 9px; font-weight: 600; letter-spacing: .18em; color: var(--g400); margin-bottom: 7px; text-transform: uppercase; }
-.ret-title { font-size: 18px; font-weight: 500; letter-spacing: .04em; text-transform: uppercase; margin-bottom: 8px; color: var(--black); }
-.ret-body { font-size: 12px; line-height: 1.75; color: var(--g500); }
-
-/* Image pair */
-.img-pair { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--g200); }
-.img-cell { height: 380px; overflow: hidden; position: relative; border-right: 1px solid var(--g200); }
-.img-cell:last-child { border-right: none; }
-.img-cell img { width: 100%; height: 100%; object-fit: cover; }
-.img-cap { position: absolute; bottom: 16px; left: 18px; z-index: 2; font-size: 8px; letter-spacing: .12em; text-transform: uppercase; color: var(--white); background: rgba(0,0,0,.65); padding: 6px 10px; }
-
-.cs-stats { display: grid; gap: 1px; background: var(--g200); margin-bottom: 28px; }
-.cs-stats-3 { grid-template-columns: repeat(3,1fr); }
-.cs-stat-cell { background: var(--white); padding: 28px 24px; }
-.cs-stat-eyebrow { font-size: 9px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--g300); margin-bottom: 12px; }
-.cs-stat-num { font-size: 48px; font-weight: 300; color: var(--black); letter-spacing: -.02em; line-height: 1; margin-bottom: 8px; }
-.cs-stat-label { font-size: 12px; color: var(--g500); line-height: 1.65; }
 
 /* Business Case Carousel (Saks Style) */
-.carousel-container { position: relative; margin: 40px -56px 0; padding: 0 56px; overflow-x: auto; overflow-y: hidden; cursor: grab; scroll-behavior: smooth; scrollbar-width: none; }
+.carousel-container { position: relative; margin: 40px -56px 0; padding: 0 56px; overflow-x: auto; overflow-y: hidden; cursor: grab; scrollbar-width: none; }
 .carousel-container::-webkit-scrollbar { display: none; }
 .carousel-track { display: flex; gap: 24px; padding-bottom: 40px; }
 .carousel-item { flex: 0 0 360px; background: var(--white); border-top: 2px solid var(--black); border-radius: 0; padding: 32px 24px; }
@@ -236,29 +211,41 @@ body { font-family: var(--font); background: var(--white); color: var(--black); 
 .world-cell:hover img { transform: scale(1.04); }
 .world-cap { position: absolute; bottom: 16px; left: 18px; z-index: 2; font-size: 8px; letter-spacing: .12em; text-transform: uppercase; color: var(--white); background: rgba(0,0,0,.65); padding: 6px 10px; }
 
-/* Outcome Stats — Horizontal */
-.outcome-stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; border-top: 1px solid var(--g200); padding-top: 32px; margin-top: 48px; }
-.outcome-cell { padding-right: 24px; }
-.o-num { font-size: 42px; font-weight: 300; letter-spacing: -.02em; color: var(--black); line-height: 1; margin-bottom: 8px; }
-.o-label { font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--g300); margin-bottom: 4px; }
-.o-desc { font-size: 12px; color: var(--g500); line-height: 1.5; }
+/* Outcome Stats — Saks classes */
+.outcome-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--g200); margin-bottom: 32px; }
+.outcome-stat { background: var(--white); padding: 28px 24px; border-top: 3px solid var(--black); min-width: 0; overflow-wrap: break-word; }
+.outcome-stat-num { font-size: 52px; font-weight: 300; color: var(--black); letter-spacing: -.02em; line-height: 1; margin-bottom: 10px; }
+.outcome-stat-label { font-size: 12px; color: var(--g500); line-height: 1.65; }
 
-/* Market Stats */
-.market-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 1px solid var(--g200); margin-top: 48px; }
-.m-cell { padding: 32px 24px; border-right: 1px solid var(--g200); }
-.m-cell:last-child { border-right: none; }
-.m-big { font-size: clamp(40px, 5vw, 72px); font-weight: 300; letter-spacing: -.03em; line-height: 1; color: var(--black); font-family: var(--font); }
-.m-unit { font-size: 14px; font-weight: 300; color: var(--g400); margin-left: 2px; }
-.m-desc { font-size: 11px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--g300); margin-top: 12px; font-family: var(--font); }
+/* Ending Block */
+.cs-ending-block { background: var(--black); padding: 48px 56px; margin-top: 40px; margin-bottom: 0; }
+.cs-ending-text { font-size: 18px; font-weight: 300; line-height: 1.7; color: rgba(255,255,255,.9); margin: 0; max-width: 720px; font-style: italic; }
 
-/* Three-Act Content Engine */
-.engine-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 1px solid var(--g200); margin-top: 48px; }
-.engine-act { padding: 32px 24px; border-right: 1px solid var(--g200); display: flex; flex-direction: column; }
-.engine-act:last-child { border-right: none; }
-.engine-num { font-size: 9px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--g300); margin-bottom: 16px; font-family: var(--mono, monospace); }
-.engine-tag { font-size: 9px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--black); margin-bottom: 12px; font-family: var(--font); }
-.engine-title { font-size: 20px; font-weight: 300; color: var(--black); letter-spacing: -.01em; margin-bottom: 12px; line-height: 1.3; }
-.engine-desc { font-size: 13px; font-weight: 300; color: var(--g500); line-height: 1.65; }
+
+/* Stats Grid — Saks classes */
+.cs-stats { display: grid; gap: 1px; background: var(--g200); margin-bottom: 28px; }
+.cs-stats-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.cs-stats-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.cs-stat-cell { background: var(--white); padding: 28px 24px; min-width: 0; overflow-wrap: break-word; }
+.cs-stat-eyebrow { font-size: 9px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--g300); margin-bottom: 12px; }
+.cs-stat-num { font-size: 48px; font-weight: 300; color: var(--black); letter-spacing: -.02em; line-height: 1; margin-bottom: 8px; }
+.cs-stat-num-inline { font-size: 28px; font-weight: 300; letter-spacing: -.01em; margin-bottom: 12px; white-space: nowrap; }
+.cs-stat-label { font-size: 12px; color: var(--g500); line-height: 1.65; }
+
+/* IMAGE LAYOUTS — Saks classes */
+.cs-img-contain { overflow: hidden; display: block; background: var(--g100); width: 100%; }
+.cs-img-contain img { width: 100%; height: 100%; object-fit: cover; object-position: center center; display: block; }
+.cs-img-full { width: 100%; margin-bottom: 8px; overflow: hidden; }
+.cs-img-full img { width: 100%; display: block; object-fit: cover; }
+.cs-img-full .cs-img-contain img { object-fit: cover; }
+.cs-img-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px; }
+.cs-img-2col-item img { width: 100%; display: block; object-fit: cover; aspect-ratio: 4/3; }
+.cs-img-2col-item .cs-img-contain img { object-fit: cover; }
+.cs-img-3col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 8px; }
+.cs-img-3col-item img { width: 100%; display: block; object-fit: cover; aspect-ratio: 3/4; }
+.cs-img-3col-item .cs-img-contain img { object-fit: cover; }
+.img-caption { font-size: 9px; letter-spacing: .12em; text-transform: uppercase; color: var(--g400); padding: 6px 0 20px; display: block; }
+.cs-img-2col-item .img-caption, .cs-img-3col-item .img-caption { padding: 6px 0 0; }
 
 /* Next Case Study */
 .cs-next { border-top: 1px solid var(--g200); padding-top: 32px; display: flex; justify-content: space-between; align-items: center; margin-top: 48px; }
@@ -278,7 +265,7 @@ footer { display: flex; justify-content: space-between; align-items: center; pad
 .footer-link { font-size: 10px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.35); text-decoration: none; transition: color var(--ease-fast); }
 .footer-link:hover { color: var(--white); }
 .footer-copy { font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: rgba(255,255,255,.18); }
-#scroll-progress { position: fixed; top: 0; left: 0; height: 2px; background: var(--black); width: 0%; z-index: 300; transition: width 100ms linear; }
+#scroll-progress { position: fixed; top: 0; left: 0; height: 2px; background: var(--black); width: 0%; z-index: 150; transition: width 100ms linear; }
 
 /* Divider */
 .cs-divider { display: flex; align-items: center; gap: 16px; padding: 24px 56px; border-bottom: 1px solid var(--g200); }
@@ -295,35 +282,30 @@ footer { display: flex; justify-content: space-between; align-items: center; pad
 
   #cs-sidenav { display: none !important; }
   .cs-body-wrap { grid-template-columns: 1fr !important; }
-  #cs-exec-summary, .cs-section, .cs-hero-title-wrap, .hara-col, .act-body, .floor-info, .m-cell, .comp-row { padding: 40px 20px !important; }
-  
-  .cs-exec-inner, .cs-stats-3, .cs-stats-4, .cs-body-2col { 
-     grid-template-columns: 1fr !important; 
-     gap: 16px !important; 
+  #cs-exec-summary, .cs-section, .cs-hero-title-wrap, .hara-col, .act-body { padding: 40px 20px !important; }
+
+  .cs-exec-inner, .cs-stats-3 {
+     grid-template-columns: 1fr !important;
+     gap: 16px !important;
    }
   .cs-exec-meta-grid { 
-     grid-template-columns: 1fr 1fr !important; 
+     grid-template-columns: repeat(2, minmax(0, 1fr)) !important; 
      gap: 1px !important; 
      background: var(--g200) !important;
      border: 1px solid var(--g200) !important;
    }
-  .outcome-stats-row, .cs-img-2col, .cs-img-3col, .hara-split, .market-stats, .img-pair, .meta-strip, .act-row {
+  .outcome-stats-row, .hara-split, .img-pair, .meta-strip, .act-row {
     grid-template-columns: 1fr !important;
     gap: 0 !important;
   }
-  .market-stats { grid-template-columns: 1fr 1fr !important; }
-  .m-cell { border-right: none !important; border-bottom: 1px solid var(--g200) !important; }
-  .m-cell:last-child { border-bottom: none !important; }
-  .engine-container { grid-template-columns: 1fr !important; }
-  .engine-act { border-right: none !important; border-bottom: 1px solid var(--g200) !important; }
-  .engine-act:last-child { border-bottom: none !important; }
+  .cs-stats-3, .cs-stats-4 { grid-template-columns: 1fr !important; }
   .carousel-container { margin-left: -20px !important; margin-right: -20px !important; padding-left: 20px !important; padding-right: 20px !important; }
   .cs-next { flex-direction: column !important; align-items: flex-start !important; gap: 16px !important; }
   .cs-next-link { text-align: left !important; }
   .hara-col { border-right: none !important; border-left: 3px solid var(--g200) !important; }
   .hara-col:first-child { border-left: 3px solid var(--black) !important; }
   .cs-body-2col { grid-template-columns: 1fr !important; gap: 32px !important; }
-  .world-grid { grid-template-columns: 1fr 1fr !important; }
+  .world-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
   .world-cell { height: 200px !important; }
   .carousel-controls { justify-content: flex-start !important; }
 
@@ -335,17 +317,11 @@ footer { display: flex; justify-content: space-between; align-items: center; pad
   
   .comp-grid { grid-template-columns: 1fr !important; }
   
-  .comp-row { grid-template-columns: 1fr !important; gap: 8px !important; }
-
-  .comp-row.hdr { display: none !important; }
   .c-yr { font-size: 14px !important; margin-top: 4px !important; }
 
   .cs-hero { min-height: 60vh !important; }
   .cs-hero-title { font-size: 32px !important; }
   .cs-heading { font-size: 24px !important; }
-  .cs-pull-quote { padding-left: 20px !important; font-size: 18px !important; }
-  
-  .thesis-pill { padding: 20px !important; }
   .token-block { flex-direction: column !important; text-align: center !important; }
   footer { flex-direction: column !important; gap: 16px !important; padding: 32px 20px !important; align-items: flex-start !important; }
 }
@@ -373,7 +349,7 @@ footer { display: flex; justify-content: space-between; align-items: center; pad
   <section class="cs-hero" id="cs-hero">
     <div class="cs-hero-ghost">Diesel</div>
     <div class="cs-hero-bg">
-      <img src="/img/case-studies/diesel/diesel_hero.webp" alt="Diesel Tokyo — Gravitational Pull">
+      <img src="/img/case-studies/diesel/diesel_hero.webp" alt="Diesel Tokyo — Gravitational Pull" width="1920" height="1080">
     </div>
     <div class="cs-hero-scrim"></div>
     <div class="cs-hero-title-wrap">
@@ -384,15 +360,15 @@ footer { display: flex; justify-content: space-between; align-items: center; pad
   <div class="cs-body-wrap">
     <aside id="cs-sidenav">
       <div class="cs-sidenav-label">Index</div>
-      <a class="cs-sidenav-link active" data-target="cs-exec-summary" onclick="scrollToSection('cs-exec-summary')"><span class="cs-sidenav-num">00</span><span class="cs-sidenav-text">Exec Summary</span></a>
+      <a class="cs-sidenav-link active" href="#cs-exec-summary" data-target="cs-exec-summary" onclick="scrollToSection('cs-exec-summary')"><span class="cs-sidenav-num">00</span><span class="cs-sidenav-text">Exec Summary</span></a>
       <div class="cs-sidenav-divider"></div>
-      <a class="cs-sidenav-link" data-target="cs-section-01" onclick="scrollToSection('cs-section-01')"><span class="cs-sidenav-num">01</span><span class="cs-sidenav-text">The Enemy</span></a>
-      <a class="cs-sidenav-link" data-target="cs-section-02" onclick="scrollToSection('cs-section-02')"><span class="cs-sidenav-num">02</span><span class="cs-sidenav-text">The Concept</span></a>
-      <a class="cs-sidenav-link" data-target="cs-section-03" onclick="scrollToSection('cs-section-03')"><span class="cs-sidenav-num">03</span><span class="cs-sidenav-text">The Provocation</span></a>
-      <a class="cs-sidenav-link" data-target="cs-section-04" onclick="scrollToSection('cs-section-04')"><span class="cs-sidenav-num">04</span><span class="cs-sidenav-text">The Floors</span></a>
-      <a class="cs-sidenav-link" data-target="cs-section-05" onclick="scrollToSection('cs-section-05')"><span class="cs-sidenav-num">05</span><span class="cs-sidenav-text">Market</span></a>
-      <a class="cs-sidenav-link" data-target="cs-section-06" onclick="scrollToSection('cs-section-06')"><span class="cs-sidenav-num">06</span><span class="cs-sidenav-text">Returns</span></a>
-      <a class="cs-sidenav-link" data-target="cs-outcome" onclick="scrollToSection('cs-outcome')"><span class="cs-sidenav-num">07</span><span class="cs-sidenav-text">Close</span></a>
+      <a class="cs-sidenav-link" href="#cs-section-01" data-target="cs-section-01" onclick="scrollToSection('cs-section-01')"><span class="cs-sidenav-num">01</span><span class="cs-sidenav-text">The Enemy</span></a>
+      <a class="cs-sidenav-link" href="#cs-section-02" data-target="cs-section-02" onclick="scrollToSection('cs-section-02')"><span class="cs-sidenav-num">02</span><span class="cs-sidenav-text">The Concept</span></a>
+      <a class="cs-sidenav-link" href="#cs-section-03" data-target="cs-section-03" onclick="scrollToSection('cs-section-03')"><span class="cs-sidenav-num">03</span><span class="cs-sidenav-text">The Provocation</span></a>
+      <a class="cs-sidenav-link" href="#cs-section-04" data-target="cs-section-04" onclick="scrollToSection('cs-section-04')"><span class="cs-sidenav-num">04</span><span class="cs-sidenav-text">The Floors</span></a>
+      <a class="cs-sidenav-link" href="#cs-section-05" data-target="cs-section-05" onclick="scrollToSection('cs-section-05')"><span class="cs-sidenav-num">05</span><span class="cs-sidenav-text">Market</span></a>
+      <a class="cs-sidenav-link" href="#cs-section-06" data-target="cs-section-06" onclick="scrollToSection('cs-section-06')"><span class="cs-sidenav-num">06</span><span class="cs-sidenav-text">Returns</span></a>
+      <a class="cs-sidenav-link" href="#cs-outcome" data-target="cs-outcome" onclick="scrollToSection('cs-outcome')"><span class="cs-sidenav-num">07</span><span class="cs-sidenav-text">Close</span></a>
       <div class="cs-sidenav-exec">
         <div class="cs-sidenav-exec-label">TL;DR</div>
         <p class="cs-sidenav-exec-text">Find out who you are first. Post later. Tokyo isn't an expansion — it's the first physical space designed to match what Diesel now actually is.</p>
@@ -488,7 +464,7 @@ footer { display: flex; justify-content: space-between; align-items: center; pad
       <!-- 03 THE PROVOCATION -->
       <section class="cs-section" id="cs-section-03" data-cs-section="section-03">
         <div class="cs-section-eyebrow"><span class="cs-section-num">03</span><span class="cs-section-title">The Central Provocation</span></div>
-        <div class="cs-body-2col" style="gap:48px;">
+        <div class="cs-body-2col">
           <div>
             <h2 class="cs-heading">The retail floors are phone-free.</h2>
             <p class="cs-body">Not as a wellness gimmick. Not as a luxury status signal. <strong>As a genuine provocation with a specific argument:</strong> you have been dressing for your phone so long, you've forgotten what it feels like to dress for yourself.</p>
@@ -519,24 +495,21 @@ footer { display: flex; justify-content: space-between; align-items: center; pad
             <div class="cs-section-eyebrow" style="margin-top:36px;margin-bottom:16px;"><span class="cs-section-num">—</span><span class="cs-section-title">The Three-Act Content Engine</span></div>
             <p class="cs-body" style="max-width:420px;margin-bottom:24px;">The phone-free floors don't kill the content pipeline. They upgrade it into three distinct acts.</p>
 
-            <div class="engine-container">
-              <div class="engine-act">
-                <div class="engine-num">01</div>
-                <span class="engine-tag">The Surrender</span>
-                <span class="engine-title">Before You Enter</span>
-                <p class="engine-desc">The phone check-in is the first ritual. The brass token and the act of surrender become the first documented "moment."</p>
+            <div class="cs-stats cs-stats-3">
+              <div class="cs-stat-cell">
+                <div class="cs-stat-eyebrow">01 · The Surrender</div>
+                <div class="cs-stat-num-inline">Before You Enter</div>
+                <div class="cs-stat-label">The phone check-in is the first ritual. The brass token and the act of surrender become the first documented "moment."</div>
               </div>
-              <div class="engine-act">
-                <div class="engine-num">02</div>
-                <span class="engine-tag">The Absence</span>
-                <span class="engine-title">The Hour Offline</span>
-                <p class="engine-desc">Conspicuous absence generates anticipation. "I don't know how to describe what happened but—" That sentence writes itself.</p>
+              <div class="cs-stat-cell">
+                <div class="cs-stat-eyebrow">02 · The Absence</div>
+                <div class="cs-stat-num-inline">The Hour Offline</div>
+                <div class="cs-stat-label">Conspicuous absence generates anticipation. "I don't know how to describe what happened but—" That sentence writes itself.</div>
               </div>
-              <div class="engine-act">
-                <div class="engine-num">03</div>
-                <span class="engine-tag">The Reward</span>
-                <span class="engine-title">Ghiaccio Apex</span>
-                <p class="engine-desc">The reward for effort. Content from the apex floor is slower, more considered, and carries higher brand authority.</p>
+              <div class="cs-stat-cell">
+                <div class="cs-stat-eyebrow">03 · The Reward</div>
+                <div class="cs-stat-num-inline">Ghiaccio Apex</div>
+                <div class="cs-stat-label">The reward for effort. Content from the apex floor is slower, more considered, and carries higher brand authority.</div>
               </div>
             </div>
 
@@ -553,7 +526,7 @@ footer { display: flex; justify-content: space-between; align-items: center; pad
         </div>
 
         <div class="ext-visual">
-          <img src="/img/case-studies/diesel/exterior.png" alt="Diesel Tokyo — Harajuku Flagship Exterior">
+          <img src="/img/case-studies/diesel/exterior.png" alt="Diesel Tokyo — Harajuku Flagship Exterior" loading="lazy">
           <div class="ext-label">Harajuku Flagship · Exterior</div>
         </div>
 
@@ -614,57 +587,57 @@ footer { display: flex; justify-content: space-between; align-items: center; pad
           <div class="floor-visual-track">
             <!-- F1 -->
             <div class="floor-img-wrap active" data-floor-img="0">
-              <img src="/img/case-studies/diesel/f1.png" alt="F1 Gallery" data-view="primary">
-              <img src="/img/case-studies/diesel/f1_detail.png" alt="F1 Detail" data-view="detail" style="display:none;">
+              <img src="/img/case-studies/diesel/f1.png" alt="F1 Gallery" data-view="primary" loading="lazy">
+              <img src="/img/case-studies/diesel/f1_detail.png" alt="F1 Detail" data-view="detail" loading="lazy" style="display:none;">
               <div class="floor-img-overlay"></div>
               <div class="floor-img-label">F1 · Street Level</div>
               <div class="floor-thumbs" data-for-floor="0">
-                <div class="f-thumb active" onclick="switchView(event,0, 'primary')"><img src="/img/case-studies/diesel/f1.png"></div>
-                <div class="f-thumb" onclick="switchView(event,0, 'detail')"><img src="/img/case-studies/diesel/f1_detail.png"></div>
+                <div class="f-thumb active" onclick="switchView(event,0, 'primary')"><img src="/img/case-studies/diesel/f1.png" loading="lazy"></div>
+                <div class="f-thumb" onclick="switchView(event,0, 'detail')"><img src="/img/case-studies/diesel/f1_detail.png" loading="lazy"></div>
               </div>
             </div>
             <!-- F2 -->
             <div class="floor-img-wrap" data-floor-img="1">
-              <img src="/img/case-studies/diesel/f2.png" alt="F2 Premium" data-view="primary">
-              <img src="/img/case-studies/diesel/f2_detail.png" alt="F2 Detail" data-view="detail" style="display:none;">
+              <img src="/img/case-studies/diesel/f2.png" alt="F2 Premium" data-view="primary" loading="lazy">
+              <img src="/img/case-studies/diesel/f2_detail.png" alt="F2 Detail" data-view="detail" loading="lazy" style="display:none;">
               <div class="floor-img-overlay"></div>
               <div class="floor-img-label">F2 · The Edit</div>
               <div class="floor-thumbs" data-for-floor="1">
-                <div class="f-thumb active" onclick="switchView(event,1, 'primary')"><img src="/img/case-studies/diesel/f2.png"></div>
-                <div class="f-thumb" onclick="switchView(event,1, 'detail')"><img src="/img/case-studies/diesel/f2_detail.png"></div>
+                <div class="f-thumb active" onclick="switchView(event,1, 'primary')"><img src="/img/case-studies/diesel/f2.png" loading="lazy"></div>
+                <div class="f-thumb" onclick="switchView(event,1, 'detail')"><img src="/img/case-studies/diesel/f2_detail.png" loading="lazy"></div>
               </div>
             </div>
             <!-- F3 -->
             <div class="floor-img-wrap" data-floor-img="2">
-              <img src="/img/case-studies/diesel/f3.png" alt="F3 Lab" data-view="primary">
-              <img src="/img/case-studies/diesel/f3_detail.png" alt="F3 Detail" data-view="detail" style="display:none;">
+              <img src="/img/case-studies/diesel/f3.png" alt="F3 Lab" data-view="primary" loading="lazy">
+              <img src="/img/case-studies/diesel/f3_detail.png" alt="F3 Detail" data-view="detail" loading="lazy" style="display:none;">
               <div class="floor-img-overlay"></div>
               <div class="floor-img-label">F3 · Denim Lab</div>
               <div class="floor-thumbs" data-for-floor="2">
-                <div class="f-thumb active" onclick="switchView(event,2, 'primary')"><img src="/img/case-studies/diesel/f3.png"></div>
-                <div class="f-thumb" onclick="switchView(event,2, 'detail')"><img src="/img/case-studies/diesel/f3_detail.png"></div>
+                <div class="f-thumb active" onclick="switchView(event,2, 'primary')"><img src="/img/case-studies/diesel/f3.png" loading="lazy"></div>
+                <div class="f-thumb" onclick="switchView(event,2, 'detail')"><img src="/img/case-studies/diesel/f3_detail.png" loading="lazy"></div>
               </div>
             </div>
             <!-- F4 -->
             <div class="floor-img-wrap" data-floor-img="3">
-              <img src="/img/case-studies/diesel/f4.png" alt="F4 Cafe" data-view="primary">
-              <img src="/img/case-studies/diesel/f4_detail.png" alt="F4 Detail" data-view="detail" style="display:none;">
+              <img src="/img/case-studies/diesel/f4.png" alt="F4 Cafe" data-view="primary" loading="lazy">
+              <img src="/img/case-studies/diesel/f4_detail.png" alt="F4 Detail" data-view="detail" loading="lazy" style="display:none;">
               <div class="floor-img-overlay"></div>
               <div class="floor-img-label">F4 · Café 1978</div>
               <div class="floor-thumbs" data-for-floor="3">
-                <div class="f-thumb active" onclick="switchView(event,3, 'primary')"><img src="/img/case-studies/diesel/f4.png"></div>
-                <div class="f-thumb" onclick="switchView(event,3, 'detail')"><img src="/img/case-studies/diesel/f4_detail.png"></div>
+                <div class="f-thumb active" onclick="switchView(event,3, 'primary')"><img src="/img/case-studies/diesel/f4.png" loading="lazy"></div>
+                <div class="f-thumb" onclick="switchView(event,3, 'detail')"><img src="/img/case-studies/diesel/f4_detail.png" loading="lazy"></div>
               </div>
             </div>
             <!-- F5 -->
             <div class="floor-img-wrap" data-floor-img="4">
-              <img src="/img/case-studies/diesel/f5.png" alt="F5 Ghiaccio" data-view="primary">
-              <img src="/img/case-studies/diesel/f5_detail.png" alt="F5 Detail" data-view="detail" style="display:none;">
+              <img src="/img/case-studies/diesel/f5.png" alt="F5 Ghiaccio" data-view="primary" loading="lazy">
+              <img src="/img/case-studies/diesel/f5_detail.png" alt="F5 Detail" data-view="detail" loading="lazy" style="display:none;">
               <div class="floor-img-overlay"></div>
               <div class="floor-img-label">F5 · Ghiaccio</div>
               <div class="floor-thumbs" data-for-floor="4">
-                <div class="f-thumb active" onclick="switchView(event,4, 'primary')"><img src="/img/case-studies/diesel/f5.png"></div>
-                <div class="f-thumb" onclick="switchView(event,4, 'detail')"><img src="/img/case-studies/diesel/f5_detail.png"></div>
+                <div class="f-thumb active" onclick="switchView(event,4, 'primary')"><img src="/img/case-studies/diesel/f5.png" loading="lazy"></div>
+                <div class="f-thumb" onclick="switchView(event,4, 'detail')"><img src="/img/case-studies/diesel/f5_detail.png" loading="lazy"></div>
               </div>
             </div>
           </div>
@@ -683,21 +656,21 @@ footer { display: flex; justify-content: space-between; align-items: center; pad
           <div class="cs-divider-line"></div>
           <span class="cs-divider-end">Market Rationale</span>
         </div>
-        <div class="market-stats">
-          <div class="m-cell">
-            <div class="m-big"><span>4</span>th</div>
-            <div class="m-unit">Market Context</div>
-            <p class="m-desc"><strong>World's Largest Economy.</strong> Japan's luxury market has demonstrated consistent resilience and disproportionate profitability.</p>
+        <div class="cs-stats cs-stats-3">
+          <div class="cs-stat-cell">
+            <div class="cs-stat-eyebrow">01 · Market Context</div>
+            <div class="cs-stat-num">4th</div>
+            <div class="cs-stat-label"><strong>World's Largest Economy.</strong> Japan's luxury market has demonstrated consistent resilience and disproportionate profitability.</div>
           </div>
-          <div class="m-cell">
-            <div class="m-big">Self<span>↗</span></div>
-            <div class="m-unit">Purchase Motivation</div>
-            <p class="m-desc"><strong>Intrinsic Reward.</strong> Japanese buyers purchase for quality over status—mapping directly to Diesel's "For Successful Living" ethos.</p>
+          <div class="cs-stat-cell">
+            <div class="cs-stat-eyebrow">02 · Purchase Motivation</div>
+            <div class="cs-stat-num-inline">Self ↗</div>
+            <div class="cs-stat-label"><strong>Intrinsic Reward.</strong> Japanese buyers purchase for quality over status—mapping directly to Diesel's "For Successful Living" ethos.</div>
           </div>
-          <div class="m-cell">
-            <div class="m-big">Hara<span>—</span></div>
-            <div class="m-unit">Site Specificity</div>
-            <p class="m-desc"><strong>Original Site.</strong> Reclaiming Harajuku as the birthplace of authentic self-expression in Tokyo. Location as argument.</p>
+          <div class="cs-stat-cell">
+            <div class="cs-stat-eyebrow">03 · Site Specificity</div>
+            <div class="cs-stat-num-inline">Hara—</div>
+            <div class="cs-stat-label"><strong>Original Site.</strong> Reclaiming Harajuku as the birthplace of authentic self-expression in Tokyo. Location as argument.</div>
           </div>
         </div>
 
@@ -733,104 +706,152 @@ footer { display: flex; justify-content: space-between; align-items: center; pad
         <h2 class="cs-heading">What the building returns.</h2>
         <p class="cs-body">A flagship of this scale is a brand statement. <strong>The real value is what happens to the brand's position globally when this exists.</strong></p>
         <p class="cs-body">One number worth holding: the brands that have committed flagship infrastructure to Japan have reported Japan as a top-three market for global profitability within 36 months.</p>
-        <div class="carousel-container" id="business-carousel">
-          <div class="carousel-track">
-            <div class="carousel-item">
-              <span class="c-num">01</span>
-              <div class="c-h">Global Prestige Signal</div>
-              <p class="c-p">Success in Japan's discerning market is internationally recognised as a quality benchmark. A Harajuku flagship communicates prestige to global press and wholesale.</p>
-            </div>
-            <div class="carousel-item">
-              <span class="c-num">02</span>
-              <div class="c-h">Asian Market Gateway</div>
-              <p class="c-p">Japan's cultural influence creates an amplification effect. A successful flagship generates brand equity that radiates into emerging markets. Tokyo is the beachhead.</p>
-            </div>
-            <div class="carousel-item">
-              <span class="c-num">03</span>
-              <div class="c-h">Loyalty Infrastructure</div>
-              <p class="c-p">The Destruction Ceremony and brass tokens are loyalty mechanics. Japan's deep brand loyalty makes this the highest-LTV consumer base Diesel can cultivate.</p>
-            </div>
-            <div class="carousel-item">
-              <span class="c-num">04</span>
-              <div class="c-h">Earned Organic Reach</div>
-              <p class="c-p">Phone-free floors don't suppress content — they upgrade it. Diesel gets better organic distribution by engineering the conditions for authenticity.</p>
-            </div>
-            <div class="carousel-item">
-              <span class="c-num">05</span>
-              <div class="c-h">The Expansion Template</div>
-              <p class="c-p">Proof that Diesel can execute prestige retail globally under Martens. If the Iceberg works here, the brief for London and Shanghai is written.</p>
-            </div>
-          </div>
-        </div>
-        <div class="carousel-controls">
-          <button class="carousel-btn" onclick="carouselNav(-1)" aria-label="Previous">&#8592;</button>
-          <button class="carousel-btn" onclick="carouselNav(1)" aria-label="Next">&#8594;</button>
+
+      </section>
+
+      <!-- BUSINESS CASE ROTATION CAROUSEL -->
+      <div class="rotation-carousel" id="business-rotation-section">
+        <div class="rotation-carousel-head">
+          <div class="rotation-carousel-title">The Business Case — Five Return Vectors</div>
+          <div class="rotation-carousel-counter" id="business-rotation-counter">01 <span>/ 05</span></div>
         </div>
 
-        <div class="cs-divider" style="margin-top:64px;">
-          <span class="cs-divider-text">The Brand in the World</span>
-          <div class="cs-divider-line"></div>
-          <span class="cs-divider-end">Fixtures / Packaging / Style</span>
+        <div class="rotation-viewport">
+          <div class="rotation-track" id="business-rotation-track">
+            <!-- Card 01 -->
+            <div class="rotation-card active" data-index="1">
+              <div class="rotation-card-days">Return Vector 01</div>
+              <div class="rotation-card-name">01 · Global Prestige Signal</div>
+              <div class="rotation-card-body">Success in Japan's discerning market is internationally recognised as a quality benchmark. A Harajuku flagship communicates prestige to global press and wholesale. Tokyo is the hardest market in the world to fake — which is why winning here means something.</div>
+              <div class="rotation-card-metrics">
+                <div class="rotation-metric"><div class="rotation-metric-label">Market Signal</div><div class="rotation-metric-val">Global</div></div>
+                <div class="rotation-metric"><div class="rotation-metric-label">Timeline</div><div class="rotation-metric-val">36 months</div></div>
+              </div>
+            </div>
+            <!-- Card 02 -->
+            <div class="rotation-card" data-index="2">
+              <div class="rotation-card-days">Return Vector 02</div>
+              <div class="rotation-card-name">02 · Asian Market Gateway</div>
+              <div class="rotation-card-body">Japan's cultural influence creates an amplification effect. A successful flagship generates brand equity that radiates into emerging markets. Tokyo is the beachhead — the signal from which the rest of Asia takes permission.</div>
+              <div class="rotation-card-metrics">
+                <div class="rotation-metric"><div class="rotation-metric-label">Region</div><div class="rotation-metric-val">Asia-Pacific</div></div>
+                <div class="rotation-metric"><div class="rotation-metric-label">Market Position</div><div class="rotation-metric-val">Beachhead</div></div>
+              </div>
+            </div>
+            <!-- Card 03 -->
+            <div class="rotation-card" data-index="3">
+              <div class="rotation-card-days">Return Vector 03</div>
+              <div class="rotation-card-name">03 · Loyalty Infrastructure</div>
+              <div class="rotation-card-body">The Destruction Ceremony and brass tokens are loyalty mechanics built into the physical experience. Japan's deep brand loyalty makes this the highest-LTV consumer base Diesel can cultivate. Once earned, this customer doesn't leave.</div>
+              <div class="rotation-card-metrics">
+                <div class="rotation-metric"><div class="rotation-metric-label">Mechanic</div><div class="rotation-metric-val">Physical</div></div>
+                <div class="rotation-metric"><div class="rotation-metric-label">LTV Impact</div><div class="rotation-metric-val">Highest</div></div>
+              </div>
+            </div>
+            <!-- Card 04 -->
+            <div class="rotation-card" data-index="4">
+              <div class="rotation-card-days">Return Vector 04</div>
+              <div class="rotation-card-name">04 · Earned Organic Reach</div>
+              <div class="rotation-card-body">Phone-free floors don't suppress content — they upgrade it. Diesel gets better organic distribution by engineering the conditions for authenticity. The content from Ghiaccio arrives earned, not manufactured, which is why it travels further.</div>
+              <div class="rotation-card-metrics">
+                <div class="rotation-metric"><div class="rotation-metric-label">Content Type</div><div class="rotation-metric-val">Earned</div></div>
+                <div class="rotation-metric"><div class="rotation-metric-label">vs. Paid CPM</div><div class="rotation-metric-val">400×</div></div>
+              </div>
+            </div>
+            <!-- Card 05 -->
+            <div class="rotation-card" data-index="5">
+              <div class="rotation-card-days">Return Vector 05</div>
+              <div class="rotation-card-name">05 · The Expansion Template</div>
+              <div class="rotation-card-body">Proof that Diesel can execute prestige retail globally under Martens. If the Iceberg works here, the brief for London and Shanghai is written. This isn't just a flagship — it's the prototype for the next decade of physical presence.</div>
+              <div class="rotation-card-metrics">
+                <div class="rotation-metric"><div class="rotation-metric-label">Next Markets</div><div class="rotation-metric-val">London · Shanghai</div></div>
+                <div class="rotation-metric"><div class="rotation-metric-label">Model</div><div class="rotation-metric-val">Prototype</div></div>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div class="world-grid">
-          <div class="world-cell">
-            <img src="/img/case-studies/diesel/fixture.png" alt="Diesel Fixture Detail">
-            <div class="world-cap">Store Fixtures — Volcanic Stone & Steel</div>
-          </div>
-          <div class="world-cell">
-            <img src="/img/case-studies/diesel/packaging.png" alt="Diesel Packaging Detail">
-            <div class="world-cap">Packaging System — Vacuum-Sealed Lab Kits</div>
-          </div>
-          <div class="world-cell">
-            <img src="/img/case-studies/diesel/uniform.png" alt="Diesel Uniform Detail">
-            <div class="world-cap">Employee Style Guide — Tonal Denim Utility</div>
-          </div>
-          <div class="world-cell">
-            <img src="/img/case-studies/diesel/token.png" alt="Diesel Brass Token">
-            <div class="world-cap">Brass Token — For Successful Living · 1978</div>
-          </div>
-          <div class="world-cell">
-            <img src="/img/case-studies/diesel/signage.png" alt="Diesel In-Store Signage">
-            <div class="world-cap">In-Store Signage — Brutalist Typography</div>
-          </div>
-          <div class="world-cell">
-            <img src="/img/case-studies/diesel/architecture.png" alt="Diesel Architectural Detail">
-            <div class="world-cap">Architecture — Raw Concrete & Kintsugi Joinery</div>
+        <div class="rotation-nav">
+          <button class="rotation-nav-btn" id="biz-rot-prev" onclick="scrollBusinessRotation(-1)">
+            <svg viewBox="0 0 24 24"><path d="M15.41 16.59L10.83 12.00L15.41 7.41L14.00 6.00L8.00 12.00L14.00 18.00L15.41 16.59Z"/></svg>
+          </button>
+          <button class="rotation-nav-btn" id="biz-rot-next" onclick="scrollBusinessRotation(1)">
+            <svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12.00L8.59 7.41L10.00 6.00L16.00 12.00L10.00 18.00L8.59 16.59Z"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <section class="cs-section cs-section-alt" id="cs-section-06b" data-cs-section="section-06b">
+
+        <div class="cs-section-eyebrow" style="margin-bottom:20px;"><span class="cs-section-num">06B</span><span class="cs-section-title">Brand in the World</span></div>
+
+        <!-- Sub-section: Store Fixtures -->
+        <div class="cs-body-2col" style="margin-bottom:16px;">
+          <div>
+            <h3 style="font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--black);margin-bottom:8px;">01 · Store Fixtures</h3>
+            <p class="cs-body">The Iceberg communicates through material restraint. Volcanic stone cash wraps, milled steel rails, and raw concrete surfaces. No softness, no padding — every surface is a deliberate argument for the body over the brand.</p>
           </div>
         </div>
+        <div class="cs-img-3col">
+          <div class="cs-img-3col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="/img/case-studies/diesel/fixture.png" alt="Diesel Fixture Detail" loading="lazy" /></div><span class="img-caption">Fixtures: Volcanic Stone & Steel.</span></div>
+          <div class="cs-img-3col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="/img/case-studies/diesel/signage.png" alt="Diesel In-Store Signage" loading="lazy" /></div><span class="img-caption">Signage: Brutalist Typography.</span></div>
+          <div class="cs-img-3col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="/img/case-studies/diesel/architecture.png" alt="Diesel Architectural Detail" loading="lazy" /></div><span class="img-caption">Architecture: Raw Concrete & Kintsugi Joinery.</span></div>
+        </div>
+
+        <!-- Sub-section: Packaging System -->
+        <div class="cs-body-2col" style="margin-top:40px;margin-bottom:16px;">
+          <div>
+            <h3 style="font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--black);margin-bottom:8px;">02 · Packaging System</h3>
+            <p class="cs-body">Material constants across every touchpoint. The brass token stamped with the founding ethos. Vacuum-sealed lab kits for Denim Lab artifacts. Every object you leave with carries the same argument as the building you just exited.</p>
+          </div>
+        </div>
+        <div class="cs-img-2col">
+          <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:4/3;min-height:220px;"><img src="/img/case-studies/diesel/packaging.png" alt="Diesel Packaging Detail" loading="lazy" /></div><span class="img-caption">Packaging: Vacuum-Sealed Lab Kits.</span></div>
+          <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:4/3;min-height:220px;"><img src="/img/case-studies/diesel/token.png" alt="Diesel Brass Token" loading="lazy" /></div><span class="img-caption">Token: For Successful Living · 1978.</span></div>
+        </div>
+
+        <!-- Sub-section: Employee Style Guide -->
+        <div class="cs-body-2col" style="margin-top:40px;margin-bottom:16px;">
+          <div>
+            <h3 style="font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--black);margin-bottom:8px;">03 · Employee Style Guide</h3>
+            <p class="cs-body">The team is the first signal. Tonal denim utility — nothing precious, nothing performative. Staff dress the way the building argues you should: for yourself, not for the photo. The stylist relationship is the highest-trust asset in the building.</p>
+          </div>
+        </div>
+        <div class="cs-img-full"><div class="cs-img-contain" style="min-height:320px;aspect-ratio:16/9;"><img src="/img/case-studies/diesel/uniform.png" alt="Diesel Uniform Detail" loading="lazy" /></div></div>
+        <span class="img-caption">Style Guide: Tonal Denim Utility — dressed for the building, not the camera.</span>
 
       </section>
 
       <!-- 07 CLOSE / OUTCOME -->
       <section class="cs-section" id="cs-outcome" data-cs-section="outcome">
         <div class="cs-section-eyebrow"><span class="cs-section-num">07</span><span class="cs-section-title">Final Position</span></div>
-        <h2 class="cs-heading" style="font-size:clamp(28px,4vw,52px);font-weight:700;letter-spacing:-.01em;max-width:900px;line-height:1.05;">Don't open a store. Open the space Harajuku forgot it had.</h2>
-        <p class="cs-body" style="max-width:800px;margin-top:24px;">Diesel Tokyo is not a retail expansion. It is a reclamation — of Harajuku, of authentic self-expression, and of the version of "For Successful Living" that has always meant deciding who you are before performing it. <strong>The Iceberg resets the brand's physical gravity for the next decade of creative leadership.</strong></p>
-        
-        <div class="outcome-stats-row">
-          <div class="outcome-cell">
-            <div class="o-label">Physical Scale</div>
-            <div class="o-num">05</div>
-            <p class="o-desc">Five immersive floors including High-Velocity Retail, The Edit, Denim Lab, Café 1978, and Ghiaccio.</p>
+        <h2 class="cs-heading">Don't open a store. Open the space Harajuku forgot it had.</h2>
+        <p class="cs-body" style="max-width:800px;">Diesel Tokyo is not a retail expansion. It is a reclamation — of Harajuku, of authentic self-expression, and of the version of "For Successful Living" that has always meant deciding who you are before performing it. <strong>The Iceberg resets the brand's physical gravity for the next decade of creative leadership.</strong></p>
+
+        <div class="outcome-stats">
+          <div class="outcome-stat">
+            <div class="outcome-stat-num">05</div>
+            <div class="outcome-stat-label">Five immersive floors including High-Velocity Retail, The Edit, Denim Lab, Café 1978, and Ghiaccio. Physical scale in service of cultural argument.</div>
           </div>
-          <div class="outcome-cell">
-            <div class="o-label">Product Mix</div>
-            <div class="o-num">10/90</div>
-            <p class="o-desc">A 10% product to 90% soul ratio. The space carries the brand weight, not the sheer SKU count.</p>
+          <div class="outcome-stat">
+            <div class="outcome-stat-num">10/90</div>
+            <div class="outcome-stat-label">A 10% product to 90% soul ratio. The space carries the brand weight, not the sheer SKU count. The building is the product.</div>
           </div>
-          <div class="outcome-cell">
-            <div class="o-label">Creative Era</div>
-            <div class="o-num">2026</div>
-            <p class="o-desc">The ultimate physical expression of the brand's reclaimed cultural momentum.</p>
+          <div class="outcome-stat">
+            <div class="outcome-stat-num">2026</div>
+            <div class="outcome-stat-label">The ultimate physical expression of the brand's reclaimed cultural momentum under Glenn Martens. The prototype for the next decade.</div>
           </div>
+        </div>
+
+        <div class="cs-ending-block">
+          <p class="cs-ending-text">The brands that survive the next decade won't be the ones with the most Instagram-friendly stores. They'll be the ones that created the space for you to find out who you are before you performed it. Diesel Tokyo proves that friction creates stories. That authenticity can be designed. That the phone-free hour is worth more than a thousand flower walls.</p>
         </div>
 
         <div class="cs-next">
           <div class="cs-next-label">Next Case Study</div>
-          <a href="/work/stylect" class="cs-next-link" target="_parent">
-            <div class="cs-next-meta">Stylect · Styling Platform · 2026</div>
-            <div class="cs-next-title">Stylect &rarr;</div>
+          <a href="/work/saks" class="cs-next-link" target="_parent">
+            <div class="cs-next-meta">Vault by Saks · Luxury Retail · 2026</div>
+            <div class="cs-next-title">Vault by Saks &rarr;</div>
           </a>
         </div>
       </section>
@@ -886,38 +907,34 @@ function switchView(event, floorIndex, view) {
 }
 
 
-// Business Case Carousel (Draggable + Arrows)
-function carouselNav(dir) {
-  const c = document.getElementById('business-carousel');
-  c.scrollLeft += dir * 384;
+// Business Case Rotation Carousel
+const bizTrack = document.getElementById('business-rotation-track');
+const bizCards = document.querySelectorAll('#business-rotation-track .rotation-card');
+const bizCounter = document.getElementById('business-rotation-counter');
+
+function scrollBusinessRotation(dir) {
+  const currentCard = bizTrack.querySelector('.rotation-card.active');
+  let index = parseInt(currentCard.dataset.index);
+  let nextIndex = index + dir;
+  if (nextIndex < 1) nextIndex = 1;
+  if (nextIndex > bizCards.length) nextIndex = bizCards.length;
+  const nextCard = bizTrack.querySelector(`.rotation-card[data-index="${nextIndex}"]`);
+  bizCards.forEach(c => c.classList.remove('active'));
+  nextCard.classList.add('active');
+  const scrollOffset = nextCard.offsetLeft - bizTrack.offsetLeft;
+  bizTrack.scrollTo({ left: scrollOffset, behavior: 'smooth' });
+  bizCounter.innerHTML = (nextIndex < 10 ? '0' + nextIndex : nextIndex) + ` <span>/ 0${bizCards.length}</span>`;
 }
 
-const carousel = document.getElementById('business-carousel');
-const track = carousel.querySelector('.carousel-track');
-let isDown = false;
-let startX;
-let scrollLeft;
-
-carousel.addEventListener('mousedown', (e) => {
-  isDown = true;
-  carousel.classList.add('active');
-  startX = e.pageX - carousel.offsetLeft;
-  scrollLeft = carousel.scrollLeft;
-});
-carousel.addEventListener('mouseleave', () => {
-  isDown = false;
-  carousel.classList.remove('active');
-});
-carousel.addEventListener('mouseup', () => {
-  isDown = false;
-  carousel.classList.remove('active');
-});
-carousel.addEventListener('mousemove', (e) => {
-  if(!isDown) return;
-  e.preventDefault();
-  const x = e.pageX - carousel.offsetLeft;
-  const walk = (x - startX) * 2;
-  carousel.scrollLeft = scrollLeft - walk;
+bizTrack.addEventListener('scroll', () => {
+  const scrollPos = bizTrack.scrollLeft;
+  const cardWidth = bizCards[0].offsetWidth + 32;
+  const activeIndex = Math.round(scrollPos / cardWidth) + 1;
+  if (activeIndex >= 1 && activeIndex <= bizCards.length) {
+    bizCards.forEach(c => c.classList.remove('active'));
+    bizCards[activeIndex - 1].classList.add('active');
+    bizCounter.innerHTML = (activeIndex < 10 ? '0' + activeIndex : activeIndex) + ` <span>/ 0${bizCards.length}</span>`;
+  }
 });
 
 window.addEventListener('scroll', () => {
@@ -941,5 +958,6 @@ function scrollToSection(id) {
   window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 104, behavior: 'smooth' });
 }
 </script>
+<script src="/js/cs-stat-eyebrow-fit.js"></script>
 </body>
 </html>

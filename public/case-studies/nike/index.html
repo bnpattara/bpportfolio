@@ -64,8 +64,8 @@ body{font-family:var(--font);background:var(--white);color:var(--black);line-hei
 .cs-exec-kpi{display:flex;align-items:center;gap:10px;border:1px solid var(--g200);padding:8px 14px;}
 .cs-exec-kpi-num{font-size:18px;font-weight:300;color:var(--black);letter-spacing:-.01em;line-height:1;font-family:var(--font);font-style:italic;}
 .cs-exec-kpi-label{font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--g400);line-height:1.4;font-family:var(--font);}
-.cs-exec-meta-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--g200);margin-bottom:24px;}
-.cs-exec-meta-cell{background:var(--white);padding:20px;}
+.cs-exec-meta-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--g200);margin-bottom:24px;}
+.cs-exec-meta-cell{background:var(--white);padding:20px;min-width:0;overflow-wrap:break-word;}
 .cs-exec-meta-label{font-size:8px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--g300);margin-bottom:6px;font-family:var(--font);}
 .cs-exec-meta-val{font-size:12px;font-weight:500;letter-spacing:.04em;color:var(--black);}
 .cs-section{padding:72px 56px;border-bottom:1px solid #f0f0f0;}
@@ -81,9 +81,9 @@ body{font-family:var(--font);background:var(--white);color:var(--black);line-hei
 .cs-body-2col{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-bottom:28px;}
 .cs-body-2col p{font-size:13px;color:var(--g500);line-height:1.75;}
 .cs-stats{display:grid;gap:1px;background:var(--g200);margin-bottom:28px;}
-.cs-stats-3{grid-template-columns:repeat(3,1fr);}
-.cs-stats-4{grid-template-columns:repeat(4,1fr);}
-.cs-stat-cell{background:var(--white);padding:28px 24px;}
+.cs-stats-3{grid-template-columns:repeat(3,minmax(0,1fr));}
+.cs-stats-4{grid-template-columns:repeat(4,minmax(0,1fr));}
+.cs-stat-cell{background:var(--white);padding:28px 24px;min-width:0;overflow-wrap:break-word;}
 .cs-stat-eyebrow{font-size:9px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--g300);margin-bottom:12px;font-family:var(--font);}
 .cs-stat-num{font-family:var(--font);font-size:48px;font-weight:300;font-style:italic;color:var(--black);letter-spacing:-.01em;line-height:1;margin-bottom:8px;}
 .cs-stat-label{font-size:12px;color:var(--g500);line-height:1.65;}
@@ -95,8 +95,8 @@ body{font-family:var(--font);background:var(--white);color:var(--black);line-hei
 .pm-lens{border:1px solid var(--g200);padding:24px 28px;margin-bottom:28px;background:#fafafa;}
 .pm-lens-label{font-size:8px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--g300);margin-bottom:10px;font-family:var(--font);}
 .pm-lens-text{font-size:13px;color:var(--g500);line-height:1.75;font-style:italic;}
-.persona-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--g200);margin-bottom:28px;}
-.persona-card{background:var(--white);padding:28px 24px;}
+.persona-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--g200);margin-bottom:28px;}
+.persona-card{background:var(--white);padding:28px 24px;min-width:0;overflow-wrap:break-word;}
 .persona-card-tier{font-size:8px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--g300);margin-bottom:12px;font-family:var(--font);}
 .persona-card-name{font-family:var(--font);font-size:20px;font-weight:400;color:var(--black);margin-bottom:4px;}
 .persona-card-city{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--g400);margin-bottom:16px;}
@@ -241,7 +241,7 @@ footer{border-top:1px solid var(--g200);padding:32px 48px;display:flex;align-ite
      background: transparent !important;
    }
    .cs-exec-meta-grid { 
-     grid-template-columns: 1fr 1fr !important; 
+     grid-template-columns: repeat(2, minmax(0, 1fr)) !important; 
      gap: 1px !important; 
      background: var(--g200) !important;
      border: 1px solid var(--g200) !important;
@@ -863,5 +863,6 @@ function toggleJourney(el) {
   });
 })();
 </script>
+<script src="/js/cs-stat-eyebrow-fit.js"></script>
 </body>
 </html>

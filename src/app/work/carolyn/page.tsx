@@ -3,10 +3,10 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "The Carolyn — Calvin Klein — Benn Pattara",
-  description: "Thirty years of cultural capital and no named object to carry it. A hero bag product strategy for Calvin Klein.",
+  description: "Hero bag strategy for Calvin Klein: discreet excellence, constitutive muse, PRD constraints, GTM discipline, and sensitivity framework — from market thesis through launch KPIs.",
   openGraph: {
     title: "The Carolyn — Calvin Klein — Benn Pattara",
-    description: "Thirty years of cultural capital and no named object to carry it. A hero bag product strategy for Calvin Klein.",
+    description: "Hero bag strategy for Calvin Klein: discreet excellence, constitutive muse, PRD constraints, GTM discipline, and sensitivity framework — from market thesis through launch KPIs.",
     url: "/work/carolyn",
     type: "website",
     images: [{ url: "https://bennpattara.com/og/carolyn.jpg", width: 1200, height: 630 }],

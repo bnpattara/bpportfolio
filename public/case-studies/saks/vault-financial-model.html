@@ -5,19 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Vault by Saks — Financial Model</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,400;1,300;1,400&family=Fragment+Mono:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg:       #0C0C0C;
-  --surface:  #111111;
+  --bg:       #0a0a0a;
+  --surface:  #111;
   --surface2: #161616;
-  --border:   rgba(184,149,42,0.18);
-  --gold:     #B8952A;
-  --gold-dim: rgba(184,149,42,0.10);
-  --gold-mid: rgba(184,149,42,0.35);
-  --cream:    #E8E0CC;
-  --muted:    #555550;
-  --muted2:   #3A3A35;
+  --border:   rgba(255,255,255,0.08);
+  --gold:     #fff;
+  --gold-dim: rgba(255,255,255,0.04);
+  --gold-mid: rgba(255,255,255,0.15);
+  --cream:    #fff;
+  --muted:    #666;
+  --muted2:   #333;
   --red:      #8C3030;
   --red-dim:  rgba(140,48,48,0.12);
   --green:    #2E5A3A;
@@ -31,12 +31,12 @@
 .vbs-model {
   background: var(--bg);
   color: var(--cream);
-  font-family: 'Fragment Mono', monospace;
+  font-family: 'DM Mono', monospace;
   font-size: 11px;
   line-height: 1.6;
   width: 100%;
   overflow-x: hidden;
-  border: 1px solid var(--border);
+  border: 1px solid #222;
 }
 
 /* ── COMPONENT HEADER ── */
@@ -66,7 +66,7 @@
 }
 .header-title span { color: var(--gold); }
 .header-subtitle {
-  font-family: 'Playfair Display', serif;
+  font-family: "Big Caslon", "Book Antiqua", "Palatino Linotype", Georgia, serif;
   font-style: italic;
   font-size: 14px;
   color: var(--muted);
@@ -172,7 +172,7 @@
   margin-bottom: 8px;
 }
 .section-note {
-  font-family: 'Playfair Display', serif;
+  font-family: "Big Caslon", "Book Antiqua", "Palatino Linotype", Georgia, serif;
   font-style: italic;
   font-size: 13px;
   color: var(--muted);
@@ -247,7 +247,7 @@
 .cost-table td.right { text-align: right; padding-right: 0; }
 
 .cost-category {
-  font-family: 'Fragment Mono', monospace;
+  font-family: 'DM Mono', monospace;
   font-size: 11px;
   color: var(--cream);
   line-height: 1.4;
@@ -368,7 +368,7 @@
   background: var(--gold-dim);
 }
 .thesis-text {
-  font-family: 'Playfair Display', serif;
+  font-family: "Big Caslon", "Book Antiqua", "Palatino Linotype", Georgia, serif;
   font-style: italic;
   font-size: 14px;
   line-height: 1.6;
@@ -625,7 +625,7 @@ canvas#beChart {
   color: var(--muted);
 }
 .metric-val {
-  font-family: 'Fragment Mono', monospace;
+  font-family: 'DM Mono', monospace;
   font-size: 12px;
   transition: color 0.3s;
 }
@@ -665,7 +665,7 @@ canvas#beChart {
   transition: color 0.4s;
 }
 .npv-note {
-  font-family: 'Playfair Display', serif;
+  font-family: "Big Caslon", "Book Antiqua", "Palatino Linotype", Georgia, serif;
   font-style: italic;
   font-size: 12px;
   color: var(--muted);
@@ -696,7 +696,7 @@ canvas#beChart {
   color: var(--muted);
 }
 .footer-note {
-  font-family: 'Playfair Display', serif;
+  font-family: "Big Caslon", "Book Antiqua", "Palatino Linotype", Georgia, serif;
   font-style: italic;
   font-size: 11px;
   color: var(--muted);
@@ -1145,12 +1145,12 @@ canvas#beChart {
         <div class="npv-cell">
           <div class="npv-label">10-Year NPV at 9% WACC</div>
           <div class="npv-val" id="npv-val">$6.1B</div>
-          <div class="npv-multiple" id="npv-multiple">75× the $81M investment</div>
-          <div class="npv-note" id="npv-note">Base case: discounted savings against $81M transformation investment. Even in the bear case at 12% WACC, NPV is $3.8B — 47× the investment.</div>
+          <div class="npv-multiple" id="npv-multiple">50× the $123.4M investment</div>
+          <div class="npv-note" id="npv-note">Base case: discounted savings against $123.4M transformation investment ($78.4M node build-out + $45M tech platform). Even in the bear case at 12% WACC, NPV is $3.8B — 31× the investment.</div>
         </div>
         <div class="npv-cell dark">
           <div class="npv-label">The Structural Insight</div>
-          <div style="font-family:'Playfair Display',serif;font-style:italic;font-size:15px;color:var(--cream);line-height:1.6;margin-top:8px" id="scenario-insight">
+          <div style="font-family:&quot;Big Caslon&quot;,&quot;Book Antiqua&quot;,&quot;Palatino Linotype&quot;,Georgia,serif;font-style:italic;font-size:15px;color:var(--cream);line-height:1.6;margin-top:8px" id="scenario-insight">
             In the bear case, membership ARR covers only 31% of fixed costs — but the EBITDA is still positive. The model doesn't break in the bear case. It just earns less. That's the structural argument: subscriptions first, retail upside second.
           </div>
         </div>
@@ -1268,7 +1268,7 @@ function drawChart(currentNodes) {
     ctx.beginPath(); ctx.moveTo(pad.left, y); ctx.lineTo(pad.left + cw, y); ctx.stroke();
     const label = Math.round((maxY - (maxY / 4) * i));
     ctx.fillStyle = '#3A3A35';
-    ctx.font = '9px Fragment Mono, monospace';
+    ctx.font = '9px DM Mono, monospace';
     ctx.textAlign = 'right';
     ctx.fillText('$' + label + 'M', pad.left - 8, y + 3);
   }
@@ -1286,7 +1286,7 @@ function drawChart(currentNodes) {
   ctx.beginPath(); ctx.moveTo(pad.left, fcY); ctx.lineTo(pad.left + cw, fcY); ctx.stroke();
   ctx.setLineDash([]);
   ctx.fillStyle = '#8C3030';
-  ctx.font = '9px Fragment Mono, monospace';
+  ctx.font = '9px DM Mono, monospace';
   ctx.textAlign = 'left';
   ctx.fillText('Fixed Cost Floor ~$240M', pad.left + 4, fcY - 5);
 
@@ -1343,7 +1343,7 @@ function drawChart(currentNodes) {
   // Tooltip bubble
   const revAtCur = currentNodes * revenuePerNode;
   ctx.fillStyle = '#B8952A';
-  ctx.font = 'bold 10px Fragment Mono, monospace';
+  ctx.font = 'bold 10px DM Mono, monospace';
   ctx.textAlign = 'center';
   const tooltipY = curY - 18;
   ctx.fillText(`$${revAtCur}M`, curX, tooltipY);
@@ -1355,13 +1355,13 @@ function drawChart(currentNodes) {
   ctx.beginPath(); ctx.moveTo(beX, pad.top); ctx.lineTo(beX, pad.top + ch); ctx.stroke();
   ctx.setLineDash([]);
   ctx.fillStyle = '#4A8C5C';
-  ctx.font = '9px Fragment Mono, monospace';
+  ctx.font = '9px DM Mono, monospace';
   ctx.textAlign = 'center';
   ctx.fillText('B/E Node 28', beX, pad.top + ch + 16);
 
   // X-axis labels
   ctx.fillStyle = '#3A3A35';
-  ctx.font = '9px Fragment Mono, monospace';
+  ctx.font = '9px DM Mono, monospace';
   ctx.textAlign = 'center';
   [1, 9, 18, 28, 38].forEach(n => {
     const x = pad.left + ((n - 1) / (totalNodes - 1)) * cw;
@@ -1383,8 +1383,8 @@ const scenarios = {
     gm_note: 'Consignment model',
     ebitda_note: 'After $480K fixed costs',
     payback_note: 'Per node build-out',
-    npv: '$3.8B', multiple: '47× the $81M investment',
-    npv_note: 'At 12% WACC, bear-case savings. NPV still 47× the transformation investment.',
+    npv: '$3.8B', multiple: '31× the $123.4M investment',
+    npv_note: 'At 12% WACC, bear-case savings. NPV still 31× the $123.4M transformation investment.',
     insight: 'In the bear case, membership ARR covers only 31% of fixed costs — but the EBITDA is still positive at $122K. The model doesn\'t break. It just earns less. That\'s the structural argument: the floor holds because subscriptions cover fixed costs structurally, regardless of any single rotation.'
   },
   base: {
@@ -1396,8 +1396,8 @@ const scenarios = {
     gm_note: 'Consignment model',
     ebitda_note: 'After $480K fixed costs',
     payback_note: 'Per node build-out',
-    npv: '$6.1B', multiple: '75× the $81M investment',
-    npv_note: 'At 9% WACC, base-case savings against $81M transformation investment. Payback in under one month at run-rate savings.',
+    npv: '$6.1B', multiple: '50× the $123.4M investment',
+    npv_note: 'At 9% WACC, base-case savings against $123.4M transformation investment. Payback in under two months at $964M/yr run-rate savings.',
     insight: 'In the base case, membership ARR covers 124% of fixed costs before a single piece of retail sells. Retail GMV is pure margin upside. This is the only luxury model where the business doesn\'t need a hit season to stay solvent.'
   },
   bull: {
@@ -1409,7 +1409,7 @@ const scenarios = {
     gm_note: 'Strong sell-through',
     ebitda_note: 'After $480K fixed costs',
     payback_note: 'Per node build-out',
-    npv: '$9.2B', multiple: '114× the $81M investment',
+    npv: '$9.2B', multiple: '75× the $123.4M investment',
     npv_note: 'At 9% WACC, bull-case savings. Strong sell-through and Black-tier concentration drives both ARR and GMV margin well above base projections.',
     insight: 'In the bull case, 23% Black-tier concentration drives blended ARR to $1,620/member — 36% above base. At 850 members per node, membership ARR alone covers 288% of fixed costs. The retail margin becomes the compounding mechanism, not the survival mechanism.'
   }

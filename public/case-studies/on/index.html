@@ -76,8 +76,8 @@ body { font-family: var(--font); background: var(--white); color: var(--black); 
 .cs-exec-kpi { display: flex; align-items: center; gap: 10px; border: 1px solid var(--g200); padding: 8px 14px; }
 .cs-exec-kpi-num { font-size: 18px; font-weight: 300; color: var(--black); letter-spacing: -.01em; line-height: 1; font-style: italic; }
 .cs-exec-kpi-label { font-size: 9px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--g400); line-height: 1.4;  }
-.cs-exec-meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--g200); margin-bottom: 24px; }
-.cs-exec-meta-cell { background: var(--white); padding: 20px; }
+.cs-exec-meta-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: var(--g200); margin-bottom: 24px; }
+.cs-exec-meta-cell { background: var(--white); padding: 20px; min-width: 0; overflow-wrap: break-word; }
 .cs-exec-meta-label { font-size: 8px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--g300); margin-bottom: 6px;  }
 .cs-exec-meta-val { font-size: 12px; font-weight: 500; letter-spacing: .04em; color: var(--black); }
 
@@ -105,7 +105,7 @@ body { font-family: var(--font); background: var(--white); color: var(--black); 
 .cs-body-2col-dark p { font-size: 13px; color: rgba(255,255,255,.42); line-height: 1.75; }
 
     /* Success Metrics Grid — Mobile */
-    .metrics-grid-mobile { display: none; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 32px; }
+    .metrics-grid-mobile { display: none; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-bottom: 32px; }
     .metric-card { background: #fff; border: 1px solid var(--g200); padding: 16px; display: flex; flex-direction: column; gap: 8px; }
     .metric-card-title { font-size: 8px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--g300); }
     .metric-card-val { font-size: 20px; font-weight: 200; font-family: var(--serif); color: var(--black); }
@@ -137,7 +137,7 @@ body { font-family: var(--font); background: var(--white); color: var(--black); 
 
     @media (max-width: 768px) {
       .cs-exec-inner { grid-template-columns: 1fr; gap: 48px; }
-      .cs-exec-meta-grid { grid-template-columns: 1fr 1fr; }
+      .cs-exec-meta-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .cs-body-2col { grid-template-columns: 1fr; }
       .cs-stats-4, .cs-stats-3 { grid-template-columns: 1fr; }
       .cs-metrics-table, .token-table-desktop, .flow-carousel { display: none !important; }
@@ -147,10 +147,10 @@ body { font-family: var(--font); background: var(--white); color: var(--black); 
       .priority-grid { grid-template-columns: 1fr; }
     }
 .cs-stats { display: grid; gap: 1px; background: var(--g200); margin-bottom: 28px; }
-.cs-stats-3 { grid-template-columns: repeat(3,1fr); }
-.cs-stats-4 { grid-template-columns: repeat(4,1fr); }
-.cs-stat-cell { background: var(--white); padding: 28px 24px; }
-.cs-stat-cell-dark { background: #0a0a0a; padding: 28px 24px; }
+.cs-stats-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.cs-stats-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.cs-stat-cell { background: var(--white); padding: 28px 24px; min-width: 0; overflow-wrap: break-word; }
+.cs-stat-cell-dark { background: #0a0a0a; padding: 28px 24px; min-width: 0; overflow-wrap: break-word; }
 .cs-stat-eyebrow { font-size: 9px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--g300); margin-bottom: 12px;  }
 .cs-stat-eyebrow-dark { font-size: 9px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.2); margin-bottom: 12px;  }
 .cs-stat-num { font-size: 48px; font-weight: 300; font-style: italic; color: var(--black); letter-spacing: -.01em; line-height: 1; margin-bottom: 8px; }
@@ -175,8 +175,8 @@ body { font-family: var(--font); background: var(--white); color: var(--black); 
 .pm-lens-text-dark { font-size: 13px; color: rgba(255,255,255,.42); line-height: 1.75; font-style: italic; }
 
 /* ── PERSONAS ── */
-.persona-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--g200); margin-bottom: 28px; }
-.persona-card { background: var(--white); padding: 28px 24px; }
+.persona-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--g200); margin-bottom: 28px; }
+.persona-card { background: var(--white); padding: 28px 24px; min-width: 0; overflow-wrap: break-word; }
 .persona-card-tier { font-size: 8px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--g300); margin-bottom: 12px;  }
 .persona-card-name { font-size: 20px; font-weight: 400; color: var(--black); margin-bottom: 4px; }
 .persona-card-city { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--g400); margin-bottom: 16px; }
@@ -376,7 +376,7 @@ footer { padding: 32px 48px; border-top: 1px solid var(--g200); display: flex; j
     gap: 16px !important; 
   }
   .cs-exec-meta-grid { 
-    grid-template-columns: 1fr 1fr !important; 
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important; 
     gap: 1px !important; 
     background: var(--g200) !important;
     border: 1px solid var(--g200) !important;
@@ -1475,5 +1475,6 @@ function toggleJourney(el) {
   });
 })();
 </script>
+<script src="/js/cs-stat-eyebrow-fit.js"></script>
 </body>
 </html>

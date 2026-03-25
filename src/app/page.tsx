@@ -140,7 +140,7 @@ export default function Home() {
     },
     {
       bg: "linear-gradient(160deg,#03081e 0%,#060f2e 35%,#03081e 65%,#010408 100%)",
-      image: "/case-studies/saks/saks_hero_exterior.webp",
+      image: "/case-studies/saks/saks_hero_rack.webp",
       ghost: "Saks",
       badge: "Unit Economics → Platform Design",
       num: "02 / 06",
@@ -410,43 +410,32 @@ export default function Home() {
           </p>
         </div>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '48px', marginTop: '0px', alignSelf: 'flex-start' }}>
-          {/* Status grid */}
-          <div className="status-grid">
-            <div className="status-cell">
-              <div className="status-cell-value">VCU Brandcenter M.S. Business/Branding &mdash; Expected May 2026</div>
-            </div>
-            <div className="status-cell">
-              <div className="status-cell-value">Brand &amp; product strategist</div>
-            </div>
-            <div className="status-cell">
-              <div className="status-cell-value">Richmond, VA</div>
-            </div>
+        <aside className="about-hero-sidebar">
+          <div className="about-meta">
+            <p className="about-meta-text">VCU Brandcenter M.S. Business/Branding &mdash; Expected May 2026</p>
+            <p className="about-meta-text">Brand &amp; product strategist</p>
+            <p className="about-meta-text">Currently based in Richmond, VA</p>
           </div>
 
-          <div className="featured-row" style={{ justifyContent: 'flex-start', alignItems: 'flex-start', paddingTop: 0, borderTop: 'none', background: 'transparent' }}>
-            <div className="featured-content">
-              <span className="featured-label">Featured In</span>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                <div className="featured-names">
-                  <span className="featured-name">AdAge</span>
-                  <span className="featured-name">AdForum</span>
-                  <span className="featured-name">Communication Arts</span>
-                  <span className="featured-name">Print Mag</span>
-                  <span className="featured-name">Stash</span>
-                </div>
-                <span className="featured-qualifier">
-                  Via Branch Museum of Design &times; MullenLowe Design Studio
-                </span>
-              </div>
+          <div className="about-featured-block">
+            <span className="featured-label">Featured In</span>
+            <div className="featured-names">
+              <span className="featured-name">AdAge</span>
+              <span className="featured-name">AdForum</span>
+              <span className="featured-name">Communication Arts</span>
+              <span className="featured-name">Print Mag</span>
+              <span className="featured-name">Stash</span>
             </div>
+            <p className="featured-qualifier">
+              Via Branch Museum of Design &times; MullenLowe Design Studio
+            </p>
           </div>
 
           <div className="about-hero-ctas">
             <a href="/resume.pdf" className="about-cta-btn about-cta-btn--secondary" download>Download R&eacute;sum&eacute;</a>
             <a href="#contact" className="about-cta-btn about-cta-btn--primary">Get in Touch</a>
           </div>
-        </div>
+        </aside>
       </section>
 
 
