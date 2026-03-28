@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Stylect — Product &amp; UX Design Case Study (Narrative) · Benn Pattara</title>
+<style>
+:root {
+  --black: #000;
+  --white: #fff;
+  --g100: #f5f5f5;
+  --g200: #e8e8e8;
+  --g300: #ccc;
+  --g400: #999;
+  --g500: #666;
+  --font: 'Helvetica Neue', Arial, sans-serif;
+  --ease-fast: 150ms ease;
+  --nav-h: 52px;
+  --sidenav-w: 220px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font); background: var(--white); color: var(--black); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+#site-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; background: var(--white); border-bottom: 1px solid var(--g200); }
+.nav-main { position: relative; height: 52px; padding: 0 48px; }
+.nav-left { position: absolute; left: 48px; top: 50%; transform: translateY(-50%); display: flex; gap: 28px; }
+.nav-left a { font-size: 11px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--g500); text-decoration: none; transition: color var(--ease-fast); }
+.nav-left a:hover { color: var(--black); }
+.nav-wordmark { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); font-size: 14px; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; color: var(--black); text-decoration: none; white-space: nowrap; }
+.nav-right { position: absolute; right: 48px; top: 50%; transform: translateY(-50%); }
+.nav-right a { font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--black); text-decoration: none; border-bottom: 1px solid var(--black); padding-bottom: 1px; }
+.page-body { padding-top: var(--nav-h); }
+
+.cs-hero { position: relative; min-height: 78vh; overflow: hidden; display: flex; align-items: flex-end; }
+.cs-hero-bg { position: absolute; inset: 0; z-index: 0; }
+.cs-hero-bg img { width: 100%; height: 100%; object-fit: cover; object-position: center center; display: block; }
+.cs-hero-scrim { position: absolute; inset: 0; z-index: 1; background: linear-gradient(to top, rgba(0,0,0,.88) 0%, rgba(0,0,0,.4) 40%, transparent 65%); pointer-events: none; }
+.cs-hero-title-wrap { position: relative; z-index: 2; padding: 64px 56px 72px 48px; width: 100%; max-width: 920px; }
+.cs-hero-kicker { font-size: 10px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.55); margin-bottom: 14px; }
+.cs-hero-title { font-size: clamp(36px,5vw,64px); font-weight: 300; letter-spacing: .06em; text-transform: uppercase; color: var(--white); line-height: .95; margin: 0; text-shadow: 0 2px 24px rgba(0,0,0,.5); }
+.cs-hero-title em { font-style: italic; color: rgba(255,255,255,.72); }
+.cs-hero-ghost { position: absolute; bottom: -36px; right: -24px; font-size: clamp(80px,12vw,160px); font-weight: 300; color: rgba(255,255,255,.04); letter-spacing: -.03em; line-height: 1; white-space: nowrap; pointer-events: none; text-transform: uppercase; user-select: none; z-index: 1; }
+
+.cs-body-wrap { display: grid; grid-template-columns: var(--sidenav-w) 1fr; align-items: start; min-height: 100vh; }
+#cs-sidenav { position: sticky; top: var(--nav-h); height: calc(100vh - var(--nav-h)); overflow-y: auto; border-right: 1px solid var(--g200); padding: 40px 0; display: flex; flex-direction: column; background: var(--white); z-index: 50; scrollbar-width: none; }
+#cs-sidenav::-webkit-scrollbar { display: none; }
+.cs-sidenav-label { font-size: 8px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--g300); padding: 0 28px 20px; }
+.cs-sidenav-link { display: flex; align-items: center; gap: 14px; padding: 12px 28px; cursor: pointer; transition: background var(--ease-fast); text-decoration: none; border-left: 2px solid transparent; }
+.cs-sidenav-link:hover { background: var(--g100); }
+.cs-sidenav-link.active { border-left-color: var(--black); background: var(--g100); }
+.cs-sidenav-num { font-size: 9px; font-weight: 600; letter-spacing: .12em; color: var(--g300); width: 20px; flex-shrink: 0; transition: color var(--ease-fast); }
+.cs-sidenav-link.active .cs-sidenav-num { color: var(--black); }
+.cs-sidenav-text { font-size: 11px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--g400); transition: color var(--ease-fast); }
+.cs-sidenav-link.active .cs-sidenav-text { color: var(--black); }
+.cs-sidenav-divider { height: 1px; background: var(--g100); margin: 8px 28px; }
+.cs-sidenav-more { margin-top: auto; padding: 20px 28px 0; border-top: 1px solid var(--g100); font-size: 10px; color: var(--g400); line-height: 1.6; }
+.cs-sidenav-more a { color: var(--black); font-weight: 600; letter-spacing: .08em; text-transform: uppercase; text-decoration: none; border-bottom: 1px solid var(--black); }
+
+#cs-exec-summary { padding: 64px 56px; border-bottom: 1px solid var(--g200); }
+.cs-exec-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+.cs-exec-ii-row .cs-stat-num {
+  font-size: clamp(18px, 2vw, 26px);
+  font-weight: 300;
+  letter-spacing: .02em;
+  line-height: 1.15;
+  margin-bottom: 12px;
+}
+.cs-exec-heading { font-size: 32px; font-weight: 300; letter-spacing: .04em; text-transform: uppercase; color: var(--black); margin-bottom: 8px; }
+p.cs-exec-body { font-size: 13px; color: var(--g500); line-height: 1.85; margin-bottom: 20px; }
+p.cs-exec-body:last-child { margin-bottom: 0; }
+.cs-exec-meta-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: var(--g200); margin-bottom: 0; }
+.cs-exec-meta-cell { background: var(--white); padding: 20px; min-width: 0; overflow-wrap: break-word; }
+.cs-exec-meta-label { font-size: 8px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--g300); margin-bottom: 6px; }
+.cs-exec-meta-val { font-size: 12px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; color: var(--black); }
+.cs-stats { display: grid; gap: 1px; background: var(--g200); margin-bottom: 0; }
+.cs-stats-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.cs-stats-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.cs-problem-stats { margin-top: 28px; }
+.cs-stat-cell { background: var(--white); padding: 28px 24px; min-width: 0; overflow-wrap: break-word; }
+.cs-stat-eyebrow { font-size: 9px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--g300); margin-bottom: 12px; }
+.cs-stat-num { font-size: 48px; font-weight: 300; color: var(--black); letter-spacing: -.02em; line-height: 1; margin-bottom: 8px; }
+.cs-stat-label { font-size: 12px; color: var(--g500); line-height: 1.65; }
+
+.cs-section { padding: 72px 56px; border-bottom: 1px solid #f0f0f0; }
+.cs-section-alt { background: var(--g100); }
+.cs-section-eyebrow { display: flex; align-items: center; gap: 14px; margin-bottom: 28px; }
+.cs-section-num { font-size: 9px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--g300); }
+.cs-section-title { font-size: 11px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--black); }
+.cs-heading-serif { font-size: clamp(22px,2.5vw,30px); font-weight: 400; letter-spacing: .03em; text-transform: uppercase; color: var(--black); line-height: 1.15; margin-bottom: 28px; }
+.cs-heading-serif em { font-style: italic; color: var(--g500); }
+.cs-body { font-size: 15px; color: var(--g500); line-height: 1.82; margin-bottom: 20px; max-width: 44rem; }
+.cs-body:last-child { margin-bottom: 0; }
+.cs-pull-quote { font-size: clamp(20px,2.2vw,28px); font-weight: 300; font-style: italic; color: var(--black); line-height: 1.4; border-left: 2px solid var(--black); padding-left: 28px; margin: 32px 0; max-width: 40rem; }
+.cs-problem-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(24px, 4vw, 40px);
+  align-items: start;
+  margin-bottom: 0;
+  width: 100%;
+  max-width: none;
+}
+.cs-problem-split .cs-body { max-width: none; margin-bottom: 0; }
+.cs-problem-split > div { display: flex; flex-direction: column; gap: 16px; }
+.cs-content { min-width: 0; }
+
+.stylect-venn { color: var(--black); max-width: 100%; box-sizing: border-box; }
+.stylect-venn svg { display: block; }
+
+/* Journey map — "How it works" */
+.jm-wrap {
+  width: 100%;
+  max-width: 100%;
+  margin: 36px 0 0;
+  padding: clamp(24px, 4vw, 32px) clamp(16px, 3vw, 28px) clamp(28px, 4vw, 36px);
+  background: var(--g100);
+  border: 1px solid var(--g200);
+  box-sizing: border-box;
+}
+.jm-rail-wrap { position: relative; padding-top: 2px; padding-bottom: 8px; }
+.jm-rail {
+  position: absolute;
+  top: auto;
+  bottom: 50px;
+  left: calc(8% - 2px);
+  right: calc(8% - 2px);
+  height: 1px;
+  background: var(--g300);
+}
+.jm-rail::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, transparent, var(--black) 10%, var(--black) 90%, transparent);
+  opacity: 0.09;
+}
+.jm-stages {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: clamp(12px, 2vw, 20px);
+  position: relative;
+  z-index: 1;
+  align-items: stretch;
+}
+.jm-node {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  min-width: 0;
+  align-self: stretch;
+}
+.jm-node-top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  min-height: 46px;
+  margin-top: 16px;
+  margin-bottom: 0;
+  position: relative;
+  z-index: 2;
+}
+.jm-node-num {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid var(--black);
+  background: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--black);
+  flex-shrink: 0;
+  box-shadow: 0 0 0 4px var(--g100);
+}
+.jm-actor {
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--g500);
+  margin-top: 10px;
+  line-height: 1.35;
+  max-width: 100%;
+}
+.jm-card {
+  text-align: left;
+  padding: 0;
+  background: var(--white);
+  border: 1px solid var(--g200);
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+}
+.jm-card-title {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--black);
+  margin: 0;
+  padding: 16px 14px 0;
+  line-height: 1.35;
+}
+.jm-card-body {
+  font-size: clamp(11px, 1.05vw, 13px);
+  color: var(--g500);
+  line-height: 1.65;
+  flex: 0 1 auto;
+  margin: 0;
+  padding: 10px 14px 16px;
+}
+
+
+.artifact-strip { background: var(--black); }
+.artifact-trigger { padding: 24px 56px; display: flex; align-items: stretch; justify-content: space-between; cursor: pointer; transition: background var(--ease-fast); }
+.artifact-trigger:hover { background: #111; }
+.artifact-left { display: flex; align-items: stretch; gap: 20px; }
+.artifact-badge { border: 1px solid rgba(255,255,255,.25); padding: 0 12px; display: flex; align-items: center; flex-shrink: 0; }
+.artifact-badge span { font-size: 9px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: rgba(255,255,255,.6); white-space: nowrap; }
+.artifact-meta { display: flex; flex-direction: column; justify-content: center; gap: 5px; }
+.artifact-name { font-size: 14px; font-weight: 500; letter-spacing: .05em; text-transform: uppercase; color: var(--white); }
+.artifact-desc { font-size: 12px; color: rgba(255,255,255,.35); }
+.artifact-right { display: flex; align-items: center; flex-shrink: 0; padding-left: 20px; }
+.artifact-toggle { font-size: 20px; font-weight: 300; color: rgba(255,255,255,.5); line-height: 1; display: inline-block; width: 24px; text-align: center; }
+.artifact-trigger:hover .artifact-toggle { color: var(--white); }
+.artifact-expand { max-height: 0; overflow: hidden; transition: max-height 700ms ease; }
+.artifact-inner { background: #0a0a0a; }
+.artifact-iframe-wrap { width: 100%; }
+.artifact-iframe-wrap iframe { width: 100%; height: 85vh; min-height: 600px; border: none; display: block; }
+
+.proto-section { padding: 80px clamp(24px, 5vw, 64px); box-sizing: border-box; border-bottom: 1px solid #f0f0f0; }
+.proto-intro { max-width: 40rem; margin-bottom: 40px; }
+.proto-intro .cs-section-eyebrow { margin-bottom: 16px; }
+.proto-layout { display: grid; grid-template-columns: 1fr; gap: 24px; justify-items: center; }
+.proto-stack { display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 360px; }
+.proto-stack .proto-phone { flex-shrink: 0; }
+.proto-persona {
+  display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center;
+  margin-top: 22px; width: 100%;
+}
+.proto-persona-tabs {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 8px;
+  padding: 6px; background: #f5f5f5; border: 1px solid #e8e8e8; border-radius: 999px;
+}
+.proto-ptab {
+  padding: 8px 18px; border-radius: 999px; border: none; cursor: pointer; background: transparent;
+  font-size: 8px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--g400);
+  transition: background .2s ease, color .2s ease;
+  font-family: inherit;
+}
+.proto-ptab:hover { color: var(--black); background: rgba(0,0,0,.06); }
+.proto-ptab.active { background: var(--black); color: var(--white); }
+/* Inner clip matches scaled iframe; radius tracks stylect-app .phone (44px at 375) + bezel. */
+.proto-phone { width: calc(320px + 16px); height: calc(812px * 320 / 375 + 16px); border-radius: calc(8px + 44px * 320 / 375); border: 8px solid #000; overflow: hidden; background: #000; box-shadow: 0 0 0 1px #e8e8e8; display: flex; justify-content: center; align-items: flex-start; }
+.proto-phone iframe { width: 375px; height: 812px; border: none; display: block; transform: scale(calc(320 / 375)); transform-origin: top center; flex-shrink: 0; }
+.proto-open-row { margin-top: 28px; text-align: center; }
+.proto-open-row a { font-size: 10px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--black); text-decoration: none; border-bottom: 1px solid var(--black); }
+
+.cs-next { border-top: 1px solid var(--g200); padding-top: 32px; display: flex; justify-content: space-between; align-items: center; margin-top: 48px; }
+.cs-next-label { font-size: 9px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--g300); }
+.cs-next-link { text-align: right; text-decoration: none; display: block; }
+.cs-next-meta { font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: var(--g400); margin-bottom: 5px; }
+.cs-next-title { font-size: 22px; font-weight: 400; letter-spacing: .04em; text-transform: uppercase; color: var(--black); transition: color var(--ease-fast); }
+.cs-next-link:hover .cs-next-title { color: var(--g500); }
+
+footer { background: var(--black); padding: 32px 48px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+.footer-id { display: flex; flex-direction: column; gap: 4px; }
+.footer-name { font-size: 12px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--white); }
+.footer-role { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.28); }
+.footer-links { display: flex; gap: 24px; }
+.footer-link { font-size: 10px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.35); text-decoration: none; transition: color var(--ease-fast); }
+.footer-link:hover { color: var(--white); }
+.footer-copy { font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: rgba(255,255,255,.18); }
+
+#scroll-progress { position: fixed; top: 0; left: 0; height: 2px; background: var(--black); width: 0%; z-index: 300; transition: width 100ms linear; }
+
+@media (max-width: 768px) {
+  #cs-sidenav { display: none !important; }
+  .cs-body-wrap { grid-template-columns: 1fr !important; }
+  #cs-exec-summary { padding: 40px 20px !important; }
+  .cs-exec-inner { grid-template-columns: 1fr !important; gap: 32px !important; }
+  .cs-exec-meta-grid { grid-template-columns: 1fr !important; }
+  .cs-stats-2 { grid-template-columns: 1fr !important; }
+  .cs-stats-4 { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  .cs-problem-split { grid-template-columns: 1fr !important; gap: 20px !important; }
+  .cs-section { padding: 40px 20px !important; }
+  .proto-section { padding: 40px 20px !important; }
+  .cs-hero-title-wrap { padding: 40px 20px 48px !important; }
+  .nav-left { display: none; }
+  .nav-main { padding: 0 20px !important; }
+  .nav-right { right: 20px !important; }
+  .jm-wrap {
+    margin-top: 24px;
+    padding: 20px 14px 24px;
+    border-radius: 0;
+  }
+  .jm-rail { display: none; }
+  .jm-stages {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+  .jm-node {
+    text-align: left;
+    background: var(--white);
+    border: 1px solid var(--g200);
+    border-radius: 2px;
+    overflow: hidden;
+    flex-direction: column;
+  }
+  .jm-node-top {
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 12px;
+    min-height: auto;
+    margin-top: 0;
+    margin-bottom: 0;
+    order: 2;
+    padding: 12px 16px;
+    background: var(--g100);
+    border-top: 1px solid var(--g200);
+  }
+  .jm-node-num {
+    width: 36px;
+    height: 36px;
+    font-size: 10px;
+    box-shadow: 0 0 0 3px var(--white);
+  }
+  .jm-actor {
+    margin-top: 0;
+    align-self: center;
+    flex: 1;
+    text-align: left;
+    letter-spacing: 0.14em;
+  }
+  .jm-card {
+    flex: 0 1 auto;
+    min-height: 0;
+    border: none;
+    border-radius: 0;
+    order: 1;
+  }
+  .jm-card-title {
+    padding: 16px 16px 0;
+  }
+  .jm-card-body {
+    padding: 10px 16px 16px;
+  }
+  .artifact-trigger { padding: 16px 20px !important; }
+  .cs-next { flex-direction: column; gap: 16px; align-items: flex-start; }
+  .cs-next-link { text-align: left; }
+}
+</style>
+</head>
+<body>
+<div id="scroll-progress"></div>
+
+<nav id="site-nav">
+  <div class="nav-main">
+    <div class="nav-left">
+      <a href="/#work" target="_parent">Work</a>
+      <a href="/#about" target="_parent">About</a>
+      <a href="/blog" target="_parent">Blog</a>
+    </div>
+    <a href="/" class="nav-wordmark" target="_parent">Benn Pattara</a>
+    <div class="nav-right"><a href="/#contact" target="_parent">Contact</a></div>
+  </div>
+</nav>
+
+<div class="page-body">
+
+<section class="cs-hero" id="cs-hero">
+  <div class="cs-hero-ghost">Stylect</div>
+  <div class="cs-hero-bg"><img src="../stylect/stylect_hero.webp" alt="Stylect"/></div>
+  <div class="cs-hero-scrim"></div>
+  <div class="cs-hero-title-wrap">
+    <p class="cs-hero-kicker">Product &amp; UX Design Case Study</p>
+    <h1 class="cs-hero-title">Stylect</h1>
+  </div>
+</section>
+
+<div class="cs-body-wrap">
+  <aside id="cs-sidenav">
+    <div class="cs-sidenav-label">Index</div>
+    <a class="cs-sidenav-link active" data-target="cs-exec-summary" onclick="scrollToSection('cs-exec-summary')"><span class="cs-sidenav-num">00</span><span class="cs-sidenav-text">Summary</span></a>
+    <div class="cs-sidenav-divider"></div>
+    <a class="cs-sidenav-link" data-target="cs-problem" onclick="scrollToSection('cs-problem')"><span class="cs-sidenav-num">01</span><span class="cs-sidenav-text">Problem</span></a>
+    <a class="cs-sidenav-link" data-target="cs-insight-idea" onclick="scrollToSection('cs-insight-idea')"><span class="cs-sidenav-num">02</span><span class="cs-sidenav-text">Insight / Idea</span></a>
+    <a class="cs-sidenav-link" data-target="cs-how" onclick="scrollToSection('cs-how')"><span class="cs-sidenav-num">03</span><span class="cs-sidenav-text">How it works</span></a>
+    <a class="cs-sidenav-link" data-target="cs-business" onclick="scrollToSection('cs-business')"><span class="cs-sidenav-num">04</span><span class="cs-sidenav-text">Business model</span></a>
+    <a class="cs-sidenav-link" data-target="cs-design" onclick="scrollToSection('cs-design')"><span class="cs-sidenav-num">05</span><span class="cs-sidenav-text">Design system</span></a>
+    <a class="cs-sidenav-link" data-target="artifact-design-system" onclick="scrollToSection('artifact-design-system')"><span class="cs-sidenav-num">&mdash;</span><span class="cs-sidenav-text">DS artifact</span></a>
+    <a class="cs-sidenav-link" data-target="prototype" onclick="scrollToSection('prototype')"><span class="cs-sidenav-num">&mdash;</span><span class="cs-sidenav-text">Prototype</span></a>
+    <a class="cs-sidenav-link" data-target="cs-leftout" onclick="scrollToSection('cs-leftout')"><span class="cs-sidenav-num">06</span><span class="cs-sidenav-text">Left out</span></a>
+    <a class="cs-sidenav-link" data-target="cs-shifted" onclick="scrollToSection('cs-shifted')"><span class="cs-sidenav-num">07</span><span class="cs-sidenav-text">What shifted</span></a>
+    <div class="cs-sidenav-more">
+      <a href="/work/stylect" target="_parent">Full Stylect case study</a>
+      <span style="display:block;margin-top:10px;">PRD · metrics · decision log</span>
+    </div>
+  </aside>
+
+  <main class="cs-content">
+
+    <section id="cs-exec-summary" data-cs-section="exec-summary">
+      <div class="cs-exec-inner">
+        <div>
+          <h2 class="cs-exec-heading">Executive summary</h2>
+          <p class="cs-exec-body">The fashion recommendation problem is not an algorithm problem. It&rsquo;s a trust problem. Consumers don&rsquo;t distrust AI because it&rsquo;s wrong; they distrust it because it&rsquo;s visibly designed to sell rather than serve. Meanwhile, every major retailer employs expert human stylists whose reach ends at the shop floor door.</p>
+          <p class="cs-exec-body">Stylect closes that gap. A shopper submits a one-minute brief; an algorithm surfaces three matched stylists; the shopper picks one; within 24 hours they have a three-item shortlist with a human-written reason for each pick. The platform earns on outcome &mdash; affiliate revenue at checkout, direct commission to the stylist, a retailer partnership fee &mdash; which aligns every incentive in the chain toward the purchase that actually fits.</p>
+        </div>
+        <div>
+          <div class="cs-exec-meta-grid">
+            <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Project</div><div class="cs-exec-meta-val">Stylect · MVP</div></div>
+            <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Year</div><div class="cs-exec-meta-val">2026</div></div>
+            <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Role</div><div class="cs-exec-meta-val">Product Manager &amp; UX Systems Designer</div></div>
+            <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Type</div><div class="cs-exec-meta-val">Full-Stack Platform · Molecular Design System</div></div>
+            <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Deliverables</div><div class="cs-exec-meta-val">PRD · Molecular Design System · Interactive App Prototype · Case Study</div></div>
+            <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Goal</div><div class="cs-exec-meta-val">Find ONE item for ONE occasion in under 24h</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cs-section" id="cs-problem" data-cs-section="problem">
+      <div class="cs-section-eyebrow"><span class="cs-section-num">01</span><span class="cs-section-title">The problem</span></div>
+      <h2 class="cs-heading-serif">More inventory than ever.<br><em>And a 73% cart abandonment rate.</em></h2>
+      <div class="cs-problem-split">
+        <div>
+          <p class="cs-body">Discovery is tuned for engagement and retailer margin, not for the moment a shopper needs a decisive judgment. People feel that misalignment &mdash; and still need a human to say <em>this one</em>.</p>
+        </div>
+        <div>
+          <p class="cs-body">Expert stylists hold real trust on the floor, but that authority doesn&rsquo;t transfer online at scale. The feed gets infinite reach; the person who actually knows the rack doesn&rsquo;t.</p>
+        </div>
+      </div>
+      <div class="cs-stats cs-stats-4 cs-problem-stats">
+        <div class="cs-stat-cell">
+          <div class="cs-stat-eyebrow">01 · Consumer Problem</div>
+          <div class="cs-stat-num">73%</div>
+          <div class="cs-stat-label">Cart abandonment rate in fashion e-commerce. The shopper knows what they want in the abstract. They don&rsquo;t trust the algorithm to find it.</div>
+        </div>
+        <div class="cs-stat-cell">
+          <div class="cs-stat-eyebrow">02 · Retailer Problem</div>
+          <div class="cs-stat-num">$0</div>
+          <div class="cs-stat-label">Digital commission earned by an in-store stylist who recommends a piece that sells online. Their expertise has no online attribution model.</div>
+        </div>
+        <div class="cs-stat-cell">
+          <div class="cs-stat-eyebrow">03 · Trust Deficit</div>
+          <div class="cs-stat-num">61%</div>
+          <div class="cs-stat-label">Of Gen Z shoppers say they distrust algorithmic fashion recommendations. The distrust isn&rsquo;t about accuracy &mdash; it&rsquo;s about intent.</div>
+        </div>
+        <div class="cs-stat-cell">
+          <div class="cs-stat-eyebrow">04 · Time Constraint</div>
+          <div class="cs-stat-num">4.2h</div>
+          <div class="cs-stat-label">Average time spent browsing before a fashion purchase. The shopping experience is broken before checkout ever appears.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cs-section cs-section-alt" id="cs-insight-idea" data-cs-section="insight-idea">
+      <div class="cs-section-eyebrow"><span class="cs-section-num">02</span><span class="cs-section-title">Insight / Idea</span></div>
+      <div class="cs-stats cs-stats-2 cs-exec-ii-row">
+        <div class="cs-stat-cell">
+          <div class="cs-stat-eyebrow">Insight</div>
+          <div class="cs-stat-num">People trust people, not platforms</div>
+          <div class="cs-stat-label">People have never trusted platforms. They trust people who happen to work at them. The entire history of retail loyalty runs through individual relationships &mdash; the associate who remembers your name, who pulls something off the rack because she thought of you. E-commerce scaled the store and deleted the person. It kept the inventory and removed the one thing that made it navigable: a human being with a stake in your outcome.</div>
+        </div>
+        <div class="cs-stat-cell">
+          <div class="cs-stat-eyebrow">Idea</div>
+          <div class="cs-stat-num">AI filters the brief · A person owns the pick</div>
+          <div class="cs-stat-label">Stylect uses AI to filter a universe of inventory against a specific brief, then hands the recommendation to a real, in-store stylist who provides the judgment that converts a browser into a buyer. Speed of discovery is traded for confidence of outcome. Human authorship is not a feature of the platform &mdash; it is the platform.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cs-section" id="cs-how" data-cs-section="how">
+      <div class="cs-section-eyebrow"><span class="cs-section-num">03</span><span class="cs-section-title">How it works</span></div>
+      <h2 class="cs-heading-serif">A shopper submits a brief.<br><em>A matched stylist responds with three items and a reason for each one.</em></h2>
+      <div class="jm-wrap" role="region" aria-label="Stylect journey from brief to shortlist">
+        <div class="jm-rail-wrap">
+          <div class="jm-rail" aria-hidden="true"></div>
+          <div class="jm-stages">
+            <article class="jm-node">
+              <div class="jm-card">
+                <h3 class="jm-card-title">Occasion brief</h3>
+                <p class="jm-card-body">Occasion, budget, dress code, and brief context—in under a minute.</p>
+              </div>
+              <div class="jm-node-top">
+                <div class="jm-node-num">1</div>
+                <span class="jm-actor">Shopper</span>
+              </div>
+            </article>
+            <article class="jm-node">
+              <div class="jm-card">
+                <h3 class="jm-card-title">Matches surfaced</h3>
+                <p class="jm-card-body">Scores in-store stylists for fit, surfaces <strong style="font-weight:600;color:var(--black)">three</strong> matches, then <strong style="font-weight:600;color:var(--black)">stops</strong>—no endless ranking.</p>
+              </div>
+              <div class="jm-node-top">
+                <div class="jm-node-num">2</div>
+                <span class="jm-actor">Platform</span>
+              </div>
+            </article>
+            <article class="jm-node">
+              <div class="jm-card">
+                <h3 class="jm-card-title">Chooses stylist</h3>
+                <p class="jm-card-body">The shopper picks their stylist—<em>chosen</em>, never auto-assigned.</p>
+              </div>
+              <div class="jm-node-top">
+                <div class="jm-node-num">3</div>
+                <span class="jm-actor">Shopper</span>
+              </div>
+            </article>
+            <article class="jm-node">
+              <div class="jm-card">
+                <h3 class="jm-card-title">Three items + why</h3>
+                <p class="jm-card-body">Three items within two hours; every pick needs a stylist-written &ldquo;why.&rdquo;</p>
+              </div>
+              <div class="jm-node-top">
+                <div class="jm-node-num">4</div>
+                <span class="jm-actor">Stylist</span>
+              </div>
+            </article>
+            <article class="jm-node">
+              <div class="jm-card">
+                <h3 class="jm-card-title">Human gate</h3>
+                <p class="jm-card-body">The shortlist never reaches the shopper without a human author.</p>
+              </div>
+              <div class="jm-node-top">
+                <div class="jm-node-num">5</div>
+                <span class="jm-actor">Rule</span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cs-section cs-section-alt" id="cs-business" data-cs-section="business">
+      <div class="cs-section-eyebrow"><span class="cs-section-num">04</span><span class="cs-section-title">The business model</span></div>
+      <h2 class="cs-heading-serif">Three parties.<br><em>All three only win on a completed transaction.</em></h2>
+      <p class="cs-body">Stylect is a three-sided marketplace: the shopper, the stylist, and the brand manager. The platform earns affiliate revenue at checkout. The stylist earns a direct commission. The retailer receives guaranteed, highly qualified foot traffic. Nobody earns anything on clicks or browsing behavior.</p>
+      <figure class="stylect-venn" style="margin: 2rem 0; width: 100%;">
+        <svg width="100%" viewBox="0 0 680 420" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <style>
+              .venn-label-hero { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; fill: currentColor; }
+              .venn-label-sub  { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 11px; font-weight: 400; fill: currentColor; opacity: 0.55; }
+              .venn-label-center { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; fill: currentColor; }
+              .venn-label-zone { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 10px; font-weight: 400; fill: currentColor; opacity: 0.55; }
+            </style>
+          </defs>
+          <circle cx="340" cy="148" r="138" fill="currentColor" fill-opacity="0.04" stroke="currentColor" stroke-width="1" stroke-opacity="0.35"/>
+          <circle cx="238" cy="298" r="138" fill="currentColor" fill-opacity="0.04" stroke="currentColor" stroke-width="1" stroke-opacity="0.35"/>
+          <circle cx="442" cy="298" r="138" fill="currentColor" fill-opacity="0.04" stroke="currentColor" stroke-width="1" stroke-opacity="0.35"/>
+          <rect x="323" y="228" width="34" height="34" fill="currentColor" fill-opacity="0.08" stroke="currentColor" stroke-width="0.75" stroke-opacity="0.5"/>
+          <text class="venn-label-hero" x="340" y="62" text-anchor="middle">Shopper</text>
+          <text class="venn-label-sub" x="340" y="78" text-anchor="middle">Discovery + intent</text>
+          <text class="venn-label-hero" x="130" y="388" text-anchor="middle">Stylist</text>
+          <text class="venn-label-sub" x="130" y="404" text-anchor="middle">Taste + trust</text>
+          <text class="venn-label-hero" x="550" y="388" text-anchor="middle">Brand</text>
+          <text class="venn-label-sub" x="550" y="404" text-anchor="middle">Inventory + traffic</text>
+          <text class="venn-label-zone" x="248" y="193" text-anchor="middle">Curation</text>
+          <text class="venn-label-zone" x="432" y="193" text-anchor="middle">Reservation</text>
+          <text class="venn-label-zone" x="340" y="362" text-anchor="middle">Commission</text>
+          <text class="venn-label-center" x="340" y="244" text-anchor="middle">Stylect</text>
+          <text class="venn-label-zone" x="340" y="258" text-anchor="middle">Attribution</text>
+        </svg>
+      </figure>
+    </section>
+
+    <section class="cs-section" id="cs-design" data-cs-section="design">
+      <div class="cs-section-eyebrow"><span class="cs-section-num">05</span><span class="cs-section-title">The design system</span></div>
+      <h2 class="cs-heading-serif">Every design decision was made to make trust <em>legible.</em></h2>
+      <div class="cs-problem-split">
+        <p class="cs-body">Most fashion interfaces treat design as expression, brand flex, aesthetic signal &mdash; a reason to linger and keep you scrolling through an environment. Stylect is built through a molecular design system that aligns all tokens to perform a specific function in the trust sequence.</p>
+        <p class="cs-body">The system is built to WCAG AA contrast standards, as a design constraint so visual noise never substitutes for clarity. Elevated without being exclusive &mdash; legible for every user.</p>
+      </div>
+    </section>
+
+    <div class="artifact-strip" id="artifact-design-system" data-cs-section="artifact-design-system">
+      <div class="artifact-trigger" id="art1-trigger" onclick="toggleArtifact(1)">
+        <div class="artifact-left">
+          <div class="artifact-badge"><span>Interactive artifact</span></div>
+          <div class="artifact-meta">
+            <div class="artifact-name">Molecular design system</div>
+            <div class="artifact-desc">Shared with primary case study · tokens · light/dark · components</div>
+          </div>
+        </div>
+        <div class="artifact-right"><span class="artifact-toggle" id="art1-cta">+</span></div>
+      </div>
+      <div class="artifact-expand" id="art1-expand">
+        <div class="artifact-inner">
+          <div class="artifact-iframe-wrap">
+            <iframe src="../stylect/stylect-design-system.html" title="Stylect Molecular Design System" scrolling="yes"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="proto-section" id="prototype" data-cs-section="prototype">
+      <div class="proto-intro">
+        <div class="cs-section-eyebrow"><span class="cs-section-num">&mdash;</span><span class="cs-section-title">Interactive prototype</span></div>
+        <h2 class="cs-heading-serif">Shopper, stylist, and brand manager flows <em>in one build.</em></h2>
+        <p class="cs-body" style="margin-bottom:0;">Same HTML prototype as the full case study: multi-phone stage with onboarding, brief, match, chat, shortlist, QR reservation, stylist workspace, and manager view.</p>
+      </div>
+      <div class="proto-layout">
+        <div class="proto-stack">
+          <div class="proto-phone">
+            <iframe id="stylect-proto-iframe" src="../stylect/stylect-app.html?embed=case" title="Stylect App Prototype" scrolling="yes"></iframe>
+          </div>
+          <div class="proto-persona" aria-label="Switch prototype persona (outside device mockup)">
+            <div class="proto-persona-tabs" role="tablist">
+              <button type="button" class="proto-ptab active" data-stylect-view="stylee" role="tab" aria-selected="true">Stylee</button>
+              <button type="button" class="proto-ptab" data-stylect-view="stylist" role="tab" aria-selected="false">Stylist</button>
+              <button type="button" class="proto-ptab" data-stylect-view="manager" role="tab" aria-selected="false">Manager</button>
+            </div>
+          </div>
+        </div>
+        <p class="proto-open-row"><a href="../stylect/stylect-app.html" target="_blank" rel="noopener">Open prototype in new tab</a></p>
+      </div>
+    </section>
+
+    <section class="cs-section cs-section-alt" id="cs-leftout" data-cs-section="leftout">
+      <div class="cs-section-eyebrow"><span class="cs-section-num">06</span><span class="cs-section-title">What was deliberately left out</span></div>
+      <h2 class="cs-heading-serif">Stylect removed every pattern that trades shopper anxiety <em>for retailer revenue.</em></h2>
+      <div class="cs-problem-split">
+        <div>
+          <p class="cs-body">No browse grid. No urgency mechanics. No cart badge during the styling conversation. No AI-closed loop without human review. These aren&rsquo;t omissions &mdash; they&rsquo;re the product&rsquo;s competitive position.</p>
+        </div>
+        <div>
+          <p class="cs-body">Every removed pattern is a pattern that already exists everywhere else. Keep them and Stylect is indistinguishable from the subscription box models that came before it. More importantly: keep them and no stylist trusts the platform enough to stake their professional reputation on a recommendation it could override.</p>
+          <p class="cs-body">The constraints are what make both sides of the marketplace show up.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="cs-section" id="cs-shifted" data-cs-section="shifted">
+      <div class="cs-section-eyebrow"><span class="cs-section-num">07</span><span class="cs-section-title">What shifted</span></div>
+      <p class="cs-pull-quote" style="margin-top:0;">Not better recommendations. Accountable ones.</p>
+      <div class="cs-problem-split">
+        <div>
+          <p class="cs-body">For the first time, a stylist&rsquo;s judgment has a direct line to attribution. Two hours to a shortlist. A QR code that closes the loop at purchase. A commission that proves the conversation drove the sale. The stylist&rsquo;s labor &mdash; previously invisible the moment a shopper left the store &mdash; becomes measurable and compensable at scale.</p>
+        </div>
+        <div>
+          <p class="cs-body">That&rsquo;s not a product feature. That&rsquo;s a structural correction to how retail expertise gets valued. Stylect doesn&rsquo;t just help shoppers find the right item in under 24 hours. It makes the person who found it for them worth paying.</p>
+        </div>
+      </div>
+
+      <div class="cs-next">
+        <div class="cs-next-label">Primary case study</div>
+        <a href="/work/stylect" class="cs-next-link" target="_parent">
+          <div class="cs-next-meta">Stylect · Full PM depth</div>
+          <div class="cs-next-title">Research → PRD → Prototype &rarr;</div>
+        </a>
+      </div>
+    </section>
+
+  </main>
+</div>
+</div>
+
+<footer>
+  <div class="footer-id">
+    <span class="footer-name">Benn Pattara</span>
+    <span class="footer-role">Brand &amp; Product Strategist</span>
+  </div>
+  <div class="footer-links">
+    <a href="/" class="footer-link" target="_parent">Home</a>
+    <a href="/#about" class="footer-link" target="_parent">About</a>
+    <a href="/blog" class="footer-link" target="_parent">Blog</a>
+    <a href="/#contact" class="footer-link" target="_parent">Contact</a>
+  </div>
+  <div class="footer-copy">&copy; 2026 Benn Pattara</div>
+</footer>
+
+<script>
+window.addEventListener('scroll', () => {
+  const s = window.scrollY, t = document.documentElement.scrollHeight - window.innerHeight;
+  document.getElementById('scroll-progress').style.width = (t > 0 ? (s / t * 100) : 0) + '%';
+});
+
+const sectionObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      document.querySelectorAll('.cs-sidenav-link').forEach(l => l.classList.remove('active'));
+      const id = entry.target.id;
+      const match = document.querySelector('.cs-sidenav-link[data-target="' + id + '"]');
+      if (match) match.classList.add('active');
+    }
+  });
+}, { threshold: 0, rootMargin: '-10% 0px -75% 0px' });
+document.querySelectorAll('[data-cs-section]').forEach(s => sectionObserver.observe(s));
+
+function scrollToSection(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 104, behavior: 'smooth' });
+}
+
+function toggleArtifact(n) {
+  const expand = document.getElementById('art' + n + '-expand');
+  const toggle = document.getElementById('art' + n + '-cta');
+  const isOpen = expand.dataset.open === 'true';
+  expand.style.maxHeight = isOpen ? '0' : '960px';
+  expand.dataset.open = isOpen ? 'false' : 'true';
+  toggle.textContent = isOpen ? '+' : '\u00d7';
+}
+
+(function initStylectProtoEmbed() {
+  const iframe = document.getElementById('stylect-proto-iframe');
+  if (!iframe) return;
+  function postView(view) {
+    try {
+      iframe.contentWindow.postMessage({ stylectEmbed: 'switch', view: view }, '*');
+    } catch (e) {}
+  }
+  document.querySelectorAll('.proto-ptab[data-stylect-view]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const view = btn.getAttribute('data-stylect-view');
+      postView(view);
+      document.querySelectorAll('.proto-ptab[data-stylect-view]').forEach(b => {
+        const on = b === btn;
+        b.classList.toggle('active', on);
+        b.setAttribute('aria-selected', on ? 'true' : 'false');
+      });
+    });
+  });
+})();
+</script>
+</body>
+</html>
