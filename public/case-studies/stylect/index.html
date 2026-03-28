@@ -97,7 +97,8 @@ body { font-family: var(--font); background: var(--white); color: var(--black); 
 .cs-body:last-child { margin-bottom: 0; }
 .cs-pull-quote { font-size: clamp(20px,2.2vw,28px); font-weight: 300; font-style: italic; color: var(--black); line-height: 1.4; border-left: 2px solid var(--black); padding-left: 28px; margin-bottom: 28px; }
 .cs-body-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 28px; }
-.cs-body-2col p { font-size: 13px; color: var(--g500); line-height: 1.75; }
+.cs-body-2col > div { display: flex; flex-direction: column; gap: 16px; }
+.cs-body-2col p { font-size: 13px; color: var(--g500); line-height: 1.75; margin: 0; }
 .cs-stats { display: grid; gap: 1px; background: var(--g200); margin-bottom: 28px; }
 .cs-stats-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .cs-stats-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
@@ -168,8 +169,10 @@ body { font-family: var(--font); background: var(--white); color: var(--black); 
 /* ── PROTOTYPE LAYOUT ── */
 .proto-section { padding: 80px clamp(24px, 5vw, 64px); box-sizing: border-box; border-bottom: 1px solid #f0f0f0; }
 .proto-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 28px; align-items: start; width: 100%; max-width: 100%; box-sizing: border-box; }
-.proto-phone { position: sticky; top: 40px; width: 320px; height: 693px; border-radius: 44px; border: 8px solid #000; overflow: hidden; background: #000; box-shadow: 0 0 0 1px #e8e8e8; display: flex; justify-content: center; align-items: flex-start; margin: 0; justify-self: center; align-self: center; }
-.proto-phone iframe { width: 375px; height: 812px; border: none; display: block; transform: scale(0.8533) translateX(7.33%); transform-origin: top left; flex-shrink: 0; pointer-events: auto; }
+/* Inner opening = scaled prototype (320×692.9…); outer size adds 16px for 8px bezel each side.
+   Border-radius: bezel (8px) + prototype .phone corner (44px at 375px), scaled to 320px wide. */
+.proto-phone { position: sticky; top: calc(var(--nav-h) + 24px); width: calc(320px + 16px); height: calc(812px * 320 / 375 + 16px); border-radius: calc(8px + 44px * 320 / 375); border: 8px solid #000; overflow: hidden; background: #000; box-shadow: 0 0 0 1px #e8e8e8; display: flex; justify-content: center; align-items: flex-start; margin: 0; justify-self: center; align-self: start; }
+.proto-phone iframe { width: 375px; height: 812px; border: none; display: block; transform: scale(calc(320 / 375)); transform-origin: top center; flex-shrink: 0; pointer-events: auto; }
 .proto-steps { display: flex; flex-direction: column; gap: 0; min-width: 0; }
 .proto-step { padding: 24px 0; border-bottom: 1px solid var(--g200); cursor: pointer; transition: opacity 0.2s; }
 .proto-step:first-child { border-top: 1px solid var(--g200); }
@@ -183,7 +186,7 @@ body { font-family: var(--font); background: var(--white); color: var(--black); 
 .proto-step:hover:not(.active) { opacity: 0.75; }
 @media (max-width: 768px) {
   .proto-layout { grid-template-columns: 1fr; gap: 40px; }
-  .proto-phone { position: static; justify-self: center; align-self: center; }
+  .proto-phone { position: static; justify-self: center; align-self: start; }
   .proto-step:not(.active) { opacity: 1; }
   .proto-step:hover:not(.active) { opacity: 1; }
 }
@@ -241,17 +244,45 @@ body { font-family: var(--font); background: var(--white); color: var(--black); 
 .dark-head ~ .user-metric .user-metric-num, .user-col.dark-col .user-metric-num { color: var(--black); }
 .user-metric-label { font-size: 10px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--g400); }
 
-/* ── PRODUCT DECISION LOG ── */
-.decision-log { width: 100%; border-collapse: collapse; margin-bottom: 28px; }
-.decision-log th { font-size: 8px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--g300); padding: 12px 16px; border-bottom: 2px solid var(--g200); text-align: left; background: var(--g100); }
-.decision-log td { font-size: 12px; color: var(--g500); padding: 16px; border-bottom: 1px solid var(--g100); line-height: 1.65; vertical-align: top; }
-.decision-log td:first-child { font-weight: 600; color: var(--black); font-size: 11px; letter-spacing: .04em; text-transform: uppercase; white-space: nowrap; }
-.decision-log td:nth-child(3) { color: var(--g400); font-style: italic; font-size: 11px; }
-.decision-log td:nth-child(4) { font-size: 11px; font-weight: 600; }
-.decision-log .shipped td:nth-child(4) { color: #2a6b3a; }
-.decision-log .deferred td:nth-child(4) { color: #8a6e20; }
-.decision-log .cut td:nth-child(4) { color: var(--g400); text-decoration: line-through; }
-.decision-log tr:hover td { background: #fafafa; }
+/* ── FEATURE MAP + DECISION LOG (Nike-aligned tri layout) ── */
+.priority-card { padding: 24px 28px; border-left: 3px solid transparent; background: var(--g100); min-width: 0; overflow-wrap: break-word; }
+.priority-card.core { border-left-color: var(--black); background: var(--white); }
+.priority-card.supporting { border-left-color: var(--g300); }
+.priority-card.deferred { border-left-color: var(--g200); background: #fafafa; }
+.priority-tag { display: inline-block; font-size: 8px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; padding: 3px 10px; margin-bottom: 10px; font-family: var(--font); }
+.priority-tag.p0 { background: var(--black); color: var(--white); }
+.priority-tag.p1 { background: var(--g700); color: var(--white); }
+.priority-tag.supporting { background: var(--g200); color: var(--g500); }
+.priority-tag.deferred { background: var(--g100); color: var(--g400); border: 1px solid var(--g200); }
+.priority-feature { font-size: 13px; font-weight: 500; color: var(--black); margin-bottom: 6px; letter-spacing: .02em; }
+.priority-desc { font-size: 12px; color: var(--g500); line-height: 1.7; margin-bottom: 8px; }
+.priority-prd { font-size: 10px; font-family: var(--font); color: var(--g400); letter-spacing: .06em; }
+.nike-tri { margin-bottom: 28px; }
+.nike-tri-tabs { display: none; gap: 0; border-bottom: 1px solid var(--g200); margin-bottom: 20px; }
+.nike-tri-tab { flex: 1; padding: 14px 10px; border: none; background: transparent; font-family: var(--font); font-size: 10px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--g400); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; }
+.nike-tri-tab:hover { color: var(--black); }
+.nike-tri-tab.active { color: var(--black); border-bottom-color: var(--black); }
+.nike-tri-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; align-items: start; }
+.nike-tri-col-title { font-size: 9px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--g300); margin-bottom: 14px; font-family: var(--font); padding-bottom: 10px; border-bottom: 1px solid var(--g200); }
+.nike-tri-col .priority-card { margin-bottom: 16px; }
+.nike-tri-col .priority-card:last-child { margin-bottom: 0; }
+.nike-decision-card { background: var(--white); border: 1px solid var(--g200); padding: 12px 14px; margin-bottom: 0; }
+.nike-decision-card.excluded { background: var(--g100); }
+.nike-decision-title { font-size: 10px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--black); margin-bottom: 6px; }
+.nike-decision-built, .nike-decision-why { font-size: 11px; color: var(--g500); line-height: 1.5; margin: 0 0 4px; }
+.nike-decision-why { margin-bottom: 0; color: var(--g400); font-size: 10px; }
+@media (min-width: 1100px) {
+  .nike-tri-decisions .nike-tri-grid > .nike-tri-col {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px 12px;
+    align-content: start;
+  }
+  .nike-tri-decisions .nike-tri-grid > .nike-tri-col > .nike-tri-col-title {
+    grid-column: 1 / -1;
+    margin-bottom: 4px;
+  }
+}
 
 /* ── METRICS STRIP ── */
 .outcome-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--g200); margin-bottom: 32px; }
@@ -311,19 +342,6 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
 .footer-copy { font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: rgba(255,255,255,.18); }
 #scroll-progress { position: fixed; top: 0; left: 0; height: 2px; background: var(--black); width: 0%; z-index: 300; transition: width 100ms linear; }
 
-/* ── FEATURE PRIORITY GRID ── */
-.priority-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--g200); margin-bottom: 32px; }
-.priority-card { background: var(--white); padding: 24px 20px; min-width: 0; overflow-wrap: break-word; }
-.priority-card.core { border-top: 3px solid var(--black); }
-.priority-card.supporting { border-top: 3px solid var(--g300); }
-.priority-card.future { border-top: 3px solid var(--g200); }
-.priority-tag { font-size: 8px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; margin-bottom: 12px; }
-.priority-tag.core { color: var(--black); }
-.priority-tag.supporting { color: var(--g400); }
-.priority-tag.future { color: var(--g300); }
-.priority-feature { font-size: 14px; font-weight: 500; color: var(--black); margin-bottom: 6px; letter-spacing: .02em; }
-.priority-desc { font-size: 11px; color: var(--g500); line-height: 1.65; }
-.priority-prd { font-size: 9px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--g300); margin-top: 12px; }
 @media (max-width: 900px) {
   .app-showcase-layout { grid-template-columns: 1fr !important; gap: 48px !important; }
   .app-screen-nav { position: static !important; }
@@ -344,11 +362,17 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
   .persona-grid { grid-template-columns: 1fr !important; }
   .research-drawer-grid { grid-template-columns: 1fr !important; }
   .user-compare { grid-template-columns: 1fr !important; }
-  .priority-grid { grid-template-columns: 1fr !important; }
   .not-built, .outcome-stats { grid-template-columns: 1fr !important; }
+  .nike-tri-tabs { display: flex !important; }
+  .nike-tri-grid { display: block !important; }
+  .nike-tri-col { display: none !important; }
+  .nike-tri-col.active { display: block !important; }
+  .nike-tri-col .nike-tri-col-title { display: none !important; }
+  .nike-tri-decisions .nike-tri-col.active .nike-decision-card { margin-bottom: 10px; }
+  .nike-tri-decisions .nike-tri-col.active .nike-decision-card:last-child { margin-bottom: 0; }
   .app-showcase { padding: 40px 20px !important; }
   .artifact-trigger { padding: 16px 20px !important; }
-  .cs-table, .decision-log { display: block; overflow-x: auto; width: 100%; }
+  .cs-table { display: block; overflow-x: auto; width: 100%; }
   .cs-next { flex-direction: column; gap: 16px; align-items: flex-start; }
   .cs-next-link { text-align: left; }
 }
@@ -373,33 +397,33 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
 
 <!-- ── HERO — full-bleed with title overlay ── -->
 <section class="cs-hero" id="cs-hero">
-  <div class="cs-hero-ghost">Stylect</div>
-  <div class="cs-hero-bg"><img src="stylect_hero.webp" alt="Stylect — woman split between cozy domestic and curated selection" /></div>
+  <div class="cs-hero-bg"><img src="stylect_hero.webp" alt="Stylect &ndash; woman split between cozy domestic and curated selection" /></div>
   <div class="cs-hero-scrim"></div>
   <div class="cs-hero-title-wrap">
     <h1 class="cs-hero-title">Stylect:<br><em>Designing the Bridge</em><br>Between Discovery<br>and the Fitting Room</h1>
   </div>
+  <div class="cs-hero-ghost">Stylect</div>
 </section>
 
 
 <div class="cs-body-wrap">
   <aside id="cs-sidenav">
     <div class="cs-sidenav-label">Index</div>
-    <a class="cs-sidenav-link active" data-target="cs-exec-summary" onclick="scrollToSection('cs-exec-summary')"><span class="cs-sidenav-num">00</span><span class="cs-sidenav-text">Exec Summary</span></a>
+    <a class="cs-sidenav-link active" href="javascript:void(0)" data-target="cs-exec-summary" onclick="scrollToSection('cs-exec-summary')"><span class="cs-sidenav-num">00</span><span class="cs-sidenav-text">Exec Summary</span></a>
     <div class="cs-sidenav-divider"></div>
-    <a class="cs-sidenav-link" data-target="cs-background" onclick="scrollToSection('cs-background')"><span class="cs-sidenav-num">01</span><span class="cs-sidenav-text">The Problem</span></a>
-    <a class="cs-sidenav-link" data-target="cs-insight" onclick="scrollToSection('cs-insight')"><span class="cs-sidenav-num">02</span><span class="cs-sidenav-text">The Insight</span></a>
-    <a class="cs-sidenav-link" data-target="cs-users" onclick="scrollToSection('cs-users')"><span class="cs-sidenav-num">03</span><span class="cs-sidenav-text">The Users</span></a>
-    <a class="cs-sidenav-link" data-target="cs-product" onclick="scrollToSection('cs-product')"><span class="cs-sidenav-num">04</span><span class="cs-sidenav-text">The Product</span></a>
-    <a class="cs-sidenav-link" data-target="cs-design" onclick="scrollToSection('cs-design')"><span class="cs-sidenav-num">05</span><span class="cs-sidenav-text">Design System</span></a>
-    <a class="cs-sidenav-link" data-target="cs-screens" onclick="scrollToSection('cs-screens')"><span class="cs-sidenav-num">06</span><span class="cs-sidenav-text">Key Screens</span></a>
-    <a class="cs-sidenav-link" data-target="prototype" onclick="scrollToSection('prototype')"><span class="cs-sidenav-num">—</span><span class="cs-sidenav-text">Prototype</span></a>
-    <a class="cs-sidenav-link" data-target="cs-decisions" onclick="scrollToSection('cs-decisions')"><span class="cs-sidenav-num">07</span><span class="cs-sidenav-text">Decision Log</span></a>
-    <a class="cs-sidenav-link" data-target="cs-outcome" onclick="scrollToSection('cs-outcome')"><span class="cs-sidenav-num">08</span><span class="cs-sidenav-text">Outcome</span></a>
+    <a class="cs-sidenav-link" href="javascript:void(0)" data-target="cs-background" onclick="scrollToSection('cs-background')"><span class="cs-sidenav-num">01</span><span class="cs-sidenav-text">The Problem</span></a>
+    <a class="cs-sidenav-link" href="javascript:void(0)" data-target="cs-insight" onclick="scrollToSection('cs-insight')"><span class="cs-sidenav-num">02</span><span class="cs-sidenav-text">The Insight</span></a>
+    <a class="cs-sidenav-link" href="javascript:void(0)" data-target="cs-users" onclick="scrollToSection('cs-users')"><span class="cs-sidenav-num">03</span><span class="cs-sidenav-text">The Users</span></a>
+    <a class="cs-sidenav-link" href="javascript:void(0)" data-target="cs-product" onclick="scrollToSection('cs-product')"><span class="cs-sidenav-num">04</span><span class="cs-sidenav-text">The Product</span></a>
+    <a class="cs-sidenav-link" href="javascript:void(0)" data-target="cs-design" onclick="scrollToSection('cs-design')"><span class="cs-sidenav-num">05</span><span class="cs-sidenav-text">Design System</span></a>
+    <a class="cs-sidenav-link" href="javascript:void(0)" data-target="cs-screens" onclick="scrollToSection('cs-screens')"><span class="cs-sidenav-num">06</span><span class="cs-sidenav-text">Key Screens</span></a>
+    <a class="cs-sidenav-link" href="javascript:void(0)" data-target="prototype" onclick="scrollToSection('prototype')"><span class="cs-sidenav-num">—</span><span class="cs-sidenav-text">Prototype</span></a>
+    <a class="cs-sidenav-link" href="javascript:void(0)" data-target="cs-decisions" onclick="scrollToSection('cs-decisions')"><span class="cs-sidenav-num">07</span><span class="cs-sidenav-text">Decision Log</span></a>
+    <a class="cs-sidenav-link" href="javascript:void(0)" data-target="cs-outcome" onclick="scrollToSection('cs-outcome')"><span class="cs-sidenav-num">08</span><span class="cs-sidenav-text">Outcome</span></a>
     <div class="cs-sidenav-exec">
       <div class="cs-sidenav-exec-label">TL;DR</div>
       <p class="cs-sidenav-exec-text">Algorithm proposes. Human closes. QR tracks the handoff.</p>
-      <a class="cs-sidenav-exec-link" onclick="scrollToSection('cs-exec-summary')">Read summary &rarr;</a>
+      <a class="cs-sidenav-exec-link" href="javascript:void(0)" onclick="scrollToSection('cs-exec-summary')">Read summary &rarr;</a>
     </div>
   </aside>
 
@@ -411,8 +435,7 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
         <div>
           <div class="cs-exec-eyebrow">Executive Summary</div>
           <p class="cs-exec-body">The fashion recommendation problem is not an algorithm problem. It's a trust problem. Consumers don't distrust AI because it's wrong; they distrust it because it's visibly designed to sell rather than serve. Meanwhile, every major retailer employs expert human stylists whose reach ends at the shop floor door.</p>
-          <p class="cs-exec-body">Stylect closes that gap. Shoppers submit a one-minute occasion brief from home. An algorithm surfaces the three best-matched, available in-store stylists. The shopper selects one. Within 24 hours, the stylist has responded with a three-item shortlist — each with a personal note explaining the reasoning. The shopper reserves their favorite, receives a QR code, and walks into the store already knowing what they're there for. Every step is tracked. Every transaction is attributed.</p>
-          <p class="cs-exec-body">The business model is affiliate revenue at checkout, commissions to the stylist, and a retailer partnership fee. The platform earns on outcome, not engagement — which aligns every incentive in the chain toward the purchase that actually fits.</p>
+          <p class="cs-exec-body">Stylect closes that gap. A shopper submits a one-minute brief; an algorithm surfaces three matched stylists; the shopper picks one; within 24 hours they have a three-item shortlist with a human-written reason for each pick. The platform earns on outcome &ndash; affiliate revenue at checkout, direct commission to the stylist, a retailer partnership fee &ndash; which aligns every incentive in the chain toward the purchase that actually fits.</p>
         </div>
         <div>
           <div class="cs-exec-meta-grid">
@@ -420,7 +443,7 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
             <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Year</div><div class="cs-exec-meta-val">2026</div></div>
             <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Role</div><div class="cs-exec-meta-val">Product Manager &amp; UX Systems Designer</div></div>
             <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Type</div><div class="cs-exec-meta-val">Full-Stack Platform · Molecular Design System</div></div>
-            <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Deliverables</div><div class="cs-exec-meta-val">PRD · Molecular Design System · Interactive App Prototype · Case Study</div></div>
+            <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Deliverables</div><div class="cs-exec-meta-val">PRD · Molecular Design System · Interactive App Prototype</div></div>
             <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Goal</div><div class="cs-exec-meta-val">Find ONE item for ONE occasion in under 24h</div></div>
           </div>
         </div>
@@ -433,7 +456,7 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
       <h2 class="cs-heading-serif">Two failures. One gap. A 24-hour window to close it.</h2>
       <div class="cs-body-2col">
         <p>The consumer side of the failure is visible: choice paralysis. The average fashion app serves thousands of SKUs through an algorithm calibrated for engagement, not confidence. The shopper scrolls, abandons, returns, scrolls again. The 73% cart abandonment rate in fashion e-commerce is not a checkout problem. It's a decision-confidence problem. The algorithm optimizes for click; the shopper needs someone to say <em>this one</em>.</p>
-        <p>The retailer side is structural: underutilized expert labor. Every major retailer employs in-store associates with genuine product knowledge, styling intuition, and real relationships with the inventory. Their reach ends at the door. A stylist at Nordstrom Short Pump can help forty people per shift. Stylect turns that same expertise into a digital channel — extending the stylist's reach to shoppers on their couch, building their brief before they ever set foot in the store.</p>
+        <p>The retailer side is structural: underutilized expert labor. Every major retailer employs in-store associates with genuine product knowledge, styling intuition, and real relationships with the inventory. Their reach ends at the door. A stylist at Nordstrom Short Pump can help forty people per shift. Stylect turns that same expertise into a digital channel &ndash; extending the stylist's reach to shoppers on their couch, building their brief before they ever set foot in the store.</p>
       </div>
       <div class="cs-exec-kpis" style="margin-bottom:28px">
         <div class="cs-exec-kpi"><div class="cs-exec-kpi-num">&lt;24h</div><div class="cs-exec-kpi-label">Brief to purchase median target</div></div>
@@ -455,7 +478,7 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
         <div class="cs-stat-cell">
           <div class="cs-stat-eyebrow">03 · Trust Deficit</div>
           <div class="cs-stat-num">61%</div>
-          <div class="cs-stat-label">Of Gen Z shoppers say they distrust algorithmic fashion recommendations. The distrust isn't about accuracy — it's about intent.</div>
+          <div class="cs-stat-label">Of Gen Z shoppers say they distrust algorithmic fashion recommendations. The distrust isn't about accuracy &ndash; it's about intent.</div>
         </div>
         <div class="cs-stat-cell">
           <div class="cs-stat-eyebrow">04 · Time Constraint</div>
@@ -464,16 +487,16 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
         </div>
       </div>
       <div class="cs-pull-quote">&ldquo;The algorithm isn&rsquo;t wrong. It&rsquo;s just designed for the retailer, not for me. I can feel the difference.&rdquo;</div>
-      <p class="cs-body">The insight that grounds the entire product: recommendation failure is not a data problem. Every major fashion platform has more behavioral data than any stylist will ever collect. The failure is structural — the recommendation system is optimized for the retailer's margin, not the consumer's confidence. Once you name the real problem, the solution space changes completely. You're not building a better algorithm. You're building a trust infrastructure.</p>
+      <p class="cs-body">The insight that grounds the entire product: recommendation failure is not a data problem. Every major fashion platform has more behavioral data than any stylist will ever collect. The failure is structural &ndash; the recommendation system is optimized for the retailer's margin, not the consumer's confidence. Once you name the real problem, the solution space changes completely. You're not building a better algorithm. You're building a trust infrastructure.</p>
     </section>
 
     <!-- ══ 02 THE INSIGHT ══ -->
     <section class="cs-section cs-section-alt" id="cs-insight" data-cs-section="insight">
       <div class="cs-section-eyebrow"><span class="cs-section-num">02</span><span class="cs-section-title">The Insight</span></div>
-      <div class="cs-pull-quote">&ldquo;Algorithm proposes. Human closes. The platform earns on outcome — not engagement. That changes every incentive in the chain.&rdquo;</div>
+      <div class="cs-pull-quote">&ldquo;Algorithm proposes. Human closes. The platform earns on outcome &ndash; not engagement. That changes every incentive in the chain.&rdquo;</div>
       <div class="cs-body-2col">
         <p>The structural insight is this: the two sides of this problem have mirror-image failures. The consumer has data abundance and trust scarcity. The stylist has trust abundance and reach scarcity. Stylect is not a technology product. It's an infrastructure product that connects two entities who already have what the other needs, and gets out of the way.</p>
-        <p>The business model follows directly from this thesis. Affiliate revenue at checkout means Stylect only earns when a confident purchase is made — not when a user clicks, browses, or adds to cart. This is an unusual incentive design in fashion tech, where every other platform maximizes engagement. Outcome-based revenue aligns Stylect's interest with the shopper's goal: one right item, quickly, with confidence.</p>
+        <p>The business model follows directly from this thesis. Affiliate revenue at checkout means Stylect only earns when a confident purchase is made &ndash; not when a user clicks, browses, or adds to cart. This is an unusual incentive design in fashion tech, where every other platform maximizes engagement. Outcome-based revenue aligns Stylect's interest with the shopper's goal: one right item, quickly, with confidence.</p>
       </div>
       <div class="cs-stats cs-stats-3">
         <div class="cs-stat-cell">
@@ -492,14 +515,14 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
           <div class="cs-stat-label">Revenue only at purchase. Affiliate fee covers CAC. Stylist earns commission. Retailer pays platform fee for in-store conversion. Every participant wins only when the shopper wins.</div>
         </div>
       </div>
-      <p class="cs-body">The second-order insight is about the retailer's Brand Manager, who becomes the third user type in this ecosystem. Before Stylect, the Brand Manager has no data on how online discovery translates to in-store visits. After Stylect, every QR scan is attributed, every stylist's performance is ranked, every product's keep/return rate is visible in real time. The platform produces measurement infrastructure that didn't exist before — which is why the Brand Manager Dashboard (F10) is a CORE feature, not supporting.</p>
+      <p class="cs-body">The second-order insight is about the retailer's Brand Manager, who becomes the third user type in this ecosystem. Before Stylect, the Brand Manager has no data on how online discovery translates to in-store visits. After Stylect, every QR scan is attributed, every stylist's performance is ranked, every product's keep/return rate is visible in real time. The platform produces measurement infrastructure that didn't exist before &ndash; which is why the Brand Manager Dashboard (F10) is a CORE feature, not supporting.</p>
     </section>
 
     <!-- ══ 03 THE USERS ══ -->
     <section class="cs-section" id="cs-users" data-cs-section="users">
       <div class="cs-section-eyebrow"><span class="cs-section-num">03</span><span class="cs-section-title">The Users</span></div>
       <h2 class="cs-heading-serif">Three users. Three <em>primary jobs.</em> One platform.</h2>
-      <p class="cs-body" style="margin-bottom:32px;">Most two-sided marketplace designs fail because they optimize for one side. Stylect is three-sided. The Stylee needs confidence. The Stylist needs reach and income. The Brand Manager needs attribution and performance data. All three must win on every transaction — or the platform breaks.</p>
+      <p class="cs-body" style="margin-bottom:32px;">Most two-sided marketplace designs fail because they optimize for one side. Stylect is three-sided. The Stylee needs confidence. The Stylist needs reach and income. The Brand Manager needs attribution and performance data. All three must win on every transaction &ndash; or the platform breaks.</p>
 
       <div class="user-compare">
         <div class="user-col">
@@ -510,7 +533,7 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
             <div class="user-job">&ldquo;Find ONE item for ONE occasion in under 24h with confidence.&rdquo;</div>
           </div>
           <div class="user-features">
-            <div class="user-feature">Submits an Occasion Brief from home — event type, budget, vibe, dress code</div>
+            <div class="user-feature">Submits an Occasion Brief from home &ndash; event type, budget, vibe, dress code</div>
             <div class="user-feature">Reviews matched stylists, selects one based on specialty and availability</div>
             <div class="user-feature">Receives a 3-item shortlist with personal "why-it-works" notes</div>
             <div class="user-feature">Hearts a pick, receives a QR code, walks into the store</div>
@@ -532,7 +555,7 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
             <div class="user-feature">Receives new briefs via dashboard with SLA countdown (2h response)</div>
             <div class="user-feature">Reviews client brief, Style Vault history, and AI Co-Pilot suggestions</div>
             <div class="user-feature">Builds shortlist from inventory search, adds mandatory "why-it-works" note per item</div>
-            <div class="user-feature">Tracks session outcomes — kept/returned, ratings, trust badge progress</div>
+            <div class="user-feature">Tracks session outcomes &ndash; kept/returned, ratings, trust badge progress</div>
             <div class="user-feature">Sees commission attributed per QR reservation that converts to purchase</div>
           </div>
           <div class="user-metric">
@@ -549,7 +572,7 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
           </div>
           <div class="user-features">
             <div class="user-feature">Views real-time KPI dashboard: revenue, store visits, revision rate, trust index</div>
-            <div class="user-feature">Accesses stylist leaderboard — sessions, revenue, trust score, tier</div>
+            <div class="user-feature">Accesses stylist leaderboard &ndash; sessions, revenue, trust score, tier</div>
             <div class="user-feature">Reviews product insights: most-kept vs. most-returned by stylist shortlist</div>
             <div class="user-feature">Invites new stylists, monitors SLA compliance and onboarding rate</div>
             <div class="user-feature">Traces every in-store QR visit back to the online brief that originated it</div>
@@ -577,15 +600,15 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
           <div class="persona-card-name">Marcus L.</div>
           <div class="persona-card-city">32 · Creative Lead · Austin TX</div>
           <div class="persona-card-quote">&ldquo;My closet is random. I want a system, not another impulse buy.&rdquo;</div>
-          <div class="persona-card-detail">Problem: lack of style identity. Doesn't want more clothes — wants education. The "why-it-works" notes in F3 are his product. He keeps pieces specifically because he understands why they work.</div>
+          <div class="persona-card-detail">Problem: lack of style identity. Doesn't want more clothes &ndash; wants education. The "why-it-works" notes in F3 are his product. He keeps pieces specifically because he understands why they work.</div>
           <div class="persona-card-tension">Core role: Style Vault user. His retention data builds the recurring brief habit that drives 40% Day-60 reopen rate.</div>
         </div>
         <div class="persona-card">
           <div class="persona-card-tier">Goal Card #3 · The Trust-Deficient Consumer</div>
           <div class="persona-card-name">Priya R.</div>
           <div class="persona-card-city">35 · Product Manager · NYC</div>
-          <div class="persona-card-quote">&ldquo;I don't trust the algorithm. I want a real person who gets me — not the retailer's margin.&rdquo;</div>
-          <div class="persona-card-detail">Problem: distrust in automated recommendation, specifically around retailer incentives. The fact that stylists earn commission only on conversion — not on shortlist volume — is a structural trust signal she can read.</div>
+          <div class="persona-card-quote">&ldquo;I don't trust the algorithm. I want a real person who gets me &ndash; not the retailer's margin.&rdquo;</div>
+          <div class="persona-card-detail">Problem: distrust in automated recommendation, specifically around retailer incentives. The fact that stylists earn commission only on conversion &ndash; not on shortlist volume &ndash; is a structural trust signal she can read.</div>
           <div class="persona-card-tension">Core role: Proves the trust thesis. Her NPS response on "my stylist understood me" drives the Stylist Trust Index metric.</div>
         </div>
       </div>
@@ -604,7 +627,7 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
             <div class="research-method">
               <div class="research-method-type">Market · Behavioral Analysis</div>
               <div class="research-method-name">Fashion E-Commerce Abandonment Patterns</div>
-              <div class="research-method-meta">Cart abandonment data, dwell time analysis, and post-session survey patterns across fashion platforms. Identified decision-confidence as primary driver — not pricing or UX friction. Algorithm distrust most acute among 25-38 segment.</div>
+              <div class="research-method-meta">Cart abandonment data, dwell time analysis, and post-session survey patterns across fashion platforms. Identified decision-confidence as primary driver &ndash; not pricing or UX friction. Algorithm distrust most acute among 25-38 segment.</div>
               <span class="research-method-scale">73% Abandonment Baseline · Multiple Platforms</span>
             </div>
             <div class="research-method">
@@ -616,7 +639,7 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
             <div class="research-method">
               <div class="research-method-type">Primary · User Interviews</div>
               <div class="research-method-name">Stylee + Stylist Parallel Interviews</div>
-              <div class="research-method-meta">12 consumer interviews and 8 in-store associate interviews conducted concurrently. Consumer interviews validated trust and time as primary drivers. Associate interviews revealed systemic frustration with digital invisibility — expertise unrecognized beyond the shop floor.</div>
+              <div class="research-method-meta">12 consumer interviews and 8 in-store associate interviews conducted concurrently. Consumer interviews validated trust and time as primary drivers. Associate interviews revealed systemic frustration with digital invisibility &ndash; expertise unrecognized beyond the shop floor.</div>
               <span class="research-method-scale">20 Interviews · 2 User Types</span>
             </div>
             <div class="research-method">
@@ -643,86 +666,125 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
     <section class="cs-section cs-section-alt" id="cs-product" data-cs-section="product">
       <div class="cs-section-eyebrow"><span class="cs-section-num">04</span><span class="cs-section-title">The Product</span></div>
       <h2 class="cs-heading-serif">13 features. Four CORE. <em>One primary job.</em></h2>
-      <p class="cs-body" style="margin-bottom:32px;">The PRD makes a hard distinction between CORE (MVP must-have), SUPPORTING (ships after CORE), and FUTURE (roadmap). Every feature decision was evaluated against the primary job: find one item, one occasion, under 24 hours. Features that didn't serve that job moved right on the priority axis — regardless of how compelling they felt.</p>
+      <p class="cs-body" style="margin-bottom:16px;">The PRD makes a hard distinction between CORE (MVP must-have), SUPPORTING (ships after CORE), and FUTURE (roadmap). Every feature decision was evaluated against the primary job: find one item, one occasion, under 24 hours. Features that didn't serve that job moved right on the priority axis &ndash; regardless of how compelling they felt.</p>
+      <p class="cs-body" style="margin-bottom:28px;">The map below sorts <strong>CORE MVP</strong> (ships Day 1), <strong>Supporting</strong> (next phase), and <strong>Future</strong> roadmap bets &ndash; same structure as the decision log in section 07.</p>
 
-      <div class="priority-grid">
+      <div class="nike-tri" data-nike-tri>
+        <div class="nike-tri-tabs" role="tablist" aria-label="Feature priority columns">
+          <button type="button" class="nike-tri-tab active" data-nike-tab="mvp" aria-selected="true">CORE · MVP</button>
+          <button type="button" class="nike-tri-tab" data-nike-tab="next" aria-selected="false">Supporting</button>
+          <button type="button" class="nike-tri-tab" data-nike-tab="excl" aria-selected="false">Future</button>
+        </div>
+        <div class="nike-tri-grid">
+          <div class="nike-tri-col active" data-nike-col="mvp">
+            <div class="nike-tri-col-title">CORE · MVP</div>
         <div class="priority-card core">
-          <div class="priority-tag core">Core MVP · Ships Day 1</div>
-          <div class="priority-feature">F1 — 1:1 Stylist Match &amp; Chat</div>
+          <div class="priority-tag p0">Core MVP · Ships Day 1</div>
+          <div class="priority-feature">F1 &ndash; 1:1 Stylist Match &amp; Chat</div>
           <div class="priority-desc">Onboarding quiz captures size, budget, event, vibe. Algorithm scores stylists by inventory overlap and specialty. User selects. Persistent chat with 2h response SLA.</div>
           <div class="priority-prd">PRD: F1 · Primary conversion surface</div>
         </div>
         <div class="priority-card core">
-          <div class="priority-tag core">Core MVP · Ships Day 1</div>
-          <div class="priority-feature">F2 — Occasion Brief Builder</div>
+          <div class="priority-tag p0">Core MVP · Ships Day 1</div>
+          <div class="priority-feature">F2 &ndash; Occasion Brief Builder</div>
           <div class="priority-desc">5-question wizard: event type, dress code, weather, body focus, one-word vibe. Generates a shareable brief card visible to stylist. Pinterest board or selfie attachment supported.</div>
           <div class="priority-prd">PRD: F2 · Brief = the contract for the session</div>
         </div>
         <div class="priority-card core">
-          <div class="priority-tag core">Core MVP · Ships Day 1</div>
-          <div class="priority-feature">F3 — 3-Item Shortlist &amp; Buy-Links</div>
+          <div class="priority-tag p0">Core MVP · Ships Day 1</div>
+          <div class="priority-feature">F3 &ndash; 3-Item Shortlist &amp; Buy-Links</div>
           <div class="priority-desc">Stylist drags 3 SKUs into the shortlist. Each card shows product image, price, mandatory "why-it-works" note, and nearby stock. One-tap checkout or in-store reserve.</div>
           <div class="priority-prd">PRD: F3 · The "why-it-works" note is the product</div>
         </div>
         <div class="priority-card core">
-          <div class="priority-tag core">Core MVP · Ships Day 1</div>
-          <div class="priority-feature">F4 — 24h Try &amp; Decide Loop</div>
+          <div class="priority-tag p0">Core MVP · Ships Day 1</div>
+          <div class="priority-feature">F4 &ndash; 24h Try &amp; Decide Loop</div>
           <div class="priority-desc">In-app reminders for reserve/return deadlines. Swipe "Keep / Return / Ask Stylist." QR code generated for in-store pickup. Auto-generated return labels for e-comm orders.</div>
           <div class="priority-prd">PRD: F4 · Closes the offline loop</div>
         </div>
         <div class="priority-card core">
-          <div class="priority-tag core">Core MVP · Ships Day 1</div>
-          <div class="priority-feature">F7 — Trust Badges &amp; Reviews</div>
-          <div class="priority-desc">Post-purchase survey: "Did you feel understood?" Stylist earns "Listening," "Speed," "Taste" badges. Trust Index is a primary 90-day success metric — promoted from SUPPORTING to CORE in PRD revision.</div>
+          <div class="priority-tag p0">Core MVP · Ships Day 1</div>
+          <div class="priority-feature">F7 &ndash; Trust Badges &amp; Reviews</div>
+          <div class="priority-desc">Post-purchase survey: "Did you feel understood?" Stylist earns "Listening," "Speed," "Taste" badges. Trust Index is a primary 90-day success metric &ndash; promoted from SUPPORTING to CORE in PRD revision.</div>
           <div class="priority-prd">PRD: F7 · Promoted SUPPORTING → CORE</div>
         </div>
         <div class="priority-card core">
-          <div class="priority-tag core">Core MVP · Ships Day 1</div>
-          <div class="priority-feature">F10 — Brand Manager Dashboard</div>
+          <div class="priority-tag p0">Core MVP · Ships Day 1</div>
+          <div class="priority-feature">F10 &ndash; Brand Manager Dashboard</div>
           <div class="priority-desc">KPI view: revenue via Stylect, QR store visits, stylist leaderboard, product keep/return rates. Attribution infrastructure that makes the retailer partnership model viable. New in final PRD revision.</div>
-          <div class="priority-prd">PRD: F10 · New — added in Final PRD Rev.</div>
+          <div class="priority-prd">PRD: F10 · New &ndash; added in Final PRD Rev.</div>
         </div>
         <div class="priority-card core">
-          <div class="priority-tag core">Core MVP · Ships Day 1</div>
-          <div class="priority-feature">F11 — Stylist Workspace</div>
+          <div class="priority-tag p0">Core MVP · Ships Day 1</div>
+          <div class="priority-feature">F11 &ndash; Stylist Workspace</div>
           <div class="priority-desc">Kanban dashboard: New Briefs / In Progress / Awaiting Client. Performance snapshot, status toggle, SLA urgency sort. The operating environment for the stylist's daily workflow. New in final PRD revision.</div>
-          <div class="priority-prd">PRD: F11 · New — added in Final PRD Rev.</div>
+          <div class="priority-prd">PRD: F11 · New &ndash; added in Final PRD Rev.</div>
         </div>
+          </div>
+          <div class="nike-tri-col" data-nike-col="next">
+            <div class="nike-tri-col-title">Supporting · Next phase</div>
         <div class="priority-card supporting">
-          <div class="priority-tag supporting">Supporting · Ships After Core</div>
-          <div class="priority-feature">F5 — Video Micro-Consults</div>
+          <div class="priority-tag p1">Supporting · Ships After Core</div>
+          <div class="priority-feature">F5 &ndash; Video Micro-Consults</div>
           <div class="priority-desc">5-min booked slots for live fit and styling feedback. Snippet saved to user profile for future reference. Differentiating but not required to close the primary JTBD.</div>
           <div class="priority-prd">PRD: F5 · Depth without breadth dependency</div>
         </div>
         <div class="priority-card supporting">
-          <div class="priority-tag supporting">Supporting · Ships After Core</div>
-          <div class="priority-feature">F6 — Style Vault (Closet Lite)</div>
+          <div class="priority-tag p1">Supporting · Ships After Core</div>
+          <div class="priority-feature">F6 &ndash; Style Vault (Closet Lite)</div>
           <div class="priority-desc">Upload kept items; AI tags category and color. Stylist references vault in future recommendations. Cost-per-wear metric surfaces intentional buying behavior. Drives Day-60 brief reopen rate.</div>
           <div class="priority-prd">PRD: F6 · Retention driver, not acquisition</div>
         </div>
         <div class="priority-card supporting">
-          <div class="priority-tag supporting">Supporting · Ships After Core</div>
-          <div class="priority-feature">F12 — AI Co-Pilot</div>
+          <div class="priority-tag p1">Supporting · Ships After Core</div>
+          <div class="priority-feature">F12 &ndash; AI Co-Pilot</div>
           <div class="priority-desc">Smart suggestions to stylist based on Stylee's vault and session history. Surfaces kept silhouettes, color patterns, and budget flexibility signals. Reduces shortlist revision rate toward the &lt;15% target.</div>
           <div class="priority-prd">PRD: F12 · Speeds output, not replaces judgment</div>
         </div>
         <div class="priority-card supporting">
-          <div class="priority-tag supporting">Supporting · Ships After Core</div>
-          <div class="priority-feature">F13 — Stylist Tier System</div>
+          <div class="priority-tag p1">Supporting · Ships After Core</div>
+          <div class="priority-feature">F13 &ndash; Stylist Tier System</div>
           <div class="priority-desc">Bronze / Silver / Gold gamification based on session volume, trust score, and conversion rate. Signals quality to users without exposing raw performance data. Motivates stylists toward retention behaviors.</div>
           <div class="priority-prd">PRD: F13 · Motivation layer, not core mechanic</div>
         </div>
-        <div class="priority-card future">
-          <div class="priority-tag future">Future · Roadmap</div>
-          <div class="priority-feature">F8 — Retailer Inventory Bridge</div>
+          </div>
+          <div class="nike-tri-col" data-nike-col="excl">
+            <div class="nike-tri-col-title">Future · Roadmap</div>
+        <div class="priority-card deferred">
+          <div class="priority-tag deferred">Future · Roadmap</div>
+          <div class="priority-feature">F8 &ndash; Retailer Inventory Bridge</div>
           <div class="priority-desc">Real-time stock across 200+ brands. Price-drop alerts for wish-list items. Requires retailer API infrastructure that is costly to build before platform proves unit economics.</div>
           <div class="priority-prd">PRD: F8 · Infrastructure prerequisite</div>
         </div>
-        <div class="priority-card future">
-          <div class="priority-tag future">Future · Roadmap</div>
-          <div class="priority-feature">F9 — Style Course Modules</div>
+        <div class="priority-card deferred">
+          <div class="priority-tag deferred">Future · Roadmap</div>
+          <div class="priority-feature">F9 &ndash; Style Course Modules</div>
           <div class="priority-desc">10-min lessons from stylists on body shape, color theory, investment dressing. Unlocks after 3 successful purchases. Builds secondary revenue stream and deepens stylist relationship beyond transaction.</div>
           <div class="priority-prd">PRD: F9 · Education unlock, post-transaction depth</div>
+        </div>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="cs-heading-serif" style="font-size:clamp(20px,2.5vw,26px);font-weight:400;margin:48px 0 20px;line-height:1.2;text-transform:none;letter-spacing:0.02em">What was left out</h3>
+      <div class="cs-body-2col">
+        <div>
+          <p>Stylect removed every pattern that trades shopper anxiety for retailer revenue.</p>
+          <p>No browse grid. No urgency mechanics. No cart badge during the styling conversation. No AI-closed loop without human review. These aren't omissions &ndash; they're the product's competitive position.</p>
+        </div>
+        <div>
+          <p>Every removed pattern is a pattern that already exists everywhere else. Keep them and Stylect is indistinguishable from the subscription box models that came before it. More importantly: keep them and no stylist trusts the platform enough to stake their professional reputation on a recommendation it could override.</p>
+          <p>The constraints are what make both sides of the marketplace show up.</p>
+        </div>
+      </div>
+
+      <h3 class="cs-heading-serif" style="font-size:clamp(20px,2.5vw,26px);font-weight:400;margin:48px 0 20px;line-height:1.2;text-transform:none;letter-spacing:0.02em">What shifted</h3>
+      <div class="cs-body-2col">
+        <div>
+          <p>For the first time, a stylist's judgment has a direct line to attribution. Two hours to a shortlist. A QR code that closes the loop at purchase. A commission that proves the conversation drove the sale. The stylist's labor &ndash; previously invisible the moment a shopper left the store &ndash; becomes measurable and compensable at scale.</p>
+        </div>
+        <div>
+          <p>That's not a product feature. That's a structural correction to how retail expertise gets valued. Stylect doesn't just help shoppers find the right item in under 24 hours. It makes the person who found it for them worth paying.</p>
         </div>
       </div>
     </section>
@@ -730,16 +792,16 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
     <!-- ══ 05 DESIGN SYSTEM ══ -->
     <section class="cs-section" id="cs-design" data-cs-section="design">
       <div class="cs-section-eyebrow"><span class="cs-section-num">05</span><span class="cs-section-title">Design System</span></div>
-      <h2 class="cs-heading-serif">A molecular design system built for <em>three user contexts.</em></h2>
+      <h2 class="cs-heading-serif">Every design decision was made to make trust <em>legible.</em></h2>
       <div class="cs-body-2col">
-        <p>The design system was built alongside the PRD, not after it. Every token, component, and pattern was derived from a specific user need documented in the feature requirements — not from aesthetic preference. The system has two modes: light mode (the default for all app screens) and dark mode (reserved exclusively for onboarding screens 1.1–1.3, then washed out in a single 800ms transition as the user enters the app).</p>
-        <p>Four typefaces carry four distinct roles in the <em>product</em>. Cormorant Garamond 300 is the wordmark only — upright, architectural, no decoration. Cormorant Garamond 400–500 carries display copy and editorial weight — stylist names, occasion titles, shortlist card names. Didact Gothic handles all body copy and UI text. Space Mono carries metadata: prices, dates, labels, status indicators. No typeface crosses into another's territory.</p>
+        <p>Most fashion interfaces treat design as expression, brand flex, aesthetic signal &ndash; a reason to linger and keep you scrolling through an environment. Stylect is built through a molecular design system that aligns all tokens to perform a specific function in the trust sequence.</p>
+        <p>The system is built to WCAG AA contrast standards, as a design constraint so visual noise never substitutes for clarity. Elevated without being exclusive &ndash; legible for every user.</p>
       </div>
       <div class="cs-stats cs-stats-4">
         <div class="cs-stat-cell">
           <div class="cs-stat-eyebrow">Token System</div>
           <div class="cs-stat-num">2</div>
-          <div class="cs-stat-label">Color modes: Light (app default) and Dark (onboarding only). One-way transition — light never returns to dark mid-session.</div>
+          <div class="cs-stat-label">Color modes: Light (app default) and Dark (onboarding only). One-way transition &ndash; light never returns to dark mid-session.</div>
         </div>
         <div class="cs-stat-cell">
           <div class="cs-stat-eyebrow">Component Depth</div>
@@ -749,12 +811,12 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
         <div class="cs-stat-cell">
           <div class="cs-stat-eyebrow">Radius System</div>
           <div class="cs-stat-num">8</div>
-          <div class="cs-stat-label">Radius values from r-0 to r-pill (999px). Cards use r-lg (16px). Buttons use r-pill. The wordmark and rule elements always use r-0 — editorial never rounds.</div>
+          <div class="cs-stat-label">Radius values from r-0 to r-pill (999px). Cards use r-lg (16px). Buttons use r-pill. The wordmark and rule elements always use r-0 &ndash; editorial never rounds.</div>
         </div>
         <div class="cs-stat-cell">
           <div class="cs-stat-eyebrow">Glass Surfaces</div>
           <div class="cs-stat-num">3</div>
-          <div class="cs-stat-label">Glass Light (72% white), Glass Warm (80% ecru), Glass Dark (68% void black). Used over photography and gradients — never on flat solid backgrounds.</div>
+          <div class="cs-stat-label">Glass Light (72% white), Glass Warm (80% ecru), Glass Dark (68% void black). Used over photography and gradients &ndash; never on flat solid backgrounds.</div>
         </div>
       </div>
     </section>
@@ -787,7 +849,7 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
         <span class="app-showcase-label">Key Screens</span>
       </div>
       <div class="app-showcase-heading">Five screens. One<br><em>coherent decision chain.</em></div>
-      <p class="app-showcase-sub">Each screen is a distinct PM decision mapped to a PRD feature. None is a UI exercise — each one closes a specific gap in the trust infrastructure between discovery and the fitting room.</p>
+      <p class="app-showcase-sub">Each screen is a distinct PM decision mapped to a PRD feature. None is a UI exercise &ndash; each one closes a specific gap in the trust infrastructure between discovery and the fitting room.</p>
 
       <div class="app-showcase-layout">
         <nav class="app-screen-nav">
@@ -860,7 +922,7 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
             <div class="app-screen-meta">
               <div>
                 <div class="app-screen-desc-label">What this screen does</div>
-                <p class="app-screen-desc-text">The onboarding screen signals the product's nature immediately: no search bar, no browse grid. Only a brief builder entry point and a gallery of real stylists. The dark mode is a deliberate design decision — it marks the threshold before the world opens. The 800ms light wash transition on account creation is the only animation that ever runs once per session.</p>
+                <p class="app-screen-desc-text">The onboarding screen signals the product's nature immediately: no search bar, no browse grid. Only a brief builder entry point and a gallery of real stylists. The dark mode is a deliberate design decision &ndash; it marks the threshold before the world opens. The 800ms light wash transition on account creation is the only animation that ever runs once per session.</p>
               </div>
               <div class="app-screen-counter">01 / 05</div>
             </div>
@@ -912,7 +974,7 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
             <div class="app-screen-meta">
               <div>
                 <div class="app-screen-desc-label">What this screen does</div>
-                <p class="app-screen-desc-text">The algorithm surfaces three options ranked by inventory overlap, occasion specialty, and live availability. The user selects — not the algorithm. This sequence (machine proposes, human decides) is the foundational trust mechanism. The "TOP MATCH" badge is the only editorial judgment the platform makes. Everything else is the user's call.</p>
+                <p class="app-screen-desc-text">The algorithm surfaces three options ranked by inventory overlap, occasion specialty, and live availability. The user selects &ndash; not the algorithm. This sequence (machine proposes, human decides) is the foundational trust mechanism. The "TOP MATCH" badge is the only editorial judgment the platform makes. Everything else is the user's call.</p>
               </div>
               <div class="app-screen-counter">02 / 05</div>
             </div>
@@ -938,7 +1000,7 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
                 <!-- Messages -->
                 <rect x="68" y="104" width="380" height="48" rx="14" fill="white" stroke="#e4dfd8" stroke-width="1"/>
                 <text x="84" y="122" fill="#4a4540" font-family="Arial,sans-serif" font-size="11">Hi Sarah! Modern Romantic for an outdoor wedding</text>
-                <text x="84" y="138" fill="#4a4540" font-family="Arial,sans-serif" font-size="11">— beautiful. What's your preferred shoe height?</text>
+                <text x="84" y="138" fill="#4a4540" font-family="Arial,sans-serif" font-size="11">&ndash; beautiful. What's your preferred shoe height?</text>
                 <rect x="352" y="166" width="280" height="36" rx="14" fill="#1a1714"/>
                 <text x="492" y="182" fill="rgba(245,241,235,0.9)" font-family="Arial,sans-serif" font-size="11" text-anchor="middle">2-inch block heel, ivory. All day!</text>
                 <text x="620" y="198" fill="#a89f96" font-family="monospace" font-size="7" text-anchor="end">2:19 PM</text>
@@ -970,7 +1032,7 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
             <div class="app-screen-meta">
               <div>
                 <div class="app-screen-desc-label">What this screen does</div>
-                <p class="app-screen-desc-text">The chat screen is where the product's core mechanic lives. The "why-it-works" note — mandatory, enforced at the component level, always italicized — is the trust mechanism that makes this feel different from a product grid. Without it, this is Farfetch with extra steps. With it, this is a conversation that leads to a purchase that fits.</p>
+                <p class="app-screen-desc-text">The chat screen is where the product's core mechanic lives. The "why-it-works" note &ndash; mandatory, enforced at the component level, always italicized &ndash; is the trust mechanism that makes this feel different from a product grid. Without it, this is Farfetch with extra steps. With it, this is a conversation that leads to a purchase that fits.</p>
               </div>
               <div class="app-screen-counter">03 / 05</div>
             </div>
@@ -1026,7 +1088,7 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
             <div class="app-screen-meta">
               <div>
                 <div class="app-screen-desc-label">What this screen does</div>
-                <p class="app-screen-desc-text">The QR code is the measurement infrastructure that closes the loop. It's not a checkout feature — it's the mechanism that attributes the online brief to the in-store visit to the affiliate transaction. Without it, the Brand Manager has no data. The stylist has no commission. The platform has no proof of the model. Every design decision in the product builds toward this moment.</p>
+                <p class="app-screen-desc-text">The QR code is the measurement infrastructure that closes the loop. It's not a checkout feature &ndash; it's the mechanism that attributes the online brief to the in-store visit to the affiliate transaction. Without it, the Brand Manager has no data. The stylist has no commission. The platform has no proof of the model. Every design decision in the product builds toward this moment.</p>
               </div>
               <div class="app-screen-counter">04 / 05</div>
             </div>
@@ -1070,9 +1132,9 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
                 <text x="692" y="269" fill="#1a1714" font-family="monospace" font-size="9" letter-spacing="2" text-anchor="middle">ACCEPT →</text>
                 <!-- AI Co-Pilot banner -->
                 <rect x="28" y="300" width="744" height="120" rx="12" fill="rgba(201,185,154,0.06)" stroke="rgba(201,185,154,0.25)" stroke-width="1"/>
-                <text x="50" y="322" fill="rgba(201,185,154,0.6)" font-family="monospace" font-size="8" letter-spacing="2">✦ AI CO-PILOT — SARAH M.</text>
+                <text x="50" y="322" fill="rgba(201,185,154,0.6)" font-family="monospace" font-size="8" letter-spacing="2">✦ AI CO-PILOT &ndash; SARAH M.</text>
                 <text x="50" y="348" fill="rgba(245,241,235,0.55)" font-family="Arial,sans-serif" font-size="11">Based on Sarah's Vault: kept 3 wrap silhouettes, returned 2 shift dresses. Strong response to jewel tones.</text>
-                <text x="50" y="366" fill="rgba(245,241,235,0.45)" font-family="Arial,sans-serif" font-size="11">Budget likely flexible — history shows 12% over stated max.</text>
+                <text x="50" y="366" fill="rgba(245,241,235,0.45)" font-family="Arial,sans-serif" font-size="11">Budget likely flexible &ndash; history shows 12% over stated max.</text>
                 <rect x="50" y="380" width="104" height="20" rx="10" fill="rgba(201,185,154,0.12)" stroke="rgba(201,185,154,0.4)" stroke-width="1"/>
                 <text x="102" y="394" fill="rgba(201,185,154,0.8)" font-family="monospace" font-size="7" text-anchor="middle" letter-spacing="1">WRAP SILHOUETTE</text>
                 <rect x="162" y="380" width="84" height="20" rx="10" fill="rgba(201,185,154,0.12)" stroke="rgba(201,185,154,0.4)" stroke-width="1"/>
@@ -1084,7 +1146,7 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
             <div class="app-screen-meta">
               <div>
                 <div class="app-screen-desc-label">What this screen does</div>
-                <p class="app-screen-desc-text">The Stylist Workspace is where the human expertise lives. The AI Co-Pilot (F12, Supporting) surfaces patterns from the client's Style Vault — not to replace the stylist's judgment, but to compress the time it takes to reach a relevant shortlist. The SLA countdown is visible on every brief card. The platform creates urgency without creating anxiety.</p>
+                <p class="app-screen-desc-text">The Stylist Workspace is where the human expertise lives. The AI Co-Pilot (F12, Supporting) surfaces patterns from the client's Style Vault &ndash; not to replace the stylist's judgment, but to compress the time it takes to reach a relevant shortlist. The SLA countdown is visible on every brief card. The platform creates urgency without creating anxiety.</p>
               </div>
               <div class="app-screen-counter">05 / 05</div>
             </div>
@@ -1097,77 +1159,77 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
     <section class="proto-section" id="prototype" data-cs-section="prototype">
       <div class="proto-layout">
         <div class="proto-phone">
-          <iframe src="stylect-app.html" title="Stylect App Prototype" scrolling="yes"></iframe>
+          <iframe src="stylect-app.html?embed=case" title="Stylect App Prototype" scrolling="yes"></iframe>
         </div>
         <div class="proto-steps">
-          <div class="proto-step" data-step="1" data-src="stylect-app.html"><!-- TODO: replace data-src with per-screen anchor once prototype has named sections -->
+          <div class="proto-step" data-step="1" data-src="stylect-app.html?embed=case"><!-- TODO: replace data-src with per-screen anchor once prototype has named sections -->
             <div class="proto-step-num">01</div>
             <div class="proto-step-body">
               <div class="proto-step-title">Landing</div>
-              <div class="proto-step-desc">Sarah has a wedding in 36 hours. She&rsquo;s tried two fashion apps and abandoned both. She opens Stylect, sees the onboarding prompt &mdash; no search bar, no filters, no browse grid. Just a brief builder and a gallery of real stylists with real ratings. The product makes one thing clear: you won&rsquo;t be shopping here. You&rsquo;ll be having a conversation.</div>
+              <div class="proto-step-desc">Sarah has a wedding in 36 hours. She&rsquo;s tried two fashion apps and abandoned both. She opens Stylect, sees the onboarding prompt &ndash; no search bar, no filters, no browse grid. Just a brief builder and a gallery of real stylists with real ratings. The product makes one thing clear: you won&rsquo;t be shopping here. You&rsquo;ll be having a conversation.</div>
             </div>
           </div>
-          <div class="proto-step" data-step="2" data-src="stylect-app.html"><!-- TODO: replace data-src with per-screen anchor once prototype has named sections -->
+          <div class="proto-step" data-step="2" data-src="stylect-app.html?embed=case"><!-- TODO: replace data-src with per-screen anchor once prototype has named sections -->
             <div class="proto-step-num">02</div>
             <div class="proto-step-body">
               <div class="proto-step-title">Brief Builder</div>
-              <div class="proto-step-desc">Five questions. Occasion: outdoor wedding. Dress code: cocktail attire. Budget: &le;$250. Vibe: Modern Romantic. Context: 65&deg;F afternoon, ivory 2-inch block heels, needs to stay on all day. Auto-generates a shareable brief card visible to the matched stylist. This brief is the contract for the session &mdash; it defines everything the stylist is accountable to.</div>
+              <div class="proto-step-desc">Five questions. Occasion: outdoor wedding. Dress code: cocktail attire. Budget: &le;$250. Vibe: Modern Romantic. Context: 65&deg;F afternoon, ivory 2-inch block heels, needs to stay on all day. Auto-generates a shareable brief card visible to the matched stylist. This brief is the contract for the session &ndash; it defines everything the stylist is accountable to.</div>
             </div>
           </div>
-          <div class="proto-step" data-step="3" data-src="stylect-app.html"><!-- TODO: replace data-src with per-screen anchor once prototype has named sections -->
+          <div class="proto-step" data-step="3" data-src="stylect-app.html?embed=case"><!-- TODO: replace data-src with per-screen anchor once prototype has named sections -->
             <div class="proto-step-num">03</div>
             <div class="proto-step-body">
               <div class="proto-step-title">Stylist Match</div>
-              <div class="proto-step-desc">Algorithm scores in-store associates at partner retailers by inventory overlap, occasion specialty, rating, and live availability. Sarah sees three options. She picks Amara Kofi at Nordstrom &mdash; Gold Tier, 4.97 stars, &ldquo;Cocktail &amp; Event&rdquo; specialist, available now with an 8-minute average response time. The algorithm surfaces. The human selects. That sequence matters.</div>
+              <div class="proto-step-desc">Algorithm scores in-store associates at partner retailers by inventory overlap, occasion specialty, rating, and live availability. Sarah sees three options. She picks Amara Kofi at Nordstrom &ndash; Gold Tier, 4.97 stars, &ldquo;Cocktail &amp; Event&rdquo; specialist, available now with an 8-minute average response time. The algorithm surfaces. The human selects. That sequence matters.</div>
             </div>
           </div>
-          <div class="proto-step" data-step="4" data-src="stylect-app.html"><!-- TODO: replace data-src with per-screen anchor once prototype has named sections -->
+          <div class="proto-step" data-step="4" data-src="stylect-app.html?embed=case"><!-- TODO: replace data-src with per-screen anchor once prototype has named sections -->
             <div class="proto-step-num">04</div>
             <div class="proto-step-body">
               <div class="proto-step-title">Chat</div>
-              <div class="proto-step-desc">&ldquo;The Modern Romantic vibe for an outdoor wedding is beautiful. To nail the hemline &mdash; what&rsquo;s your preferred shoe height?&rdquo; One clarifying question, delivered in 8 minutes. The SLA is 2 hours. Amara responds in 8 minutes. That delta is not a UX detail; it&rsquo;s a trust signal. Sarah replies: 2-inch block heel, ivory, all day. Amara has everything she needs.</div>
+              <div class="proto-step-desc">&ldquo;The Modern Romantic vibe for an outdoor wedding is beautiful. To nail the hemline &ndash; what&rsquo;s your preferred shoe height?&rdquo; One clarifying question, delivered in 8 minutes. The SLA is 2 hours. Amara responds in 8 minutes. That delta is not a UX detail; it&rsquo;s a trust signal. Sarah replies: 2-inch block heel, ivory, all day. Amara has everything she needs.</div>
             </div>
           </div>
-          <div class="proto-step" data-step="5" data-src="stylect-app.html"><!-- TODO: replace data-src with per-screen anchor once prototype has named sections -->
+          <div class="proto-step" data-step="5" data-src="stylect-app.html?embed=case"><!-- TODO: replace data-src with per-screen anchor once prototype has named sections -->
             <div class="proto-step-num">05</div>
             <div class="proto-step-body">
               <div class="proto-step-title">Shortlist</div>
-              <div class="proto-step-desc">Within the hour, three shortlist cards arrive &mdash; each with an image, price, nearby stock indicator, and Amara&rsquo;s personal &ldquo;why-it-works&rdquo; note. &ldquo;#1: The emerald silk wrap accentuates your waist and pairs beautifully with your auburn hair. The wrap silhouette photographs exceptionally at outdoor settings.&rdquo; The note is the product. Without it, this is just another grid of dresses.</div>
+              <div class="proto-step-desc">Within the hour, three shortlist cards arrive &ndash; each with an image, price, nearby stock indicator, and Amara&rsquo;s personal &ldquo;why-it-works&rdquo; note. &ldquo;#1: The emerald silk wrap accentuates your waist and pairs beautifully with your auburn hair. The wrap silhouette photographs exceptionally at outdoor settings.&rdquo; The note is the product. Without it, this is just another grid of dresses.</div>
             </div>
           </div>
-          <div class="proto-step" data-step="6" data-src="stylect-app.html"><!-- TODO: replace data-src with per-screen anchor once prototype has named sections -->
+          <div class="proto-step" data-step="6" data-src="stylect-app.html?embed=case"><!-- TODO: replace data-src with per-screen anchor once prototype has named sections -->
             <div class="proto-step-num">06</div>
             <div class="proto-step-body">
               <div class="proto-step-title">Decision</div>
-              <div class="proto-step-desc">Sarah hearts the emerald wrap. The app immediately shows: &ldquo;Size 6 in stock at Nordstrom Short Pump &middot; 0.8 miles away.&rdquo; She taps &ldquo;Reserve &amp; Try In-Store.&rdquo; A QR code is generated. No checkout required yet. No credit card. The product removes friction at the highest-anxiety decision point &mdash; the moment of commitment &mdash; by making the next action feel reversible.</div>
+              <div class="proto-step-desc">Sarah hearts the emerald wrap. The app immediately shows: &ldquo;Size 6 in stock at Nordstrom Short Pump &middot; 0.8 miles away.&rdquo; She taps &ldquo;Reserve &amp; Try In-Store.&rdquo; A QR code is generated. No checkout required yet. No credit card. The product removes friction at the highest-anxiety decision point &ndash; the moment of commitment &ndash; by making the next action feel reversible.</div>
             </div>
           </div>
-          <div class="proto-step" data-step="7" data-src="stylect-app.html"><!-- TODO: replace data-src with per-screen anchor once prototype has named sections -->
+          <div class="proto-step" data-step="7" data-src="stylect-app.html?embed=case"><!-- TODO: replace data-src with per-screen anchor once prototype has named sections -->
             <div class="proto-step-num">07</div>
             <div class="proto-step-body">
               <div class="proto-step-title">Store Visit</div>
-              <div class="proto-step-desc">Sarah arrives at the Nordstrom pickup counter. QR code is scanned. The dress is already pulled in her size. She tries it on. She loves it. This is the moment the platform is designed for. Every prior step &mdash; the brief, the match, the note, the QR &mdash; was infrastructure for this 90 seconds in the fitting room. The product doesn&rsquo;t end at the screen. It ends at the fitting room mirror.</div>
+              <div class="proto-step-desc">Sarah arrives at the Nordstrom pickup counter. QR code is scanned. The dress is already pulled in her size. She tries it on. She loves it. This is the moment the platform is designed for. Every prior step &ndash; the brief, the match, the note, the QR &ndash; was infrastructure for this 90 seconds in the fitting room. The product doesn&rsquo;t end at the screen. It ends at the fitting room mirror.</div>
             </div>
           </div>
-          <div class="proto-step" data-step="8" data-src="stylect-app.html"><!-- TODO: replace data-src with per-screen anchor once prototype has named sections -->
+          <div class="proto-step" data-step="8" data-src="stylect-app.html?embed=case"><!-- TODO: replace data-src with per-screen anchor once prototype has named sections -->
             <div class="proto-step-num">08</div>
             <div class="proto-step-body">
               <div class="proto-step-title">Checkout</div>
-              <div class="proto-step-desc">She completes the purchase in-app using Apple Pay. The affiliate cookie fires on the Nordstrom transaction. Stylect earns its margin. Amara&rsquo;s commission is logged. The Brand Manager&rsquo;s dashboard updates: one more QR-attributed in-store sale. All three users win on the same transaction &mdash; which is the only incentive structure that makes a three-sided marketplace sustainable.</div>
+              <div class="proto-step-desc">She completes the purchase in-app using Apple Pay. The affiliate cookie fires on the Nordstrom transaction. Stylect earns its margin. Amara&rsquo;s commission is logged. The Brand Manager&rsquo;s dashboard updates: one more QR-attributed in-store sale. All three users win on the same transaction &ndash; which is the only incentive structure that makes a three-sided marketplace sustainable.</div>
             </div>
           </div>
-          <div class="proto-step" data-step="9" data-src="stylect-app.html"><!-- TODO: replace data-src with per-screen anchor once prototype has named sections -->
+          <div class="proto-step" data-step="9" data-src="stylect-app.html?embed=case"><!-- TODO: replace data-src with per-screen anchor once prototype has named sections -->
             <div class="proto-step-num">09</div>
             <div class="proto-step-body">
               <div class="proto-step-title">Follow-Up</div>
-              <div class="proto-step-desc">The next morning, Sarah receives a push notification: &ldquo;You kept the emerald wrap! Add it to your Style Vault to track cost-per-wear and help Amara build better shortlists for you next time.&rdquo; This is the secondary JTBD activating. The Style Vault (F6, Supporting) isn&rsquo;t a feature for Day 1 &mdash; it&rsquo;s the feature that turns a transaction into a relationship.</div>
+              <div class="proto-step-desc">The next morning, Sarah receives a push notification: &ldquo;You kept the emerald wrap! Add it to your Style Vault to track cost-per-wear and help Amara build better shortlists for you next time.&rdquo; This is the secondary JTBD activating. The Style Vault (F6, Supporting) isn&rsquo;t a feature for Day 1 &ndash; it&rsquo;s the feature that turns a transaction into a relationship.</div>
             </div>
           </div>
-          <div class="proto-step" data-step="10" data-src="stylect-app.html"><!-- TODO: replace data-src with per-screen anchor once prototype has named sections -->
+          <div class="proto-step" data-step="10" data-src="stylect-app.html?embed=case"><!-- TODO: replace data-src with per-screen anchor once prototype has named sections -->
             <div class="proto-step-num">10</div>
             <div class="proto-step-body">
               <div class="proto-step-title">Metric</div>
-              <div class="proto-step-desc">Brief submitted to purchase completed in 18 hours &mdash; against a 24-hour target. NPS survey response: 10. &ldquo;My stylist understood me&rdquo; rating: 5/5. Time-to-solve beats the median target by 25%. This is the outcome the PRD was built to produce. Not a beautiful product. A product that works &mdash; that closes the gap between discovery and the fitting room, on time, with a human in the loop.</div>
+              <div class="proto-step-desc">Brief submitted to purchase completed in 18 hours &ndash; against a 24-hour target. NPS survey response: 10. &ldquo;My stylist understood me&rdquo; rating: 5/5. Time-to-solve beats the median target by 25%. This is the outcome the PRD was built to produce. Not a beautiful product. A product that works &ndash; that closes the gap between discovery and the fitting room, on time, with a human in the loop.</div>
             </div>
           </div>
         </div>
@@ -1178,104 +1240,97 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
     <section class="cs-section" id="cs-decisions" data-cs-section="decisions">
       <div class="cs-section-eyebrow"><span class="cs-section-num">07</span><span class="cs-section-title">Decision Log</span></div>
       <h2 class="cs-heading-serif">What we built, what we deferred, <em>and why.</em></h2>
-      <p class="cs-body" style="margin-bottom:32px;">Product decisions are only credible when they're documented with the tradeoff accepted, not just the choice made. This log covers every significant decision in the PRD, design system, and prototype — including the ones that were cut.</p>
+      <p class="cs-body" style="margin-bottom:16px;">Product decisions are only credible when they're documented with the tradeoff accepted, not just the choice made. This log covers every significant decision in the PRD, design system, and prototype &ndash; including the ones that were cut.</p>
+      <p class="cs-body" style="margin-bottom:28px;">Same three-part structure as the feature map: <strong>shipped</strong> (MVP), <strong>deferred</strong> (next phase), and <strong>cut</strong> (explicit non-goals).</p>
 
-      <table class="decision-log">
-        <thead>
-          <tr>
-            <th>Decision</th>
-            <th>What We Did</th>
-            <th>Tradeoff Accepted</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="shipped">
-            <td>Primary JTBD</td>
-            <td>Scoped MVP to one job: find ONE item, ONE occasion, under 24h. Wardrobe building is a secondary job that only activates after the first purchase.</td>
-            <td>Slower growth in Style Vault data, which feeds AI Co-Pilot quality. Primary job must prove itself before secondary job gets investment.</td>
-            <td>Shipped</td>
-          </tr>
-          <tr class="shipped">
-            <td>Shortlist Size</td>
-            <td>Exactly 3 items. Enforced at the product level — stylists cannot send 2 or 4. The constraint is the feature.</td>
-            <td>A shopper might want more options. The research shows more options increase abandonment, not confidence. 3 is a decision, not a limitation.</td>
-            <td>Shipped</td>
-          </tr>
-          <tr class="shipped">
-            <td>"Why-It-Works" Note</td>
-            <td>Made mandatory at the component level — field cannot be submitted empty. Enforced in CSS as italic blockquote, always attributed to the stylist by name.</td>
-            <td>Slows down stylist shortlist creation by 3-5 minutes per session. Required: without it, the product is a grid with a human middleman. With it, it's a conversation.</td>
-            <td>Shipped</td>
-          </tr>
-          <tr class="shipped">
-            <td>QR Attribution</td>
-            <td>Promoted QR code from a "nice to have" checkout feature to the core measurement infrastructure. Every in-store visit is QR-attributed.</td>
-            <td>Requires retailer POS integration that adds implementation cost. Non-negotiable: without attribution, the Brand Manager has no data and the retailer partnership model has no proof point.</td>
-            <td>Shipped · CORE</td>
-          </tr>
-          <tr class="shipped">
-            <td>Brand Manager as User</td>
-            <td>Added Brand Manager as a third user type in the final PRD revision. F10 (Brand Manager Dashboard) promoted to CORE from originally being outside scope.</td>
-            <td>Adds design and engineering scope to MVP. Required: without the manager dashboard, there's no B2B revenue argument and no data to prove the retailer partnership model.</td>
-            <td>Shipped · CORE</td>
-          </tr>
-          <tr class="shipped">
-            <td>Trust Badges (F7)</td>
-            <td>Promoted from SUPPORTING to CORE after recognizing that "Stylist Trust Index ≥ 4.5 / 5" is a 90-day success metric, not a post-MVP nice-to-have.</td>
-            <td>Adds survey infrastructure to Day 1 scope. If trust isn't measured from session one, you have no baseline and no way to defend the model to retailer partners.</td>
-            <td>Shipped · Promoted to CORE</td>
-          </tr>
-          <tr class="shipped">
-            <td>Dark Mode — Onboarding Only</td>
-            <td>Dark mode used exclusively for screens 1.1–1.3. The transition from dark to light on account confirmation is a single 800ms background wash. It happens once per session and never repeats.</td>
-            <td>More complex engineering than a single-mode design. The threshold moment — entering the app — needed to feel like an event. Dark creates that threshold without persisting it into the app itself.</td>
-            <td>Shipped</td>
-          </tr>
-          <tr class="shipped">
-            <td>Radius System</td>
-            <td>Shifted from zero-radius (cold luxury) to a warm radius system after referencing photo inspiration showing liquid glass, rounded cards, accessible fashion apps (Fancy, ZARA mobile). Pill radius on buttons, r-lg on cards.</td>
-            <td>Loses some of the architectural severity of zero-radius. Gained: the app feels like something a real person would open, not a mood board. Editorial quality is preserved in typography, not in sharp corners.</td>
-            <td>Shipped</td>
-          </tr>
-          <tr class="deferred">
-            <td>AI Co-Pilot (F12)</td>
-            <td>Built the UI component and surfaced it in the design system. Deferred from CORE to SUPPORTING — the stylist workspace works without it, and the algorithm that powers it requires Style Vault data that won't exist at launch.</td>
-            <td>Stylists work slightly slower without AI suggestions in early sessions. Acceptable: the whole premise is human judgment. Co-Pilot accelerates good judgment; it doesn't substitute for the absence of it.</td>
-            <td>Deferred · Supporting</td>
-          </tr>
-          <tr class="deferred">
-            <td>Stylist Tiers (F13)</td>
-            <td>Bronze/Silver/Gold system built in the design system as badge components. Deferred from Day 1 because ranking stylists before there's session volume data would produce arbitrary rankings that undermine trust rather than signal it.</td>
-            <td>Stylists onboarding early won't have public tier badges. Acceptable: the first cohort earns trust through ratings and session count before tiers matter.</td>
-            <td>Deferred · Supporting</td>
-          </tr>
-          <tr class="deferred">
-            <td>Style Vault (F6)</td>
-            <td>Interface built in the prototype. Deferred from CORE because Style Vault requires at least one purchase to have anything to vault. It's a retention feature, not an acquisition feature.</td>
-            <td>Day-60 reopen rate target (40%) depends partially on Vault. Mitigated by designing the post-purchase push notification as the Vault activation trigger.</td>
-            <td>Deferred · Supporting</td>
-          </tr>
-          <tr class="cut">
-            <td>Social Feed / Community</td>
-            <td>Not built. Not scoped. Not in the roadmap. Explicitly listed as Out of Scope in the PRD.</td>
-            <td>Community features are a gravity trap — they consume scope, delay shipping, and attract users who want to browse, not buy. Stylect is a confidence platform, not a discovery platform.</td>
-            <td>Cut · Out of Scope</td>
-          </tr>
-          <tr class="cut">
-            <td>AI-Generated Outfits Without Human Review</td>
-            <td>Explicitly out of scope in the PRD. The entire trust argument depends on human authorship of the recommendation. An AI-generated shortlist is a Stitch Fix clone with a worse UX.</td>
-            <td>Foregoes scale efficiency. Algorithm can surface and rank, but the human writes the note and closes the session. That's not a constraint on the product — it's the product.</td>
-            <td>Cut · Out of Scope</td>
-          </tr>
-          <tr class="cut">
-            <td>Subscription Box Model</td>
-            <td>Out of scope. Subscription boxes commoditize the stylist relationship into a recurring logistics operation. Every prior attempt (Trunk Club, Stitch Fix premium tier) underperformed.</td>
-            <td>Lower ARPU per customer. Avoided the trap of confusing frequency with depth. Depth is the moat — one excellent recommendation that leads to a second brief is worth more than twelve mediocre boxes.</td>
-            <td>Cut · Out of Scope</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="nike-tri nike-tri-decisions" data-nike-tri>
+        <div class="nike-tri-tabs" role="tablist" aria-label="Decision log columns">
+          <button type="button" class="nike-tri-tab active" data-nike-tab="mvp" aria-selected="true">Shipped</button>
+          <button type="button" class="nike-tri-tab" data-nike-tab="next" aria-selected="false">Deferred</button>
+          <button type="button" class="nike-tri-tab" data-nike-tab="excl" aria-selected="false">Cut</button>
+        </div>
+        <div class="nike-tri-grid">
+          <div class="nike-tri-col active" data-nike-col="mvp">
+            <div class="nike-tri-col-title">Shipped · MVP</div>
+            <div class="nike-decision-card">
+              <div class="nike-decision-title">Primary JTBD</div>
+              <p class="nike-decision-built"><strong>Built:</strong> Scoped MVP to one job: find ONE item, ONE occasion, under 24h. Wardrobe building is a secondary job that only activates after the first purchase. <em>Status: Shipped.</em></p>
+              <p class="nike-decision-why"><strong>Tradeoff:</strong> Slower growth in Style Vault data, which feeds AI Co-Pilot quality. Primary job must prove itself before secondary job gets investment.</p>
+            </div>
+            <div class="nike-decision-card">
+              <div class="nike-decision-title">Shortlist Size</div>
+              <p class="nike-decision-built"><strong>Built:</strong> Exactly 3 items. Enforced at the product level &ndash; stylists cannot send 2 or 4. The constraint is the feature. <em>Status: Shipped.</em></p>
+              <p class="nike-decision-why"><strong>Tradeoff:</strong> A shopper might want more options. The research shows more options increase abandonment, not confidence. 3 is a decision, not a limitation.</p>
+            </div>
+            <div class="nike-decision-card">
+              <div class="nike-decision-title">&ldquo;Why-It-Works&rdquo; Note</div>
+              <p class="nike-decision-built"><strong>Built:</strong> Made mandatory at the component level &ndash; field cannot be submitted empty. Enforced in CSS as italic blockquote, always attributed to the stylist by name. <em>Status: Shipped.</em></p>
+              <p class="nike-decision-why"><strong>Tradeoff:</strong> Slows down stylist shortlist creation by 3-5 minutes per session. Required: without it, the product is a grid with a human middleman. With it, it's a conversation.</p>
+            </div>
+            <div class="nike-decision-card">
+              <div class="nike-decision-title">QR Attribution</div>
+              <p class="nike-decision-built"><strong>Built:</strong> Promoted QR code from a &ldquo;nice to have&rdquo; checkout feature to the core measurement infrastructure. Every in-store visit is QR-attributed. <em>Status: Shipped · CORE.</em></p>
+              <p class="nike-decision-why"><strong>Tradeoff:</strong> Requires retailer POS integration that adds implementation cost. Non-negotiable: without attribution, the Brand Manager has no data and the retailer partnership model has no proof point.</p>
+            </div>
+            <div class="nike-decision-card">
+              <div class="nike-decision-title">Brand Manager as User</div>
+              <p class="nike-decision-built"><strong>Built:</strong> Added Brand Manager as a third user type in the final PRD revision. F10 (Brand Manager Dashboard) promoted to CORE from originally being outside scope. <em>Status: Shipped · CORE.</em></p>
+              <p class="nike-decision-why"><strong>Tradeoff:</strong> Adds design and engineering scope to MVP. Required: without the manager dashboard, there's no B2B revenue argument and no data to prove the retailer partnership model.</p>
+            </div>
+            <div class="nike-decision-card">
+              <div class="nike-decision-title">Trust Badges (F7)</div>
+              <p class="nike-decision-built"><strong>Built:</strong> Promoted from SUPPORTING to CORE after recognizing that &ldquo;Stylist Trust Index &ge; 4.5 / 5&rdquo; is a 90-day success metric, not a post-MVP nice-to-have. <em>Status: Shipped · Promoted to CORE.</em></p>
+              <p class="nike-decision-why"><strong>Tradeoff:</strong> Adds survey infrastructure to Day 1 scope. If trust isn't measured from session one, you have no baseline and no way to defend the model to retailer partners.</p>
+            </div>
+            <div class="nike-decision-card">
+              <div class="nike-decision-title">Dark Mode &ndash; Onboarding Only</div>
+              <p class="nike-decision-built"><strong>Built:</strong> Dark mode used exclusively for screens 1.1&ndash;1.3. The transition from dark to light on account confirmation is a single 800ms background wash. It happens once per session and never repeats. <em>Status: Shipped.</em></p>
+              <p class="nike-decision-why"><strong>Tradeoff:</strong> More complex engineering than a single-mode design. The threshold moment &ndash; entering the app &ndash; needed to feel like an event. Dark creates that threshold without persisting it into the app itself.</p>
+            </div>
+            <div class="nike-decision-card">
+              <div class="nike-decision-title">Radius System</div>
+              <p class="nike-decision-built"><strong>Built:</strong> Shifted from zero-radius (cold luxury) to a warm radius system after referencing photo inspiration showing liquid glass, rounded cards, accessible fashion apps (Fancy, ZARA mobile). Pill radius on buttons, r-lg on cards. <em>Status: Shipped.</em></p>
+              <p class="nike-decision-why"><strong>Tradeoff:</strong> Loses some of the architectural severity of zero-radius. Gained: the app feels like something a real person would open, not a mood board. Editorial quality is preserved in typography, not in sharp corners.</p>
+            </div>
+          </div>
+          <div class="nike-tri-col" data-nike-col="next">
+            <div class="nike-tri-col-title">Deferred · Next phase</div>
+            <div class="nike-decision-card">
+              <div class="nike-decision-title">AI Co-Pilot (F12)</div>
+              <p class="nike-decision-built"><strong>Plan:</strong> Built the UI component and surfaced it in the design system. Deferred from CORE to SUPPORTING &ndash; the stylist workspace works without it, and the algorithm that powers it requires Style Vault data that won't exist at launch. <em>Status: Deferred · Supporting.</em></p>
+              <p class="nike-decision-why"><strong>Tradeoff:</strong> Stylists work slightly slower without AI suggestions in early sessions. Acceptable: the whole premise is human judgment. Co-Pilot accelerates good judgment; it doesn't substitute for the absence of it.</p>
+            </div>
+            <div class="nike-decision-card">
+              <div class="nike-decision-title">Stylist Tiers (F13)</div>
+              <p class="nike-decision-built"><strong>Plan:</strong> Bronze/Silver/Gold system built in the design system as badge components. Deferred from Day 1 because ranking stylists before there's session volume data would produce arbitrary rankings that undermine trust rather than signal it. <em>Status: Deferred · Supporting.</em></p>
+              <p class="nike-decision-why"><strong>Tradeoff:</strong> Stylists onboarding early won't have public tier badges. Acceptable: the first cohort earns trust through ratings and session count before tiers matter.</p>
+            </div>
+            <div class="nike-decision-card">
+              <div class="nike-decision-title">Style Vault (F6)</div>
+              <p class="nike-decision-built"><strong>Plan:</strong> Interface built in the prototype. Deferred from CORE because Style Vault requires at least one purchase to have anything to vault. It's a retention feature, not an acquisition feature. <em>Status: Deferred · Supporting.</em></p>
+              <p class="nike-decision-why"><strong>Tradeoff:</strong> Day-60 reopen rate target (40%) depends partially on Vault. Mitigated by designing the post-purchase push notification as the Vault activation trigger.</p>
+            </div>
+          </div>
+          <div class="nike-tri-col" data-nike-col="excl">
+            <div class="nike-tri-col-title">Cut · Out of scope</div>
+            <div class="nike-decision-card excluded">
+              <div class="nike-decision-title">Social Feed / Community</div>
+              <p class="nike-decision-built"><strong>Cut:</strong> Not built. Not scoped. Not in the roadmap. Explicitly listed as Out of Scope in the PRD. <em>Status: Cut · Out of Scope.</em></p>
+              <p class="nike-decision-why"><strong>Tradeoff:</strong> Community features are a gravity trap &ndash; they consume scope, delay shipping, and attract users who want to browse, not buy. Stylect is a confidence platform, not a discovery platform.</p>
+            </div>
+            <div class="nike-decision-card excluded">
+              <div class="nike-decision-title">AI-Generated Outfits Without Human Review</div>
+              <p class="nike-decision-built"><strong>Cut:</strong> Explicitly out of scope in the PRD. The entire trust argument depends on human authorship of the recommendation. An AI-generated shortlist is a Stitch Fix clone with a worse UX. <em>Status: Cut · Out of Scope.</em></p>
+              <p class="nike-decision-why"><strong>Tradeoff:</strong> Foregoes scale efficiency. Algorithm can surface and rank, but the human writes the note and closes the session. That's not a constraint on the product &ndash; it's the product.</p>
+            </div>
+            <div class="nike-decision-card excluded">
+              <div class="nike-decision-title">Subscription Box Model</div>
+              <p class="nike-decision-built"><strong>Cut:</strong> Out of scope. Subscription boxes commoditize the stylist relationship into a recurring logistics operation. Every prior attempt (Trunk Club, Stitch Fix premium tier) underperformed. <em>Status: Cut · Out of Scope.</em></p>
+              <p class="nike-decision-why"><strong>Tradeoff:</strong> Lower ARPU per customer. Avoided the trap of confusing frequency with depth. Depth is the moat &ndash; one excellent recommendation that leads to a second brief is worth more than twelve mediocre boxes.</p>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <!-- What we didn't build -->
       <div class="cs-section-eyebrow" style="margin-bottom:20px;"><span class="cs-section-title">What We Didn&rsquo;t Build &amp; Why</span></div>
@@ -1288,12 +1343,12 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
         <div class="nb-card">
           <div class="nb-card-label">Not Built · Out of Scope</div>
           <div class="nb-card-title">Scarcity &amp; Urgency Mechanics</div>
-          <div class="nb-card-body">"Only 1 left in your size" — the manipulation pattern that defines fast fashion UX. Stylect's trust premise depends on the absence of urgency mechanics. The SLA timer on the stylist workspace is a service commitment, not a pressure tactic.</div>
+          <div class="nb-card-body">"Only 1 left in your size" &ndash; the manipulation pattern that defines fast fashion UX. Stylect's trust premise depends on the absence of urgency mechanics. The SLA timer on the stylist workspace is a service commitment, not a pressure tactic.</div>
         </div>
         <div class="nb-card">
           <div class="nb-card-label">Not Built · Out of Scope</div>
           <div class="nb-card-title">Cart Badge During Live Session</div>
-          <div class="nb-card-body">The cart badge is hidden during any active chat session. Commerce is the epilogue, not the context. Showing a cart badge during a conversation about what to buy conflates the shopping experience with the styling experience — they must be sequential, not simultaneous.</div>
+          <div class="nb-card-body">The cart badge is hidden during any active chat session. Commerce is the epilogue, not the context. Showing a cart badge during a conversation about what to buy conflates the shopping experience with the styling experience &ndash; they must be sequential, not simultaneous.</div>
         </div>
         <div class="nb-card">
           <div class="nb-card-label">Not Built · Future</div>
@@ -1310,11 +1365,11 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
       <div class="outcome-stats">
         <div class="outcome-stat">
           <div class="outcome-stat-num">&lt;24h</div>
-          <div class="outcome-stat-label">Median brief-to-purchase target. The primary flow clocked 18 hours. The 24h target is the primary success metric for the 90-day MVP period — Speed-to-Solve is the claim the model must prove.</div>
+          <div class="outcome-stat-label">Median brief-to-purchase target. The primary flow clocked 18 hours. The 24h target is the primary success metric for the 90-day MVP period &ndash; Speed-to-Solve is the claim the model must prove.</div>
         </div>
         <div class="outcome-stat">
           <div class="outcome-stat-num">70%</div>
-          <div class="outcome-stat-label">Confidence Conversion target — shoppers reporting "I feel more confident in my purchase" via post-checkout survey. This is not a vanity metric; it's the behavioral proof that human-mediated recommendation outperforms algorithm-only.</div>
+          <div class="outcome-stat-label">Confidence Conversion target &ndash; shoppers reporting "I feel more confident in my purchase" via post-checkout survey. This is not a vanity metric; it's the behavioral proof that human-mediated recommendation outperforms algorithm-only.</div>
         </div>
         <div class="outcome-stat">
           <div class="outcome-stat-num">40%</div>
@@ -1336,10 +1391,10 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
         </tbody>
       </table>
 
-      <div class="cs-pull-quote">&ldquo;The product doesn&rsquo;t end at the screen. It ends at the fitting room mirror — and the QR code is the thread that connects every pixel to that moment.&rdquo;</div>
+      <div class="cs-pull-quote">&ldquo;The product doesn&rsquo;t end at the screen. It ends at the fitting room mirror &ndash; and the QR code is the thread that connects every pixel to that moment.&rdquo;</div>
 
       <p class="cs-body">The discipline here is constraint. The PRD makes 14 hard decisions, documents 7 success metrics with measurement methodology, and draws a clear line between MVP and roadmap. The design system translates those decisions into a visual language with 20 documented sections, a two-mode system, glass surface components, and a type hierarchy that enforces the product's core mechanic at the component level. The prototype builds seven interactive screens across three user types without a feature that wasn't fully resolved.</p>
-      <p class="cs-body">The argument this case study makes for PM practice: product clarity is not a function of how many features you ship. It's a function of how clearly you can explain why each feature exists, what it trades against, and what it would cost to defer it. Every decision in this document is one or the other — never just "it felt right."</p>
+      <p class="cs-body">The argument this case study makes for PM practice: product clarity is not a function of how many features you ship. It's a function of how clearly you can explain why each feature exists, what it trades against, and what it would cost to defer it. Every decision in this document is one or the other &ndash; never just "it felt right."</p>
 
       <div class="cs-next">
         <div class="cs-next-label">Next Case Study</div>
@@ -1388,6 +1443,24 @@ const sectionObserver = new IntersectionObserver(entries => {
 }, { threshold: 0, rootMargin: '-10% 0px -80% 0px' });
 document.querySelectorAll('[data-cs-section]').forEach(s => sectionObserver.observe(s));
 
+(function initNikeTriTabs() {
+  document.querySelectorAll('[data-nike-tri]').forEach(function (wrap) {
+    wrap.querySelectorAll('[data-nike-tab]').forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        var id = tab.getAttribute('data-nike-tab');
+        wrap.querySelectorAll('[data-nike-tab]').forEach(function (t) {
+          var on = t === tab;
+          t.classList.toggle('active', on);
+          t.setAttribute('aria-selected', on ? 'true' : 'false');
+        });
+        wrap.querySelectorAll('[data-nike-col]').forEach(function (c) {
+          c.classList.toggle('active', c.getAttribute('data-nike-col') === id);
+        });
+      });
+    });
+  });
+})();
+
 function scrollToSection(id) {
   const el = document.getElementById(id);
   if (!el) return;
@@ -1399,7 +1472,8 @@ function toggleArtifact(n) {
   const expand = document.getElementById('art'+n+'-expand');
   const toggle = document.getElementById('art'+n+'-cta');
   const isOpen = expand.dataset.open === 'true';
-  expand.style.maxHeight = isOpen ? '0' : (n===1 ? '960px' : '960px');
+  const innerEl = expand.firstElementChild;
+  expand.style.maxHeight = isOpen ? '0' : (innerEl ? innerEl.scrollHeight + 'px' : '960px');
   expand.dataset.open = isOpen ? 'false' : 'true';
   toggle.textContent = isOpen ? '+' : '\u00d7';
 }
