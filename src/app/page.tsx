@@ -130,7 +130,7 @@ export default function Home() {
   const caseStudies = [
     {
       bg: "linear-gradient(160deg,#1a0e00 0%,#2e1a00 35%,#1a0e00 70%,#0d0700 100%)",
-      image: "/case-studies/nike/nike_hero_brand_identity.webp",
+      image: "/case-studies/nike2/nike_hero_brand_identity.webp",
       ghost: "Nike",
       badge: "Diagnosis → Decision Stack",
       num: "01 / 06",

@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Nike SNKRS — Museum Mindset · Benn Pattara</title>
+<style>
+:root {
+  --black:     #000;
+  --white:     #fff;
+  --g100:      #f5f5f5;
+  --g200:      #e8e8e8;
+  --g300:      #ccc;
+  --g400:      #999;
+  --g500:      #666;
+  --g700:      #333;
+  --font:      'Helvetica Neue', Arial, sans-serif;
+  --ease-fast: 150ms ease;
+  --ease-base: 250ms ease;
+  --nav-h:     52px;
+  --sidenav-w: 220px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font);background:var(--white);color:var(--black);line-height:1.6;-webkit-font-smoothing:antialiased;}
+#site-nav{position:fixed;top:0;left:0;right:0;z-index:200;background:var(--white);border-bottom:1px solid var(--g200);}
+.nav-main{position:relative;height:52px;padding:0 48px;}
+.nav-left{position:absolute;left:48px;top:50%;transform:translateY(-50%);display:flex;gap:28px;}
+.nav-left a{font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--g500);text-decoration:none;transition:color var(--ease-fast);}
+.nav-left a:hover{color:var(--black);}
+.nav-wordmark{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:14px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--black);text-decoration:none;white-space:nowrap;}
+.nav-right{position:absolute;right:48px;top:50%;transform:translateY(-50%);}
+.nav-right a{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--black);text-decoration:none;border-bottom:1px solid var(--black);padding-bottom:1px;}
+.page-body{padding-top:var(--nav-h);}
+.cs-hero{position:relative;min-height:85vh;overflow:hidden;display:flex;align-items:flex-end;}
+.cs-hero-bg{position:absolute;inset:0;z-index:0;background:linear-gradient(160deg,#0a0a0a 0%,#141010 40%,#0a0a0a 100%);}
+.cs-hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center center;display:block;}
+.cs-hero-scrim{position:absolute;inset:0;z-index:1;background:linear-gradient(to top,rgba(0,0,0,.85) 0%,rgba(0,0,0,.4) 35%,transparent 60%);pointer-events:none;}
+.cs-hero-title-wrap{position:relative;z-index:2;padding:64px 56px 72px 48px;width:100%;max-width:900px;}
+.cs-hero-title{font-size:clamp(32px,4vw,56px);font-weight:300;letter-spacing:.04em;text-transform:uppercase;color:var(--white);line-height:.95;margin:0;text-shadow:0 2px 24px rgba(0,0,0,.5);}
+.cs-hero-title em{font-style:italic;color:rgba(255,255,255,.65);}
+.cs-hero-ghost{position:absolute;bottom:-40px;right:-30px;font-size:clamp(100px,14vw,200px);font-weight:300;color:rgba(255,255,255,.03);letter-spacing:-.03em;line-height:1;white-space:nowrap;pointer-events:none;text-transform:uppercase;user-select:none;z-index:1;}
+.cs-body-wrap{display:grid;grid-template-columns:var(--sidenav-w) 1fr;align-items:start;min-height:100vh;}
+#cs-sidenav{position:sticky;top:var(--nav-h);height:calc(100vh - var(--nav-h));overflow-y:auto;border-right:1px solid var(--g200);padding:40px 0;display:flex;flex-direction:column;background:var(--white);z-index:50;scrollbar-width:none;}
+#cs-sidenav::-webkit-scrollbar{display:none;}
+.cs-sidenav-label{font-size:8px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--g300);padding:0 28px 20px;font-family:var(--font);}
+.cs-sidenav-link{display:flex;align-items:center;gap:14px;padding:12px 28px;cursor:pointer;transition:background var(--ease-fast);text-decoration:none;border-left:2px solid transparent;}
+.cs-sidenav-link:hover{background:var(--g100);}
+.cs-sidenav-link.active{border-left-color:var(--black);background:var(--g100);}
+.cs-sidenav-num{font-size:9px;font-weight:600;letter-spacing:.12em;color:var(--g300);width:20px;flex-shrink:0;transition:color var(--ease-fast);font-family:var(--font);}
+.cs-sidenav-link.active .cs-sidenav-num{color:var(--black);}
+.cs-sidenav-text{font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--g400);transition:color var(--ease-fast);}
+.cs-sidenav-link.active .cs-sidenav-text{color:var(--black);}
+.cs-sidenav-divider{height:1px;background:var(--g100);margin:8px 28px;}
+.cs-sidenav-exec{margin-top:auto;padding:20px 28px 0;border-top:1px solid var(--g100);}
+.cs-sidenav-exec-label{font-size:8px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--g300);margin-bottom:10px;font-family:var(--font);}
+.cs-sidenav-exec-text{font-size:13px;color:var(--g400);line-height:1.7;font-family:var(--font);font-style:italic;}
+.cs-sidenav-exec-link{display:inline-block;margin-top:10px;font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--black);text-decoration:none;border-bottom:1px solid var(--black);padding-bottom:1px;cursor:pointer;}
+.cs-content{min-width:0;}
+.cs-exec-inner{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;}
+.cs-exec-eyebrow{font-size:8px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--g300);margin-bottom:16px;font-family:var(--font);}
+.cs-exec-body{font-size:13px;color:var(--g500);line-height:1.85;margin-bottom:20px;}
+.cs-exec-meta-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--g200);margin-bottom:24px;}
+.cs-exec-meta-cell{background:var(--white);padding:20px;min-width:0;overflow-wrap:break-word;}
+.cs-exec-meta-label{font-size:8px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--g300);margin-bottom:6px;font-family:var(--font);}
+.cs-exec-meta-val{font-size:12px;font-weight:500;letter-spacing:.04em;color:var(--black);}
+.cs-section{padding:72px 56px;border-bottom:1px solid #f0f0f0;}
+.cs-full-bleed{width:calc(100% + 112px);margin-left:-56px;margin-right:-56px;}
+.cs-section-alt{background:var(--g100);}
+.cs-section-eyebrow{display:flex;align-items:center;gap:14px;margin-bottom:28px;}
+.cs-section-num{font-size:9px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--g300);font-family:var(--font);}
+.cs-section-title{font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--black);}
+.cs-heading-serif{font-family:var(--font);font-size:clamp(26px,3vw,40px);font-weight:300;color:var(--black);line-height:1.1;margin-bottom:28px;letter-spacing:.02em;}
+.cs-heading-serif em{font-style:italic;color:var(--g500);}
+.cs-body{font-size:15px;color:var(--g500);line-height:1.8;margin-bottom:20px;}
+.cs-body:last-child{margin-bottom:0;}
+.cs-pull-quote{font-family:var(--font);font-size:clamp(20px,2.2vw,28px);font-weight:300;font-style:italic;color:var(--black);line-height:1.45;border-left:2px solid var(--black);padding-left:28px;margin-bottom:28px;}
+.cs-body-2col{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-bottom:28px;}
+.cs-body-2col p{font-size:13px;color:var(--g500);line-height:1.75;}
+.cs-stats{display:grid;gap:1px;background:var(--g200);margin-bottom:28px;}
+.cs-stats-3{grid-template-columns:repeat(3,minmax(0,1fr));}
+.cs-stats-4{grid-template-columns:repeat(4,minmax(0,1fr));}
+.cs-stat-cell{background:var(--white);padding:28px 24px;min-width:0;overflow-wrap:break-word;}
+.cs-stat-eyebrow{font-size:9px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--g300);margin-bottom:12px;font-family:var(--font);}
+.cs-stat-num{font-family:var(--font);font-size:48px;font-weight:300;font-style:italic;color:var(--black);letter-spacing:-.01em;line-height:1;margin-bottom:8px;}
+.cs-stat-label{font-size:12px;color:var(--g500);line-height:1.65;}
+.cs-table{width:100%;border-collapse:collapse;margin-bottom:28px;}
+.cs-table th{font-size:8px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--g300);padding:12px 16px;border-bottom:1px solid var(--g200);text-align:left;background:var(--g100);font-family:var(--font);}
+.cs-table td{font-size:12px;color:var(--g500);padding:14px 16px;border-bottom:1px solid var(--g100);line-height:1.6;vertical-align:top;}
+.cs-table td:first-child{font-weight:500;color:var(--black);font-size:11px;letter-spacing:.03em;text-transform:uppercase;}
+.cs-table tr:hover td{background:#fafafa;}
+.pm-lens{border:1px solid var(--g200);padding:24px 28px;margin-bottom:28px;background:#fafafa;}
+.pm-lens-label{font-size:8px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--g300);margin-bottom:10px;font-family:var(--font);}
+.pm-lens-text{font-size:13px;color:var(--g500);line-height:1.75;font-style:italic;}
+.persona-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--g200);margin-bottom:28px;}
+.persona-card{background:var(--white);padding:28px 24px;min-width:0;overflow-wrap:break-word;}
+.persona-card-tier{font-size:8px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--g300);margin-bottom:12px;font-family:var(--font);}
+.persona-card-name{font-family:var(--font);font-size:20px;font-weight:400;color:var(--black);margin-bottom:4px;}
+.persona-card-city{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--g400);margin-bottom:16px;}
+.persona-card-quote{font-family:var(--font);font-size:13px;font-style:italic;color:var(--g500);line-height:1.65;margin-bottom:16px;border-left:1px solid var(--g300);padding-left:12px;}
+.persona-card-detail{font-size:11px;color:var(--g500);line-height:1.7;}
+.persona-card-tension{font-size:11px;font-weight:500;color:var(--black);margin-top:12px;padding-top:12px;border-top:1px solid var(--g100);}
+.persona-card-segment{font-size:8px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--g300);margin:0 0 10px;font-family:var(--font);}
+.persona-card-segment strong{color:var(--black);font-weight:600;}
+.nike-research-persona-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:1px;background:var(--g200);margin-bottom:28px;}
+.nike-research-persona-grid .persona-card{padding:22px 18px;}
+.nike-research-persona-grid .persona-card-name{font-size:17px;}
+.nike-persona-research-intro{margin-top:40px;margin-bottom:24px;}
+.priority-card{padding:24px 28px;border-left:3px solid transparent;background:var(--g100);}
+.priority-card.core{border-left-color:var(--black);background:var(--white);}
+.priority-card.supporting{border-left-color:var(--g300);}
+.priority-card.deferred{border-left-color:var(--g200);background:#fafafa;}
+.priority-tag{display:inline-block;font-size:8px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;padding:3px 10px;margin-bottom:10px;font-family:var(--font);}
+.priority-tag.p0{background:var(--black);color:var(--white);}
+.priority-tag.p1{background:var(--g700);color:var(--white);}
+.priority-tag.supporting{background:var(--g200);color:var(--g500);}
+.priority-tag.deferred{background:var(--g100);color:var(--g400);border:1px solid var(--g200);}
+.priority-feature{font-size:13px;font-weight:500;color:var(--black);margin-bottom:6px;letter-spacing:.02em;}
+.priority-desc{font-size:12px;color:var(--g500);line-height:1.7;margin-bottom:8px;}
+.priority-prd{font-size:10px;font-family:var(--font);color:var(--g400);letter-spacing:.06em;}
+.nike-tri{margin-bottom:28px;}
+.nike-tri-tabs{display:none;gap:0;border-bottom:1px solid var(--g200);margin-bottom:20px;}
+.nike-tri-tab{flex:1;padding:14px 10px;border:none;background:transparent;font-family:var(--font);font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--g400);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;}
+.nike-tri-tab:hover{color:var(--black);}
+.nike-tri-tab.active{color:var(--black);border-bottom-color:var(--black);}
+.nike-tri-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;align-items:start;}
+.nike-tri-col-title{font-size:9px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--g300);margin-bottom:14px;font-family:var(--font);padding-bottom:10px;border-bottom:1px solid var(--g200);}
+.nike-tri-col .priority-card{margin-bottom:16px;}
+.nike-tri-col .priority-card:last-child{margin-bottom:0;}
+.nike-decision-card{background:var(--white);border:1px solid var(--g200);padding:12px 14px;margin-bottom:0;}
+.nike-decision-card.excluded{background:var(--g100);}
+.nike-decision-title{font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--black);margin-bottom:6px;}
+.nike-decision-built,.nike-decision-why{font-size:11px;color:var(--g500);line-height:1.5;margin:0 0 4px;}
+.nike-decision-why{margin-bottom:0;color:var(--g400);font-size:10px;}
+@media (min-width: 1100px) {
+  .nike-tri-decisions .nike-tri-grid > .nike-tri-col {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px 12px;
+    align-content: start;
+  }
+  .nike-tri-decisions .nike-tri-grid > .nike-tri-col > .nike-tri-col-title {
+    grid-column: 1 / -1;
+    margin-bottom: 4px;
+  }
+}
+.nike-persona-seg{margin-top:8px;margin-bottom:28px;}
+.nike-persona-seg-label{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--black);margin-bottom:10px;}
+.nike-persona-seg-body{font-size:13px;color:var(--g500);line-height:1.75;margin:0;max-width:52em;}
+.nike-persona-tool-wrap{margin-top:36px;padding-top:28px;border-top:1px solid var(--g200);}
+.nike-persona-tool-head{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--black);margin-bottom:8px;}
+.nike-persona-tool-desc{font-size:13px;color:var(--g500);line-height:1.7;margin-bottom:16px;max-width:52em;}
+.artifact-strip{background:var(--black);}
+.artifact-trigger{padding:24px 56px;display:flex;align-items:stretch;justify-content:space-between;cursor:pointer;transition:background var(--ease-fast);}
+.artifact-trigger:hover{background:#111;}
+.artifact-left{display:flex;align-items:stretch;gap:20px;}
+.artifact-badge{border:1px solid rgba(255,255,255,.25);padding:0 12px;display:flex;align-items:center;flex-shrink:0;}
+.artifact-badge span{font-size:9px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.6);white-space:nowrap;font-family:var(--font);}
+.artifact-meta{display:flex;flex-direction:column;justify-content:center;gap:5px;}
+.artifact-name{font-size:14px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;color:var(--white);}
+.artifact-desc{font-size:12px;color:rgba(255,255,255,.35);}
+.artifact-right{display:flex;align-items:center;flex-shrink:0;padding-left:20px;}
+.artifact-toggle{font-size:20px;font-weight:300;color:rgba(255,255,255,.5);line-height:1;display:inline-block;width:24px;text-align:center;}
+.artifact-trigger:hover .artifact-toggle{color:var(--white);}
+.artifact-expand{max-height:0;overflow:hidden;transition:max-height 700ms ease;}
+.artifact-inner{background:#0a0a0a;}
+.artifact-close-btn{background:transparent;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.5);padding:9px 18px;font-size:9px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;font-family:var(--font);white-space:nowrap;margin-top:4px;}
+.artifact-iframe-wrap{width:100%;background:#0a0a0a;line-height:0;}
+.artifact-iframe-wrap iframe{width:100%;height:85vh;min-height:600px;border:none;display:block;background:#0a0a0a;}
+.artifact-model-open-btn{display:none;box-sizing:border-box;width:100%;margin:0;padding:18px 20px;text-align:center;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--white);text-decoration:none;background:#141414;border-top:1px solid rgba(255,255,255,.1);font-family:var(--font);-webkit-tap-highlight-color:transparent;}
+.artifact-model-open-btn:active{background:#1a1a1a;}
+.proto-section { padding: 80px clamp(24px, 5vw, 64px); box-sizing: border-box; border-bottom: 1px solid #f0f0f0; }
+.proto-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 28px; align-items: start; width: 100%; max-width: 100%; box-sizing: border-box; }
+.proto-phone { position: sticky; top: 40px; width: 320px; height: 693px; border-radius: 44px; border: 8px solid #000; overflow: hidden; background: #000; box-shadow: 0 0 0 1px #e8e8e8; display: flex; justify-content: center; align-items: flex-start; margin: 0; justify-self: center; align-self: center; }
+.proto-phone iframe { width: 375px; height: 812px; border: none; display: block; transform: scale(0.8533) translateX(7.33%); transform-origin: top left; flex-shrink: 0; pointer-events: auto; }
+.proto-steps { display: flex; flex-direction: column; gap: 0; min-width: 0; }
+.proto-step { padding: 24px 0; border-bottom: 1px solid var(--g200); cursor: pointer; transition: opacity 0.2s; }
+.proto-step:first-child { border-top: 1px solid var(--g200); }
+.proto-step-num { font-size: 9px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--g300); margin-bottom: 8px; font-family: var(--mono, 'DM Mono', monospace); }
+.proto-step-title { font-size: 14px; font-weight: 500; color: var(--black); margin-bottom: 6px; letter-spacing: -.01em; }
+.proto-step-desc { font-size: 13px; font-weight: 300; color: var(--g500); line-height: 1.65; overflow-wrap: break-word; word-break: break-word; }
+.proto-step.active .proto-step-num { color: var(--black); }
+.proto-step.active .proto-step-title { color: var(--black); }
+.proto-step.active { opacity: 1; }
+.proto-step:not(.active) { opacity: 0.5; }
+.proto-step:hover:not(.active) { opacity: 0.75; }
+@media (max-width: 768px) {
+  .proto-layout { grid-template-columns: 1fr; gap: 40px; }
+  .proto-phone { position: static; justify-self: center; align-self: center; }
+  .proto-step:not(.active) { opacity: 1; }
+  .proto-step:hover:not(.active) { opacity: 1; }
+}
+  /* Journey Map */
+  .journey-section { padding: 80px 48px; border-top: 1px solid var(--g200); border-bottom: 1px solid var(--g200); background: var(--white); }
+  .journey-map { margin-top: 40px; }
+  .journey-step { border-bottom: 1px solid var(--g100); }
+  .journey-header { 
+    display: flex; align-items: center; gap: 24px; padding: 24px 0; cursor: pointer; 
+    transition: background var(--ease-fast);
+  }
+  .journey-num { font-size: 11px; font-weight: 600; color: var(--g300); font-family: var(--font); width: 24px; }
+  .journey-label { font-size: 14px; font-weight: 500; text-transform: uppercase; letter-spacing: .08em; color: var(--black); flex: 1; }
+  .journey-icon { font-size: 20px; font-weight: 300; color: var(--g300); width: 20px; text-align: center; }
+  .journey-panel { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; padding: 0 0 0 48px; }
+  .journey-panel-title { font-size: 18px; font-weight: 400; color: var(--black); margin-bottom: 16px; border-left: 2px solid var(--black); padding-left: 20px; }
+  .journey-step.active .journey-panel { max-height: 600px; padding-bottom: 32px; }
+  .journey-step.active .journey-icon { transform: rotate(45deg); color: var(--black); }
+  .journey-step:last-child { border-bottom: none; }
+
+  @media (max-width: 768px) {
+    .journey-section { padding: 40px 20px !important; }
+    .journey-panel { padding-left: 20px !important; }
+    .journey-panel-title { font-size: 16px !important; }
+    .flow-panel-meta { flex-wrap: wrap !important; }
+  }
+.app-showcase{padding:0;border-bottom:1px solid var(--g200);}
+.app-showcase-eyebrow{display:flex;align-items:center;gap:14px;padding:56px 56px 0;margin-bottom:12px;}
+.app-showcase-num{font-size:9px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--g300);font-family:var(--font);}
+.app-showcase-label{font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--black);}
+.app-showcase-heading{font-family:var(--font);font-size:clamp(26px,3vw,40px);font-weight:300;color:var(--black);line-height:1.1;letter-spacing:.02em;padding:0 56px;margin-bottom:12px;}
+.app-showcase-heading em{font-style:italic;color:var(--g500);}
+.app-showcase-sub{font-size:13px;color:var(--g500);padding:0 56px 40px;line-height:1.75;max-width:640px;}
+.app-showcase-layout{display:grid;grid-template-columns:160px 1fr;border-top:1px solid var(--g200);}
+.app-screen-nav{border-right:1px solid var(--g200);padding:0;}
+.app-screen-btn{display:flex;flex-direction:column;gap:4px;width:100%;padding:20px 24px;border:none;background:transparent;cursor:pointer;text-align:left;border-bottom:1px solid var(--g200);border-left:2px solid transparent;transition:all var(--ease-fast);}
+.app-screen-btn:hover{background:var(--g100);}
+.app-screen-btn.active{border-left-color:var(--black);background:var(--g100);}
+.app-screen-btn-num{font-size:9px;font-weight:600;letter-spacing:.12em;color:var(--g300);font-family:var(--font);}
+.app-screen-btn.active .app-screen-btn-num{color:var(--black);}
+.app-screen-btn-name{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--g400);}
+.app-screen-btn.active .app-screen-btn-name{color:var(--black);}
+.app-screen-frame{display:none;grid-template-columns:1fr 1fr;}
+.app-screen-frame.active{display:grid;}
+.app-screen-visual{padding:40px;border-right:1px solid var(--g200);display:flex;align-items:center;justify-content:center;background:var(--g100);}
+.app-screen-meta{padding:40px;display:flex;flex-direction:column;justify-content:space-between;}
+.app-screen-desc-label{font-size:8px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--g300);margin-bottom:14px;font-family:var(--font);}
+.app-screen-desc-text{font-size:13px;color:var(--g500);line-height:1.8;}
+.app-screen-counter{font-family:var(--font);font-size:32px;font-weight:300;font-style:italic;color:var(--g200);letter-spacing:-.01em;margin-top:24px;}
+.cs-next{border-top:1px solid var(--g200);padding-top:32px;margin-top:48px;}
+.cs-next-label{font-size:8px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--g300);margin-bottom:14px;font-family:var(--font);}
+.cs-next-link{text-decoration:none;display:inline-block;}
+.cs-next-meta{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--g400);margin-bottom:6px;font-family:var(--font);}
+.cs-next-title{font-family:var(--font);font-size:28px;font-weight:300;color:var(--black);transition:color var(--ease-fast);}
+.cs-next-link:hover .cs-next-title{color:var(--g500);}
+footer{border-top:1px solid var(--g200);padding:32px 48px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;}
+.footer-id{display:flex;flex-direction:column;gap:3px;}
+.footer-name{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--black);}
+.footer-role{font-size:11px;color:var(--g400);}
+.footer-qualifier{font-size:9px;color:var(--g300);font-style:italic;text-transform:none;margin-top:2px;opacity:.85;}
+.footer-links{display:flex;gap:20px;}
+.footer-link{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--g400);text-decoration:none;transition:color var(--ease-fast);}
+.footer-link:hover{color:var(--black);}
+.footer-copy{font-size:11px;color:var(--g300);font-family:var(--font);}
+@media (max-width: 1100px) {
+  .nike-research-persona-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 768px) {
+  .token-panel {
+    max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; 
+    background: var(--white);
+  }
+  .token-row { font-size: 12px; color: var(--g500); line-height: 1.6; margin-bottom: 12px; }
+  .token-icon { font-size: 14px; color: var(--g300); }
+  #cs-sidenav { display: none !important; }
+  .cs-body-wrap { grid-template-columns: 1fr !important; }
+  #cs-exec-summary, .cs-section { padding: 40px 20px !important; }
+  .proto-section { padding: 40px clamp(20px, 5vw, 28px) !important; }
+  .cs-full-bleed { width: calc(100% + 40px) !important; margin-left: -20px !important; margin-right: -20px !important; }
+  .cs-exec-inner { grid-template-columns: 1fr !important; gap: 32px !important; }
+  .cs-hero-title-wrap { padding: 40px 20px 48px !important; }
+  .cs-stats, .cs-stats-3, .cs-stats-4, .persona-grid, .nike-research-persona-grid, .cs-body-2col { 
+     grid-template-columns: 1fr !important; 
+     gap: 16px !important; 
+     background: transparent !important;
+   }
+   .cs-exec-meta-grid { 
+     grid-template-columns: repeat(2, minmax(0, 1fr)) !important; 
+     gap: 1px !important; 
+     background: var(--g200) !important;
+     border: 1px solid var(--g200) !important;
+   }
+  .cs-pull-quote { padding-left: 20px !important; font-size: 18px !important; }
+  .cs-heading-serif { font-size: 24px !important; }
+  
+  /* Navbar mobile fixes */
+  .nav-main { padding: 0 20px !important; display: flex !important; justify-content: space-between !important; align-items: center !important; }
+  .nav-left, .nav-wordmark, .nav-right { position: static !important; transform: none !important; left: auto !important; right: auto !important; top: auto !important; }
+  .nav-left a:not([href="/"]) { display: none !important; }
+  .nav-wordmark { font-size: 11px !important; letter-spacing: .12em !important; }
+  .nav-right a { font-size: 9px !important; }
+  .app-showcase-layout { grid-template-columns: 1fr !important; }
+  .app-screen-frame.active { display: flex !important; flex-direction: column !important; }
+  .app-showcase-eyebrow, .app-showcase-heading, .app-showcase-sub { padding-left: 20px !important; padding-right: 20px !important; }
+  .artifact-trigger { padding: 16px 20px !important; }
+  .cs-table { display: block; overflow-x: auto; width: 100%; }
+  .nike-tri-tabs { display: flex !important; }
+  .nike-tri-grid { display: block !important; }
+  .nike-tri-col { display: none !important; }
+  .nike-tri-col.active { display: block !important; }
+  .nike-tri-col .nike-tri-col-title { display: none !important; }
+  .nike-tri-decisions .nike-tri-col.active .nike-decision-card { margin-bottom: 10px; }
+  .nike-tri-decisions .nike-tri-col.active .nike-decision-card:last-child { margin-bottom: 0; }
+  .artifact-iframe-wrap iframe { pointer-events: none !important; }
+  .artifact-model-open-btn { display: block !important; }
+  .cs-next { flex-direction: column !important; gap: 16px !important; align-items: flex-start !important; }
+  footer { flex-direction: column !important; gap: 16px !important; padding: 32px 20px !important; align-items: flex-start !important; }
+}
+  /* Metrics Grid */
+  .metrics-container { margin-bottom: 48px; }
+  .metrics-grid-header { font-size: 8px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--g300); margin-bottom: 16px; font-family: var(--font); }
+  .metrics-card-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .metric-card { 
+    background: var(--white); border: 1px solid var(--g100); padding: 20px; 
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .metric-label { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: .05em; color: var(--black); }
+  .metric-target { font-size: 24px; font-weight: 300; color: var(--black); letter-spacing: -.02em; }
+  .metric-desc { font-size: 11px; color: var(--g400); line-height: 1.5; }
+
+  @media (max-width: 768px) {
+    .metrics-card-grid { grid-template-columns: 1fr; }
+    .metric-target { font-size: 20px; }
+  }
+  /* Conclusion Headings */
+  .cs-conclusion-header { 
+    font-size: 11px; font-weight: 600; letter-spacing: .15em; text-transform: uppercase; 
+    color: var(--black); margin-top: 40px; margin-bottom: 12px; font-family: var(--font);
+  }
+  /* Mobile Overrides */
+  @media (max-width: 768px) {
+    #cs-screens, .cs-screens-section, [data-target="cs-screens"] { display: none !important; }
+    
+    .metrics-card-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 8px !important; }
+    .metric-target { font-size: 18px !important; }
+    .metric-card { padding: 12px !important; }
+  }
+</style>
+</head>
+<body>
+<!-- IMAGE AUDIT
+  1. src="nike_hero_brand_identity.webp" — NEEDS VERIFICATION (relative path, hero background)
+-->
+<nav id="site-nav">
+  <div class="nav-main">
+    <div class="nav-left"><a href="/" target="_parent">Work</a><a href="/#about" target="_parent">About</a></div>
+    <a class="nav-wordmark" href="/" target="_parent">Benn Pattara</a>
+    <div class="nav-right"><a href="/" target="_parent">All Projects &rarr;</a></div>
+  </div>
+</nav>
+<div class="page-body">
+<section class="cs-hero">
+  <div class="cs-hero-bg"><img src="nike_hero_brand_identity.webp" alt="Nike SNKRS — lifestyle moment tying new sneakers" /></div>
+  <div class="cs-hero-scrim"></div>
+  <div class="cs-hero-title-wrap">
+    <h1 class="cs-hero-title">Nike SNKRS<br><em>Museum Mindset</em></h1>
+  </div>
+  <div class="cs-hero-ghost">MUSEUM</div>
+</section>
+<div class="cs-body-wrap">
+<aside id="cs-sidenav">
+  <div class="cs-sidenav-label">Index</div>
+  <a class="cs-sidenav-link active" data-target="cs-exec-summary" onclick="scrollToSection('cs-exec-summary')"><span class="cs-sidenav-num">00</span><span class="cs-sidenav-text">Exec Summary</span></a>
+  <div class="cs-sidenav-divider"></div>
+  <a class="cs-sidenav-link" data-target="cs-problem" onclick="scrollToSection('cs-problem')"><span class="cs-sidenav-num">01</span><span class="cs-sidenav-text">The Problem</span></a>
+  <a class="cs-sidenav-link" data-target="cs-insight" onclick="scrollToSection('cs-insight')"><span class="cs-sidenav-num">02</span><span class="cs-sidenav-text">The Insight</span></a>
+  <a class="cs-sidenav-link" data-target="cs-users" onclick="scrollToSection('cs-users')"><span class="cs-sidenav-num">03</span><span class="cs-sidenav-text">The Users</span></a>
+  <a class="cs-sidenav-link" data-target="cs-research-personas" onclick="scrollToSection('cs-research-personas')"><span class="cs-sidenav-num">&mdash;</span><span class="cs-sidenav-text">Research personas</span></a>
+  <a class="cs-sidenav-link" data-target="cs-persona-tool" onclick="scrollToPersonaLab(); return false;"><span class="cs-sidenav-num">&mdash;</span><span class="cs-sidenav-text">Persona model</span></a>
+  <a class="cs-sidenav-link" data-target="cs-product" onclick="scrollToSection('cs-product')"><span class="cs-sidenav-num">04</span><span class="cs-sidenav-text">The Product</span></a>
+  <a class="cs-sidenav-link" data-target="prototype" onclick="scrollToSection('prototype')"><span class="cs-sidenav-num">&mdash;</span><span class="cs-sidenav-text">Prototype</span></a>
+  <a class="cs-sidenav-link" data-target="cs-decisions" onclick="scrollToSection('cs-decisions')"><span class="cs-sidenav-num">07</span><span class="cs-sidenav-text">Decision Log</span></a>
+  <a class="cs-sidenav-link" data-target="cs-outcome" onclick="scrollToSection('cs-outcome')"><span class="cs-sidenav-num">08</span><span class="cs-sidenav-text">Outcome</span></a>
+  <div class="cs-sidenav-exec">
+    <div class="cs-sidenav-exec-label">TL;DR</div>
+    <p class="cs-sidenav-exec-text">Exclusivity creates hype. Confidence creates loyalty. The app learns what you own, shows you how to wear it, and earns access to drops through styling.</p>
+    <a class="cs-sidenav-exec-link" onclick="scrollToSection('cs-exec-summary')">Read summary &rarr;</a>
+  </div>
+</aside>
+<div class="cs-content">
+
+<!-- 00 EXEC SUMMARY -->
+<section id="cs-exec-summary" data-cs-section="cs-exec-summary" style="padding:64px 56px;border-bottom:1px solid var(--g200);">
+  <div class="cs-exec-inner">
+    <div>
+      <div class="cs-exec-eyebrow">Executive Summary</div>
+      <p class="cs-exec-body">The SNKRS app has shifted from a cultural juggernaut to a symbol of inaccessibility. While it successfully generates "hype" through digital lotteries (drops), it has created a broken ecosystem where algorithmic hostility and the "Museum Mindset" prevail.</p>
+      <p class="cs-exec-body">80% of users now view sneaker culture as overhyped or inaccessible, and 40% of Nike’s core "style-driven" demographic has stopped using the app entirely. Winners of rare shoes are often too intimidated to wear them, leaving them in boxes as "static identity investments".</p>
+      <p class="cs-exec-body">The Confidence Hub strategic shift moves away from artificial scarcity toward a model that triggers "Activation"—getting the shoe out of the box and onto the foot—which leads to natural wear and tear and, eventually, a replacement sale. The barrier isn't just a lack of access; it is a lack of confidence in how to style and use them.</p>
+    </div>
+    <div>
+      <div class="cs-exec-eyebrow">Project Details</div>
+      <div class="cs-exec-meta-grid">
+        <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Project</div><div class="cs-exec-meta-val">Nike SNKRS &mdash; Confidence Hub</div></div>
+        <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Year</div><div class="cs-exec-meta-val">2026</div></div>
+        <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Role</div><div class="cs-exec-meta-val">Brand Strategist &amp; Product Manager</div></div>
+        <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Type</div><div class="cs-exec-meta-val">App Redesign Strategy &middot; PRD + Design System</div></div>
+        <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Deliverables</div><div class="cs-exec-meta-val">PRD &middot; Design System &middot; Interactive Prototype</div></div>
+        <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Primary Job</div><div class="cs-exec-meta-val">Fixing the "Museum Mindset" and recovering LTV through styling confidence</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 01 THE PROBLEM -->
+<section class="cs-section" id="cs-problem" data-cs-section="cs-problem">
+  <div class="cs-section-eyebrow"><span class="cs-section-num">01</span><span class="cs-section-title">The Problem</span></div>
+  <h2 class="cs-heading-serif">The SNKRS app has shifted from a cultural juggernaut to a symbol of inaccessibility. <em>The ecosystem is broken.</em></h2>
+  <div class="cs-body-2col">
+    <p>While the SNKRS app successfully generates "hype" through digital lotteries (drops), it has created two distinct points of failure: algorithmic hostility and the "Opt-Out Trend". 80% of users now view sneaker culture as overhyped or inaccessible.</p>
+    <p>The result is a "Museum Mindset": winners of rare shoes are often too intimidated to wear them. Users own an average of 16+ pairs but only rotate 2 to 5, leaving the rest in boxes as "static identity investments". The barrier isn't just a lack of access; it is a lack of confidence in how to style and use them.</p>
+  </div>
+  <div class="cs-stats cs-stats-3" style="margin-bottom:28px;">
+    <div class="cs-stat-cell">
+      <div class="cs-stat-num">80%</div>
+      <div class="cs-stat-eyebrow">Algorithmic Hostility</div>
+      <div class="cs-stat-label">Of users now view sneaker culture as overhyped or inaccessible. The digital lottery system has created a barrier of frustration.</div>
+    </div>
+    <div class="cs-stat-cell">
+      <div class="cs-stat-num">40%</div>
+      <div class="cs-stat-eyebrow">The Opt-Out Trend</div>
+      <div class="cs-stat-label">Of Nike’s core "style-driven" demographic has stopped using the app entirely, seeking authenticity elsewhere.</div>
+    </div>
+    <div class="cs-stat-cell">
+      <div class="cs-stat-num">2-5</div>
+      <div class="cs-stat-eyebrow">The Museum Rotation</div>
+      <div class="cs-stat-label">Average pairs rotated out of 16+ owned. The rest remain in boxes as static identity investments, never activated.</div>
+    </div>
+  </div>
+  <div class="cs-pull-quote">&ldquo;The barrier isn't just a lack of access to products; it is a lack of confidence in how to style and use them.&rdquo;</div>
+  <p class="cs-body">The SNKRS app has shifted from a cultural juggernaut to a symbol of inaccessibility. The "Museum Mindset" means that even when a consumer wins, the relationship often ends at the box. Activation failure at the post-purchase stage breaks Nike’s fundamental business mechanic: repeat purchase driven by wear-out.</p>
+  <p class="cs-body">To recover lost Lifetime Value (LTV), the brand must move away from artificial scarcity and toward a "Confidence Hub" model. The goal is to trigger "Activation"—getting the shoe out of the box and onto the foot—which leads to natural wear and tear and, eventually, a replacement sale.</p>
+</section>
+
+<!-- 02 THE INSIGHT -->
+<section class="cs-section cs-section-alt" id="cs-insight" data-cs-section="cs-insight">
+  <div class="cs-section-eyebrow"><span class="cs-section-num">02</span><span class="cs-section-title">The Insight</span></div>
+  <h2 class="cs-heading-serif">The Strategic Shift: From Scarcity to Confidence. <em>Recovering LTV through Activation.</em></h2>
+  <div class="cs-body-2col">
+    <p>To recover lost Lifetime Value (LTV), the brand must move away from artificial scarcity and toward a "Confidence Hub" model. The goal is simple but profound: trigger "Activation." Getting the shoe out of the box and onto the foot leads to natural wear and tear and, eventually, a replacement sale.</p>
+    <p>This plan replaces the "lottery" feel with a "styling infrastructure." By shifting the focus from the moment of acquisition to the lifetime of use, Nike can rebuild trust with the 40% who have opted out. The app becomes a styling platform that happens to sell sneakers, ensuring every purchase has a clear path to being worn.</p>
+  </div>
+  <div class="cs-stats cs-stats-3" style="margin-bottom:28px;">
+    <div class="cs-stat-cell">
+      <div class="cs-stat-eyebrow">Strategic pivot · From</div>
+      <div class="cs-stat-num" style="font-size:32px;margin-bottom:8px;">Lottery</div>
+      <div class="cs-stat-label">Random access &middot; Bot-exploitable &middot; Destroys trust &middot; Ends at checkout &middot; Museum mindset unchanged</div>
+    </div>
+    <div class="cs-stat-cell" style="background:var(--g100);">
+      <div class="cs-stat-eyebrow">Mechanism</div>
+      <div class="cs-stat-num" style="font-size:24px;line-height:1.2;margin-bottom:8px;">Confidence &rarr;<br>Activation &rarr;<br>Replacement &rarr;<br>LTV</div>
+      <div class="cs-stat-label">The causal chain that connects styling intelligence to Nike&rsquo;s business objective</div>
+    </div>
+    <div class="cs-stat-cell">
+      <div class="cs-stat-eyebrow">Strategic pivot · To</div>
+      <div class="cs-stat-num" style="font-size:32px;margin-bottom:8px;">Earn</div>
+      <div class="cs-stat-label">Participation access &middot; Styling-led &middot; Builds loyalty &middot; Continues post-purchase &middot; Museum mindset solved</div>
+    </div>
+  </div>
+  <div class="cs-pull-quote">&ldquo;Solve for confidence, unlock the replacement cycle, recover LTV. We're shaking up the business model to connect with the lost consumer. The app becomes a styling platform that happens to sell sneakers &mdash; not a sneaker store that happens to have an app.&rdquo;</div>
+  <p class="cs-body">The strategic repositioning follows from the insight: Nike&rsquo;s proposition shifts from &ldquo;can you get it&rdquo; to &ldquo;can you wear it well.&rdquo; The Confidence Hub re-enters the Aesthetic Individualist&rsquo;s consideration set not by making drops more accessible &mdash; that addresses the symptom &mdash; but by making the brand&rsquo;s relationship with the consumer substantively more useful. The consumer who feels confident in how to dress becomes the consumer who wears shoes out. The consumer who wears shoes out becomes the consumer who needs new ones.</p>
+</section>
+<!-- 03 THE USERS -->
+<section class="cs-section" id="cs-users" data-cs-section="cs-users">
+  <div class="cs-section-eyebrow"><span class="cs-section-num">03</span><span class="cs-section-title">The Users</span></div>
+  <h2 class="cs-heading-serif">Three distinct consumer psychographics. <em>One platform pivot to serve all three.</em></h2>
+  <p class="cs-body">The 629-touchpoint research surfaced three distinct user archetypes within the 18&ndash;34 sneaker market. Each has a different relationship with the drop model, a different definition of what winning looks like, and a different reason to adopt &mdash; or reject &mdash; a Confidence Hub. The platform had to address all three without compromising the product argument for any of them.</p>
+  <div class="nike-persona-seg">
+    <div class="nike-persona-seg-label">Audience segmentation</div>
+    <p class="nike-persona-seg-body">Strategy sorts the market into three <strong>audience segments</strong> the Confidence Hub must win at once: the opted-out high-LTV individualist, the engaged but disillusioned drop participant, and the museum-minded considered buyer. The cards below define each segment. Further down, <strong>five research personas</strong> translate those segments into concrete inquiry scripts for the interactive lab.</p>
+  </div>
+  <div class="persona-grid">
+    <div class="persona-card">
+      <div class="persona-card-tier">Segment 01 &middot; Primary Target</div>
+      <div class="persona-card-name">The Aesthetic Individualist</div>
+      <div class="persona-card-city">Chicago &middot; 26 &middot; Creative Director</div>
+      <div class="persona-card-quote">&ldquo;I have 14 pairs and I&rsquo;m wearing 3 of them. I don&rsquo;t even open SNKRS anymore. I lost 8 times in a row and stopped.&rdquo;</div>
+      <div class="persona-card-detail">Owns 14+ pairs. Rotates 3&ndash;4 regularly. Acquires through Nike.com direct, not SNKRS. Defines identity through style coherence, not brand logos. Opted out of drop culture entirely. Followed Nike for 5 years but feels no recognition of that loyalty in the product.</div>
+      <div class="persona-card-tension">Core tension: Significant latent affinity for Nike product &mdash; actively alienated by the drop model. Will return if the system stops treating participation as random noise.</div>
+    </div>
+    <div class="persona-card">
+      <div class="persona-card-tier">Segment 02 &middot; Active User</div>
+      <div class="persona-card-name">The Culture Participant</div>
+      <div class="persona-card-city">New York &middot; 23 &middot; Music Industry</div>
+      <div class="persona-card-quote">&ldquo;I&rsquo;m in the app every release. I&rsquo;ve won a few. But I&rsquo;ve also lost 30 times to bots. It feels like the game is rigged.&rdquo;</div>
+      <div class="persona-card-detail">Active SNKRS user. Participates in most major drops. Follows sneaker media, release calendars, and resale markets. Winning a drop is a social event &mdash; screenshot, post, flex. But lottery losses create real brand damage at the moment of highest engagement.</div>
+      <div class="persona-card-tension">Core tension: Deeply engaged with the category &mdash; feels the unfairness most acutely because they invest the most. The most loyal beneficiary of a participation-based system.</div>
+    </div>
+    <div class="persona-card">
+      <div class="persona-card-tier">Segment 03 &middot; Latent Prospect</div>
+      <div class="persona-card-name">The Considered Buyer</div>
+      <div class="persona-card-city">Richmond &middot; 29 &middot; Financial Analyst</div>
+      <div class="persona-card-quote">&ldquo;I want to buy better shoes but I can never figure out what actually goes with what I already own. So I just buy the same ones.&rdquo;</div>
+      <div class="persona-card-detail">Purchases 2&ndash;3 pairs annually. Makes deliberate, researched decisions. Never participated in a drop. The museum mindset in its purest form: buys slowly, wears rarely, replaces infrequently. High income, high conversion probability if given styling confidence.</div>
+      <div class="persona-card-tension">Core tension: Has the purchasing power and the intention &mdash; lacks the context to make the next purchase feel like the right decision. Style confidence is the unlock.</div>
+    </div>
+  </div>
+  <div class="nike-persona-research-intro" id="cs-research-personas" data-cs-section="cs-research-personas">
+    <div class="nike-persona-seg-label">Research personas</div>
+    <p class="nike-persona-seg-body">Five inquiry profiles used in the lab below. Each is mapped to an <strong>audience segment</strong> so you can see which strategic bucket the script stress-tests &mdash; then open the model to run <strong>individual</strong> inquiry or <strong>focus</strong> comparison on the same characters.</p>
+  </div>
+  <div class="nike-research-persona-grid">
+    <div class="persona-card">
+      <div class="persona-card-segment">Audience segment: <strong>Aesthetic Individualist</strong></div>
+      <div class="persona-card-name">Maya</div>
+      <div class="persona-card-city">The Individualist &middot; Creative Professional &middot; 26</div>
+      <div class="persona-card-detail">Shops vintage Nike. Values provenance and circular economy. Represents the opted-out high-taste consumer SNKRS never rewarded &mdash; recovery depends on respect, not hype.</div>
+    </div>
+    <div class="persona-card">
+      <div class="persona-card-segment">Audience segment: <strong>Aesthetic Individualist</strong></div>
+      <div class="persona-card-name">Chloe</div>
+      <div class="persona-card-city">The Style Seeker &middot; Social Media Manager &middot; 24</div>
+      <div class="persona-card-detail">Dupe economy architect. Decouples aesthetic from brand. Zero loyalty. Probes whether Nikes styling authority can matter when taste is sourced off-platform.</div>
+    </div>
+    <div class="persona-card">
+      <div class="persona-card-segment">Audience segment: <strong>Culture Participant</strong></div>
+      <div class="persona-card-name">David</div>
+      <div class="persona-card-city">The Anxious Collector &middot; Tech Professional &middot; 29</div>
+      <div class="persona-card-detail">High earner with deadstock paralysis. Treats sneakers as assets. Embodies lottery fatigue and bot cynicism &mdash; the emotional damage of participation without payout.</div>
+    </div>
+    <div class="persona-card">
+      <div class="persona-card-segment">Audience segment: <strong>Culture Participant</strong></div>
+      <div class="persona-card-name">Alex</div>
+      <div class="persona-card-city">The Hypebeast &middot; Student / Reseller &middot; 22</div>
+      <div class="persona-card-detail">Views SNKRS drops as financial assets. Deep in cook groups. The pure drop-native stress test for fairness, access, and what replacing the lottery with participation-gated access actually feels like.</div>
+    </div>
+    <div class="persona-card">
+      <div class="persona-card-segment">Audience segment: <strong>Considered Buyer</strong></div>
+      <div class="persona-card-name">Sarah</div>
+      <div class="persona-card-city">The Pragmatist &middot; Project Manager &middot; 32</div>
+      <div class="persona-card-detail">Values efficiency and durability. Rejects hype. Buys on data. Stress-tests whether styling confidence and wardrobe logic can convert a slow, deliberate buyer who never needed drops.</div>
+    </div>
+  </div>
+  <div class="nike-persona-tool-wrap" id="cs-persona-tool" data-cs-section="cs-persona-tool">
+    <div class="nike-persona-tool-head">Interactive persona research model</div>
+    <p class="nike-persona-tool-desc">Tap the black strip to expand the full-viewport embedded lab. The five profiles above run here as scripted personas with guided questions: <strong>individual</strong> inquiry or <strong>focus</strong> mode side-by-side.</p>
+    <div class="cs-full-bleed">
+      <div class="artifact-strip" id="artifact-persona-lab">
+        <div class="artifact-trigger" id="art2-trigger" onclick="toggleArtifact(2)">
+          <div class="artifact-left">
+            <div class="artifact-badge"><span>Interactive Artifact</span></div>
+            <div class="artifact-meta">
+              <div class="artifact-name">Persona research model</div>
+              <div class="artifact-desc">Five lab profiles &middot; individual &amp; focus modes &middot; guided inquiry</div>
+            </div>
+          </div>
+          <div class="artifact-right"><span class="artifact-toggle" id="art2-cta">+</span></div>
+        </div>
+        <div class="artifact-expand" id="art2-expand">
+          <div class="artifact-inner">
+            <div class="artifact-iframe-wrap">
+              <iframe src="/work/nike/persona" title="Nike SNKRS research persona lab" loading="lazy" scrolling="yes"></iframe>
+            </div>
+            <a class="artifact-model-open-btn" href="/work/nike/persona" target="_parent">Open persona lab full screen</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="cs-body" style="margin-top:14px;font-size:12px;color:var(--g400);"><a href="/work/nike/persona" target="_parent" style="color:inherit;text-decoration:underline;text-underline-offset:3px;">Open persona lab full screen</a></p>
+  </div>
+</section>
+
+<!-- 04 THE PRODUCT -->
+<section class="cs-section cs-section-alt" id="cs-product" data-cs-section="cs-product">
+  <div class="cs-section-eyebrow"><span class="cs-section-num">04</span><span class="cs-section-title">The Product</span></div>
+  <h2 class="cs-heading-serif">The Primary Plan: The Confidence Hub. <em>From scarcity to styling infrastructure.</em></h2>
+  <div class="cs-body-2col">
+    <p>The plan replaces the "lottery" feel with a "styling infrastructure." It focuses on three core pillars: The Style Gym, The Style Profile & Gap Report, and Confidence Drops. Each is designed to bridge the gap between owning a product and having the confidence to wear it in a contextual, coherent way.</p>
+    <p>By providing contextual outfit formulas and identifying gaps in a user's existing collection, the app sells an entire Nike ecosystem rather than a single shoe. This strategy turns commerce into a "contextual consequence" of expert styling advice, rebuilding the brand-consumer relationship through utility and trust.</p>
+  </div>
+  <div class="nike-tri" data-nike-tri>
+    <div class="nike-tri-tabs" role="tablist" aria-label="Product roadmap columns">
+      <button type="button" class="nike-tri-tab active" data-nike-tab="mvp" aria-selected="true">MVP</button>
+      <button type="button" class="nike-tri-tab" data-nike-tab="next" aria-selected="false">Next phase</button>
+      <button type="button" class="nike-tri-tab" data-nike-tab="excl" aria-selected="false">Excluded</button>
+    </div>
+    <div class="nike-tri-grid">
+      <div class="nike-tri-col active" data-nike-col="mvp">
+        <div class="nike-tri-col-title">MVP</div>
+        <div class="priority-card core">
+          <div class="priority-tag p0">P0 &middot; Pillar A</div>
+          <div class="priority-feature">The Style Gym</div>
+          <div class="priority-desc">Instead of static technical spec sheets, product pages provide contextual outfit formulas (e.g., "Errand," "Casual," and "After 5:00 PM"). Every item in the recommended outfit is a Nike-owned product, selling an entire ecosystem rather than a single shoe. This adds immediate value by showing the user exactly how to integrate a new purchase into their life.</div>
+          <div class="priority-prd">Business Benefit: Higher AOV by selling full looks &middot; Primary metric: +40% AOV lift &middot; Contextual relevance over technical specs</div>
+        </div>
+        <div class="priority-card core">
+          <div class="priority-tag p0">P0 &middot; Pillar B</div>
+          <div class="priority-feature">The Style Profile & Gap Report</div>
+          <div class="priority-desc">The app builds a "wardrobe graph" by pulling purchase history from Nike.com, SNKRS, and the Run Club app. The Gap Report algorithm identifies what is missing from a user's collection (e.g., "You have 14 neon runners but zero neutral sneakers for business casual") and prioritizes recommendations based on what "unlocks" the potential of items the user already owns.</div>
+          <div class="priority-prd">Mechanism: Automated wardrobe inventory &middot; Primary metric: Conversion rate on "gap-fill" recommendations &middot; Leverages existing Nike data ecosystem</div>
+        </div>
+      </div>
+      <div class="nike-tri-col" data-nike-col="next">
+        <div class="nike-tri-col-title">Next phase</div>
+        <div class="priority-card supporting">
+          <div class="priority-tag p1">P1 &middot; Pillar C</div>
+          <div class="priority-feature">Confidence Drops</div>
+          <div class="priority-desc">To defeat automated bots and reward genuine fans, access to mid-tier releases is gated behind participation. 48 hours before a drop, users must complete a styling challenge to earn a "Confidence Passport." While bots are optimized for millisecond speed, they cannot easily parse visual data to create a coherent aesthetic look, ensuring access for real humans.</div>
+          <div class="priority-prd">Anti-Bot Measure: Visual styling challenges &middot; Primary metric: Human vs. Bot purchase ratio &middot; Reward genuine brand affinity</div>
+        </div>
+        <div class="priority-card supporting">
+          <div class="priority-tag p1">P1/P2 &middot; Authority Layer</div>
+          <div class="priority-feature">The Confidence Index</div>
+          <div class="priority-desc">An annual data-driven cultural report transforming millions of SNKRS user interactions into the definitive guide to global street style. Nike as cultural authority &mdash; not just vendor. Distributed as editorial, press, and in-app feature. The Confidence Index makes Nike&rsquo;s aggregated platform data a public brand asset. Published annually. Written like editorial, not like a brand report.</div>
+          <div class="priority-prd">PRD: P2 &middot; Primary metric: share of voice in cultural press &middot; Secondary: brand authority survey scores &middot; Gated behind Phase 1 + 2 data volume</div>
+        </div>
+      </div>
+      <div class="nike-tri-col" data-nike-col="excl">
+        <div class="nike-tri-col-title">Excluded</div>
+        <div class="priority-card deferred">
+          <div class="priority-tag deferred">Hard constraint &middot; All phases</div>
+          <div class="priority-feature">In-App Commerce &mdash; No Checkout, No Catalog, No Advertising</div>
+          <div class="priority-desc">The only commerce surfaces in the Confidence Hub are contextual: a Nike.com deep-link when the Style Profile recommends a gap-filling shoe, and Style Gym &ldquo;Shop &#x2197;&rdquo; links on each outfit item. No in-app checkout. No product catalog. No advertising. No promoted drops. Commerce is the consequence of the platform working &mdash; not its purpose. Every link goes exclusively to Nike.com or SNKRS, never to third-party retail.</div>
+          <div class="priority-prd">PRD: Hard constraint &middot; Rationale: Keeps incentive structure aligned &mdash; the platform earns on engagement and confidence, not transaction. Third-party referrals would dilute the brand relationship the entire platform is designed to rebuild.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 DESIGN SYSTEM -->
+<section class="cs-section" id="cs-design" data-cs-section="cs-design">
+  <div class="cs-section-eyebrow"><span class="cs-section-num">05</span><span class="cs-section-title">Design System</span></div>
+  <h2 class="cs-heading-serif">Visual & Technical Execution. <em>Precision, Authority, and Energy.</em></h2>
+  <div class="cs-body-2col">
+    <p>The UI uses sharp, 0-degree border radii and high-legibility "engineered" typography to signal authority and precision rather than "soft" social media vibes. The app replaces "Emergency Red" notifications (which spike cortisol/anxiety) with "Volt" (yellow-green), which signals energy and achievement.</p>
+    <p>To maintain trust, the Hub excludes in-app checkouts and ads. Commerce is treated as a "contextual consequence" of the styling advice. Every design decision is filtered through the need to rebuild the brand's aspiration and the user's confidence.</p>
+  </div>
+  <div class="cs-stats cs-stats-4">
+    <div class="cs-stat-cell">
+      <div class="cs-stat-num">Light</div>
+      <div class="cs-stat-eyebrow">Theme</div>
+      <div class="cs-stat-label">White body (#fff), #f5f5f3 alt sections. Dark surfaces reserved for confidence badges, anchor tags, drop banners. More editorial than existing SNKRS. Confidence, not urgency.</div>
+    </div>
+    <div class="cs-stat-cell">
+      <div class="cs-stat-num">&le;3</div>
+      <div class="cs-stat-eyebrow">Volt Rule</div>
+      <div class="cs-stat-label">Maximum volt (#D4FF00) instances per screen. Always on dark or black surfaces. Never decorative. Scarcity is the authority &mdash; same discipline as On Apex, different product argument.</div>
+    </div>
+    <div class="cs-stat-cell">
+      <div class="cs-stat-num">0px</div>
+      <div class="cs-stat-eyebrow">Border Radius</div>
+      <div class="cs-stat-label">Zero border-radius. Everywhere. The rounded corner implies approachable consumer software. Confidence Hub implies precision and authority. These are not the same message.</div>
+    </div>
+    <div class="cs-stat-cell">
+      <div class="cs-stat-num">8px</div>
+      <div class="cs-stat-eyebrow">Grid</div>
+      <div class="cs-stat-label">8px base grid. All spacing is a multiple of 8. No half-values. The grid produces tension at the component level &mdash; right for a brand that lives at the edge of culture.</div>
+    </div>
+  </div>
+
+
+</section>
+
+<!-- ARTIFACT 1: DESIGN SYSTEM + PRD -->
+<div class="artifact-strip" id="artifact-design-system">
+  <div class="artifact-trigger" id="art1-trigger" onclick="toggleArtifact(1)">
+    <div class="artifact-left">
+      <div class="artifact-badge"><span>Interactive Artifact</span></div>
+      <div class="artifact-meta">
+        <div class="artifact-name">Design System + PRD</div>
+        <div class="artifact-desc">Full token reference &middot; Component library &middot; Color system &middot; Typography &middot; All PRD sections 01&ndash;09 &middot; Interactive states</div>
+      </div>
+    </div>
+    <div class="artifact-right"><span class="artifact-toggle" id="art1-cta">+</span></div>
+  </div>
+  <div class="artifact-expand" id="art1-expand">
+    <div class="artifact-inner">
+      <div class="artifact-iframe-wrap">
+        <iframe src="snkrs-design-system.html" title="Nike SNKRS Confidence Hub Design System + PRD" scrolling="yes"></iframe>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- PROTOTYPE + WALKTHROUGH -->
+<section class="proto-section" id="prototype" data-cs-section="prototype">
+  <div class="proto-layout">
+    <div class="proto-phone">
+      <iframe src="snkrs-app.html" title="Nike SNKRS App Prototype" scrolling="yes"></iframe>
+    </div>
+    <div class="proto-steps">
+      <!-- TODO: Replace data-src values with actual per-screen Figma embed URLs -->
+      <div class="proto-step" data-step="1" data-src="snkrs-app.html">
+        <div class="proto-step-num">01</div>
+        <div class="proto-step-body">
+          <div class="proto-step-title">Feed Discovery</div>
+          <div class="proto-step-desc">The app opens to a dark feed. The Confidence Drop card leads &mdash; darker background, volt chip, lock icon, challenge CTA &mdash; establishes the access model before mechanics. The live drop below uses &ldquo;Style Gym Ready&rdquo; to signal styling context. None of these compete. They sequence.</div>
+        </div>
+      </div>
+      <div class="proto-step" data-step="2" data-src="snkrs-app.html"><!-- TODO: Product Page screen URL -->
+        <div class="proto-step-num">02</div>
+        <div class="proto-step-body">
+          <div class="proto-step-title">Product Page</div>
+          <div class="proto-step-desc">Taller hero image, occasion-first context pills sit directly on the image. The Confidence Score is the first data point after the name. Every element earns its position through documented product decisions.</div>
+        </div>
+      </div>
+      <div class="proto-step" data-step="3" data-src="snkrs-app.html"><!-- TODO: Style Gym screen URL -->
+        <div class="proto-step-num">03</div>
+        <div class="proto-step-body">
+          <div class="proto-step-title">Style Gym</div>
+          <div class="proto-step-desc">The Wardrobe Insight card names the specific gap this shoe closes. Three outfit rows follow with shoppable Nike links. &ldquo;Add Look&rdquo; adds the entire outfit to cart &mdash; the average order value (AOV) lever.</div>
+        </div>
+      </div>
+      <div class="proto-step" data-step="4" data-src="snkrs-app.html"><!-- TODO: Confidence Drop screen URL -->
+        <div class="proto-step-num">04</div>
+        <div class="proto-step-body">
+          <div class="proto-step-title">Confidence Drop</div>
+          <div class="proto-step-desc">Access is gated by participation. Completing styling challenges earns Confidence Pass points and queue priority. Scarcity is not abolished; it is deprecated for specific releases.</div>
+        </div>
+      </div>
+      <div class="proto-step" data-step="5" data-src="snkrs-app.html"><!-- TODO: Style Profile screen URL -->
+        <div class="proto-step-num">05</div>
+        <div class="proto-step-body">
+          <div class="proto-step-title">Style Profile</div>
+          <div class="proto-step-desc">Nike&rsquo;s existing purchase history becomes the wardrobe graph. The Gap Report surfaces what&rsquo;s genuinely missing with recommendations ranked by gap-fill score, not inventory surplus.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 07 DECISION LOG -->
+<section class="cs-section" id="cs-decisions" data-cs-section="cs-decisions">
+  <div class="cs-section-eyebrow"><span class="cs-section-num">07</span><span class="cs-section-title">Decision Log</span></div>
+  <h2 class="cs-heading-serif">11 decisions with documented tradeoffs. <em>Nothing shipped without a reason.</em></h2>
+  <p class="cs-body">The decision log is the discipline. Every shipped and deferred item represents a choice between options, with an explicit rationale for the path taken. The log is not a changelog &mdash; it is a product philosophy made visible at the component level. Same three-part structure as the product map: <strong>MVP</strong> (shipped), <strong>next phase</strong> (gated / deferred), and <strong>excluded</strong> (explicit non-goals).</p>
+  <div class="nike-tri nike-tri-decisions" data-nike-tri>
+    <div class="nike-tri-tabs" role="tablist" aria-label="Decision log columns">
+      <button type="button" class="nike-tri-tab active" data-nike-tab="mvp" aria-selected="true">MVP</button>
+      <button type="button" class="nike-tri-tab" data-nike-tab="next" aria-selected="false">Next phase</button>
+      <button type="button" class="nike-tri-tab" data-nike-tab="excl" aria-selected="false">Excluded</button>
+    </div>
+    <div class="nike-tri-grid">
+      <div class="nike-tri-col active" data-nike-col="mvp">
+        <div class="nike-tri-col-title">MVP &middot; Shipped</div>
+        <div class="nike-decision-card">
+          <div class="nike-decision-title">Light Mode First</div>
+          <p class="nike-decision-built"><strong>Built:</strong> White body, off-white segments, dark accents for badges.</p>
+          <p class="nike-decision-why"><strong>Tradeoff:</strong> Shifts from hype/FOMO to editorial experience. Contrast earned through light field.</p>
+        </div>
+        <div class="nike-decision-card">
+          <div class="nike-decision-title">Wardrobe Graph</div>
+          <p class="nike-decision-built"><strong>Built:</strong> Automated history sync from Nike.com/SNKRS.</p>
+          <p class="nike-decision-why"><strong>Tradeoff:</strong> Reduces cold-start friction. Uses data Nike already owns to be substantively useful.</p>
+        </div>
+        <div class="nike-decision-card">
+          <div class="nike-decision-title">Confidence Score</div>
+          <p class="nike-decision-built"><strong>Built:</strong> 0&ndash;100 score on every product page based on compatibility.</p>
+          <p class="nike-decision-why"><strong>Tradeoff:</strong> Quantifies a previously qualitative signal. Reduces returns through pre-purchase matching.</p>
+        </div>
+        <div class="nike-decision-card">
+          <div class="nike-decision-title">Nike-Only Outfits</div>
+          <p class="nike-decision-built"><strong>Built:</strong> Style Gym links exclusively to Nike.com ecosystem.</p>
+          <p class="nike-decision-why"><strong>Tradeoff:</strong> Keeps incentive structure aligned. Drives average order value (AOV) within Nike instead of referring outward.</p>
+        </div>
+        <div class="nike-decision-card">
+          <div class="nike-decision-title">Context Pills</div>
+          <p class="nike-decision-built"><strong>Built:</strong> Occasion pills positioned directly on product hero image.</p>
+          <p class="nike-decision-why"><strong>Tradeoff:</strong> Creates occasion-first read before price. Reduces hesitation for considered buyers.</p>
+        </div>
+        <div class="nike-decision-card">
+          <div class="nike-decision-title">Zero Border-Radius</div>
+          <p class="nike-decision-built"><strong>Built:</strong> Sharp edges on all UI components including buttons/cards.</p>
+          <p class="nike-decision-why"><strong>Tradeoff:</strong> Signals authority and precision. Matches Nike&apos;s aggressive hardware visual register.</p>
+        </div>
+        <div class="nike-decision-card">
+          <div class="nike-decision-title">Volt Energy</div>
+          <p class="nike-decision-built"><strong>Built:</strong> Volt replaces red as primary accent for positive signals.</p>
+          <p class="nike-decision-why"><strong>Tradeoff:</strong> Reduces alarmist UX. Volt reads as achievement/signal rather than urgency/FOMO.</p>
+        </div>
+        <div class="nike-decision-card">
+          <div class="nike-decision-title">Add Look</div>
+          <p class="nike-decision-built"><strong>Built:</strong> One-tap multi-item cart addition for styling outfits.</p>
+          <p class="nike-decision-why"><strong>Tradeoff:</strong> Core average order value (AOV) lever. Turns styling service into direct revenue generation.</p>
+        </div>
+      </div>
+      <div class="nike-tri-col" data-nike-col="next">
+        <div class="nike-tri-col-title">Next phase &middot; Deferred</div>
+        <div class="nike-decision-card">
+          <div class="nike-decision-title">Lottery Retention</div>
+          <p class="nike-decision-built"><strong>Plan:</strong> SNKRS Draw retained for top 20% highest-hype releases.</p>
+          <p class="nike-decision-why"><strong>Tradeoff:</strong> Protects cultural capital while transition to participation-model happens on mid-tier SKUs.</p>
+        </div>
+        <div class="nike-decision-card">
+          <div class="nike-decision-title">Index Publication</div>
+          <p class="nike-decision-built"><strong>Plan:</strong> Annual cultural authority report mentioned in UI.</p>
+          <p class="nike-decision-why"><strong>Tradeoff:</strong> Gated on Phase 1+2 data volume so the report is definitively meaningful.</p>
+        </div>
+        <div class="nike-decision-card">
+          <div class="nike-decision-title">Bot Resistance</div>
+          <p class="nike-decision-built"><strong>Plan:</strong> Placeholder anti-bot logic for styling challenges.</p>
+          <p class="nike-decision-why"><strong>Tradeoff:</strong> Full engineering layer deferred until production behavioral data can be analyzed.</p>
+        </div>
+      </div>
+      <div class="nike-tri-col" data-nike-col="excl">
+        <div class="nike-tri-col-title">Excluded</div>
+        <div class="nike-decision-card excluded">
+          <div class="nike-decision-title">In-app checkout &amp; catalog</div>
+          <p class="nike-decision-why">No Nike.com checkout inside Confidence Hub; no full product catalog or browsing mall. Commerce stays contextual deep-links only.</p>
+        </div>
+        <div class="nike-decision-card excluded">
+          <div class="nike-decision-title">Third-party retail from styling surfaces</div>
+          <p class="nike-decision-why">Style Gym and Profile links stay Nike.com/SNKRS-only so styling never trains members away from owned retail.</p>
+        </div>
+        <div class="nike-decision-card excluded">
+          <div class="nike-decision-title">In-hub ads &amp; promoted drops as revenue</div>
+          <p class="nike-decision-why">No advertising or paid placement in the hub; engagement and confidence are the product, not inventory clearance.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cs-pull-quote">&ldquo;The decision log doesn&rsquo;t just specify what to build. It specifies what <em>not</em> to build &mdash; and why. Every deferred feature is a tradeoff documented, not a feature forgotten.&rdquo;</div>
+</section>
+
+<!-- 08 OUTCOME -->
+<section class="cs-section cs-section-alt" id="cs-outcome" data-cs-section="cs-outcome">
+  <div class="cs-section-eyebrow"><span class="cs-section-num">08</span><span class="cs-section-title">Outcome &amp; What This Demonstrates</span></div>
+  <h2 class="cs-heading-serif">Projected Results. <em>Recovering value through confidence.</em></h2>
+
+  <div class="cs-stats cs-stats-4" style="margin-bottom:28px;">
+    <div class="cs-stat-cell">
+      <div class="cs-stat-eyebrow">Research Base</div>
+      <div class="cs-stat-num">629</div>
+      <div class="cs-stat-label">Touchpoints across surveys, interviews, and focus groups. The insight that the barrier is confidence rather than access emerged from this data, not from assumption.</div>
+    </div>
+    <div class="cs-stat-cell">
+      <div class="cs-stat-eyebrow">Target Segment</div>
+      <div class="cs-stat-num">40%</div>
+      <div class="cs-stat-label">Aesthetic Individualist reactivation target. The primary success metric that validates the platform pivot &mdash; not downloads, not impressions. Recaptured consumers who opted out.</div>
+    </div>
+    <div class="cs-stat-cell">
+      <div class="cs-stat-eyebrow">Decisions Logged</div>
+      <div class="cs-stat-num">11</div>
+      <div class="cs-stat-label">Hard product decisions with documented tradeoffs. 8 shipped, 3 deferred with explicit phase gates and rationale. No decision made without a belief attached.</div>
+    </div>
+    <div class="cs-stat-cell">
+      <div class="cs-stat-eyebrow">PRD Metrics</div>
+      <div class="cs-stat-num">7</div>
+      <div class="cs-stat-label">Success metrics specified with baselines, targets, and measurement methodology &mdash; from segment reactivation to return rate reduction to average order value (AOV) lift.</div>
+    </div>
+  </div>
+
+  <!-- Success Metrics Grid -->
+  <div class="metrics-container">
+    <div class="metrics-grid-header">Measurement &middot; Success Metrics</div>
+    <div class="metrics-card-grid">
+      <div class="metric-card">
+        <div class="metric-label">Average Order Value (AOV)</div>
+        <div class="metric-target">+40% increase</div>
+        <div class="metric-desc">Selling full looks rather than isolated sneakers through the Style Gym and "Add Look" mechanics.</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Returns Reduction</div>
+        <div class="metric-target">Significant reduction</div>
+        <div class="metric-desc">Categorized as "Aesthetic Mismatch" due to customers realizing a shoe doesn't fit their existing wardrobe.</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">LTV Recovery</div>
+        <div class="metric-target">40% target</div>
+        <div class="metric-desc">Recovering lost value from the "style-driven" demographic that previously opted out.</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Activation Rate</div>
+        <div class="metric-target">&gt;35%</div>
+        <div class="metric-desc">Users moving sneakers from "Museum" status to active rotation through styling confidence.</div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="cs-conclusion-header">Activation as Success</div>
+  <p class="cs-body">The Confidence Hub is the architectural answer to the "Museum Mindset." By shifting the focus from scarcity to confidence, Nike doesn't just sell more shoes; it builds a more resilient relationship with its core style-driven demographic. When a consumer feels confident in how to wear what they own, they wear it. When they wear it, they need the next one. That is how LTV is recovered.</p>
+  
+  <div class="cs-conclusion-header">Precision as Language</div>
+  <p class="cs-body">Every design choice—from the zero border-radius to the Volt accent—signals authority and precision. By removing the anxiety triggers of the lottery model and replacing them with a useful styling infrastructure, Nike earns the right to participate in the consumer's daily style decision. This is not just a redesign; it is a strategic realignment of the app's purpose: moving from a lottery machine to a confidence hub.</p>
+
+  <div class="cs-next">
+    <div class="cs-next-label">Next Case Study</div>
+    <a href="/work/saks" class="cs-next-link" target="_parent">
+      <div class="cs-next-meta">Vault by Saks &middot; Platform Strategy &middot; 2026</div>
+      <div class="cs-next-title">Vault by Saks &rarr;</div>
+    </a>
+  </div>
+</section>
+
+</div><!-- /cs-content -->
+</div><!-- /cs-body-wrap -->
+</div><!-- /page-body -->
+
+<footer>
+  <div class="footer-id">
+    <span class="footer-name">Benn Pattara</span>
+    <span class="footer-role">Brand &amp; Product Strategist</span>
+    <span class="footer-qualifier">from cultural insight to shipped product specs</span>
+  </div>
+  <div class="footer-links">
+    <a href="/" class="footer-link" target="_parent">Home</a>
+    <a href="/#about" class="footer-link" target="_parent">About</a>
+    <a href="/blog" class="footer-link" target="_parent">Blog</a>
+    <a href="/#contact" class="footer-link" target="_parent">Contact</a>
+  </div>
+  <div class="footer-copy">&copy; 2026 Benn Pattara &middot; bennpattara.com</div>
+</footer>
+
+<script>
+const sectionObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      document.querySelectorAll('.cs-sidenav-link').forEach(l => l.classList.remove('active'));
+      const match = document.querySelector('.cs-sidenav-link[data-target="' + entry.target.id + '"]');
+      if (match) match.classList.add('active');
+    }
+  });
+}, { threshold: 0, rootMargin: '-10% 0px -80% 0px' });
+document.querySelectorAll('[data-cs-section]').forEach(s => sectionObserver.observe(s));
+
+(function initNikeTriTabs() {
+  document.querySelectorAll('[data-nike-tri]').forEach(function (wrap) {
+    wrap.querySelectorAll('[data-nike-tab]').forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        var id = tab.getAttribute('data-nike-tab');
+        wrap.querySelectorAll('[data-nike-tab]').forEach(function (t) {
+          var on = t === tab;
+          t.classList.toggle('active', on);
+          t.setAttribute('aria-selected', on ? 'true' : 'false');
+        });
+        wrap.querySelectorAll('[data-nike-col]').forEach(function (c) {
+          c.classList.toggle('active', c.getAttribute('data-nike-col') === id);
+        });
+      });
+    });
+  });
+})();
+
+function scrollToSection(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 104, behavior: 'smooth' });
+}
+
+function scrollToPersonaLab() {
+  scrollToSection('cs-persona-tool');
+  setTimeout(function () {
+    var expand = document.getElementById('art2-expand');
+    if (expand && expand.dataset.open !== 'true') toggleArtifact(2);
+  }, 450);
+}
+
+function toggleArtifact(n) {
+  const expand = document.getElementById('art' + n + '-expand');
+  const toggle = document.getElementById('art' + n + '-cta');
+  if (!expand || !toggle) return;
+  const isOpen = expand.dataset.open === 'true';
+  expand.style.maxHeight = isOpen ? '0' : '5200px';
+  expand.dataset.open = isOpen ? 'false' : 'true';
+  toggle.textContent = isOpen ? '+' : '\u00d7';
+}
+function closeArtifact(n) {
+  const expand = document.getElementById('art'+n+'-expand');
+  const toggle = document.getElementById('art'+n+'-cta');
+  expand.style.maxHeight = '0'; expand.dataset.open = 'false'; toggle.textContent = '+';
+}
+
+let currentFlow = 0;
+const totalFlow = 5;
+function showFlow(n) {
+  document.querySelectorAll('.flow-step').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.flow-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.flow-step')[n].classList.add('active');
+  document.getElementById('fp-'+n).classList.add('active');
+  const num = String(n+1).padStart(2,'0');
+  document.getElementById('flow-counter').innerHTML = num + ' <span>/ 05</span>';
+  currentFlow = n;
+}
+function nextFlow() { showFlow((currentFlow+1) % totalFlow); }
+function prevFlow() { showFlow((currentFlow-1+totalFlow) % totalFlow); }
+
+function showScreen(n) {
+  document.querySelectorAll('.app-screen-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.app-screen-frame').forEach(f => f.classList.remove('active'));
+  document.querySelector('.app-screen-btn[data-screen="'+n+'"]').classList.add('active');
+  document.getElementById('screen-'+n).classList.add('active');
+}
+function toggleJourney(el) {
+  el.classList.toggle('active');
+}
+</script>
+<script>
+(function() {
+  const steps = document.querySelectorAll('.proto-step');
+  const iframe = document.querySelector('.proto-phone iframe');
+  if (!steps.length || !iframe) return;
+  steps[0].classList.add('active');
+  steps.forEach(step => {
+    step.addEventListener('click', () => {
+      steps.forEach(s => s.classList.remove('active'));
+      step.classList.add('active');
+      const src = step.dataset.src;
+      if (src) iframe.src = src;
+    });
+  });
+})();
+</script>
+<script src="/js/cs-stat-eyebrow-fit.js"></script>
+</body>
+</html>
