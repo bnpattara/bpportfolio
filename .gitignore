@@ -40,6 +40,10 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# python
+__pycache__/
+*.py[cod]
+
 # private lyrics reference — never deploy
 src/data/mirrorball-songs-with-lyrics.json
 

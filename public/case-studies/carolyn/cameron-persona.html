@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cameron — The Deliberate Investor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --white: #fff;
+    --black: #0a0a0a;
+    --alt: #f4f2ef;
+    --wash: #ebe8e3;
+    --border: #e0dcd4;
+    --muted: #5c5c5c;
+    --muted-light: #8a8680;
+    --accent: #000;
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-body: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --font-mono: 'DM Mono', monospace;
+    --chapter-pad: clamp(28px, 4vw, 48px);
+    --main-pad-x: clamp(32px, 5vw, 72px);
+  }
+
+  html { font-size: 16px; }
+
+  body {
+    background: var(--white);
+    color: var(--black);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+  }
+
+  .page-wrap {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    min-height: 100vh;
+  }
+
+  .sidenav {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    border-right: 1px solid var(--border);
+    padding: 40px 0;
+    overflow-y: auto;
+    background: linear-gradient(180deg, var(--wash) 0%, var(--white) 28%);
+  }
+
+  .sidenav-label {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted-light);
+    padding: 0 20px 14px;
+  }
+
+  .sidenav a {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--muted);
+    text-decoration: none;
+    padding: 10px 20px;
+    border-left: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s, background 0.2s;
+    line-height: 1.45;
+  }
+
+  .sidenav a:hover { color: var(--black); background: rgba(0,0,0,.03); }
+  .sidenav a.active {
+    color: var(--black);
+    border-left-color: var(--black);
+    font-weight: 500;
+    background: rgba(0,0,0,.04);
+  }
+
+  .main {
+    padding: 64px var(--main-pad-x) 140px;
+    max-width: 920px;
+    background: linear-gradient(180deg, #faf9f7 0%, var(--white) 22%);
+  }
+
+  .section {
+    padding-top: clamp(56px, 12vh, 120px);
+    scroll-margin-top: 24px;
+  }
+
+  .section:first-child { padding-top: 0; }
+
+  .section:not(:first-child) {
+    border-top: 1px solid transparent;
+  }
+
+  .section:not(:first-child) .section-rule {
+    display: none;
+  }
+
+  .section:not(:first-child)::before {
+    content: "";
+    display: block;
+    height: 1px;
+    margin: 0 calc(-1 * var(--main-pad-x)) 48px;
+    background: linear-gradient(90deg, transparent, var(--border) 12%, var(--border) 88%, transparent);
+  }
+
+  .kicker {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted-light);
+    margin-bottom: 14px;
+  }
+
+  h1.display {
+    font-family: var(--font-display);
+    font-size: clamp(56px, 9vw, 88px);
+    line-height: 0.92;
+    letter-spacing: 0.02em;
+    margin-bottom: 6px;
+  }
+
+  h2.section-title {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 5vw, 52px);
+    letter-spacing: 0.03em;
+    line-height: 0.95;
+    margin-bottom: 28px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--black);
+    max-width: none;
+  }
+
+  .section-rule {
+    width: 100%;
+    height: 1px;
+    background: var(--border);
+    margin-bottom: 28px;
+  }
+
+  p {
+    font-size: 16px;
+    line-height: 1.78;
+    color: #1f1f1f;
+    max-width: 40rem;
+  }
+
+  p + p { margin-top: 16px; }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.25fr 1fr;
+    gap: 0;
+    border: none;
+    margin: 36px calc(-1 * var(--main-pad-x)) 64px;
+    background: linear-gradient(145deg, #0c0c0c 0%, #1a1816 45%, #0a0a0a 100%);
+    color: #e8e6e3;
+    box-shadow: 0 32px 80px rgba(0,0,0,.18);
+  }
+
+  .hero-left {
+    padding: var(--chapter-pad) var(--chapter-pad) var(--chapter-pad) calc(var(--chapter-pad) + 8px);
+    border-right: 1px solid rgba(255,255,255,.08);
+  }
+
+  .hero-left .stat-label { color: rgba(255,255,255,.45); }
+  .hero-left p {
+    color: rgba(255,255,255,.78);
+    font-size: 15px;
+    line-height: 1.82;
+    max-width: none;
+  }
+
+  .hero-right {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+  }
+
+  .hero-stat {
+    padding: 28px var(--chapter-pad);
+    border-bottom: 1px solid rgba(255,255,255,.08);
+  }
+
+  .hero-stat:last-child { border-bottom: none; }
+
+  .hero-stat .stat-label { color: rgba(255,255,255,.45); }
+  .hero-stat .stat-value { color: #fff; font-size: clamp(32px, 4vw, 42px); }
+  .hero-stat .stat-sub { color: rgba(255,255,255,.55); }
+
+  .stat-label {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted-light);
+    margin-bottom: 8px;
+  }
+
+  .stat-value {
+    font-family: var(--font-display);
+    font-size: 36px;
+    line-height: 1;
+    letter-spacing: 0.02em;
+  }
+
+  .stat-sub {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 6px;
+  }
+
+  .archetype-pill {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border: 1px solid rgba(255,255,255,.55);
+    color: #fff;
+    padding: 8px 16px;
+    margin-top: 20px;
+    background: rgba(255,255,255,.06);
+  }
+
+  .quote-stack { margin: 40px 0; }
+
+  #voice .quote-stack {
+    margin: 44px calc(-1 * var(--main-pad-x));
+    padding: clamp(40px, 6vw, 72px) var(--chapter-pad);
+    background: #080807;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.06);
+  }
+
+  #voice .quote-block {
+    border-left: 3px solid #fff;
+    padding: 0 0 0 28px;
+    margin-bottom: 40px;
+    background: transparent;
+  }
+
+  #voice .quote-block:last-child { margin-bottom: 0; }
+
+  #voice .quote-text {
+    font-size: clamp(17px, 2.1vw, 22px);
+    font-style: italic;
+    line-height: 1.55;
+    color: #f2f0ec;
+    font-weight: 400;
+  }
+
+  #voice .quote-attr {
+    color: rgba(255,255,255,.45);
+    margin-top: 16px;
+  }
+
+  .quote-block {
+    border-left: 2px solid var(--black);
+    padding: 24px 28px;
+    margin-bottom: 16px;
+    background: var(--alt);
+  }
+
+  .quote-block:last-child { margin-bottom: 0; }
+
+  .quote-text {
+    font-size: 15px;
+    font-style: italic;
+    line-height: 1.65;
+    color: var(--black);
+    max-width: none;
+  }
+
+  .quote-attr {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--muted-light);
+    margin-top: 12px;
+    letter-spacing: 0.06em;
+  }
+
+  .data-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 12px;
+    margin: 36px 0 28px;
+    font-size: 14px;
+  }
+
+  .data-table th {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted-light);
+    text-align: left;
+    padding: 0 20px 8px;
+    border-bottom: 2px solid var(--black);
+    background: transparent;
+  }
+
+  .data-table td {
+    padding: 18px 20px;
+    border-bottom: none;
+    vertical-align: top;
+    line-height: 1.55;
+    color: #222;
+    background: var(--white);
+    box-shadow: 0 1px 0 var(--border);
+  }
+
+  .data-table td:first-child {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--muted);
+    white-space: normal;
+    width: 28%;
+    border-radius: 2px 0 0 2px;
+    border-left: 3px solid var(--black);
+  }
+
+  .data-table td:last-child { border-radius: 0 2px 2px 0; }
+
+  #tensions {
+    position: relative;
+  }
+
+  #tensions > p { max-width: 44rem; }
+
+  .tension-stage {
+    margin-top: 40px;
+    padding: 48px var(--chapter-pad);
+    margin-left: calc(-1 * var(--main-pad-x));
+    margin-right: calc(-1 * var(--main-pad-x));
+    background:
+      radial-gradient(ellipse 70% 50% at 50% 50%, rgba(0,0,0,.04) 0%, transparent 70%),
+      var(--alt);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .tension-row-full {
+    display: grid;
+    grid-template-columns: 1fr 48px 1fr;
+    align-items: start;
+    gap: 0;
+    border-bottom: 1px solid rgba(0,0,0,.06);
+    padding: 36px 0;
+  }
+
+  .tension-row-full:first-child { padding-top: 0; }
+  .tension-row-full:last-child { border-bottom: none; padding-bottom: 0; }
+
+  .tension-pole { padding: 0 12px 0 0; }
+  .tension-pole.right {
+    padding: 0 0 0 32px;
+    border-left: 1px solid var(--border);
+  }
+
+  .pole-label {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted-light);
+    margin-bottom: 8px;
+  }
+
+  .pole-title {
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+  }
+
+  .pole-body {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.65;
+    max-width: 38rem;
+  }
+
+  .vs-col {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-size: 22px;
+    color: rgba(0,0,0,.2);
+    letter-spacing: 0.12em;
+    padding-top: 28px;
+  }
+
+  .tension-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    background: transparent;
+    border: none;
+    margin: 28px 0;
+  }
+
+  .tension-cell {
+    background: var(--white);
+    padding: 28px 28px;
+    border: 1px solid var(--border);
+    box-shadow: 0 16px 48px rgba(0,0,0,.05);
+  }
+
+  .tension-cell.vs {
+    background: var(--wash);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px dashed var(--border);
+    box-shadow: none;
+  }
+
+  .tension-label {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted-light);
+    margin-bottom: 10px;
+  }
+
+  .tension-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+
+  .tension-body {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.65;
+    max-width: none;
+  }
+
+  .vs-marker {
+    font-family: var(--font-display);
+    font-size: 18px;
+    color: var(--muted-light);
+    letter-spacing: 0.08em;
+  }
+
+  .impl-list {
+    margin: 36px 0 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .impl-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 28px 32px;
+    border-bottom: none;
+    align-items: start;
+    background: var(--white);
+    border: 1px solid var(--border);
+    box-shadow: 0 20px 56px rgba(0,0,0,.06);
+    border-left: 4px solid var(--black);
+  }
+
+  .impl-dim {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--black);
+    padding-top: 0;
+  }
+
+  .impl-text {
+    font-size: 15px;
+    color: #222;
+    line-height: 1.72;
+    max-width: 48rem;
+  }
+
+  .impl-text strong {
+    color: var(--black);
+    font-weight: 600;
+  }
+
+  .journey-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 36px 0 28px;
+    font-size: 14px;
+  }
+
+  .journey-table thead { display: none; }
+
+  .journey-table tbody tr {
+    display: block;
+    padding: 28px 32px;
+    margin-bottom: 18px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    box-shadow: 0 20px 56px rgba(0,0,0,.07);
+    border-left: 4px solid var(--black);
+  }
+
+  .journey-table tbody td {
+    display: block;
+    padding: 8px 0;
+    border: none;
+    line-height: 1.6;
+    color: #222;
+  }
+
+  .journey-table tbody td:first-child {
+    padding-bottom: 16px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .journey-stage {
+    font-family: var(--font-display);
+    font-size: 28px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-weight: 400;
+    color: var(--black);
+  }
+
+  .journey-table tbody td:nth-child(2)::before {
+    content: "Channel / touchpoint";
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted-light);
+    margin-bottom: 6px;
+  }
+
+  .journey-table tbody td:nth-child(3)::before {
+    content: "Behavioral trigger";
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted-light);
+    margin-bottom: 6px;
+  }
+
+  .journey-table tbody td:nth-child(4)::before {
+    content: "Strategic requirement";
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted-light);
+    margin-bottom: 6px;
+  }
+
+  .comp-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+    margin: 36px 0 24px;
+    font-size: 14px;
+  }
+  .comp-table th {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted-light);
+    text-align: left;
+    padding: 0 16px 10px;
+    border-bottom: 2px solid var(--black);
+    background: transparent;
+  }
+  .comp-table td {
+    padding: 16px 18px;
+    border-bottom: none;
+    vertical-align: top;
+    line-height: 1.55;
+    color: #222;
+    background: var(--white);
+    box-shadow: 0 1px 0 var(--border);
+  }
+  .comp-table tr.highlight-row td {
+    background: linear-gradient(180deg, #f0ece6 0%, var(--white) 100%);
+    box-shadow: 0 8px 32px rgba(0,0,0,.06);
+  }
+  .comp-table tr.highlight-row td:first-child { font-weight: 600; color: var(--black); }
+
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    background: transparent;
+    border: none;
+    margin: 20px 0 8px;
+  }
+
+  .stat-item {
+    background: var(--white);
+    padding: 28px 24px;
+    border: 1px solid var(--border);
+    box-shadow: 0 16px 40px rgba(0,0,0,.05);
+  }
+
+  .stat-item-n {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 4vw, 44px);
+    line-height: 1;
+    letter-spacing: 0.02em;
+    margin-bottom: 10px;
+  }
+
+  .stat-item-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    line-height: 1.45;
+  }
+
+  .tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    border: 1px solid var(--border);
+    padding: 6px 12px;
+    color: var(--muted);
+    background: var(--white);
+  }
+
+  .construct-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 8px;
+    margin: 36px 0 24px;
+    font-size: 13px;
+  }
+  .construct-table th {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted-light);
+    text-align: left;
+    padding: 0 14px 8px;
+    border-bottom: 2px solid var(--black);
+    background: transparent;
+  }
+  .construct-table td {
+    padding: 14px 16px;
+    border-bottom: none;
+    line-height: 1.55;
+    color: #222;
+    vertical-align: top;
+    background: var(--white);
+    box-shadow: 0 1px 0 var(--border);
+  }
+  .construct-table .metric { font-family: var(--font-mono); font-size: 11px; color: var(--muted); }
+  .pass { color: #2a7a2a; font-size: 11px; font-family: var(--font-mono); }
+  .fail { color: #c0392b; font-size: 11px; font-family: var(--font-mono); }
+
+  .price-tier-list {
+    margin: 36px 0 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .price-tier {
+    display: grid;
+    grid-template-columns: minmax(120px, 160px) 1fr minmax(100px, 200px);
+    gap: 20px;
+    align-items: center;
+    padding: 22px 24px;
+    border: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    background: var(--white);
+    box-shadow: 0 8px 28px rgba(0,0,0,.04);
+  }
+  .price-range { font-family: var(--font-mono); font-size: 11px; color: var(--muted); }
+  .price-desc { font-size: 14px; color: #333; line-height: 1.5; }
+  .price-brand { font-family: var(--font-mono); font-size: 10px; color: var(--muted-light); text-align: right; }
+  .price-tier.target {
+    background: linear-gradient(90deg, var(--wash) 0%, var(--white) 100%);
+    border-color: var(--black);
+    box-shadow: 0 20px 48px rgba(0,0,0,.08);
+    margin: 0;
+    padding: 26px 28px;
+  }
+  .price-tier.target .price-range { color: var(--black); font-weight: 600; }
+  .price-tier.target .price-desc { font-weight: 600; color: var(--black); }
+
+  .divider {
+    width: 56px;
+    height: 3px;
+    background: var(--black);
+    margin: 48px 0;
+  }
+
+  .footnote {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--muted-light);
+    line-height: 1.65;
+    border-top: 1px solid var(--border);
+    margin-top: 56px;
+    padding-top: 24px;
+    max-width: 48rem;
+  }
+
+  @media (max-width: 900px) {
+    .page-wrap { grid-template-columns: 1fr; }
+    .sidenav {
+      position: relative;
+      height: auto;
+      border-right: none;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 20px 16px;
+    }
+    .sidenav-label { width: 100%; padding: 0 0 8px; }
+    .sidenav a {
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-left: 1px solid var(--border);
+      border-radius: 2px;
+      font-size: 9px;
+    }
+    .sidenav a.active { border-left-color: var(--black); border-color: var(--black); }
+    .hero-grid { grid-template-columns: 1fr; margin-left: 0; margin-right: 0; }
+    .hero-left { border-right: none; border-bottom: 1px solid rgba(255,255,255,.08); }
+    .stat-row { grid-template-columns: 1fr; }
+    .tension-row-full {
+      grid-template-columns: 1fr;
+      gap: 16px;
+      padding: 28px 0;
+    }
+    .tension-pole.right { border-left: none; border-top: 1px solid var(--border); padding: 20px 0 0; }
+    .vs-col { padding: 0; justify-content: flex-start; font-size: 18px; }
+    .tension-stage { margin-left: 0; margin-right: 0; padding: 32px 20px; }
+    #voice .quote-stack { margin-left: 0; margin-right: 0; }
+    .data-table { display: block; overflow-x: auto; border-spacing: 0 8px; }
+    .price-tier { grid-template-columns: 1fr; text-align: left; }
+    .price-brand { text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-wrap">
+
+  <!-- ─── SIDENAV ─── -->
+  <nav class="sidenav" aria-label="Persona sections">
+    <div class="sidenav-label">Persona Profile</div>
+    <a href="#overview" class="active">Overview</a>
+    <a href="#identity">Consumer Identity</a>
+    <a href="#psychographic">Psychographic Depth</a>
+    <a href="#voice">Voice & Verbatim</a>
+    <a href="#tensions">Core Tensions</a>
+    <a href="#behavior">Behavioral Patterns</a>
+    <a href="#competitive">Competitive Set</a>
+    <a href="#construction">Construction Standards</a>
+    <a href="#pricing">Pricing Psychology</a>
+    <a href="#implications">Strategic Implications</a>
+  </nav>
+
+  <!-- ─── MAIN ─── -->
+  <main class="main">
+
+    <!-- OVERVIEW -->
+    <div id="overview" class="section">
+      <div class="kicker">The Carolyn — Primary Consumer Persona</div>
+      <h1 class="display">CAMERON</h1>
+      <div class="kicker" style="margin-top:4px; margin-bottom:0;">The Deliberate Investor</div>
+
+      <div class="hero-grid">
+        <div class="hero-left">
+          <div class="stat-label">Archetype Definition</div>
+          <p style="font-size:14px; line-height:1.7; margin-top:8px;">Cameron is not defined by demographics but by her relationship to the <em>consideration window</em> — a psychological space where every purchase is audited for long-term utility, material integrity, and its ability to signal taste to an informed peer group.</p>
+          <p style="font-size:14px; line-height:1.7; margin-top:12px;">She has abandoned fast fashion as an environmental and aesthetic failure. She is equally cautious of the $4,000 heritage house bag. She wants the "smart" choice that proves her taste.</p>
+          <div class="archetype-pill">Skeptical Aesthete</div>
+        </div>
+        <div class="hero-right">
+          <div class="hero-stat">
+            <div class="stat-label">Age / Life Stage</div>
+            <div class="stat-value">28–35</div>
+            <div class="stat-sub">Mid-career Director / Senior Manager</div>
+          </div>
+          <div class="hero-stat">
+            <div class="stat-label">Annual Income</div>
+            <div class="stat-value">$110–150K</div>
+            <div class="stat-sub">High discretionary, protective allocation</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="stat-row">
+        <div class="stat-item">
+          <div class="stat-item-n">2–3×</div>
+          <div class="stat-item-label">Luxury purchase frequency per year — considered, never compulsive</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-item-n">$595–895</div>
+          <div class="stat-item-label">Accessible-but-painful sweet spot for bag investment</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-item-n">$2.4T</div>
+          <div class="stat-item-label">Aggregate HENRY segment spending power (U.S., 2025)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONSUMER IDENTITY -->
+    <div id="identity" class="section">
+      <div class="section-rule"></div>
+      <h2 class="section-title">01 / Consumer Identity</h2>
+      <p>Cameron represents the HENRY cohort (High-Earner, Not Rich Yet) — the single highest-concentration segment of discretionary spending in the luxury market. Her income provides liquidity without the "unthinking consumption" privilege of the ultra-affluent. Every dollar is audited.</p>
+      <p style="margin-top:16px;">Her professional environment — Director or Senior Manager in creative, tech, or strategy — means her wardrobe is also a workplace tool. It must signal competence, not fashion desperation.</p>
+
+      <table class="data-table" style="margin-top:28px;">
+        <thead>
+          <tr>
+            <th>Dimension</th>
+            <th>Profile</th>
+            <th>Strategic Implication</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Age / Stage</td>
+            <td>28–35, mid-career consolidation</td>
+            <td>Rejects trend-chasing; demands longevity</td>
+          </tr>
+          <tr>
+            <td>Income</td>
+            <td>$110k–$150k annually</td>
+            <td>Price is a quality signal, not just a gate</td>
+          </tr>
+          <tr>
+            <td>Role</td>
+            <td>Director / Senior Manager</td>
+            <td>Needs workhorse utility + executive polish</td>
+          </tr>
+          <tr>
+            <td>Industry</td>
+            <td>Creative, Tech, Strategy</td>
+            <td>Values intellectualized design + niche discovery</td>
+          </tr>
+          <tr>
+            <td>Geography</td>
+            <td>Tier-1 global cities</td>
+            <td>High exposure to "silent" luxury in daily life</td>
+          </tr>
+          <tr>
+            <td>Purchase intent</td>
+            <td>Self-gifting, earned reward</td>
+            <td>She chose it — she was not sold it</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="tag-row">
+        <span class="tag">Toteme T-Lock</span>
+        <span class="tag">Khaite Lotus</span>
+        <span class="tag">Vintage Prada Nylon</span>
+        <span class="tag">The Row</span>
+        <span class="tag">COS</span>
+      </div>
+      <div style="font-family: var(--font-mono); font-size: 10px; color: var(--muted-light); margin-top:8px;">Competitive consideration set — what The Carolyn is being compared against</div>
+    </div>
+
+    <!-- PSYCHOGRAPHIC DEPTH -->
+    <div id="psychographic" class="section">
+      <div class="section-rule"></div>
+      <h2 class="section-title">02 / Psychographic Depth</h2>
+      <p>Cameron's aesthetic worldview is rooted in a deep literacy of fashion history — specifically the 1990s era of American minimalism. She does not view this period as a trend to revive; she views it as a definitive standard that has been diluted by modern marketing.</p>
+      <p style="margin-top:12px;">Her relationship with Calvin Klein is currently <strong>lapsed but conditional</strong>. She respects the archives. She views modern CK as a mall brand that over-relies on celebrity underwear campaigns and mall-tier distribution. She is waiting for the brand to give her a reason to return.</p>
+
+      <table class="data-table" style="margin-top:28px;">
+        <thead>
+          <tr>
+            <th>Aesthetic Marker</th>
+            <th>Archival Reference</th>
+            <th>Modern Interpretation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Color Palette</td>
+            <td>Neutrals, Black, Porcelain, Granite</td>
+            <td>"Quiet Luxury" and "Skinimalism"</td>
+          </tr>
+          <tr>
+            <td>Silhouette</td>
+            <td>Lean, Narrow, Draped</td>
+            <td>Masculine tailoring as empowerment</td>
+          </tr>
+          <tr>
+            <td>Accessories</td>
+            <td>Tortoiseshell, Oval Sunglasses</td>
+            <td>Rejection of visible logos</td>
+          </tr>
+          <tr>
+            <td>Leather Finish</td>
+            <td>Brushed, Full-Grain, Patinated</td>
+            <td>Workhorse utility + material integrity</td>
+          </tr>
+          <tr>
+            <td>Branding</td>
+            <td>None outward-facing</td>
+            <td>Obvious branding = "tax on the insecure"</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="divider"></div>
+
+      <h2 class="section-title" style="font-size:20px; margin-bottom:16px;">The CBK Muse</h2>
+      <p>The primary influence on Cameron's aesthetic is the legacy of Carolyn Bessette-Kennedy — whose tenure at Calvin Klein defined a specific kind of New York restraint. For Cameron, CBK represents the "Clean Girl" archetype decades before the term became a social media phenomenon. The "CBK Uniform" — bootcut Levi's, oversized trench, unadorned leather goods — is not nostalgia; it is an ongoing ideological stance on consumption.</p>
+      <p style="margin-top:12px;">The 2026 <em>Love Story</em> limited series (Ryan Murphy, FX) has reignited global interest in CBK's aesthetic, providing earned cultural momentum that cannot be manufactured by a campaign.</p>
+    </div>
+
+    <!-- VOICE & VERBATIM -->
+    <div id="voice" class="section">
+      <div class="section-rule"></div>
+      <h2 class="section-title">03 / Voice & Verbatim</h2>
+      <p>These statements are synthesized from fashion Substacks, luxury review forums, and high-end resale platforms. They reflect Cameron's internal monologue during discovery and evaluation — not manufactured personas.</p>
+
+      <div class="quote-stack" style="margin-top:28px;">
+        <div class="quote-block">
+          <div class="quote-text">"I don't want a billboard; I want a workhorse. It needs to hold my laptop and look better in three years than it does today."</div>
+          <div class="quote-attr">Purchase motivation — utility + patina expectation</div>
+        </div>
+        <div class="quote-block">
+          <div class="quote-text">"If I'm spending $600 on a contemporary bag, the hardware better not feel hollow when I pick it up."</div>
+          <div class="quote-attr">Tactile quality gate — weight as proxy for structural integrity</div>
+        </div>
+        <div class="quote-block">
+          <div class="quote-text">"Calvin Klein used to own American minimalism. If this bag is a return to that, I'm interested. If it's just another influencer push, I'm out."</div>
+          <div class="quote-attr">Brand relationship — conditional re-engagement, authenticity as the only lever</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CORE TENSIONS -->
+    <div id="tensions" class="section">
+      <div class="section-rule"></div>
+      <h2 class="section-title">04 / Core Tensions</h2>
+      <p>Cameron's internal contradictions are not obstacles — they are the design constraints. Every product, channel, and communication decision for The Carolyn must navigate all three simultaneously.</p>
+
+      <div class="tension-stage">
+        <div class="tension-row-full">
+          <div class="tension-pole">
+            <div class="pole-label">Desire</div>
+            <div class="pole-title">Legacy Authority</div>
+            <div class="pole-body">She wants a piece of the 1990s CK ethos. It carries historical weight and cultural capital that no startup brand can replicate.</div>
+          </div>
+          <div class="vs-col">VS</div>
+          <div class="tension-pole right">
+            <div class="pole-label">Rejection</div>
+            <div class="pole-title">Manufactured Hype</div>
+            <div class="pole-body">If the launch feels too "trendy" or is pushed by high-tier TikTok influencers who don't share her aesthetic literacy, she writes the brand off as inauthentic.</div>
+          </div>
+        </div>
+
+        <div class="tension-row-full">
+          <div class="tension-pole">
+            <div class="pole-label">Need</div>
+            <div class="pole-title">Everyday Utility</div>
+            <div class="pole-body">A bag that can be thrown onto a subway seat or the passenger seat of a car. A true workhorse that doesn't demand precious handling.</div>
+          </div>
+          <div class="vs-col">VS</div>
+          <div class="tension-pole right">
+            <div class="pole-label">Demand</div>
+            <div class="pole-title">Elevated Execution</div>
+            <div class="pole-body">The precision of the stitching, quality of edge-painting, and sourcing of leather must match the pinnacle of craftsmanship. Grade A+ or walk.</div>
+          </div>
+        </div>
+
+        <div class="tension-row-full">
+          <div class="tension-pole">
+            <div class="pole-label">Want</div>
+            <div class="pole-title">Horizontal Signaling</div>
+            <div class="pole-body">Peers — art directors, strategists, designers — should recognize the bag by silhouette and drape. Not mass market. Not invisible. Literate.</div>
+          </div>
+          <div class="vs-col">VS</div>
+          <div class="tension-pole right">
+            <div class="pole-label">Refusal</div>
+            <div class="pole-title">Logo as Signal</div>
+            <div class="pole-body">A stamped logo is a failure of confidence. The bag must carry meaning through form, not branding. Blind-emboss internally or not at all.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BEHAVIORAL PATTERNS -->
+    <div id="behavior" class="section">
+      <div class="section-rule"></div>
+      <h2 class="section-title">05 / Behavioral Patterns</h2>
+      <p>Cameron's path to purchase is non-linear and heavily influenced by niche authority. Understanding how she moves through the digital and physical world dictates channel investment and associate training at the point of touch.</p>
+
+      <table class="journey-table" style="margin-top:28px;">
+        <thead>
+          <tr>
+            <th>Stage</th>
+            <th>Channel / Touchpoint</th>
+            <th>Behavioral Trigger</th>
+            <th>Strategic Requirement</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="journey-stage">Discovery</span></td>
+            <td>Magasin, Blackbird Spyplane, Concorde</td>
+            <td>"Unbeatable recon" into Veronica Leoni's debut for CK</td>
+            <td>High-quality long-form editorial content</td>
+          </tr>
+          <tr>
+            <td><span class="journey-stage">Validation</span></td>
+            <td>SSENSE "Best of 2026," Mytheresa</td>
+            <td>Confirmation that the bag is curated by aesthetic authorities</td>
+            <td>Exclusive editorial retail partnership</td>
+          </tr>
+          <tr>
+            <td><span class="journey-stage">Verification</span></td>
+            <td>Physical flagship store</td>
+            <td>Tactile inspection: hardware weight, zipper glide, gusset stitching</td>
+            <td>Solid brass hardware, YKK zippers, trained associates</td>
+          </tr>
+          <tr>
+            <td><span class="journey-stage">Purchase</span></td>
+            <td>CK flagship / Exclusive boutique</td>
+            <td>Price-to-longevity evaluation (~$750)</td>
+            <td>Expert associate, heritage-focused storytelling</td>
+          </tr>
+          <tr>
+            <td><span class="journey-stage">Advocacy</span></td>
+            <td>Professional urban setting</td>
+            <td>Daily carry; bag develops patina, signals taste to peers</td>
+            <td>Structural integrity, logo-less silhouette recognition</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="divider"></div>
+
+      <h2 class="section-title" style="font-size:20px; margin-bottom:16px;">The Substack Ecosystem</h2>
+      <p>Cameron does not click on paid Instagram carousels. Her discovery is organic, curated, and social — but only within her trusted circle. Key platforms serving as discovery infrastructure:</p>
+
+      <table class="data-table" style="margin-top:20px;">
+        <thead>
+          <tr>
+            <th>Newsletter</th>
+            <th>Focus</th>
+            <th>Why It Resonates</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Blackbird Spyplane</td>
+            <td>Fashion, culture, "unbeatable recon"</td>
+            <td>Essayistic; insider lens; anti-hype credibility</td>
+          </tr>
+          <tr>
+            <td>Magasin</td>
+            <td>Curated retail, zeitgeist capture</td>
+            <td>Connects trend analysis directly to purchase intent</td>
+          </tr>
+          <tr>
+            <td>Line Sheet</td>
+            <td>Fashion industry mechanics</td>
+            <td>Determines if a brand revival is authentic or a last-ditch effort</td>
+          </tr>
+          <tr>
+            <td>Concorde</td>
+            <td>Women's fashion intelligence</td>
+            <td>Spyplane's women-focused vertical — highest trust</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- COMPETITIVE SET -->
+    <div id="competitive" class="section">
+      <div class="section-rule"></div>
+      <h2 class="section-title">06 / Competitive Set</h2>
+      <p>When Cameron evaluates The Carolyn, she is weighing it against a specific peer group. Each competitor has a known technical failure that The Carolyn must address.</p>
+
+      <table class="comp-table" style="margin-top:28px;">
+        <thead>
+          <tr>
+            <th>Brand / Model</th>
+            <th>Price Range</th>
+            <th>Primary Appeal</th>
+            <th>Cameron's Risk / Failure</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="highlight-row">
+            <td>Calvin Klein — The Carolyn</td>
+            <td>$595–$895</td>
+            <td>Archival heritage; Leoni vision; CBK legacy</td>
+            <td>Mall-brand perception; unproven resale value</td>
+          </tr>
+          <tr>
+            <td>Toteme T-Lock</td>
+            <td>$960–$1,400</td>
+            <td>Architectural heft; minimalist design; solid feet</td>
+            <td>Turn-lock mechanism failure; "screw-like" hardware; becoming ubiquitous</td>
+          </tr>
+          <tr>
+            <td>Khaite Lotus</td>
+            <td>$1,500–$2,800</td>
+            <td>Sculptural drape; suede texture; body-hugging silhouette</td>
+            <td>No base feet; poor shape retention; price-to-casual disconnect</td>
+          </tr>
+          <tr>
+            <td>Prada 1995 Re-Edition</td>
+            <td>$2,300+</td>
+            <td>Original CBK heritage; archival authority; proven resale</td>
+            <td>Price-to-value ceiling; European brand, not American narrative</td>
+          </tr>
+          <tr>
+            <td>Vintage Prada Nylon</td>
+            <td>$500–$1,200 resale</td>
+            <td>Proven workhorse; archival credibility; smart choice signal</td>
+            <td>Logo outward-facing; no patina development; competition is "found," not bought</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- CONSTRUCTION STANDARDS -->
+    <div id="construction" class="section">
+      <div class="section-rule"></div>
+      <h2 class="section-title">07 / Construction Standards</h2>
+      <p>Cameron's skepticism can only be overcome by a product that exceeds her technical expectations. She will feel the weight of the zipper and check the stitching on the gussets. If the bag fails these tactile tests, no amount of marketing converts her.</p>
+
+      <table class="construct-table" style="margin-top:28px;">
+        <thead>
+          <tr>
+            <th>Component</th>
+            <th>Required Standard</th>
+            <th>Failure Condition</th>
+            <th>Grade A+</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="metric">Hardware Material</td>
+            <td>Solid brass, sand-cast, custom-tooled, PVD-coated</td>
+            <td>Zinc alloy, hollow, plated — peels and reveals gray core</td>
+            <td><span class="pass">REQUIRED</span></td>
+          </tr>
+          <tr>
+            <td class="metric">Zipper</td>
+            <td>YKK or Excella — substantial glide, no stick</td>
+            <td>Unbranded or sticky zippers</td>
+            <td><span class="pass">REQUIRED</span></td>
+          </tr>
+          <tr>
+            <td class="metric">Leather Grade</td>
+            <td>Full-grain cowhide, LWG-certified, vegetable-tanned</td>
+            <td>Corrected grain or "genuine leather"</td>
+            <td><span class="pass">REQUIRED</span></td>
+          </tr>
+          <tr>
+            <td class="metric">Base Protection</td>
+            <td>Metal feet, reinforced corners</td>
+            <td>No feet on structured bag</td>
+            <td><span class="pass">REQUIRED</span></td>
+          </tr>
+          <tr>
+            <td class="metric">Interior Lining</td>
+            <td>Suede, silk, or high-density cotton</td>
+            <td>Cheap polyester or thin PU</td>
+            <td><span class="pass">REQUIRED</span></td>
+          </tr>
+          <tr>
+            <td class="metric">Edge Finishing</td>
+            <td>Multi-layer, sanded between coats, flexible paint (&lt;1% VOC)</td>
+            <td>Single coat, raw edge, or peeling paint</td>
+            <td><span class="pass">REQUIRED</span></td>
+          </tr>
+          <tr>
+            <td class="metric">Logo Placement</td>
+            <td>Blind-embossed interior or zipper-pull engraving only</td>
+            <td>Any outward-facing stamped logo</td>
+            <td><span class="fail">ZERO TOLERANCE</span></td>
+          </tr>
+          <tr>
+            <td class="metric">Laptop Fit</td>
+            <td>Interior accommodates 13-inch laptop</td>
+            <td>Decorative bag with insufficient capacity</td>
+            <td><span class="pass">REQUIRED</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- PRICING PSYCHOLOGY -->
+    <div id="pricing" class="section">
+      <div class="section-rule"></div>
+      <h2 class="section-title">08 / Pricing Psychology</h2>
+      <p>For Cameron, price is a quality signal before it is a consideration gate. The recommended price point of <strong>$795</strong> sits at the deliberate center of the accessible-but-painful sweet spot — high enough to guarantee material credibility, low enough to remain a "smart" investment rather than an aspirational stretch.</p>
+
+      <div class="price-tier-list" style="margin-top:28px;">
+        <div class="price-tier">
+          <div class="price-range">$100 – $350</div>
+          <div class="price-desc">Commercial / Disposable. She doesn't look here.</div>
+          <div class="price-brand">Modern CK Standard, Coach Outlet</div>
+        </div>
+        <div class="price-tier">
+          <div class="price-range">$350 – $550</div>
+          <div class="price-desc">Aspirational / "Upper Mall." Possible but skeptical.</div>
+          <div class="price-brand">Tory Burch, Coach Main Line</div>
+        </div>
+        <div class="price-tier target">
+          <div class="price-range">$595 – $895 ← TARGET</div>
+          <div class="price-desc">"Smart" luxury. Best value-to-quality. Investment, not impulse.</div>
+          <div class="price-brand">The Carolyn (rec. $795)</div>
+        </div>
+        <div class="price-tier">
+          <div class="price-range">$950 – $1,450</div>
+          <div class="price-desc">Established minimalist. Begins comparing against Toteme.</div>
+          <div class="price-brand">Toteme, Polène</div>
+        </div>
+        <div class="price-tier">
+          <div class="price-range">$1,500 – $3,000</div>
+          <div class="price-desc">Heritage house territory. Pivots to European authority.</div>
+          <div class="price-brand">Khaite, The Row, Prada, Celine</div>
+        </div>
+      </div>
+
+      <p style="margin-top:8px; font-size:13px; color:var(--muted);">Below $500 → she doesn't believe the quality. Above $1,200 → she pivots to a brand with proven resale. The window is $595–$895. Recommended retail: <strong>$795</strong>.</p>
+    </div>
+
+    <!-- STRATEGIC IMPLICATIONS -->
+    <div id="implications" class="section">
+      <div class="section-rule"></div>
+      <h2 class="section-title">09 / Strategic Implications</h2>
+      <p>Cameron's profile doesn't inform the campaign brief — it generates the product brief, the distribution constraints, and the communication architecture simultaneously. Every dimension below is a direct translation of a psychographic imperative, not a marketing opinion.</p>
+
+      <div class="impl-list" style="margin-top:32px;">
+        <div class="impl-row">
+          <div class="impl-dim">Product</div>
+          <div class="impl-text"><strong>Hardware must be solid brass, custom-tooled, and weighted.</strong> The logo is blind-embossed on the interior lining or engraved on the zipper pull — never outward-facing. Full-grain leather, LWG-certified, designed to soften and develop patina. Metal feet. Laptop fit. Grade A+ or she walks before purchase.</div>
+        </div>
+        <div class="impl-row">
+          <div class="impl-dim">Price</div>
+          <div class="impl-text">Target retail of <strong>$795</strong>. Accessible-but-painful. High enough to guarantee material credibility. Low enough to position against Toteme ($960+) as the smarter, equally constructed alternative. Round numbers only — $.99 endings signal "mass."</div>
+        </div>
+        <div class="impl-row">
+          <div class="impl-dim">Naming</div>
+          <div class="impl-text">"The Carolyn" implies a person, not a product. <strong>It codes the brand as having a world, not just a catalog.</strong> The CBK naming is a trust-building device — it signals archival intentionality before she opens the bag.</div>
+        </div>
+        <div class="impl-row">
+          <div class="impl-dim">Channel</div>
+          <div class="impl-text"><strong>CK flagship stores and SSENSE / Mytheresa for the pre-release window.</strong> Keep it off wholesale department store floors where it will be discounted and adjacent to mass-market product. She reads channel as quality signal. Nordstrom rack adjacency kills purchase intent before she arrives.</div>
+        </div>
+        <div class="impl-row">
+          <div class="impl-dim">Associates</div>
+          <div class="impl-text">Store associates must function as archivists, not salespeople. They should be trained to discuss the leather tannery (LWG certification), the archival FW95 silhouette, and the mechanics of solid brass hardware. <strong>78% of millennials report a positive associate interaction can convert a skeptic.</strong></div>
+        </div>
+        <div class="impl-row">
+          <div class="impl-dim">Communication</div>
+          <div class="impl-text">The narrative is not "Look at this new IT bag." The narrative is: <strong>"We went back to the archives, obsessed over the construction, and built the perfect minimalist workhorse."</strong> Earned media and editorial placement (Line Sheet, Magasin, Vogue) over paid social. Silence is a feature. One clean object photograph on white converts harder than a 6-look campaign.</div>
+        </div>
+        <div class="impl-row">
+          <div class="impl-dim">Influencers</div>
+          <div class="impl-text">If influencers are used, they must be <strong>niche authorities</strong> — art directors, independent stylists, architects. Not celebrity-tier TikTok. Discovery must feel earned rather than served. The Love Story series is a cultural tailwind to leverage, not a merch opportunity.</div>
+        </div>
+        <div class="impl-row">
+          <div class="impl-dim">Retention</div>
+          <div class="impl-text">If The Carolyn earns her, she expands: The Carolyn in suede, The Carolyn Clutch. She becomes a <strong>franchise customer, not a transaction.</strong> Long-term LTV depends on first-purchase experience quality. The silent ambassador who carries the bag daily — developing patina in public — is the most powerful marketing the brand can achieve. She never posts an unboxing. She just carries it.</div>
+        </div>
+      </div>
+
+      <div class="footnote">
+        Sources synthesized from: consumer verbatim (fashion Substacks, luxury review forums, high-end resale platforms), Bourdieu's theory of habitus, economic data on HENRY segment spending (2024–25), competitive product reviews (Toteme T-Lock, Khaite Lotus), Veronica Leoni FW25 debut coverage, and CBK archival research. All voice quotes are synthesized composites, not direct attributions.
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+  const sections = document.querySelectorAll('.section[id]');
+  const navLinks = document.querySelectorAll('.sidenav a');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === '#' + entry.target.id) {
+            link.classList.add('active');
+          }
+        });
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+
+  sections.forEach(section => observer.observe(section));
+</script>
+
+</body>
+</html>

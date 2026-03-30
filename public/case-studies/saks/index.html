@@ -208,6 +208,25 @@ body { font-family: var(--font); background: var(--white); color: var(--black); 
 .img-caption { font-size: 9px; letter-spacing: .12em; text-transform: uppercase; color: var(--g400); padding: 6px 0 20px; display: block; }
 .cs-img-2col-item .img-caption, .cs-img-3col-item .img-caption { padding: 6px 0 0; }
 
+/* Capsule + corner highlight: compact landscape, full render visible */
+.cs-img-2col--fixture-landscape {
+  justify-items: center;
+  gap: 12px 20px;
+}
+.cs-img-2col--fixture-landscape .cs-img-2col-item {
+  width: 100%;
+  max-width: 340px;
+}
+.cs-img-2col--fixture-landscape .cs-img-contain {
+  aspect-ratio: 16 / 9;
+  min-height: 0;
+  width: 100%;
+}
+.cs-img-2col--fixture-landscape .cs-img-contain img {
+  object-fit: contain;
+  object-position: center center;
+}
+
 /* Full-bleed width, height follows image: no cover crop */
 .cs-img-intrinsic { width: 100%; display: block; background: var(--white); }
 .cs-img-intrinsic img {
@@ -571,6 +590,9 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
     grid-template-columns: 1fr !important; 
     gap: 24px !important; 
   }
+  .cs-img-2col--fixture-landscape .cs-img-2col-item {
+    max-width: 100% !important;
+  }
   #cs-bottom-line .cs-metrics-table { display: none !important; }
   .metrics-grid-mobile, .decision-accordion-mobile { display: grid !important; grid-template-columns: 1fr !important; }
   table.legacy-vault-compare-table { display: none !important; }
@@ -796,9 +818,9 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
             <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="../saks/fixtures/Saks_WindowChest_Fixture.png" alt="Window chest display" loading="lazy" /></div><span class="img-caption">Window chest</span></div>
             <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="../saks/fixtures/Saks_WindowLighting_Fixture.png" alt="Window lighting" loading="lazy" /></div><span class="img-caption">Window lighting</span></div>
           </div>
-          <div class="cs-img-2col" style="margin-top:8px;">
-            <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="../saks/fixtures/Saks_CapsuleHighlight_Fixture.png" alt="Capsule highlight" loading="lazy" /></div><span class="img-caption">Capsule highlight</span></div>
-            <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="../saks/fixtures/Saks_Cornerhighlight_fixture.png" alt="Corner highlight fixture" loading="lazy" /></div><span class="img-caption">Corner highlight</span></div>
+          <div class="cs-img-2col cs-img-2col--fixture-landscape" style="margin-top:8px;">
+            <div class="cs-img-2col-item"><div class="cs-img-contain"><img src="../saks/fixtures/Saks_CapsuleHighlight_Fixture.png" alt="Capsule highlight" loading="lazy" /></div><span class="img-caption">Capsule highlight</span></div>
+            <div class="cs-img-2col-item"><div class="cs-img-contain"><img src="../saks/fixtures/Saks_Cornerhighlight_fixture.png" alt="Corner highlight fixture" loading="lazy" /></div><span class="img-caption">Corner highlight</span></div>
           </div>
 
           <!-- 04 · Uniform Styling Guide -->

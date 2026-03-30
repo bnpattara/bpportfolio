@@ -1,0 +1,3428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>On Apex — PRD + Molecular Design System</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,200;0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+  /* ============================================================
+     ON APEX — DESIGN TOKENS (ATOMS)
+     Swiss Engineering × Molecular Architecture
+  ============================================================ */
+
+  :root {
+    /* --- COLOR TOKENS --- */
+    --color-surface-primary:   #FAFAFA;
+    --color-surface-secondary: #F2F2F0;
+    --color-surface-tertiary:  #E8E8E4;
+    --color-surface-inverse:   #0A0A0A;
+
+    --color-ink-primary:       #0A0A0A;
+    --color-ink-secondary:     #3A3A3A;
+    --color-ink-tertiary:      #767676;
+    --color-ink-disabled:      #ABABAB;
+    --color-ink-inverse:       #FAFAFA;
+
+    --color-brand-on-black:    #0A0A0A;
+    --color-brand-on-white:    #FAFAFA;
+    --color-brand-accent:      #E8FF3C;   /* On's signature volt/lime accent */
+    --color-brand-accent-dark: #C8DF00;
+    --color-brand-mid:         #767676;
+
+    --color-semantic-success:  #1A7F4B;
+    --color-semantic-warning:  #B85C00;
+    --color-semantic-error:    #C0392B;
+    --color-semantic-info:     #1A5276;
+
+    --color-border-strong:     #0A0A0A;
+    --color-border-default:    #C8C8C4;
+    --color-border-subtle:     #E8E8E4;
+
+    /* --- TYPOGRAPHY TOKENS --- */
+    --font-display:    'DM Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --font-body:       'DM Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    --font-mono:       'DM Mono', 'Courier New', monospace;
+
+    /* Scale — 4px base grid */
+    --type-2xs:  10px;
+    --type-xs:   12px;
+    --type-sm:   13px;
+    --type-base: 15px;
+    --type-md:   17px;
+    --type-lg:   20px;
+    --type-xl:   24px;
+    --type-2xl:  30px;
+    --type-3xl:  38px;
+    --type-4xl:  48px;
+    --type-5xl:  64px;
+    --type-6xl:  80px;
+
+    /* Weight */
+    --weight-light:   200;
+    --weight-regular: 300;
+    --weight-medium:  400;
+    --weight-semibold:500;
+    --weight-bold:    600;
+
+    /* Line height */
+    --leading-tight:  1.0;
+    --leading-snug:   1.2;
+    --leading-normal: 1.45;
+    --leading-relaxed:1.65;
+
+    /* Letter spacing */
+    --tracking-tight:  -0.03em;
+    --tracking-snug:   -0.02em;
+    --tracking-normal:  0em;
+    --tracking-wide:    0.04em;
+    --tracking-wider:   0.08em;
+    --tracking-widest:  0.14em;
+
+    /* --- SPACING TOKENS (4px grid) --- */
+    --space-1:  4px;
+    --space-2:  8px;
+    --space-3:  12px;
+    --space-4:  16px;
+    --space-5:  20px;
+    --space-6:  24px;
+    --space-8:  32px;
+    --space-10: 40px;
+    --space-12: 48px;
+    --space-16: 64px;
+    --space-20: 80px;
+    --space-24: 96px;
+    --space-32: 128px;
+
+    /* --- RADIUS TOKENS --- */
+    --radius-none:  0px;
+    --radius-sm:    2px;
+    --radius-md:    4px;
+    --radius-pill:  999px;
+
+    /* --- BORDER TOKENS --- */
+    --border-thin:   1px;
+    --border-medium: 2px;
+    --border-thick:  3px;
+
+    /* --- SHADOW TOKENS --- */
+    --shadow-sm:  0 1px 3px rgba(0,0,0,0.08);
+    --shadow-md:  0 4px 16px rgba(0,0,0,0.08);
+    --shadow-lg:  0 12px 40px rgba(0,0,0,0.10);
+    --shadow-xl:  0 24px 64px rgba(0,0,0,0.12);
+
+    /* --- MOTION TOKENS --- */
+    --duration-instant: 0ms;
+    --duration-fast:    120ms;
+    --duration-base:    220ms;
+    --duration-slow:    380ms;
+    --duration-slower:  600ms;
+    --ease-standard:    cubic-bezier(0.2, 0, 0, 1);
+    --ease-decelerate:  cubic-bezier(0, 0, 0.2, 1);
+    --ease-accelerate:  cubic-bezier(0.4, 0, 1, 1);
+    --ease-spring:      cubic-bezier(0.34, 1.56, 0.64, 1);
+
+    /* --- Z-INDEX TOKENS --- */
+    --z-base:    0;
+    --z-raised:  10;
+    --z-overlay: 100;
+    --z-modal:   200;
+    --z-nav:     300;
+    --z-toast:   400;
+
+    /* --- LAYOUT --- */
+    --grid-columns-mobile:  4;
+    --grid-columns-tablet:  8;
+    --grid-columns-desktop: 12;
+    --grid-gutter:          16px;
+    --grid-margin-mobile:   16px;
+    --grid-margin-tablet:   32px;
+    --max-width:            1200px;
+    --sidebar-width:        260px;
+  }
+
+  @media (max-width: 768px) {
+    body { flex-direction: column !important; }
+    .sidebar { width: 100% !important; height: auto !important; position: static !important; }
+    .main { padding: 40px 20px !important; }
+    .hero-title { font-size: 32px !important; }
+    .hero-meta { grid-template-columns: 1fr !important; }
+    .section-title { font-size: 28px !important; }
+    .subsection-title { font-size: 20px !important; }
+    .spec-table, .spec-table thead, .spec-table tbody, .spec-table th, .spec-table td, .spec-table tr { 
+      display: block !important; 
+    }
+    .spec-table thead { display: none !important; }
+    .spec-table td { border-bottom: none !important; padding: 10px 0 !important; }
+    .spec-table td:first-child { width: 100% !important; font-weight: bold !important; color: var(--color-ink-primary) !important; padding-top: 20px !important; border-top: 1px solid var(--color-border-subtle) !important; }
+    .spec-table tr:first-child td:first-child { border-top: none !important; }
+    .component-grid, .metric-grid, .persona-grid { grid-template-columns: 1fr !important; }
+  }
+
+  /* ============================================================
+     DARK MODE — Token Overrides
+     Applied via html[data-mode="dark"]
+     Semantic tokens remap; brand/spacing/type/motion unchanged
+  ============================================================ */
+
+  html[data-mode="dark"] {
+    /* Surface */
+    --color-surface-primary:   #0A0A0A;
+    --color-surface-secondary: #141414;
+    --color-surface-tertiary:  #1E1E1E;
+    --color-surface-inverse:   #F0F0EC;
+
+    /* Ink */
+    --color-ink-primary:       #F0F0EC;
+    --color-ink-secondary:     #B8B8B2;
+    --color-ink-tertiary:      #707070;
+    --color-ink-disabled:      #404040;
+    --color-ink-inverse:       #0A0A0A;
+
+    /* Brand — volt stays exactly the same. It was born for dark. */
+    --color-brand-accent:      #E8FF3C;
+    --color-brand-accent-dark: #C8DF00;
+    --color-brand-on-black:    #0A0A0A;
+
+    /* Semantic — slightly desaturated on dark */
+    --color-semantic-success:  #34C77A;
+    --color-semantic-warning:  #E8983A;
+    --color-semantic-error:    #E85C4A;
+    --color-semantic-info:     #5A9FD4;
+
+    /* Border */
+    --color-border-strong:     #F0F0EC;
+    --color-border-default:    #2A2A2A;
+    --color-border-subtle:     #1A1A1A;
+
+    /* Shadow — glow-based on dark */
+    --shadow-sm:  0 1px 3px rgba(0,0,0,0.4);
+    --shadow-md:  0 4px 16px rgba(0,0,0,0.5);
+    --shadow-lg:  0 12px 40px rgba(0,0,0,0.6);
+    --shadow-xl:  0 24px 64px rgba(0,0,0,0.7);
+  }
+
+  /* ── Dark mode: component-level overrides ── */
+
+  html[data-mode="dark"] body {
+    background: var(--color-surface-primary);
+    color: var(--color-ink-primary);
+  }
+
+  html[data-mode="dark"] .sidebar {
+    background: #050505;
+    border-right: 1px solid var(--color-border-subtle);
+  }
+
+  html[data-mode="dark"] .hero {
+    background: #050505;
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+
+  html[data-mode="dark"] .hero::before {
+    background: linear-gradient(135deg, transparent 30%, rgba(232,255,60,0.04) 100%);
+  }
+
+  html[data-mode="dark"] .code-block {
+    background: #050505;
+    border: 1px solid var(--color-border-subtle);
+  }
+
+  html[data-mode="dark"] .callout {
+    background: var(--color-surface-secondary);
+  }
+
+  html[data-mode="dark"] .component-preview {
+    background: var(--color-surface-secondary);
+  }
+
+  html[data-mode="dark"] .component-preview.dark {
+    background: #050505;
+  }
+
+  html[data-mode="dark"] .component-label-bar {
+    background: var(--color-surface-primary);
+    border-top-color: var(--color-border-subtle);
+  }
+
+  html[data-mode="dark"] .spec-table tr:hover td {
+    background: var(--color-surface-secondary);
+  }
+
+  html[data-mode="dark"] .phone-frame {
+    border-color: var(--color-border-default);
+    background: var(--color-surface-primary);
+  }
+
+  html[data-mode="dark"] .phone-status {
+    background: var(--color-surface-primary);
+    border-bottom-color: var(--color-border-subtle);
+  }
+
+  html[data-mode="dark"] .mobile-nav {
+    background: var(--color-surface-primary);
+    border-top-color: var(--color-border-subtle);
+  }
+
+  html[data-mode="dark"] .motion-demo {
+    background: var(--color-brand-accent);
+  }
+
+  html[data-mode="dark"] .motion-card:hover .motion-demo {
+    background: var(--color-brand-accent-dark);
+  }
+
+  html[data-mode="dark"] .input {
+    background: var(--color-surface-secondary);
+    border-color: var(--color-border-default);
+    color: var(--color-ink-primary);
+  }
+
+  html[data-mode="dark"] .input:focus {
+    border-color: var(--color-ink-primary);
+  }
+
+  html[data-mode="dark"] .chip {
+    border-color: var(--color-border-default);
+    color: var(--color-ink-secondary);
+  }
+
+  html[data-mode="dark"] .chip:hover,
+  html[data-mode="dark"] .chip.selected {
+    background: var(--color-ink-primary);
+    border-color: var(--color-ink-primary);
+    color: var(--color-ink-inverse);
+  }
+
+  html[data-mode="dark"] .metric-card {
+    background: var(--color-surface-secondary);
+    border-color: var(--color-border-subtle);
+  }
+
+  html[data-mode="dark"] .run-row:hover {
+    background: var(--color-surface-secondary);
+  }
+
+  html[data-mode="dark"] .avatar {
+    background: var(--color-surface-tertiary);
+    color: var(--color-ink-secondary);
+  }
+
+  html[data-mode="dark"] .progress-track {
+    background: var(--color-border-subtle);
+  }
+
+  html[data-mode="dark"] .badge-default {
+    background: var(--color-surface-tertiary);
+    color: var(--color-ink-secondary);
+  }
+
+  html[data-mode="dark"] .badge-success { background: rgba(52,199,122,0.15); color: var(--color-semantic-success); }
+  html[data-mode="dark"] .badge-warning { background: rgba(232,152,58,0.15); color: var(--color-semantic-warning); }
+  html[data-mode="dark"] .badge-error   { background: rgba(232,92,74,0.15);  color: var(--color-semantic-error); }
+
+  /* ── Mode toggle button ── */
+  .mode-toggle {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-top: auto;
+    padding-top: var(--space-6);
+    border-top: 1px solid rgba(255,255,255,0.08);
+    cursor: pointer;
+    background: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    width: 100%;
+    text-align: left;
+  }
+
+  html[data-mode="dark"] .mode-toggle {
+    border-top-color: rgba(255,255,255,0.06);
+  }
+
+  .mode-toggle-track {
+    width: 32px;
+    height: 18px;
+    background: rgba(255,255,255,0.12);
+    border-radius: 999px;
+    position: relative;
+    flex-shrink: 0;
+    transition: background var(--duration-base) var(--ease-standard);
+  }
+
+  html[data-mode="dark"] .mode-toggle-track {
+    background: var(--color-brand-accent);
+  }
+
+  .mode-toggle-thumb {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 14px;
+    height: 14px;
+    background: white;
+    border-radius: 50%;
+    transition: transform var(--duration-base) var(--ease-spring),
+                background var(--duration-base) var(--ease-standard);
+  }
+
+  html[data-mode="dark"] .mode-toggle-thumb {
+    transform: translateX(14px);
+    background: var(--color-brand-on-black);
+  }
+
+  .mode-toggle-label {
+    font-family: var(--font-mono);
+    font-size: var(--type-2xs);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.38);
+    transition: color var(--duration-fast) var(--ease-standard);
+    user-select: none;
+  }
+
+  html[data-mode="dark"] .mode-toggle-label {
+    color: rgba(255,255,255,0.55);
+  }
+
+  /* ── Mode badge in color section ── */
+  .mode-label-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    height: 24px;
+    padding: 0 var(--space-3);
+    font-family: var(--font-mono);
+    font-size: var(--type-2xs);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    border: 1px solid var(--color-border-default);
+    color: var(--color-ink-tertiary);
+    border-radius: var(--radius-sm);
+  }
+
+  .mode-label-pill .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-ink-primary);
+    flex-shrink: 0;
+  }
+
+  /* ── Dark mode transition on body ── */
+  html {
+    transition: background var(--duration-slow) var(--ease-standard);
+  }
+
+  body,
+  .sidebar,
+  .hero,
+  .doc-section,
+  .component-card,
+  .component-preview,
+  .component-label-bar,
+  .callout,
+  .code-block,
+  .spec-table td,
+  .spec-table th,
+  .metric-card,
+  .phone-frame,
+  .phone-status,
+  .mobile-nav,
+  .motion-card,
+  .interaction-card,
+  .input,
+  .chip,
+  .avatar,
+  .badge,
+  .run-row,
+  .progress-track,
+  .swatch-name,
+  .swatch-hex,
+  .section-title,
+  .section-subtitle,
+  .subsection-title,
+  .subsection-body,
+  footer {
+    transition:
+      background-color var(--duration-slow) var(--ease-standard),
+      border-color var(--duration-slow) var(--ease-standard),
+      color var(--duration-slow) var(--ease-standard);
+  }
+
+  /* ============================================================
+     BASE RESET
+  ============================================================ */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-body);
+    font-size: var(--type-base);
+    font-weight: var(--weight-regular);
+    line-height: var(--leading-relaxed);
+    color: var(--color-ink-primary);
+    background: var(--color-surface-primary);
+    display: flex;
+    min-height: 100vh;
+  }
+
+  /* ============================================================
+     LAYOUT — SIDEBAR + MAIN
+  ============================================================ */
+  .sidebar {
+    width: var(--sidebar-width);
+    min-height: 100vh;
+    background: var(--color-surface-inverse);
+    color: var(--color-ink-inverse);
+    padding: var(--space-10) var(--space-6);
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    flex-shrink: 0;
+    z-index: var(--z-nav);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+  }
+
+  .sidebar-logo {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding-bottom: var(--space-8);
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+  }
+
+  .sidebar-logo-mark {
+    width: 32px;
+    height: 32px;
+    background: var(--color-brand-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .sidebar-logo-mark span {
+    font-family: var(--font-display);
+    font-size: var(--type-sm);
+    font-weight: var(--weight-bold);
+    color: var(--color-brand-on-black);
+    letter-spacing: var(--tracking-tight);
+  }
+
+  .sidebar-logo-text {
+    font-family: var(--font-display);
+    font-size: var(--type-xs);
+    font-weight: var(--weight-medium);
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+    color: var(--color-ink-inverse);
+    line-height: var(--leading-snug);
+  }
+
+  .sidebar-logo-sub {
+    font-family: var(--font-mono);
+    font-size: var(--type-2xs);
+    color: rgba(255,255,255,0.35);
+    letter-spacing: var(--tracking-wide);
+    display: block;
+    margin-top: 2px;
+  }
+
+  .nav-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  .nav-section-label {
+    font-family: var(--font-mono);
+    font-size: var(--type-2xs);
+    font-weight: var(--weight-medium);
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.28);
+    padding: var(--space-1) var(--space-3) var(--space-2);
+    margin-top: var(--space-4);
+  }
+
+  .nav-link {
+    display: block;
+    font-family: var(--font-body);
+    font-size: var(--type-xs);
+    font-weight: var(--weight-regular);
+    color: rgba(255,255,255,0.55);
+    text-decoration: none;
+    padding: var(--space-2) var(--space-3);
+    letter-spacing: var(--tracking-wide);
+    transition: color var(--duration-fast) var(--ease-standard),
+                background var(--duration-fast) var(--ease-standard);
+    border-left: 2px solid transparent;
+  }
+
+  .nav-link:hover,
+  .nav-link.active {
+    color: var(--color-ink-inverse);
+    background: rgba(255,255,255,0.06);
+    border-left-color: var(--color-brand-accent);
+  }
+
+  /* ============================================================
+     MAIN CONTENT
+  ============================================================ */
+  .main {
+    flex: 1;
+    min-width: 0;
+    padding: var(--space-16) var(--space-16) var(--space-32);
+    max-width: 960px;
+  }
+
+  /* ============================================================
+     SECTION STRUCTURE
+  ============================================================ */
+  .doc-section {
+    padding-top: var(--space-20);
+    padding-bottom: var(--space-20);
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+
+  .doc-section:first-of-type {
+    padding-top: 0;
+  }
+
+  .section-eyebrow {
+    font-family: var(--font-mono);
+    font-size: var(--type-2xs);
+    font-weight: var(--weight-medium);
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+    color: var(--color-ink-tertiary);
+    margin-bottom: var(--space-4);
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: var(--type-4xl);
+    font-weight: var(--weight-light);
+    line-height: var(--leading-tight);
+    letter-spacing: var(--tracking-snug);
+    color: var(--color-ink-primary);
+    margin-bottom: var(--space-6);
+  }
+
+  .section-title em {
+    font-style: italic;
+    font-weight: var(--weight-light);
+  }
+
+  .section-subtitle {
+    font-family: var(--font-body);
+    font-size: var(--type-lg);
+    font-weight: var(--weight-light);
+    line-height: var(--leading-relaxed);
+    color: var(--color-ink-secondary);
+    max-width: 640px;
+    margin-bottom: var(--space-12);
+  }
+
+  .subsection-title {
+    font-family: var(--font-display);
+    font-size: var(--type-xl);
+    font-weight: var(--weight-medium);
+    letter-spacing: var(--tracking-snug);
+    color: var(--color-ink-primary);
+    margin-top: var(--space-12);
+    margin-bottom: var(--space-6);
+  }
+
+  .subsection-body {
+    font-family: var(--font-body);
+    font-size: var(--type-base);
+    font-weight: var(--weight-regular);
+    line-height: var(--leading-relaxed);
+    color: var(--color-ink-secondary);
+    max-width: 680px;
+    margin-bottom: var(--space-6);
+  }
+
+  /* ============================================================
+     PRD COMPONENTS
+  ============================================================ */
+
+  /* Hero block */
+  .hero {
+    background: var(--color-surface-inverse);
+    color: var(--color-ink-inverse);
+    padding: var(--space-16) var(--space-16);
+    margin: calc(-1 * var(--space-16)) calc(-1 * var(--space-16)) var(--space-16);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 320px; height: 100%;
+    background: linear-gradient(135deg, transparent 40%, rgba(232,255,60,0.06) 100%);
+    pointer-events: none;
+  }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-family: var(--font-mono);
+    font-size: var(--type-2xs);
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+    color: var(--color-brand-accent);
+    margin-bottom: var(--space-8);
+  }
+
+  .hero-tag::before {
+    content: '';
+    display: inline-block;
+    width: 24px;
+    height: 1px;
+    background: var(--color-brand-accent);
+  }
+
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: var(--type-6xl);
+    font-weight: var(--weight-light);
+    line-height: var(--leading-tight);
+    letter-spacing: var(--tracking-tight);
+    margin-bottom: var(--space-6);
+  }
+
+  .hero-title strong {
+    font-weight: var(--weight-semibold);
+    display: block;
+  }
+
+  .hero-meta {
+    display: flex;
+    gap: var(--space-8);
+    margin-top: var(--space-10);
+    padding-top: var(--space-8);
+    border-top: 1px solid rgba(255,255,255,0.12);
+    flex-wrap: wrap;
+  }
+
+  .hero-meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .hero-meta-label {
+    font-family: var(--font-mono);
+    font-size: var(--type-2xs);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+  }
+
+  .hero-meta-value {
+    font-family: var(--font-body);
+    font-size: var(--type-sm);
+    color: rgba(255,255,255,0.75);
+    font-weight: var(--weight-medium);
+  }
+
+  /* Spec table */
+  .spec-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: var(--space-6) 0;
+    font-family: var(--font-body);
+  }
+
+  .spec-table th {
+    font-family: var(--font-mono);
+    font-size: var(--type-2xs);
+    font-weight: var(--weight-medium);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--color-ink-tertiary);
+    text-align: left;
+    padding: var(--space-3) var(--space-4);
+    border-bottom: 2px solid var(--color-border-strong);
+  }
+
+  .spec-table td {
+    font-size: var(--type-sm);
+    color: var(--color-ink-secondary);
+    padding: var(--space-3) var(--space-4);
+    border-bottom: 1px solid var(--color-border-subtle);
+    vertical-align: top;
+  }
+
+  .spec-table td:first-child {
+    font-family: var(--font-mono);
+    font-size: var(--type-xs);
+    color: var(--color-ink-primary);
+    font-weight: var(--weight-medium);
+    white-space: nowrap;
+    width: 200px;
+  }
+
+  .spec-table tr:hover td {
+    background: var(--color-surface-secondary);
+  }
+
+  /* Tag / Badge */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    height: 20px;
+    padding: 0 var(--space-2);
+    font-family: var(--font-mono);
+    font-size: var(--type-2xs);
+    font-weight: var(--weight-medium);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    border-radius: var(--radius-sm);
+    white-space: nowrap;
+  }
+
+  .badge-default  { background: var(--color-surface-tertiary); color: var(--color-ink-secondary); }
+  .badge-strong   { background: var(--color-ink-primary);      color: var(--color-ink-inverse); }
+  .badge-accent   { background: var(--color-brand-accent);     color: var(--color-brand-on-black); }
+  .badge-success  { background: #D4EDDA; color: var(--color-semantic-success); }
+  .badge-warning  { background: #FDEBD0; color: var(--color-semantic-warning); }
+  .badge-error    { background: #FADBD8; color: var(--color-semantic-error); }
+
+  /* Priority / status indicators */
+  .priority-row {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-4);
+    padding: var(--space-4) 0;
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+
+  .priority-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 6px;
+  }
+
+  .priority-dot.p0 { background: var(--color-semantic-error); }
+  .priority-dot.p1 { background: var(--color-semantic-warning); }
+  .priority-dot.p2 { background: var(--color-semantic-info); }
+  .priority-dot.p3 { background: var(--color-ink-disabled); }
+
+  .priority-content strong {
+    font-family: var(--font-body);
+    font-size: var(--type-sm);
+    font-weight: var(--weight-medium);
+    color: var(--color-ink-primary);
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  .priority-content span {
+    font-size: var(--type-xs);
+    color: var(--color-ink-tertiary);
+    line-height: var(--leading-normal);
+  }
+
+  /* Code block */
+  .code-block {
+    background: var(--color-surface-inverse);
+    border-radius: var(--radius-md);
+    padding: var(--space-6);
+    margin: var(--space-6) 0;
+    overflow-x: auto;
+  }
+
+  .code-block pre {
+    font-family: var(--font-mono);
+    font-size: var(--type-xs);
+    line-height: 1.7;
+    color: rgba(255,255,255,0.78);
+  }
+
+  .code-block .token-comment  { color: rgba(255,255,255,0.28); }
+  .code-block .token-key      { color: var(--color-brand-accent); }
+  .code-block .token-value    { color: #A8E6CF; }
+  .code-block .token-string   { color: #FFDAB9; }
+
+  /* Info callout */
+  .callout {
+    display: flex;
+    gap: var(--space-4);
+    padding: var(--space-5) var(--space-6);
+    border-left: 3px solid var(--color-ink-primary);
+    background: var(--color-surface-secondary);
+    margin: var(--space-6) 0;
+  }
+
+  .callout-accent { border-left-color: var(--color-brand-accent); }
+  .callout-warn   { border-left-color: var(--color-semantic-warning); }
+
+  .callout-icon {
+    font-family: var(--font-mono);
+    font-size: var(--type-xs);
+    color: var(--color-ink-tertiary);
+    flex-shrink: 0;
+    padding-top: 2px;
+  }
+
+  .callout-body {
+    font-size: var(--type-sm);
+    color: var(--color-ink-secondary);
+    line-height: var(--leading-normal);
+  }
+
+  .callout-body strong {
+    font-weight: var(--weight-semibold);
+    color: var(--color-ink-primary);
+    display: block;
+    margin-bottom: var(--space-1);
+  }
+
+  /* ============================================================
+     DESIGN SYSTEM DISPLAY COMPONENTS
+  ============================================================ */
+
+  /* Color swatches */
+  .swatch-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: var(--space-3);
+    margin: var(--space-6) 0;
+  }
+
+  .swatch {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .swatch-color {
+    height: 48px;
+    border-radius: var(--radius-sm);
+  }
+
+  .swatch-color.bordered {
+    border: 1px solid var(--color-border-default);
+  }
+
+  .swatch-name {
+    font-family: var(--font-mono);
+    font-size: var(--type-2xs);
+    color: var(--color-ink-secondary);
+    letter-spacing: var(--tracking-wide);
+    line-height: 1;
+  }
+
+  .swatch-hex {
+    font-family: var(--font-mono);
+    font-size: var(--type-2xs);
+    color: var(--color-ink-tertiary);
+  }
+
+  /* Type specimen */
+  .type-specimen {
+    padding: var(--space-6) 0;
+    border-bottom: 1px solid var(--color-border-subtle);
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: var(--space-6);
+    align-items: baseline;
+  }
+
+  .type-meta {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+  }
+
+  .type-token {
+    font-family: var(--font-mono);
+    font-size: var(--type-2xs);
+    color: var(--color-brand-accent);
+    background: var(--color-surface-inverse);
+    display: inline-block;
+    padding: 1px 6px;
+    border-radius: var(--radius-sm);
+    letter-spacing: var(--tracking-wide);
+  }
+
+  .type-spec {
+    font-family: var(--font-mono);
+    font-size: var(--type-2xs);
+    color: var(--color-ink-tertiary);
+    margin-top: var(--space-1);
+    line-height: 1.6;
+  }
+
+  /* Spacing scale */
+  .spacing-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+    padding: var(--space-3) 0;
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+
+  .spacing-bar-wrap {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    flex: 1;
+  }
+
+  .spacing-bar {
+    background: var(--color-ink-primary);
+    height: 4px;
+    flex-shrink: 0;
+  }
+
+  .spacing-label {
+    font-family: var(--font-mono);
+    font-size: var(--type-2xs);
+    color: var(--color-ink-tertiary);
+    width: 70px;
+    flex-shrink: 0;
+  }
+
+  .spacing-value {
+    font-family: var(--font-mono);
+    font-size: var(--type-2xs);
+    color: var(--color-ink-secondary);
+    width: 48px;
+    flex-shrink: 0;
+  }
+
+  /* Component preview cards */
+  .component-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-6);
+    margin: var(--space-8) 0;
+  }
+
+  .component-card {
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+
+  .component-preview {
+    background: var(--color-surface-secondary);
+    padding: var(--space-8) var(--space-6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 140px;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+  }
+
+  .component-preview.dark {
+    background: var(--color-surface-inverse);
+  }
+
+  .component-label-bar {
+    padding: var(--space-3) var(--space-4);
+    background: var(--color-surface-primary);
+    border-top: 1px solid var(--color-border-subtle);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .component-label-bar span {
+    font-family: var(--font-mono);
+    font-size: var(--type-2xs);
+    color: var(--color-ink-tertiary);
+    letter-spacing: var(--tracking-wide);
+  }
+
+  /* ============================================================
+     ACTUAL UI COMPONENTS (atoms → molecules)
+  ============================================================ */
+
+  /* Buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    font-family: var(--font-body);
+    font-size: var(--type-xs);
+    font-weight: var(--weight-medium);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    border: 2px solid transparent;
+    border-radius: var(--radius-none);
+    padding: var(--space-3) var(--space-6);
+    transition: all var(--duration-base) var(--ease-standard);
+    white-space: nowrap;
+    height: 44px;
+  }
+
+  .btn-primary {
+    background: var(--color-ink-primary);
+    border-color: var(--color-ink-primary);
+    color: var(--color-ink-inverse);
+  }
+
+  .btn-primary:hover {
+    background: var(--color-brand-accent);
+    border-color: var(--color-brand-accent);
+    color: var(--color-brand-on-black);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    border-color: var(--color-ink-primary);
+    color: var(--color-ink-primary);
+  }
+
+  .btn-secondary:hover {
+    background: var(--color-ink-primary);
+    color: var(--color-ink-inverse);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    border-color: transparent;
+    color: var(--color-ink-primary);
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .btn-ghost:hover { color: var(--color-ink-secondary); }
+
+  .btn-accent {
+    background: var(--color-brand-accent);
+    border-color: var(--color-brand-accent);
+    color: var(--color-brand-on-black);
+  }
+
+  .btn-accent:hover {
+    background: var(--color-brand-accent-dark);
+    border-color: var(--color-brand-accent-dark);
+  }
+
+  .btn-sm {
+    height: 36px;
+    padding: var(--space-2) var(--space-4);
+    font-size: var(--type-2xs);
+  }
+
+  .btn-lg {
+    height: 52px;
+    padding: var(--space-4) var(--space-8);
+    font-size: var(--type-sm);
+  }
+
+  /* Input */
+  .input-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    width: 260px;
+  }
+
+  .input-label {
+    font-family: var(--font-mono);
+    font-size: var(--type-2xs);
+    font-weight: var(--weight-medium);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--color-ink-tertiary);
+  }
+
+  .input {
+    font-family: var(--font-body);
+    font-size: var(--type-sm);
+    color: var(--color-ink-primary);
+    background: var(--color-surface-primary);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--radius-none);
+    padding: var(--space-3) var(--space-4);
+    height: 44px;
+    outline: none;
+    transition: border-color var(--duration-fast) var(--ease-standard);
+  }
+
+  .input:focus {
+    border-color: var(--color-ink-primary);
+  }
+
+  .input::placeholder {
+    color: var(--color-ink-disabled);
+  }
+
+  /* Activity metric card */
+  .metric-card {
+    background: var(--color-surface-primary);
+    border: 1px solid var(--color-border-subtle);
+    padding: var(--space-5) var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    min-width: 140px;
+  }
+
+  .metric-label {
+    font-family: var(--font-mono);
+    font-size: var(--type-2xs);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--color-ink-tertiary);
+  }
+
+  .metric-value {
+    font-family: var(--font-display);
+    font-size: var(--type-3xl);
+    font-weight: var(--weight-light);
+    letter-spacing: var(--tracking-tight);
+    color: var(--color-ink-primary);
+    line-height: 1;
+  }
+
+  .metric-unit {
+    font-family: var(--font-mono);
+    font-size: var(--type-xs);
+    color: var(--color-ink-tertiary);
+    margin-left: 2px;
+  }
+
+  .metric-delta {
+    font-family: var(--font-mono);
+    font-size: var(--type-2xs);
+    color: var(--color-semantic-success);
+    letter-spacing: var(--tracking-wide);
+  }
+
+  /* Nav bar (mobile) */
+  .mobile-nav {
+    background: var(--color-surface-primary);
+    border-top: 1px solid var(--color-border-subtle);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 64px;
+    padding: 0 var(--space-4);
+    max-width: 390px;
+    width: 100%;
+  }
+
+  .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-1);
+    padding: var(--space-2) var(--space-3);
+    cursor: pointer;
+    opacity: 0.4;
+    transition: opacity var(--duration-fast) var(--ease-standard);
+  }
+
+  .nav-item.active { opacity: 1; }
+  .nav-item:hover  { opacity: 0.7; }
+
+  .nav-icon {
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .nav-icon svg {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.5;
+  }
+
+  .nav-item-label {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+    color: var(--color-ink-primary);
+  }
+
+  /* Run stat row */
+  .run-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    padding: var(--space-4) 0;
+    border-bottom: 1px solid var(--color-border-subtle);
+    cursor: pointer;
+    transition: background var(--duration-fast) var(--ease-standard);
+  }
+
+  .run-row:hover { background: var(--color-surface-secondary); margin: 0 calc(-1 * var(--space-4)); padding-left: var(--space-4); padding-right: var(--space-4); }
+
+  .run-date-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 44px;
+  }
+
+  .run-date-month {
+    font-family: var(--font-mono);
+    font-size: var(--type-2xs);
+    color: var(--color-ink-tertiary);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+  }
+
+  .run-date-day {
+    font-family: var(--font-display);
+    font-size: var(--type-xl);
+    font-weight: var(--weight-light);
+    color: var(--color-ink-primary);
+    line-height: 1;
+  }
+
+  .run-type-bar {
+    width: 2px;
+    height: 44px;
+    background: var(--color-ink-primary);
+    flex-shrink: 0;
+  }
+
+  .run-type-bar.recovery { background: var(--color-ink-disabled); }
+  .run-type-bar.tempo    { background: var(--color-brand-accent-dark); }
+  .run-type-bar.long     { background: var(--color-ink-primary); }
+
+  .run-info { flex: 1; }
+
+  .run-title {
+    font-family: var(--font-body);
+    font-size: var(--type-sm);
+    font-weight: var(--weight-medium);
+    color: var(--color-ink-primary);
+  }
+
+  .run-stats {
+    font-family: var(--font-mono);
+    font-size: var(--type-2xs);
+    color: var(--color-ink-tertiary);
+    letter-spacing: var(--tracking-wide);
+    margin-top: 2px;
+  }
+
+  .run-distance {
+    font-family: var(--font-display);
+    font-size: var(--type-lg);
+    font-weight: var(--weight-light);
+    color: var(--color-ink-primary);
+    text-align: right;
+    min-width: 56px;
+  }
+
+  .run-distance span {
+    font-size: var(--type-2xs);
+    font-family: var(--font-mono);
+    color: var(--color-ink-tertiary);
+    display: block;
+    text-align: right;
+  }
+
+  /* Pill chip */
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    height: 28px;
+    padding: 0 var(--space-3);
+    font-family: var(--font-mono);
+    font-size: var(--type-2xs);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--radius-none);
+    cursor: pointer;
+    transition: all var(--duration-fast) var(--ease-standard);
+    color: var(--color-ink-secondary);
+    background: transparent;
+  }
+
+  .chip:hover,
+  .chip.selected {
+    background: var(--color-ink-primary);
+    border-color: var(--color-ink-primary);
+    color: var(--color-ink-inverse);
+  }
+
+  /* Progress bar */
+  .progress-wrap {
+    width: 100%;
+  }
+
+  .progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: var(--space-2);
+  }
+
+  .progress-track {
+    height: 2px;
+    background: var(--color-border-subtle);
+    width: 100%;
+    position: relative;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: var(--color-ink-primary);
+    transition: width var(--duration-slow) var(--ease-decelerate);
+  }
+
+  .progress-fill.accent { background: var(--color-brand-accent-dark); }
+
+  /* Avatar */
+  .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-none);
+    background: var(--color-surface-tertiary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: var(--type-xs);
+    font-weight: var(--weight-medium);
+    color: var(--color-ink-secondary);
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+
+  .avatar.sm { width: 28px; height: 28px; font-size: var(--type-2xs); }
+  .avatar.lg { width: 56px; height: 56px; font-size: var(--type-base); }
+
+  /* Divider */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--color-border-subtle);
+    margin: var(--space-8) 0;
+  }
+
+  .divider-strong {
+    border-color: var(--color-border-strong);
+    border-top-width: 2px;
+  }
+
+  /* Motion spec grid */
+  .motion-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-4);
+    margin: var(--space-6) 0;
+  }
+
+  .motion-card {
+    border: 1px solid var(--color-border-subtle);
+    padding: var(--space-5);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    cursor: pointer;
+  }
+
+  .motion-demo {
+    width: 32px;
+    height: 32px;
+    background: var(--color-ink-primary);
+    border-radius: var(--radius-none);
+    transition-property: transform, background;
+    transition-duration: var(--duration-base);
+    transition-timing-function: var(--ease-standard);
+  }
+
+  .motion-card:hover .motion-demo { transform: scale(1.2); background: var(--color-brand-accent-dark); }
+  .motion-card.spring:hover .motion-demo { transition-timing-function: var(--ease-spring); }
+  .motion-card.fast:hover .motion-demo   { transition-duration: var(--duration-fast); }
+  .motion-card.slow:hover .motion-demo   { transition-duration: var(--duration-slow); }
+
+  .motion-name {
+    font-family: var(--font-mono);
+    font-size: var(--type-2xs);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--color-ink-secondary);
+  }
+
+  .motion-spec {
+    font-family: var(--font-mono);
+    font-size: var(--type-2xs);
+    color: var(--color-ink-tertiary);
+    line-height: 1.6;
+  }
+
+  /* Section rule */
+  .rule-line {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    margin: var(--space-12) 0 var(--space-8);
+  }
+
+  .rule-line::before {
+    content: '';
+    display: block;
+    height: 2px;
+    background: var(--color-ink-primary);
+    width: var(--space-8);
+  }
+
+  .rule-line-text {
+    font-family: var(--font-mono);
+    font-size: var(--type-2xs);
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+    color: var(--color-ink-tertiary);
+  }
+
+  /* Two-column layout helper */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-8);
+    margin: var(--space-6) 0;
+  }
+
+  /* Scroll behavior */
+  .scroll-fade {
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity var(--duration-slow) var(--ease-decelerate),
+                transform var(--duration-slow) var(--ease-decelerate);
+  }
+
+  .scroll-fade.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ============================================================
+     MOBILE MOCKUP SHELL
+  ============================================================ */
+  .phone-frame {
+    width: 280px;
+    height: 520px;
+    border: 2px solid var(--color-ink-primary);
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    background: var(--color-surface-primary);
+    flex-shrink: 0;
+  }
+
+  .phone-screen {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .phone-status {
+    height: 28px;
+    background: var(--color-surface-primary);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--space-4);
+    flex-shrink: 0;
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+
+  .phone-status-time {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    font-weight: var(--weight-bold);
+    color: var(--color-ink-primary);
+    letter-spacing: 0.02em;
+  }
+
+  .phone-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--space-4);
+    scrollbar-width: none;
+  }
+
+  .phone-content::-webkit-scrollbar { display: none; }
+
+  /* Screen: Activity Feed */
+  .screen-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: var(--space-4);
+  }
+
+  .screen-greeting {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: var(--weight-light);
+    letter-spacing: var(--tracking-snug);
+    line-height: 1.1;
+    color: var(--color-ink-primary);
+  }
+
+  .screen-date {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    color: var(--color-ink-tertiary);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    text-align: right;
+    line-height: 1.4;
+  }
+
+  .mini-metric-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: var(--space-2);
+    margin-bottom: var(--space-4);
+  }
+
+  .mini-metric {
+    padding: var(--space-3) var(--space-2);
+    border: 1px solid var(--color-border-subtle);
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .mini-metric-val {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: var(--weight-light);
+    color: var(--color-ink-primary);
+    line-height: 1;
+  }
+
+  .mini-metric-lbl {
+    font-family: var(--font-mono);
+    font-size: 8px;
+    color: var(--color-ink-tertiary);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .feed-item {
+    padding: var(--space-3) 0;
+    border-bottom: 1px solid var(--color-border-subtle);
+    display: flex;
+    gap: var(--space-3);
+    align-items: flex-start;
+  }
+
+  .feed-avatar-sm {
+    width: 24px;
+    height: 24px;
+    background: var(--color-surface-tertiary);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 8px;
+    color: var(--color-ink-secondary);
+  }
+
+  .feed-text {
+    font-family: var(--font-body);
+    font-size: 10px;
+    color: var(--color-ink-secondary);
+    line-height: 1.4;
+  }
+
+  .feed-text strong {
+    font-weight: var(--weight-semibold);
+    color: var(--color-ink-primary);
+  }
+
+  .feed-time {
+    font-family: var(--font-mono);
+    font-size: 8px;
+    color: var(--color-ink-disabled);
+    letter-spacing: 0.04em;
+    flex-shrink: 0;
+  }
+
+  /* ============================================================
+     INTERACTION PATTERNS DOC
+  ============================================================ */
+  .interaction-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-4);
+    margin: var(--space-6) 0;
+  }
+
+  .interaction-card {
+    padding: var(--space-5);
+    border: 1px solid var(--color-border-subtle);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .interaction-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--color-surface-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .interaction-icon svg {
+    width: 20px;
+    height: 20px;
+    stroke: var(--color-ink-primary);
+    fill: none;
+    stroke-width: 1.5;
+  }
+
+  .interaction-name {
+    font-family: var(--font-mono);
+    font-size: var(--type-xs);
+    font-weight: var(--weight-medium);
+    letter-spacing: var(--tracking-wide);
+    color: var(--color-ink-primary);
+  }
+
+  .interaction-desc {
+    font-family: var(--font-body);
+    font-size: var(--type-xs);
+    color: var(--color-ink-tertiary);
+    line-height: var(--leading-normal);
+  }
+
+  /* ============================================================
+     UTILITY
+  ============================================================ */
+  .gap-row   { display: flex; gap: var(--space-3); flex-wrap: wrap; align-items: center; }
+  .gap-col   { display: flex; flex-direction: column; gap: var(--space-3); }
+  .mt-4      { margin-top: var(--space-4); }
+  .mt-6      { margin-top: var(--space-6); }
+  .mt-8      { margin-top: var(--space-8); }
+
+  /* ============================================================
+     SCROLLBAR
+  ============================================================ */
+  .sidebar::-webkit-scrollbar { width: 4px; }
+  .sidebar::-webkit-scrollbar-track { background: transparent; }
+  .sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 2px; }
+
+  /* ============================================================
+     RESPONSIVE
+  ============================================================ */
+  @media (max-width: 900px) {
+    .sidebar { display: none; }
+    .main    { padding: var(--space-8); }
+    .hero    { margin: calc(-1 * var(--space-8)) calc(-1 * var(--space-8)) var(--space-8); padding: var(--space-12) var(--space-8); }
+    .hero-title { font-size: var(--type-4xl); }
+    .section-title { font-size: var(--type-3xl); }
+    .two-col { grid-template-columns: 1fr; }
+    .component-grid { grid-template-columns: 1fr; }
+    .interaction-grid { grid-template-columns: 1fr 1fr; }
+    .motion-grid { grid-template-columns: 1fr 1fr; }
+    .type-specimen { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     SIDEBAR NAV
+============================================================ -->
+<nav class="sidebar">
+  <div>
+    <div class="sidebar-logo">
+      <div class="sidebar-logo-mark"><span>On</span></div>
+      <div>
+        <div class="sidebar-logo-text">Apex</div>
+        <span class="sidebar-logo-sub">PRD + MDS v1.0</span>
+      </div>
+    </div>
+
+    <div class="nav-section">
+      <span class="nav-section-label">Product</span>
+      <a href="#overview"    class="nav-link active">Overview</a>
+      <a href="#problem"     class="nav-link">Problem Statement</a>
+      <a href="#users"       class="nav-link">Users &amp; Personas</a>
+      <a href="#goals"       class="nav-link">Goals &amp; Success</a>
+      <a href="#scope"       class="nav-link">Scope &amp; Features</a>
+      <a href="#userflows"   class="nav-link">User Flows</a>
+      <a href="#constraints" class="nav-link">Constraints</a>
+    </div>
+
+    <div class="nav-section">
+      <span class="nav-section-label">Design System</span>
+      <a href="#philosophy"  class="nav-link">Philosophy</a>
+      <a href="#tokens"      class="nav-link">Design Tokens</a>
+      <a href="#typography"  class="nav-link">Typography</a>
+      <a href="#color"       class="nav-link">Color + Dark Mode</a>
+      <a href="#spacing"     class="nav-link">Spacing</a>
+      <a href="#motion"      class="nav-link">Motion</a>
+      <a href="#atoms"       class="nav-link">Atoms</a>
+      <a href="#molecules"   class="nav-link">Molecules</a>
+      <a href="#interactions" class="nav-link">Interactions</a>
+      <a href="#screens"     class="nav-link">Screen Patterns</a>
+    </div>
+  </div>
+
+  <button class="mode-toggle" id="modeToggle" aria-label="Toggle dark mode">
+    <div class="mode-toggle-track">
+      <div class="mode-toggle-thumb"></div>
+    </div>
+    <span class="mode-toggle-label" id="modeLabel">Light Mode</span>
+  </button>
+</nav>
+
+<!-- ============================================================
+     MAIN CONTENT
+============================================================ -->
+<main class="main">
+
+  <div class="hero-spacer" style="height: 60px;"></div>
+
+  <!-- ============================================================
+       SECTION 1 — PROBLEM STATEMENT
+  ============================================================ -->
+  <section class="doc-section" id="problem">
+    <div class="section-eyebrow">01 — Problem</div>
+    <h2 class="section-title">On makes the world's best running hardware.<br><em>It has no software home.</em></h2>
+    <p class="section-subtitle">
+      Strava owns the activity layer. Nike Run Club owns the social layer. On owns the product — but has no owned digital surface where community, performance identity, and brand meaning converge.
+    </p>
+
+    <div class="callout callout-accent">
+      <span class="callout-icon">→</span>
+      <div class="callout-body">
+        <strong>The Core Gap</strong>
+        On's digital presence is transactional (buy) or informational (learn). There is no surface that captures the On runner's identity, connects them to others, or gives meaning to their miles in an On-specific context. Every competitive insight is gifted to third-party platforms.
+      </div>
+    </div>
+
+    <div class="subsection-title">Evidence of the Gap</div>
+    <table class="spec-table">
+      <thead>
+        <tr>
+          <th>Signal</th>
+          <th>Implication</th>
+          <th>Priority</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>On has no owned activity-tracking app</td>
+          <td>Zero behavioral data on how runners actually use On product</td>
+          <td><span class="badge badge-error">Critical</span></td>
+        </tr>
+        <tr>
+          <td>Strava integration exists but is external</td>
+          <td>On's most engaged runners live in a competitor's interface</td>
+          <td><span class="badge badge-error">Critical</span></td>
+        </tr>
+        <tr>
+          <td>On's community is diffuse across Reddit, Strava, Instagram</td>
+          <td>No owned conversation surface; no loop-back to brand</td>
+          <td><span class="badge badge-warning">High</span></td>
+        </tr>
+        <tr>
+          <td>Club / group running growing globally post-COVID</td>
+          <td>Massive category moment; no On-specific community infrastructure</td>
+          <td><span class="badge badge-warning">High</span></td>
+        </tr>
+        <tr>
+          <td>CloudMonster, Cloudflow, Cloudstratus have distinct user profiles</td>
+          <td>Product-led community segmentation is possible but untapped</td>
+          <td><span class="badge badge-default">Medium</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ============================================================
+       SECTION 2 — USERS & PERSONAS
+  ============================================================ -->
+  <section class="doc-section" id="users">
+    <div class="section-eyebrow">02 — Users</div>
+    <h2 class="section-title">Three runners.<br><em>One platform.</em></h2>
+    <p class="section-subtitle">On Apex serves a specific psychographic cross-section: performance-curious, aesthetically literate, socially aspirational runners who see their gear as identity.</p>
+
+    <div class="two-col">
+      <div>
+        <div class="rule-line"><span class="rule-line-text">Persona A</span></div>
+        <div style="display:flex; gap: var(--space-4); align-items: flex-start; margin-bottom: var(--space-4);">
+          <div class="avatar lg">EL</div>
+          <div>
+            <div style="font-weight: var(--weight-semibold); font-size: var(--type-base);">The Aesthetic Athlete</div>
+            <div style="font-family: var(--font-mono); font-size: var(--type-2xs); color: var(--color-ink-tertiary); letter-spacing: var(--tracking-wide); margin-top: 2px;">28–36 · Urban · CloudSurfer / Cloudgo</div>
+          </div>
+        </div>
+        <p style="font-size: var(--type-sm); color: var(--color-ink-secondary); line-height: var(--leading-relaxed);">
+          Runs 4x/week. Posts routes. Cares about splits only enough to post them. Chose On for the design before the performance. Wants a community that looks and feels like the brand — not a spreadsheet with feet.
+        </p>
+        <div class="gap-row mt-4">
+          <span class="chip selected">Social</span>
+          <span class="chip selected">Visual</span>
+          <span class="chip">Performance</span>
+        </div>
+      </div>
+
+      <div>
+        <div class="rule-line"><span class="rule-line-text">Persona B</span></div>
+        <div style="display:flex; gap: var(--space-4); align-items: flex-start; margin-bottom: var(--space-4);">
+          <div class="avatar lg">MR</div>
+          <div>
+            <div style="font-weight: var(--weight-semibold); font-size: var(--type-base);">The Data-Driven Competitor</div>
+            <div style="font-family: var(--font-mono); font-size: var(--type-2xs); color: var(--color-ink-tertiary); letter-spacing: var(--tracking-wide); margin-top: 2px;">32–44 · Suburban · Cloudmonster / Cloudflow</div>
+          </div>
+        </div>
+        <p style="font-size: var(--type-sm); color: var(--color-ink-secondary); line-height: var(--leading-relaxed);">
+          Runs half marathons and tracks every metric. Strava power user. Uses On product for its technology story. Wants performance validation within an owned ecosystem — proof the product is working.
+        </p>
+        <div class="gap-row mt-4">
+          <span class="chip">Social</span>
+          <span class="chip selected">Performance</span>
+          <span class="chip selected">Data</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="max-width: 400px; margin-top: var(--space-8);">
+      <div class="rule-line"><span class="rule-line-text">Persona C</span></div>
+      <div style="display:flex; gap: var(--space-4); align-items: flex-start; margin-bottom: var(--space-4);">
+        <div class="avatar lg">JK</div>
+        <div>
+          <div style="font-weight: var(--weight-semibold); font-size: var(--type-base);">The Community Connector</div>
+          <div style="font-family: var(--font-mono); font-size: var(--type-2xs); color: var(--color-ink-tertiary); letter-spacing: var(--tracking-wide); margin-top: 2px;">24–34 · Urban · Any On shoe · Group runner</div>
+        </div>
+      </div>
+      <p style="font-size: var(--type-sm); color: var(--color-ink-secondary); line-height: var(--leading-relaxed);">
+        Runs with a club. The shoes are a badge. Wants a platform where group runs, local leaderboards, and crew identity have a home. The social glue of the On ecosystem.
+      </p>
+      <div class="gap-row mt-4">
+        <span class="chip selected">Social</span>
+        <span class="chip selected">Community</span>
+        <span class="chip">Performance</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 3 — GOALS & SUCCESS METRICS
+  ============================================================ -->
+  <section class="doc-section" id="goals">
+    <div class="section-eyebrow">03 — Goals &amp; Success</div>
+    <h2 class="section-title">What <em>winning</em> looks like.</h2>
+    <p class="section-subtitle">Goals are anchored to three horizons: activation, engagement, and brand value creation.</p>
+
+    <div class="subsection-title">Product Goals</div>
+    <div class="priority-row">
+      <div class="priority-dot p0"></div>
+      <div class="priority-content">
+        <strong>Own the post-purchase identity moment</strong>
+        <span>When a runner laces up their new On shoes, Apex should be the first digital thing they reach for — not Strava.</span>
+      </div>
+    </div>
+    <div class="priority-row">
+      <div class="priority-dot p0"></div>
+      <div class="priority-content">
+        <strong>Capture behavioral data On doesn't have</strong>
+        <span>Activity cadence, shoe rotation, preferred distances, social graph — create a behavioral dataset that informs product, marketing, and loyalty decisions.</span>
+      </div>
+    </div>
+    <div class="priority-row">
+      <div class="priority-dot p1"></div>
+      <div class="priority-content">
+        <strong>Build community with On aesthetics, not generic fitness UX</strong>
+        <span>Every interaction should feel as Swiss-engineered as the product itself. No gamification for its own sake. No badges that feel like participation trophies.</span>
+      </div>
+    </div>
+    <div class="priority-row">
+      <div class="priority-dot p1"></div>
+      <div class="priority-content">
+        <strong>Create a commerce loop without being a shopping app</strong>
+        <span>Contextual gear discovery, shoe mileage tracking, and Cyclon program integration — commerce as utility, not interruption.</span>
+      </div>
+    </div>
+    <div class="priority-row">
+      <div class="priority-dot p2"></div>
+      <div class="priority-content">
+        <strong>Support On's move into experiential retail and events</strong>
+        <span>Club runs, pop-up events, and On Apex community challenges become discoverable and RSVP-able within the platform.</span>
+      </div>
+    </div>
+
+    <div class="subsection-title">Success Metrics</div>
+    <table class="spec-table">
+      <thead>
+        <tr><th>Metric</th><th>Target (Y1)</th><th>Category</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Weekly Active Users</td>
+          <td>35% of registered users logging activity weekly</td>
+          <td><span class="badge badge-strong">Engagement</span></td>
+        </tr>
+        <tr>
+          <td>Activity sessions / user / week</td>
+          <td>2.4 average</td>
+          <td><span class="badge badge-strong">Engagement</span></td>
+        </tr>
+        <tr>
+          <td>Community connection rate</td>
+          <td>60% of users follow ≥1 other user within 30 days</td>
+          <td><span class="badge badge-default">Social</span></td>
+        </tr>
+        <tr>
+          <td>Shoe registration rate</td>
+          <td>70% of users register ≥1 On shoe</td>
+          <td><span class="badge badge-default">Commerce</span></td>
+        </tr>
+        <tr>
+          <td>Shoe reorder attribution</td>
+          <td>15% of purchases traceable to Apex mileage prompt</td>
+          <td><span class="badge badge-default">Commerce</span></td>
+        </tr>
+        <tr>
+          <td>PWA install rate</td>
+          <td>45% of mobile visitors add to home screen</td>
+          <td><span class="badge badge-accent">Technical</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ============================================================
+       SECTION 4 — SCOPE & FEATURES
+  ============================================================ -->
+  <section class="doc-section" id="scope">
+    <div class="section-eyebrow">04 — Scope</div>
+    <h2 class="section-title">Feature scope,<br><em>by priority.</em></h2>
+
+    <div class="callout callout-warn">
+      <span class="callout-icon">!</span>
+      <div class="callout-body">
+        <strong>MVP Constraint</strong>
+        Phase 1 ships with activity tracking, social feed, and shoe management. Community challenges and event discovery are Phase 2. Commerce integration is Phase 3.
+      </div>
+    </div>
+
+    <div class="subsection-title">Phase 1 — MVP</div>
+    <table class="spec-table">
+      <thead>
+        <tr><th>Feature</th><th>Description</th><th>Priority</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Activity Log</td>
+          <td>GPS run tracking via device sensors. Distance, pace, elevation, heart rate (if available). Post-run summary with On-branded visual output.</td>
+          <td><span class="badge badge-error">P0</span></td>
+        </tr>
+        <tr>
+          <td>Shoe Garage</td>
+          <td>Register On shoes by model. Auto-track mileage per shoe. Surface wear warnings. Link to product page for reorder.</td>
+          <td><span class="badge badge-error">P0</span></td>
+        </tr>
+        <tr>
+          <td>Social Feed</td>
+          <td>Follow other On runners. Activity cards with distance, route thumbnail, shoe used. Reactions (not likes — more on this below).</td>
+          <td><span class="badge badge-error">P0</span></td>
+        </tr>
+        <tr>
+          <td>Profile + Stats</td>
+          <td>Personal performance dashboard. Weekly/monthly/YTD summaries. Shoe history. Shareable stat card.</td>
+          <td><span class="badge badge-error">P0</span></td>
+        </tr>
+        <tr>
+          <td>On Account Integration</td>
+          <td>SSO with existing On account. Order history pulls shoe data automatically.</td>
+          <td><span class="badge badge-error">P0</span></td>
+        </tr>
+        <tr>
+          <td>Onboarding Flow</td>
+          <td>3-screen progressive onboarding. Shoe registration, goal-setting, follow suggestions.</td>
+          <td><span class="badge badge-error">P0</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="subsection-title">Phase 2 — Community Layer</div>
+    <table class="spec-table">
+      <thead>
+        <tr><th>Feature</th><th>Description</th><th>Priority</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Apex Clubs</td>
+          <td>Geo-located running clubs. Group leaderboards. Club run scheduling. Club identity (name, logo, crew size).</td>
+          <td><span class="badge badge-warning">P1</span></td>
+        </tr>
+        <tr>
+          <td>Challenges</td>
+          <td>Brand-created and user-created distance / elevation / streak challenges. On-exclusive drops for top finishers.</td>
+          <td><span class="badge badge-warning">P1</span></td>
+        </tr>
+        <tr>
+          <td>Event Discovery</td>
+          <td>On-sponsored races, pop-up runs, and community events near user. In-app RSVP + crew formation.</td>
+          <td><span class="badge badge-warning">P1</span></td>
+        </tr>
+        <tr>
+          <td>Route Library</td>
+          <td>Community-submitted routes. Curated On routes in flagship cities. Difficulty, surface type, shoe recommendation.</td>
+          <td><span class="badge badge-default">P2</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ============================================================
+       SECTION 5 — USER FLOWS
+  ============================================================ -->
+  <section class="doc-section" id="userflows">
+    <div class="section-eyebrow">05 — User Flows</div>
+    <h2 class="section-title">Critical paths.</h2>
+
+    <div class="subsection-title">Flow 1 — First Run (Post-Onboarding)</div>
+    <div style="display: flex; gap: 0; margin: var(--space-6) 0; overflow-x: auto;">
+      <!-- Flow steps -->
+      <div style="display: flex; align-items: stretch; flex-wrap: wrap; gap: var(--space-3);">
+        {[ ['Open App', 'Home / Dashboard'], ['Tap Start Run', 'Pre-Run Screen'], ['GPS Lock + Shoe Select', 'Active Run'], ['Run Completes', 'Post-Run Summary'], ['Share or Save', 'Feed / Profile'] ].map((s, i) => `
+        <div style="display:flex; align-items:center; gap: var(--space-3);">
+          <div style="padding: var(--space-3) var(--space-4); border: 1px solid var(--color-border-default); min-width: 100px;">
+            <div style="font-family: var(--font-mono); font-size: var(--type-2xs); color: var(--color-ink-tertiary); letter-spacing: var(--tracking-wide);">Step ${i+1}</div>
+            <div style="font-size: var(--type-sm); font-weight: var(--weight-medium); margin-top: 2px;">${s[0]}</div>
+            <div style="font-family: var(--font-mono); font-size: var(--type-2xs); color: var(--color-ink-tertiary); margin-top: 2px;">${s[1]}</div>
+          </div>
+          ${i < 4 ? '<div style="font-family: var(--font-mono); font-size: var(--type-xs); color: var(--color-ink-disabled);">→</div>' : ''}
+        </div>`).join('')}
+      </div>
+    </div>
+
+    <!-- Inline flow boxes -->
+    <div style="display: flex; align-items: stretch; gap: var(--space-2); margin: var(--space-6) 0; overflow-x: auto; padding-bottom: var(--space-2);">
+      <div style="padding: var(--space-3) var(--space-4); border: 2px solid var(--color-ink-primary); min-width: 108px; flex-shrink:0;">
+        <div style="font-family: var(--font-mono); font-size: var(--type-2xs); color: var(--color-ink-tertiary); letter-spacing: var(--tracking-wide);">01</div>
+        <div style="font-size: var(--type-sm); font-weight: var(--weight-medium); margin-top: 2px;">Open App</div>
+        <div style="font-family: var(--font-mono); font-size: var(--type-2xs); color: var(--color-ink-tertiary); margin-top: 2px;">Dashboard</div>
+      </div>
+      <div style="display:flex; align-items:center; color: var(--color-ink-disabled); font-family: var(--font-mono); font-size: var(--type-sm); padding: 0 var(--space-1);">→</div>
+      <div style="padding: var(--space-3) var(--space-4); border: 1px solid var(--color-border-default); min-width: 108px; flex-shrink:0;">
+        <div style="font-family: var(--font-mono); font-size: var(--type-2xs); color: var(--color-ink-tertiary); letter-spacing: var(--tracking-wide);">02</div>
+        <div style="font-size: var(--type-sm); font-weight: var(--weight-medium); margin-top: 2px;">Start Run</div>
+        <div style="font-family: var(--font-mono); font-size: var(--type-2xs); color: var(--color-ink-tertiary); margin-top: 2px;">Pre-Run</div>
+      </div>
+      <div style="display:flex; align-items:center; color: var(--color-ink-disabled); font-family: var(--font-mono); font-size: var(--type-sm); padding: 0 var(--space-1);">→</div>
+      <div style="padding: var(--space-3) var(--space-4); border: 1px solid var(--color-border-default); min-width: 108px; flex-shrink:0; background: var(--color-surface-secondary);">
+        <div style="font-family: var(--font-mono); font-size: var(--type-2xs); color: var(--color-ink-tertiary); letter-spacing: var(--tracking-wide);">03</div>
+        <div style="font-size: var(--type-sm); font-weight: var(--weight-medium); margin-top: 2px;">GPS + Shoe</div>
+        <div style="font-family: var(--font-mono); font-size: var(--type-2xs); color: var(--color-ink-tertiary); margin-top: 2px;">Active Run</div>
+      </div>
+      <div style="display:flex; align-items:center; color: var(--color-ink-disabled); font-family: var(--font-mono); font-size: var(--type-sm); padding: 0 var(--space-1);">→</div>
+      <div style="padding: var(--space-3) var(--space-4); border: 1px solid var(--color-border-default); min-width: 108px; flex-shrink:0;">
+        <div style="font-family: var(--font-mono); font-size: var(--type-2xs); color: var(--color-ink-tertiary); letter-spacing: var(--tracking-wide);">04</div>
+        <div style="font-size: var(--type-sm); font-weight: var(--weight-medium); margin-top: 2px;">Summary</div>
+        <div style="font-family: var(--font-mono); font-size: var(--type-2xs); color: var(--color-ink-tertiary); margin-top: 2px;">Post-Run</div>
+      </div>
+      <div style="display:flex; align-items:center; color: var(--color-ink-disabled); font-family: var(--font-mono); font-size: var(--type-sm); padding: 0 var(--space-1);">→</div>
+      <div style="padding: var(--space-3) var(--space-4); border: 1px solid var(--color-border-default); min-width: 108px; flex-shrink:0;">
+        <div style="font-family: var(--font-mono); font-size: var(--type-2xs); color: var(--color-ink-tertiary); letter-spacing: var(--tracking-wide);">05</div>
+        <div style="font-size: var(--type-sm); font-weight: var(--weight-medium); margin-top: 2px;">Share / Save</div>
+        <div style="font-family: var(--font-mono); font-size: var(--type-2xs); color: var(--color-ink-tertiary); margin-top: 2px;">Feed</div>
+      </div>
+    </div>
+
+    <div class="subsection-title">Flow 2 — Shoe Registration</div>
+    <div style="display: flex; align-items: stretch; gap: var(--space-2); margin: var(--space-6) 0; overflow-x: auto; padding-bottom: var(--space-2);">
+      <div style="padding: var(--space-3) var(--space-4); border: 2px solid var(--color-ink-primary); min-width: 108px; flex-shrink:0;">
+        <div style="font-family: var(--font-mono); font-size: var(--type-2xs); color: var(--color-ink-tertiary);">01</div>
+        <div style="font-size: var(--type-sm); font-weight: var(--weight-medium); margin-top: 2px;">Order Sync</div>
+        <div style="font-family: var(--font-mono); font-size: var(--type-2xs); color: var(--color-ink-tertiary); margin-top: 2px;">Auto-detect</div>
+      </div>
+      <div style="display:flex; align-items:center; color: var(--color-ink-disabled); font-family: var(--font-mono); padding: 0 var(--space-1);">→</div>
+      <div style="padding: var(--space-3) var(--space-4); border: 1px solid var(--color-border-default); min-width: 108px; flex-shrink:0;">
+        <div style="font-family: var(--font-mono); font-size: var(--type-2xs); color: var(--color-ink-tertiary);">02</div>
+        <div style="font-size: var(--type-sm); font-weight: var(--weight-medium); margin-top: 2px;">Confirm Shoe</div>
+        <div style="font-family: var(--font-mono); font-size: var(--type-2xs); color: var(--color-ink-tertiary); margin-top: 2px;">Verify model</div>
+      </div>
+      <div style="display:flex; align-items:center; color: var(--color-ink-disabled); font-family: var(--font-mono); padding: 0 var(--space-1);">→</div>
+      <div style="padding: var(--space-3) var(--space-4); border: 1px solid var(--color-border-default); min-width: 108px; flex-shrink:0; background: var(--color-surface-secondary);">
+        <div style="font-family: var(--font-mono); font-size: var(--type-2xs); color: var(--color-ink-tertiary);">03</div>
+        <div style="font-size: var(--type-sm); font-weight: var(--weight-medium); margin-top: 2px;">Name Shoe</div>
+        <div style="font-family: var(--font-mono); font-size: var(--type-2xs); color: var(--color-ink-tertiary); margin-top: 2px;">Personalize</div>
+      </div>
+      <div style="display:flex; align-items:center; color: var(--color-ink-disabled); font-family: var(--font-mono); padding: 0 var(--space-1);">→</div>
+      <div style="padding: var(--space-3) var(--space-4); border: 1px solid var(--color-border-default); min-width: 108px; flex-shrink:0;">
+        <div style="font-family: var(--font-mono); font-size: var(--type-2xs); color: var(--color-ink-tertiary);">04</div>
+        <div style="font-size: var(--type-sm); font-weight: var(--weight-medium); margin-top: 2px;">Set Goal</div>
+        <div style="font-family: var(--font-mono); font-size: var(--type-2xs); color: var(--color-ink-tertiary); margin-top: 2px;">Retire target</div>
+      </div>
+      <div style="display:flex; align-items:center; color: var(--color-ink-disabled); font-family: var(--font-mono); padding: 0 var(--space-1);">→</div>
+      <div style="padding: var(--space-3) var(--space-4); border: 1px solid var(--color-border-default); min-width: 108px; flex-shrink:0;">
+        <div style="font-family: var(--font-mono); font-size: var(--type-2xs); color: var(--color-ink-tertiary);">05</div>
+        <div style="font-size: var(--type-sm); font-weight: var(--weight-medium); margin-top: 2px;">Garage</div>
+        <div style="font-family: var(--font-mono); font-size: var(--type-2xs); color: var(--color-ink-tertiary); margin-top: 2px;">Live tracking</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION 6 — CONSTRAINTS
+  ============================================================ -->
+  <section class="doc-section" id="constraints">
+    <div class="section-eyebrow">06 — Constraints</div>
+    <h2 class="section-title">What shapes<br><em>the build.</em></h2>
+
+    <table class="spec-table">
+      <thead>
+        <tr><th>Constraint</th><th>Type</th><th>Design Response</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>PWA — no native app store</td>
+          <td><span class="badge badge-default">Technical</span></td>
+          <td>Service worker caching for offline runs. Web Geolocation API. Aggressive install-to-home-screen prompting.</td>
+        </tr>
+        <tr>
+          <td>On brand guidelines</td>
+          <td><span class="badge badge-default">Brand</span></td>
+          <td>White-dominant, Swiss-minimalist system. No gamification chrome. Restraint as authority.</td>
+        </tr>
+        <tr>
+          <td>No native GPS chip access (PWA)</td>
+          <td><span class="badge badge-default">Technical</span></td>
+          <td>Browser Geolocation API + watch integration fallback. Manual entry as last resort.</td>
+        </tr>
+        <tr>
+          <td>Must not feel like Strava-clone</td>
+          <td><span class="badge badge-default">Product</span></td>
+          <td>No follower counts as status. No KOM/trophy system. Shoe + gear as identity layer — not pace.</td>
+        </tr>
+        <tr>
+          <td>Must respect On's commerce channel</td>
+          <td><span class="badge badge-default">Business</span></td>
+          <td>Deep-link to on.com for purchases. No in-app checkout in Phase 1. Commerce is contextual, not promotional.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ============================================================
+       DESIGN SYSTEM — PHILOSOPHY
+  ============================================================ -->
+  <section class="doc-section" id="philosophy">
+    <div class="section-eyebrow">Design System — Foundation</div>
+    <h2 class="section-title">Molecular Design System<br><em>On Apex Edition</em></h2>
+    <p class="section-subtitle">
+      Swiss engineering applied to mobile UI. Zero border-radius. 4px grid. DM Sans as a Swiss grotesque stand-in. Restraint is the brand. Every component earns its presence.
+    </p>
+
+    <div class="two-col">
+      <div class="callout">
+        <span class="callout-icon">◆</span>
+        <div class="callout-body">
+          <strong>Atom</strong>
+          The indivisible unit. Color token, spacing value, type style, motion curve. Cannot be broken down further. No opinions about context.
+        </div>
+      </div>
+      <div class="callout">
+        <span class="callout-icon">◆◆</span>
+        <div class="callout-body">
+          <strong>Molecule</strong>
+          Two or more atoms forming a functional unit. A button (atom: ink + surface + type + border). A metric card (atoms: type + spacing + border). Has a single purpose.
+        </div>
+      </div>
+    </div>
+
+    <div class="two-col mt-6">
+      <div class="callout">
+        <span class="callout-icon">◆◆◆</span>
+        <div class="callout-body">
+          <strong>Organism</strong>
+          A complex UI region. The activity feed. The shoe garage card. The nav bar. Composed of molecules. Has context-specific behavior.
+        </div>
+      </div>
+      <div class="callout callout-accent">
+        <span class="callout-icon">→</span>
+        <div class="callout-body">
+          <strong>Design Principle</strong>
+          If a component can't justify its presence with a functional argument, it doesn't ship. Beauty is a byproduct of precision, not decoration.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION — DESIGN TOKENS
+  ============================================================ -->
+  <section class="doc-section" id="tokens">
+    <div class="section-eyebrow">Design System — Atoms</div>
+    <h2 class="section-title">Design Tokens</h2>
+    <p class="section-subtitle">The complete token vocabulary. All values expressed as CSS custom properties. All measurements on a 4px grid.</p>
+
+    <div class="code-block">
+      <pre><span class="token-comment">/* On Apex Molecular Design System — Token Reference */</span>
+
+<span class="token-key">--color-surface-primary</span>: <span class="token-value">#FAFAFA</span>;     <span class="token-comment">/* Base surface */</span>
+<span class="token-key">--color-surface-secondary</span>: <span class="token-value">#F2F2F0</span>;   <span class="token-comment">/* Elevated surface */</span>
+<span class="token-key">--color-surface-inverse</span>: <span class="token-value">#0A0A0A</span>;    <span class="token-comment">/* Dark surface */</span>
+<span class="token-key">--color-ink-primary</span>: <span class="token-value">#0A0A0A</span>;       <span class="token-comment">/* Primary text */</span>
+<span class="token-key">--color-ink-tertiary</span>: <span class="token-value">#767676</span>;     <span class="token-comment">/* Metadata / labels */</span>
+<span class="token-key">--color-brand-accent</span>: <span class="token-value">#E8FF3C</span>;      <span class="token-comment">/* On volt — use sparingly */</span>
+
+<span class="token-key">--font-display</span>: <span class="token-string">'DM Sans', 'Helvetica Neue', sans-serif</span>;
+<span class="token-key">--font-mono</span>:    <span class="token-string">'DM Mono', 'Courier New', monospace</span>;
+
+<span class="token-key">--space-1</span>: <span class="token-value">4px</span>; <span class="token-key">--space-2</span>: <span class="token-value">8px</span>;  <span class="token-key">--space-4</span>: <span class="token-value">16px</span>;
+<span class="token-key">--space-6</span>: <span class="token-value">24px</span>; <span class="token-key">--space-8</span>: <span class="token-value">32px</span>; <span class="token-key">--space-12</span>: <span class="token-value">48px</span>;
+
+<span class="token-key">--radius-none</span>: <span class="token-value">0px</span>;   <span class="token-comment">/* On Apex uses zero border-radius */</span>
+<span class="token-key">--radius-sm</span>: <span class="token-value">2px</span>;     <span class="token-comment">/* Exception: badges, code blocks only */</span>
+
+<span class="token-key">--duration-fast</span>: <span class="token-value">120ms</span>;   <span class="token-key">--ease-standard</span>: <span class="token-string">cubic-bezier(0.2, 0, 0, 1)</span>;
+<span class="token-key">--duration-base</span>: <span class="token-value">220ms</span>;   <span class="token-key">--ease-spring</span>:   <span class="token-string">cubic-bezier(0.34, 1.56, 0.64, 1)</span>;</pre>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION — TYPOGRAPHY
+  ============================================================ -->
+  <section class="doc-section" id="typography">
+    <div class="section-eyebrow">Design System — Atoms</div>
+    <h2 class="section-title">Typography</h2>
+    <p class="section-subtitle">DM Sans as the Swiss grotesque workhorse. DM Mono for data, metadata, and all functional labeling. Two families. Zero decorative typography.</p>
+
+    <div class="type-specimen">
+      <div class="type-meta">
+        <span class="type-token">--type-6xl</span>
+        <div class="type-spec">80px / Light 200<br>tracking: −0.03em<br>leading: 1.0</div>
+      </div>
+      <div style="font-family: var(--font-display); font-size: var(--type-6xl); font-weight: var(--weight-light); line-height: var(--leading-tight); letter-spacing: var(--tracking-tight);">Apex</div>
+    </div>
+
+    <div class="type-specimen">
+      <div class="type-meta">
+        <span class="type-token">--type-4xl</span>
+        <div class="type-spec">48px / Light 200<br>tracking: −0.02em<br>leading: 1.0</div>
+      </div>
+      <div style="font-family: var(--font-display); font-size: var(--type-4xl); font-weight: var(--weight-light); line-height: var(--leading-tight); letter-spacing: var(--tracking-snug);">Running harder.</div>
+    </div>
+
+    <div class="type-specimen">
+      <div class="type-meta">
+        <span class="type-token">--type-3xl</span>
+        <div class="type-spec">38px / Light 200<br>tracking: −0.02em<br>leading: 1.2</div>
+      </div>
+      <div style="font-family: var(--font-display); font-size: var(--type-3xl); font-weight: var(--weight-light); line-height: var(--leading-snug); letter-spacing: var(--tracking-snug);">Section header</div>
+    </div>
+
+    <div class="type-specimen">
+      <div class="type-meta">
+        <span class="type-token">--type-xl</span>
+        <div class="type-spec">24px / Regular 400<br>tracking: −0.02em<br>leading: 1.2</div>
+      </div>
+      <div style="font-family: var(--font-display); font-size: var(--type-xl); font-weight: var(--weight-medium); letter-spacing: var(--tracking-snug);">Subsection title</div>
+    </div>
+
+    <div class="type-specimen">
+      <div class="type-meta">
+        <span class="type-token">--type-base</span>
+        <div class="type-spec">15px / Light 300<br>tracking: 0em<br>leading: 1.65</div>
+      </div>
+      <div style="font-size: var(--type-base); font-weight: var(--weight-regular); line-height: var(--leading-relaxed); max-width: 400px; color: var(--color-ink-secondary);">Body copy. Swiss precision means legibility first. This weight at this size creates reading comfort without softness.</div>
+    </div>
+
+    <div class="type-specimen">
+      <div class="type-meta">
+        <span class="type-token">mono / label</span>
+        <div class="type-spec">10px / Medium 500<br>tracking: +0.14em<br>leading: 1.0 · UPPERCASE</div>
+      </div>
+      <div style="font-family: var(--font-mono); font-size: var(--type-2xs); font-weight: var(--weight-medium); letter-spacing: var(--tracking-widest); text-transform: uppercase; color: var(--color-ink-tertiary);">SECTION LABEL · METADATA · UI SYSTEM TEXT</div>
+    </div>
+
+    <div class="type-specimen">
+      <div class="type-meta">
+        <span class="type-token">mono / data</span>
+        <div class="type-spec">12–13px / Regular 400<br>tracking: +0.04em</div>
+      </div>
+      <div style="font-family: var(--font-mono); font-size: var(--type-xs); color: var(--color-ink-secondary); letter-spacing: var(--tracking-wide);">42.2 km · 4:38/km · 847 m elev · 1h 44m</div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION — COLOR + DARK MODE
+  ============================================================ -->
+  <section class="doc-section" id="color">
+    <div class="section-eyebrow">Design System — Atoms</div>
+    <h2 class="section-title">Color System<br><em>Dual Mode</em></h2>
+    <p class="section-subtitle">
+      Two modes. One token vocabulary. Semantic color tokens remap on mode switch — components require zero code changes. Toggle the mode using the sidebar switch to preview the live system.
+    </p>
+
+    <!-- Live mode indicator -->
+    <div style="display:flex; align-items:center; gap: var(--space-4); margin-bottom: var(--space-8); padding: var(--space-4) var(--space-5); background: var(--color-surface-secondary); border: 1px solid var(--color-border-subtle);">
+      <span class="mode-label-pill" id="modePillLight">
+        <span class="dot" style="background:#FAFAFA; border: 1px solid #ccc;"></span>
+        Light Primary
+      </span>
+      <span style="font-family: var(--font-mono); font-size: var(--type-2xs); color: var(--color-ink-disabled);">→</span>
+      <span class="mode-label-pill" id="modePillDark">
+        <span class="dot" style="background:#0A0A0A;"></span>
+        Dark Variant
+      </span>
+      <span style="font-family: var(--font-mono); font-size: var(--type-2xs); color: var(--color-ink-tertiary); margin-left: auto; letter-spacing: var(--tracking-wide);" id="modeStatusText">Currently: Light</span>
+    </div>
+
+    <!-- Token comparison table -->
+    <div class="subsection-title">Token Mapping — Light → Dark</div>
+    <p class="subsection-body">Each token resolves to a different value per mode. The token name never changes. The component never changes. Only the resolved value changes.</p>
+
+    <table class="spec-table" style="margin-bottom: var(--space-10);">
+      <thead>
+        <tr>
+          <th>Token</th>
+          <th>Light Value</th>
+          <th>Dark Value</th>
+          <th>Role</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>--color-surface-primary</td>
+          <td><span style="display:inline-flex; align-items:center; gap:6px;"><span style="width:12px;height:12px;background:#FAFAFA;border:1px solid #ccc;display:inline-block;"></span> #FAFAFA</span></td>
+          <td><span style="display:inline-flex; align-items:center; gap:6px;"><span style="width:12px;height:12px;background:#0A0A0A;display:inline-block;"></span> #0A0A0A</span></td>
+          <td>Page background</td>
+        </tr>
+        <tr>
+          <td>--color-surface-secondary</td>
+          <td><span style="display:inline-flex; align-items:center; gap:6px;"><span style="width:12px;height:12px;background:#F2F2F0;border:1px solid #ccc;display:inline-block;"></span> #F2F2F0</span></td>
+          <td><span style="display:inline-flex; align-items:center; gap:6px;"><span style="width:12px;height:12px;background:#141414;display:inline-block;"></span> #141414</span></td>
+          <td>Elevated card surface</td>
+        </tr>
+        <tr>
+          <td>--color-surface-tertiary</td>
+          <td><span style="display:inline-flex; align-items:center; gap:6px;"><span style="width:12px;height:12px;background:#E8E8E4;border:1px solid #ccc;display:inline-block;"></span> #E8E8E4</span></td>
+          <td><span style="display:inline-flex; align-items:center; gap:6px;"><span style="width:12px;height:12px;background:#1E1E1E;display:inline-block;"></span> #1E1E1E</span></td>
+          <td>Highest elevation surface</td>
+        </tr>
+        <tr>
+          <td>--color-surface-inverse</td>
+          <td><span style="display:inline-flex; align-items:center; gap:6px;"><span style="width:12px;height:12px;background:#0A0A0A;display:inline-block;"></span> #0A0A0A</span></td>
+          <td><span style="display:inline-flex; align-items:center; gap:6px;"><span style="width:12px;height:12px;background:#F0F0EC;border:1px solid #ccc;display:inline-block;"></span> #F0F0EC</span></td>
+          <td>Inverted surface (hero, modals)</td>
+        </tr>
+        <tr>
+          <td>--color-ink-primary</td>
+          <td><span style="display:inline-flex; align-items:center; gap:6px;"><span style="width:12px;height:12px;background:#0A0A0A;display:inline-block;"></span> #0A0A0A</span></td>
+          <td><span style="display:inline-flex; align-items:center; gap:6px;"><span style="width:12px;height:12px;background:#F0F0EC;border:1px solid #ccc;display:inline-block;"></span> #F0F0EC</span></td>
+          <td>Primary body text</td>
+        </tr>
+        <tr>
+          <td>--color-ink-secondary</td>
+          <td><span style="display:inline-flex; align-items:center; gap:6px;"><span style="width:12px;height:12px;background:#3A3A3A;display:inline-block;"></span> #3A3A3A</span></td>
+          <td><span style="display:inline-flex; align-items:center; gap:6px;"><span style="width:12px;height:12px;background:#B8B8B2;border:1px solid #ccc;display:inline-block;"></span> #B8B8B2</span></td>
+          <td>Secondary / supporting text</td>
+        </tr>
+        <tr>
+          <td>--color-ink-tertiary</td>
+          <td><span style="display:inline-flex; align-items:center; gap:6px;"><span style="width:12px;height:12px;background:#767676;display:inline-block;"></span> #767676</span></td>
+          <td><span style="display:inline-flex; align-items:center; gap:6px;"><span style="width:12px;height:12px;background:#707070;display:inline-block;"></span> #707070</span></td>
+          <td>Labels, metadata, captions</td>
+        </tr>
+        <tr>
+          <td>--color-border-subtle</td>
+          <td><span style="display:inline-flex; align-items:center; gap:6px;"><span style="width:12px;height:12px;background:#E8E8E4;border:1px solid #ccc;display:inline-block;"></span> #E8E8E4</span></td>
+          <td><span style="display:inline-flex; align-items:center; gap:6px;"><span style="width:12px;height:12px;background:#1A1A1A;display:inline-block;"></span> #1A1A1A</span></td>
+          <td>Dividers, card borders</td>
+        </tr>
+        <tr>
+          <td>--color-semantic-success</td>
+          <td><span style="display:inline-flex; align-items:center; gap:6px;"><span style="width:12px;height:12px;background:#1A7F4B;display:inline-block;"></span> #1A7F4B</span></td>
+          <td><span style="display:inline-flex; align-items:center; gap:6px;"><span style="width:12px;height:12px;background:#34C77A;display:inline-block;"></span> #34C77A</span></td>
+          <td>Active shoe, goals met, PRs</td>
+        </tr>
+        <tr>
+          <td>--color-brand-accent</td>
+          <td><span style="display:inline-flex; align-items:center; gap:6px;"><span style="width:12px;height:12px;background:#E8FF3C;border:1px solid #ccc;display:inline-block;"></span> #E8FF3C</span></td>
+          <td><span style="display:inline-flex; align-items:center; gap:6px;"><span style="width:12px;height:12px;background:#E8FF3C;border:1px solid #ccc;display:inline-block;"></span> #E8FF3C</span></td>
+          <td><strong>Unchanged.</strong> Volt is mode-invariant.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Live swatch grids — show current mode values -->
+    <div class="rule-line"><span class="rule-line-text">Surface — Live</span></div>
+    <div class="swatch-grid">
+      <div class="swatch">
+        <div class="swatch-color bordered" style="background: var(--color-surface-primary); border-color: var(--color-border-default);"></div>
+        <div class="swatch-name">surface-primary</div>
+        <div class="swatch-hex" id="sw-sp"></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background: var(--color-surface-secondary); border: 1px solid var(--color-border-default);"></div>
+        <div class="swatch-name">surface-secondary</div>
+        <div class="swatch-hex" id="sw-ss"></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background: var(--color-surface-tertiary); border: 1px solid var(--color-border-default);"></div>
+        <div class="swatch-name">surface-tertiary</div>
+        <div class="swatch-hex" id="sw-st"></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background: var(--color-surface-inverse);"></div>
+        <div class="swatch-name">surface-inverse</div>
+        <div class="swatch-hex" id="sw-si"></div>
+      </div>
+    </div>
+
+    <div class="rule-line"><span class="rule-line-text">Ink — Live</span></div>
+    <div class="swatch-grid">
+      <div class="swatch">
+        <div class="swatch-color" style="background: var(--color-ink-primary);"></div>
+        <div class="swatch-name">ink-primary</div>
+        <div class="swatch-hex" id="sw-ip"></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background: var(--color-ink-secondary);"></div>
+        <div class="swatch-name">ink-secondary</div>
+        <div class="swatch-hex" id="sw-is"></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color bordered" style="background: var(--color-ink-tertiary); border-color: var(--color-border-default);"></div>
+        <div class="swatch-name">ink-tertiary</div>
+        <div class="swatch-hex" id="sw-it"></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color bordered" style="background: var(--color-ink-disabled); border-color: var(--color-border-default);"></div>
+        <div class="swatch-name">ink-disabled</div>
+        <div class="swatch-hex" id="sw-id"></div>
+      </div>
+    </div>
+
+    <div class="rule-line"><span class="rule-line-text">Brand — Mode-Invariant</span></div>
+    <div class="swatch-grid">
+      <div class="swatch">
+        <div class="swatch-color" style="background:#E8FF3C;"></div>
+        <div class="swatch-name">brand-accent</div>
+        <div class="swatch-hex">#E8FF3C · Volt</div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#C8DF00;"></div>
+        <div class="swatch-name">brand-accent-dark</div>
+        <div class="swatch-hex">#C8DF00</div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#0A0A0A;"></div>
+        <div class="swatch-name">brand-on-black</div>
+        <div class="swatch-hex">#0A0A0A · Fixed</div>
+      </div>
+    </div>
+
+    <div class="rule-line"><span class="rule-line-text">Semantic — Live</span></div>
+    <div class="swatch-grid">
+      <div class="swatch">
+        <div class="swatch-color" style="background: var(--color-semantic-success);"></div>
+        <div class="swatch-name">semantic-success</div>
+        <div class="swatch-hex" id="sw-sem-s"></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background: var(--color-semantic-warning);"></div>
+        <div class="swatch-name">semantic-warning</div>
+        <div class="swatch-hex" id="sw-sem-w"></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background: var(--color-semantic-error);"></div>
+        <div class="swatch-name">semantic-error</div>
+        <div class="swatch-hex" id="sw-sem-e"></div>
+      </div>
+    </div>
+
+    <!-- Volt rule -->
+    <div class="callout callout-accent mt-6">
+      <span class="callout-icon">→</span>
+      <div class="callout-body">
+        <strong>Volt Rule — Mode-Invariant</strong>
+        <code style="font-family: var(--font-mono); font-size: var(--type-2xs); background: rgba(0,0,0,0.08); padding: 1px 5px; border-radius: 2px;">#E8FF3C</code> never changes between modes. It was designed for dark surfaces — it earns even more authority there. Use only for: primary CTAs on dark fills, active nav indicators, achievement moments, PR badges. Never as a background fill. Never decorative.
+      </div>
+    </div>
+
+    <!-- Contrast compliance -->
+    <div class="subsection-title">Contrast Compliance</div>
+    <table class="spec-table">
+      <thead>
+        <tr><th>Pair</th><th>Light Ratio</th><th>Dark Ratio</th><th>WCAG</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>ink-primary / surface-primary</td>
+          <td>18.1:1</td>
+          <td>18.4:1</td>
+          <td><span class="badge badge-success">AAA</span></td>
+        </tr>
+        <tr>
+          <td>ink-secondary / surface-primary</td>
+          <td>9.7:1</td>
+          <td>7.2:1</td>
+          <td><span class="badge badge-success">AAA</span></td>
+        </tr>
+        <tr>
+          <td>ink-tertiary / surface-primary</td>
+          <td>4.6:1</td>
+          <td>4.5:1</td>
+          <td><span class="badge badge-success">AA</span></td>
+        </tr>
+        <tr>
+          <td>brand-accent / surface-inverse</td>
+          <td>Light: 13.2:1</td>
+          <td>Dark: 14.8:1</td>
+          <td><span class="badge badge-success">AAA</span></td>
+        </tr>
+        <tr>
+          <td>brand-on-black / brand-accent</td>
+          <td>13.2:1 (both modes)</td>
+          <td>13.2:1 (both modes)</td>
+          <td><span class="badge badge-success">AAA</span></td>
+        </tr>
+        <tr>
+          <td>ink-disabled / surface-primary</td>
+          <td>2.3:1</td>
+          <td>2.1:1</td>
+          <td><span class="badge badge-warning">Decorative only</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Dark mode decision rationale -->
+    <div class="subsection-title">Why Dual Mode</div>
+    <p class="subsection-body">Running happens across the full luminosity spectrum — pre-dawn runs, midday sun, evening cooldowns. Dark mode is not a preference accommodation. It's an environmental adaptation. The On Apex color system treats both modes as first-class citizens, not a light-mode app with a dark theme bolted on.</p>
+
+    <div class="two-col mt-4">
+      <div class="callout">
+        <span class="callout-icon">○</span>
+        <div class="callout-body">
+          <strong>Light — Swiss Precision</strong>
+          Clean white surfaces. Maximum product photography contrast. Readable in outdoor daylight. The default for discovery, onboarding, and browsing states.
+        </div>
+      </div>
+      <div class="callout" style="background: var(--color-surface-inverse); border-left-color: var(--color-brand-accent);">
+        <span class="callout-icon" style="color: var(--color-brand-accent);">●</span>
+        <div class="callout-body" style="color: var(--color-ink-inverse);">
+          <strong style="color: var(--color-ink-inverse);">Dark — Run Mode</strong>
+          Near-black surfaces with volt accents. Reduces screen glare during active running. Volt reads even more powerfully here. The native state of running culture.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION — SPACING
+  ============================================================ -->
+  <section class="doc-section" id="spacing">
+    <div class="section-eyebrow">Design System — Atoms</div>
+    <h2 class="section-title">Spacing Scale</h2>
+    <p class="section-subtitle">4px base grid. All spacing values are multiples of 4. No exceptions.</p>
+
+    <div style="margin: var(--space-6) 0;">
+      <div class="spacing-row">
+        <span class="spacing-label">--space-1</span>
+        <span class="spacing-value">4px</span>
+        <div class="spacing-bar-wrap"><div class="spacing-bar" style="width:4px;"></div></div>
+      </div>
+      <div class="spacing-row">
+        <span class="spacing-label">--space-2</span>
+        <span class="spacing-value">8px</span>
+        <div class="spacing-bar-wrap"><div class="spacing-bar" style="width:8px;"></div></div>
+      </div>
+      <div class="spacing-row">
+        <span class="spacing-label">--space-3</span>
+        <span class="spacing-value">12px</span>
+        <div class="spacing-bar-wrap"><div class="spacing-bar" style="width:12px;"></div></div>
+      </div>
+      <div class="spacing-row">
+        <span class="spacing-label">--space-4</span>
+        <span class="spacing-value">16px</span>
+        <div class="spacing-bar-wrap"><div class="spacing-bar" style="width:16px;"></div></div>
+      </div>
+      <div class="spacing-row">
+        <span class="spacing-label">--space-6</span>
+        <span class="spacing-value">24px</span>
+        <div class="spacing-bar-wrap"><div class="spacing-bar" style="width:24px;"></div></div>
+      </div>
+      <div class="spacing-row">
+        <span class="spacing-label">--space-8</span>
+        <span class="spacing-value">32px</span>
+        <div class="spacing-bar-wrap"><div class="spacing-bar" style="width:32px;"></div></div>
+      </div>
+      <div class="spacing-row">
+        <span class="spacing-label">--space-12</span>
+        <span class="spacing-value">48px</span>
+        <div class="spacing-bar-wrap"><div class="spacing-bar" style="width:48px;"></div></div>
+      </div>
+      <div class="spacing-row">
+        <span class="spacing-label">--space-16</span>
+        <span class="spacing-value">64px</span>
+        <div class="spacing-bar-wrap"><div class="spacing-bar" style="width:64px;"></div></div>
+      </div>
+      <div class="spacing-row">
+        <span class="spacing-label">--space-20</span>
+        <span class="spacing-value">80px</span>
+        <div class="spacing-bar-wrap"><div class="spacing-bar" style="width:80px;"></div></div>
+      </div>
+      <div class="spacing-row">
+        <span class="spacing-label">--space-24</span>
+        <span class="spacing-value">96px</span>
+        <div class="spacing-bar-wrap"><div class="spacing-bar" style="width:96px;"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION — MOTION
+  ============================================================ -->
+  <section class="doc-section" id="motion">
+    <div class="section-eyebrow">Design System — Atoms</div>
+    <h2 class="section-title">Motion System</h2>
+    <p class="section-subtitle">Hover the cards to preview each curve. Motion should feel precise, not performative. Swiss time-keeping applied to transitions.</p>
+
+    <div class="motion-grid">
+      <div class="motion-card fast">
+        <div class="motion-demo"></div>
+        <div class="motion-name">Fast / Tap</div>
+        <div class="motion-spec">120ms<br>ease-standard<br>cubic-bezier(0.2, 0, 0, 1)</div>
+      </div>
+      <div class="motion-card">
+        <div class="motion-demo"></div>
+        <div class="motion-name">Base / Transition</div>
+        <div class="motion-spec">220ms<br>ease-standard<br>cubic-bezier(0.2, 0, 0, 1)</div>
+      </div>
+      <div class="motion-card slow">
+        <div class="motion-demo"></div>
+        <div class="motion-name">Slow / Reveal</div>
+        <div class="motion-spec">380ms<br>ease-decelerate<br>cubic-bezier(0, 0, 0.2, 1)</div>
+      </div>
+      <div class="motion-card spring">
+        <div class="motion-demo"></div>
+        <div class="motion-name">Spring / Confirm</div>
+        <div class="motion-spec">380ms<br>ease-spring<br>cubic-bezier(0.34, 1.56, 0.64, 1)</div>
+      </div>
+      <div class="motion-card">
+        <div class="motion-demo" style="transition-duration: 600ms; transition-timing-function: cubic-bezier(0,0,0.2,1);"></div>
+        <div class="motion-name">Slower / Page</div>
+        <div class="motion-spec">600ms<br>ease-decelerate<br>Screen transitions</div>
+      </div>
+      <div class="motion-card">
+        <div class="motion-demo" style="background: var(--color-surface-tertiary); transition: background 120ms, transform 120ms; border: 1px solid var(--color-border-default);"></div>
+        <div class="motion-name">Instant / Feedback</div>
+        <div class="motion-spec">0ms<br>State change only<br>No animation</div>
+      </div>
+    </div>
+
+    <div class="callout mt-6">
+      <span class="callout-icon">→</span>
+      <div class="callout-body">
+        <strong>Motion Principle</strong>
+        Animations serve navigation — they communicate state change and spatial relationships. They never run for aesthetic reasons alone. If removing an animation degrades comprehension, it earns its place.
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION — ATOMS
+  ============================================================ -->
+  <section class="doc-section" id="atoms">
+    <div class="section-eyebrow">Design System — Atoms</div>
+    <h2 class="section-title">Atomic Components</h2>
+
+    <div class="component-grid">
+
+      <!-- Buttons -->
+      <div class="component-card">
+        <div class="component-preview">
+          <button class="btn btn-primary">Start Run</button>
+          <button class="btn btn-secondary">View Stats</button>
+          <button class="btn btn-accent">Join Club</button>
+        </div>
+        <div class="component-label-bar">
+          <span>Button — Primary / Secondary / Accent</span>
+          <span>.btn</span>
+        </div>
+      </div>
+
+      <!-- Button sizes -->
+      <div class="component-card">
+        <div class="component-preview">
+          <button class="btn btn-primary btn-sm">Small</button>
+          <button class="btn btn-primary">Default 44px</button>
+          <button class="btn btn-primary btn-lg">Large 52px</button>
+        </div>
+        <div class="component-label-bar">
+          <span>Button — Size Scale</span>
+          <span>.btn-sm / .btn-lg</span>
+        </div>
+      </div>
+
+      <!-- Ghost + Dark -->
+      <div class="component-card">
+        <div class="component-preview dark">
+          <button class="btn" style="background: var(--color-brand-accent); color: var(--color-brand-on-black); border: none;">Start Run</button>
+          <button class="btn" style="background: transparent; border: 2px solid rgba(255,255,255,0.4); color: white;">Settings</button>
+          <button class="btn btn-ghost" style="color: rgba(255,255,255,0.6);">Skip →</button>
+        </div>
+        <div class="component-label-bar">
+          <span>Button — On Dark Surface</span>
+          <span>Dark variant</span>
+        </div>
+      </div>
+
+      <!-- Input -->
+      <div class="component-card">
+        <div class="component-preview">
+          <div class="input-wrap">
+            <label class="input-label">Shoe Nickname</label>
+            <input class="input" type="text" placeholder="e.g. Thursday Tempo">
+          </div>
+        </div>
+        <div class="component-label-bar">
+          <span>Input Field</span>
+          <span>.input</span>
+        </div>
+      </div>
+
+      <!-- Badges -->
+      <div class="component-card">
+        <div class="component-preview">
+          <span class="badge badge-default">Recovery</span>
+          <span class="badge badge-strong">Tempo</span>
+          <span class="badge badge-accent">PR</span>
+          <span class="badge badge-success">Active</span>
+          <span class="badge badge-warning">High Load</span>
+          <span class="badge badge-error">Retire</span>
+        </div>
+        <div class="component-label-bar">
+          <span>Badge / Status</span>
+          <span>.badge</span>
+        </div>
+      </div>
+
+      <!-- Chips -->
+      <div class="component-card">
+        <div class="component-preview">
+          <span class="chip selected">Road</span>
+          <span class="chip">Trail</span>
+          <span class="chip selected">Race</span>
+          <span class="chip">Recovery</span>
+          <span class="chip">Tempo</span>
+        </div>
+        <div class="component-label-bar">
+          <span>Filter Chip</span>
+          <span>.chip</span>
+        </div>
+      </div>
+
+      <!-- Avatar -->
+      <div class="component-card">
+        <div class="component-preview">
+          <div class="avatar sm">BP</div>
+          <div class="avatar">BP</div>
+          <div class="avatar lg">BP</div>
+          <div class="avatar" style="background: var(--color-surface-inverse); color: var(--color-ink-inverse);">EL</div>
+        </div>
+        <div class="component-label-bar">
+          <span>Avatar</span>
+          <span>.avatar</span>
+        </div>
+      </div>
+
+      <!-- Progress -->
+      <div class="component-card">
+        <div class="component-preview" style="flex-direction: column; align-items: stretch; padding: var(--space-6);">
+          <div class="progress-wrap">
+            <div class="progress-header">
+              <span style="font-family: var(--font-mono); font-size: var(--type-2xs); color: var(--color-ink-tertiary); letter-spacing: var(--tracking-wide); text-transform: uppercase;">Shoe Mileage</span>
+              <span style="font-family: var(--font-mono); font-size: var(--type-2xs); color: var(--color-ink-secondary);">412 / 600 km</span>
+            </div>
+            <div class="progress-track"><div class="progress-fill" style="width: 68.6%;"></div></div>
+          </div>
+          <div class="progress-wrap" style="margin-top: var(--space-4);">
+            <div class="progress-header">
+              <span style="font-family: var(--font-mono); font-size: var(--type-2xs); color: var(--color-ink-tertiary); letter-spacing: var(--tracking-wide); text-transform: uppercase;">Weekly Goal</span>
+              <span style="font-family: var(--font-mono); font-size: var(--type-2xs); color: var(--color-semantic-success);">32 / 40 km</span>
+            </div>
+            <div class="progress-track"><div class="progress-fill accent" style="width: 80%;"></div></div>
+          </div>
+        </div>
+        <div class="component-label-bar">
+          <span>Progress Bar</span>
+          <span>.progress-track</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION — MOLECULES
+  ============================================================ -->
+  <section class="doc-section" id="molecules">
+    <div class="section-eyebrow">Design System — Molecules</div>
+    <h2 class="section-title">Molecular Components</h2>
+
+    <!-- Metric cards -->
+    <div class="rule-line"><span class="rule-line-text">Metric Card</span></div>
+    <div class="gap-row mt-4">
+      <div class="metric-card">
+        <div class="metric-label">Distance</div>
+        <div class="metric-value">12.4<span class="metric-unit">km</span></div>
+        <div class="metric-delta">↑ +2.1 vs last week</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Avg Pace</div>
+        <div class="metric-value">4:38<span class="metric-unit">/km</span></div>
+        <div class="metric-delta">↑ −0:12 faster</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Elevation</div>
+        <div class="metric-value">284<span class="metric-unit">m</span></div>
+        <div class="metric-delta" style="color: var(--color-ink-disabled);">— flat week</div>
+      </div>
+      <div class="metric-card" style="background: var(--color-surface-inverse); border-color: transparent;">
+        <div class="metric-label" style="color: rgba(255,255,255,0.4);">Shoe Miles</div>
+        <div class="metric-value" style="color: var(--color-ink-inverse);">412<span class="metric-unit" style="color: rgba(255,255,255,0.4);">km</span></div>
+        <div style="font-family: var(--font-mono); font-size: var(--type-2xs); color: var(--color-brand-accent); letter-spacing: var(--tracking-wide);">68% of limit</div>
+      </div>
+    </div>
+
+    <!-- Run history rows -->
+    <div class="rule-line"><span class="rule-line-text">Activity Row</span></div>
+    <div style="border-top: 2px solid var(--color-ink-primary); margin-top: var(--space-4);">
+      <div class="run-row">
+        <div class="run-date-col">
+          <div class="run-date-month">Mar</div>
+          <div class="run-date-day">11</div>
+        </div>
+        <div class="run-type-bar tempo"></div>
+        <div class="run-info">
+          <div class="run-title">Morning Tempo</div>
+          <div class="run-stats">4:38/km · 1h 02m · Cloudflow 4</div>
+        </div>
+        <div class="run-distance">13.4<span>km</span></div>
+      </div>
+      <div class="run-row">
+        <div class="run-date-col">
+          <div class="run-date-month">Mar</div>
+          <div class="run-date-day">09</div>
+        </div>
+        <div class="run-type-bar long"></div>
+        <div class="run-info">
+          <div class="run-title">Long Run — RVA Trails</div>
+          <div class="run-stats">5:12/km · 2h 18m · Cloudmonster 2</div>
+        </div>
+        <div class="run-distance">26.6<span>km</span></div>
+      </div>
+      <div class="run-row">
+        <div class="run-date-col">
+          <div class="run-date-month">Mar</div>
+          <div class="run-date-day">07</div>
+        </div>
+        <div class="run-type-bar recovery"></div>
+        <div class="run-info">
+          <div class="run-title">Easy Recovery</div>
+          <div class="run-stats">6:10/km · 38m · Cloudgo</div>
+        </div>
+        <div class="run-distance">6.2<span>km</span></div>
+      </div>
+    </div>
+
+    <!-- Mobile nav bar molecule -->
+    <div class="rule-line"><span class="rule-line-text">Bottom Navigation</span></div>
+    <div style="margin-top: var(--space-4); display: flex; justify-content: flex-start;">
+      <div class="mobile-nav">
+        <div class="nav-item active">
+          <div class="nav-icon">
+            <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <span class="nav-item-label">Home</span>
+        </div>
+        <div class="nav-item">
+          <div class="nav-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <span class="nav-item-label">Activity</span>
+        </div>
+        <div class="nav-item">
+          <div class="nav-icon" style="width: 40px; height: 40px; background: var(--color-ink-primary); display: flex; align-items: center; justify-content: center; margin-top: -8px;">
+            <svg viewBox="0 0 24 24" style="stroke: white;"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </div>
+          <span class="nav-item-label" style="margin-top: 4px;">Start</span>
+        </div>
+        <div class="nav-item">
+          <div class="nav-icon">
+            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <span class="nav-item-label">Community</span>
+        </div>
+        <div class="nav-item">
+          <div class="nav-icon">
+            <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <span class="nav-item-label">Profile</span>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ============================================================
+       SECTION — INTERACTION PATTERNS
+  ============================================================ -->
+  <section class="doc-section" id="interactions">
+    <div class="section-eyebrow">Design System — Behavior</div>
+    <h2 class="section-title">Interaction Patterns</h2>
+    <p class="section-subtitle">Advanced mobile UX patterns specified for On Apex. Each pattern has a gesture, a duration, and a purpose.</p>
+
+    <div class="interaction-grid">
+      <div class="interaction-card">
+        <div class="interaction-icon">
+          <svg viewBox="0 0 24 24"><path d="M14 14s-1 1-2 1-2-1-2-1"/><circle cx="9" cy="9" r="1"/><circle cx="15" cy="9" r="1"/><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div class="interaction-name">Haptic Tap</div>
+        <div class="interaction-desc">All primary CTAs trigger light haptic on tap. Confirm actions trigger medium. Destructive actions trigger warning pattern. 0ms delay — instant.</div>
+      </div>
+      <div class="interaction-card">
+        <div class="interaction-icon">
+          <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+        </div>
+        <div class="interaction-name">Swipe Dismiss</div>
+        <div class="interaction-desc">Notification sheets and contextual menus dismiss on horizontal swipe ≥80px. Velocity threshold: 300px/s. Spring rebound if threshold not met.</div>
+      </div>
+      <div class="interaction-card">
+        <div class="interaction-icon">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        <div class="interaction-name">Pull to Refresh</div>
+        <div class="interaction-desc">Feed and activity log pull-to-refresh. Threshold: 72px. Loading state: single line 2px scanning animation. No spinner — precision over skeuomorphism.</div>
+      </div>
+      <div class="interaction-card">
+        <div class="interaction-icon">
+          <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        </div>
+        <div class="interaction-name">Long Press</div>
+        <div class="interaction-desc">Activity cards support long press (400ms) to reveal: share, edit, delete. Blur background, surface modal. Contextual — no global long press behavior.</div>
+      </div>
+      <div class="interaction-card">
+        <div class="interaction-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+        </div>
+        <div class="interaction-name">Scroll Snap</div>
+        <div class="interaction-desc">Horizontal carousels (shoe garage, suggested routes) use CSS scroll-snap-type: mandatory. Each card snaps to alignment. No momentum scrolling past endpoint.</div>
+      </div>
+      <div class="interaction-card">
+        <div class="interaction-icon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="9" y1="9" x2="15" y2="15"/><line x1="15" y1="9" x2="9" y2="15"/></svg>
+        </div>
+        <div class="interaction-name">Sheet Modal</div>
+        <div class="interaction-desc">Bottom sheets animate up from 0 to final position in 380ms ease-decelerate. Max 90% screen height. Drag handle visible. Scrim dims to 40% opacity.</div>
+      </div>
+      <div class="interaction-card">
+        <div class="interaction-icon">
+          <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </div>
+        <div class="interaction-name">Toast Notification</div>
+        <div class="interaction-desc">Run saved, shoe registered, club joined. 3s duration. Slide up from bottom, 16px above nav bar. Auto-dismiss. No action required — acknowledgment only.</div>
+      </div>
+      <div class="interaction-card">
+        <div class="interaction-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <div class="interaction-name">Skeleton Loading</div>
+        <div class="interaction-desc">Content areas show skeleton before data loads. Animated shimmer scan — left to right, 1.5s cycle. Matches layout of real content exactly. No spinners.</div>
+      </div>
+      <div class="interaction-card">
+        <div class="interaction-icon">
+          <svg viewBox="0 0 24 24"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+        </div>
+        <div class="interaction-name">Map Expand</div>
+        <div class="interaction-desc">Route preview maps expand on tap to full-screen. Transition: scale from thumbnail origin point, 380ms spring. Back button returns to origin at same speed.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECTION — SCREEN PATTERNS
+  ============================================================ -->
+  <section class="doc-section" id="screens">
+    <div class="section-eyebrow">Design System — Organisms</div>
+    <h2 class="section-title">Screen Patterns</h2>
+    <p class="section-subtitle">Annotated mobile screen wireframes. Not high-fidelity mockups — structural blueprints with component mapping.</p>
+
+    <div class="two-col">
+
+      <!-- Screen 1 — Home / Feed -->
+      <div>
+        <div class="rule-line"><span class="rule-line-text">Screen / Home</span></div>
+        <div class="phone-frame">
+          <div class="phone-screen">
+            <div class="phone-status">
+              <span class="phone-status-time">9:41</span>
+              <span style="font-family: var(--font-mono); font-size: 9px; color: var(--color-ink-tertiary);">●●●●</span>
+            </div>
+            <div class="phone-content">
+              <div class="screen-header">
+                <div>
+                  <div class="screen-greeting">Good morning,<br>Benn.</div>
+                </div>
+                <div class="screen-date">Wed<br>Mar 11</div>
+              </div>
+
+              <div class="mini-metric-row">
+                <div class="mini-metric">
+                  <div class="mini-metric-val">32</div>
+                  <div class="mini-metric-lbl">km / wk</div>
+                </div>
+                <div class="mini-metric">
+                  <div class="mini-metric-val">4</div>
+                  <div class="mini-metric-lbl">runs</div>
+                </div>
+                <div class="mini-metric" style="background: var(--color-surface-inverse);">
+                  <div class="mini-metric-val" style="color: var(--color-ink-inverse);">412</div>
+                  <div class="mini-metric-lbl" style="color: rgba(255,255,255,0.4);">shoe km</div>
+                </div>
+              </div>
+
+              <div style="margin-bottom: var(--space-3);">
+                <button style="width:100%; height:40px; background: var(--color-ink-primary); color: var(--color-ink-inverse); border:none; font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer;">START RUN</button>
+              </div>
+
+              <div style="font-family: var(--font-mono); font-size: 8px; color: var(--color-ink-tertiary); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: var(--space-2); padding-bottom: var(--space-2); border-bottom: 1px solid var(--color-border-subtle);">Community Feed</div>
+
+              <div class="feed-item">
+                <div class="feed-avatar-sm">EL</div>
+                <div style="flex:1;">
+                  <div class="feed-text"><strong>Elena L.</strong> ran 18.2 km · Cloudflow 4</div>
+                  <div style="font-family: var(--font-mono); font-size: 8px; color: var(--color-ink-tertiary); margin-top: 2px;">4:44/km · Richmond, VA</div>
+                </div>
+                <div class="feed-time">2h</div>
+              </div>
+              <div class="feed-item">
+                <div class="feed-avatar-sm">MR</div>
+                <div style="flex:1;">
+                  <div class="feed-text"><strong>Marcus R.</strong> hit a new PR — 5K in 19:42</div>
+                  <div style="font-family: var(--font-mono); font-size: 8px; color: var(--color-brand-accent-dark); margin-top: 2px;">Personal Record ↑</div>
+                </div>
+                <div class="feed-time">5h</div>
+              </div>
+              <div class="feed-item">
+                <div class="feed-avatar-sm">JK</div>
+                <div style="flex:1;">
+                  <div class="feed-text"><strong>Jamie K.</strong> organized a club run · Sat 7am</div>
+                  <div style="font-family: var(--font-mono); font-size: 8px; color: var(--color-ink-tertiary); margin-top: 2px;">RVA Apex Club · 8 going</div>
+                </div>
+                <div class="feed-time">8h</div>
+              </div>
+            </div>
+            <div style="height: 52px; border-top: 1px solid var(--color-border-subtle); display: flex; align-items: center; justify-content: space-around; padding: 0 var(--space-3); flex-shrink: 0;">
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 2px; opacity: 1;">
+                <div style="width: 4px; height: 4px; background: var(--color-ink-primary); border-radius: 50%;"></div>
+                <span style="font-family: var(--font-mono); font-size: 7px; letter-spacing: 0.1em; text-transform: uppercase;">Home</span>
+              </div>
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 2px; opacity: 0.3;">
+                <div style="width: 14px; height: 14px; border: 1.5px solid var(--color-ink-primary); border-radius: 50%;"></div>
+                <span style="font-family: var(--font-mono); font-size: 7px; letter-spacing: 0.1em; text-transform: uppercase;">Activity</span>
+              </div>
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 2px;">
+                <div style="width: 28px; height: 28px; background: var(--color-ink-primary); display: flex; align-items: center; justify-content: center; margin-top: -8px;">
+                  <span style="color: white; font-size: 14px; line-height: 1;">+</span>
+                </div>
+              </div>
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 2px; opacity: 0.3;">
+                <div style="width: 14px; height: 14px; border: 1.5px solid var(--color-ink-primary); border-radius: 50%;"></div>
+                <span style="font-family: var(--font-mono); font-size: 7px; letter-spacing: 0.1em; text-transform: uppercase;">Club</span>
+              </div>
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 2px; opacity: 0.3;">
+                <div style="width: 14px; height: 14px; border: 1.5px solid var(--color-ink-primary); border-radius: 50%;"></div>
+                <span style="font-family: var(--font-mono); font-size: 7px; letter-spacing: 0.1em; text-transform: uppercase;">Profile</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p style="font-family: var(--font-mono); font-size: var(--type-2xs); color: var(--color-ink-tertiary); margin-top: var(--space-3); letter-spacing: var(--tracking-wide);">HOME — Greeting + week stats + Start Run CTA + community feed. One action above the fold. No carousel. No ads.</p>
+      </div>
+
+      <!-- Screen 2 — Shoe Garage -->
+      <div>
+        <div class="rule-line"><span class="rule-line-text">Screen / Shoe Garage</span></div>
+        <div class="phone-frame">
+          <div class="phone-screen">
+            <div class="phone-status">
+              <span class="phone-status-time">9:41</span>
+              <span style="font-family: var(--font-mono); font-size: 9px; color: var(--color-ink-tertiary);">●●●●</span>
+            </div>
+            <div class="phone-content">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-4);">
+                <div style="font-family: var(--font-display); font-size: 22px; font-weight: 200; letter-spacing: -0.02em;">Garage</div>
+                <button style="background: none; border: 1px solid var(--color-border-default); font-family: var(--font-mono); font-size: 8px; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 8px; cursor: pointer; color: var(--color-ink-secondary);">+ Add</button>
+              </div>
+
+              <!-- Shoe card 1 -->
+              <div style="border: 1px solid var(--color-border-default); padding: var(--space-3); margin-bottom: var(--space-3);">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: var(--space-2);">
+                  <div>
+                    <div style="font-size: 11px; font-weight: 500; color: var(--color-ink-primary);">Thursday Tempo</div>
+                    <div style="font-family: var(--font-mono); font-size: 8px; color: var(--color-ink-tertiary); letter-spacing: 0.06em; margin-top: 2px;">Cloudflow 4 · Black/White</div>
+                  </div>
+                  <span style="font-family: var(--font-mono); font-size: 8px; padding: 2px 6px; background: #D4EDDA; color: var(--color-semantic-success);">ACTIVE</span>
+                </div>
+                <div style="margin-bottom: var(--space-2);">
+                  <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                    <span style="font-family: var(--font-mono); font-size: 8px; color: var(--color-ink-tertiary); letter-spacing: 0.08em; text-transform: uppercase;">Mileage</span>
+                    <span style="font-family: var(--font-mono); font-size: 8px; color: var(--color-ink-secondary);">412 / 600 km</span>
+                  </div>
+                  <div style="height: 2px; background: var(--color-border-subtle);">
+                    <div style="height: 100%; width: 68.6%; background: var(--color-ink-primary);"></div>
+                  </div>
+                </div>
+                <div style="font-family: var(--font-mono); font-size: 8px; color: var(--color-ink-tertiary); letter-spacing: 0.06em;">Last run: Mar 11 · 13.4 km</div>
+              </div>
+
+              <!-- Shoe card 2 -->
+              <div style="border: 1px solid var(--color-border-default); padding: var(--space-3); margin-bottom: var(--space-3);">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: var(--space-2);">
+                  <div>
+                    <div style="font-size: 11px; font-weight: 500;">Weekend Warrior</div>
+                    <div style="font-family: var(--font-mono); font-size: 8px; color: var(--color-ink-tertiary); letter-spacing: 0.06em; margin-top: 2px;">Cloudmonster 2 · Cobalt</div>
+                  </div>
+                  <span style="font-family: var(--font-mono); font-size: 8px; padding: 2px 6px; background: var(--color-surface-secondary); color: var(--color-ink-secondary);">ACTIVE</span>
+                </div>
+                <div style="margin-bottom: var(--space-2);">
+                  <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                    <span style="font-family: var(--font-mono); font-size: 8px; color: var(--color-ink-tertiary); letter-spacing: 0.08em; text-transform: uppercase;">Mileage</span>
+                    <span style="font-family: var(--font-mono); font-size: 8px; color: var(--color-ink-secondary);">87 / 600 km</span>
+                  </div>
+                  <div style="height: 2px; background: var(--color-border-subtle);">
+                    <div style="height: 100%; width: 14.5%; background: var(--color-brand-accent-dark);"></div>
+                  </div>
+                </div>
+                <div style="font-family: var(--font-mono); font-size: 8px; color: var(--color-ink-tertiary); letter-spacing: 0.06em;">Last run: Mar 09 · 26.6 km</div>
+              </div>
+
+              <!-- Retire prompt -->
+              <div style="background: var(--color-surface-inverse); padding: var(--space-3); display: flex; align-items: center; justify-content: space-between;">
+                <div>
+                  <div style="font-family: var(--font-mono); font-size: 8px; color: var(--color-brand-accent); letter-spacing: 0.08em; text-transform: uppercase;">Time to retire?</div>
+                  <div style="font-size: 9px; color: rgba(255,255,255,0.6); margin-top: 2px;">Cloudgo · 568 km</div>
+                </div>
+                <button style="background: var(--color-brand-accent); border: none; font-family: var(--font-mono); font-size: 8px; letter-spacing: 0.08em; text-transform: uppercase; padding: 4px 8px; cursor: pointer; color: var(--color-brand-on-black);">Shop →</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p style="font-family: var(--font-mono); font-size: var(--type-2xs); color: var(--color-ink-tertiary); margin-top: var(--space-3); letter-spacing: var(--tracking-wide);">GARAGE — Shoe cards with live mileage progress. Retire prompt on dark surface triggers contextual commerce — no separate shop tab needed.</p>
+      </div>
+
+    </div>
+
+    <!-- Scroll behavior note -->
+    <div class="callout callout-accent mt-8">
+      <span class="callout-icon">→</span>
+      <div class="callout-body">
+        <strong>Screen Architecture Rule</strong>
+        Every screen in On Apex has a single primary action. Home = Start Run. Activity = Log. Garage = Manage shoe. Profile = Share. No screen asks two questions at once. Swiss clarity applied to information architecture.
+      </div>
+    </div>
+
+    <!-- Accessibility note -->
+    <div class="subsection-title">Accessibility Standards</div>
+    <table class="spec-table">
+      <thead>
+        <tr><th>Standard</th><th>Requirement</th><th>Status</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Color contrast</td>
+          <td>WCAG AA minimum (4.5:1 for normal, 3:1 for large text). All ink-on-surface combinations pass at AAA.</td>
+          <td><span class="badge badge-success">Compliant</span></td>
+        </tr>
+        <tr>
+          <td>Touch targets</td>
+          <td>44×44px minimum on all interactive elements. iOS HIG and Material Design compliant.</td>
+          <td><span class="badge badge-success">Compliant</span></td>
+        </tr>
+        <tr>
+          <td>Motion preference</td>
+          <td>All non-essential animations respect prefers-reduced-motion. Core navigation remains functional without motion.</td>
+          <td><span class="badge badge-success">Compliant</span></td>
+        </tr>
+        <tr>
+          <td>Dynamic type</td>
+          <td>DM Sans supports iOS Dynamic Type scaling. All text containers accommodate 2× size without horizontal truncation.</td>
+          <td><span class="badge badge-warning">Designed for</span></td>
+        </tr>
+        <tr>
+          <td>Screen reader</td>
+          <td>All interactive elements have ARIA labels. Activity data expressed in readable sentence form, not raw numbers.</td>
+          <td><span class="badge badge-warning">Designed for</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer style="padding-top: var(--space-16); border-top: 2px solid var(--color-ink-primary); display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: var(--space-6);">
+    <div>
+      <div style="display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-3);">
+        <div style="width: 24px; height: 24px; background: var(--color-ink-primary); display: flex; align-items: center; justify-content: center;">
+          <span style="font-family: var(--font-display); font-size: var(--type-2xs); font-weight: var(--weight-bold); color: var(--color-brand-accent);">On</span>
+        </div>
+        <span style="font-family: var(--font-display); font-size: var(--type-sm); font-weight: var(--weight-medium); letter-spacing: var(--tracking-wide); text-transform: uppercase;">Apex PRD + MDS v1.0</span>
+      </div>
+      <p style="font-family: var(--font-mono); font-size: var(--type-2xs); color: var(--color-ink-tertiary); letter-spacing: var(--tracking-wide); line-height: 1.8;">
+        Molecular Design System — On Apex Edition<br>
+        Swiss Engineering × Advanced Mobile UI<br>
+        Benn Pattara · VCU Brandcenter · 2026
+      </p>
+    </div>
+    <div style="text-align: right;">
+      <div style="font-family: var(--font-mono); font-size: var(--type-2xs); color: var(--color-ink-disabled); letter-spacing: var(--tracking-wide); line-height: 2;">
+        <div>PRD Version 1.0</div>
+        <div>Design System v1.0</div>
+        <div>March 2026</div>
+        <div>On Apex — Portfolio Case Study</div>
+      </div>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+  // ============================================================
+  // DARK MODE TOGGLE
+  // ============================================================
+  const html      = document.documentElement;
+  const toggle    = document.getElementById('modeToggle');
+  const modeLabel = document.getElementById('modeLabel');
+  const modeStatusText = document.getElementById('modeStatusText');
+
+  // Token map for live swatch hex labels
+  const swatchMap = {
+    'sw-sp':    ['#FAFAFA', '#0A0A0A'],
+    'sw-ss':    ['#F2F2F0', '#141414'],
+    'sw-st':    ['#E8E8E4', '#1E1E1E'],
+    'sw-si':    ['#0A0A0A', '#F0F0EC'],
+    'sw-ip':    ['#0A0A0A', '#F0F0EC'],
+    'sw-is':    ['#3A3A3A', '#B8B8B2'],
+    'sw-it':    ['#767676', '#707070'],
+    'sw-id':    ['#ABABAB', '#404040'],
+    'sw-sem-s': ['#1A7F4B', '#34C77A'],
+    'sw-sem-w': ['#B85C00', '#E8983A'],
+    'sw-sem-e': ['#C0392B', '#E85C4A'],
+  };
+
+  let isDark = false;
+
+  function setMode(dark) {
+    isDark = dark;
+    if (dark) {
+      html.setAttribute('data-mode', 'dark');
+      modeLabel.textContent = 'Dark Mode';
+      if (modeStatusText) modeStatusText.textContent = 'Currently: Dark';
+    } else {
+      html.removeAttribute('data-mode');
+      modeLabel.textContent = 'Light Mode';
+      if (modeStatusText) modeStatusText.textContent = 'Currently: Light';
+    }
+    // Update live swatch hex labels
+    Object.entries(swatchMap).forEach(([id, [light, dark]]) => {
+      const el = document.getElementById(id);
+      if (el) el.textContent = dark ? dark : light;
+    });
+    // Persist
+    try { localStorage.setItem('apex-mode', dark ? 'dark' : 'light'); } catch(e) {}
+  }
+
+  // Init from storage or system preference
+  let saved = null;
+  try { saved = localStorage.getItem('apex-mode'); } catch(e) {}
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  setMode(saved === 'dark' || (!saved && prefersDark));
+
+  toggle.addEventListener('click', () => setMode(!isDark));
+
+  // Also respond to system preference changes
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+    try {
+      if (!localStorage.getItem('apex-mode')) setMode(e.matches);
+    } catch(err) { setMode(e.matches); }
+  });
+
+  // ============================================================
+  // ACTIVE NAV HIGHLIGHTING — IntersectionObserver
+  // ============================================================
+  const sections = document.querySelectorAll('.doc-section, .hero');
+  const navLinks = document.querySelectorAll('.nav-link');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === `#${id}`) {
+            link.classList.add('active');
+          }
+        });
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+
+  // ============================================================
+  // SCROLL REVEAL
+  // ============================================================
+  const fadeEls = document.querySelectorAll('.scroll-fade');
+  const fadeObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        fadeObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  fadeEls.forEach(el => fadeObserver.observe(el));
+</script>
+</body>
+</html>

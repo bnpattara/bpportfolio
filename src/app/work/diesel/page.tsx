@@ -18,7 +18,7 @@ export default function DieselCaseStudy(): React.ReactElement {
     <div style={{ width: "100%", height: "100dvh", background: "#fff" }}>
       <iframe
         src="/case-studies/diesel/index.html"
-        title="Diesel Tokyo — Gravitational Pull"
+        title="Diesel Iceberg — Case Study"
         className="responsive-iframe"
         style={{ width: "100%", height: "100%", border: "none" }}
       />

@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>On Apex · Case Study · Benn Pattara</title>
+<style>
+:root {
+  --black: #000;
+  --white: #fff;
+  --g100: #f5f5f5;
+  --g200: #e8e8e8;
+  --g300: #ccc;
+  --g400: #999;
+  --g500: #666;
+  --font: 'Helvetica Neue', Arial, sans-serif;
+  --ease-fast: 150ms ease;
+  --nav-h: 52px;
+  --sidenav-w: 220px;
+  --volt: #E8FF3C;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font); background: var(--white); color: var(--black); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+#site-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; background: var(--white); border-bottom: 1px solid var(--g200); }
+.nav-main { position: relative; height: 52px; padding: 0 48px; }
+.nav-left { position: absolute; left: 48px; top: 50%; transform: translateY(-50%); display: flex; gap: 28px; }
+.nav-left a { font-size: 11px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--g500); text-decoration: none; transition: color var(--ease-fast); }
+.nav-left a:hover { color: var(--black); }
+.nav-wordmark { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); font-size: 14px; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; color: var(--black); text-decoration: none; white-space: nowrap; }
+.nav-right { position: absolute; right: 48px; top: 50%; transform: translateY(-50%); }
+.nav-right a { font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--black); text-decoration: none; border-bottom: 1px solid var(--black); padding-bottom: 1px; }
+.page-body { padding-top: var(--nav-h); }
+
+.cs-hero { position: relative; min-height: 78vh; overflow: hidden; display: flex; align-items: flex-end; }
+.cs-hero-bg { position: absolute; inset: 0; z-index: 0; }
+.cs-hero-bg img { width: 100%; height: 100%; object-fit: cover; object-position: center center; display: block; }
+.cs-hero-scrim { position: absolute; inset: 0; z-index: 1; background: linear-gradient(to top, rgba(0,0,0,.88) 0%, rgba(0,0,0,.4) 40%, transparent 65%); pointer-events: none; }
+.cs-hero-title-wrap { position: relative; z-index: 2; padding: 64px 56px 72px 48px; width: 100%; max-width: 920px; }
+.cs-hero-kicker { font-size: 10px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.55); margin-bottom: 14px; }
+.cs-hero-title { font-size: clamp(36px,5vw,64px); font-weight: 300; letter-spacing: .06em; text-transform: uppercase; color: var(--white); line-height: .95; margin: 0; text-shadow: 0 2px 24px rgba(0,0,0,.5); }
+.cs-hero-title em { font-style: italic; color: rgba(255,255,255,.72); }
+.cs-hero-ghost { position: absolute; bottom: -36px; right: -24px; font-size: clamp(80px,12vw,160px); font-weight: 300; color: rgba(255,255,255,.04); letter-spacing: -.03em; line-height: 1; white-space: nowrap; pointer-events: none; text-transform: uppercase; user-select: none; z-index: 1; }
+
+.cs-body-wrap { display: grid; grid-template-columns: var(--sidenav-w) 1fr; align-items: start; min-height: 100vh; }
+#cs-sidenav { position: sticky; top: var(--nav-h); height: calc(100vh - var(--nav-h)); overflow-y: auto; border-right: 1px solid var(--g200); padding: 40px 0; display: flex; flex-direction: column; background: var(--white); z-index: 50; scrollbar-width: none; }
+#cs-sidenav::-webkit-scrollbar { display: none; }
+.cs-sidenav-label { font-size: 8px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--g300); padding: 0 28px 20px; }
+.cs-sidenav-link { display: flex; align-items: center; gap: 14px; padding: 12px 28px; cursor: pointer; transition: background var(--ease-fast); text-decoration: none; border-left: 2px solid transparent; color: inherit; }
+.cs-sidenav-link:hover { background: var(--g100); }
+.cs-sidenav-link.active { border-left-color: var(--black); background: var(--g100); }
+.cs-sidenav-num { font-size: 9px; font-weight: 600; letter-spacing: .12em; color: var(--g300); width: 20px; flex-shrink: 0; transition: color var(--ease-fast); }
+.cs-sidenav-link.active .cs-sidenav-num { color: var(--black); }
+.cs-sidenav-text { font-size: 11px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--g400); transition: color var(--ease-fast); }
+.cs-sidenav-link.active .cs-sidenav-text { color: var(--black); }
+.cs-sidenav-divider { height: 1px; background: var(--g100); margin: 8px 28px; }
+.cs-sidenav-more { margin-top: auto; padding: 20px 28px 0; border-top: 1px solid var(--g100); font-size: 10px; color: var(--g400); line-height: 1.6; }
+.cs-sidenav-more a { color: var(--black); font-weight: 600; letter-spacing: .08em; text-transform: uppercase; text-decoration: none; border-bottom: 1px solid var(--black); }
+
+.cs-content { min-width: 0; }
+#cs-exec-summary { padding: 64px 56px; border-bottom: 1px solid var(--g200); }
+.cs-exec-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+.cs-exec-heading { font-size: 32px; font-weight: 300; letter-spacing: .04em; text-transform: uppercase; color: var(--black); margin-bottom: 8px; }
+p.cs-exec-body { font-size: 13px; color: var(--g500); line-height: 1.85; margin-bottom: 20px; }
+p.cs-exec-body:last-child { margin-bottom: 0; }
+.cs-exec-meta-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: var(--g200); margin-bottom: 0; }
+.cs-exec-meta-cell { background: var(--white); padding: 20px; min-width: 0; overflow-wrap: break-word; }
+.cs-exec-meta-label { font-size: 8px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--g300); margin-bottom: 6px; }
+.cs-exec-meta-val { font-size: 12px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; color: var(--black); }
+
+.cs-section { padding: 72px 56px; border-bottom: 1px solid #f0f0f0; }
+.cs-section-alt { background: var(--g100); }
+.cs-section-eyebrow { display: flex; align-items: center; gap: 14px; margin-bottom: 28px; }
+.cs-section-num { font-size: 9px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--g300); }
+.cs-section-title { font-size: 11px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--black); }
+.cs-heading-serif { font-size: clamp(22px,2.5vw,30px); font-weight: 400; letter-spacing: .03em; text-transform: uppercase; color: var(--black); line-height: 1.15; margin-bottom: 28px; }
+.cs-heading-serif em { font-style: italic; color: var(--g500); }
+.cs-body { font-size: 15px; color: var(--g500); line-height: 1.82; margin-bottom: 20px; max-width: 44rem; }
+.cs-body:last-child { margin-bottom: 0; }
+.cs-pull-quote { font-size: clamp(20px,2.2vw,28px); font-weight: 300; font-style: italic; color: var(--black); line-height: 1.4; border-left: 2px solid var(--black); padding-left: 28px; margin: 32px 0; max-width: 40rem; }
+.cs-body-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 28px; }
+.cs-body-2col p { font-size: 14px; color: var(--g500); line-height: 1.75; }
+.cs-problem-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(24px, 4vw, 40px);
+  align-items: start;
+  margin-bottom: 0;
+  width: 100%;
+  max-width: none;
+}
+.cs-problem-split .cs-body { max-width: none; margin-bottom: 0; }
+.cs-problem-split > div { display: flex; flex-direction: column; gap: 16px; }
+
+.cs-stats { display: grid; gap: 1px; background: var(--g200); margin: 28px 0; }
+.cs-stats-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.cs-stat-cell { background: var(--white); padding: 28px 24px; min-width: 0; overflow-wrap: break-word; }
+.cs-stat-eyebrow { font-size: 9px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--g300); margin-bottom: 12px; }
+.cs-stat-num { font-size: 48px; font-weight: 300; color: var(--black); letter-spacing: -.02em; line-height: 1; margin-bottom: 8px; }
+.cs-stat-label { font-size: 12px; color: var(--g500); line-height: 1.65; }
+
+.move-list { list-style: none; margin: 24px 0 0; padding: 0; border-top: 1px solid var(--g200); }
+.move-list li { padding: 16px 0; border-bottom: 1px solid var(--g200); font-size: 14px; color: var(--g500); line-height: 1.65; }
+.move-list strong { color: var(--black); font-weight: 500; }
+
+.persona-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--g200); margin: 32px 0; max-width: none; width: 100%; }
+.persona-card { background: var(--white); padding: 24px 22px; min-width: 0; }
+.persona-name { font-size: 13px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--black); margin-bottom: 6px; }
+.persona-role { font-size: 8px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--g300); margin-bottom: 14px; }
+.persona-body { font-size: 13px; color: var(--g500); line-height: 1.65; }
+
+.mode-split { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--g200); margin: 28px 0; max-width: 100%; }
+.mode-panel { padding: 28px; }
+.mode-panel-light { background: #F7F7F3; }
+.mode-panel-dark { background: #050505; color: #F0F0EA; }
+.mode-label { font-size: 8px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; margin-bottom: 12px; }
+.mode-label-light { color: #888; }
+.mode-label-dark { color: rgba(255,255,255,.35); }
+.mode-sample { font-family: ui-monospace, monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; margin-top: 16px; line-height: 1.5; }
+.mode-panel-dark .mode-sample { color: rgba(255,255,255,.35); }
+.mode-big { font-size: 40px; font-weight: 200; letter-spacing: .04em; line-height: 1; margin-top: 8px; }
+.mode-panel-dark .mode-big { color: #F0F0EA; }
+.mode-panel-dark .volt { color: var(--volt); }
+
+.artifact-strip { background: var(--black); }
+.artifact-trigger { padding: 24px 56px; display: flex; align-items: stretch; justify-content: space-between; cursor: pointer; transition: background var(--ease-fast); }
+.artifact-trigger:hover { background: #111; }
+.artifact-left { display: flex; align-items: stretch; gap: 20px; }
+.artifact-badge { border: 1px solid rgba(255,255,255,.25); padding: 0 12px; display: flex; align-items: center; flex-shrink: 0; }
+.artifact-badge span { font-size: 9px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: rgba(255,255,255,.6); white-space: nowrap; }
+.artifact-meta { display: flex; flex-direction: column; justify-content: center; gap: 5px; }
+.artifact-name { font-size: 14px; font-weight: 500; letter-spacing: .05em; text-transform: uppercase; color: var(--white); }
+.artifact-desc { font-size: 12px; color: rgba(255,255,255,.35); }
+.artifact-right { display: flex; align-items: center; flex-shrink: 0; padding-left: 20px; }
+.artifact-toggle { font-size: 20px; font-weight: 300; color: rgba(255,255,255,.5); line-height: 1; display: inline-block; width: 24px; text-align: center; }
+.artifact-trigger:hover .artifact-toggle { color: var(--white); }
+.artifact-expand { max-height: 0; overflow: hidden; transition: max-height 700ms ease; }
+.artifact-inner { background: #0a0a0a; }
+.artifact-iframe-wrap { width: 100%; }
+.artifact-iframe-wrap iframe { width: 100%; height: 85vh; min-height: 600px; border: none; display: block; }
+
+.proto-section { padding: 80px clamp(24px, 5vw, 64px); box-sizing: border-box; border-bottom: 1px solid #f0f0f0; }
+.proto-intro { max-width: 40rem; margin-bottom: 40px; }
+.proto-intro .cs-section-eyebrow { margin-bottom: 16px; }
+.proto-layout { display: grid; grid-template-columns: 1fr; gap: 24px; justify-items: center; }
+.proto-stack { display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 360px; }
+.proto-open-row { margin-top: 28px; text-align: center; }
+.proto-open-row a { font-size: 10px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--black); text-decoration: none; border-bottom: 1px solid var(--black); }
+.proto-phone { width: calc(320px + 16px); height: calc(812px * 320 / 375 + 16px); border-radius: calc(8px + 44px * 320 / 375); border: 8px solid #000; overflow: hidden; background: #000; box-shadow: 0 0 0 1px #e8e8e8; display: flex; justify-content: center; align-items: flex-start; }
+.proto-phone iframe { width: 375px; height: 812px; border: none; display: block; transform: scale(calc(320 / 375)); transform-origin: top center; flex-shrink: 0; }
+
+.cs-table { width: 100%; border-collapse: collapse; margin-top: 28px; }
+.cs-table th { font-size: 8px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--g300); padding: 12px 14px; text-align: left; background: var(--g100); border-bottom: 1px solid var(--g200); }
+.cs-table td { font-size: 13px; color: var(--g500); padding: 14px; border-bottom: 1px solid var(--g100); vertical-align: top; line-height: 1.6; }
+.cs-table td:first-child { font-weight: 600; color: var(--black); font-size: 11px; letter-spacing: .04em; text-transform: uppercase; width: 28%; }
+
+.cs-close-bleed {
+  width: 100%;
+  background: #050505;
+  color: #F0F0EA;
+  padding: clamp(88px, 14vw, 160px) clamp(20px, 6vw, 72px);
+  text-align: center;
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+.cs-close-bleed-inner { margin: 0 auto; max-width: min(1100px, 92vw); }
+.cs-close-bleed-line {
+  font-size: clamp(24px, 5.2vw, 56px);
+  font-weight: 200;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  line-height: 1.12;
+  margin: 0;
+}
+.cs-close-bleed-line--accent { margin-top: clamp(12px, 2vw, 22px); }
+.cs-close-bleed-line em { font-style: italic; color: var(--volt); font-weight: 500; letter-spacing: .1em; }
+
+.cs-next { border-top: 1px solid var(--g200); padding-top: 32px; display: flex; justify-content: space-between; align-items: center; margin-top: 48px; }
+.cs-next-label { font-size: 9px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--g300); }
+.cs-next-link { text-align: right; text-decoration: none; display: block; }
+.cs-next-meta { font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: var(--g400); margin-bottom: 5px; }
+.cs-next-title { font-size: 22px; font-weight: 400; letter-spacing: .04em; text-transform: uppercase; color: var(--black); transition: color var(--ease-fast); }
+.cs-next-link:hover .cs-next-title { color: var(--g500); }
+
+#scroll-progress { position: fixed; top: 0; left: 0; height: 2px; background: var(--black); width: 0%; z-index: 300; transition: width 100ms linear; }
+
+footer { background: var(--black); padding: 32px 48px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+.footer-id { display: flex; flex-direction: column; gap: 4px; }
+.footer-name { font-size: 12px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--white); }
+.footer-role { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.28); }
+.footer-links { display: flex; gap: 24px; }
+.footer-link { font-size: 10px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.35); text-decoration: none; transition: color var(--ease-fast); }
+.footer-link:hover { color: var(--white); }
+.footer-copy { font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: rgba(255,255,255,.18); }
+
+@media (max-width: 768px) {
+  #cs-sidenav { display: none !important; }
+  .cs-body-wrap { grid-template-columns: 1fr !important; }
+  #cs-exec-summary { padding: 40px 20px !important; }
+  .cs-exec-inner { grid-template-columns: 1fr !important; gap: 32px !important; }
+  .cs-exec-meta-grid { grid-template-columns: 1fr !important; }
+  .cs-stats-2 { grid-template-columns: 1fr !important; }
+  .cs-problem-split { grid-template-columns: 1fr !important; gap: 20px !important; }
+  .cs-section { padding: 40px 20px !important; }
+  .proto-section { padding: 40px 20px !important; }
+  .cs-hero-title-wrap { padding: 40px 20px 48px !important; }
+  #site-nav .nav-left { display: none; }
+  #site-nav .nav-main { padding: 0 20px !important; }
+  #site-nav .nav-right { right: 20px !important; }
+  .artifact-trigger { padding: 16px 20px !important; }
+  .cs-next { flex-direction: column; gap: 16px; align-items: flex-start; }
+  .cs-next-link { text-align: left; }
+  footer { flex-direction: column; align-items: flex-start; }
+}
+</style>
+</head>
+<body>
+<div id="scroll-progress"></div>
+
+<nav id="site-nav">
+  <div class="nav-main">
+    <div class="nav-left">
+      <a href="/#work" target="_parent">Work</a>
+      <a href="/#about" target="_parent">About</a>
+      <a href="/blog" target="_parent">Blog</a>
+    </div>
+    <a href="/" class="nav-wordmark" target="_parent">Benn Pattara</a>
+    <div class="nav-right">
+      <a href="/#contact" target="_parent">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<div class="page-body">
+<section class="cs-hero" id="cs-hero">
+  <div class="cs-hero-ghost">Apex</div>
+  <div class="cs-hero-bg"><img src="on_hero.webp" alt="On Apex"/></div>
+  <div class="cs-hero-scrim"></div>
+  <div class="cs-hero-title-wrap">
+    <p class="cs-hero-kicker">Brand &amp; product · Strategy to PWA</p>
+    <h1 class="cs-hero-title">On Apex</h1>
+  </div>
+</section>
+
+<div class="cs-body-wrap">
+  <aside id="cs-sidenav">
+    <div class="cs-sidenav-label">Index</div>
+    <a class="cs-sidenav-link active" data-target="cs-exec-summary" onclick="scrollToSection('cs-exec-summary')"><span class="cs-sidenav-num">00</span><span class="cs-sidenav-text">Summary</span></a>
+    <div class="cs-sidenav-divider"></div>
+    <a class="cs-sidenav-link" data-target="move-01" onclick="scrollToSection('move-01')"><span class="cs-sidenav-num">01</span><span class="cs-sidenav-text">Moment</span></a>
+    <a class="cs-sidenav-link" data-target="move-02" onclick="scrollToSection('move-02')"><span class="cs-sidenav-num">02</span><span class="cs-sidenav-text">Brand</span></a>
+    <a class="cs-sidenav-link" data-target="move-03" onclick="scrollToSection('move-03')"><span class="cs-sidenav-num">03</span><span class="cs-sidenav-text">Reframe</span></a>
+    <a class="cs-sidenav-link" data-target="move-04" onclick="scrollToSection('move-04')"><span class="cs-sidenav-num">04</span><span class="cs-sidenav-text">Idea</span></a>
+    <a class="cs-sidenav-link" data-target="move-05" onclick="scrollToSection('move-05')"><span class="cs-sidenav-num">05</span><span class="cs-sidenav-text">System</span></a>
+    <a class="cs-sidenav-link" data-target="artifact-prd" onclick="scrollToSection('artifact-prd')"><span class="cs-sidenav-num">&mdash;</span><span class="cs-sidenav-text">PRD artifact</span></a>
+    <a class="cs-sidenav-link" data-target="move-06" onclick="scrollToSection('move-06')"><span class="cs-sidenav-num">06</span><span class="cs-sidenav-text">Distribution</span></a>
+    <a class="cs-sidenav-link" data-target="prototype" onclick="scrollToSection('prototype')"><span class="cs-sidenav-num">&mdash;</span><span class="cs-sidenav-text">Prototype</span></a>
+    <a class="cs-sidenav-link" data-target="move-07" onclick="scrollToSection('move-07')"><span class="cs-sidenav-num">07</span><span class="cs-sidenav-text">Threshold</span></a>
+    <a class="cs-sidenav-link" data-target="move-08" onclick="scrollToSection('move-08')"><span class="cs-sidenav-num">08</span><span class="cs-sidenav-text">Changed</span></a>
+    <div class="cs-sidenav-more">
+      <a href="#cs-exec-summary" onclick="scrollToSection('cs-exec-summary'); return false;">Executive summary</a>
+      <span style="display:block;margin-top:10px;">Strategy to shipped PWA · 2026</span>
+    </div>
+  </aside>
+
+  <main class="cs-content">
+
+    <section id="cs-exec-summary" data-cs-section="exec-summary">
+      <div class="cs-exec-inner">
+        <div>
+          <h2 class="cs-exec-heading">Executive summary</h2>
+          <p class="cs-exec-body">On&rsquo;s hardware is the most precise in running. The software layer was a void. Apex is the argument for a digital product built to the same standard as the shoe — the shoe as identity unit, anti-feed mechanics, and evidence before prestige features.</p>
+          <p class="cs-exec-body">Running stayed personal; the tools stayed premium. The software layer did not. Apex is the argument for software built to the same standard as the shoe: the shoe as identity unit, anti-feed mechanics, and proof before prestige features.</p>
+        </div>
+        <div>
+          <div class="cs-exec-meta-grid">
+            <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Project</div><div class="cs-exec-meta-val">On Apex · PWA</div></div>
+            <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Year</div><div class="cs-exec-meta-val">2026</div></div>
+            <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Role</div><div class="cs-exec-meta-val">PM / Systems UX</div></div>
+            <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Type</div><div class="cs-exec-meta-val">Strategy · Design system · Prototype</div></div>
+            <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Deliverables</div><div class="cs-exec-meta-val">PRD · Tokens · Interactive prototype</div></div>
+            <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Goal</div><div class="cs-exec-meta-val">Own the runner post-purchase</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cs-section" id="move-01" data-cs-section="move-01">
+      <div class="cs-section-eyebrow"><span class="cs-section-num">01</span><span class="cs-section-title">The cultural moment</span></div>
+      <h2 class="cs-heading-serif">The best hardware in running<br><em>ships with no software at all.</em></h2>
+      <p class="cs-body">Running became the last truly personal sport. No team. No coach. No crowd. Just a body, a road, and a decision to move. The tools runners chose reflected that — premium, precise, engineered with obsessive care.</p>
+      <p class="cs-body">Then they came home, opened an app, and handed their data to someone else.</p>
+    </section>
+
+    <section class="cs-section cs-section-alt" id="move-02" data-cs-section="move-02">
+      <div class="cs-section-eyebrow"><span class="cs-section-num">02</span><span class="cs-section-title">The brand</span></div>
+      <h2 class="cs-heading-serif">On built the most precise shoe in running.<br><em>Then stopped.</em></h2>
+      <div class="cs-problem-split">
+        <div>
+          <p class="cs-body">On Running&rsquo;s CloudTec sole geometry, Helion foam, and liquid-injected Speedboard plate turned every footstrike into a calibrated event. Runners chose On because it felt like a precision instrument.</p>
+        </div>
+        <div>
+          <p class="cs-body">At the digital layer, that relationship ended at the register. On had zero owned software surface area. The default tracker was Nike Run Club. The default community was Strava. On made the shoe. Nike owned the runner.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="cs-section" id="move-03" data-cs-section="move-03">
+      <div class="cs-section-eyebrow"><span class="cs-section-num">03</span><span class="cs-section-title">The reframe</span></div>
+      <h2 class="cs-heading-serif">On runners aren&rsquo;t chasing leaderboards.<br><em>They&rsquo;re chasing themselves.</em></h2>
+      <p class="cs-body">Nike Run Club owns aspiration. Strava owns competition. Both platforms assume the runner&rsquo;s primary motivation is social performance — to be seen, ranked, celebrated.</p>
+      <p class="cs-body">On runners are different. They run for self-expression: a discipline, an aesthetic, a relationship with their own body. No platform was built for that psychology. That gap was On&rsquo;s moat.</p>
+      <p class="cs-pull-quote">Movement is the act. The shoe is the object. The platform is the witness.</p>
+    </section>
+
+    <section class="cs-section cs-section-alt" id="move-04" data-cs-section="move-04">
+      <div class="cs-section-eyebrow"><span class="cs-section-num">04</span><span class="cs-section-title">The idea</span></div>
+      <h2 class="cs-heading-serif">Apex: Software built to the same standard<br><em>as the shoe.</em></h2>
+      <p class="cs-body">Not a fitness tracker. Not a social network. A silent, precision instrument that knows exactly which physical object you&rsquo;re wearing and molds the digital experience around it.</p>
+      <p class="cs-body">The shoe is the identity unit. Apex exists to honor it.</p>
+      <div class="persona-grid">
+        <div class="persona-card">
+          <div class="persona-name">Elena</div>
+          <div class="persona-role">Aesthetic athlete</div>
+          <p class="persona-body">Runs Cloudsurfers. Movement as mental practice and visual flow.</p>
+        </div>
+        <div class="persona-card">
+          <div class="persona-name">Marcus</div>
+          <div class="persona-role">Data competitor</div>
+          <p class="persona-body">Runs Cloudmonsters. Respects the engineering. Demands the same from his metrics.</p>
+        </div>
+        <div class="persona-card">
+          <div class="persona-name">Jamie</div>
+          <div class="persona-role">Community connector</div>
+          <p class="persona-body">The run is a social ritual. Connection through shared effort.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="cs-section" id="move-05" data-cs-section="move-05">
+      <div class="cs-section-eyebrow"><span class="cs-section-num">05</span><span class="cs-section-title">The system</span></div>
+      <h2 class="cs-heading-serif">Every design decision was a rejection<br><em>of something familiar.</em></h2>
+      <p class="cs-body">The molecular design system enforced the same restraint as On&rsquo;s physical hardware. Nothing decorative. Nothing arbitrary. Every rule tied to a functional need.</p>
+      <ul class="move-list">
+        <li><strong>Split mode</strong> — Light mode for browsing. Dark mode the instant you hit run. The transition is the feature — a physiological trigger that signals you&rsquo;re in the work.</li>
+        <li><strong>Volt rule</strong> — One accent color. Maximum three instances per screen. Scarcity creates authority — the eye goes exactly where it should.</li>
+        <li><strong>Zero radius</strong> — No rounded corners anywhere in the interface. Not approachable consumer tech — a serious tool. The visual language of industrial instruments.</li>
+        <li><strong>DM Mono</strong> — Monospaced font for all live data. Every digit occupies identical horizontal space. The stopwatch never jitters. Precision is felt, not just seen.</li>
+        <li><strong>No likes</strong> — Five On-native reactions replace the heart: Push, Solid, Pace, Zone, Respect. Each requires the viewer to have actually looked at the run. Cognitive friction replaces cheap dopamine.</li>
+        <li><strong>Shoe garage</strong> — Automatic odometer per registered pair. At 500km, the mileage bar turns amber — not red. Reaching the end of a shoe&rsquo;s lifespan is completion, not failure.</li>
+      </ul>
+      <div class="mode-split">
+        <div class="mode-panel mode-panel-light">
+          <div class="mode-label mode-label-light">Light · browsing</div>
+          <div class="mode-big">38</div>
+          <div class="mode-sample">This week · km · feed · garage</div>
+        </div>
+        <div class="mode-panel mode-panel-dark">
+          <div class="mode-label mode-label-dark">Dark · in the run</div>
+          <div class="mode-big"><span class="volt">28</span><span class="volt">:</span>14</div>
+          <div class="mode-sample">Elapsed · zone · route · work register</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="artifact-strip" id="artifact-prd" data-cs-section="artifact-prd">
+      <div class="artifact-trigger" id="art1-trigger" onclick="toggleArtifact(1)">
+        <div class="artifact-left">
+          <div class="artifact-badge"><span>Interactive artifact</span></div>
+          <div class="artifact-meta">
+            <div class="artifact-name">PRD + design system tokens</div>
+            <div class="artifact-desc">Expand for full documentation · same folder</div>
+          </div>
+        </div>
+        <div class="artifact-right"><span class="artifact-toggle" id="art1-cta">+</span></div>
+      </div>
+      <div class="artifact-expand" id="art1-expand">
+        <div class="artifact-inner">
+          <div class="artifact-iframe-wrap">
+            <iframe src="prd-design-system.html" title="On Apex PRD and design system reference" scrolling="yes"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="cs-section cs-section-alt" id="move-06" data-cs-section="move-06">
+      <div class="cs-section-eyebrow"><span class="cs-section-num">06</span><span class="cs-section-title">The distribution</span></div>
+      <h2 class="cs-heading-serif">Phase one ships as a PWA.<br><em>Not an app. An invitation.</em></h2>
+      <p class="cs-body">A native App Store launch would place Apex directly underneath sponsored ads for Nike Run Club. Instead, Apex deploys as a Progressive Web App — captured at On.com at the moment a runner drops $200 on a new pair of shoes. Maximum intent. Zero noise.</p>
+      <p class="cs-body">PWA infrastructure also grants full iteration velocity. Bug fixed, feature shipped, every user updated — without waiting for App Store review. The engineering team controls the clock.</p>
+      <table class="cs-table">
+        <thead><tr><th>Phase</th><th>Detail</th></tr></thead>
+        <tbody>
+          <tr><td>Phase 1</td><td>PWA via On.com</td></tr>
+          <tr><td>Entry point</td><td>Post-purchase prompt at checkout</td></tr>
+          <tr><td>Commerce surface</td><td>One amber bar. No in-app checkout.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="proto-section" id="prototype" data-cs-section="prototype">
+      <div class="proto-intro">
+        <div class="cs-section-eyebrow"><span class="cs-section-num">&mdash;</span><span class="cs-section-title">Interactive prototype</span></div>
+        <h2 class="cs-heading-serif">Same molecular system rules,<br><em>navigable in device context.</em></h2>
+        <p class="cs-body" style="margin-bottom:0;">Built as the On Apex interactive layer: mode split, volt discipline, garage, feed — not a wireframe dump.</p>
+      </div>
+      <div class="proto-layout">
+        <div class="proto-stack">
+          <div class="proto-phone">
+            <iframe src="/work/on-apex-app" title="On Apex interactive prototype" scrolling="yes"></iframe>
+          </div>
+        </div>
+        <p class="proto-open-row"><a href="/work/on-apex-app" target="_blank" rel="noopener">Open prototype in new tab</a></p>
+      </div>
+    </section>
+
+    <section class="cs-section" id="move-07" data-cs-section="move-07">
+      <div class="cs-section-eyebrow"><span class="cs-section-num">07</span><span class="cs-section-title">The threshold</span></div>
+      <h2 class="cs-heading-serif">Native infrastructure unlocks<br><em>at two numbers.</em></h2>
+      <p class="cs-body">Phase Three — a full native App Store release — is not triggered by a timeline or a boardroom decision. It is triggered by evidence. The PWA must prove that anti-social-feed behavior actually retains runners in the real world.</p>
+      <div class="cs-stats cs-stats-2">
+        <div class="cs-stat-cell">
+          <div class="cs-stat-num">35%</div>
+          <div class="cs-stat-eyebrow">Weekly active user rate required to build native</div>
+        </div>
+        <div class="cs-stat-cell">
+          <div class="cs-stat-num">70%</div>
+          <div class="cs-stat-eyebrow">Shoe registration rate required to build native</div>
+        </div>
+      </div>
+      <p class="cs-body">Every deferred feature — in-app checkout, gamified challenges, native push notifications — was a documented tradeoff. The core philosophy ships first. Everything else waits for proof.</p>
+    </section>
+
+    <section class="cs-section cs-section-alt" id="move-08" data-cs-section="move-08">
+      <div class="cs-section-eyebrow"><span class="cs-section-num">08</span><span class="cs-section-title">What changed</span></div>
+      <h2 class="cs-heading-serif">On stopped selling a shoe.<br><em>It started owning the runner.</em></h2>
+      <p class="cs-body">Commerce as a consequence, not a purpose. A platform that protects its own integrity by refusing to become a storefront. A social feed that demands you actually look at someone&rsquo;s run before you react to it.</p>
+      <p class="cs-body">Apex proved that software doesn&rsquo;t have to be a slot machine. It can be a calibrated instrument — one that treats the digital experience with the same uncompromising standard as the physical object it was built to serve.</p>
+
+      <div class="cs-next">
+        <div class="cs-next-label">Next</div>
+        <a href="/work/diesel" class="cs-next-link" target="_parent">
+          <div class="cs-next-meta">Diesel · Experiential · 2026</div>
+          <div class="cs-next-title">The Iceberg &rarr;</div>
+        </a>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<div class="cs-close-bleed" role="region" aria-label="Closing">
+  <div class="cs-close-bleed-inner">
+    <p class="cs-close-bleed-line">On made the precision shoe.</p>
+    <p class="cs-close-bleed-line cs-close-bleed-line--accent"><em>Apex made On the precision brand.</em></p>
+  </div>
+</div>
+
+</div>
+
+<footer>
+  <div class="footer-id">
+    <span class="footer-name">Benn Pattara</span>
+    <span class="footer-role">Brand &amp; Product Strategist</span>
+  </div>
+  <div class="footer-links">
+    <a href="/" class="footer-link" target="_parent">Home</a>
+    <a href="/#about" class="footer-link" target="_parent">About</a>
+    <a href="/blog" class="footer-link" target="_parent">Blog</a>
+    <a href="/#contact" class="footer-link" target="_parent">Contact</a>
+  </div>
+  <div class="footer-copy">&copy; 2026 Benn Pattara</div>
+</footer>
+
+<script>
+window.addEventListener("scroll", () => {
+  const s = window.scrollY;
+  const t = document.documentElement.scrollHeight - window.innerHeight;
+  const el = document.getElementById("scroll-progress");
+  if (el) el.style.width = (t > 0 ? (s / t) * 100 : 0) + "%";
+});
+
+const sectionObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      document.querySelectorAll('.cs-sidenav-link').forEach(l => l.classList.remove('active'));
+      const match = document.querySelector('.cs-sidenav-link[data-target="' + entry.target.id + '"]');
+      if (match) match.classList.add('active');
+    }
+  });
+}, { threshold: 0, rootMargin: '-10% 0px -75% 0px' });
+document.querySelectorAll('[data-cs-section]').forEach(s => sectionObserver.observe(s));
+
+function scrollToSection(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 104, behavior: 'smooth' });
+}
+
+function toggleArtifact(n) {
+  const expand = document.getElementById('art' + n + '-expand');
+  const toggle = document.getElementById('art' + n + '-cta');
+  if (!expand || !toggle) return;
+  const open = expand.dataset.open === 'true';
+  expand.style.maxHeight = open ? '0' : '5200px';
+  expand.dataset.open = open ? 'false' : 'true';
+  toggle.textContent = open ? '+' : '\u00d7';
+}
+</script>
+<script src="/js/cs-stat-eyebrow-fit.js"></script>
+</body>
+</html>
