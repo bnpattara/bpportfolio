@@ -2061,6 +2061,11 @@ body.stylect-embed-case #stage {
 body.stylect-embed-case .phone-label {
   display: none;
 }
+body.stylect-embed-case .stylist-section {
+  flex-direction: column;
+  align-items: flex-start !important;
+  padding: 0 !important;
+}
 
 .vs-btn {
   padding: 8px 18px;
@@ -3740,11 +3745,14 @@ function updateBriefBudget(val) {
 // ── INIT ──
 document.addEventListener('DOMContentLoaded', () => {
   const caseParam = new URLSearchParams(location.search).get('embed') === 'case';
-  const inIframe = window.frameElement != null;
+  const inIframe = window.self !== window.top;
   if (caseParam || inIframe) {
     document.body.classList.add('stylect-embed-case');
     const vs = document.getElementById('view-switcher');
-    if (vs) vs.hidden = true;
+    if (vs) {
+      vs.hidden = true;
+      vs.style.display = 'none';
+    }
   }
   quizStep = 1;
   applyQuizStep(0);
