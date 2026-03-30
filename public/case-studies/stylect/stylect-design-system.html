@@ -1215,6 +1215,19 @@ body {
   justify-content: center;
 }
 
+.sl-img img {
+  width: 100%;
+  height: 100%;
+  min-height: 110px;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  opacity: 1;
+  transition: opacity var(--dur-base), transform var(--dur-base);
+}
+
+.shortlist-card:hover .sl-img img { opacity: 0.92; }
+
 .sl-garment {
   opacity: 0.2;
   transition: opacity var(--dur-base);
@@ -1433,6 +1446,20 @@ body {
   position: absolute;
   bottom: 0; left: 0; right: 0; height: 2px;
   background: var(--l-accent);
+}
+
+.lp-swatch.lp-swatch-photo {
+  padding: 0;
+  overflow: hidden;
+  background: var(--l-bg);
+}
+.lp-swatch.lp-swatch-photo::after { z-index: 1; }
+.lp-swatch.lp-swatch-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
 }
 
 .lp-meta { flex: 1; display: flex; flex-direction: column; gap: 3px; }
@@ -3022,7 +3049,7 @@ document.querySelectorAll('.vibe-option').forEach(opt => {
   <div class="flex-col" style="max-width:600px;gap:8px">
     <div class="shortlist-card hearted">
       <div class="sl-rank"><div class="sl-rank-num">1</div></div>
-      <div class="sl-img"><div class="sl-img-placeholder"><svg class="sl-garment" width="40" height="80" viewBox="0 0 40 80"><path d="M12 0 L28 0 L34 20 L36 80 L4 80 L6 20 Z" fill="#1a1714"/></svg></div></div>
+      <div class="sl-img"><img src="assets/ds-shortlist-emerald-silk-wrap.png" alt="Emerald silk wrap dress, product photo" width="176" height="220" loading="lazy" decoding="async" /></div>
       <div class="sl-content">
         <div class="sl-brand">Nordstrom · Eliza J · SS26</div>
         <div class="sl-name">The Emerald Silk Wrap</div>
@@ -3041,7 +3068,7 @@ document.querySelectorAll('.vibe-option').forEach(opt => {
 
     <div class="shortlist-card">
       <div class="sl-rank"><div class="sl-rank-num">2</div></div>
-      <div class="sl-img"><div class="sl-img-placeholder"><svg class="sl-garment" width="36" height="80" viewBox="0 0 36 80"><path d="M4 0 L32 0 L32 80 L4 80 Z" fill="#1a1714"/></svg></div></div>
+      <div class="sl-img"><img src="assets/ds-shortlist-terracotta-midi-dress.png" alt="Terracotta midi dress, product photo" width="176" height="220" loading="lazy" decoding="async" /></div>
       <div class="sl-content">
         <div class="sl-brand">Anthropologie · Floreat · AW25</div>
         <div class="sl-name">Terracotta Midi Dress</div>
@@ -3059,7 +3086,7 @@ document.querySelectorAll('.vibe-option').forEach(opt => {
 
     <div class="shortlist-card">
       <div class="sl-rank"><div class="sl-rank-num">3</div></div>
-      <div class="sl-img"><div class="sl-img-placeholder"><svg class="sl-garment" width="38" height="80" viewBox="0 0 38 80"><path d="M8 0 L30 0 L30 36 L38 36 L38 80 L0 80 L0 36 L8 36 Z" fill="#1a1714"/></svg></div></div>
+      <div class="sl-img"><img src="assets/ds-shortlist-black-wide-leg-jumpsuit.png" alt="Black wide-leg jumpsuit, product photo" width="176" height="220" loading="lazy" decoding="async" /></div>
       <div class="sl-content">
         <div class="sl-brand">Reformation · Vintage · SS26</div>
         <div class="sl-name">Black Wide-Leg Jumpsuit</div>
@@ -3170,7 +3197,7 @@ document.querySelectorAll('.vibe-option').forEach(opt => {
           <div class="chat-bubble stylist">Perfect — block heels give us more silhouette flexibility. Here's your shortlist:</div>
           <div class="chat-meta">Amara Kofi · 2:41 PM</div>
           <div class="look-pin" style="margin-top:8px">
-            <div class="lp-swatch"></div>
+            <div class="lp-swatch lp-swatch-photo"><img src="assets/ds-shortlist-emerald-silk-wrap.png" alt="Emerald silk wrap dress, product photo" width="80" height="104" loading="lazy" decoding="async" /></div>
             <div class="lp-meta">
               <div class="lp-name">The Emerald Silk Wrap</div>
               <div class="lp-brand">Nordstrom · Eliza J</div>
@@ -3185,7 +3212,7 @@ document.querySelectorAll('.vibe-option').forEach(opt => {
     <div class="flex-col">
       <div class="sub-label">Look Pin — Standalone Component</div>
       <div class="look-pin" style="max-width:none">
-        <div class="lp-swatch" style="width:52px;height:68px"></div>
+        <div class="lp-swatch lp-swatch-photo" style="width:52px;height:68px"><img src="assets/ds-shortlist-terracotta-midi-dress.png" alt="Terracotta midi dress, product photo" width="104" height="136" loading="lazy" decoding="async" /></div>
         <div class="lp-meta">
           <div class="lp-name">Terracotta Midi Dress</div>
           <div class="lp-brand">Anthropologie · Floreat · AW25</div>
@@ -3412,7 +3439,7 @@ document.querySelectorAll('.vibe-option').forEach(opt => {
         <!-- Inline shortlist card condensed -->
         <div style="border:1px solid var(--l-border);background:var(--l-lift);margin-bottom:10px">
           <div style="display:flex;gap:0">
-            <div style="width:52px;flex-shrink:0;background:var(--l-bg);display:flex;align-items:center;justify-content:center;border-right:1px solid var(--l-border)"><svg width="20" height="44" viewBox="0 0 20 44"><path d="M5 0 L15 0 L18 11 L19 44 L1 44 L2 11 Z" fill="#1a1714" opacity="0.15"/></svg></div>
+            <div style="width:52px;min-height:72px;flex-shrink:0;background:var(--l-bg);border-right:1px solid var(--l-border);overflow:hidden"><img src="assets/ds-shortlist-emerald-silk-wrap.png" alt="Emerald silk wrap" style="width:100%;height:100%;min-height:72px;object-fit:cover;object-position:center top;display:block" /></div>
             <div style="flex:1;padding:10px 12px">
               <div style="font-family:var(--font-label);font-size:7px;letter-spacing:0.14em;text-transform:uppercase;color:var(--l-ink-4)">Nordstrom · Eliza J</div>
               <div style="font-family:var(--font-display);font-size:14px;color:var(--l-ink)">Emerald Silk Wrap</div>

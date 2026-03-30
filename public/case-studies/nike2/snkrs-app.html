@@ -28,11 +28,11 @@
   --fm:     'DM Mono',monospace;
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
-html,body{height:100%;overflow:hidden;}
-body{background:#b8b8b8;font-family:var(--fu);display:flex;justify-content:center;}
+html,body{height:100%;min-height:100%;overflow:hidden;}
+body{background:#b8b8b8;font-family:var(--fu);display:flex;justify-content:center;align-items:stretch;}
 
 /* ── PHONE ─────────────────────────────────────────────── */
-.phone{width:390px;height:100vh;background:var(--white);position:relative;overflow:hidden;box-shadow:0 0 80px rgba(0,0,0,.4);}
+.phone{width:375px;max-width:100%;min-height:100%;height:100%;background:var(--white);position:relative;overflow:hidden;box-shadow:0 0 80px rgba(0,0,0,.4);}
 
 /* ── SCREENS ───────────────────────────────────────────── */
 .screen{position:absolute;inset:0;background:var(--white);display:flex;flex-direction:column;opacity:0;pointer-events:none;transform:translateX(20px);transition:opacity .18s ease,transform .18s ease;}
@@ -415,13 +415,13 @@ body{background:#b8b8b8;font-family:var(--fu);display:flex;justify-content:cente
       <div style="margin-top:14px;"><button class="btn bv bsm">View My Gap Report →</button></div>
     </div>
 
-    <!-- Upcoming -->
+    <!-- Upcoming — Air Jordan 1 Chicago -->
     <div class="dc">
-      <div class="dch" style="height:170px;background:#111;">
-        <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;">
-          <div style="text-align:center;"><div style="font-family:var(--fd);font-size:28px;letter-spacing:.04em;color:#fff;">Air Jordan 1<br>Chicago</div></div>
-        </div>
+      <div class="dch" style="height:248px;background:linear-gradient(168deg,#0a0a0a 0%,#1a0508 40%,#5c1018 100%);border-bottom:2px solid #c8102e;">
+        <img class="dch-focus-shoes" src="app%20mockups/air-jordan-1-chicago.jpg" alt="Air Jordan 1 Chicago" />
+        <div class="dco" style="background:linear-gradient(to top,rgba(90,12,18,.92) 0%,rgba(15,5,8,.45) 50%,transparent 100%);"><div class="dcn">Air Jordan 1<br>&rsquo;Chicago&rsquo;</div><div class="dcp">$180</div></div>
         <div style="position:absolute;top:12px;left:12px;"><div class="chip sc"><div class="cd"></div>Jun 21</div></div>
+        <div style="position:absolute;top:12px;right:12px;background:linear-gradient(135deg,#c8102e 0%,#7a0f18 100%);padding:5px 10px;font-family:var(--fm);font-size:8px;letter-spacing:.18em;color:#fff;text-transform:uppercase;box-shadow:0 2px 8px rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.2);">Varsity red / Chicago</div>
       </div>
       <div class="dcb">
         <div class="dcm">Price<span>$180</span></div>
@@ -591,12 +591,12 @@ body{background:#b8b8b8;font-family:var(--fu);display:flex;justify-content:cente
     </div>
     <div class="phist">
       <div class="phrow">
-        <div class="phthumb"><img src="https://www.figma.com/api/mcp/asset/7ef7b18a-7606-489c-93b9-6b0ce2bf1955" alt="shoe" /></div>
+        <div class="phthumb"><img src="app%20mockups/air-max-90-white.jpg" alt="Air Max 90 White" /></div>
         <div class="phbody"><div class="phn">Air Max 90 'White'</div><div class="phs">Purchased Mar 2024 · Nike.com</div></div>
         <div class="phtag tag-rot">In Rotation</div>
       </div>
       <div class="phrow">
-        <div class="phthumb"><img src="https://www.figma.com/api/mcp/asset/c6c1dae2-9efc-4a26-abf6-1730bbee0103" alt="shoe" /></div>
+        <div class="phthumb"><img src="app%20mockups/air-jordan-1-mid-black.jpg" alt="Air Jordan 1 Mid Black" /></div>
         <div class="phbody"><div class="phn">Air Jordan 1 Mid 'Black'</div><div class="phs">Purchased Sep 2023 · SNKRS</div></div>
         <div class="phtag tag-mus">Museum</div>
       </div>
@@ -639,11 +639,11 @@ body{background:#b8b8b8;font-family:var(--fu);display:flex;justify-content:cente
       <div class="grt">Your Gap Report</div>
       <div class="gi">
         <div class="gih"><div class="giico">👟</div><div class="gib"><div class="gik">Gap Found via Purchase History</div><div class="git">Clean White — Work Context</div><div class="gir">You own 0 white sneakers suited for business-casual. Affects 3 days/week.</div></div><div class="gisc">91</div></div>
-        <div class="grec"><div class="grsho"><img src="https://www.figma.com/api/mcp/asset/7ef7b18a-7606-489c-93b9-6b0ce2bf1955" alt="rec" /></div><div style="flex:1;"><div class="grn">Waffle Debut 'White Black'</div><div class="grs">NIKE · $95 · Top match</div></div><button class="btn bk bsm" onclick="go('s-pdp')">View →</button></div>
+        <div class="grec"><div class="grsho"><img src="app%20mockups/waffle-debut-white-black.png" alt="Waffle Debut White Black" /></div><div style="flex:1;"><div class="grn">Waffle Debut 'White Black'</div><div class="grs">NIKE · $95 · Top match</div></div><button class="btn bk bsm" onclick="go('s-pdp')">View →</button></div>
       </div>
       <div class="gi">
         <div class="gih"><div class="giico">🏃</div><div class="gib"><div class="gik">Gap Found via Training Data</div><div class="git">Performance Low — Training</div><div class="gir">All your NRC workouts logged in lifestyle shoes. No dedicated performance trainer.</div></div><div class="gisc">84</div></div>
-        <div class="grec"><div class="grsho" style="background:var(--mid);"></div><div style="flex:1;"><div class="grn">Nike Pegasus 41</div><div class="grs">NIKE · $130 · Strong match</div></div><button class="btn bk bsm">View →</button></div>
+        <div class="grec"><div class="grsho"><img src="app%20mockups/nike-pegasus-41.jpg" alt="Nike Pegasus 41" /></div><div style="flex:1;"><div class="grn">Nike Pegasus 41</div><div class="grs">NIKE · $130 · Strong match</div></div><button class="btn bk bsm">View →</button></div>
       </div>
       <div class="gi">
         <div class="gih"><div class="giico">🌙</div><div class="gib"><div class="gik">Gap Found via Style Quiz</div><div class="git">Evening — Elevated Casual</div><div class="gir">Your quiz suggests you go out regularly but your rotation has nothing elevated.</div></div><div class="gisc">76</div></div>
@@ -787,12 +787,57 @@ body{background:#b8b8b8;font-family:var(--fu);display:flex;justify-content:cente
 </div>
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 const S2T={'s-feed':'t-feed','s-pdp':'t-instk','s-drop':'t-drop','s-style':'t-style','s-profile':'t-prof'};
+const VALID_SCREENS = ['s-feed','s-pdp','s-style','s-drop','s-profile'];
+function emitProtoScrollLock(py,ty){
+  try{
+    if(typeof py==='number'&&!isNaN(py)&&window.parent!==window){
+      window.parent.postMessage({type:'snkrs-proto-lock',y:py},'*');
+    }
+  }catch(e){}
+  try{
+    if(typeof ty==='number'&&!isNaN(ty)&&window.top!==window&&window.top!==window.parent){
+      window.top.postMessage({type:'snkrs-proto-lock',y:ty},'*');
+    }
+  }catch(e){}
+}
+function blurStaleScreenFocus(){
+  try{
+    var ae=document.activeElement;
+    if(!ae||typeof ae.closest!=='function')return;
+    var host=ae.closest('.screen');
+    if(host&&!host.classList.contains('active'))ae.blur();
+  }catch(e){}
+}
 function go(id){
+  var py=0,ty=0;
+  try{if(window.parent!==window)py=window.parent.scrollY;}catch(e){}
+  try{if(window.top!==window)ty=window.top.scrollY;}catch(e){}
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
   const sc=document.getElementById(id);
   if(sc){const b=sc.querySelector('.sb');if(b)b.scrollTop=0;sc.classList.add('active');}
+  blurStaleScreenFocus();
   const ti=S2T[id];if(ti){const t=document.getElementById(ti);if(t)t.classList.add('on');}
+  function bump(){emitProtoScrollLock(py,ty);}
+  bump();
+  requestAnimationFrame(bump);
+  setTimeout(bump,0);
+  setTimeout(bump,50);
+  setTimeout(bump,100);
+  setTimeout(bump,200);
+  setTimeout(bump,400);
+  setTimeout(bump,650);
+  setTimeout(bump,1000);
+}
+function applyHashRoute(){
+  var raw = (location.hash || '').replace(/^#/,'');
+  if (raw && VALID_SCREENS.indexOf(raw) !== -1) go(raw);
+}
+window.addEventListener('hashchange', applyHashRoute);
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', applyHashRoute);
+} else {
+  applyHashRoute();
 }
 function ctxSw(el){
   const ph=el.closest('.ph');
@@ -823,6 +868,15 @@ setInterval(()=>{
   if(em)em.textContent=String(m).padStart(2,'0');
   if(es)es.textContent=String(s).padStart(2,'0');
 },1000);
+(function(){
+  var ph=document.querySelector('.phone');
+  if(!ph)return;
+  ph.addEventListener('pointerdown',function(e){
+    if(e.pointerType!=='mouse'||!e.isPrimary)return;
+    var t=e.target;
+    if(t.closest('.tab')||t.closest('button')||t.closest('[onclick]'))e.preventDefault();
+  },true);
+})();
 </script>
 </body>
 </html>

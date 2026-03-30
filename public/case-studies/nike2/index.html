@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Nike SNKRS — Museum Mindset · Benn Pattara</title>
+<title>Nike SNKRS — Confidence Hub · Benn Pattara</title>
 <style>
 :root {
   --black:     #000;
@@ -39,6 +39,7 @@ body{font-family:var(--font);background:var(--white);color:var(--black);line-hei
 .cs-hero-title-wrap{position:relative;z-index:2;padding:64px 56px 72px 48px;width:100%;max-width:900px;}
 .cs-hero-title{font-size:clamp(32px,4vw,56px);font-weight:300;letter-spacing:.04em;text-transform:uppercase;color:var(--white);line-height:.95;margin:0;text-shadow:0 2px 24px rgba(0,0,0,.5);}
 .cs-hero-title em{font-style:italic;color:rgba(255,255,255,.65);}
+.cs-hero-kicker{font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:14px;}
 .cs-hero-ghost{position:absolute;bottom:-40px;right:-30px;font-size:clamp(100px,14vw,200px);font-weight:300;color:rgba(255,255,255,.03);letter-spacing:-.03em;line-height:1;white-space:nowrap;pointer-events:none;text-transform:uppercase;user-select:none;z-index:1;}
 .cs-body-wrap{display:grid;grid-template-columns:var(--sidenav-w) 1fr;align-items:start;min-height:100vh;}
 #cs-sidenav{position:sticky;top:var(--nav-h);height:calc(100vh - var(--nav-h));overflow-y:auto;border-right:1px solid var(--g200);padding:40px 0;display:flex;flex-direction:column;background:var(--white);z-index:50;scrollbar-width:none;}
@@ -66,6 +67,9 @@ body{font-family:var(--font);background:var(--white);color:var(--black);line-hei
 .cs-exec-meta-val{font-size:12px;font-weight:500;letter-spacing:.04em;color:var(--black);}
 .cs-section{padding:72px 56px;border-bottom:1px solid #f0f0f0;}
 .cs-full-bleed{width:calc(100% + 112px);margin-left:-56px;margin-right:-56px;}
+#cs-users{padding-bottom:32px;}
+.cs-design-system-strip-wrap{background:var(--g100);padding-top:clamp(28px,4vw,40px);border-bottom:1px solid #f0f0f0;}
+#artifact-design-system{margin-top:-40px;padding-top:calc(72px + 40px);}
 .cs-section-alt{background:var(--g100);}
 .cs-section-eyebrow{display:flex;align-items:center;gap:14px;margin-bottom:28px;}
 .cs-section-num{font-size:9px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--g300);font-family:var(--font);}
@@ -74,7 +78,15 @@ body{font-family:var(--font);background:var(--white);color:var(--black);line-hei
 .cs-heading-serif em{font-style:italic;color:var(--g500);}
 .cs-body{font-size:15px;color:var(--g500);line-height:1.8;margin-bottom:20px;}
 .cs-body:last-child{margin-bottom:0;}
-.cs-pull-quote{font-family:var(--font);font-size:clamp(20px,2.2vw,28px);font-weight:300;font-style:italic;color:var(--black);line-height:1.45;border-left:2px solid var(--black);padding-left:28px;margin-bottom:28px;}
+.cs-exec-heading{font-size:32px;font-weight:300;letter-spacing:.04em;text-transform:uppercase;color:var(--black);margin-bottom:8px;}
+.cs-stats-2{grid-template-columns:repeat(2,minmax(0,1fr));}
+.cs-exec-ii-row .cs-stat-num{font-size:clamp(18px,2vw,26px);font-weight:300;letter-spacing:.02em;line-height:1.15;margin-bottom:12px;font-style:normal;}
+.cs-problem-split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,40px);align-items:start;margin-bottom:0;width:100%;max-width:none;}
+.cs-problem-split .cs-body{max-width:none;margin-bottom:0;}
+.cs-problem-split > div{display:flex;flex-direction:column;gap:16px;}
+.proto-intro{max-width:44rem;margin-bottom:40px;}
+.proto-intro .cs-section-eyebrow{margin-bottom:16px;}
+#scroll-progress{position:fixed;top:0;left:0;height:2px;background:var(--black);width:0%;z-index:300;transition:width 100ms linear;}
 .cs-body-2col{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-bottom:28px;}
 .cs-body-2col p{font-size:13px;color:var(--g500);line-height:1.75;}
 .cs-stats{display:grid;gap:1px;background:var(--g200);margin-bottom:28px;}
@@ -100,8 +112,6 @@ body{font-family:var(--font);background:var(--white);color:var(--black);line-hei
 .persona-card-quote{font-family:var(--font);font-size:13px;font-style:italic;color:var(--g500);line-height:1.65;margin-bottom:16px;border-left:1px solid var(--g300);padding-left:12px;}
 .persona-card-detail{font-size:11px;color:var(--g500);line-height:1.7;}
 .persona-card-tension{font-size:11px;font-weight:500;color:var(--black);margin-top:12px;padding-top:12px;border-top:1px solid var(--g100);}
-.persona-card-segment{font-size:8px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--g300);margin:0 0 10px;font-family:var(--font);}
-.persona-card-segment strong{color:var(--black);font-weight:600;}
 .nike-research-persona-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:1px;background:var(--g200);margin-bottom:28px;}
 .nike-research-persona-grid .persona-card{padding:22px 18px;}
 .nike-research-persona-grid .persona-card-name{font-size:17px;}
@@ -169,10 +179,11 @@ body{font-family:var(--font);background:var(--white);color:var(--black);line-hei
 .artifact-iframe-wrap iframe{width:100%;height:85vh;min-height:600px;border:none;display:block;background:#0a0a0a;}
 .artifact-model-open-btn{display:none;box-sizing:border-box;width:100%;margin:0;padding:18px 20px;text-align:center;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--white);text-decoration:none;background:#141414;border-top:1px solid rgba(255,255,255,.1);font-family:var(--font);-webkit-tap-highlight-color:transparent;}
 .artifact-model-open-btn:active{background:#1a1a1a;}
-.proto-section { padding: 80px clamp(24px, 5vw, 64px); box-sizing: border-box; border-bottom: 1px solid #f0f0f0; }
+.proto-section { padding: 80px clamp(24px, 5vw, 64px); box-sizing: border-box; border-bottom: 1px solid #f0f0f0; overflow-anchor: none; overscroll-behavior: contain; }
 .proto-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 28px; align-items: start; width: 100%; max-width: 100%; box-sizing: border-box; }
 .proto-phone { position: sticky; top: 40px; width: 320px; height: 693px; border-radius: 44px; border: 8px solid #000; overflow: hidden; background: #000; box-shadow: 0 0 0 1px #e8e8e8; display: flex; justify-content: center; align-items: flex-start; margin: 0; justify-self: center; align-self: center; }
-.proto-phone iframe { width: 375px; height: 812px; border: none; display: block; transform: scale(0.8533) translateX(7.33%); transform-origin: top left; flex-shrink: 0; pointer-events: auto; }
+/* Fill inner bezel: 304×677 — scale = max(304/375, 677/812) so app bleeds to bottom; sides clip */
+.proto-phone iframe { width: 375px; height: 812px; border: none; display: block; transform: scale(0.83374); transform-origin: top center; flex-shrink: 0; pointer-events: auto; align-self: flex-start; }
 .proto-steps { display: flex; flex-direction: column; gap: 0; min-width: 0; }
 .proto-step { padding: 24px 0; border-bottom: 1px solid var(--g200); cursor: pointer; transition: opacity 0.2s; }
 .proto-step:first-child { border-top: 1px solid var(--g200); }
@@ -264,6 +275,8 @@ footer{border-top:1px solid var(--g200);padding:32px 48px;display:flex;align-ite
   #cs-sidenav { display: none !important; }
   .cs-body-wrap { grid-template-columns: 1fr !important; }
   #cs-exec-summary, .cs-section { padding: 40px 20px !important; }
+  #cs-users { padding-bottom: 24px !important; }
+  #artifact-design-system { margin-top: -24px !important; padding-top: calc(40px + 24px) !important; }
   .proto-section { padding: 40px clamp(20px, 5vw, 28px) !important; }
   .cs-full-bleed { width: calc(100% + 40px) !important; margin-left: -20px !important; margin-right: -20px !important; }
   .cs-exec-inner { grid-template-columns: 1fr !important; gap: 32px !important; }
@@ -279,7 +292,6 @@ footer{border-top:1px solid var(--g200);padding:32px 48px;display:flex;align-ite
      background: var(--g200) !important;
      border: 1px solid var(--g200) !important;
    }
-  .cs-pull-quote { padding-left: 20px !important; font-size: 18px !important; }
   .cs-heading-serif { font-size: 24px !important; }
   
   /* Navbar mobile fixes */
@@ -320,6 +332,8 @@ footer{border-top:1px solid var(--g200);padding:32px 48px;display:flex;align-ite
   @media (max-width: 768px) {
     .metrics-card-grid { grid-template-columns: 1fr; }
     .metric-target { font-size: 20px; }
+    .cs-stats-2 { grid-template-columns: 1fr !important; }
+    .cs-problem-split { grid-template-columns: 1fr !important; gap: 20px !important; }
   }
   /* Conclusion Headings */
   .cs-conclusion-header { 
@@ -337,6 +351,7 @@ footer{border-top:1px solid var(--g200);padding:32px 48px;display:flex;align-ite
 </style>
 </head>
 <body>
+<div id="scroll-progress" aria-hidden="true"></div>
 <!-- IMAGE AUDIT
   1. src="nike_hero_brand_identity.webp" — NEEDS VERIFICATION (relative path, hero background)
 -->
@@ -352,27 +367,26 @@ footer{border-top:1px solid var(--g200);padding:32px 48px;display:flex;align-ite
   <div class="cs-hero-bg"><img src="nike_hero_brand_identity.webp" alt="Nike SNKRS — lifestyle moment tying new sneakers" /></div>
   <div class="cs-hero-scrim"></div>
   <div class="cs-hero-title-wrap">
-    <h1 class="cs-hero-title">Nike SNKRS<br><em>Museum Mindset</em></h1>
+    <p class="cs-hero-kicker">Product strategy &amp; systems</p>
+    <h1 class="cs-hero-title">Nike SNKRS<br><em>Confidence Hub</em></h1>
   </div>
-  <div class="cs-hero-ghost">MUSEUM</div>
+  <div class="cs-hero-ghost">CONFIDENCE</div>
 </section>
 <div class="cs-body-wrap">
 <aside id="cs-sidenav">
   <div class="cs-sidenav-label">Index</div>
   <a class="cs-sidenav-link active" data-target="cs-exec-summary" onclick="scrollToSection('cs-exec-summary')"><span class="cs-sidenav-num">00</span><span class="cs-sidenav-text">Exec Summary</span></a>
   <div class="cs-sidenav-divider"></div>
-  <a class="cs-sidenav-link" data-target="cs-problem" onclick="scrollToSection('cs-problem')"><span class="cs-sidenav-num">01</span><span class="cs-sidenav-text">The Problem</span></a>
-  <a class="cs-sidenav-link" data-target="cs-insight" onclick="scrollToSection('cs-insight')"><span class="cs-sidenav-num">02</span><span class="cs-sidenav-text">The Insight</span></a>
-  <a class="cs-sidenav-link" data-target="cs-users" onclick="scrollToSection('cs-users')"><span class="cs-sidenav-num">03</span><span class="cs-sidenav-text">The Users</span></a>
+  <a class="cs-sidenav-link" data-target="cs-problem-insight" onclick="scrollToSection('cs-problem-insight')"><span class="cs-sidenav-num">01</span><span class="cs-sidenav-text">Problem / Insight</span></a>
+  <a class="cs-sidenav-link" data-target="cs-users" onclick="scrollToSection('cs-users')"><span class="cs-sidenav-num">02</span><span class="cs-sidenav-text">The Users</span></a>
   <a class="cs-sidenav-link" data-target="cs-research-personas" onclick="scrollToSection('cs-research-personas')"><span class="cs-sidenav-num">&mdash;</span><span class="cs-sidenav-text">Research personas</span></a>
   <a class="cs-sidenav-link" data-target="cs-persona-tool" onclick="scrollToPersonaLab(); return false;"><span class="cs-sidenav-num">&mdash;</span><span class="cs-sidenav-text">Persona model</span></a>
-  <a class="cs-sidenav-link" data-target="cs-product" onclick="scrollToSection('cs-product')"><span class="cs-sidenav-num">04</span><span class="cs-sidenav-text">The Product</span></a>
+  <a class="cs-sidenav-link" data-target="artifact-design-system" onclick="scrollToSection('artifact-design-system')"><span class="cs-sidenav-num">03</span><span class="cs-sidenav-text">Design system</span></a>
   <a class="cs-sidenav-link" data-target="prototype" onclick="scrollToSection('prototype')"><span class="cs-sidenav-num">&mdash;</span><span class="cs-sidenav-text">Prototype</span></a>
-  <a class="cs-sidenav-link" data-target="cs-decisions" onclick="scrollToSection('cs-decisions')"><span class="cs-sidenav-num">07</span><span class="cs-sidenav-text">Decision Log</span></a>
-  <a class="cs-sidenav-link" data-target="cs-outcome" onclick="scrollToSection('cs-outcome')"><span class="cs-sidenav-num">08</span><span class="cs-sidenav-text">Outcome</span></a>
+  <a class="cs-sidenav-link" data-target="cs-verdict" onclick="scrollToSection('cs-verdict')"><span class="cs-sidenav-num">04</span><span class="cs-sidenav-text">The Verdict</span></a>
   <div class="cs-sidenav-exec">
     <div class="cs-sidenav-exec-label">TL;DR</div>
-    <p class="cs-sidenav-exec-text">Exclusivity creates hype. Confidence creates loyalty. The app learns what you own, shows you how to wear it, and earns access to drops through styling.</p>
+    <p class="cs-sidenav-exec-text">The problem was never access. It was confidence. The Hub rebuilds SNKRS around styling so what you own gets worn &mdash; and the replacement cycle can compound again.</p>
     <a class="cs-sidenav-exec-link" onclick="scrollToSection('cs-exec-summary')">Read summary &rarr;</a>
   </div>
 </aside>
@@ -382,157 +396,102 @@ footer{border-top:1px solid var(--g200);padding:32px 48px;display:flex;align-ite
 <section id="cs-exec-summary" data-cs-section="cs-exec-summary" style="padding:64px 56px;border-bottom:1px solid var(--g200);">
   <div class="cs-exec-inner">
     <div>
-      <div class="cs-exec-eyebrow">Executive Summary</div>
-      <p class="cs-exec-body">The SNKRS app has shifted from a cultural juggernaut to a symbol of inaccessibility. While it successfully generates "hype" through digital lotteries (drops), it has created a broken ecosystem where algorithmic hostility and the "Museum Mindset" prevail.</p>
-      <p class="cs-exec-body">80% of users now view sneaker culture as overhyped or inaccessible, and 40% of Nike’s core "style-driven" demographic has stopped using the app entirely. Winners of rare shoes are often too intimidated to wear them, leaving them in boxes as "static identity investments".</p>
-      <p class="cs-exec-body">The Confidence Hub strategic shift moves away from artificial scarcity toward a model that triggers "Activation"—getting the shoe out of the box and onto the foot—which leads to natural wear and tear and, eventually, a replacement sale. The barrier isn't just a lack of access; it is a lack of confidence in how to style and use them.</p>
+      <h2 class="cs-exec-heading">Executive summary</h2>
+      <p class="cs-exec-body">SNKRS became the most talked-about app in footwear and one of the worst places to actually buy shoes. The drop model became a lottery system that kept purchased sneakers in their boxes. Users own 16 or more pairs and rotate two to five. A shoe that never leaves its box never wears out, and a shoe that never wears out never gets replaced. That&rsquo;s not a hype problem &mdash; it&rsquo;s a broken repeat purchase mechanic.</p>
+      <p class="cs-exec-body">The problem was never access. It was confidence. Sneaker culture sold identity through ownership and gave people no tools to express it. The Confidence Hub rebuilds the app around that gap &mdash; and when it works, the replacement cycle restores itself.</p>
     </div>
     <div>
-      <div class="cs-exec-eyebrow">Project Details</div>
+      <div class="cs-exec-eyebrow">Project details</div>
       <div class="cs-exec-meta-grid">
         <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Project</div><div class="cs-exec-meta-val">Nike SNKRS &mdash; Confidence Hub</div></div>
         <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Year</div><div class="cs-exec-meta-val">2026</div></div>
         <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Role</div><div class="cs-exec-meta-val">Brand Strategist &amp; Product Manager</div></div>
         <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Type</div><div class="cs-exec-meta-val">App Redesign Strategy &middot; PRD + Design System</div></div>
         <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Deliverables</div><div class="cs-exec-meta-val">PRD &middot; Design System &middot; Interactive Prototype</div></div>
-        <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Primary Job</div><div class="cs-exec-meta-val">Fixing the "Museum Mindset" and recovering LTV through styling confidence</div></div>
+        <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Primary job</div><div class="cs-exec-meta-val">Restore repeat purchase by earning styling confidence &mdash; not chasing access</div></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 01 THE PROBLEM -->
-<section class="cs-section" id="cs-problem" data-cs-section="cs-problem">
-  <div class="cs-section-eyebrow"><span class="cs-section-num">01</span><span class="cs-section-title">The Problem</span></div>
-  <h2 class="cs-heading-serif">The SNKRS app has shifted from a cultural juggernaut to a symbol of inaccessibility. <em>The ecosystem is broken.</em></h2>
-  <div class="cs-body-2col">
-    <p>While the SNKRS app successfully generates "hype" through digital lotteries (drops), it has created two distinct points of failure: algorithmic hostility and the "Opt-Out Trend". 80% of users now view sneaker culture as overhyped or inaccessible.</p>
-    <p>The result is a "Museum Mindset": winners of rare shoes are often too intimidated to wear them. Users own an average of 16+ pairs but only rotate 2 to 5, leaving the rest in boxes as "static identity investments". The barrier isn't just a lack of access; it is a lack of confidence in how to style and use them.</p>
-  </div>
-  <div class="cs-stats cs-stats-3" style="margin-bottom:28px;">
+<!-- 01 PROBLEM / INSIGHT -->
+<section class="cs-section cs-section-alt" id="cs-problem-insight" data-cs-section="cs-problem-insight">
+  <div class="cs-section-eyebrow"><span class="cs-section-num">01</span><span class="cs-section-title">Problem / Insight</span></div>
+  <div class="cs-stats cs-stats-2 cs-exec-ii-row">
     <div class="cs-stat-cell">
-      <div class="cs-stat-num">80%</div>
-      <div class="cs-stat-eyebrow">Algorithmic Hostility</div>
-      <div class="cs-stat-label">Of users now view sneaker culture as overhyped or inaccessible. The digital lottery system has created a barrier of frustration.</div>
+      <div class="cs-stat-eyebrow">The Problem</div>
+      <div class="cs-stat-num">Nike&rsquo;s repeat purchase mechanic is broken.</div>
+      <div class="cs-stat-label">The lottery moves product into storage. 80% of users describe sneaker culture as inaccessible or overhyped. 40% of Nike&rsquo;s highest-value buyers opted out entirely &mdash; not to a competitor, but out of the market altogether. A shoe that never gets worn never needs replacing, and Nike is funding the full cost of the drop to generate a single transaction that goes nowhere.</div>
     </div>
     <div class="cs-stat-cell">
-      <div class="cs-stat-num">40%</div>
-      <div class="cs-stat-eyebrow">The Opt-Out Trend</div>
-      <div class="cs-stat-label">Of Nike’s core "style-driven" demographic has stopped using the app entirely, seeking authenticity elsewhere.</div>
-    </div>
-    <div class="cs-stat-cell">
-      <div class="cs-stat-num">2-5</div>
-      <div class="cs-stat-eyebrow">The Museum Rotation</div>
-      <div class="cs-stat-label">Average pairs rotated out of 16+ owned. The rest remain in boxes as static identity investments, never activated.</div>
+      <div class="cs-stat-eyebrow">The Insight</div>
+      <div class="cs-stat-num">Sneaker culture sold identity through ownership and built no infrastructure for expression.</div>
+      <div class="cs-stat-label">Users aren&rsquo;t paralyzed by lack of access. They&rsquo;re paralyzed by confidence. The shoe stays in the box because wearing it wrong feels worse than not wearing it at all &mdash; and the app never gave them any tools to get it right.</div>
     </div>
   </div>
-  <div class="cs-pull-quote">&ldquo;The barrier isn't just a lack of access to products; it is a lack of confidence in how to style and use them.&rdquo;</div>
-  <p class="cs-body">The SNKRS app has shifted from a cultural juggernaut to a symbol of inaccessibility. The "Museum Mindset" means that even when a consumer wins, the relationship often ends at the box. Activation failure at the post-purchase stage breaks Nike’s fundamental business mechanic: repeat purchase driven by wear-out.</p>
-  <p class="cs-body">To recover lost Lifetime Value (LTV), the brand must move away from artificial scarcity and toward a "Confidence Hub" model. The goal is to trigger "Activation"—getting the shoe out of the box and onto the foot—which leads to natural wear and tear and, eventually, a replacement sale.</p>
 </section>
-
-<!-- 02 THE INSIGHT -->
-<section class="cs-section cs-section-alt" id="cs-insight" data-cs-section="cs-insight">
-  <div class="cs-section-eyebrow"><span class="cs-section-num">02</span><span class="cs-section-title">The Insight</span></div>
-  <h2 class="cs-heading-serif">The Strategic Shift: From Scarcity to Confidence. <em>Recovering LTV through Activation.</em></h2>
-  <div class="cs-body-2col">
-    <p>To recover lost Lifetime Value (LTV), the brand must move away from artificial scarcity and toward a "Confidence Hub" model. The goal is simple but profound: trigger "Activation." Getting the shoe out of the box and onto the foot leads to natural wear and tear and, eventually, a replacement sale.</p>
-    <p>This plan replaces the "lottery" feel with a "styling infrastructure." By shifting the focus from the moment of acquisition to the lifetime of use, Nike can rebuild trust with the 40% who have opted out. The app becomes a styling platform that happens to sell sneakers, ensuring every purchase has a clear path to being worn.</p>
-  </div>
-  <div class="cs-stats cs-stats-3" style="margin-bottom:28px;">
-    <div class="cs-stat-cell">
-      <div class="cs-stat-eyebrow">Strategic pivot · From</div>
-      <div class="cs-stat-num" style="font-size:32px;margin-bottom:8px;">Lottery</div>
-      <div class="cs-stat-label">Random access &middot; Bot-exploitable &middot; Destroys trust &middot; Ends at checkout &middot; Museum mindset unchanged</div>
-    </div>
-    <div class="cs-stat-cell" style="background:var(--g100);">
-      <div class="cs-stat-eyebrow">Mechanism</div>
-      <div class="cs-stat-num" style="font-size:24px;line-height:1.2;margin-bottom:8px;">Confidence &rarr;<br>Activation &rarr;<br>Replacement &rarr;<br>LTV</div>
-      <div class="cs-stat-label">The causal chain that connects styling intelligence to Nike&rsquo;s business objective</div>
-    </div>
-    <div class="cs-stat-cell">
-      <div class="cs-stat-eyebrow">Strategic pivot · To</div>
-      <div class="cs-stat-num" style="font-size:32px;margin-bottom:8px;">Earn</div>
-      <div class="cs-stat-label">Participation access &middot; Styling-led &middot; Builds loyalty &middot; Continues post-purchase &middot; Museum mindset solved</div>
-    </div>
-  </div>
-  <div class="cs-pull-quote">&ldquo;Solve for confidence, unlock the replacement cycle, recover LTV. We're shaking up the business model to connect with the lost consumer. The app becomes a styling platform that happens to sell sneakers &mdash; not a sneaker store that happens to have an app.&rdquo;</div>
-  <p class="cs-body">The strategic repositioning follows from the insight: Nike&rsquo;s proposition shifts from &ldquo;can you get it&rdquo; to &ldquo;can you wear it well.&rdquo; The Confidence Hub re-enters the Aesthetic Individualist&rsquo;s consideration set not by making drops more accessible &mdash; that addresses the symptom &mdash; but by making the brand&rsquo;s relationship with the consumer substantively more useful. The consumer who feels confident in how to dress becomes the consumer who wears shoes out. The consumer who wears shoes out becomes the consumer who needs new ones.</p>
-</section>
-<!-- 03 THE USERS -->
+<!-- 02 THE USERS -->
 <section class="cs-section" id="cs-users" data-cs-section="cs-users">
-  <div class="cs-section-eyebrow"><span class="cs-section-num">03</span><span class="cs-section-title">The Users</span></div>
-  <h2 class="cs-heading-serif">Three distinct consumer psychographics. <em>One platform pivot to serve all three.</em></h2>
-  <p class="cs-body">The 629-touchpoint research surfaced three distinct user archetypes within the 18&ndash;34 sneaker market. Each has a different relationship with the drop model, a different definition of what winning looks like, and a different reason to adopt &mdash; or reject &mdash; a Confidence Hub. The platform had to address all three without compromising the product argument for any of them.</p>
-  <div class="nike-persona-seg">
-    <div class="nike-persona-seg-label">Audience segmentation</div>
-    <p class="nike-persona-seg-body">Strategy sorts the market into three <strong>audience segments</strong> the Confidence Hub must win at once: the opted-out high-LTV individualist, the engaged but disillusioned drop participant, and the museum-minded considered buyer. The cards below define each segment. Further down, <strong>five research personas</strong> translate those segments into concrete inquiry scripts for the interactive lab.</p>
-  </div>
+  <div class="cs-section-eyebrow"><span class="cs-section-num">02</span><span class="cs-section-title">The Users</span></div>
+  <h2 class="cs-heading-serif">Three failure modes. <em>One shared gap: confidence.</em></h2>
+  <p class="cs-body">629 research touchpoints across the 18&ndash;34 sneaker market showed three separate segments.</p>
   <div class="persona-grid">
     <div class="persona-card">
-      <div class="persona-card-tier">Segment 01 &middot; Primary Target</div>
+      <div class="persona-card-tier">Segment 01 &middot; Opted out</div>
       <div class="persona-card-name">The Aesthetic Individualist</div>
-      <div class="persona-card-city">Chicago &middot; 26 &middot; Creative Director</div>
-      <div class="persona-card-quote">&ldquo;I have 14 pairs and I&rsquo;m wearing 3 of them. I don&rsquo;t even open SNKRS anymore. I lost 8 times in a row and stopped.&rdquo;</div>
-      <div class="persona-card-detail">Owns 14+ pairs. Rotates 3&ndash;4 regularly. Acquires through Nike.com direct, not SNKRS. Defines identity through style coherence, not brand logos. Opted out of drop culture entirely. Followed Nike for 5 years but feels no recognition of that loyalty in the product.</div>
-      <div class="persona-card-tension">Core tension: Significant latent affinity for Nike product &mdash; actively alienated by the drop model. Will return if the system stops treating participation as random noise.</div>
+      <div class="persona-card-city">High taste &middot; high affinity &middot; no SNKRS</div>
+      <div class="persona-card-detail">She owns 14 pairs, rotates three, and stopped opening SNKRS after losing eight drops in a row. Her affinity for Nike is real. What&rsquo;s gone is her belief that Nike sees her.</div>
+      <div class="persona-card-tension">Recovery depends on respect and utility &mdash; not louder hype.</div>
     </div>
     <div class="persona-card">
-      <div class="persona-card-tier">Segment 02 &middot; Active User</div>
+      <div class="persona-card-tier">Segment 02 &middot; Still in the app</div>
       <div class="persona-card-name">The Culture Participant</div>
-      <div class="persona-card-city">New York &middot; 23 &middot; Music Industry</div>
-      <div class="persona-card-quote">&ldquo;I&rsquo;m in the app every release. I&rsquo;ve won a few. But I&rsquo;ve also lost 30 times to bots. It feels like the game is rigged.&rdquo;</div>
-      <div class="persona-card-detail">Active SNKRS user. Participates in most major drops. Follows sneaker media, release calendars, and resale markets. Winning a drop is a social event &mdash; screenshot, post, flex. But lottery losses create real brand damage at the moment of highest engagement.</div>
-      <div class="persona-card-tension">Core tension: Deeply engaged with the category &mdash; feels the unfairness most acutely because they invest the most. The most loyal beneficiary of a participation-based system.</div>
+      <div class="persona-card-city">Every release &middot; lottery fatigue</div>
+      <div class="persona-card-detail">Still in the app every release, but losing 30 times to bots has made his highest moment of engagement his most damaging brand experience.</div>
+      <div class="persona-card-tension">Fairness and signal at the peak of attention &mdash; or the relationship curdles in public.</div>
     </div>
     <div class="persona-card">
-      <div class="persona-card-tier">Segment 03 &middot; Latent Prospect</div>
+      <div class="persona-card-tier">Segment 03 &middot; Never touched a drop</div>
       <div class="persona-card-name">The Considered Buyer</div>
-      <div class="persona-card-city">Richmond &middot; 29 &middot; Financial Analyst</div>
-      <div class="persona-card-quote">&ldquo;I want to buy better shoes but I can never figure out what actually goes with what I already own. So I just buy the same ones.&rdquo;</div>
-      <div class="persona-card-detail">Purchases 2&ndash;3 pairs annually. Makes deliberate, researched decisions. Never participated in a drop. The museum mindset in its purest form: buys slowly, wears rarely, replaces infrequently. High income, high conversion probability if given styling confidence.</div>
-      <div class="persona-card-tension">Core tension: Has the purchasing power and the intention &mdash; lacks the context to make the next purchase feel like the right decision. Style confidence is the unlock.</div>
+      <div class="persona-card-city">Income &middot; intention &middot; no wardrobe map</div>
+      <div class="persona-card-detail">Never touched a drop. He has the income and the intention &mdash; he just can&rsquo;t figure out what goes with what he already owns, so he keeps buying the same thing.</div>
+      <div class="persona-card-tension">Styling logic and gap clarity convert a buyer the lottery never spoke to.</div>
     </div>
   </div>
   <div class="nike-persona-research-intro" id="cs-research-personas" data-cs-section="cs-research-personas">
-    <div class="nike-persona-seg-label">Research personas</div>
-    <p class="nike-persona-seg-body">Five inquiry profiles used in the lab below. Each is mapped to an <strong>audience segment</strong> so you can see which strategic bucket the script stress-tests &mdash; then open the model to run <strong>individual</strong> inquiry or <strong>focus</strong> comparison on the same characters.</p>
+    <div class="nike-persona-seg-label">Personas</div>
+    <p class="nike-persona-seg-body">Five lab profiles. Open the <strong>persona tool</strong> to run individual inquiry or focus comparisons on the same characters.</p>
   </div>
   <div class="nike-research-persona-grid">
     <div class="persona-card">
-      <div class="persona-card-segment">Audience segment: <strong>Aesthetic Individualist</strong></div>
       <div class="persona-card-name">Maya</div>
       <div class="persona-card-city">The Individualist &middot; Creative Professional &middot; 26</div>
       <div class="persona-card-detail">Shops vintage Nike. Values provenance and circular economy. Represents the opted-out high-taste consumer SNKRS never rewarded &mdash; recovery depends on respect, not hype.</div>
     </div>
     <div class="persona-card">
-      <div class="persona-card-segment">Audience segment: <strong>Aesthetic Individualist</strong></div>
       <div class="persona-card-name">Chloe</div>
       <div class="persona-card-city">The Style Seeker &middot; Social Media Manager &middot; 24</div>
-      <div class="persona-card-detail">Dupe economy architect. Decouples aesthetic from brand. Zero loyalty. Probes whether Nikes styling authority can matter when taste is sourced off-platform.</div>
+      <div class="persona-card-detail">Dupe economy architect. Decouples aesthetic from brand. Zero loyalty. Probes whether Nike&rsquo;s styling authority can matter when taste is sourced off-platform.</div>
     </div>
     <div class="persona-card">
-      <div class="persona-card-segment">Audience segment: <strong>Culture Participant</strong></div>
       <div class="persona-card-name">David</div>
       <div class="persona-card-city">The Anxious Collector &middot; Tech Professional &middot; 29</div>
       <div class="persona-card-detail">High earner with deadstock paralysis. Treats sneakers as assets. Embodies lottery fatigue and bot cynicism &mdash; the emotional damage of participation without payout.</div>
     </div>
     <div class="persona-card">
-      <div class="persona-card-segment">Audience segment: <strong>Culture Participant</strong></div>
       <div class="persona-card-name">Alex</div>
       <div class="persona-card-city">The Hypebeast &middot; Student / Reseller &middot; 22</div>
       <div class="persona-card-detail">Views SNKRS drops as financial assets. Deep in cook groups. The pure drop-native stress test for fairness, access, and what replacing the lottery with participation-gated access actually feels like.</div>
     </div>
     <div class="persona-card">
-      <div class="persona-card-segment">Audience segment: <strong>Considered Buyer</strong></div>
       <div class="persona-card-name">Sarah</div>
       <div class="persona-card-city">The Pragmatist &middot; Project Manager &middot; 32</div>
       <div class="persona-card-detail">Values efficiency and durability. Rejects hype. Buys on data. Stress-tests whether styling confidence and wardrobe logic can convert a slow, deliberate buyer who never needed drops.</div>
     </div>
   </div>
   <div class="nike-persona-tool-wrap" id="cs-persona-tool" data-cs-section="cs-persona-tool">
-    <div class="nike-persona-tool-head">Interactive persona research model</div>
-    <p class="nike-persona-tool-desc">Tap the black strip to expand the full-viewport embedded lab. The five profiles above run here as scripted personas with guided questions: <strong>individual</strong> inquiry or <strong>focus</strong> mode side-by-side.</p>
+    <div class="nike-persona-tool-head">Persona tool</div>
+    <p class="nike-persona-tool-desc">Expand the strip for the embedded lab &mdash; scripted personas, guided questions, <strong>individual</strong> or <strong>focus</strong> mode.</p>
     <div class="cs-full-bleed">
       <div class="artifact-strip" id="artifact-persona-lab">
         <div class="artifact-trigger" id="art2-trigger" onclick="toggleArtifact(2)">
@@ -548,125 +507,40 @@ footer{border-top:1px solid var(--g200);padding:32px 48px;display:flex;align-ite
         <div class="artifact-expand" id="art2-expand">
           <div class="artifact-inner">
             <div class="artifact-iframe-wrap">
-              <iframe src="/work/nike/persona" title="Nike SNKRS research persona lab" loading="lazy" scrolling="yes"></iframe>
+              <iframe id="nike-persona-lab-iframe" title="Nike SNKRS research persona lab" scrolling="yes" src="about:blank" data-lab-src="/work/nike/persona" allow="clipboard-read; clipboard-write; fullscreen"></iframe>
             </div>
-            <a class="artifact-model-open-btn" href="/work/nike/persona" target="_parent">Open persona lab full screen</a>
+            <a class="artifact-model-open-btn" href="/work/nike/persona" target="_top">Open persona lab full screen</a>
           </div>
         </div>
       </div>
     </div>
-    <p class="cs-body" style="margin-top:14px;font-size:12px;color:var(--g400);"><a href="/work/nike/persona" target="_parent" style="color:inherit;text-decoration:underline;text-underline-offset:3px;">Open persona lab full screen</a></p>
+    <p class="cs-body" style="margin-top:14px;font-size:12px;color:var(--g400);"><a href="/work/nike/persona" target="_top" style="color:inherit;text-decoration:underline;text-underline-offset:3px;">Open persona lab full screen</a></p>
   </div>
 </section>
 
-<!-- 04 THE PRODUCT -->
-<section class="cs-section cs-section-alt" id="cs-product" data-cs-section="cs-product">
-  <div class="cs-section-eyebrow"><span class="cs-section-num">04</span><span class="cs-section-title">The Product</span></div>
-  <h2 class="cs-heading-serif">The Primary Plan: The Confidence Hub. <em>From scarcity to styling infrastructure.</em></h2>
-  <div class="cs-body-2col">
-    <p>The plan replaces the "lottery" feel with a "styling infrastructure." It focuses on three core pillars: The Style Gym, The Style Profile & Gap Report, and Confidence Drops. Each is designed to bridge the gap between owning a product and having the confidence to wear it in a contextual, coherent way.</p>
-    <p>By providing contextual outfit formulas and identifying gaps in a user's existing collection, the app sells an entire Nike ecosystem rather than a single shoe. This strategy turns commerce into a "contextual consequence" of expert styling advice, rebuilding the brand-consumer relationship through utility and trust.</p>
-  </div>
-  <div class="nike-tri" data-nike-tri>
-    <div class="nike-tri-tabs" role="tablist" aria-label="Product roadmap columns">
-      <button type="button" class="nike-tri-tab active" data-nike-tab="mvp" aria-selected="true">MVP</button>
-      <button type="button" class="nike-tri-tab" data-nike-tab="next" aria-selected="false">Next phase</button>
-      <button type="button" class="nike-tri-tab" data-nike-tab="excl" aria-selected="false">Excluded</button>
-    </div>
-    <div class="nike-tri-grid">
-      <div class="nike-tri-col active" data-nike-col="mvp">
-        <div class="nike-tri-col-title">MVP</div>
-        <div class="priority-card core">
-          <div class="priority-tag p0">P0 &middot; Pillar A</div>
-          <div class="priority-feature">The Style Gym</div>
-          <div class="priority-desc">Instead of static technical spec sheets, product pages provide contextual outfit formulas (e.g., "Errand," "Casual," and "After 5:00 PM"). Every item in the recommended outfit is a Nike-owned product, selling an entire ecosystem rather than a single shoe. This adds immediate value by showing the user exactly how to integrate a new purchase into their life.</div>
-          <div class="priority-prd">Business Benefit: Higher AOV by selling full looks &middot; Primary metric: +40% AOV lift &middot; Contextual relevance over technical specs</div>
-        </div>
-        <div class="priority-card core">
-          <div class="priority-tag p0">P0 &middot; Pillar B</div>
-          <div class="priority-feature">The Style Profile & Gap Report</div>
-          <div class="priority-desc">The app builds a "wardrobe graph" by pulling purchase history from Nike.com, SNKRS, and the Run Club app. The Gap Report algorithm identifies what is missing from a user's collection (e.g., "You have 14 neon runners but zero neutral sneakers for business casual") and prioritizes recommendations based on what "unlocks" the potential of items the user already owns.</div>
-          <div class="priority-prd">Mechanism: Automated wardrobe inventory &middot; Primary metric: Conversion rate on "gap-fill" recommendations &middot; Leverages existing Nike data ecosystem</div>
-        </div>
-      </div>
-      <div class="nike-tri-col" data-nike-col="next">
-        <div class="nike-tri-col-title">Next phase</div>
-        <div class="priority-card supporting">
-          <div class="priority-tag p1">P1 &middot; Pillar C</div>
-          <div class="priority-feature">Confidence Drops</div>
-          <div class="priority-desc">To defeat automated bots and reward genuine fans, access to mid-tier releases is gated behind participation. 48 hours before a drop, users must complete a styling challenge to earn a "Confidence Passport." While bots are optimized for millisecond speed, they cannot easily parse visual data to create a coherent aesthetic look, ensuring access for real humans.</div>
-          <div class="priority-prd">Anti-Bot Measure: Visual styling challenges &middot; Primary metric: Human vs. Bot purchase ratio &middot; Reward genuine brand affinity</div>
-        </div>
-        <div class="priority-card supporting">
-          <div class="priority-tag p1">P1/P2 &middot; Authority Layer</div>
-          <div class="priority-feature">The Confidence Index</div>
-          <div class="priority-desc">An annual data-driven cultural report transforming millions of SNKRS user interactions into the definitive guide to global street style. Nike as cultural authority &mdash; not just vendor. Distributed as editorial, press, and in-app feature. The Confidence Index makes Nike&rsquo;s aggregated platform data a public brand asset. Published annually. Written like editorial, not like a brand report.</div>
-          <div class="priority-prd">PRD: P2 &middot; Primary metric: share of voice in cultural press &middot; Secondary: brand authority survey scores &middot; Gated behind Phase 1 + 2 data volume</div>
-        </div>
-      </div>
-      <div class="nike-tri-col" data-nike-col="excl">
-        <div class="nike-tri-col-title">Excluded</div>
-        <div class="priority-card deferred">
-          <div class="priority-tag deferred">Hard constraint &middot; All phases</div>
-          <div class="priority-feature">In-App Commerce &mdash; No Checkout, No Catalog, No Advertising</div>
-          <div class="priority-desc">The only commerce surfaces in the Confidence Hub are contextual: a Nike.com deep-link when the Style Profile recommends a gap-filling shoe, and Style Gym &ldquo;Shop &#x2197;&rdquo; links on each outfit item. No in-app checkout. No product catalog. No advertising. No promoted drops. Commerce is the consequence of the platform working &mdash; not its purpose. Every link goes exclusively to Nike.com or SNKRS, never to third-party retail.</div>
-          <div class="priority-prd">PRD: Hard constraint &middot; Rationale: Keeps incentive structure aligned &mdash; the platform earns on engagement and confidence, not transaction. Third-party referrals would dilute the brand relationship the entire platform is designed to rebuild.</div>
-        </div>
-      </div>
-    </div>
-  </div>
+<!-- 03 DESIGN SYSTEM -->
+<section class="cs-section cs-section-alt" id="artifact-design-system" data-cs-section="artifact-design-system">
+  <div class="cs-section-eyebrow"><span class="cs-section-num">03</span><span class="cs-section-title">Design system</span></div>
+  <h2 class="cs-heading-serif">Tokens, components, and depth <em>in one living reference.</em></h2>
+  <p class="cs-body">Instead of a static deck plus a separate UI kit, this is the combined spec for SNKRS Confidence Hub: semantic tokens, the core component library, color and typography scales, and PRD sections 01&ndash;09 with interactive examples where behavior actually matters. It keeps what you see in the prototype and what engineering takes into build tied to the same names, states, and acceptance criteria. Expand the strip below to read the full document in-frame.</p>
 </section>
-
-<!-- 05 DESIGN SYSTEM -->
-<section class="cs-section" id="cs-design" data-cs-section="cs-design">
-  <div class="cs-section-eyebrow"><span class="cs-section-num">05</span><span class="cs-section-title">Design System</span></div>
-  <h2 class="cs-heading-serif">Visual & Technical Execution. <em>Precision, Authority, and Energy.</em></h2>
-  <div class="cs-body-2col">
-    <p>The UI uses sharp, 0-degree border radii and high-legibility "engineered" typography to signal authority and precision rather than "soft" social media vibes. The app replaces "Emergency Red" notifications (which spike cortisol/anxiety) with "Volt" (yellow-green), which signals energy and achievement.</p>
-    <p>To maintain trust, the Hub excludes in-app checkouts and ads. Commerce is treated as a "contextual consequence" of the styling advice. Every design decision is filtered through the need to rebuild the brand's aspiration and the user's confidence.</p>
-  </div>
-  <div class="cs-stats cs-stats-4">
-    <div class="cs-stat-cell">
-      <div class="cs-stat-num">Light</div>
-      <div class="cs-stat-eyebrow">Theme</div>
-      <div class="cs-stat-label">White body (#fff), #f5f5f3 alt sections. Dark surfaces reserved for confidence badges, anchor tags, drop banners. More editorial than existing SNKRS. Confidence, not urgency.</div>
-    </div>
-    <div class="cs-stat-cell">
-      <div class="cs-stat-num">&le;3</div>
-      <div class="cs-stat-eyebrow">Volt Rule</div>
-      <div class="cs-stat-label">Maximum volt (#D4FF00) instances per screen. Always on dark or black surfaces. Never decorative. Scarcity is the authority &mdash; same discipline as On Apex, different product argument.</div>
-    </div>
-    <div class="cs-stat-cell">
-      <div class="cs-stat-num">0px</div>
-      <div class="cs-stat-eyebrow">Border Radius</div>
-      <div class="cs-stat-label">Zero border-radius. Everywhere. The rounded corner implies approachable consumer software. Confidence Hub implies precision and authority. These are not the same message.</div>
-    </div>
-    <div class="cs-stat-cell">
-      <div class="cs-stat-num">8px</div>
-      <div class="cs-stat-eyebrow">Grid</div>
-      <div class="cs-stat-label">8px base grid. All spacing is a multiple of 8. No half-values. The grid produces tension at the component level &mdash; right for a brand that lives at the edge of culture.</div>
-    </div>
-  </div>
-
-
-</section>
-
-<!-- ARTIFACT 1: DESIGN SYSTEM + PRD -->
-<div class="artifact-strip" id="artifact-design-system">
-  <div class="artifact-trigger" id="art1-trigger" onclick="toggleArtifact(1)">
-    <div class="artifact-left">
-      <div class="artifact-badge"><span>Interactive Artifact</span></div>
-      <div class="artifact-meta">
-        <div class="artifact-name">Design System + PRD</div>
-        <div class="artifact-desc">Full token reference &middot; Component library &middot; Color system &middot; Typography &middot; All PRD sections 01&ndash;09 &middot; Interactive states</div>
+<div class="cs-design-system-strip-wrap">
+  <div class="artifact-strip">
+    <div class="artifact-trigger" id="art1-trigger" onclick="toggleArtifact(1)">
+      <div class="artifact-left">
+        <div class="artifact-badge"><span>Interactive Artifact</span></div>
+        <div class="artifact-meta">
+          <div class="artifact-name">Design system</div>
+          <div class="artifact-desc">Full token reference &middot; Component library &middot; Color system &middot; Typography &middot; Interactive states</div>
+        </div>
       </div>
+      <div class="artifact-right"><span class="artifact-toggle" id="art1-cta">+</span></div>
     </div>
-    <div class="artifact-right"><span class="artifact-toggle" id="art1-cta">+</span></div>
-  </div>
-  <div class="artifact-expand" id="art1-expand">
-    <div class="artifact-inner">
-      <div class="artifact-iframe-wrap">
-        <iframe src="snkrs-design-system.html" title="Nike SNKRS Confidence Hub Design System + PRD" scrolling="yes"></iframe>
+    <div class="artifact-expand" id="art1-expand">
+      <div class="artifact-inner">
+        <div class="artifact-iframe-wrap">
+          <iframe src="snkrs-design-system.html" title="Nike SNKRS Confidence Hub design system" scrolling="yes"></iframe>
+        </div>
       </div>
     </div>
   </div>
@@ -676,206 +550,54 @@ footer{border-top:1px solid var(--g200);padding:32px 48px;display:flex;align-ite
 
 <!-- PROTOTYPE + WALKTHROUGH -->
 <section class="proto-section" id="prototype" data-cs-section="prototype">
+  <div class="proto-intro">
+    <div class="cs-section-eyebrow"><span class="cs-section-num">&mdash;</span><span class="cs-section-title">Proof / design</span></div>
+    <h2 class="cs-heading-serif">Interactive prototype <em>and spec depth in the artifacts.</em></h2>
+    <p class="cs-body" style="margin-bottom:0;">The phone build walks feed, In Stock PDP (Style Gym on the same screen), Upcoming / Confidence Drop, and Style / closet intelligence. Expand the design-system strip above for the full token reference and PRD.</p>
+  </div>
   <div class="proto-layout">
     <div class="proto-phone">
-      <iframe src="snkrs-app.html" title="Nike SNKRS App Prototype" scrolling="yes"></iframe>
+      <iframe src="snkrs-app.html#s-feed" title="Nike SNKRS App Prototype" scrolling="yes"></iframe>
     </div>
     <div class="proto-steps">
-      <!-- TODO: Replace data-src values with actual per-screen Figma embed URLs -->
-      <div class="proto-step" data-step="1" data-src="snkrs-app.html">
+      <div class="proto-step" data-step="1" data-src="snkrs-app.html#s-feed">
         <div class="proto-step-num">01</div>
         <div class="proto-step-body">
           <div class="proto-step-title">Feed Discovery</div>
-          <div class="proto-step-desc">The app opens to a dark feed. The Confidence Drop card leads &mdash; darker background, volt chip, lock icon, challenge CTA &mdash; establishes the access model before mechanics. The live drop below uses &ldquo;Style Gym Ready&rdquo; to signal styling context. None of these compete. They sequence.</div>
+          <div class="proto-step-desc">The hub pulls SNKRS, Nike.com, and Run Club into one wardrobe map &mdash; no extra data entry. The feed shows how that surfaces: Confidence Drops preview participation-gated access; live drops signal Outfit Context and styling before you hit the PDP.</div>
         </div>
       </div>
-      <div class="proto-step" data-step="2" data-src="snkrs-app.html"><!-- TODO: Product Page screen URL -->
+      <div class="proto-step" data-step="2" data-src="snkrs-app.html#s-pdp">
         <div class="proto-step-num">02</div>
         <div class="proto-step-body">
-          <div class="proto-step-title">Product Page</div>
-          <div class="proto-step-desc">Taller hero image, occasion-first context pills sit directly on the image. The Confidence Score is the first data point after the name. Every element earns its position through documented product decisions.</div>
+          <div class="proto-step-title">Outfit Context (In Stock)</div>
+          <div class="proto-step-desc">Every product page becomes an outfit session: three complete Nike looks, the shoe as wardrobe anchor, every piece shoppable &mdash; context lifts average order value, not just the sneaker.</div>
         </div>
       </div>
-      <div class="proto-step" data-step="3" data-src="snkrs-app.html"><!-- TODO: Style Gym screen URL -->
+      <div class="proto-step" data-step="3" data-src="snkrs-app.html#s-drop">
         <div class="proto-step-num">03</div>
         <div class="proto-step-body">
-          <div class="proto-step-title">Style Gym</div>
-          <div class="proto-step-desc">The Wardrobe Insight card names the specific gap this shoe closes. Three outfit rows follow with shoppable Nike links. &ldquo;Add Look&rdquo; adds the entire outfit to cart &mdash; the average order value (AOV) lever.</div>
+          <div class="proto-step-title">Confidence Drops (Upcoming)</div>
+          <div class="proto-step-desc">Mid-tier lottery is replaced by styling challenges that open 48 hours ahead; promoting your looks earns loyalty points and queue priority. Bots can&rsquo;t pass a coherent visual challenge, so humans stay primary.</div>
         </div>
       </div>
-      <div class="proto-step" data-step="4" data-src="snkrs-app.html"><!-- TODO: Confidence Drop screen URL -->
+      <div class="proto-step" data-step="4" data-src="snkrs-app.html#s-style">
         <div class="proto-step-num">04</div>
         <div class="proto-step-body">
-          <div class="proto-step-title">Confidence Drop</div>
-          <div class="proto-step-desc">Access is gated by participation. Completing styling challenges earns Confidence Pass points and queue priority. Scarcity is not abolished; it is deprecated for specific releases.</div>
-        </div>
-      </div>
-      <div class="proto-step" data-step="5" data-src="snkrs-app.html"><!-- TODO: Style Profile screen URL -->
-        <div class="proto-step-num">05</div>
-        <div class="proto-step-body">
-          <div class="proto-step-title">Style Profile</div>
-          <div class="proto-step-desc">Nike&rsquo;s existing purchase history becomes the wardrobe graph. The Gap Report surfaces what&rsquo;s genuinely missing with recommendations ranked by gap-fill score, not inventory surplus.</div>
+          <div class="proto-step-title">Closet Intelligence (Style)</div>
+          <div class="proto-step-desc">Purchase history drives what&rsquo;s genuinely missing &mdash; not more of what you own &mdash; so gaps activate what&rsquo;s already in the closet (e.g. Pegasus 41, Waffle Debut in the gap report).</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 07 DECISION LOG -->
-<section class="cs-section" id="cs-decisions" data-cs-section="cs-decisions">
-  <div class="cs-section-eyebrow"><span class="cs-section-num">07</span><span class="cs-section-title">Decision Log</span></div>
-  <h2 class="cs-heading-serif">11 decisions with documented tradeoffs. <em>Nothing shipped without a reason.</em></h2>
-  <p class="cs-body">The decision log is the discipline. Every shipped and deferred item represents a choice between options, with an explicit rationale for the path taken. The log is not a changelog &mdash; it is a product philosophy made visible at the component level. Same three-part structure as the product map: <strong>MVP</strong> (shipped), <strong>next phase</strong> (gated / deferred), and <strong>excluded</strong> (explicit non-goals).</p>
-  <div class="nike-tri nike-tri-decisions" data-nike-tri>
-    <div class="nike-tri-tabs" role="tablist" aria-label="Decision log columns">
-      <button type="button" class="nike-tri-tab active" data-nike-tab="mvp" aria-selected="true">MVP</button>
-      <button type="button" class="nike-tri-tab" data-nike-tab="next" aria-selected="false">Next phase</button>
-      <button type="button" class="nike-tri-tab" data-nike-tab="excl" aria-selected="false">Excluded</button>
-    </div>
-    <div class="nike-tri-grid">
-      <div class="nike-tri-col active" data-nike-col="mvp">
-        <div class="nike-tri-col-title">MVP &middot; Shipped</div>
-        <div class="nike-decision-card">
-          <div class="nike-decision-title">Light Mode First</div>
-          <p class="nike-decision-built"><strong>Built:</strong> White body, off-white segments, dark accents for badges.</p>
-          <p class="nike-decision-why"><strong>Tradeoff:</strong> Shifts from hype/FOMO to editorial experience. Contrast earned through light field.</p>
-        </div>
-        <div class="nike-decision-card">
-          <div class="nike-decision-title">Wardrobe Graph</div>
-          <p class="nike-decision-built"><strong>Built:</strong> Automated history sync from Nike.com/SNKRS.</p>
-          <p class="nike-decision-why"><strong>Tradeoff:</strong> Reduces cold-start friction. Uses data Nike already owns to be substantively useful.</p>
-        </div>
-        <div class="nike-decision-card">
-          <div class="nike-decision-title">Confidence Score</div>
-          <p class="nike-decision-built"><strong>Built:</strong> 0&ndash;100 score on every product page based on compatibility.</p>
-          <p class="nike-decision-why"><strong>Tradeoff:</strong> Quantifies a previously qualitative signal. Reduces returns through pre-purchase matching.</p>
-        </div>
-        <div class="nike-decision-card">
-          <div class="nike-decision-title">Nike-Only Outfits</div>
-          <p class="nike-decision-built"><strong>Built:</strong> Style Gym links exclusively to Nike.com ecosystem.</p>
-          <p class="nike-decision-why"><strong>Tradeoff:</strong> Keeps incentive structure aligned. Drives average order value (AOV) within Nike instead of referring outward.</p>
-        </div>
-        <div class="nike-decision-card">
-          <div class="nike-decision-title">Context Pills</div>
-          <p class="nike-decision-built"><strong>Built:</strong> Occasion pills positioned directly on product hero image.</p>
-          <p class="nike-decision-why"><strong>Tradeoff:</strong> Creates occasion-first read before price. Reduces hesitation for considered buyers.</p>
-        </div>
-        <div class="nike-decision-card">
-          <div class="nike-decision-title">Zero Border-Radius</div>
-          <p class="nike-decision-built"><strong>Built:</strong> Sharp edges on all UI components including buttons/cards.</p>
-          <p class="nike-decision-why"><strong>Tradeoff:</strong> Signals authority and precision. Matches Nike&apos;s aggressive hardware visual register.</p>
-        </div>
-        <div class="nike-decision-card">
-          <div class="nike-decision-title">Volt Energy</div>
-          <p class="nike-decision-built"><strong>Built:</strong> Volt replaces red as primary accent for positive signals.</p>
-          <p class="nike-decision-why"><strong>Tradeoff:</strong> Reduces alarmist UX. Volt reads as achievement/signal rather than urgency/FOMO.</p>
-        </div>
-        <div class="nike-decision-card">
-          <div class="nike-decision-title">Add Look</div>
-          <p class="nike-decision-built"><strong>Built:</strong> One-tap multi-item cart addition for styling outfits.</p>
-          <p class="nike-decision-why"><strong>Tradeoff:</strong> Core average order value (AOV) lever. Turns styling service into direct revenue generation.</p>
-        </div>
-      </div>
-      <div class="nike-tri-col" data-nike-col="next">
-        <div class="nike-tri-col-title">Next phase &middot; Deferred</div>
-        <div class="nike-decision-card">
-          <div class="nike-decision-title">Lottery Retention</div>
-          <p class="nike-decision-built"><strong>Plan:</strong> SNKRS Draw retained for top 20% highest-hype releases.</p>
-          <p class="nike-decision-why"><strong>Tradeoff:</strong> Protects cultural capital while transition to participation-model happens on mid-tier SKUs.</p>
-        </div>
-        <div class="nike-decision-card">
-          <div class="nike-decision-title">Index Publication</div>
-          <p class="nike-decision-built"><strong>Plan:</strong> Annual cultural authority report mentioned in UI.</p>
-          <p class="nike-decision-why"><strong>Tradeoff:</strong> Gated on Phase 1+2 data volume so the report is definitively meaningful.</p>
-        </div>
-        <div class="nike-decision-card">
-          <div class="nike-decision-title">Bot Resistance</div>
-          <p class="nike-decision-built"><strong>Plan:</strong> Placeholder anti-bot logic for styling challenges.</p>
-          <p class="nike-decision-why"><strong>Tradeoff:</strong> Full engineering layer deferred until production behavioral data can be analyzed.</p>
-        </div>
-      </div>
-      <div class="nike-tri-col" data-nike-col="excl">
-        <div class="nike-tri-col-title">Excluded</div>
-        <div class="nike-decision-card excluded">
-          <div class="nike-decision-title">In-app checkout &amp; catalog</div>
-          <p class="nike-decision-why">No Nike.com checkout inside Confidence Hub; no full product catalog or browsing mall. Commerce stays contextual deep-links only.</p>
-        </div>
-        <div class="nike-decision-card excluded">
-          <div class="nike-decision-title">Third-party retail from styling surfaces</div>
-          <p class="nike-decision-why">Style Gym and Profile links stay Nike.com/SNKRS-only so styling never trains members away from owned retail.</p>
-        </div>
-        <div class="nike-decision-card excluded">
-          <div class="nike-decision-title">In-hub ads &amp; promoted drops as revenue</div>
-          <p class="nike-decision-why">No advertising or paid placement in the hub; engagement and confidence are the product, not inventory clearance.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="cs-pull-quote">&ldquo;The decision log doesn&rsquo;t just specify what to build. It specifies what <em>not</em> to build &mdash; and why. Every deferred feature is a tradeoff documented, not a feature forgotten.&rdquo;</div>
-</section>
-
-<!-- 08 OUTCOME -->
-<section class="cs-section cs-section-alt" id="cs-outcome" data-cs-section="cs-outcome">
-  <div class="cs-section-eyebrow"><span class="cs-section-num">08</span><span class="cs-section-title">Outcome &amp; What This Demonstrates</span></div>
-  <h2 class="cs-heading-serif">Projected Results. <em>Recovering value through confidence.</em></h2>
-
-  <div class="cs-stats cs-stats-4" style="margin-bottom:28px;">
-    <div class="cs-stat-cell">
-      <div class="cs-stat-eyebrow">Research Base</div>
-      <div class="cs-stat-num">629</div>
-      <div class="cs-stat-label">Touchpoints across surveys, interviews, and focus groups. The insight that the barrier is confidence rather than access emerged from this data, not from assumption.</div>
-    </div>
-    <div class="cs-stat-cell">
-      <div class="cs-stat-eyebrow">Target Segment</div>
-      <div class="cs-stat-num">40%</div>
-      <div class="cs-stat-label">Aesthetic Individualist reactivation target. The primary success metric that validates the platform pivot &mdash; not downloads, not impressions. Recaptured consumers who opted out.</div>
-    </div>
-    <div class="cs-stat-cell">
-      <div class="cs-stat-eyebrow">Decisions Logged</div>
-      <div class="cs-stat-num">11</div>
-      <div class="cs-stat-label">Hard product decisions with documented tradeoffs. 8 shipped, 3 deferred with explicit phase gates and rationale. No decision made without a belief attached.</div>
-    </div>
-    <div class="cs-stat-cell">
-      <div class="cs-stat-eyebrow">PRD Metrics</div>
-      <div class="cs-stat-num">7</div>
-      <div class="cs-stat-label">Success metrics specified with baselines, targets, and measurement methodology &mdash; from segment reactivation to return rate reduction to average order value (AOV) lift.</div>
-    </div>
-  </div>
-
-  <!-- Success Metrics Grid -->
-  <div class="metrics-container">
-    <div class="metrics-grid-header">Measurement &middot; Success Metrics</div>
-    <div class="metrics-card-grid">
-      <div class="metric-card">
-        <div class="metric-label">Average Order Value (AOV)</div>
-        <div class="metric-target">+40% increase</div>
-        <div class="metric-desc">Selling full looks rather than isolated sneakers through the Style Gym and "Add Look" mechanics.</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-label">Returns Reduction</div>
-        <div class="metric-target">Significant reduction</div>
-        <div class="metric-desc">Categorized as "Aesthetic Mismatch" due to customers realizing a shoe doesn't fit their existing wardrobe.</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-label">LTV Recovery</div>
-        <div class="metric-target">40% target</div>
-        <div class="metric-desc">Recovering lost value from the "style-driven" demographic that previously opted out.</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-label">Activation Rate</div>
-        <div class="metric-target">&gt;35%</div>
-        <div class="metric-desc">Users moving sneakers from "Museum" status to active rotation through styling confidence.</div>
-      </div>
-    </div>
-  </div>
-
-
-  <div class="cs-conclusion-header">Activation as Success</div>
-  <p class="cs-body">The Confidence Hub is the architectural answer to the "Museum Mindset." By shifting the focus from scarcity to confidence, Nike doesn't just sell more shoes; it builds a more resilient relationship with its core style-driven demographic. When a consumer feels confident in how to wear what they own, they wear it. When they wear it, they need the next one. That is how LTV is recovered.</p>
-  
-  <div class="cs-conclusion-header">Precision as Language</div>
-  <p class="cs-body">Every design choice—from the zero border-radius to the Volt accent—signals authority and precision. By removing the anxiety triggers of the lottery model and replacing them with a useful styling infrastructure, Nike earns the right to participate in the consumer's daily style decision. This is not just a redesign; it is a strategic realignment of the app's purpose: moving from a lottery machine to a confidence hub.</p>
+<!-- 04 THE VERDICT -->
+<section class="cs-section cs-section-alt" id="cs-verdict" data-cs-section="cs-verdict">
+  <div class="cs-section-eyebrow"><span class="cs-section-num">04</span><span class="cs-section-title">The Verdict</span></div>
+  <p class="cs-body">When the app stops running a lottery and starts building confidence, <em>Nike doesn&rsquo;t just recover lifetime value</em> &mdash; it changes its relationship with the people who made it matter in the first place.</p>
+  <p class="cs-body">Sneaker culture was built by people who cared deeply enough to wait in line, set alarms, and lose sleep over a release. The lottery didn&rsquo;t create that devotion &mdash; it inherited it and then spent it. The Confidence Hub is how Nike earns it back. Not through access, not through hype, but through genuine utility.</p>
+  <p class="cs-body">When a brand can show you how to wear what you own, tell you what you&rsquo;re missing, and reward you for having taste &mdash; it stops being a vendor. It becomes part of how you see yourself.</p>
 
   <div class="cs-next">
     <div class="cs-next-label">Next Case Study</div>
@@ -906,6 +628,13 @@ footer{border-top:1px solid var(--g200);padding:32px 48px;display:flex;align-ite
 </footer>
 
 <script>
+window.addEventListener('scroll', function () {
+  var s = window.scrollY;
+  var t = document.documentElement.scrollHeight - window.innerHeight;
+  var bar = document.getElementById('scroll-progress');
+  if (bar) bar.style.width = (t > 0 ? (s / t * 100) : 0) + '%';
+}, { passive: true });
+
 const sectionObserver = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -946,7 +675,17 @@ function scrollToPersonaLab() {
   setTimeout(function () {
     var expand = document.getElementById('art2-expand');
     if (expand && expand.dataset.open !== 'true') toggleArtifact(2);
+    else ensureNikePersonaLabIframeLoaded();
   }, 450);
+}
+
+function ensureNikePersonaLabIframeLoaded() {
+  var iframe = document.getElementById('nike-persona-lab-iframe');
+  if (!iframe) return;
+  var base = iframe.getAttribute('data-lab-src') || '/work/nike/persona';
+  var cur = String(iframe.getAttribute('src') || '');
+  if (cur && cur !== 'about:blank') return;
+  iframe.src = base;
 }
 
 function toggleArtifact(n) {
@@ -957,6 +696,11 @@ function toggleArtifact(n) {
   expand.style.maxHeight = isOpen ? '0' : '5200px';
   expand.dataset.open = isOpen ? 'false' : 'true';
   toggle.textContent = isOpen ? '+' : '\u00d7';
+  if (!isOpen && n === 2) {
+    requestAnimationFrame(function () {
+      ensureNikePersonaLabIframeLoaded();
+    });
+  }
 }
 function closeArtifact(n) {
   const expand = document.getElementById('art'+n+'-expand');
@@ -993,13 +737,87 @@ function toggleJourney(el) {
   const steps = document.querySelectorAll('.proto-step');
   const iframe = document.querySelector('.proto-phone iframe');
   if (!steps.length || !iframe) return;
+
+  const SCROLL_CLAMP_MS = 1800;
+  let scrollClampY = null;
+  let scrollClampUntil = 0;
+
+  function snapScrollTo(y) {
+    const html = document.documentElement;
+    const prev = html.style.scrollBehavior;
+    html.style.scrollBehavior = 'auto';
+    window.scrollTo(0, y);
+    if (document.documentElement) document.documentElement.scrollTop = y;
+    if (document.body) document.body.scrollTop = y;
+    html.style.scrollBehavior = prev;
+  }
+
+  function onScrollClamp() {
+    if (scrollClampY === null || performance.now() > scrollClampUntil) return;
+    if (Math.abs(window.scrollY - scrollClampY) <= 0.5) return;
+    snapScrollTo(scrollClampY);
+  }
+
+  window.addEventListener('scroll', onScrollClamp, { capture: true, passive: true });
+
+  function armScrollClamp(y) {
+    if (typeof y !== 'number' || isNaN(y)) return;
+    scrollClampY = y;
+    scrollClampUntil = performance.now() + SCROLL_CLAMP_MS;
+    onScrollClamp();
+  }
+
+  function restoreCaseStudyScroll(y) {
+    if (typeof y !== 'number' || isNaN(y)) return;
+    armScrollClamp(y);
+    function r() {
+      snapScrollTo(y);
+    }
+    r();
+    requestAnimationFrame(r);
+    requestAnimationFrame(function () { requestAnimationFrame(r); });
+    [0, 16, 50, 100, 200, 350, 500, 650, 1000, 1300, 1600].forEach(function (ms) { setTimeout(r, ms); });
+  }
+
+  window.addEventListener('message', function (e) {
+    if (!e.data || e.data.type !== 'snkrs-proto-lock') return;
+    restoreCaseStudyScroll(e.data.y);
+  });
+
+  function applyProtoSrc(src) {
+    if (!src) return;
+    const y = window.scrollY;
+    armScrollClamp(y);
+    const i = src.indexOf('#');
+    const hash = i >= 0 ? src.slice(i) : '';
+    try {
+      const win = iframe.contentWindow;
+      const loc = win && win.location;
+      if (loc && /snkrs-app\.html/i.test(loc.pathname || '') && hash) {
+        if (loc.hash !== hash) loc.hash = hash;
+        restoreCaseStudyScroll(y);
+        return;
+      }
+    } catch (e) {}
+    iframe.addEventListener('load', function onPrLoad() {
+      iframe.removeEventListener('load', onPrLoad);
+      restoreCaseStudyScroll(y);
+    });
+    iframe.src = src;
+  }
+
   steps[0].classList.add('active');
   steps.forEach(step => {
+    step.addEventListener('pointerdown', function (e) {
+      if (e.pointerType === 'mouse' && e.isPrimary) e.preventDefault();
+    });
     step.addEventListener('click', () => {
+      const y = window.scrollY;
+      armScrollClamp(y);
       steps.forEach(s => s.classList.remove('active'));
       step.classList.add('active');
-      const src = step.dataset.src;
-      if (src) iframe.src = src;
+      applyProtoSrc(step.dataset.src);
+      restoreCaseStudyScroll(y);
     });
   });
 })();

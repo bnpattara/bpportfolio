@@ -2,11 +2,13 @@ import React from "react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Nike SNKRS Confidence Hub — Benn Pattara",
-  description: "From lottery machine to styling platform. Rebuilding trust in a drop system designed to create desire but creating abandonment instead.",
+  title: "Nike SNKRS — Confidence Hub — Benn Pattara",
+  description:
+    "SNKRS, reframed around confidence: wardrobe intelligence, outfit context, closet gaps, and participation-gated drops that restore repeat purchase.",
   openGraph: {
-    title: "Nike SNKRS Confidence Hub — Benn Pattara",
-    description: "From lottery machine to styling platform. Rebuilding trust in a drop system designed to create desire but creating abandonment instead.",
+    title: "Nike SNKRS — Confidence Hub — Benn Pattara",
+    description:
+      "When access isn’t the barrier, utility is the strategy — styling infrastructure that earns loyalty compounding beyond the lottery.",
     url: "/work/nike2",
     type: "website",
     images: [{ url: "https://bennpattara.com/og/nike.jpg", width: 1200, height: 630 }],
