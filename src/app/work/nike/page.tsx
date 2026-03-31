@@ -1,38 +1,8 @@
 "use client";
 
-import React, { useEffect } from "react";
-
-function restoreWindowScroll(y: number) {
-  const html = document.documentElement;
-  const prev = html.style.scrollBehavior;
-  html.style.scrollBehavior = "auto";
-  window.scrollTo(0, y);
-  if (document.documentElement) document.documentElement.scrollTop = y;
-  if (document.body) document.body.scrollTop = y;
-  html.style.scrollBehavior = prev;
-}
-
-/** Nested iframes on /work/nike: prototype asks parent to restore scroll after tab changes. */
-function useSnkrsProtoScrollLock() {
-  useEffect(() => {
-    function onMsg(e: MessageEvent) {
-      if (!e.data || e.data.type !== "snkrs-proto-lock") return;
-      const y = e.data.y;
-      if (typeof y !== "number" || Number.isNaN(y)) return;
-      const run = () => restoreWindowScroll(y);
-      run();
-      requestAnimationFrame(run);
-      requestAnimationFrame(() => requestAnimationFrame(run));
-      [0, 16, 50, 100, 200, 350].forEach((ms) => setTimeout(run, ms));
-    }
-    window.addEventListener("message", onMsg);
-    return () => window.removeEventListener("message", onMsg);
-  }, []);
-}
+import React from "react";
 
 export default function NikeCaseStudy(): React.ReactElement {
-  useSnkrsProtoScrollLock();
-
   const caseStudySrc =
     process.env.NODE_ENV === "development"
       ? `/case-studies/nike2/index.html?__dev=${Date.now()}`
