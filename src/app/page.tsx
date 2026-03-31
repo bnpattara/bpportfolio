@@ -135,6 +135,7 @@ export default function Home() {
       badge: "Diagnosis → Decision Stack",
       num: "01 / 06",
       title: "NIKE SNKRS",
+      clientWorkLabel: "Live client",
       insight: "\u201CWhich problem do we solve first? Finding the failure point in a drop system designed for desire but creating abandonment. Rebuilding trust through documented tradeoffs.\u201D",
       link: "/work/nike",
     },
@@ -236,6 +237,9 @@ export default function Home() {
                 {/* Collapsed state: project title */}
                 <div className={`accordion-collapsed${isHovered ? ' accordion-collapsed--hidden' : ''}`}>
                   <div className="accordion-collapsed-title">{cs.title}</div>
+                  {"clientWorkLabel" in cs && cs.clientWorkLabel ? (
+                    <div className="accordion-collapsed-client">{cs.clientWorkLabel}</div>
+                  ) : null}
                 </div>
 
                 {/* Card number */}
@@ -243,8 +247,15 @@ export default function Home() {
 
                 {/* Full content — fades in on expand */}
                 <div className={`accordion-content${isHovered ? ' accordion-content--visible' : ''}`}>
-                  <div className="accordion-badge">
-                    <span>{cs.badge}</span>
+                  <div className="accordion-meta-row">
+                    {"clientWorkLabel" in cs && cs.clientWorkLabel ? (
+                      <div className="accordion-badge accordion-badge--client">
+                        <span>{cs.clientWorkLabel}</span>
+                      </div>
+                    ) : null}
+                    <div className="accordion-badge">
+                      <span>{cs.badge}</span>
+                    </div>
                   </div>
                   <div className="accordion-body">
                     <div className="accordion-title">{cs.title}</div>

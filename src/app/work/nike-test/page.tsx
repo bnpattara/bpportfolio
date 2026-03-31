@@ -12,7 +12,6 @@ function restoreWindowScroll(y: number) {
   html.style.scrollBehavior = prev;
 }
 
-/** Nested iframes on /work/nike: prototype asks parent to restore scroll after tab changes. */
 function useSnkrsProtoScrollLock() {
   useEffect(() => {
     function onMsg(e: MessageEvent) {
@@ -30,20 +29,20 @@ function useSnkrsProtoScrollLock() {
   }, []);
 }
 
-export default function NikeCaseStudy(): React.ReactElement {
+export default function NikeTestCaseStudyPage(): React.ReactElement {
   useSnkrsProtoScrollLock();
 
   const caseStudySrc =
     process.env.NODE_ENV === "development"
-      ? `/case-studies/nike2/index.html?__dev=${Date.now()}`
-      : "/case-studies/nike2/index.html";
+      ? `/case-studies/nike-test/index.html?__dev=${Date.now()}`
+      : "/case-studies/nike-test/index.html";
 
   return (
     <div style={{ width: "100%", height: "100dvh", background: "#fff" }}>
       <iframe
         className="responsive-iframe"
         src={caseStudySrc}
-        title="Nike SNKRS — Confidence Hub"
+        title="Nike SNKRS — Alternate narrative (draft)"
         style={{ width: "100%", height: "100%", border: "none" }}
       />
     </div>

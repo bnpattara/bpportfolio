@@ -738,10 +738,6 @@ function toggleJourney(el) {
   const iframe = document.querySelector('.proto-phone iframe');
   if (!steps.length || !iframe) return;
 
-  const SCROLL_CLAMP_MS = 1800;
-  let scrollClampY = null;
-  let scrollClampUntil = 0;
-
   function snapScrollTo(y) {
     const html = document.documentElement;
     const prev = html.style.scrollBehavior;
@@ -752,31 +748,15 @@ function toggleJourney(el) {
     html.style.scrollBehavior = prev;
   }
 
-  function onScrollClamp() {
-    if (scrollClampY === null || performance.now() > scrollClampUntil) return;
-    if (Math.abs(window.scrollY - scrollClampY) <= 0.5) return;
-    snapScrollTo(scrollClampY);
-  }
-
-  window.addEventListener('scroll', onScrollClamp, { capture: true, passive: true });
-
-  function armScrollClamp(y) {
-    if (typeof y !== 'number' || isNaN(y)) return;
-    scrollClampY = y;
-    scrollClampUntil = performance.now() + SCROLL_CLAMP_MS;
-    onScrollClamp();
-  }
-
   function restoreCaseStudyScroll(y) {
     if (typeof y !== 'number' || isNaN(y)) return;
-    armScrollClamp(y);
     function r() {
       snapScrollTo(y);
     }
     r();
     requestAnimationFrame(r);
     requestAnimationFrame(function () { requestAnimationFrame(r); });
-    [0, 16, 50, 100, 200, 350, 500, 650, 1000, 1300, 1600].forEach(function (ms) { setTimeout(r, ms); });
+    [0, 16, 50, 100, 200, 350].forEach(function (ms) { setTimeout(r, ms); });
   }
 
   window.addEventListener('message', function (e) {
@@ -787,7 +767,6 @@ function toggleJourney(el) {
   function applyProtoSrc(src) {
     if (!src) return;
     const y = window.scrollY;
-    armScrollClamp(y);
     const i = src.indexOf('#');
     const hash = i >= 0 ? src.slice(i) : '';
     try {
@@ -808,12 +787,8 @@ function toggleJourney(el) {
 
   steps[0].classList.add('active');
   steps.forEach(step => {
-    step.addEventListener('pointerdown', function (e) {
-      if (e.pointerType === 'mouse' && e.isPrimary) e.preventDefault();
-    });
     step.addEventListener('click', () => {
       const y = window.scrollY;
-      armScrollClamp(y);
       steps.forEach(s => s.classList.remove('active'));
       step.classList.add('active');
       applyProtoSrc(step.dataset.src);

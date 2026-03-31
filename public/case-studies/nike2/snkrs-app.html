@@ -825,9 +825,6 @@ function go(id){
   setTimeout(bump,50);
   setTimeout(bump,100);
   setTimeout(bump,200);
-  setTimeout(bump,400);
-  setTimeout(bump,650);
-  setTimeout(bump,1000);
 }
 function applyHashRoute(){
   var raw = (location.hash || '').replace(/^#/,'');
@@ -868,15 +865,6 @@ setInterval(()=>{
   if(em)em.textContent=String(m).padStart(2,'0');
   if(es)es.textContent=String(s).padStart(2,'0');
 },1000);
-(function(){
-  var ph=document.querySelector('.phone');
-  if(!ph)return;
-  ph.addEventListener('pointerdown',function(e){
-    if(e.pointerType!=='mouse'||!e.isPrimary)return;
-    var t=e.target;
-    if(t.closest('.tab')||t.closest('button')||t.closest('[onclick]'))e.preventDefault();
-  },true);
-})();
 </script>
 </body>
 </html>

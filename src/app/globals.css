@@ -2090,6 +2090,7 @@ body>* {
 
   /* Responsive iframe utility */
 .responsive-iframe {
+  display: block;
   width: 100%;
   height: auto;
   aspect-ratio: 16 / 9;
@@ -2646,6 +2647,17 @@ body>* {
   padding-bottom: 8px;
 }
 
+.accordion-collapsed-client {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: .16em;
+  line-height: 1.35;
+  color: rgba(255, 255, 255, .55);
+  text-align: center;
+  text-transform: uppercase;
+  max-width: 100%;
+}
+
 /* ── Card number ── */
 .accordion-num {
   position: absolute;
@@ -2688,6 +2700,13 @@ body>* {
   pointer-events: auto;
 }
 
+.accordion-meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
 .accordion-badge {
   display: inline-flex;
   align-items: center;
@@ -2702,6 +2721,11 @@ body>* {
   border: 1px solid rgba(255, 255, 255, .18);
   padding: 5px 12px;
   white-space: nowrap;
+}
+
+.accordion-badge--client span {
+  color: rgba(255, 255, 255, .78);
+  border-color: rgba(255, 255, 255, .38);
 }
 
 .accordion-body {

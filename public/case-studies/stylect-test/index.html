@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Stylect,  Prose test (draft) · Benn Pattara</title>
+<style>
+:root {
+  --black:     #000;
+  --white:     #fff;
+  --g100:      #f5f5f5;
+  --g200:      #e8e8e8;
+  --g300:      #ccc;
+  --g400:      #999;
+  --g500:      #666;
+  --g700:      #333;
+  --font:      'Helvetica Neue', Arial, sans-serif;
+  --ease-fast: 150ms ease;
+  --ease-base: 250ms ease;
+  --nav-h:     52px;
+  --sidenav-w: 220px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font);background:var(--white);color:var(--black);line-height:1.6;-webkit-font-smoothing:antialiased;}
+#site-nav{position:fixed;top:0;left:0;right:0;z-index:200;background:var(--white);border-bottom:1px solid var(--g200);}
+.nav-main{position:relative;height:52px;padding:0 48px;}
+.nav-left{position:absolute;left:48px;top:50%;transform:translateY(-50%);display:flex;gap:28px;}
+.nav-left a{font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--g500);text-decoration:none;transition:color var(--ease-fast);}
+.nav-left a:hover{color:var(--black);}
+.nav-wordmark{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:14px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--black);text-decoration:none;white-space:nowrap;}
+.nav-right{position:absolute;right:48px;top:50%;transform:translateY(-50%);}
+.nav-right a{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--black);text-decoration:none;border-bottom:1px solid var(--black);padding-bottom:1px;}
+.page-body{padding-top:var(--nav-h);}
+.cs-hero{position:relative;min-height:85vh;overflow:hidden;display:flex;align-items:flex-end;}
+.cs-hero-bg{position:absolute;inset:0;z-index:0;background:linear-gradient(160deg,#0a0a0a 0%,#141010 40%,#0a0a0a 100%);}
+.cs-hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center center;display:block;}
+.cs-hero-scrim{position:absolute;inset:0;z-index:1;background:linear-gradient(to top,rgba(0,0,0,.85) 0%,rgba(0,0,0,.4) 35%,transparent 60%);pointer-events:none;}
+.cs-hero-title-wrap{position:relative;z-index:2;padding:64px 56px 72px 48px;width:100%;max-width:900px;}
+.cs-hero-title{font-size:clamp(32px,4vw,56px);font-weight:300;letter-spacing:.04em;text-transform:uppercase;color:var(--white);line-height:.95;margin:0;text-shadow:0 2px 24px rgba(0,0,0,.5);}
+.cs-hero-title em{font-style:italic;color:rgba(255,255,255,.65);}
+.cs-hero-kicker{font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:14px;}
+.cs-hero-meta-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:10px;}
+.cs-hero-role{display:inline-block;font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.88);border:1px solid rgba(255,255,255,.35);padding:5px 12px;}
+.cs-body-wrap{display:grid;grid-template-columns:var(--sidenav-w) 1fr;align-items:start;align-content:start;}
+#cs-sidenav{position:sticky;top:var(--nav-h);height:calc(100vh - var(--nav-h));overflow-y:auto;border-right:1px solid var(--g200);padding:40px 0;display:flex;flex-direction:column;background:var(--white);z-index:50;scrollbar-width:none;}
+#cs-sidenav::-webkit-scrollbar{display:none;}
+.cs-sidenav-label{font-size:8px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--g300);padding:0 28px 20px;font-family:var(--font);}
+.cs-sidenav-link{display:flex;align-items:center;gap:14px;padding:12px 28px;cursor:pointer;transition:background var(--ease-fast);text-decoration:none;border-left:2px solid transparent;}
+.cs-sidenav-link:hover{background:var(--g100);}
+.cs-sidenav-link.active{border-left-color:var(--black);background:var(--g100);}
+.cs-sidenav-num{font-size:9px;font-weight:600;letter-spacing:.12em;color:var(--g300);width:20px;flex-shrink:0;transition:color var(--ease-fast);font-family:var(--font);}
+.cs-sidenav-link.active .cs-sidenav-num{color:var(--black);}
+.cs-sidenav-text{font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--g400);transition:color var(--ease-fast);}
+.cs-sidenav-link.active .cs-sidenav-text{color:var(--black);}
+.cs-sidenav-divider{height:1px;background:var(--g100);margin:8px 28px;}
+.cs-sidenav-exec{margin-top:auto;padding:20px 28px 0;border-top:1px solid var(--g100);}
+.cs-sidenav-exec-label{font-size:8px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--g300);margin-bottom:10px;font-family:var(--font);}
+.cs-sidenav-exec-text{font-size:13px;color:var(--g400);line-height:1.7;font-family:var(--font);font-style:italic;}
+.cs-sidenav-exec-link{display:inline-block;margin-top:10px;font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--black);text-decoration:none;border-bottom:1px solid var(--black);padding-bottom:1px;cursor:pointer;}
+.cs-content{min-width:0;}
+.cs-exec-inner{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;}
+.cs-exec-eyebrow{font-size:8px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--g300);margin-bottom:16px;font-family:var(--font);}
+.cs-exec-body{font-size:13px;color:var(--g500);line-height:1.85;margin-bottom:20px;}
+.cs-exec-meta-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--g200);margin-bottom:24px;}
+.cs-exec-meta-cell{background:var(--white);padding:20px;min-width:0;overflow-wrap:break-word;}
+.cs-exec-meta-label{font-size:8px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--g300);margin-bottom:6px;font-family:var(--font);}
+.cs-exec-meta-val{font-size:12px;font-weight:500;letter-spacing:.04em;color:var(--black);}
+.cs-section{padding:72px 56px;border-bottom:1px solid #f0f0f0;}
+.cs-full-bleed{width:calc(100% + 112px + 2px);margin-left:calc(-56px - 1px);margin-right:calc(-56px - 1px);}
+#cs-users{padding-bottom:32px;}
+.cs-design-system-strip-wrap{background:transparent;padding-top:0;border-bottom:none;}
+.cs-section-alt{background:var(--g100);}
+.cs-section-eyebrow{display:flex;align-items:center;gap:14px;margin-bottom:28px;}
+.cs-section-num{font-size:9px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--g300);font-family:var(--font);}
+.cs-section-title{font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--black);}
+.cs-heading-serif{font-family:var(--font);font-size:clamp(26px,3vw,40px);font-weight:300;color:var(--black);line-height:1.1;margin-bottom:28px;letter-spacing:.02em;}
+.cs-heading-serif em{font-style:italic;color:var(--g500);}
+.cs-body{font-size:15px;color:var(--g500);line-height:1.8;margin-bottom:20px;}
+.cs-body:last-child{margin-bottom:0;}
+.cs-exec-heading{font-size:32px;font-weight:300;letter-spacing:.04em;text-transform:uppercase;color:var(--black);margin-bottom:8px;}
+.cs-stats-2{grid-template-columns:repeat(2,minmax(0,1fr));}
+.cs-exec-ii-row .cs-stat-num{font-size:clamp(18px,2vw,26px);font-weight:300;letter-spacing:.02em;line-height:1.15;margin-bottom:12px;font-style:normal;}
+.cs-problem-split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,40px);align-items:start;margin-bottom:0;width:100%;max-width:none;}
+.cs-problem-split .cs-body{max-width:none;margin-bottom:0;}
+.cs-problem-split > div{display:flex;flex-direction:column;gap:16px;}
+.proto-intro{max-width:44rem;margin-bottom:40px;}
+.proto-intro .cs-section-eyebrow{margin-bottom:16px;}
+#scroll-progress{position:fixed;top:0;left:0;height:2px;background:var(--black);width:0%;z-index:300;transition:width 100ms linear;}
+.cs-body-2col{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-bottom:28px;}
+.cs-body-2col p{font-size:13px;color:var(--g500);line-height:1.75;}
+.cs-stats{display:grid;gap:1px;background:var(--g200);margin-bottom:28px;}
+.cs-stats-3{grid-template-columns:repeat(3,minmax(0,1fr));}
+.cs-stats-4{grid-template-columns:repeat(4,minmax(0,1fr));}
+.cs-stat-cell{background:var(--white);padding:28px 24px;min-width:0;overflow-wrap:break-word;}
+.cs-stat-eyebrow{font-size:9px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--g300);margin-bottom:12px;font-family:var(--font);}
+.cs-stat-num{font-family:var(--font);font-size:48px;font-weight:300;font-style:italic;color:var(--black);letter-spacing:-.01em;line-height:1;margin-bottom:8px;}
+.cs-stat-label{font-size:12px;color:var(--g500);line-height:1.65;}
+.cs-table{width:100%;border-collapse:collapse;margin-bottom:28px;}
+.cs-table th{font-size:8px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--g300);padding:12px 16px;border-bottom:1px solid var(--g200);text-align:left;background:var(--g100);font-family:var(--font);}
+.cs-table td{font-size:12px;color:var(--g500);padding:14px 16px;border-bottom:1px solid var(--g100);line-height:1.6;vertical-align:top;}
+.cs-table td:first-child{font-weight:500;color:var(--black);font-size:11px;letter-spacing:.03em;text-transform:uppercase;}
+.cs-table tr:hover td{background:#fafafa;}
+.pm-lens{border:1px solid var(--g200);padding:24px 28px;margin-bottom:28px;background:#fafafa;}
+.pm-lens-label{font-size:8px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--g300);margin-bottom:10px;font-family:var(--font);}
+.pm-lens-text{font-size:13px;color:var(--g500);line-height:1.75;font-style:italic;}
+.cs-the-ask-wrap{margin-bottom:0;background:#0a0a0a;}
+.cs-the-ask-inner{
+  background:linear-gradient(165deg,#0a0a0a 0%,#161616 55%,#0d0d0d 100%);
+  color:#fff;
+  padding:clamp(32px,5vw,56px) clamp(32px,5vw,64px);
+  border-left:5px solid #fff;
+  box-shadow:0 22px 56px rgba(0,0,0,.16);
+}
+.cs-the-ask-inner .cs-section-eyebrow{margin-bottom:clamp(14px,2vw,22px);}
+.cs-the-ask-inner .cs-section-num{color:rgba(255,255,255,.48);}
+.cs-the-ask-inner .cs-section-title{color:rgba(255,255,255,.92);}
+.cs-the-ask-lede{
+  font-family:var(--font);
+  font-size:clamp(22px,3vw,38px);
+  font-weight:400;
+  line-height:1.16;
+  letter-spacing:.02em;
+  color:#fff;
+  margin:0;
+  max-width:42rem;
+}
+.cs-the-ask-lede em{font-style:italic;color:rgba(255,255,255,.78);}
+.cs-section:has(.cs-the-ask-wrap) .cs-body{margin-top:28px;}
+@media (max-width:768px){
+  .cs-the-ask-inner{padding:26px 20px 32px;border-left-width:4px;}
+  .cs-the-ask-lede{font-size:clamp(20px,5.2vw,30px);}
+}
+#cs-s03-the-ask {
+  padding: 0 !important;
+  border-bottom: none !important;
+  background: #0a0a0a !important;
+  display: block;
+}
+#cs-s03-the-ask .cs-the-ask-wrap {
+  margin: 0 !important;
+  width: 100% !important;
+  border: none !important;
+}
+#cs-s02-background {
+  border-bottom: none !important;
+}
+
+/* Live Stylect,  business model band (from primary case study) */
+#cs-stylect-bm .jm-wrap.stylect-bm-jm{
+  margin-top:clamp(12px,2.5vw,24px);
+  margin-left:calc(-56px - 1px);margin-right:calc(-56px - 1px);width:calc(100% + 112px + 2px);
+  max-width:none;min-height:0;display:flex;flex-direction:column;
+  align-items:stretch;padding:clamp(24px,4vw,32px) 0 clamp(28px,4vw,36px);
+  border-left:none;border-right:none;box-sizing:border-box;
+  background:var(--g100);border:1px solid var(--g200);
+}
+.stylect-bm-table-title{margin:0 0 14px;padding:0 56px;font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--black);line-height:1.35;}
+.stylect-bm-visual{width:100%;display:flex;flex-direction:column;gap:clamp(14px,2.5vw,20px);padding:0 56px;box-sizing:border-box;}
+.stylect-bm-actors{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(10px,2vw,16px);align-items:stretch;}
+.stylect-bm-role{margin:0;padding:14px 14px 0;font-size:8px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--g500);line-height:1.35;}
+.stylect-bm-card .jm-card-body{padding:8px 14px 14px;font-size:11px;line-height:1.55;}
+.stylect-bm-hub{text-align:center;padding:clamp(14px,2.5vw,18px) clamp(12px,3vw,20px);background:var(--black);color:var(--white);border:1px solid var(--black);box-sizing:border-box;}
+.stylect-bm-hub-name{margin:0;font-size:9px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;line-height:1.3;}
+.stylect-bm-hub-lines{margin:8px 0 0;font-size:10px;font-weight:400;line-height:1.55;color:rgba(255,255,255,.62);letter-spacing:.04em;}
+.stylect-bm-hub-lines em{font-style:normal;color:rgba(255,255,255,.88);}
+
+/* Journey map,  How it works */
+.jm-wrap{width:100%;max-width:100%;margin:28px 0 0;padding:clamp(24px,4vw,32px) clamp(16px,3vw,28px) clamp(28px,4vw,36px);background:var(--g100);border:1px solid var(--g200);box-sizing:border-box;}
+.jm-rail-wrap{position:relative;padding-top:2px;padding-bottom:8px;}
+.jm-rail{position:absolute;top:auto;bottom:50px;left:calc(8% - 2px);right:calc(8% - 2px);height:1px;background:var(--g300);}
+.jm-rail::after{content:"";position:absolute;left:0;top:0;height:100%;width:100%;background:linear-gradient(90deg,transparent,var(--black) 10%,var(--black) 90%,transparent);opacity:.09;}
+.jm-stages{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:clamp(12px,2vw,20px);position:relative;z-index:1;align-items:stretch;}
+.jm-node{text-align:center;display:flex;flex-direction:column;min-height:0;min-width:0;align-self:stretch;}
+.jm-node-top{display:flex;flex-direction:column;align-items:center;flex-shrink:0;min-height:46px;margin-top:16px;margin-bottom:0;position:relative;z-index:2;}
+.jm-node-num{width:40px;height:40px;border-radius:50%;border:2px solid var(--black);background:var(--white);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;letter-spacing:.06em;color:var(--black);flex-shrink:0;box-shadow:0 0 0 4px var(--g100);}
+.jm-actor{font-size:8px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--g500);margin-top:10px;line-height:1.35;max-width:100%;}
+.jm-card{text-align:left;padding:0;background:var(--white);border:1px solid var(--g200);display:flex;flex-direction:column;flex:1 1 auto;min-height:0;overflow:hidden;}
+.jm-card-title{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--black);margin:0;padding:16px 14px 0;line-height:1.35;}
+.jm-card-body{font-size:clamp(11px,1.05vw,13px);color:var(--g500);line-height:1.65;flex:0 1 auto;margin:0;padding:10px 14px 16px;}
+
+/* Live prototype,  persona tabs + scaled phone (matches /work/stylect) */
+.proto-intro { max-width: 44rem; margin-bottom: 40px; width: 100%; }
+.proto-intro .cs-section-eyebrow { margin-bottom: 16px; }
+.proto-layout-live { display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 24px; width: 100%; padding-bottom: 16px; }
+.proto-stack { display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 360px; }
+.proto-stack .proto-phone-live { flex-shrink: 0; }
+.proto-persona { display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; margin-top: 22px; width: 100%; }
+.proto-persona-tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; padding: 6px; background: #f5f5f5; border: 1px solid #e8e8e8; border-radius: 999px; }
+.proto-ptab { padding: 8px 18px; border-radius: 999px; border: none; cursor: pointer; background: transparent; font-size: 8px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--g400); transition: background .2s ease, color .2s ease; font-family: inherit; }
+.proto-ptab:hover { color: var(--black); background: rgba(0,0,0,.06); }
+.proto-ptab.active { background: var(--black); color: var(--white); }
+.proto-phone-live { --proto-scale: 300; width: calc(var(--proto-scale) * 1px + 16px); height: calc(812px * var(--proto-scale) / 375 + 16px); border-radius: calc(8px + 44px * var(--proto-scale) / 375); border: 8px solid #000; overflow: hidden; background: #000; box-shadow: 0 0 0 1px #e8e8e8; display: flex; justify-content: center; align-items: center; }
+.proto-phone-live iframe { width: 375px; height: 812px; border: none; display: block; transform: scale(calc(var(--proto-scale) / 375)); transform-origin: center center; flex-shrink: 0; }
+.proto-open-row { margin-top: 28px; text-align: center; }
+.proto-open-row a { font-size: 10px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--black); text-decoration: none; border-bottom: 1px solid var(--black); }
+
+.persona-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--g200);margin-bottom:28px;}
+.persona-card{background:var(--white);padding:28px 24px;min-width:0;overflow-wrap:break-word;}
+.persona-card-tier{font-size:8px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--g300);margin-bottom:12px;font-family:var(--font);}
+.persona-card-name{font-family:var(--font);font-size:20px;font-weight:400;color:var(--black);margin-bottom:4px;}
+.persona-card-city{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--g400);margin-bottom:16px;}
+.persona-card-quote{font-family:var(--font);font-size:13px;font-style:italic;color:var(--g500);line-height:1.65;margin-bottom:16px;border-left:1px solid var(--g300);padding-left:12px;}
+.persona-card-detail{font-size:11px;color:var(--g500);line-height:1.7;}
+.persona-card-tension{font-size:11px;font-weight:500;color:var(--black);margin-top:12px;padding-top:12px;border-top:1px solid var(--g100);}
+.nike-research-persona-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:1px;background:var(--g200);margin-bottom:28px;}
+.nike-research-persona-grid .persona-card{padding:22px 18px;}
+.nike-research-persona-grid .persona-card-name{font-size:17px;}
+.nike-persona-research-intro{margin-top:40px;margin-bottom:24px;}
+.priority-card{padding:24px 28px;border-left:3px solid transparent;background:var(--g100);}
+.priority-card.core{border-left-color:var(--black);background:var(--white);}
+.priority-card.supporting{border-left-color:var(--g300);}
+.priority-card.deferred{border-left-color:var(--g200);background:#fafafa;}
+.priority-tag{display:inline-block;font-size:8px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;padding:3px 10px;margin-bottom:10px;font-family:var(--font);}
+.priority-tag.p0{background:var(--black);color:var(--white);}
+.priority-tag.p1{background:var(--g700);color:var(--white);}
+.priority-tag.supporting{background:var(--g200);color:var(--g500);}
+.priority-tag.deferred{background:var(--g100);color:var(--g400);border:1px solid var(--g200);}
+.priority-feature{font-size:13px;font-weight:500;color:var(--black);margin-bottom:6px;letter-spacing:.02em;}
+.priority-desc{font-size:12px;color:var(--g500);line-height:1.7;margin-bottom:8px;}
+.priority-prd{font-size:10px;font-family:var(--font);color:var(--g400);letter-spacing:.06em;}
+.nike-tri{margin-bottom:28px;}
+.nike-tri-tabs{display:none;gap:0;border-bottom:1px solid var(--g200);margin-bottom:20px;}
+.nike-tri-tab{flex:1;padding:14px 10px;border:none;background:transparent;font-family:var(--font);font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--g400);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;}
+.nike-tri-tab:hover{color:var(--black);}
+.nike-tri-tab.active{color:var(--black);border-bottom-color:var(--black);}
+.nike-tri-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;align-items:start;}
+.nike-tri-col-title{font-size:9px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--g300);margin-bottom:14px;font-family:var(--font);padding-bottom:10px;border-bottom:1px solid var(--g200);}
+.nike-tri-col .priority-card{margin-bottom:16px;}
+.nike-tri-col .priority-card:last-child{margin-bottom:0;}
+.nike-decision-card{background:var(--white);border:1px solid var(--g200);padding:12px 14px;margin-bottom:0;}
+.nike-decision-card.excluded{background:var(--g100);}
+.nike-decision-title{font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--black);margin-bottom:6px;}
+.nike-decision-built,.nike-decision-why{font-size:11px;color:var(--g500);line-height:1.5;margin:0 0 4px;}
+.nike-decision-why{margin-bottom:0;color:var(--g400);font-size:10px;}
+@media (min-width: 1100px) {
+  .nike-tri-decisions .nike-tri-grid > .nike-tri-col {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px 12px;
+    align-content: start;
+  }
+  .nike-tri-decisions .nike-tri-grid > .nike-tri-col > .nike-tri-col-title {
+    grid-column: 1 / -1;
+    margin-bottom: 4px;
+  }
+}
+.nike-persona-seg{margin-top:8px;margin-bottom:28px;}
+.nike-persona-seg-label{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--black);margin-bottom:10px;}
+.nike-persona-seg-body{font-size:13px;color:var(--g500);line-height:1.75;margin:0;max-width:52em;}
+.nike-persona-tool-wrap{margin-top:36px;padding-top:28px;border-top:1px solid var(--g200);}
+.nike-persona-tool-head{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--black);margin-bottom:8px;}
+.nike-persona-tool-desc{font-size:13px;color:var(--g500);line-height:1.7;margin-bottom:16px;max-width:52em;}
+.artifact-strip{background:var(--black);}
+.artifact-trigger{padding:24px 56px;display:flex;align-items:stretch;justify-content:space-between;cursor:pointer;transition:background var(--ease-fast);}
+.artifact-trigger:hover{background:#111;}
+.artifact-left{display:flex;align-items:stretch;gap:20px;}
+.artifact-badge{border:1px solid rgba(255,255,255,.25);padding:0 12px;display:flex;align-items:center;flex-shrink:0;}
+.artifact-badge span{font-size:9px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.6);white-space:nowrap;font-family:var(--font);}
+.artifact-meta{display:flex;flex-direction:column;justify-content:center;gap:5px;}
+.artifact-name{font-size:14px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;color:var(--white);}
+.artifact-desc{font-size:12px;color:rgba(255,255,255,.35);}
+.artifact-right{display:flex;align-items:center;flex-shrink:0;padding-left:20px;}
+.artifact-toggle{font-size:20px;font-weight:300;color:rgba(255,255,255,.5);line-height:1;display:inline-block;width:24px;text-align:center;}
+.artifact-trigger:hover .artifact-toggle{color:var(--white);}
+.artifact-expand{max-height:0;overflow:hidden;transition:max-height 700ms ease;}
+.artifact-inner{background:#0a0a0a;}
+.artifact-close-btn{background:transparent;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.5);padding:9px 18px;font-size:9px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;font-family:var(--font);white-space:nowrap;margin-top:4px;}
+.artifact-iframe-wrap{width:100%;background:#0a0a0a;line-height:0;}
+.artifact-iframe-wrap iframe{width:100%;height:85vh;min-height:600px;border:none;display:block;background:#0a0a0a;}
+.artifact-model-open-btn{display:none;box-sizing:border-box;width:100%;margin:0;padding:18px 20px;text-align:center;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--white);text-decoration:none;background:#141414;border-top:1px solid rgba(255,255,255,.1);font-family:var(--font);-webkit-tap-highlight-color:transparent;}
+.artifact-model-open-btn:active{background:#1a1a1a;}
+.proto-section { padding: 80px clamp(24px, 5vw, 64px); box-sizing: border-box; border-bottom: 1px solid #f0f0f0; overflow-anchor: none; overscroll-behavior: contain; }
+.proto-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 28px; align-items: start; width: 100%; max-width: 100%; box-sizing: border-box; }
+.proto-phone { position: sticky; top: 40px; width: 320px; height: 693px; border-radius: 44px; border: 8px solid #000; overflow: hidden; background: #000; box-shadow: 0 0 0 1px #e8e8e8; display: flex; justify-content: center; align-items: flex-start; margin: 0; justify-self: center; align-self: center; }
+/* Fill inner bezel: 304×677,  scale = max(304/375, 677/812) so app bleeds to bottom; sides clip */
+.proto-phone iframe { width: 375px; height: 812px; border: none; display: block; transform: scale(0.83374); transform-origin: top center; flex-shrink: 0; pointer-events: auto; align-self: flex-start; }
+.proto-steps { display: flex; flex-direction: column; gap: 0; min-width: 0; }
+.proto-step { padding: 24px 0; border-bottom: 1px solid var(--g200); cursor: pointer; transition: opacity 0.2s; }
+.proto-step:first-child { border-top: 1px solid var(--g200); }
+.proto-step-num { font-size: 9px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--g300); margin-bottom: 8px; font-family: var(--mono, 'DM Mono', monospace); }
+.proto-step-title { font-size: 14px; font-weight: 500; color: var(--black); margin-bottom: 6px; letter-spacing: -.01em; }
+.proto-step-desc { font-size: 13px; font-weight: 300; color: var(--g500); line-height: 1.65; overflow-wrap: break-word; word-break: break-word; }
+.proto-step.active .proto-step-num { color: var(--black); }
+.proto-step.active .proto-step-title { color: var(--black); }
+.proto-step.active { opacity: 1; }
+.proto-step:not(.active) { opacity: 0.5; }
+.proto-step:hover:not(.active) { opacity: 0.75; }
+@media (max-width: 768px) {
+  .proto-layout { grid-template-columns: 1fr; gap: 40px; }
+  .proto-phone { position: static; justify-self: center; align-self: center; }
+  .proto-step:not(.active) { opacity: 1; }
+  .proto-step:hover:not(.active) { opacity: 1; }
+}
+  /* Journey Map */
+  .journey-section { padding: 80px 48px; border-top: 1px solid var(--g200); border-bottom: 1px solid var(--g200); background: var(--white); }
+  .journey-map { margin-top: 40px; }
+  .journey-step { border-bottom: 1px solid var(--g100); }
+  .journey-header { 
+    display: flex; align-items: center; gap: 24px; padding: 24px 0; cursor: pointer; 
+    transition: background var(--ease-fast);
+  }
+  .journey-num { font-size: 11px; font-weight: 600; color: var(--g300); font-family: var(--font); width: 24px; }
+  .journey-label { font-size: 14px; font-weight: 500; text-transform: uppercase; letter-spacing: .08em; color: var(--black); flex: 1; }
+  .journey-icon { font-size: 20px; font-weight: 300; color: var(--g300); width: 20px; text-align: center; }
+  .journey-panel { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; padding: 0 0 0 48px; }
+  .journey-panel-title { font-size: 18px; font-weight: 400; color: var(--black); margin-bottom: 16px; border-left: 2px solid var(--black); padding-left: 20px; }
+  .journey-step.active .journey-panel { max-height: 600px; padding-bottom: 32px; }
+  .journey-step.active .journey-icon { transform: rotate(45deg); color: var(--black); }
+  .journey-step:last-child { border-bottom: none; }
+
+  @media (max-width: 768px) {
+    .journey-section { padding: 40px 20px !important; }
+    .journey-panel { padding-left: 20px !important; }
+    .journey-panel-title { font-size: 16px !important; }
+    .flow-panel-meta { flex-wrap: wrap !important; }
+  }
+.app-showcase{padding:0;border-bottom:1px solid var(--g200);}
+.app-showcase-eyebrow{display:flex;align-items:center;gap:14px;padding:56px 56px 0;margin-bottom:12px;}
+.app-showcase-num{font-size:9px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--g300);font-family:var(--font);}
+.app-showcase-label{font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--black);}
+.app-showcase-heading{font-family:var(--font);font-size:clamp(26px,3vw,40px);font-weight:300;color:var(--black);line-height:1.1;letter-spacing:.02em;padding:0 56px;margin-bottom:12px;}
+.app-showcase-heading em{font-style:italic;color:var(--g500);}
+.app-showcase-sub{font-size:13px;color:var(--g500);padding:0 56px 40px;line-height:1.75;max-width:640px;}
+.app-showcase-layout{display:grid;grid-template-columns:160px 1fr;border-top:1px solid var(--g200);}
+.app-screen-nav{border-right:1px solid var(--g200);padding:0;}
+.app-screen-btn{display:flex;flex-direction:column;gap:4px;width:100%;padding:20px 24px;border:none;background:transparent;cursor:pointer;text-align:left;border-bottom:1px solid var(--g200);border-left:2px solid transparent;transition:all var(--ease-fast);}
+.app-screen-btn:hover{background:var(--g100);}
+.app-screen-btn.active{border-left-color:var(--black);background:var(--g100);}
+.app-screen-btn-num{font-size:9px;font-weight:600;letter-spacing:.12em;color:var(--g300);font-family:var(--font);}
+.app-screen-btn.active .app-screen-btn-num{color:var(--black);}
+.app-screen-btn-name{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--g400);}
+.app-screen-btn.active .app-screen-btn-name{color:var(--black);}
+.app-screen-frame{display:none;grid-template-columns:1fr 1fr;}
+.app-screen-frame.active{display:grid;}
+.app-screen-visual{padding:40px;border-right:1px solid var(--g200);display:flex;align-items:center;justify-content:center;background:var(--g100);}
+.app-screen-meta{padding:40px;display:flex;flex-direction:column;justify-content:space-between;}
+.app-screen-desc-label{font-size:8px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--g300);margin-bottom:14px;font-family:var(--font);}
+.app-screen-desc-text{font-size:13px;color:var(--g500);line-height:1.8;}
+.app-screen-counter{font-family:var(--font);font-size:32px;font-weight:300;font-style:italic;color:var(--g200);letter-spacing:-.01em;margin-top:24px;}
+.cs-next{border-top:1px solid var(--g200);padding-top:24px;margin-top:0;}
+.cs-next-label{font-size:8px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--g300);margin-bottom:14px;font-family:var(--font);}
+.cs-next-link{text-decoration:none;display:inline-block;}
+.cs-next-meta{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--g400);margin-bottom:6px;font-family:var(--font);}
+.cs-next-title{font-family:var(--font);font-size:28px;font-weight:300;color:var(--black);transition:color var(--ease-fast);}
+.cs-next-link:hover .cs-next-title{color:var(--g500);}
+#cs-s10-business-benefits{padding:72px 56px 40px;}
+#cs-s10-business-benefits .cs-stats{margin-bottom:0;}
+#cs-next.cs-section{padding:40px 56px 28px;}
+footer{border-top:1px solid var(--g200);padding:32px 48px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;}
+.footer-id{display:flex;flex-direction:column;gap:3px;}
+.footer-name{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--black);}
+.footer-role{font-size:11px;color:var(--g400);}
+.footer-qualifier{font-size:9px;color:var(--g300);font-style:italic;text-transform:none;margin-top:2px;opacity:.85;}
+.footer-links{display:flex;gap:20px;}
+.footer-link{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--g400);text-decoration:none;transition:color var(--ease-fast);}
+.footer-link:hover{color:var(--black);}
+.footer-copy{font-size:11px;color:var(--g300);font-family:var(--font);}
+@media (max-width: 1100px) {
+  .nike-research-persona-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 768px) {
+  .token-panel {
+    max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; 
+    background: var(--white);
+  }
+  .token-row { font-size: 12px; color: var(--g500); line-height: 1.6; margin-bottom: 12px; }
+  .token-icon { font-size: 14px; color: var(--g300); }
+  #cs-sidenav { display: none !important; }
+  .cs-body-wrap { grid-template-columns: 1fr !important; }
+  #cs-exec-summary, .cs-section { padding: 40px 20px !important; }
+  #cs-users { padding-bottom: 24px !important; }
+  #artifact-design-system { margin-top: -24px !important; padding-top: calc(40px + 24px) !important; }
+  .proto-section { padding: 40px clamp(20px, 5vw, 28px) !important; min-height: 0 !important; }
+  #cs-stylect-bm .jm-wrap.stylect-bm-jm { margin-top: 20px; margin-left: -20px; margin-right: -20px; width: calc(100% + 40px); padding: 20px 0 24px; }
+  .stylect-bm-table-title { padding: 0 20px; margin-bottom: 12px; }
+  .stylect-bm-visual { padding: 0 20px; }
+  .stylect-bm-actors { grid-template-columns: 1fr; gap: 12px; }
+  .jm-wrap { margin-top: 24px; padding: 20px 14px 24px; }
+  .jm-rail { display: none; }
+  .jm-stages { grid-template-columns: 1fr !important; gap: 16px !important; }
+  .jm-node { text-align: left; background: var(--white); border: 1px solid var(--g200); border-radius: 2px; overflow: hidden; flex-direction: column; }
+  .jm-node-top { flex-direction: row; justify-content: flex-start; align-items: center; gap: 12px; min-height: auto; margin-top: 0; margin-bottom: 0; order: 2; padding: 12px 16px; background: var(--g100); border-top: 1px solid var(--g200); }
+  .jm-node-num { width: 36px; height: 36px; font-size: 10px; box-shadow: 0 0 0 3px var(--white); }
+  .jm-actor { margin-top: 0; align-self: center; flex: 1; text-align: left; letter-spacing: 0.14em; }
+  .jm-card { flex: 0 1 auto; min-height: 0; border: none; border-radius: 0; order: 1; }
+  .jm-card-title { padding: 16px 16px 0; }
+  .jm-card-body { padding: 10px 16px 16px; }
+  .cs-full-bleed { width: calc(100% + 40px + 2px) !important; margin-left: calc(-20px - 1px) !important; margin-right: calc(-20px - 1px) !important; }
+  .cs-exec-inner { grid-template-columns: 1fr !important; gap: 32px !important; }
+  .cs-hero-title-wrap { padding: 40px 20px 48px !important; }
+  .cs-stats, .cs-stats-3, .cs-stats-4, .persona-grid, .nike-research-persona-grid, .cs-body-2col { 
+     grid-template-columns: 1fr !important; 
+     gap: 16px !important; 
+     background: transparent !important;
+   }
+   .cs-exec-meta-grid { 
+     grid-template-columns: repeat(2, minmax(0, 1fr)) !important; 
+     gap: 1px !important; 
+     background: var(--g200) !important;
+     border: 1px solid var(--g200) !important;
+   }
+  .cs-heading-serif { font-size: 24px !important; }
+  
+  /* Navbar mobile fixes */
+  .nav-main { padding: 0 20px !important; display: flex !important; justify-content: space-between !important; align-items: center !important; }
+  .nav-left, .nav-wordmark, .nav-right { position: static !important; transform: none !important; left: auto !important; right: auto !important; top: auto !important; }
+  .nav-left a:not([href="/"]) { display: none !important; }
+  .nav-wordmark { font-size: 11px !important; letter-spacing: .12em !important; }
+  .nav-right a { font-size: 9px !important; }
+  .app-showcase-layout { grid-template-columns: 1fr !important; }
+  .app-screen-frame.active { display: flex !important; flex-direction: column !important; }
+  .app-showcase-eyebrow, .app-showcase-heading, .app-showcase-sub { padding-left: 20px !important; padding-right: 20px !important; }
+  .artifact-trigger { padding: 16px 20px !important; }
+  .cs-table { display: block; overflow-x: auto; width: 100%; }
+  .nike-tri-tabs { display: flex !important; }
+  .nike-tri-grid { display: block !important; }
+  .nike-tri-col { display: none !important; }
+  .nike-tri-col.active { display: block !important; }
+  .nike-tri-col .nike-tri-col-title { display: none !important; }
+  .nike-tri-decisions .nike-tri-col.active .nike-decision-card { margin-bottom: 10px; }
+  .nike-tri-decisions .nike-tri-col.active .nike-decision-card:last-child { margin-bottom: 0; }
+  .artifact-iframe-wrap iframe { pointer-events: none !important; }
+  .artifact-model-open-btn { display: block !important; }
+  .cs-next { flex-direction: column !important; gap: 16px !important; align-items: flex-start !important; }
+  footer { flex-direction: column !important; gap: 16px !important; padding: 32px 20px !important; align-items: flex-start !important; }
+}
+  /* Metrics Grid */
+  .metrics-container { margin-bottom: 48px; }
+  .metrics-grid-header { font-size: 8px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--g300); margin-bottom: 16px; font-family: var(--font); }
+  .metrics-card-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .metric-card { 
+    background: var(--white); border: 1px solid var(--g100); padding: 20px; 
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .metric-label { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: .05em; color: var(--black); }
+  .metric-target { font-size: 24px; font-weight: 300; color: var(--black); letter-spacing: -.02em; }
+  .metric-desc { font-size: 11px; color: var(--g400); line-height: 1.5; }
+
+  @media (max-width: 768px) {
+    .metrics-card-grid { grid-template-columns: 1fr; }
+    .metric-target { font-size: 20px; }
+    .cs-stats-2 { grid-template-columns: 1fr !important; }
+    .cs-problem-split { grid-template-columns: 1fr !important; gap: 20px !important; }
+  }
+  /* Conclusion Headings */
+  .cs-conclusion-header { 
+    font-size: 11px; font-weight: 600; letter-spacing: .15em; text-transform: uppercase; 
+    color: var(--black); margin-top: 40px; margin-bottom: 12px; font-family: var(--font);
+  }
+  /* Mobile Overrides */
+  @media (max-width: 768px) {
+    #cs-screens, .cs-screens-section, [data-target="cs-screens"] { display: none !important; }
+    
+    .metrics-card-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 8px !important; }
+    .metric-target { font-size: 18px !important; }
+    .metric-card { padding: 12px !important; }
+  }
+</style>
+</head>
+<body>
+<div id="scroll-progress" aria-hidden="true"></div>
+<nav id="site-nav">
+  <div class="nav-main">
+    <div class="nav-left"><a href="/" target="_parent">Work</a><a href="/#about" target="_parent">About</a></div>
+    <a class="nav-wordmark" href="/" target="_parent">Benn Pattara</a>
+    <div class="nav-right"><a href="/" target="_parent">All Projects &rarr;</a></div>
+  </div>
+</nav>
+<div class="page-body">
+<section class="cs-hero">
+  <div class="cs-hero-bg"><img src="../stylect/stylect_hero.webp" alt="Stylect"/></div>
+  <div class="cs-hero-scrim"></div>
+  <div class="cs-hero-title-wrap">
+    <div class="cs-hero-meta-row">
+      <p class="cs-hero-kicker" style="margin-bottom:0;">Stylect · Platform MVP</p>
+      <span class="cs-hero-role">PM · UX</span>
+    </div>
+    <h1 class="cs-hero-title">Stylect</h1>
+  </div>
+</section>
+<div class="cs-body-wrap">
+<aside id="cs-sidenav"><div class="cs-sidenav-label">Index</div><a class="cs-sidenav-link active" data-target="cs-s01-executive-summary" onclick="scrollToSection('cs-s01-executive-summary')"><span class="cs-sidenav-num">01</span><span class="cs-sidenav-text">Executive Summary</span></a><a class="cs-sidenav-link" data-target="cs-s02-background" onclick="scrollToSection('cs-s02-background')"><span class="cs-sidenav-num">02</span><span class="cs-sidenav-text">Background</span></a><a class="cs-sidenav-link" data-target="cs-s03-the-ask" onclick="scrollToSection('cs-s03-the-ask')"><span class="cs-sidenav-num">03</span><span class="cs-sidenav-text">The Ask</span></a><a class="cs-sidenav-link" data-target="cs-s04-the-problem" onclick="scrollToSection('cs-s04-the-problem')"><span class="cs-sidenav-num">04</span><span class="cs-sidenav-text">The Problem</span></a><a class="cs-sidenav-link" data-target="cs-s05-research-methods" onclick="scrollToSection('cs-s05-research-methods')"><span class="cs-sidenav-num">05</span><span class="cs-sidenav-text">Research Methods</span></a><a class="cs-sidenav-link" data-target="cs-s06-key-data-findings" onclick="scrollToSection('cs-s06-key-data-findings')"><span class="cs-sidenav-num">06</span><span class="cs-sidenav-text">Key Data / Findings</span></a><a class="cs-sidenav-link" data-target="cs-s07-the-insight" onclick="scrollToSection('cs-s07-the-insight')"><span class="cs-sidenav-num">07</span><span class="cs-sidenav-text">The Insight</span></a><a class="cs-sidenav-link" data-target="cs-s08-the-strategy" onclick="scrollToSection('cs-s08-the-strategy')"><span class="cs-sidenav-num">08</span><span class="cs-sidenav-text">The Strategy</span></a><a class="cs-sidenav-link" data-target="cs-s09-concept-design-work" onclick="scrollToSection('cs-s09-concept-design-work')"><span class="cs-sidenav-num">09</span><span class="cs-sidenav-text">Concept / Design Work</span></a><a class="cs-sidenav-link" data-target="cs-s09-how" onclick="scrollToSection('cs-s09-how')"><span class="cs-sidenav-num">, </span><span class="cs-sidenav-text">How it works</span></a><a class="cs-sidenav-link" data-target="artifact-1" onclick="scrollToSection('artifact-1')"><span class="cs-sidenav-num">, </span><span class="cs-sidenav-text">Molecular system</span></a><a class="cs-sidenav-link" data-target="prototype" onclick="scrollToSection('prototype')"><span class="cs-sidenav-num">, </span><span class="cs-sidenav-text">Prototype</span></a><a class="cs-sidenav-link" data-target="cs-s10-business-benefits" onclick="scrollToSection('cs-s10-business-benefits')"><span class="cs-sidenav-num">10</span><span class="cs-sidenav-text">Business Benefits</span></a><div class="cs-sidenav-exec">
+    <div class="cs-sidenav-exec-label">Draft</div>
+    <p class="cs-sidenav-exec-text">Prose test from portfolio-prose.docx. Primary: <a href="/work/stylect" target="_parent" style="color:inherit">/work/stylect</a>.</p>
+    <a class="cs-sidenav-exec-link" onclick="scrollToSection('cs-s01-executive-summary')">Start &rarr;</a>
+  </div></aside>
+<div class="cs-content"><section id="cs-s01-executive-summary" data-cs-section="cs-s01-executive-summary" style="padding:64px 56px;border-bottom:1px solid var(--g200);">
+  <div class="cs-exec-inner">
+    <div><h2 class="cs-exec-heading">Executive Summary</h2><p class="cs-body">E-commerce solved access and destroyed confidence. The modern shopper can reach every item in every store from her phone and arrives at purchase feeling less certain than she did when she walked into a boutique and asked for help. Stylect restores the relationship that made that help worth asking for,  a one-to-one human styling platform that delivers a three-item shortlist for any occasion in under twenty-four hours. Not better recommendations. Accountable ones.</p></div>
+    <div>
+      <div class="cs-exec-meta-grid">
+        <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Project</div><div class="cs-exec-meta-val">Stylect · MVP</div></div>
+        <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Year</div><div class="cs-exec-meta-val">2026</div></div>
+        <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Role</div><div class="cs-exec-meta-val">Product Manager &amp; UX Systems Designer</div></div>
+        <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Type</div><div class="cs-exec-meta-val">Full-Stack Platform · Molecular Design System</div></div>
+        <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Deliverables</div><div class="cs-exec-meta-val">PRD · Molecular Design System · Interactive App Prototype</div></div>
+        <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Goal</div><div class="cs-exec-meta-val">Find ONE item for ONE occasion in under 24h</div></div>
+        <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Format</div><div class="cs-exec-meta-val">Prose narrative test</div></div>
+        <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Live</div><div class="cs-exec-meta-val"><a href="/work/stylect" target="_parent" style="color:inherit;text-decoration:none;border-bottom:1px solid var(--black)">/work/stylect</a></div></div>
+      </div>
+    </div>
+  </div>
+</section><section class="cs-section cs-section-alt" id="cs-s02-background" data-cs-section="cs-s02-background">
+  <div class="cs-section-eyebrow"><span class="cs-section-num">02</span><span class="cs-section-title">Background</span></div>
+  <p class="cs-body">Fashion e-commerce scaled the inventory and eliminated the person who knew how to navigate it. The in-store associate who remembered a customer&#x27;s preferences, who could pull something unexpected from the back because she thought of her,  that relationship was never replicated in the digital channel. Platforms filled the gap with algorithms. The algorithms are optimized for engagement and inventory movement, not for the outcome the shopper is actually trying to reach. The result is a category where the primary consumer experience is exhaustion: too many options, none of them clearly right, and no trusted voice to cut through the noise.</p>
+</section><section class="cs-section" id="cs-s03-the-ask" data-cs-section="cs-s03-the-ask">
+  <div class="cs-the-ask-wrap">
+    <div class="cs-the-ask-inner">
+      <div class="cs-section-eyebrow"><span class="cs-section-num">03</span><span class="cs-section-title">The Ask</span></div>
+      <p class="cs-the-ask-lede">Develop an MVP that bridges digital convenience and human expertise, specifically helping busy professionals find a single, high-confidence item for a specific occasion within twenty-four hours.</p>
+    </div>
+  </div>
+</section><section class="cs-section cs-section-alt" id="cs-s04-the-problem" data-cs-section="cs-s04-the-problem">
+  <div class="cs-section-eyebrow"><span class="cs-section-num">04</span><span class="cs-section-title">The Problem</span></div>
+  <p class="cs-body">The problem is not a filtering problem. Better filters produce more refined versions of the same exhaustion. The problem is a trust problem. Shoppers know that algorithmic recommendations are not designed for them. They are designed to move inventory. That awareness is not cynicism,  it is accurate. Seventy-three percent of fashion e-commerce sessions end without a purchase. Sixty-one percent of Gen Z shoppers report distrusting algorithmic recommendations. The average browse time before a fashion purchase is four-point-two hours. Confidence in the right decision drops sharply if it is not reached within the first twenty-four hours of searching. The platform is not broken. The model is.</p>
+  <div class="cs-stats cs-stats-2">
+    <div class="cs-stat-cell"><div class="cs-stat-eyebrow">Sessions</div><div class="cs-stat-num">73%</div><div class="cs-stat-label">Fashion e-commerce ends with no purchase</div></div>
+    <div class="cs-stat-cell"><div class="cs-stat-eyebrow">Gen Z trust</div><div class="cs-stat-num">61%</div><div class="cs-stat-label">Distrust algorithmic recommendations</div></div>
+  </div>
+</section><section class="cs-section" id="cs-s05-research-methods" data-cs-section="cs-s05-research-methods">
+  <div class="cs-section-eyebrow"><span class="cs-section-num">05</span><span class="cs-section-title">Research Methods</span></div>
+  <p class="cs-body">Consumer research identified the post-algorithm professional,  between twenty-three and forty-five years old, high time cost, high taste standard, purchasing for specific occasions rather than general wardrobe building,  as the primary user. Friction log analysis mapped the full forty-eight-hour shopping cycle for a single event item, documenting the decision points where confidence collapsed and abandonment occurred. Stylist workflow shadowing at Nordstrom and comparable retailers translated the mechanics of successful in-person styling sessions,  how associates build context, why three options performs better than ten, what a personalized recommendation note does to purchase confidence,  into the design requirements for a digital interface.</p>
+</section><section class="cs-section cs-section-alt" id="cs-s06-key-data-findings" data-cs-section="cs-s06-key-data-findings">
+  <div class="cs-section-eyebrow"><span class="cs-section-num">06</span><span class="cs-section-title">Key Data / Findings</span></div>
+  <p class="cs-body">Cart abandonment in fashion e-commerce runs at seventy-three percent. Sixty-one percent of Gen Z shoppers report distrusting algorithmic recommendations. The average session before purchase takes four-point-two hours,  a number that reflects not engaged browsing but decision paralysis. The single most actionable finding came from the stylist workflow research: a recommendation accompanied by a personalized note explaining fit or color rationale is sixty percent more likely to result in a purchase than the same recommendation without one. The note is not additional information. It is the transfer of confidence from a trusted source to the shopper. That transfer is the product.</p>
+  <div class="cs-stats cs-stats-3">
+    <div class="cs-stat-cell"><div class="cs-stat-eyebrow">Paralysis</div><div class="cs-stat-num">4.2h</div><div class="cs-stat-label">Average browse before purchase</div></div>
+    <div class="cs-stat-cell"><div class="cs-stat-eyebrow">Note lift</div><div class="cs-stat-num">+60%</div><div class="cs-stat-label">Purchase lift with stylist rationale vs. none</div></div>
+    <div class="cs-stat-cell"><div class="cs-stat-eyebrow">SLA</div><div class="cs-stat-num">24h</div><div class="cs-stat-label">Decision window where confidence stays high</div></div>
+  </div>
+</section><section class="cs-section" id="cs-s07-the-insight" data-cs-section="cs-s07-the-insight">
+  <div class="cs-section-eyebrow"><span class="cs-section-num">07</span><span class="cs-section-title">The Insight</span></div>
+  <p class="cs-body">People have never navigated the world&#x27;s information alone. They have always used trusted intermediaries,  the friend who knows about wine, the tailor who understands proportion, the associate who remembered what you tried on six months ago. E-commerce removed those intermediaries while keeping the inventory. It replaced the relationship with a feed and called it personalization. The distrust that shoppers feel is not a reaction to bad recommendations. It is a reaction to the absence of intent. An algorithm cannot intend anything on the shopper&#x27;s behalf. A person can. The product is the infrastructure for that intention to operate at scale.</p>
+</section><section class="cs-section cs-section-alt" id="cs-s08-the-strategy" data-cs-section="cs-s08-the-strategy">
+  <div class="cs-section-eyebrow"><span class="cs-section-num">08</span><span class="cs-section-title">The Strategy</span></div>
+  <p class="cs-body">The strategic architecture is built on a single non-negotiable constraint: the human gate. Every shortlist must have a human stylist attached to it before it reaches the shopper. The algorithm&#x27;s role is matching,  finding the right stylist for the request, not generating the recommendation itself. This constraint is not a design preference. It is the commercial logic of the platform. The business model is aligned to the same constraint: stylist commission fires at purchase, not at click. Retailer affiliate revenue fires at checkout. Every incentive in the system is pointed at the same outcome,  a transaction that actually fits. The success metric is time to decision, not time in app.</p>
+  <h2 class="cs-heading-serif" style="margin-top:8px;">Three parties.<br><em>All three only win on a completed transaction.</em></h2>
+  <p class="cs-body">Stylect is a three-sided marketplace: the shopper, the stylist, and the brand manager. The platform earns affiliate revenue at checkout. The stylist earns a direct commission. The retailer receives guaranteed, highly qualified foot traffic. Nobody earns anything on clicks or browsing behavior.</p>
+  <div id="cs-stylect-bm" data-cs-section="cs-stylect-bm">
+    <div class="jm-wrap stylect-bm-jm" role="region" aria-labelledby="stylect-bm-table-title">
+      <h3 class="stylect-bm-table-title" id="stylect-bm-table-title">What each side brings · what they earn</h3>
+      <div class="stylect-bm-visual">
+        <div class="stylect-bm-actors">
+          <div class="jm-card stylect-bm-card">
+            <p class="stylect-bm-role">Shopper</p>
+            <p class="jm-card-body">Brings discovery and intent. Earns a human-named shortlist,  not another engagement feed.</p>
+          </div>
+          <div class="jm-card stylect-bm-card">
+            <p class="stylect-bm-role">Stylist</p>
+            <p class="jm-card-body">Brings taste and trust. Earns commission when the recommendation converts,  online or in store.</p>
+          </div>
+          <div class="jm-card stylect-bm-card">
+            <p class="stylect-bm-role">Brand</p>
+            <p class="jm-card-body">Brings inventory and traffic. Earns qualified visits and closed-loop attribution, not anonymous clicks.</p>
+          </div>
+        </div>
+        <div class="stylect-bm-hub">
+          <p class="stylect-bm-hub-name">Stylect · platform layer</p>
+          <p class="stylect-bm-hub-lines"><em>Attribution</em> ties the sale to the stylist. <em>Curation + reservation + commission</em> only fire on a completed transaction,  never on scroll depth.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section><section class="cs-section" id="cs-s09-concept-design-work" data-cs-section="cs-s09-concept-design-work">
+  <div class="cs-section-eyebrow"><span class="cs-section-num">09</span><span class="cs-section-title">Concept / Design Work</span></div>
+  <p class="cs-body">The Occasion Brief Builder opens the experience with five questions that capture the information a stylist needs to make a confident recommendation: the occasion, the vibe, the body focus, the budget, and the weather. The Stylist Dashboard gives styling associates a purpose-built interface for managing requests, searching live inventory across partner retailers, and assembling Shortlist Cards,  each card containing the item, the in-store availability QR code, and the human-written note that carries the recommendation&#x27;s authority. The two-hour SLA is a hard protocol, not a target. The Style Vault captures kept items post-purchase and builds a persistent style identity over time, converting a transactional platform into a long-cycle relationship. The full system is specified in a product requirements document, demonstrated through an interactive prototype across all three persona types, and supported by a molecular design system that holds trust legibility as a constraint at the token level.</p>
+
+  <div id="cs-s09-how" data-cs-section="cs-s09-how">
+    <h2 class="cs-heading-serif" style="margin-top:40px;">How it works</h2>
+    <p class="cs-body" style="margin-bottom:0;">A shopper submits a brief. A matched stylist responds with three items and a reason for each one.</p>
+    <div class="jm-wrap" role="region" aria-label="Stylect journey from brief to shortlist">
+      <div class="jm-rail-wrap">
+        <div class="jm-rail" aria-hidden="true"></div>
+        <div class="jm-stages">
+          <article class="jm-node">
+            <div class="jm-card">
+              <h3 class="jm-card-title">Occasion brief</h3>
+              <p class="jm-card-body">Occasion, budget, dress code, and brief context, in under a minute.</p>
+            </div>
+            <div class="jm-node-top">
+              <div class="jm-node-num">1</div>
+              <span class="jm-actor">Shopper</span>
+            </div>
+          </article>
+          <article class="jm-node">
+            <div class="jm-card">
+              <h3 class="jm-card-title">Matches surfaced</h3>
+              <p class="jm-card-body">Scores in-store stylists for fit, surfaces <strong style="font-weight:600;color:var(--black)">three</strong> matches, then <strong style="font-weight:600;color:var(--black)">stops</strong>, no endless ranking.</p>
+            </div>
+            <div class="jm-node-top">
+              <div class="jm-node-num">2</div>
+              <span class="jm-actor">Platform</span>
+            </div>
+          </article>
+          <article class="jm-node">
+            <div class="jm-card">
+              <h3 class="jm-card-title">Chooses stylist</h3>
+              <p class="jm-card-body">The shopper picks their stylist, <em>chosen</em>, never auto-assigned.</p>
+            </div>
+            <div class="jm-node-top">
+              <div class="jm-node-num">3</div>
+              <span class="jm-actor">Shopper</span>
+            </div>
+          </article>
+          <article class="jm-node">
+            <div class="jm-card">
+              <h3 class="jm-card-title">Three items + why</h3>
+              <p class="jm-card-body">Three items within two hours; every pick needs a stylist-written &ldquo;why.&rdquo;</p>
+            </div>
+            <div class="jm-node-top">
+              <div class="jm-node-num">4</div>
+              <span class="jm-actor">Stylist</span>
+            </div>
+          </article>
+          <article class="jm-node">
+            <div class="jm-card">
+              <h3 class="jm-card-title">Human gate</h3>
+              <p class="jm-card-body">The shortlist never reaches the shopper without a human author.</p>
+            </div>
+            <div class="jm-node-top">
+              <div class="jm-node-num">5</div>
+              <span class="jm-actor">Rule</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="cs-heading-serif" style="margin-top:48px;">Molecular design system</h2>
+  <p class="cs-body" style="margin-bottom:12px;">Every design decision was made to make trust <em style="font-style:italic;">legible.</em></p>
+  <div class="cs-problem-split" style="margin-bottom:32px;">
+    <p class="cs-body">Most fashion interfaces treat design as expression, brand flex, aesthetic signal,  a reason to linger and keep you scrolling through an environment. Stylect is built through a molecular design system that aligns all tokens to perform a specific function in the trust sequence.</p>
+    <p class="cs-body">The system is built to WCAG AA contrast standards, as a design constraint so visual noise never substitutes for clarity. Elevated without being exclusive,  legible for every user.</p>
+  </div>
+</section>
+<div class="cs-design-system-strip-wrap" id="artifact-1" data-cs-section="artifact-1">
+  <div class="artifact-strip">
+    <div class="artifact-trigger" id="art1-trigger" onclick="toggleArtifact(1)">
+      <div class="artifact-left">
+        <div class="artifact-badge"><span>Interactive artifact</span></div>
+        <div class="artifact-meta">
+          <div class="artifact-name">Molecular design system</div>
+          <div class="artifact-desc">Tokens · light/dark · components · same build as /work/stylect</div>
+        </div>
+      </div>
+      <div class="artifact-right"><span class="artifact-toggle" id="art1-cta">+</span></div>
+    </div>
+    <div class="artifact-expand" id="art1-expand">
+      <div class="artifact-inner">
+        <div class="artifact-iframe-wrap"><iframe title="Stylect molecular design system" scrolling="yes" src="../stylect/stylect-design-system.html"></iframe></div>
+        <a class="artifact-model-open-btn" href="/case-studies/stylect/stylect-design-system.html" target="_top" rel="noopener">Open full screen</a>
+      </div>
+    </div>
+  </div>
+</div>
+<section class="proto-section" id="prototype" data-cs-section="prototype">
+  <div class="proto-intro">
+    <div class="cs-section-eyebrow"><span class="cs-section-num">, </span><span class="cs-section-title">Live prototype</span></div>
+    <h2 class="cs-heading-serif">Shopper, stylist, and brand manager flows <em>in one build.</em></h2>
+    <p class="cs-body" style="margin-bottom:0;">Same HTML prototype as the full case study: brief, match, chat, shortlist, QR reservation, stylist workspace, and manager view. Use the tabs below to switch personas.</p>
+  </div>
+  <div class="proto-layout-live">
+    <div class="proto-stack">
+      <div class="proto-phone-live">
+        <iframe id="stylect-proto-iframe" src="../stylect/stylect-app.html?embed=case&amp;view=stylee" title="Stylect app prototype" scrolling="yes"></iframe>
+      </div>
+      <div class="proto-persona" aria-label="Switch prototype persona">
+        <div class="proto-persona-tabs" role="tablist">
+          <button type="button" class="proto-ptab active" data-stylect-view="stylee" role="tab" aria-selected="true">Stylee</button>
+          <button type="button" class="proto-ptab" data-stylect-view="stylist" role="tab" aria-selected="false">Stylist</button>
+          <button type="button" class="proto-ptab" data-stylect-view="manager" role="tab" aria-selected="false">Manager</button>
+        </div>
+      </div>
+    </div>
+    <p class="proto-open-row"><a href="../stylect/stylect-app.html" target="_blank" rel="noopener">Open prototype in new tab</a></p>
+  </div>
+</section>
+<section class="cs-section cs-section-alt" id="cs-s10-business-benefits" data-cs-section="cs-s10-business-benefits">
+  <div class="cs-section-eyebrow"><span class="cs-section-num">10</span><span class="cs-section-title">Business Benefits</span></div>
+  <p class="cs-body">The conversion case is direct: a shopper who receives a three-item shortlist with a human-authored rationale for each pick is purchasing with a level of confidence that no algorithmic platform currently produces. The target purchase confidence rate is above seventy percent. The retailer synergy case is equally direct: a shopper directed to a specific item at a specific store with a QR code in hand is not a browser. She is a buyer. The Reserve in Store mechanic converts digital confidence into physical foot traffic at a moment when physical retail needs it most. The long-term value case is the Style Identity graph,  a proprietary dataset of kept items, occasion types, and stylist relationships that compounds with every transaction and makes the platform&#x27;s recommendations more accurate over time. The structural benefit is one that does not appear on a conversion dashboard: for the first time, the stylist whose judgment drove the sale is compensated for the judgment, not just the transaction.</p>
+  <div class="cs-stats cs-stats-3">
+    <div class="cs-stat-cell"><div class="cs-stat-eyebrow">Target confidence</div><div class="cs-stat-num">&gt;70%</div><div class="cs-stat-label">Purchase confidence on shortlist + note</div></div>
+    <div class="cs-stat-cell"><div class="cs-stat-eyebrow">Format</div><div class="cs-stat-num">3</div><div class="cs-stat-label">Item shortlist · human gate mandatory</div></div>
+    <div class="cs-stat-cell"><div class="cs-stat-eyebrow">Compass</div><div class="cs-stat-num">Time</div><div class="cs-stat-label">Success = time-to-decision, not time-in-app</div></div>
+  </div>
+</section>
+<section class="cs-section cs-section-alt" id="cs-next" data-cs-section="cs-next">
+  <div class="cs-next">
+    <div class="cs-next-label">Next</div>
+    <a href="/work/nike" class="cs-next-link" target="_parent">
+      <div class="cs-next-meta">Nike SNKRS</div>
+      <div class="cs-next-title">Nike SNKRS →</div>
+    </a>
+  </div>
+</section>
+</div></div></div>
+<footer>
+  <div class="footer-id">
+    <span class="footer-name">Benn Pattara</span>
+    <span class="footer-role">Brand &amp; Product Strategist</span>
+    <span class="footer-qualifier">from cultural insight to shipped product specs</span>
+  </div>
+  <div class="footer-links">
+    <a href="/" class="footer-link" target="_parent">Home</a>
+    <a href="/#about" class="footer-link" target="_parent">About</a>
+    <a href="/blog" class="footer-link" target="_parent">Blog</a>
+    <a href="/#contact" class="footer-link" target="_parent">Contact</a>
+  </div>
+  <div class="footer-copy">&copy; 2026 Benn Pattara &middot; bennpattara.com</div>
+</footer>
+
+<script>
+window.addEventListener('scroll', function () {
+  var s = window.scrollY, t = document.documentElement.scrollHeight - window.innerHeight;
+  var bar = document.getElementById('scroll-progress');
+  if (bar) bar.style.width = (t > 0 ? (s / t * 100) : 0) + '%';
+}, { passive: true });
+const sectionObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      document.querySelectorAll('.cs-sidenav-link').forEach(l => l.classList.remove('active'));
+      const match = document.querySelector('.cs-sidenav-link[data-target="' + entry.target.id + '"]');
+      if (match) match.classList.add('active');
+    }
+  });
+}, { threshold: 0, rootMargin: '-10% 0px -80% 0px' });
+document.querySelectorAll('[data-cs-section]').forEach(s => sectionObserver.observe(s));
+function scrollToSection(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 104, behavior: 'smooth' });
+}
+function toggleArtifact(n) {
+  const expand = document.getElementById('art' + n + '-expand');
+  const toggle = document.getElementById('art' + n + '-cta');
+  if (!expand || !toggle) return;
+  const isOpen = expand.dataset.open === 'true';
+  expand.style.maxHeight = isOpen ? '0' : '5200px';
+  expand.dataset.open = isOpen ? 'false' : 'true';
+  toggle.textContent = isOpen ? '+' : '\u00d7';
+  if (!isOpen) {
+    var iframe = expand.querySelector('iframe[data-lab-src]');
+    if (iframe && (!iframe.getAttribute('src') || iframe.getAttribute('src') === 'about:blank')) {
+      iframe.src = iframe.getAttribute('data-lab-src') || '';
+    }
+  }
+}
+(function initStylectProtoEmbed() {
+  const iframe = document.getElementById('stylect-proto-iframe');
+  if (!iframe) return;
+  const protoSrc = (iframe.getAttribute('src') || '../stylect/stylect-app.html').split('?')[0];
+  function viewFromSrc() {
+    const m = (iframe.src || '').match(/(?:[?&])view=([^&]+)/);
+    return m ? decodeURIComponent(m[1]) : 'stylee';
+  }
+  function pushEmbedView(view) {
+    if (view !== 'stylee' && view !== 'stylist' && view !== 'manager') view = 'stylee';
+    if (viewFromSrc() !== view) {
+      iframe.src = protoSrc + '?embed=case&view=' + encodeURIComponent(view);
+    } else {
+      try {
+        iframe.contentWindow.postMessage({ stylectEmbed: 'switch', view: view }, '*');
+      } catch (e) {}
+    }
+  }
+  function getActiveTabView() {
+    const a = document.querySelector('.proto-ptab.active[data-stylect-view]');
+    return (a && a.getAttribute('data-stylect-view')) || 'stylee';
+  }
+  iframe.addEventListener('load', function () {
+    try {
+      iframe.contentWindow.postMessage({ stylectEmbed: 'switch', view: getActiveTabView() }, '*');
+    } catch (e) {}
+  });
+  document.querySelectorAll('.proto-ptab[data-stylect-view]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const view = btn.getAttribute('data-stylect-view');
+      pushEmbedView(view);
+      document.querySelectorAll('.proto-ptab[data-stylect-view]').forEach(b => {
+        const on = b === btn;
+        b.classList.toggle('active', on);
+        b.setAttribute('aria-selected', on ? 'true' : 'false');
+      });
+    });
+  });
+})();
+</script>
+<script src="/js/cs-stat-eyebrow-fit.js"></script>
+
+</body>
+</html>

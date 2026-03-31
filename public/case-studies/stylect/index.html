@@ -762,7 +762,7 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
       <div class="proto-layout">
         <div class="proto-stack">
           <div class="proto-phone">
-            <iframe id="stylect-proto-iframe" src="../stylect/stylect-app.html?embed=case" title="Stylect App Prototype" scrolling="yes"></iframe>
+            <iframe id="stylect-proto-iframe" src="../stylect/stylect-app.html?embed=case&amp;view=stylee" title="Stylect App Prototype" scrolling="yes"></iframe>
           </div>
           <div class="proto-persona" aria-label="Switch prototype persona (outside device mockup)">
             <div class="proto-persona-tabs" role="tablist">
@@ -851,15 +851,34 @@ function toggleArtifact(n) {
 (function initStylectProtoEmbed() {
   const iframe = document.getElementById('stylect-proto-iframe');
   if (!iframe) return;
-  function postView(view) {
-    try {
-      iframe.contentWindow.postMessage({ stylectEmbed: 'switch', view: view }, '*');
-    } catch (e) {}
+  const protoSrc = (iframe.getAttribute('src') || '../stylect/stylect-app.html').split('?')[0];
+  function viewFromSrc() {
+    const m = (iframe.src || '').match(/(?:[?&])view=([^&]+)/);
+    return m ? decodeURIComponent(m[1]) : 'stylee';
   }
+  function pushEmbedView(view) {
+    if (view !== 'stylee' && view !== 'stylist' && view !== 'manager') view = 'stylee';
+    if (viewFromSrc() !== view) {
+      iframe.src = protoSrc + '?embed=case&view=' + encodeURIComponent(view);
+    } else {
+      try {
+        iframe.contentWindow.postMessage({ stylectEmbed: 'switch', view: view }, '*');
+      } catch (e) {}
+    }
+  }
+  function getActiveTabView() {
+    const a = document.querySelector('.proto-ptab.active[data-stylect-view]');
+    return (a && a.getAttribute('data-stylect-view')) || 'stylee';
+  }
+  iframe.addEventListener('load', function () {
+    try {
+      iframe.contentWindow.postMessage({ stylectEmbed: 'switch', view: getActiveTabView() }, '*');
+    } catch (e) {}
+  });
   document.querySelectorAll('.proto-ptab[data-stylect-view]').forEach(btn => {
     btn.addEventListener('click', () => {
       const view = btn.getAttribute('data-stylect-view');
-      postView(view);
+      pushEmbedView(view);
       document.querySelectorAll('.proto-ptab[data-stylect-view]').forEach(b => {
         const on = b === btn;
         b.classList.toggle('active', on);

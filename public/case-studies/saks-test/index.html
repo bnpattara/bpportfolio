@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Nike SNKRS — Confidence Hub · Benn Pattara</title>
+<title>Vault by Saks,  Prose test (draft) · Benn Pattara</title>
 <style>
 :root {
   --black:     #000;
@@ -32,24 +32,20 @@ body{font-family:var(--font);background:var(--white);color:var(--black);line-hei
 .nav-right{position:absolute;right:48px;top:50%;transform:translateY(-50%);}
 .nav-right a{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--black);text-decoration:none;border-bottom:1px solid var(--black);padding-bottom:1px;}
 .page-body{padding-top:var(--nav-h);}
-.cs-hero{position:relative;min-height:85vh;overflow:hidden;display:flex;align-items:flex-end;justify-content:flex-start;}
+.cs-hero{position:relative;min-height:85vh;overflow:hidden;display:flex;align-items:flex-end;}
 .cs-hero-bg{position:absolute;inset:0;z-index:0;background:linear-gradient(160deg,#0a0a0a 0%,#141010 40%,#0a0a0a 100%);}
 .cs-hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center center;display:block;}
 .cs-hero-scrim{position:absolute;inset:0;z-index:1;background:linear-gradient(to top,rgba(0,0,0,.85) 0%,rgba(0,0,0,.4) 35%,transparent 60%);pointer-events:none;}
-.cs-hero-title-wrap{position:relative;z-index:2;padding:64px 56px 72px 56px;width:100%;max-width:900px;text-align:left;box-sizing:border-box;}
+.cs-hero-title-wrap{position:relative;z-index:2;padding:64px 56px 72px 48px;width:100%;max-width:900px;}
 .cs-hero-title{font-size:clamp(32px,4vw,56px);font-weight:300;letter-spacing:.04em;text-transform:uppercase;color:var(--white);line-height:.95;margin:0;text-shadow:0 2px 24px rgba(0,0,0,.5);}
 .cs-hero-title em{font-style:italic;color:rgba(255,255,255,.65);}
 .cs-hero-kicker{font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:14px;}
-.cs-hero-ghost{position:absolute;bottom:-40px;right:-30px;font-size:clamp(100px,14vw,200px);font-weight:300;color:rgba(255,255,255,.03);letter-spacing:-.03em;line-height:1;white-space:nowrap;pointer-events:none;text-transform:uppercase;user-select:none;z-index:1;}
+.cs-hero-meta-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:10px;}
+.cs-hero-role{display:inline-block;font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.88);border:1px solid rgba(255,255,255,.35);padding:5px 12px;}
 .cs-body-wrap{display:grid;grid-template-columns:var(--sidenav-w) 1fr;align-items:start;min-height:100vh;}
 #cs-sidenav{position:sticky;top:var(--nav-h);height:calc(100vh - var(--nav-h));overflow-y:auto;border-right:1px solid var(--g200);padding:40px 0;display:flex;flex-direction:column;background:var(--white);z-index:50;scrollbar-width:none;}
 #cs-sidenav::-webkit-scrollbar{display:none;}
-.cs-sidenav-index-head{display:flex;align-items:center;justify-content:flex-start;flex-wrap:wrap;gap:10px;padding:0 28px 20px;width:100%;box-sizing:border-box;text-align:left;align-content:flex-start;}
-.cs-sidenav-label{font-size:8px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--g300);padding:0;font-family:var(--font);}
-.cs-live-client-badge{display:inline-flex;align-items:center;font-size:8px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--white);background:#e50012;padding:5px 10px;font-family:var(--font);line-height:1;flex-shrink:0;}
-.cs-hero-head{display:flex;align-items:center;justify-content:flex-start;flex-wrap:wrap;gap:12px;margin-bottom:14px;width:100%;text-align:left;}
-.cs-hero-head .cs-hero-kicker{margin-bottom:0;}
-.cs-live-client-badge--hero-mobile{display:none;}
+.cs-sidenav-label{font-size:8px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--g300);padding:0 28px 20px;font-family:var(--font);}
 .cs-sidenav-link{display:flex;align-items:center;gap:14px;padding:12px 28px;cursor:pointer;transition:background var(--ease-fast);text-decoration:none;border-left:2px solid transparent;}
 .cs-sidenav-link:hover{background:var(--g100);}
 .cs-sidenav-link.active{border-left-color:var(--black);background:var(--g100);}
@@ -71,7 +67,7 @@ body{font-family:var(--font);background:var(--white);color:var(--black);line-hei
 .cs-exec-meta-label{font-size:8px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--g300);margin-bottom:6px;font-family:var(--font);}
 .cs-exec-meta-val{font-size:12px;font-weight:500;letter-spacing:.04em;color:var(--black);}
 .cs-section{padding:72px 56px;border-bottom:1px solid #f0f0f0;}
-.cs-full-bleed{width:calc(100% + 112px);margin-left:-56px;margin-right:-56px;}
+.cs-full-bleed{width:calc(100% + 112px + 2px);margin-left:calc(-56px - 1px);margin-right:calc(-56px - 1px);}
 #cs-users{padding-bottom:32px;}
 .cs-design-system-strip-wrap{background:var(--g100);padding-top:clamp(28px,4vw,40px);border-bottom:1px solid #f0f0f0;}
 #artifact-design-system{margin-top:-40px;padding-top:calc(72px + 40px);}
@@ -109,6 +105,48 @@ body{font-family:var(--font);background:var(--white);color:var(--black);line-hei
 .pm-lens{border:1px solid var(--g200);padding:24px 28px;margin-bottom:28px;background:#fafafa;}
 .pm-lens-label{font-size:8px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--g300);margin-bottom:10px;font-family:var(--font);}
 .pm-lens-text{font-size:13px;color:var(--g500);line-height:1.75;font-style:italic;}
+.cs-the-ask-wrap{margin-bottom:0;background:#0a0a0a;}
+.cs-the-ask-inner{
+  background:linear-gradient(165deg,#0a0a0a 0%,#161616 55%,#0d0d0d 100%);
+  color:#fff;
+  padding:clamp(32px,5vw,56px) clamp(32px,5vw,64px);
+  border-left:5px solid #fff;
+  box-shadow:0 22px 56px rgba(0,0,0,.16);
+}
+.cs-the-ask-inner .cs-section-eyebrow{margin-bottom:clamp(14px,2vw,22px);}
+.cs-the-ask-inner .cs-section-num{color:rgba(255,255,255,.48);}
+.cs-the-ask-inner .cs-section-title{color:rgba(255,255,255,.92);}
+.cs-the-ask-lede{
+  font-family:var(--font);
+  font-size:clamp(22px,3vw,38px);
+  font-weight:400;
+  line-height:1.16;
+  letter-spacing:.02em;
+  color:#fff;
+  margin:0;
+  max-width:42rem;
+}
+.cs-the-ask-lede em{font-style:italic;color:rgba(255,255,255,.78);}
+.cs-section:has(.cs-the-ask-wrap) .cs-body{margin-top:28px;}
+@media (max-width:768px){
+  .cs-the-ask-inner{padding:26px 20px 32px;border-left-width:4px;}
+  .cs-the-ask-lede{font-size:clamp(20px,5.2vw,30px);}
+}
+#cs-s03-the-ask {
+  padding: 0 !important;
+  border-bottom: none !important;
+  background: #0a0a0a !important;
+  display: block;
+}
+#cs-s03-the-ask .cs-the-ask-wrap {
+  margin: 0 !important;
+  width: 100% !important;
+  border: none !important;
+}
+#cs-s02-background {
+  border-bottom: none !important;
+}
+
 .persona-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--g200);margin-bottom:28px;}
 .persona-card{background:var(--white);padding:28px 24px;min-width:0;overflow-wrap:break-word;}
 .persona-card-tier{font-size:8px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--g300);margin-bottom:12px;font-family:var(--font);}
@@ -187,7 +225,7 @@ body{font-family:var(--font);background:var(--white);color:var(--black);line-hei
 .proto-section { padding: 80px clamp(24px, 5vw, 64px); box-sizing: border-box; border-bottom: 1px solid #f0f0f0; overflow-anchor: none; overscroll-behavior: contain; }
 .proto-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 28px; align-items: start; width: 100%; max-width: 100%; box-sizing: border-box; }
 .proto-phone { position: sticky; top: 40px; width: 320px; height: 693px; border-radius: 44px; border: 8px solid #000; overflow: hidden; background: #000; box-shadow: 0 0 0 1px #e8e8e8; display: flex; justify-content: center; align-items: flex-start; margin: 0; justify-self: center; align-self: center; }
-/* Fill inner bezel: 304×677 — scale = max(304/375, 677/812) so app bleeds to bottom; sides clip */
+/* Fill inner bezel: 304×677,  scale = max(304/375, 677/812) so app bleeds to bottom; sides clip */
 .proto-phone iframe { width: 375px; height: 812px; border: none; display: block; transform: scale(0.83374); transform-origin: top center; flex-shrink: 0; pointer-events: auto; align-self: flex-start; }
 .proto-steps { display: flex; flex-direction: column; gap: 0; min-width: 0; }
 .proto-step { padding: 24px 0; border-bottom: 1px solid var(--g200); cursor: pointer; transition: opacity 0.2s; }
@@ -286,7 +324,6 @@ footer{border-top:1px solid var(--g200);padding:32px 48px;display:flex;align-ite
   .cs-full-bleed { width: calc(100% + 40px) !important; margin-left: -20px !important; margin-right: -20px !important; }
   .cs-exec-inner { grid-template-columns: 1fr !important; gap: 32px !important; }
   .cs-hero-title-wrap { padding: 40px 20px 48px !important; }
-  .cs-live-client-badge--hero-mobile{display:inline-flex;}
   .cs-stats, .cs-stats-3, .cs-stats-4, .persona-grid, .nike-research-persona-grid, .cs-body-2col { 
      grid-template-columns: 1fr !important; 
      gap: 16px !important; 
@@ -354,13 +391,19 @@ footer{border-top:1px solid var(--g200);padding:32px 48px;display:flex;align-ite
     .metric-target { font-size: 18px !important; }
     .metric-card { padding: 12px !important; }
   }
+.cs-img-2col{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:28px 0 8px;}
+.cs-img-3col{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:8px 0;}
+.cs-img-2col-item,.cs-img-3col-item{min-width:0;}
+.cs-img-2col-item img,.cs-img-3col-item img{width:100%;display:block;}
+.cs-img-contain{overflow:hidden;background:var(--g100);}
+.cs-img-contain img{width:100%;height:100%;object-fit:cover;display:block;}
+.img-caption{font-size:11px;color:var(--g400);padding:6px 0 12px;display:block;}
+.cs-brand-world-label{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--black);margin:32px 0 16px;}
+@media(max-width:768px){.cs-img-3col{grid-template-columns:1fr!important;}}
 </style>
 </head>
 <body>
 <div id="scroll-progress" aria-hidden="true"></div>
-<!-- IMAGE AUDIT
-  1. src="nike_hero_brand_identity.webp" — NEEDS VERIFICATION (relative path, hero background)
--->
 <nav id="site-nav">
   <div class="nav-main">
     <div class="nav-left"><a href="/" target="_parent">Work</a><a href="/#about" target="_parent">About</a></div>
@@ -370,260 +413,218 @@ footer{border-top:1px solid var(--g200);padding:32px 48px;display:flex;align-ite
 </nav>
 <div class="page-body">
 <section class="cs-hero">
-  <div class="cs-hero-bg"><img src="nike_hero_brand_identity.webp" alt="Nike SNKRS — lifestyle moment tying new sneakers" /></div>
+  <div class="cs-hero-bg"><img src="../saks/saks_hero_rack.webp" alt="Vault by Saks"/></div>
   <div class="cs-hero-scrim"></div>
   <div class="cs-hero-title-wrap">
-    <div class="cs-hero-head">
-      <p class="cs-hero-kicker">Product strategy &amp; systems</p>
-      <span class="cs-live-client-badge cs-live-client-badge--hero-mobile">Live client</span>
+    <div class="cs-hero-meta-row">
+      <p class="cs-hero-kicker" style="margin-bottom:0;">Saks · Platform Strategy</p>
+      <span class="cs-hero-role">PM</span>
     </div>
-    <h1 class="cs-hero-title">Nike SNKRS<br><em>Confidence Hub</em></h1>
+    <h1 class="cs-hero-title">Vault by Saks:<br>Authority from the<br>Balance Sheet Up</h1>
   </div>
-  <div class="cs-hero-ghost">CONFIDENCE</div>
 </section>
 <div class="cs-body-wrap">
-<aside id="cs-sidenav">
-  <div class="cs-sidenav-index-head">
-    <div class="cs-sidenav-label">Index</div>
-    <span class="cs-live-client-badge">Live client</span>
-  </div>
-  <a class="cs-sidenav-link active" data-target="cs-exec-summary" onclick="scrollToSection('cs-exec-summary')"><span class="cs-sidenav-num">00</span><span class="cs-sidenav-text">Exec Summary</span></a>
-  <div class="cs-sidenav-divider"></div>
-  <a class="cs-sidenav-link" data-target="cs-problem-insight" onclick="scrollToSection('cs-problem-insight')"><span class="cs-sidenav-num">01</span><span class="cs-sidenav-text">Problem / Insight</span></a>
-  <a class="cs-sidenav-link" data-target="cs-users" onclick="scrollToSection('cs-users')"><span class="cs-sidenav-num">02</span><span class="cs-sidenav-text">The Users</span></a>
-  <a class="cs-sidenav-link" data-target="cs-research-personas" onclick="scrollToSection('cs-research-personas')"><span class="cs-sidenav-num">&mdash;</span><span class="cs-sidenav-text">Research personas</span></a>
-  <a class="cs-sidenav-link" data-target="cs-persona-tool" onclick="scrollToPersonaLab(); return false;"><span class="cs-sidenav-num">&mdash;</span><span class="cs-sidenav-text">Persona model</span></a>
-  <a class="cs-sidenav-link" data-target="artifact-design-system" onclick="scrollToSection('artifact-design-system')"><span class="cs-sidenav-num">03</span><span class="cs-sidenav-text">Design system</span></a>
-  <a class="cs-sidenav-link" data-target="prototype" onclick="scrollToSection('prototype')"><span class="cs-sidenav-num">&mdash;</span><span class="cs-sidenav-text">Prototype</span></a>
-  <a class="cs-sidenav-link" data-target="cs-verdict" onclick="scrollToSection('cs-verdict')"><span class="cs-sidenav-num">04</span><span class="cs-sidenav-text">The Verdict</span></a>
-  <div class="cs-sidenav-exec">
-    <div class="cs-sidenav-exec-label">TL;DR</div>
-    <p class="cs-sidenav-exec-text">The problem was never access. It was confidence. The Hub rebuilds SNKRS around styling so what you own gets worn &mdash; and the replacement cycle can compound again.</p>
-    <a class="cs-sidenav-exec-link" onclick="scrollToSection('cs-exec-summary')">Read summary &rarr;</a>
-  </div>
-</aside>
-<div class="cs-content">
-
-<!-- 00 EXEC SUMMARY -->
-<section id="cs-exec-summary" data-cs-section="cs-exec-summary" style="padding:64px 56px;border-bottom:1px solid var(--g200);">
+<aside id="cs-sidenav"><div class="cs-sidenav-label">Index</div><a class="cs-sidenav-link active" data-target="cs-s01-executive-summary" onclick="scrollToSection('cs-s01-executive-summary')"><span class="cs-sidenav-num">01</span><span class="cs-sidenav-text">Executive Summary</span></a><a class="cs-sidenav-link" data-target="cs-s02-background" onclick="scrollToSection('cs-s02-background')"><span class="cs-sidenav-num">02</span><span class="cs-sidenav-text">Background</span></a><a class="cs-sidenav-link" data-target="cs-s03-the-ask" onclick="scrollToSection('cs-s03-the-ask')"><span class="cs-sidenav-num">03</span><span class="cs-sidenav-text">The Ask</span></a><a class="cs-sidenav-link" data-target="cs-s04-the-problem" onclick="scrollToSection('cs-s04-the-problem')"><span class="cs-sidenav-num">04</span><span class="cs-sidenav-text">The Problem</span></a><a class="cs-sidenav-link" data-target="cs-s05-research-methods" onclick="scrollToSection('cs-s05-research-methods')"><span class="cs-sidenav-num">05</span><span class="cs-sidenav-text">Research Methods</span></a><a class="cs-sidenav-link" data-target="cs-s06-key-data-findings" onclick="scrollToSection('cs-s06-key-data-findings')"><span class="cs-sidenav-num">06</span><span class="cs-sidenav-text">Key Data / Findings</span></a><a class="cs-sidenav-link" data-target="cs-s07-the-insight" onclick="scrollToSection('cs-s07-the-insight')"><span class="cs-sidenav-num">07</span><span class="cs-sidenav-text">The Insight</span></a><a class="cs-sidenav-link" data-target="cs-s08-the-strategy" onclick="scrollToSection('cs-s08-the-strategy')"><span class="cs-sidenav-num">08</span><span class="cs-sidenav-text">The Strategy</span></a><a class="cs-sidenav-link" data-target="cs-s09-concept-design-work" onclick="scrollToSection('cs-s09-concept-design-work')"><span class="cs-sidenav-num">09</span><span class="cs-sidenav-text">Concept / Design Work</span></a><a class="cs-sidenav-link" data-target="cs-s10-business-benefits" onclick="scrollToSection('cs-s10-business-benefits')"><span class="cs-sidenav-num">10</span><span class="cs-sidenav-text">Business Benefits</span></a><a class="cs-sidenav-link" data-target="artifact-1" onclick="scrollToSection('artifact-1')"><span class="cs-sidenav-num">, </span><span class="cs-sidenav-text">Financial model</span></a><a class="cs-sidenav-link" data-target="artifact-2" onclick="scrollToSection('artifact-2')"><span class="cs-sidenav-num">, </span><span class="cs-sidenav-text">Saks3 narrative</span></a><div class="cs-sidenav-exec">
+    <div class="cs-sidenav-exec-label">Draft</div>
+    <p class="cs-sidenav-exec-text">Prose test from portfolio-prose.docx. Primary: <a href="/work/saks" target="_parent" style="color:inherit">/work/saks</a>.</p>
+    <a class="cs-sidenav-exec-link" onclick="scrollToSection('cs-s01-executive-summary')">Start &rarr;</a>
+  </div></aside>
+<div class="cs-content"><section id="cs-s01-executive-summary" data-cs-section="cs-s01-executive-summary" style="padding:64px 56px;border-bottom:1px solid var(--g200);">
   <div class="cs-exec-inner">
+    <div><h2 class="cs-exec-heading">Executive Summary</h2><p class="cs-body">Saks built its dominance on one thing: the authority to curate. Designers wanted placement. Consumers trusted the edit. That position collapsed the moment brands could go direct to consumer and no longer needed a middleman to reach the market. Without the curation advantage, Saks was left carrying the full cost structure of the old model,  $4.7 billion in debt, 180-day buy cycles, and stores losing foot traffic,  against a consumer base that had quietly moved on. Vault does not attempt to restore what Saks was. It builds what Saks needs to become: a decentralized discovery platform that turns curation into infrastructure.</p></div>
     <div>
-      <h2 class="cs-exec-heading">Executive summary</h2>
-      <p class="cs-exec-body">SNKRS became the most talked-about app in footwear and one of the worst places to actually buy shoes. The drop model became a lottery system that kept purchased sneakers in their boxes. Users own 16 or more pairs and rotate two to five. A shoe that never leaves its box never wears out, and a shoe that never wears out never gets replaced. That&rsquo;s not a hype problem &mdash; it&rsquo;s a broken repeat purchase mechanic.</p>
-      <p class="cs-exec-body">The problem was never access. It was confidence. Sneaker culture sold identity through ownership and gave people no tools to express it. The Confidence Hub rebuilds the app around that gap &mdash; and when it works, the replacement cycle restores itself.</p>
-    </div>
-    <div>
-      <div class="cs-exec-eyebrow">Project details</div>
+      <div class="cs-exec-eyebrow">Meta</div>
       <div class="cs-exec-meta-grid">
-        <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Project</div><div class="cs-exec-meta-val">Nike SNKRS &mdash; Confidence Hub</div></div>
-        <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Year</div><div class="cs-exec-meta-val">2026</div></div>
-        <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Role</div><div class="cs-exec-meta-val">Brand Strategist &amp; Product Manager</div></div>
-        <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Type</div><div class="cs-exec-meta-val">App Redesign Strategy &middot; PRD + Design System</div></div>
-        <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Deliverables</div><div class="cs-exec-meta-val">PRD &middot; Design System &middot; Interactive Prototype</div></div>
-        <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Primary job</div><div class="cs-exec-meta-val">Restore repeat purchase by earning styling confidence &mdash; not chasing access</div></div>
+        <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Format</div><div class="cs-exec-meta-val">Prose narrative test</div></div>
+        <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Live</div><div class="cs-exec-meta-val"><a href="/work/saks" target="_parent" style="color:inherit">/work/saks</a></div></div>
       </div>
     </div>
   </div>
-</section>
-
-<!-- 01 PROBLEM / INSIGHT -->
-<section class="cs-section cs-section-alt" id="cs-problem-insight" data-cs-section="cs-problem-insight">
-  <div class="cs-section-eyebrow"><span class="cs-section-num">01</span><span class="cs-section-title">Problem / Insight</span></div>
+</section><section class="cs-section cs-section-alt" id="cs-s02-background" data-cs-section="cs-s02-background">
+  <div class="cs-section-eyebrow"><span class="cs-section-num">02</span><span class="cs-section-title">Background</span></div>
+  <p class="cs-body">The merger of Saks Fifth Avenue and Neiman Marcus was designed to create a dominant luxury retail entity. Instead, it created a $4.7 billion debt load attached to a cathedral-of-consumption model that was already losing relevance before the ink dried. The cathedral works when physical presence confers authority,  when being in the building means being in the room where taste is decided. That authority eroded as brands built their own direct channels and consumers discovered they could access Gucci, Bottega, and Prada without the intermediary. The Chapter 11 filing in January 2026 was not a surprise. It was the structural outcome of a business model that had been losing its reason to exist for years.</p>
+</section><section class="cs-section" id="cs-s03-the-ask" data-cs-section="cs-s03-the-ask">
+  <div class="cs-the-ask-wrap">
+    <div class="cs-the-ask-inner">
+      <div class="cs-section-eyebrow"><span class="cs-section-num">03</span><span class="cs-section-title">The Ask</span></div>
+      <p class="cs-the-ask-lede">Develop a restructuring strategy that reduces real estate overhead and re-engages the Gen Z and Alpha luxury consumer who has abandoned department stores in favor of direct-to-consumer brands.</p>
+    </div>
+  </div>
+</section><section class="cs-section cs-section-alt" id="cs-s04-the-problem" data-cs-section="cs-s04-the-problem">
+  <div class="cs-section-eyebrow"><span class="cs-section-num">04</span><span class="cs-section-title">The Problem</span></div>
+  <p class="cs-body">The crisis has three distinct dimensions. Financially, the company carries $2.6 billion in funded debt and owes $137 million to key vendors,  including Chanel,  who have responded by withholding inventory. Operationally, the buying calendar turns over every 180 days in a market where trend cycles move every fourteen. Culturally, the brand reads as aspirational to the wrong generation: consumers under thirty-five do not see Saks as a destination for discovery. They see it as a place for their parents. Each dimension reinforces the others. The debt prevents investment. The slow cycle prevents relevance. The cultural misread prevents the next generation of customers from arriving.</p>
+  <div class="cs-stats cs-stats-3">
+    <div class="cs-stat-cell">
+      <div class="cs-stat-eyebrow">Financial</div>
+      <div class="cs-stat-num">$2.6B</div>
+      <div class="cs-stat-label">Funded debt · <strong>$137M</strong> vendor exposure (incl. Chanel) · inventory withheld</div>
+    </div>
+    <div class="cs-stat-cell">
+      <div class="cs-stat-eyebrow">Operational</div>
+      <div class="cs-stat-num">180<span style="font-size:0.45em;font-style:normal;">d</span></div>
+      <div class="cs-stat-label">Buy cycle vs. <strong>~14</strong>-day cultural velocity,  structural mismatch on assortment bets</div>
+    </div>
+    <div class="cs-stat-cell">
+      <div class="cs-stat-eyebrow">Cultural</div>
+      <div class="cs-stat-num" style="font-size:clamp(28px,3vw,44px);">&lt;35</div>
+      <div class="cs-stat-label">Luxury consumers for whom Saks is not the default discovery layer,  wrong generational signal</div>
+    </div>
+  </div>
+</section><section class="cs-section" id="cs-s05-research-methods" data-cs-section="cs-s05-research-methods">
+  <div class="cs-section-eyebrow"><span class="cs-section-num">05</span><span class="cs-section-title">Research Methods</span></div>
+  <p class="cs-body">The research began with the Chapter 11 filings themselves, audited to identify where the financial hemorrhage was most concentrated,  real estate leases and inventory holding costs accounted for the majority. A trend velocity analysis mapped the gap between the time-to-market for emerging designers in secondary fashion capitals and the pace of the Saks wholesale buying calendar, establishing the operational distance between where the market moves and where Saks could follow. Geo-spatial analysis mapped high-net-worth Gen Z purchasing behavior against physical Saks locations, revealing the scale of the geographic gap between where the brand exists and where its next consumer lives.</p>
+  <div class="cs-stats cs-stats-3">
+    <div class="cs-stat-cell">
+      <div class="cs-stat-eyebrow">Filings audit</div>
+      <div class="cs-stat-num" style="font-size:clamp(22px,2.5vw,36px);">RE + inventory</div>
+      <div class="cs-stat-label">Concentration of loss drivers in leases and holding costs</div>
+    </div>
+    <div class="cs-stat-cell">
+      <div class="cs-stat-eyebrow">Trend velocity</div>
+      <div class="cs-stat-num" style="font-size:clamp(22px,2.5vw,36px);">Designer TTMs</div>
+      <div class="cs-stat-label">Vs. wholesale calendar,  operational distance mapped</div>
+    </div>
+    <div class="cs-stat-cell">
+      <div class="cs-stat-eyebrow">Geo-spatial</div>
+      <div class="cs-stat-num" style="font-size:clamp(22px,2.5vw,36px);">HNW Gen Z</div>
+      <div class="cs-stat-label">Purchasing pockets vs. Saks doors,  overlap gap quantified</div>
+    </div>
+  </div>
+</section><section class="cs-section cs-section-alt" id="cs-s06-key-data-findings" data-cs-section="cs-s06-key-data-findings">
+  <div class="cs-section-eyebrow"><span class="cs-section-num">06</span><span class="cs-section-title">Key Data / Findings</span></div>
+  <p class="cs-body">The debt position is the context for everything else: $4.7 billion total at filing, with vendor relationships already broken at the point of the Chapter 11 announcement. The operational gap is 180 days versus 14,  a twelve-times difference in cycle speed that makes any inventory bet made under the old model a structural loss before the goods arrive. The geographic finding is the most commercially significant: sixty-five percent of high-net-worth Gen Z shoppers live in secondary markets where no physical Saks location exists. They are not avoiding Saks. They simply have no access to it. The brand&#x27;s physical footprint does not overlap with the location of its most valuable future customers.</p>
+  <div class="cs-stats cs-stats-4">
+    <div class="cs-stat-cell">
+      <div class="cs-stat-eyebrow">Debt at filing</div>
+      <div class="cs-stat-num">$4.7B</div>
+      <div class="cs-stat-label">Total context,  vendor trust already cracking at announcement</div>
+    </div>
+    <div class="cs-stat-cell">
+      <div class="cs-stat-eyebrow">Cycle gap</div>
+      <div class="cs-stat-num">12×</div>
+      <div class="cs-stat-label"><strong>180</strong> day buy vs. <strong>14</strong>-day trend rhythm</div>
+    </div>
+    <div class="cs-stat-cell">
+      <div class="cs-stat-eyebrow">HNW Gen Z</div>
+      <div class="cs-stat-num">65%</div>
+      <div class="cs-stat-label">In secondary markets with <em>no</em> Saks door,  access, not avoidance</div>
+    </div>
+    <div class="cs-stat-cell">
+      <div class="cs-stat-eyebrow">NPV (model)</div>
+      <div class="cs-stat-num">$6.1B</div>
+      <div class="cs-stat-label">Ten-year base case · interactive Bear / Base / Bull sliders</div>
+    </div>
+  </div>
+</section><section class="cs-section" id="cs-s07-the-insight" data-cs-section="cs-s07-the-insight">
+  <div class="cs-section-eyebrow"><span class="cs-section-num">07</span><span class="cs-section-title">The Insight</span></div>
+  <p class="cs-body">Luxury is no longer about access to goods. The consumer who can afford to shop at Saks can already reach Gucci directly. What she cannot access is a curated edit that has already done the filtering,  one that finds the designer she doesn&#x27;t yet know exists, the piece that is right for her before the market agrees. That is the service Saks once provided, and it is the only version of Saks that carries genuine value in the current market. The corollary is architectural: real estate is now a liability, and the data generated by curation decisions,  what gets selected, what sells, what gets held and why,  is the only asset that compounds.</p>
+</section><section class="cs-section cs-section-alt" id="cs-s08-the-strategy" data-cs-section="cs-s08-the-strategy">
+  <div class="cs-section-eyebrow"><span class="cs-section-num">08</span><span class="cs-section-title">The Strategy</span></div>
   <div class="cs-stats cs-stats-2 cs-exec-ii-row">
     <div class="cs-stat-cell">
-      <div class="cs-stat-eyebrow">The Problem</div>
-      <div class="cs-stat-num">Nike&rsquo;s repeat purchase mechanic is broken.</div>
-      <div class="cs-stat-label">The lottery moves product into storage. 80% of users describe sneaker culture as inaccessible or overhyped. 40% of Nike&rsquo;s highest-value buyers opted out entirely &mdash; not to a competitor, but out of the market altogether. A shoe that never gets worn never needs replacing, and Nike is funding the full cost of the drop to generate a single transaction that goes nowhere.</div>
+      <div class="cs-stat-eyebrow">Insight</div>
+      <div class="cs-stat-num" style="font-size:clamp(20px,2.2vw,30px);font-style:normal;">Curation is the product</div>
+      <div class="cs-stat-label">Authority moves who controls access,  not who owns the most square footage.</div>
     </div>
     <div class="cs-stat-cell">
-      <div class="cs-stat-eyebrow">The Insight</div>
-      <div class="cs-stat-num">Sneaker culture sold identity through ownership and built no infrastructure for expression.</div>
-      <div class="cs-stat-label">Users aren&rsquo;t paralyzed by lack of access. They&rsquo;re paralyzed by confidence. The shoe stays in the box because wearing it wrong feels worse than not wearing it at all &mdash; and the app never gave them any tools to get it right.</div>
+      <div class="cs-stat-eyebrow">Implication</div>
+      <div class="cs-stat-num" style="font-size:clamp(20px,2.2vw,30px);font-style:normal;">Platform, not middleman</div>
+      <div class="cs-stat-label">Membership-funded nodes · <strong>26</strong> rotations/yr · settlement speed as trust architecture</div>
     </div>
   </div>
-</section>
-<!-- 02 THE USERS -->
-<section class="cs-section" id="cs-users" data-cs-section="cs-users">
-  <div class="cs-section-eyebrow"><span class="cs-section-num">02</span><span class="cs-section-title">The Users</span></div>
-  <h2 class="cs-heading-serif">Three failure modes. <em>One shared gap: confidence.</em></h2>
-  <p class="cs-body">629 research touchpoints across the 18&ndash;34 sneaker market showed three separate segments.</p>
-  <div class="persona-grid">
-    <div class="persona-card">
-      <div class="persona-card-tier">Segment 01 &middot; Opted out</div>
-      <div class="persona-card-name">The Aesthetic Individualist</div>
-      <div class="persona-card-city">High taste &middot; high affinity &middot; no SNKRS</div>
-      <div class="persona-card-detail">She owns 14 pairs, rotates three, and stopped opening SNKRS after losing eight drops in a row. Her affinity for Nike is real. What&rsquo;s gone is her belief that Nike sees her.</div>
-      <div class="persona-card-tension">Recovery depends on respect and utility &mdash; not louder hype.</div>
+  <p class="cs-body">The strategic shift is from wholesale middleman to platform. Saks stops trying to own the inventory and the buildings and becomes the discovery and logistics layer that connects international design talent directly to local markets. The mechanics that make this viable: membership tiers that cover fixed node costs before a single item sells, a fourteen-day rotation that forces curation discipline and generates twenty-six buying cycles per year, and a direct payment architecture that restores trust with the designer community by eliminating the settlement delay that broke it. Retail revenue becomes upside against a membership-funded cost base.</p>
+</section><section class="cs-section" id="cs-s09-concept-design-work" data-cs-section="cs-s09-concept-design-work">
+  <div class="cs-section-eyebrow"><span class="cs-section-num">09</span><span class="cs-section-title">Concept / Design Work</span></div>
+  <p class="cs-body">Vault operates as a network of micro-retail nodes deployed in high-trend neighborhoods across New York, Los Angeles, and Miami. Each node rotates its designer selection every fourteen days, sourced from a global pipeline of designers with no existing US presence,  creating genuine scarcity rather than manufactured exclusivity. Three membership tiers structure the consumer relationship: Member at $500 per year, Reserve at $900, and Black at $4,500, each priced against a specific relationship with curation rather than against a volume of goods. Smart contracts handle designer payment at the moment of sale, bypassing the frozen corporate accounts that severed vendor trust at filing. The financial model is built as a twelve-slider interactive tool running Bear, Base, and Bull scenarios across the key variables, producing a $6.1 billion ten-year net present value at base case.</p>
+  <p class="cs-brand-world-label">Brand in world · environmental (live case study assets)</p>
+  <div class="cs-img-2col">
+    <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:4/3;min-height:180px;"><img src="../saks/facades/Saks_LA_Facade.png" alt="Vault node facade, Los Angeles" loading="lazy"/></div><span class="img-caption">Los Angeles</span></div>
+    <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:4/3;min-height:180px;"><img src="../saks/facades/Saks_Miami_Facade.png" alt="Vault node facade, Miami" loading="lazy"/></div><span class="img-caption">Miami</span></div>
+  </div>
+  <div class="cs-img-2col">
+    <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:4/3;min-height:180px;"><img src="../saks/facades/Saks_NYC_Facade.png" alt="Vault node facade, New York" loading="lazy"/></div><span class="img-caption">New York</span></div>
+    <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:4/3;min-height:180px;"><img src="../saks/facades/Saks_chicago_Facade.png" alt="Vault node facade, Chicago" loading="lazy"/></div><span class="img-caption">Chicago</span></div>
+  </div>
+  <p class="cs-brand-world-label">Packaging system</p>
+  <div class="cs-img-2col">
+    <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="../saks/packaging/Saks_shoppingbag_packaging.png" alt="Shopping bag" loading="lazy"/></div><span class="img-caption">Shopping bag</span></div>
+    <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="../saks/packaging/Saks_ribbonbox_packaging.png" alt="Ribbon box" loading="lazy"/></div><span class="img-caption">Ribbon box</span></div>
+  </div>
+  <p class="cs-body" style="margin-top:16px;font-size:13px;">Full tier boards, fixtures, uniform styling, and designer-platform screen flows match the primary <a href="/work/saks" target="_parent" style="color:inherit;text-decoration:underline;">Saks</a> case study.</p>
+</section><section class="cs-section cs-section-alt" id="cs-s10-business-benefits" data-cs-section="cs-s10-business-benefits">
+  <div class="cs-section-eyebrow"><span class="cs-section-num">10</span><span class="cs-section-title">Business Benefits</span></div>
+  <p class="cs-body">The physical footprint reduction is eighty-five percent against the current cost structure. The rotation model produces twenty-six buying cycles per year against an industry standard of two,  a thirteen-times improvement in inventory velocity that eliminates the holding cost that was destroying margin under the old model. The projected annual cost reduction is $964 million, with payback on capital investment under two months. The strategic benefit that does not appear in the financial model is the data position: every rotation generates intent signals, hold behavior, and sell-through data that compounds into a curation advantage no department store operating on a six-month calendar can replicate.</p>
+  <div class="cs-stats cs-stats-4">
+    <div class="cs-stat-cell">
+      <div class="cs-stat-eyebrow">Footprint</div>
+      <div class="cs-stat-num">85%</div>
+      <div class="cs-stat-label">Physical cost reduction vs. current structure</div>
     </div>
-    <div class="persona-card">
-      <div class="persona-card-tier">Segment 02 &middot; Still in the app</div>
-      <div class="persona-card-name">The Culture Participant</div>
-      <div class="persona-card-city">Every release &middot; lottery fatigue</div>
-      <div class="persona-card-detail">Still in the app every release, but losing 30 times to bots has made his highest moment of engagement his most damaging brand experience.</div>
-      <div class="persona-card-tension">Fairness and signal at the peak of attention &mdash; or the relationship curdles in public.</div>
+    <div class="cs-stat-cell">
+      <div class="cs-stat-eyebrow">Velocity</div>
+      <div class="cs-stat-num">26×2</div>
+      <div class="cs-stat-label"><strong>26</strong> buying cycles / yr vs. ~<strong>2</strong> industry norm</div>
     </div>
-    <div class="persona-card">
-      <div class="persona-card-tier">Segment 03 &middot; Never touched a drop</div>
-      <div class="persona-card-name">The Considered Buyer</div>
-      <div class="persona-card-city">Income &middot; intention &middot; no wardrobe map</div>
-      <div class="persona-card-detail">Never touched a drop. He has the income and the intention &mdash; he just can&rsquo;t figure out what goes with what he already owns, so he keeps buying the same thing.</div>
-      <div class="persona-card-tension">Styling logic and gap clarity convert a buyer the lottery never spoke to.</div>
+    <div class="cs-stat-cell">
+      <div class="cs-stat-eyebrow">Cost takeout</div>
+      <div class="cs-stat-num">$964M</div>
+      <div class="cs-stat-label">Projected annual reduction · payback &lt; <strong>2</strong> months</div>
+    </div>
+    <div class="cs-stat-cell">
+      <div class="cs-stat-eyebrow">Data compounding</div>
+      <div class="cs-stat-num" style="font-size:clamp(22px,2.5vw,40px);">Curation</div>
+      <div class="cs-stat-label">Rotation-level intent + sell-through signal stack</div>
     </div>
   </div>
-  <div class="nike-persona-research-intro" id="cs-research-personas" data-cs-section="cs-research-personas">
-    <div class="nike-persona-seg-label">Personas</div>
-    <p class="nike-persona-seg-body">Five lab profiles. Open the <strong>persona tool</strong> to run individual inquiry or focus comparisons on the same characters.</p>
-  </div>
-  <div class="nike-research-persona-grid">
-    <div class="persona-card">
-      <div class="persona-card-name">Maya</div>
-      <div class="persona-card-city">The Individualist &middot; Creative Professional &middot; 26</div>
-      <div class="persona-card-detail">Shops vintage Nike. Values provenance and circular economy. Represents the opted-out high-taste consumer SNKRS never rewarded &mdash; recovery depends on respect, not hype.</div>
-    </div>
-    <div class="persona-card">
-      <div class="persona-card-name">Chloe</div>
-      <div class="persona-card-city">The Style Seeker &middot; Social Media Manager &middot; 24</div>
-      <div class="persona-card-detail">Dupe economy architect. Decouples aesthetic from brand. Zero loyalty. Probes whether Nike&rsquo;s styling authority can matter when taste is sourced off-platform.</div>
-    </div>
-    <div class="persona-card">
-      <div class="persona-card-name">David</div>
-      <div class="persona-card-city">The Anxious Collector &middot; Tech Professional &middot; 29</div>
-      <div class="persona-card-detail">High earner with deadstock paralysis. Treats sneakers as assets. Embodies lottery fatigue and bot cynicism &mdash; the emotional damage of participation without payout.</div>
-    </div>
-    <div class="persona-card">
-      <div class="persona-card-name">Alex</div>
-      <div class="persona-card-city">The Hypebeast &middot; Student / Reseller &middot; 22</div>
-      <div class="persona-card-detail">Views SNKRS drops as financial assets. Deep in cook groups. The pure drop-native stress test for fairness, access, and what replacing the lottery with participation-gated access actually feels like.</div>
-    </div>
-    <div class="persona-card">
-      <div class="persona-card-name">Sarah</div>
-      <div class="persona-card-city">The Pragmatist &middot; Project Manager &middot; 32</div>
-      <div class="persona-card-detail">Values efficiency and durability. Rejects hype. Buys on data. Stress-tests whether styling confidence and wardrobe logic can convert a slow, deliberate buyer who never needed drops.</div>
-    </div>
-  </div>
-  <div class="nike-persona-tool-wrap" id="cs-persona-tool" data-cs-section="cs-persona-tool">
-    <div class="nike-persona-tool-head">Persona tool</div>
-    <p class="nike-persona-tool-desc">Expand the strip for the embedded lab &mdash; scripted personas, guided questions, <strong>individual</strong> or <strong>focus</strong> mode.</p>
-    <div class="cs-full-bleed">
-      <div class="artifact-strip" id="artifact-persona-lab">
-        <div class="artifact-trigger" id="art2-trigger" onclick="toggleArtifact(2)">
-          <div class="artifact-left">
-            <div class="artifact-badge"><span>Interactive Artifact</span></div>
-            <div class="artifact-meta">
-              <div class="artifact-name">Persona research model</div>
-              <div class="artifact-desc">Five lab profiles &middot; individual &amp; focus modes &middot; guided inquiry</div>
-            </div>
-          </div>
-          <div class="artifact-right"><span class="artifact-toggle" id="art2-cta">+</span></div>
-        </div>
-        <div class="artifact-expand" id="art2-expand">
-          <div class="artifact-inner">
-            <div class="artifact-iframe-wrap">
-              <iframe id="nike-persona-lab-iframe" title="Nike SNKRS research persona lab" scrolling="yes" src="about:blank" data-lab-src="/work/nike/persona" allow="clipboard-read; clipboard-write; fullscreen"></iframe>
-            </div>
-            <a class="artifact-model-open-btn" href="/work/nike/persona" target="_top">Open persona lab full screen</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <p class="cs-body" style="margin-top:14px;font-size:12px;color:var(--g400);"><a href="/work/nike/persona" target="_top" style="color:inherit;text-decoration:underline;text-underline-offset:3px;">Open persona lab full screen</a></p>
-  </div>
-</section>
-
-<!-- 03 DESIGN SYSTEM -->
-<section class="cs-section cs-section-alt" id="artifact-design-system" data-cs-section="artifact-design-system">
-  <div class="cs-section-eyebrow"><span class="cs-section-num">03</span><span class="cs-section-title">Design system</span></div>
-  <h2 class="cs-heading-serif">Tokens, components, and depth <em>in one living reference.</em></h2>
-  <p class="cs-body">Instead of a static deck plus a separate UI kit, this is the combined spec for SNKRS Confidence Hub: semantic tokens, the core component library, color and typography scales, and PRD sections 01&ndash;09 with interactive examples where behavior actually matters. It keeps what you see in the prototype and what engineering takes into build tied to the same names, states, and acceptance criteria. Expand the strip below to read the full document in-frame.</p>
-</section>
-<div class="cs-design-system-strip-wrap">
+</section><div class="cs-design-system-strip-wrap" id="artifact-1" data-cs-section="artifact-1">
   <div class="artifact-strip">
     <div class="artifact-trigger" id="art1-trigger" onclick="toggleArtifact(1)">
       <div class="artifact-left">
-        <div class="artifact-badge"><span>Interactive Artifact</span></div>
+        <div class="artifact-badge"><span>Artifact</span></div>
         <div class="artifact-meta">
-          <div class="artifact-name">Design system</div>
-          <div class="artifact-desc">Full token reference &middot; Component library &middot; Color system &middot; Typography &middot; Interactive states</div>
+          <div class="artifact-name">Vault financial model</div>
+          <div class="artifact-desc">Interactive model</div>
         </div>
       </div>
       <div class="artifact-right"><span class="artifact-toggle" id="art1-cta">+</span></div>
     </div>
     <div class="artifact-expand" id="art1-expand">
       <div class="artifact-inner">
-        <div class="artifact-iframe-wrap">
-          <iframe src="snkrs-design-system.html" title="Nike SNKRS Confidence Hub design system" scrolling="yes"></iframe>
+        <div class="artifact-iframe-wrap"><iframe title="Vault financial model" scrolling="yes" src="../saks/vault-financial-model.html"></iframe></div>
+        <a class="artifact-model-open-btn" href="/case-studies/saks/vault-financial-model.html" target="_top" rel="noopener">Open full screen</a>
+      </div>
+    </div>
+  </div>
+</div><div class="cs-design-system-strip-wrap" id="artifact-2" data-cs-section="artifact-2">
+  <div class="artifact-strip">
+    <div class="artifact-trigger" id="art2-trigger" onclick="toggleArtifact(2)">
+      <div class="artifact-left">
+        <div class="artifact-badge"><span>Artifact</span></div>
+        <div class="artifact-meta">
+          <div class="artifact-name">Saks3 alternate HTML</div>
+          <div class="artifact-desc">Full narrative</div>
         </div>
+      </div>
+      <div class="artifact-right"><span class="artifact-toggle" id="art2-cta">+</span></div>
+    </div>
+    <div class="artifact-expand" id="art2-expand">
+      <div class="artifact-inner">
+        <div class="artifact-iframe-wrap"><iframe title="Saks3 alternate HTML" scrolling="yes" src="/case-studies/saks3/index.html"></iframe></div>
+        <a class="artifact-model-open-btn" href="/case-studies/saks3/index.html" target="_top" rel="noopener">Open full screen</a>
       </div>
     </div>
   </div>
 </div>
-
-
-
-<!-- PROTOTYPE + WALKTHROUGH -->
-<section class="proto-section" id="prototype" data-cs-section="prototype">
-  <div class="proto-intro">
-    <div class="cs-section-eyebrow"><span class="cs-section-num">&mdash;</span><span class="cs-section-title">Proof / design</span></div>
-    <h2 class="cs-heading-serif">Interactive prototype <em>and spec depth in the artifacts.</em></h2>
-    <p class="cs-body" style="margin-bottom:0;">The phone build walks feed, In Stock PDP (Style Gym on the same screen), Upcoming / Confidence Drop, and Style / closet intelligence. Expand the design-system strip above for the full token reference and PRD.</p>
-  </div>
-  <div class="proto-layout">
-    <div class="proto-phone">
-      <iframe src="snkrs-app.html#s-feed" title="Nike SNKRS App Prototype" scrolling="yes"></iframe>
-    </div>
-    <div class="proto-steps">
-      <div class="proto-step" data-step="1" data-src="snkrs-app.html#s-feed">
-        <div class="proto-step-num">01</div>
-        <div class="proto-step-body">
-          <div class="proto-step-title">Feed Discovery</div>
-          <div class="proto-step-desc">The hub pulls SNKRS, Nike.com, and Run Club into one wardrobe map &mdash; no extra data entry. The feed shows how that surfaces: Confidence Drops preview participation-gated access; live drops signal Outfit Context and styling before you hit the PDP.</div>
-        </div>
-      </div>
-      <div class="proto-step" data-step="2" data-src="snkrs-app.html#s-pdp">
-        <div class="proto-step-num">02</div>
-        <div class="proto-step-body">
-          <div class="proto-step-title">Outfit Context (In Stock)</div>
-          <div class="proto-step-desc">Every product page becomes an outfit session: three complete Nike looks, the shoe as wardrobe anchor, every piece shoppable &mdash; context lifts average order value, not just the sneaker.</div>
-        </div>
-      </div>
-      <div class="proto-step" data-step="3" data-src="snkrs-app.html#s-drop">
-        <div class="proto-step-num">03</div>
-        <div class="proto-step-body">
-          <div class="proto-step-title">Confidence Drops (Upcoming)</div>
-          <div class="proto-step-desc">Mid-tier lottery is replaced by styling challenges that open 48 hours ahead; promoting your looks earns loyalty points and queue priority. Bots can&rsquo;t pass a coherent visual challenge, so humans stay primary.</div>
-        </div>
-      </div>
-      <div class="proto-step" data-step="4" data-src="snkrs-app.html#s-style">
-        <div class="proto-step-num">04</div>
-        <div class="proto-step-body">
-          <div class="proto-step-title">Closet Intelligence (Style)</div>
-          <div class="proto-step-desc">Purchase history drives what&rsquo;s genuinely missing &mdash; not more of what you own &mdash; so gaps activate what&rsquo;s already in the closet (e.g. Pegasus 41, Waffle Debut in the gap report).</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 04 THE VERDICT -->
-<section class="cs-section cs-section-alt" id="cs-verdict" data-cs-section="cs-verdict">
-  <div class="cs-section-eyebrow"><span class="cs-section-num">04</span><span class="cs-section-title">The Verdict</span></div>
-  <p class="cs-body">When the app stops running a lottery and starts building confidence, <em>Nike doesn&rsquo;t just recover lifetime value</em> &mdash; it changes its relationship with the people who made it matter in the first place.</p>
-  <p class="cs-body">Sneaker culture was built by people who cared deeply enough to wait in line, set alarms, and lose sleep over a release. The lottery didn&rsquo;t create that devotion &mdash; it inherited it and then spent it. The Confidence Hub is how Nike earns it back. Not through access, not through hype, but through genuine utility.</p>
-  <p class="cs-body">When a brand can show you how to wear what you own, tell you what you&rsquo;re missing, and reward you for having taste &mdash; it stops being a vendor. It becomes part of how you see yourself.</p>
-
+<section class="cs-section cs-section-alt" id="cs-next" data-cs-section="cs-next">
   <div class="cs-next">
-    <div class="cs-next-label">Next Case Study</div>
-    <a href="/work/saks" class="cs-next-link" target="_parent">
-      <div class="cs-next-meta">Vault by Saks &middot; Platform Strategy &middot; 2026</div>
-      <div class="cs-next-title">Vault by Saks &rarr;</div>
+    <div class="cs-next-label">Next</div>
+    <a href="/work/carolyn" class="cs-next-link" target="_parent">
+      <div class="cs-next-meta">The Carolyn · Calvin Klein</div>
+      <div class="cs-next-title">The Carolyn →</div>
     </a>
   </div>
 </section>
-
-</div><!-- /cs-content -->
-</div><!-- /cs-body-wrap -->
-</div><!-- /page-body -->
-
+</div></div></div>
 <footer>
   <div class="footer-id">
     <span class="footer-name">Benn Pattara</span>
@@ -641,12 +642,10 @@ footer{border-top:1px solid var(--g200);padding:32px 48px;display:flex;align-ite
 
 <script>
 window.addEventListener('scroll', function () {
-  var s = window.scrollY;
-  var t = document.documentElement.scrollHeight - window.innerHeight;
+  var s = window.scrollY, t = document.documentElement.scrollHeight - window.innerHeight;
   var bar = document.getElementById('scroll-progress');
   if (bar) bar.style.width = (t > 0 ? (s / t * 100) : 0) + '%';
 }, { passive: true });
-
 const sectionObserver = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -657,49 +656,11 @@ const sectionObserver = new IntersectionObserver(entries => {
   });
 }, { threshold: 0, rootMargin: '-10% 0px -80% 0px' });
 document.querySelectorAll('[data-cs-section]').forEach(s => sectionObserver.observe(s));
-
-(function initNikeTriTabs() {
-  document.querySelectorAll('[data-nike-tri]').forEach(function (wrap) {
-    wrap.querySelectorAll('[data-nike-tab]').forEach(function (tab) {
-      tab.addEventListener('click', function () {
-        var id = tab.getAttribute('data-nike-tab');
-        wrap.querySelectorAll('[data-nike-tab]').forEach(function (t) {
-          var on = t === tab;
-          t.classList.toggle('active', on);
-          t.setAttribute('aria-selected', on ? 'true' : 'false');
-        });
-        wrap.querySelectorAll('[data-nike-col]').forEach(function (c) {
-          c.classList.toggle('active', c.getAttribute('data-nike-col') === id);
-        });
-      });
-    });
-  });
-})();
-
 function scrollToSection(id) {
   const el = document.getElementById(id);
   if (!el) return;
   window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 104, behavior: 'smooth' });
 }
-
-function scrollToPersonaLab() {
-  scrollToSection('cs-persona-tool');
-  setTimeout(function () {
-    var expand = document.getElementById('art2-expand');
-    if (expand && expand.dataset.open !== 'true') toggleArtifact(2);
-    else ensureNikePersonaLabIframeLoaded();
-  }, 450);
-}
-
-function ensureNikePersonaLabIframeLoaded() {
-  var iframe = document.getElementById('nike-persona-lab-iframe');
-  if (!iframe) return;
-  var base = iframe.getAttribute('data-lab-src') || '/work/nike/persona';
-  var cur = String(iframe.getAttribute('src') || '');
-  if (cur && cur !== 'about:blank') return;
-  iframe.src = base;
-}
-
 function toggleArtifact(n) {
   const expand = document.getElementById('art' + n + '-expand');
   const toggle = document.getElementById('art' + n + '-cta');
@@ -708,107 +669,28 @@ function toggleArtifact(n) {
   expand.style.maxHeight = isOpen ? '0' : '5200px';
   expand.dataset.open = isOpen ? 'false' : 'true';
   toggle.textContent = isOpen ? '+' : '\u00d7';
-  if (!isOpen && n === 2) {
-    requestAnimationFrame(function () {
-      ensureNikePersonaLabIframeLoaded();
-    });
+  if (!isOpen) {
+    var iframe = expand.querySelector('iframe[data-lab-src]');
+    if (iframe && (!iframe.getAttribute('src') || iframe.getAttribute('src') === 'about:blank')) {
+      iframe.src = iframe.getAttribute('data-lab-src') || '';
+    }
   }
 }
-function closeArtifact(n) {
-  const expand = document.getElementById('art'+n+'-expand');
-  const toggle = document.getElementById('art'+n+'-cta');
-  expand.style.maxHeight = '0'; expand.dataset.open = 'false'; toggle.textContent = '+';
-}
-
-let currentFlow = 0;
-const totalFlow = 5;
-function showFlow(n) {
-  document.querySelectorAll('.flow-step').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.flow-panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.flow-step')[n].classList.add('active');
-  document.getElementById('fp-'+n).classList.add('active');
-  const num = String(n+1).padStart(2,'0');
-  document.getElementById('flow-counter').innerHTML = num + ' <span>/ 05</span>';
-  currentFlow = n;
-}
-function nextFlow() { showFlow((currentFlow+1) % totalFlow); }
-function prevFlow() { showFlow((currentFlow-1+totalFlow) % totalFlow); }
-
-function showScreen(n) {
-  document.querySelectorAll('.app-screen-btn').forEach(b => b.classList.remove('active'));
-  document.querySelectorAll('.app-screen-frame').forEach(f => f.classList.remove('active'));
-  document.querySelector('.app-screen-btn[data-screen="'+n+'"]').classList.add('active');
-  document.getElementById('screen-'+n).classList.add('active');
-}
-function toggleJourney(el) {
-  el.classList.toggle('active');
-}
-</script>
-<script>
 (function() {
   const steps = document.querySelectorAll('.proto-step');
   const iframe = document.querySelector('.proto-phone iframe');
   if (!steps.length || !iframe) return;
-
-  function snapScrollTo(y) {
-    const html = document.documentElement;
-    const prev = html.style.scrollBehavior;
-    html.style.scrollBehavior = 'auto';
-    window.scrollTo(0, y);
-    if (document.documentElement) document.documentElement.scrollTop = y;
-    if (document.body) document.body.scrollTop = y;
-    html.style.scrollBehavior = prev;
-  }
-
-  function restoreCaseStudyScroll(y) {
-    if (typeof y !== 'number' || isNaN(y)) return;
-    function r() {
-      snapScrollTo(y);
-    }
-    r();
-    requestAnimationFrame(r);
-    requestAnimationFrame(function () { requestAnimationFrame(r); });
-    [0, 16, 50, 100, 200, 350].forEach(function (ms) { setTimeout(r, ms); });
-  }
-
-  window.addEventListener('message', function (e) {
-    if (!e.data || e.data.type !== 'snkrs-proto-lock') return;
-    restoreCaseStudyScroll(e.data.y);
-  });
-
-  function applyProtoSrc(src) {
-    if (!src) return;
-    const y = window.scrollY;
-    const i = src.indexOf('#');
-    const hash = i >= 0 ? src.slice(i) : '';
-    try {
-      const win = iframe.contentWindow;
-      const loc = win && win.location;
-      if (loc && /snkrs-app\.html/i.test(loc.pathname || '') && hash) {
-        if (loc.hash !== hash) loc.hash = hash;
-        restoreCaseStudyScroll(y);
-        return;
-      }
-    } catch (e) {}
-    iframe.addEventListener('load', function onPrLoad() {
-      iframe.removeEventListener('load', onPrLoad);
-      restoreCaseStudyScroll(y);
-    });
-    iframe.src = src;
-  }
-
   steps[0].classList.add('active');
   steps.forEach(step => {
     step.addEventListener('click', () => {
-      const y = window.scrollY;
       steps.forEach(s => s.classList.remove('active'));
       step.classList.add('active');
-      applyProtoSrc(step.dataset.src);
-      restoreCaseStudyScroll(y);
+      if (step.dataset.src) iframe.src = step.dataset.src;
     });
   });
 })();
 </script>
 <script src="/js/cs-stat-eyebrow-fit.js"></script>
+
 </body>
 </html>
