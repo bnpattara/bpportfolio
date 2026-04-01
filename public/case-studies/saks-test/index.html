@@ -395,11 +395,66 @@ footer{border-top:1px solid var(--g200);padding:32px 48px;display:flex;align-ite
 .cs-img-3col{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:8px 0;}
 .cs-img-2col-item,.cs-img-3col-item{min-width:0;}
 .cs-img-2col-item img,.cs-img-3col-item img{width:100%;display:block;}
-.cs-img-contain{overflow:hidden;background:var(--g100);}
+.cs-img-contain{overflow:hidden;background:var(--g100);position:relative;}
 .cs-img-contain img{width:100%;height:100%;object-fit:cover;display:block;}
+.cs-img-full{width:100%;margin-bottom:0;}
+.cs-img-full .cs-img-contain{width:100%;}
+.cs-img-intrinsic img{width:100%;display:block;height:auto;}
 .img-caption{font-size:11px;color:var(--g400);padding:6px 0 12px;display:block;}
 .cs-brand-world-label{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--black);margin:32px 0 16px;}
 @media(max-width:768px){.cs-img-3col{grid-template-columns:1fr!important;}}
+/* TIER COMPARISON */
+.tier-compare{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--g200);margin-bottom:28px;}
+.tier-col{background:var(--white);min-width:0;}
+.tier-col-head{padding:24px 20px;border-bottom:1px solid var(--g200);}
+.tier-col-head.black-head{background:var(--black);}
+.tier-tier{font-size:8px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--g300);margin-bottom:8px;}
+.tier-col-head.black-head .tier-tier{color:rgba(255,255,255,.35);}
+.tier-price{font-size:28px;font-weight:300;color:var(--black);letter-spacing:-.02em;line-height:1;}
+.tier-col-head.black-head .tier-price{color:var(--white);}
+.tier-price-sub{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--g400);margin-top:4px;}
+.tier-col-head.black-head .tier-price-sub{color:rgba(255,255,255,.3);}
+.tier-unlock{font-size:11px;font-weight:600;letter-spacing:.04em;color:var(--black);margin-top:12px;}
+.tier-col-head.black-head .tier-unlock{color:var(--white);}
+.tier-features{padding:16px 20px;display:flex;flex-direction:column;gap:10px;}
+.tier-feature{font-size:11px;color:var(--g500);line-height:1.5;display:flex;gap:10px;align-items:flex-start;}
+.tier-feature::before{content:'+';font-size:10px;font-weight:600;color:var(--g300);flex-shrink:0;margin-top:1px;}
+.tier-persona{padding:16px 20px;border-top:1px solid var(--g100);}
+.tier-persona-label{font-size:8px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--g300);margin-bottom:6px;}
+.tier-persona-name{font-size:13px;font-weight:500;color:var(--black);margin-bottom:4px;}
+.tier-persona-role{font-size:11px;color:var(--g400);}
+/* DESIGNER PLATFORM SHOWCASE */
+.app-showcase{background:#0d0d0d;padding:72px 56px;border-bottom:1px solid #1a1a1a;}
+.app-showcase-eyebrow{display:flex;align-items:center;gap:14px;margin-bottom:20px;}
+.app-showcase-num{font-size:9px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.2);}
+.app-showcase-label{font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.4);}
+.app-showcase-heading{font-size:clamp(18px,2.2vw,26px);font-weight:300;letter-spacing:.05em;text-transform:uppercase;color:var(--white);line-height:1.1;margin-bottom:12px;}
+.app-showcase-intro{width:100%;max-width:720px;margin-bottom:40px;}
+.app-showcase-intro p{font-size:13px;color:rgba(255,255,255,.35);line-height:1.7;margin:0;}
+.app-showcase-layout{display:grid;grid-template-columns:220px 1fr;gap:40px;align-items:start;}
+.app-screen-nav-wrap{align-self:start;position:sticky;top:calc(var(--nav-h) + 20px);display:flex;flex-direction:column;gap:28px;min-width:0;}
+.app-screen-nav{display:flex;flex-direction:column;position:static;flex-shrink:0;}
+.app-screen-side-panel{border-top:1px solid rgba(255,255,255,0.1);padding-top:22px;min-height:0;}
+.app-screen-desc-panel{display:none;}
+.app-screen-desc-panel.active{display:block;}
+.app-screen-side-panel .app-screen-desc-label{margin-bottom:10px;}
+.app-screen-side-panel .app-screen-desc-text{font-size:12px;color:rgba(255,255,255,.42);line-height:1.65;margin:0;}
+.app-screen-counter--side{margin-top:18px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.08);font-size:11px;font-weight:300;letter-spacing:.1em;color:rgba(255,255,255,.22);white-space:nowrap;}
+.app-screen-btn{background:transparent;border:none;border-left:2px solid #222;padding:16px 20px;text-align:left;cursor:pointer;font-family:var(--font);transition:border-color var(--ease-fast);}
+.app-screen-btn:hover{background:rgba(255,255,255,.03);border-left-color:#444;}
+.app-screen-btn.active{border-left-color:var(--white);}
+.app-screen-btn-num{font-size:9px;font-weight:600;letter-spacing:.14em;color:rgba(255,255,255,.2);margin-bottom:4px;}
+.app-screen-btn.active .app-screen-btn-num{color:rgba(255,255,255,.5);}
+.app-screen-btn-name{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.3);line-height:1.3;}
+.app-screen-btn.active .app-screen-btn-name{color:var(--white);}
+.app-screen-frame{display:none;animation:screenFadeIn 200ms ease;}
+.app-screen-frame.active{display:block;}
+@keyframes screenFadeIn{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:translateY(0);}}
+.app-screen-display{min-width:0;}
+.app-screen-visual{width:100%;aspect-ratio:16/9;background:#111;border:1px solid rgba(255,255,255,.06);display:flex;align-items:stretch;justify-content:stretch;margin-bottom:20px;overflow:hidden;}
+.app-screen-visual svg{width:100%;height:100%;}
+.app-screen-desc-label{font-size:9px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:6px;}
+.app-screen-desc-text{font-size:13px;color:rgba(255,255,255,.5);line-height:1.7;max-width:480px;}
 </style>
 </head>
 <body>
@@ -536,47 +591,254 @@ footer{border-top:1px solid var(--g200);padding:32px 48px;display:flex;align-ite
 </section><section class="cs-section" id="cs-s09-concept-design-work" data-cs-section="cs-s09-concept-design-work">
   <div class="cs-section-eyebrow"><span class="cs-section-num">09</span><span class="cs-section-title">Concept / Design Work</span></div>
   <p class="cs-body">Vault operates as a network of micro-retail nodes deployed in high-trend neighborhoods across New York, Los Angeles, and Miami. Each node rotates its designer selection every fourteen days, sourced from a global pipeline of designers, creating genuine access and scarcity rather than manufactured exclusivity.</p>
-  <p class="cs-brand-world-label">Brand in world · environmental (live case study assets)</p>
-  <div class="cs-img-2col">
-    <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:4/3;min-height:180px;"><img src="../saks/facades/Saks_LA_Facade.png" alt="Vault node facade, Los Angeles" loading="lazy"/></div><span class="img-caption">Los Angeles</span></div>
-    <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:4/3;min-height:180px;"><img src="../saks/facades/Saks_Miami_Facade.png" alt="Vault node facade, Miami" loading="lazy"/></div><span class="img-caption">Miami</span></div>
+
+  <!-- 01 · Environmental Design -->
+  <div style="margin-bottom:16px;">
+    <h3 style="font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--black);margin-bottom:8px;">01 · Environmental Design</h3>
+    <p class="cs-body">Each node's facade matches the atmosphere and urban design of its market: the same system, read through local context.</p>
   </div>
   <div class="cs-img-2col">
-    <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:4/3;min-height:180px;"><img src="../saks/facades/Saks_NYC_Facade.png" alt="Vault node facade, New York" loading="lazy"/></div><span class="img-caption">New York</span></div>
-    <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:4/3;min-height:180px;"><img src="../saks/facades/Saks_chicago_Facade.png" alt="Vault node facade, Chicago" loading="lazy"/></div><span class="img-caption">Chicago</span></div>
+    <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:4/3;min-height:200px;"><img src="../saks/facades/Saks_LA_Facade.png" alt="Vault node facade, Los Angeles" loading="lazy"/></div><span class="img-caption">Los Angeles</span></div>
+    <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:4/3;min-height:200px;"><img src="../saks/facades/Saks_Miami_Facade.png" alt="Vault node facade, Miami" loading="lazy"/></div><span class="img-caption">Miami</span></div>
   </div>
-  <p class="cs-brand-world-label">Packaging system</p>
+  <div class="cs-img-2col" style="margin-top:8px;">
+    <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:4/3;min-height:200px;"><img src="../saks/facades/Saks_NYC_Facade.png" alt="Vault node facade, New York" loading="lazy"/></div><span class="img-caption">New York</span></div>
+    <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:4/3;min-height:200px;"><img src="../saks/facades/Saks_chicago_Facade.png" alt="Vault node facade, Chicago" loading="lazy"/></div><span class="img-caption">Chicago</span></div>
+  </div>
+
+  <!-- 02 · Packaging -->
+  <div style="margin-top:40px;margin-bottom:16px;">
+    <h3 style="font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--black);margin-bottom:8px;">02 · Packaging</h3>
+    <p class="cs-body">From shopping bags to garment wraps and tags, every layer is considered down to the smallest detail.</p>
+  </div>
   <div class="cs-img-2col">
-    <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="../saks/packaging/Saks_shoppingbag_packaging.png" alt="Shopping bag" loading="lazy"/></div><span class="img-caption">Shopping bag</span></div>
-    <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="../saks/packaging/Saks_ribbonbox_packaging.png" alt="Ribbon box" loading="lazy"/></div><span class="img-caption">Ribbon box</span></div>
+    <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="../saks/packaging/Saks_shoppingbag_packaging.png" alt="Vault shopping bag" loading="lazy"/></div><span class="img-caption">Shopping bag</span></div>
+    <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="../saks/packaging/Saks_ribbonbox_packaging.png" alt="Ribbon-tied gift box" loading="lazy"/></div><span class="img-caption">Ribbon box</span></div>
   </div>
-  <p class="cs-body" style="margin-top:16px;font-size:13px;">Full tier boards, fixtures, uniform styling, and designer-platform screen flows match the primary <a href="/work/saks" target="_parent" style="color:inherit;text-decoration:underline;">Saks</a> case study.</p>
-</section><section class="cs-section cs-section-alt" id="cs-s10-business-benefits" data-cs-section="cs-s10-business-benefits">
+  <div class="cs-img-2col" style="margin-top:8px;">
+    <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="../saks/packaging/Saks_Garmentbag_packaging.png" alt="Garment bag" loading="lazy"/></div><span class="img-caption">Garment bag</span></div>
+    <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="../saks/packaging/Saks_linentissueswrapping_packaging.png" alt="Tissue and linen wrapping" loading="lazy"/></div><span class="img-caption">Tissue &amp; wrap</span></div>
+  </div>
+
+  <!-- 03 · Fixtures -->
+  <div style="margin-top:40px;margin-bottom:16px;">
+    <h3 style="font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--black);margin-bottom:8px;">03 · Fixtures</h3>
+    <p class="cs-body">Modular fixtures and focal moments repeat across the node: cashwrap, bar, windows, capsules, and fitting rooms in one coherent language.</p>
+  </div>
+  <div class="cs-img-3col">
+    <div class="cs-img-3col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="../saks/fixtures/Saks_Cashwrap_Fixtures.png" alt="Cashwrap fixtures" loading="lazy"/></div><span class="img-caption">Cashwrap</span></div>
+    <div class="cs-img-3col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="../saks/fixtures/Saks_primarybar_fixture.png" alt="Primary bar fixture" loading="lazy"/></div><span class="img-caption">Primary bar</span></div>
+    <div class="cs-img-3col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="../saks/fixtures/Saks_Bar_Fixture.png" alt="Bar fixture" loading="lazy"/></div><span class="img-caption">Bar</span></div>
+  </div>
+  <div class="cs-img-3col" style="margin-top:8px;">
+    <div class="cs-img-3col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="../saks/fixtures/Saks_Ceilingbar_Fixture.png" alt="Ceiling bar" loading="lazy"/></div><span class="img-caption">Ceiling bar</span></div>
+    <div class="cs-img-3col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="../saks/fixtures/Saks_Wallshelf_Fixture.png" alt="Wall shelf" loading="lazy"/></div><span class="img-caption">Wall shelf</span></div>
+    <div class="cs-img-3col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="../saks/fixtures/Saks_Wallhooks_fixture.png" alt="Wall hooks" loading="lazy"/></div><span class="img-caption">Wall hooks</span></div>
+  </div>
+  <div class="cs-img-2col" style="margin-top:8px;">
+    <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="../saks/fixtures/Saks_WindowChest_Fixture.png" alt="Window chest display" loading="lazy"/></div><span class="img-caption">Window chest</span></div>
+    <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="../saks/fixtures/Saks_WindowLighting_Fixture.png" alt="Window lighting" loading="lazy"/></div><span class="img-caption">Window lighting</span></div>
+  </div>
+  <div class="cs-img-2col" style="margin-top:8px;">
+    <div class="cs-img-2col-item"><div class="cs-img-contain"><img src="../saks/fixtures/Saks_CapsuleHighlight_Fixture.png" alt="Capsule highlight" loading="lazy" style="width:100%;display:block;"/></div><span class="img-caption">Capsule highlight</span></div>
+    <div class="cs-img-2col-item"><div class="cs-img-contain"><img src="../saks/fixtures/Saks_Cornerhighlight_fixture.png" alt="Corner highlight fixture" loading="lazy" style="width:100%;display:block;"/></div><span class="img-caption">Corner highlight</span></div>
+  </div>
+
+  <!-- 04 · Uniform Styling Guide -->
+  <div style="margin-top:40px;margin-bottom:16px;">
+    <h3 style="font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--black);margin-bottom:8px;">04 · Uniform Styling Guide</h3>
+    <p class="cs-body">Group direction, individual styling, accessory detail, and flatlay references: a practical guide for how the team shows up in the node.</p>
+  </div>
+  <div class="cs-img-full"><div class="cs-img-contain" style="min-height:320px;aspect-ratio:16/9;"><img src="../saks/style-guide/Saks_teamstylingexamplegroupshot_styleguide.png" alt="Team styling group shot" loading="lazy"/></div></div>
+  <span class="img-caption">Group · team styling reference</span>
+  <div class="cs-img-3col" style="margin-top:8px;">
+    <div class="cs-img-3col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:220px;"><img src="../saks/style-guide/Saks_femalestylistguide_stylelguide.png" alt="Female stylist styling guide" loading="lazy"/></div><span class="img-caption">Individual · stylist A</span></div>
+    <div class="cs-img-3col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:220px;"><img src="../saks/style-guide/Saks_managerstylecloseup_styleguide.png" alt="Manager style close-up" loading="lazy"/></div><span class="img-caption">Individual · management</span></div>
+    <div class="cs-img-3col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:220px;"><img src="../saks/style-guide/Saks_malestylistcloseup_styleguide.png" alt="Male stylist close-up" loading="lazy"/></div><span class="img-caption">Individual · stylist B</span></div>
+  </div>
+  <div class="cs-img-3col" style="margin-top:8px;">
+    <div class="cs-img-3col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:220px;"><img src="../saks/style-guide/Saks_necklaceexample_styleguide.png" alt="Necklace styling example" loading="lazy"/></div><span class="img-caption">Detail · necklace</span></div>
+    <div class="cs-img-3col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:220px;"><img src="../saks/style-guide/Saks_Jewelrycloseup_styleguide.png" alt="Bracelet styling detail" loading="lazy"/></div><span class="img-caption">Detail · bracelet</span></div>
+    <div class="cs-img-3col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:220px;"><img src="../saks/style-guide/Saks_beltcloseup_styleguide.png" alt="Belt styling detail" loading="lazy"/></div><span class="img-caption">Detail · belt</span></div>
+  </div>
+  <div class="cs-img-2col" style="margin-top:8px;">
+    <div class="cs-img-2col-item"><img src="../saks/style-guide/Saks_clothingflatlay_styleguide.png" alt="Clothing flatlay style reference" loading="lazy" style="width:100%;display:block;"/><span class="img-caption">Flatlay · apparel</span></div>
+    <div class="cs-img-2col-item"><img src="../saks/style-guide/Saks_jewelryflatlay_styleguide.png" alt="Jewelry flatlay style reference" loading="lazy" style="width:100%;display:block;"/><span class="img-caption">Flatlay · jewelry</span></div>
+  </div>
+</section>
+
+<!-- DESIGNER DASHBOARD -->
+<section class="app-showcase" id="cs-designer-dashboard" data-cs-section="cs-designer-dashboard">
+  <div class="app-showcase-eyebrow"><span class="app-showcase-num">—</span><span class="app-showcase-label">Designer partnership</span></div>
+  <h2 class="app-showcase-heading">Designer platform · dashboard &amp; data architecture</h2>
+  <div class="app-showcase-intro">
+    <p>Every rotation generates data. Every data point improves the next curation decision. Designers subscribe for sell&#8209;through velocity, anonymized member aggregates, rotation scoring, and settlement status &mdash; intelligence that wholesale never shares.</p>
+  </div>
+  <div class="app-showcase-layout">
+    <div class="app-screen-nav-wrap">
+      <nav class="app-screen-nav" aria-label="Designer platform screens">
+        <button class="app-screen-btn active" type="button" data-screen="1" onclick="showScreen(1)"><div class="app-screen-btn-num">01</div><div class="app-screen-btn-name">Performance Dashboard</div></button>
+        <button class="app-screen-btn" type="button" data-screen="2" onclick="showScreen(2)"><div class="app-screen-btn-num">02</div><div class="app-screen-btn-name">Member Profile Aggregates</div></button>
+        <button class="app-screen-btn" type="button" data-screen="3" onclick="showScreen(3)"><div class="app-screen-btn-num">03</div><div class="app-screen-btn-name">Rotation Scoring</div></button>
+        <button class="app-screen-btn" type="button" data-screen="4" onclick="showScreen(4)"><div class="app-screen-btn-num">04</div><div class="app-screen-btn-name">Smart Contract Settlement</div></button>
+        <button class="app-screen-btn" type="button" data-screen="5" onclick="showScreen(5)"><div class="app-screen-btn-num">05</div><div class="app-screen-btn-name">Trend Velocity Reports</div></button>
+      </nav>
+      <div class="app-screen-side-panel" aria-live="polite">
+        <div class="app-screen-desc-panel active" data-desc-screen="1"><div class="app-screen-desc-label">What this screen does</div><p class="app-screen-desc-text">Designers can see exactly how fast each piece is selling. That information arrives before they need to commit to their next run &mdash; something a traditional wholesale buyer would never share.</p><div class="app-screen-counter app-screen-counter--side">01 / 05</div></div>
+        <div class="app-screen-desc-panel" data-desc-screen="2"><div class="app-screen-desc-label">What this screen does</div><p class="app-screen-desc-text">Anonymous style profile aggregates across Reserve and Black tier members. Informs silhouette, color, and fabrication decisions before the sample is cut &mdash; 12 weeks earlier than wholesale buyers can.</p><div class="app-screen-counter app-screen-counter--side">02 / 05</div></div>
+        <div class="app-screen-desc-panel" data-desc-screen="3"><div class="app-screen-desc-label">What this screen does</div><p class="app-screen-desc-text">Each designer sees how their pieces perform compared to everyone else on the floor that rotation. Designers who drive members back get more floor space next cycle.</p><div class="app-screen-counter app-screen-counter--side">03 / 05</div></div>
+        <div class="app-screen-desc-panel" data-desc-screen="4"><div class="app-screen-desc-label">What this screen does</div><p class="app-screen-desc-text">Payment within 14&nbsp;days of sale, verified through smart-contract settlement. No net&#8209;90 risk. The mechanism that rebuilds vendor trust in one rotation cycle rather than one fiscal year.</p><div class="app-screen-counter app-screen-counter--side">04 / 05</div></div>
+        <div class="app-screen-desc-panel" data-desc-screen="5"><div class="app-screen-desc-label">What this screen does</div><p class="app-screen-desc-text">Bi-weekly cultural signal digest: social velocity, editorial coverage, resale premiums. Designers act on demand signals weeks before wholesale buyers receive trend reports.</p><div class="app-screen-counter app-screen-counter--side">05 / 05</div></div>
+      </div>
+    </div>
+    <div class="app-screen-display">
+      <div class="app-screen-frame active" id="screen-1"><div class="app-screen-visual"><svg viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg" style="background:#0d0d0d;"><rect x="0" y="0" width="800" height="48" fill="#111"/><text x="24" y="20" fill="#B8952A" font-family="monospace" font-size="8" letter-spacing="3">VAULT BY SAKS</text><text x="24" y="36" fill="rgba(255,255,255,0.3)" font-family="monospace" font-size="9" letter-spacing="2">DESIGNER PLATFORM · PERFORMANCE DASHBOARD</text><text x="776" y="28" fill="rgba(255,255,255,0.2)" font-family="monospace" font-size="9" text-anchor="end">ROTATION 14 · NYC NODE</text><rect x="24" y="64" width="172" height="72" fill="#161616"/><text x="36" y="82" fill="rgba(255,255,255,0.3)" font-family="monospace" font-size="7" letter-spacing="2">SELL-THROUGH</text><text x="36" y="110" fill="#E8E0CC" font-family="monospace" font-size="28" font-weight="300">68%</text><text x="36" y="126" fill="#4A8C5C" font-family="monospace" font-size="8">+12pts vs rotation avg</text><rect x="208" y="64" width="172" height="72" fill="#161616"/><text x="220" y="82" fill="rgba(255,255,255,0.3)" font-family="monospace" font-size="7" letter-spacing="2">WISHLIST RATE</text><text x="220" y="110" fill="#E8E0CC" font-family="monospace" font-size="28" font-weight="300">41%</text><text x="220" y="126" fill="#B8952A" font-family="monospace" font-size="8">of pieces wishlisted</text><rect x="392" y="64" width="172" height="72" fill="#161616"/><text x="404" y="82" fill="rgba(255,255,255,0.3)" font-family="monospace" font-size="7" letter-spacing="2">HOLD CONVERSION</text><text x="404" y="110" fill="#E8E0CC" font-family="monospace" font-size="28" font-weight="300">52%</text><text x="404" y="126" fill="#4A8C5C" font-family="monospace" font-size="8">holds converted to sale</text><rect x="576" y="64" width="200" height="72" fill="#161616"/><text x="588" y="82" fill="rgba(255,255,255,0.3)" font-family="monospace" font-size="7" letter-spacing="2">REVENUE THIS ROTATION</text><text x="588" y="110" fill="#E8E0CC" font-family="monospace" font-size="28" font-weight="300">$148K</text><text x="588" y="126" fill="#B8952A" font-family="monospace" font-size="8">GMV vs $120K target</text><text x="24" y="162" fill="rgba(255,255,255,0.25)" font-family="monospace" font-size="8" letter-spacing="2">SELL-THROUGH BY PIECE · TOP 8</text><rect x="24" y="172" width="752" height="1" fill="rgba(255,255,255,0.06)"/><rect x="24" y="220" width="72" height="120" fill="rgba(184,149,42,0.15)"/><rect x="24" y="253" width="72" height="87" fill="#B8952A"/><text x="60" y="352" fill="rgba(255,255,255,0.3)" font-family="monospace" font-size="7" text-anchor="middle">LITKOVSKA</text><text x="60" y="242" fill="#E8E0CC" font-family="monospace" font-size="9" text-anchor="middle">87%</text><rect x="112" y="220" width="72" height="120" fill="rgba(184,149,42,0.1)"/><rect x="112" y="259" width="72" height="81" fill="rgba(184,149,42,0.7)"/><text x="148" y="352" fill="rgba(255,255,255,0.3)" font-family="monospace" font-size="7" text-anchor="middle">GASANOVA</text><text x="148" y="248" fill="rgba(232,224,204,0.7)" font-family="monospace" font-size="9" text-anchor="middle">81%</text><rect x="200" y="220" width="72" height="120" fill="rgba(184,149,42,0.1)"/><rect x="200" y="268" width="72" height="72" fill="rgba(184,149,42,0.6)"/><text x="236" y="352" fill="rgba(255,255,255,0.3)" font-family="monospace" font-size="7" text-anchor="middle">PEPA LAZAR</text><text x="236" y="257" fill="rgba(232,224,204,0.7)" font-family="monospace" font-size="9" text-anchor="middle">72%</text><rect x="0" y="370" width="800" height="80" fill="#111"/><text x="24" y="392" fill="rgba(255,255,255,0.2)" font-family="monospace" font-size="8" letter-spacing="2">NEXT ROTATION BRIEF · OPENS IN</text><text x="24" y="416" fill="#B8952A" font-family="monospace" font-size="22" font-weight="300">4 DAYS 06:14:22</text><text x="776" y="416" fill="#4A8C5C" font-family="monospace" font-size="13" text-anchor="end">ALL SETTLEMENTS CURRENT</text></svg></div></div>
+      <div class="app-screen-frame" id="screen-2"><div class="app-screen-visual"><svg viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg" style="background:#0d0d0d;"><rect x="0" y="0" width="800" height="48" fill="#111"/><text x="24" y="20" fill="#B8952A" font-family="monospace" font-size="8" letter-spacing="3">VAULT BY SAKS</text><text x="24" y="36" fill="rgba(255,255,255,0.3)" font-family="monospace" font-size="9" letter-spacing="2">DESIGNER PLATFORM · MEMBER PROFILE AGGREGATES</text><text x="24" y="74" fill="rgba(255,255,255,0.25)" font-family="monospace" font-size="8" letter-spacing="2">SILHOUETTE PREFERENCE · RESERVE + BLACK TIER · ANONYMOUS AGGREGATE</text><rect x="24" y="80" width="752" height="1" fill="rgba(255,255,255,0.06)"/><text x="24" y="110" fill="rgba(255,255,255,0.4)" font-family="monospace" font-size="9">Oversized outerwear</text><rect x="220" y="100" width="400" height="12" fill="#161616"/><rect x="220" y="100" width="332" height="12" fill="#B8952A"/><text x="660" y="110" fill="#B8952A" font-family="monospace" font-size="9">83%</text><text x="24" y="132" fill="rgba(255,255,255,0.4)" font-family="monospace" font-size="9">Minimal tailoring</text><rect x="220" y="122" width="400" height="12" fill="#161616"/><rect x="220" y="122" width="284" height="12" fill="rgba(184,149,42,0.7)"/><text x="660" y="132" fill="rgba(184,149,42,0.7)" font-family="monospace" font-size="9">71%</text><text x="24" y="154" fill="rgba(255,255,255,0.4)" font-family="monospace" font-size="9">Fluid knit</text><rect x="220" y="144" width="400" height="12" fill="#161616"/><rect x="220" y="144" width="244" height="12" fill="rgba(184,149,42,0.55)"/><text x="660" y="154" fill="rgba(184,149,42,0.55)" font-family="monospace" font-size="9">61%</text><rect x="24" y="348" width="752" height="72" fill="#161616"/><text x="36" y="368" fill="#B8952A" font-family="monospace" font-size="8" letter-spacing="2">PLATFORM INSIGHT FOR NEXT COLLECTION</text><text x="36" y="390" fill="rgba(232,224,204,0.6)" font-family="monospace" font-size="10">Black-tier members are buying oversized outerwear in cream/onyx at 2.3x the rate of Reserve tier.</text><text x="36" y="408" fill="rgba(232,224,204,0.4)" font-family="monospace" font-size="10">Recommend increasing oversized coat SKUs 30% for Q3. Bias toward cream and off-white colorways.</text></svg></div></div>
+      <div class="app-screen-frame" id="screen-3"><div class="app-screen-visual"><svg viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg" style="background:#0d0d0d;"><rect x="0" y="0" width="800" height="48" fill="#111"/><text x="24" y="20" fill="#B8952A" font-family="monospace" font-size="8" letter-spacing="3">VAULT BY SAKS</text><text x="24" y="36" fill="rgba(255,255,255,0.3)" font-family="monospace" font-size="9" letter-spacing="2">DESIGNER PLATFORM · ROTATION SCORING · LITKOVSKA</text><rect x="24" y="64" width="220" height="108" fill="#161616"/><text x="36" y="78" fill="rgba(255,255,255,0.3)" font-family="monospace" font-size="7" letter-spacing="2">CURRENT SCORE</text><text x="36" y="136" fill="#B8952A" font-family="monospace" font-size="48" font-weight="300">94</text><text x="36" y="156" fill="#4A8C5C" font-family="monospace" font-size="9">+7pts vs node average</text><rect x="256" y="64" width="220" height="108" fill="#161616"/><text x="268" y="78" fill="rgba(255,255,255,0.3)" font-family="monospace" font-size="7" letter-spacing="2">NODE AVERAGE</text><text x="268" y="136" fill="rgba(232,224,204,0.5)" font-family="monospace" font-size="48" font-weight="300">87</text><rect x="24" y="372" width="752" height="60" fill="#161616"/><text x="36" y="414" fill="#4A8C5C" font-family="monospace" font-size="11">Confirmed for Rotation 15 · 6 SKUs selected · Smart contract terms sent</text></svg></div></div>
+      <div class="app-screen-frame" id="screen-4"><div class="app-screen-visual"><svg viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg" style="background:#0d0d0d;"><rect x="0" y="0" width="800" height="48" fill="#111"/><text x="24" y="20" fill="#B8952A" font-family="monospace" font-size="8" letter-spacing="3">VAULT BY SAKS</text><text x="24" y="36" fill="rgba(255,255,255,0.3)" font-family="monospace" font-size="9" letter-spacing="2">DESIGNER PLATFORM · SMART CONTRACT SETTLEMENT</text><rect x="24" y="60" width="752" height="44" fill="rgba(46,90,58,0.2)"/><rect x="24" y="60" width="4" height="44" fill="#4A8C5C"/><text x="40" y="78" fill="#4A8C5C" font-family="monospace" font-size="9" letter-spacing="2">ALL CONTRACTS CURRENT · ROTATION 14 SETTLEMENT COMPLETE</text><text x="40" y="95" fill="rgba(74,140,92,0.6)" font-family="monospace" font-size="8">Next settlement: 3 days after drop day · Automatic execution on verified sale</text><rect x="24" y="142" width="752" height="24" fill="#161616"/><text x="36" y="158" fill="rgba(255,255,255,0.3)" font-family="monospace" font-size="8" letter-spacing="1">ROTATION</text><text x="320" y="158" fill="rgba(255,255,255,0.3)" font-family="monospace" font-size="8" letter-spacing="1">GMV</text><text x="440" y="158" fill="rgba(255,255,255,0.3)" font-family="monospace" font-size="8" letter-spacing="1">NET TO DESIGNER</text><text x="600" y="158" fill="rgba(255,255,255,0.3)" font-family="monospace" font-size="8" letter-spacing="1">DAYS</text><text x="730" y="158" fill="rgba(255,255,255,0.3)" font-family="monospace" font-size="8" letter-spacing="1">STATUS</text><rect x="24" y="166" width="752" height="32" fill="rgba(255,255,255,0.015)"/><text x="36" y="186" fill="rgba(232,224,204,0.6)" font-family="monospace" font-size="10">Rotation 14</text><text x="320" y="186" fill="rgba(232,224,204,0.6)" font-family="monospace" font-size="10">$18,400</text><text x="440" y="186" fill="#B8952A" font-family="monospace" font-size="10">$12,880</text><text x="600" y="186" fill="rgba(232,224,204,0.6)" font-family="monospace" font-size="10">11</text><text x="730" y="186" fill="#4A8C5C" font-family="monospace" font-size="10">SETTLED</text><rect x="24" y="290" width="752" height="120" fill="#161616"/><text x="36" y="312" fill="#B8952A" font-family="monospace" font-size="8" letter-spacing="2">VS. NET&#8209;90 WHOLESALE</text><text x="36" y="356" fill="rgba(140,48,48,0.8)" font-family="monospace" font-size="9">Legacy Saks: avg 127 days actual payment. $700M+ outstanding at bankruptcy.</text><text x="36" y="398" fill="#4A8C5C" font-family="monospace" font-size="9">Vault: avg 11 days. Blockchain-verified. First luxury retailer to offer this.</text></svg></div></div>
+      <div class="app-screen-frame" id="screen-5"><div class="app-screen-visual"><svg viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg" style="background:#0d0d0d;"><rect x="0" y="0" width="800" height="48" fill="#111"/><text x="24" y="20" fill="#B8952A" font-family="monospace" font-size="8" letter-spacing="3">VAULT BY SAKS</text><text x="24" y="36" fill="rgba(255,255,255,0.3)" font-family="monospace" font-size="9" letter-spacing="2">DESIGNER PLATFORM · TREND VELOCITY REPORT · WEEK 14</text><text x="24" y="70" fill="rgba(255,255,255,0.25)" font-family="monospace" font-size="8" letter-spacing="2">SIGNAL SOURCES · BI-WEEKLY DIGEST</text><rect x="24" y="86" width="236" height="220" fill="#161616"/><text x="36" y="106" fill="#B8952A" font-family="monospace" font-size="8" letter-spacing="2">SOCIAL VELOCITY</text><text x="36" y="130" fill="rgba(232,224,204,0.7)" font-family="monospace" font-size="11" font-weight="bold">Shearling coats</text><text x="36" y="148" fill="#4A8C5C" font-family="monospace" font-size="9">+340% 14&#8209;day view growth</text><text x="36" y="172" fill="rgba(232,224,204,0.6)" font-family="monospace" font-size="11">Leather trousers</text><text x="36" y="190" fill="#4A8C5C" font-family="monospace" font-size="9">+180% 14&#8209;day</text><rect x="272" y="86" width="236" height="220" fill="#161616"/><text x="284" y="106" fill="#B8952A" font-family="monospace" font-size="8" letter-spacing="2">EDITORIAL COVERAGE</text><text x="284" y="130" fill="rgba(232,224,204,0.7)" font-family="monospace" font-size="11" font-weight="bold">Vogue Ukraine</text><text x="284" y="148" fill="rgba(232,224,204,0.5)" font-family="monospace" font-size="9">Litkovska · Gasanova covers</text><rect x="520" y="86" width="256" height="220" fill="#161616"/><text x="532" y="106" fill="#B8952A" font-family="monospace" font-size="8" letter-spacing="2">RESALE PREMIUMS</text><text x="532" y="130" fill="rgba(232,224,204,0.7)" font-family="monospace" font-size="11" font-weight="bold">Litkovska coat</text><text x="532" y="148" fill="#4A8C5C" font-family="monospace" font-size="9">+230% over retail · Grailed</text><rect x="24" y="322" width="752" height="100" fill="#161616"/><text x="36" y="344" fill="#B8952A" font-family="monospace" font-size="8" letter-spacing="2">CURATION SIGNAL FOR ROTATION 15</text><text x="36" y="368" fill="rgba(232,224,204,0.6)" font-family="monospace" font-size="10">Three signals converge on shearling and sculptural outerwear. Recommend 4-5 Litkovska outerwear SKUs.</text><text x="36" y="410" fill="rgba(184,149,42,0.5)" font-family="monospace" font-size="9">Signal confidence: HIGH · All three sources in alignment</text></svg></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- MEMBERSHIP TABLE -->
+<section class="cs-section" id="cs-membership" data-cs-section="cs-membership">
+  <div class="cs-section-eyebrow"><span class="cs-section-num">—</span><span class="cs-section-title">Membership model · tiers &amp; personas</span></div>
+  <div class="tier-compare" style="margin-top:24px;">
+    <div class="tier-col">
+      <div class="tier-col-head">
+        <div class="tier-tier">Member</div>
+        <div class="tier-price">$500<span style="font-size:14px;font-weight:300;letter-spacing:.06em;">/yr</span></div>
+        <div class="tier-price-sub">$41.67 / month</div>
+        <div class="tier-unlock">Discovery + Community</div>
+      </div>
+      <div class="tier-features">
+        <div class="tier-feature">Digital lookbook before drop day</div>
+        <div class="tier-feature">1 guest pass per rotation</div>
+        <div class="tier-feature">Matte physical membership card</div>
+        <div class="tier-feature">Annual member gathering</div>
+        <div class="tier-feature">Up to 5 wishlist items</div>
+      </div>
+      <div class="tier-persona">
+        <div class="tier-persona-label">Designed for</div>
+        <div class="tier-persona-name">Camille Osei</div>
+        <div class="tier-persona-role">NYC · Associate Strategist · Word-of-mouth engine</div>
+      </div>
+    </div>
+    <div class="tier-col">
+      <div class="tier-col-head">
+        <div class="tier-tier">Reserve &#9733;</div>
+        <div class="tier-price">$900<span style="font-size:14px;font-weight:300;letter-spacing:.06em;">/yr</span></div>
+        <div class="tier-price-sub">$75 / month</div>
+        <div class="tier-unlock">Stylist Relationship</div>
+      </div>
+      <div class="tier-features">
+        <div class="tier-feature">48hr early access to each rotation</div>
+        <div class="tier-feature">Named stylist available in-app</div>
+        <div class="tier-feature">1-piece hold, 24hr hold window</div>
+        <div class="tier-feature">Designer preview events</div>
+        <div class="tier-feature">Embossed card · 5% purchase discount</div>
+        <div class="tier-feature">2 guest passes · Up to 12 wishlists</div>
+      </div>
+      <div class="tier-persona">
+        <div class="tier-persona-label">Designed for</div>
+        <div class="tier-persona-name">Daniela Reyes</div>
+        <div class="tier-persona-role">LA · Creative Director · Core revenue engine</div>
+      </div>
+    </div>
+    <div class="tier-col">
+      <div class="tier-col-head black-head">
+        <div class="tier-tier">Black</div>
+        <div class="tier-price" style="color:var(--white)">$4,500<span style="font-size:14px;font-weight:300;letter-spacing:.06em;color:rgba(255,255,255,.5)">/yr</span></div>
+        <div class="tier-price-sub" style="color:rgba(255,255,255,.3)">$375 / month</div>
+        <div class="tier-unlock" style="color:var(--white)">Intimacy at Home</div>
+      </div>
+      <div class="tier-features">
+        <div class="tier-feature">96hr early access to each rotation</div>
+        <div class="tier-feature">Named stylist direct line</div>
+        <div class="tier-feature">3-piece hold, 72hr hold window</div>
+        <div class="tier-feature">6-piece edit delivered at home</div>
+        <div class="tier-feature">Titanium black card · NFC enabled</div>
+        <div class="tier-feature">4 guest passes · Unlimited wishlists</div>
+      </div>
+      <div class="tier-persona">
+        <div class="tier-persona-label">Designed for</div>
+        <div class="tier-persona-name">Margaux Delacroix</div>
+        <div class="tier-persona-role">Miami · Partner, PE · High-LTV anchor</div>
+      </div>
+    </div>
+  </div>
+  <div class="persona-grid" style="margin-top:28px;">
+    <div class="persona-card">
+      <div class="persona-card-tier">Member Tier · $500/yr · NYC</div>
+      <div class="persona-card-name">Camille Osei</div>
+      <div class="persona-card-city">29 · $95K · Associate Strategist, Tribeca</div>
+      <div class="persona-card-quote">&ldquo;I know who the good designers are before they&rsquo;re on Ssense. My job is to make things make sense. My taste does the same thing.&rdquo;</div>
+      <div class="persona-card-detail">Culturally fluent and fashion-forward but not yet high-income. Buys selectively &mdash; one or two pieces per rotation when something is exactly right.</div>
+      <div class="persona-card-tension">Core role: Vault&rsquo;s word-of-mouth engine.</div>
+    </div>
+    <div class="persona-card">
+      <div class="persona-card-tier">Reserve Tier · $900/yr · Los Angeles</div>
+      <div class="persona-card-name">Daniela Reyes</div>
+      <div class="persona-card-city">34 · $165K · Creative Director, Silver Lake</div>
+      <div class="persona-card-quote">&ldquo;I know what I like. I just don&rsquo;t have time to find it anymore.&rdquo;</div>
+      <div class="persona-card-detail">Has the income and the taste but not the time. $8,500/yr fashion spend.</div>
+      <div class="persona-card-tension">Core role: the revenue engine.</div>
+    </div>
+    <div class="persona-card">
+      <div class="persona-card-tier">Black Tier · $4,500/yr · Miami</div>
+      <div class="persona-card-name">Margaux Delacroix</div>
+      <div class="persona-card-city">41 · $380K+ · Partner, Private Equity, Brickell</div>
+      <div class="persona-card-quote">&ldquo;I don&rsquo;t shop. I acquire. Show me what&rsquo;s right and bring it to me.&rdquo;</div>
+      <div class="persona-card-detail">Wardrobe of ~60 pieces, half investment garments. $28,000/yr fashion spend.</div>
+      <div class="persona-card-tension">Core role: high-LTV anchor.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FINANCIAL MODEL -->
+<section id="cs-financial-model" class="cs-section" style="padding-top:0;padding-bottom:0;border:none;" data-cs-section="cs-financial-model">
+  <div class="cs-full-bleed">
+    <div class="artifact-strip" id="artifact-financial">
+      <div class="artifact-trigger" id="art-fm-trigger" onclick="toggleArtifactFm()">
+        <div class="artifact-left">
+          <div class="artifact-badge"><span>Interactive Artifact</span></div>
+          <div class="artifact-meta">
+            <div class="artifact-name">Financial model</div>
+            <div class="artifact-desc">Bear / Base / Bull &middot; twelve adjustable variables &middot; $6.1B 10&#8209;year NPV at base case</div>
+          </div>
+        </div>
+        <div class="artifact-right"><span class="artifact-toggle" id="art-fm-cta">+</span></div>
+      </div>
+      <div class="artifact-expand" id="art-fm-expand">
+        <div class="artifact-inner">
+          <div class="artifact-iframe-wrap"><iframe src="../saks/vault-financial-model.html" title="Vault by Saks Financial Model" scrolling="yes"></iframe></div>
+          <a class="artifact-model-open-btn" href="../saks/vault-financial-model.html" target="_blank" rel="noopener noreferrer">Open Interactive Model</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BUSINESS BENEFITS -->
+<section class="cs-section cs-section-alt" id="cs-s10-business-benefits" data-cs-section="cs-s10-business-benefits">
   <div class="cs-section-eyebrow"><span class="cs-section-num">10</span><span class="cs-section-title">Business Benefits</span></div>
-  <p class="cs-body">The physical footprint reduction is eighty-five percent against the current cost structure. The rotation model produces twenty-six buying cycles per year against an industry standard of two,  a thirteen-times improvement in inventory velocity that eliminates the holding cost that was destroying margin under the old model. The projected annual cost reduction is $964 million, with payback on capital investment under two months. The strategic benefit that does not appear in the financial model is the data position: every rotation generates intent signals, hold behavior, and sell-through data that compounds into a curation advantage no department store operating on a six-month calendar can replicate.</p>
+  <p class="cs-body">The physical footprint reduction is eighty-five percent against the current cost structure. The rotation model produces twenty-six buying cycles per year against an industry standard of two &mdash; a thirteen-times improvement in inventory velocity that eliminates the holding cost that was destroying margin under the old model. The projected annual cost reduction is $964 million, with payback on capital investment under two months.</p>
   <div class="cs-stats cs-stats-4">
-    <div class="cs-stat-cell">
-      <div class="cs-stat-eyebrow">Footprint</div>
-      <div class="cs-stat-num">85%</div>
-      <div class="cs-stat-label">Physical cost reduction vs. current structure</div>
-    </div>
-    <div class="cs-stat-cell">
-      <div class="cs-stat-eyebrow">Velocity</div>
-      <div class="cs-stat-num">26×2</div>
-      <div class="cs-stat-label"><strong>26</strong> buying cycles / yr vs. ~<strong>2</strong> industry norm</div>
-    </div>
-    <div class="cs-stat-cell">
-      <div class="cs-stat-eyebrow">Cost takeout</div>
-      <div class="cs-stat-num">$964M</div>
-      <div class="cs-stat-label">Projected annual reduction · payback &lt; <strong>2</strong> months</div>
-    </div>
-    <div class="cs-stat-cell">
-      <div class="cs-stat-eyebrow">Data compounding</div>
-      <div class="cs-stat-num" style="font-size:clamp(22px,2.5vw,40px);">Curation</div>
-      <div class="cs-stat-label">Rotation-level intent + sell-through signal stack</div>
-    </div>
+    <div class="cs-stat-cell"><div class="cs-stat-eyebrow">Footprint</div><div class="cs-stat-num">85%</div><div class="cs-stat-label">Physical cost reduction vs. current structure</div></div>
+    <div class="cs-stat-cell"><div class="cs-stat-eyebrow">Velocity</div><div class="cs-stat-num">26×2</div><div class="cs-stat-label"><strong>26</strong> buying cycles / yr vs. ~<strong>2</strong> industry norm</div></div>
+    <div class="cs-stat-cell"><div class="cs-stat-eyebrow">Cost takeout</div><div class="cs-stat-num">$964M</div><div class="cs-stat-label">Projected annual reduction · payback &lt; <strong>2</strong> months</div></div>
+    <div class="cs-stat-cell"><div class="cs-stat-eyebrow">NPV (base case)</div><div class="cs-stat-num">$6.1B</div><div class="cs-stat-label">10-year net present value · Bear / Base / Bull scenarios</div></div>
   </div>
-</section><div class="cs-design-system-strip-wrap" id="artifact-1" data-cs-section="artifact-1">
+  <div class="cs-next">
+    <div class="cs-next-label">Next</div>
+    <a href="/work/carolyn" class="cs-next-link" target="_parent">
+      <div class="cs-next-meta">The Carolyn · Calvin Klein</div>
+      <div class="cs-next-title">The Carolyn &rarr;</div>
+    </a>
+  </div>
+</section>
+<div class="cs-design-system-strip-wrap" id="artifact-1" data-cs-section="artifact-1">
   <div class="artifact-strip">
     <div class="artifact-trigger" id="art1-trigger" onclick="toggleArtifact(1)">
       <div class="artifact-left">
@@ -669,12 +931,27 @@ function toggleArtifact(n) {
   expand.style.maxHeight = isOpen ? '0' : '5200px';
   expand.dataset.open = isOpen ? 'false' : 'true';
   toggle.textContent = isOpen ? '+' : '\u00d7';
-  if (!isOpen) {
-    var iframe = expand.querySelector('iframe[data-lab-src]');
-    if (iframe && (!iframe.getAttribute('src') || iframe.getAttribute('src') === 'about:blank')) {
-      iframe.src = iframe.getAttribute('data-lab-src') || '';
-    }
-  }
+}
+function toggleArtifactFm() {
+  const expand = document.getElementById('art-fm-expand');
+  const toggle = document.getElementById('art-fm-cta');
+  if (!expand || !toggle) return;
+  const isOpen = expand.dataset.open === 'true';
+  expand.style.maxHeight = isOpen ? '0' : '5200px';
+  expand.dataset.open = isOpen ? 'false' : 'true';
+  toggle.textContent = isOpen ? '+' : '\u00d7';
+}
+function showScreen(n) {
+  const btn = document.querySelector('.app-screen-btn[data-screen="' + n + '"]');
+  const frame = document.getElementById('screen-' + n);
+  if (!btn || !frame) return;
+  document.querySelectorAll('.app-screen-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.app-screen-frame').forEach(f => f.classList.remove('active'));
+  document.querySelectorAll('.app-screen-desc-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  frame.classList.add('active');
+  const panel = document.querySelector('.app-screen-desc-panel[data-desc-screen="' + n + '"]');
+  if (panel) panel.classList.add('active');
 }
 (function() {
   const steps = document.querySelectorAll('.proto-step');
