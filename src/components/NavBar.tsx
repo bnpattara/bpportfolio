@@ -4,8 +4,7 @@ import Link from 'next/link';
 import styles from './NavBar.module.css';
 
 export default function NavBar() {
-    return (
-        <nav className={styles.nav}>
+    return (<nav className={styles.nav}>
             <div className={styles.utility}>Free Shipping on Orders $50+ | US • EN</div>
             <div className={styles.main}>
                 <div className={styles.links}>
@@ -19,6 +18,5 @@ export default function NavBar() {
                     <a href="mailto:benn@example.com">Email</a>
                 </div>
             </div>
-        </nav>
-    );
+        </nav>);
 }

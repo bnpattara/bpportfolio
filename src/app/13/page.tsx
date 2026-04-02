@@ -30,13 +30,13 @@ export default function ThirteenPage() {
   async function findSong() {
     const trimmed = feeling.trim();
     if (!trimmed || trimmed.length < 3) {
-      setError('Tell me a little more — even just a few words.');
+      setError('Tell me a little more (even just a few words.');
       return;
     }
     setError('');
     setState('loading');
 
-    // Client-side fallback — always succeeds
+    // Client-side fallback) always succeeds
     const clientMatch = () => {
       const match = findMatchingSong(trimmed, songs);
       setResult(match);
@@ -79,9 +79,8 @@ export default function ThirteenPage() {
     setState('input');
   }
 
-  return (
-    <>
-      {/* ── NAV — always light (white bg, dark text) ── */}
+  return (<>
+      {/* ── NAV · always light (white bg, dark text) ── */}
       <nav id="site-nav" className="scrolled">
         <div className="nav-main">
           <div className="nav-left">
@@ -101,18 +100,17 @@ export default function ThirteenPage() {
       <main className="main-13">
         <div className="grid-13">
 
-          {/* Left column — constant */}
+          {/* Left column · constant */}
           <div className="col-left-13">
             <div className="title-13">13</div>
             <p className="subtitle-13">Every feeling has a song.</p>
             <p className="desc-13">Type a feeling. Get your Taylor Swift song.</p>
           </div>
 
-          {/* Right column — switches by state */}
+          {/* Right column · switches by state */}
           <div className="col-right-13">
 
-            {state === 'input' && (
-              <div>
+            {state === 'input' && (<div>
                 <p className="label-13">Tell me how you feel</p>
                 <textarea
                   className="textarea-13"
@@ -126,18 +124,14 @@ export default function ThirteenPage() {
                 <button className="btn-find-13" onClick={findSong}>
                   Find My Song →
                 </button>
-              </div>
-            )}
+              </div>)}
 
-            {state === 'loading' && (
-              <div className="loading-13">
+            {state === 'loading' && (<div className="loading-13">
                 <div className="loading-bar-13" />
                 <p className="loading-text-13">Finding your song…</p>
-              </div>
-            )}
+              </div>)}
 
-            {state === 'result' && result && (
-              <div className="result-13">
+            {state === 'result' && result && (<div className="result-13">
                 <div className="song-title-13">{result.song.title}</div>
                 <div className="song-album-13">{result.song.album}</div>
 
@@ -151,9 +145,7 @@ export default function ThirteenPage() {
                   <p className="truth-text-13">{result.song.human_truth}</p>
                 </div>
 
-                {result.song.psych_concept && (
-                  <p className="psych-tag-13">[ {result.song.psych_concept} ]</p>
-                )}
+                {result.song.psych_concept && (<p className="psych-tag-13">[ {result.song.psych_concept} ]</p>)}
 
                 <div className="btns-13">
                   <a
@@ -177,8 +169,7 @@ export default function ThirteenPage() {
                 <button className="reset-13" onClick={reset}>
                   ← Try Another Feeling
                 </button>
-              </div>
-            )}
+              </div>)}
 
           </div>
         </div>
@@ -469,7 +460,7 @@ export default function ThirteenPage() {
           color: #000;
         }
 
-        /* ── MOBILE — single column, allow scroll ── */
+        /* ── MOBILE · single column, allow scroll ── */
         @media (max-width: 1023px) {
           .main-13 {
             height: auto;
@@ -491,6 +482,5 @@ export default function ThirteenPage() {
           }
         }
       `}</style>
-    </>
-  );
+    </>);
 }

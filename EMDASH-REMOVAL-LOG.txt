@@ -1,0 +1,115 @@
+EM DASH REMOVAL LOG
+===================
+
+What changed
+------------
+Across the portfolio (public/case-studies HTML, src/app pages and components, globals.css comments,
+TOMORROW.txt, carolyn-image-inventory .txt, and src/data/mirrorball-songs.json), unicode em dashes (—) and
+HTML entities (&mdash;) in user-facing copy were replaced with commas, semicolons, colons, parentheses, or
+middle dots (·) so sentences stay grammatical.
+
+Automation
+----------
+Most passes used scripts/remove_emdashes.py (fixed iter_files indentation bug 2025-03-30). That script is
+unsafe for arbitrary JSON (paired-dash heuristics mangled strings), so .json is not bulk-processed.
+
+Not in scope
+------------
+- AUDIT-GAMEPLAN.md (internal checklist; still contains em dashes)
+- Generated out/ folder
+- Root package-lock.json / tsconfig (no em dashes)
+
+---------------------------------------------------------------------------
+FILE: src/data/caseStudies.json (manual edits; do not run bulk script here)
+---------------------------------------------------------------------------
+stageTag / subtitle / thesis / impact lines: em dash replaced as follows.
+
+ORIGINAL: Stage 02 — Consideration & Trial
+EDITED:   Stage 02 · Consideration & Trial
+
+ORIGINAL: The Confidence Pivot — From Lottery Machine to Styling Platform
+EDITED:   The Confidence Pivot: from Lottery Machine to Styling Platform
+
+ORIGINAL: they don't just stop buying — they stop identifying
+EDITED:   they don't just stop buying; they stop identifying
+
+ORIGINAL: Stage 01 — Discovery & Cultural Relevancy
+EDITED:   Stage 01 · Discovery & Cultural Relevancy
+
+ORIGINAL: The Forest of Arden — A Transmedia Brand Takeover
+EDITED:   The Forest of Arden: a Transmedia Brand Takeover
+
+ORIGINAL: don't just want to buy heritage — they want to wear the story
+EDITED:   don't just want to buy heritage; they want to wear the story
+
+ORIGINAL: Stage 03 — Acquisition & Transaction
+EDITED:   Stage 03 · Acquisition & Transaction
+
+ORIGINAL: Platform‑as‑a‑Service — Rebuilding Luxury Retail from the Balance Sheet Up
+EDITED:   Platform‑as‑a‑Service: Rebuilding Luxury Retail from the Balance Sheet Up
+
+ORIGINAL: don't need Saks to buy Gucci — they can go to Gucci.com
+EDITED:   don't need Saks to buy Gucci; they can go to Gucci.com
+
+ORIGINAL: Stage 04 — Retention & Deep Engagement
+EDITED:   Stage 04 · Retention & Deep Engagement
+
+ORIGINAL: The Movement Platform — Community as the Product
+EDITED:   The Movement Platform: Community as the Product
+
+ORIGINAL: isn't fitness — it's isolation
+EDITED:   isn't fitness; it's isolation
+
+ORIGINAL: Runners now identify with On — not just their shoes
+EDITED:   Runners now identify with On: not just their shoes
+
+ORIGINAL: Stage 05 — Loyalty & LTV Maximization
+EDITED:   Stage 05 · Loyalty & LTV Maximization
+
+ORIGINAL: The Phygital Ecosystem — Bridging the Age 7 Cliff
+EDITED:   The Phygital Ecosystem: Bridging the Age 7 Cliff
+
+ORIGINAL: isn't about the Dreamhouse — it's about the late nights
+EDITED:   isn't about the Dreamhouse; it's about the late nights
+
+ORIGINAL: Lifecycle & LTV — physical product becomes entry point
+EDITED:   Lifecycle & LTV: physical product becomes entry point
+
+ORIGINAL: Proofed — aligns with resilience
+EDITED:   Proofed: aligns with resilience
+
+ORIGINAL: Stage 06 — Advocacy & Brand Affinity
+EDITED:   Stage 06 · Advocacy & Brand Affinity
+
+ORIGINAL: The Cultural Destination — 10 % Product, 90 % Soul
+EDITED:   The Cultural Destination: 10 % Product, 90 % Soul  (NB: file uses narrow no-break space before %)
+
+ORIGINAL: don't just buy a brand — they adopt it
+EDITED:   don't just buy a brand; they adopt it
+
+ORIGINAL: Statement — Tokyo flagship solidifies
+EDITED:   Statement: Tokyo flagship solidifies
+
+ORIGINAL: Cross‑Cutting — Personalization & Decision Layer
+EDITED:   Cross‑Cutting · Personalization & Decision Layer
+
+ORIGINAL: The Human‑Led Styling Platform — Trust First, Algorithm Second
+EDITED:   The Human‑Led Styling Platform: Trust First, Algorithm Second
+
+ORIGINAL: shouldn't be a shopping mall — it should be a concierge
+EDITED:   shouldn't be a shopping mall; it should be a concierge
+
+---------------------------------------------------------------------------
+FILE: src/data/mirrorball-songs.json
+---------------------------------------------------------------------------
+Automated transform (same script rules as prose). Each scene/human_truth string: em dashes became colons,
+semicolons, commas, or parentheticals depending on clause structure (e.g. " — it " → ": it ";
+paired " — x — " → "(x)"). For a line-by-line diff, run:  git diff main -- src/data/mirrorball-songs.json
+(if you commit a pre-change baseline) or compare against backup.
+
+---------------------------------------------------------------------------
+OTHER FILES (bulk pass; no per-sentence listing in this log)
+---------------------------------------------------------------------------
+All public/case-studies/*.html, public/vault_by_saks_live_model.html, src/app/**/*.{tsx,ts,jsx,js},
+src/**/*.css, relevant .md under public/, TOMORROW.txt, public/.../carolyn-image-inventory-for-claude.txt:
+em dashes removed with the script’s rules. Use repository diff history for exact original wording.

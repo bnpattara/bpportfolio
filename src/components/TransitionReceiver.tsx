@@ -7,7 +7,7 @@ import { useEffect, useRef, useState } from "react";
  *
  * Hero-expand transition: on mount, reads sessionStorage for pending transition
  * from the homepage accordion. Renders an overlay that starts at the panel's
- * rect and fluidly expands to full viewport — then fades out to reveal the
+ * rect and fluidly expands to full viewport: then fades out to reveal the
  * case study hero beneath.
  */
 export default function TransitionReceiver() {
@@ -73,8 +73,7 @@ export default function TransitionReceiver() {
     const rect = data.rect;
     const hasRect = rect && rect.width > 0 && rect.height > 0;
 
-    return (
-        <div
+    return (<div
             className={`hero-expand-overlay${!hasRect ? " hero-expand-overlay--full" : ""}${hasRect && !expanded ? " hero-expand-overlay--from-rect" : ""}${expanded ? " hero-expand-overlay--expanded" : ""}${phase === "fade" ? " hero-expand-overlay--fade" : ""}`}
             style={{
                 ...bgStyle,
@@ -88,6 +87,5 @@ export default function TransitionReceiver() {
                     : {}),
             }}
             aria-hidden="true"
-        />
-    );
+        />);
 }

@@ -62,10 +62,16 @@ body{font-family:var(--font);background:var(--white);color:var(--black);line-hei
 .cs-exec-meta-cell{background:var(--white);padding:20px;min-width:0;overflow-wrap:break-word;}
 .cs-exec-meta-label{font-size:8px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--g300);margin-bottom:6px;font-family:var(--font);}
 .cs-exec-meta-val{font-size:12px;font-weight:500;letter-spacing:.04em;color:var(--black);}
-.cs-section{padding:72px 56px;border-bottom:1px solid #f0f0f0;}
-.cs-full-bleed{width:calc(100% + 112px + 2px);margin-left:calc(-56px - 1px);margin-right:calc(-56px - 1px);}
+.cs-section{padding:64px 56px;border-bottom:1px solid var(--g200);}
+.cs-full-bleed{width:calc(100% + 112px + 2px);margin-left:calc(-56px - 1px);margin-right:calc(-56px - 1px);box-sizing:border-box;}
+.cs-design-system-strip-wrap.carolyn-artifact-bleed{
+ background:transparent;
+ border-bottom:none;
+ padding-top:0;
+}
+.carolyn-artifact-bleed{margin-top:32px;}
 #cs-users{padding-bottom:32px;}
-.cs-design-system-strip-wrap{background:var(--g100);padding-top:clamp(28px,4vw,40px);border-bottom:1px solid #f0f0f0;}
+.cs-design-system-strip-wrap{background:var(--g100);padding-top:clamp(20px,3vw,32px);border-bottom:1px solid var(--g200);}
 #artifact-design-system{margin-top:-40px;padding-top:calc(72px + 40px);}
 .cs-section-alt{background:var(--g100);}
 .cs-section-eyebrow{display:flex;align-items:center;gap:14px;margin-bottom:28px;}
@@ -140,10 +146,6 @@ body{font-family:var(--font);background:var(--white);color:var(--black);line-hei
  width: 100% !important;
  border: none !important;
 }
-#cs-s02-background {
- border-bottom: none !important;
-}
-
 .persona-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--g200);margin-bottom:28px;}
 .persona-card{background:var(--white);padding:28px 24px;min-width:0;overflow-wrap:break-word;}
 .persona-card-tier{font-size:8px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--g300);margin-bottom:12px;font-family:var(--font);}
@@ -287,7 +289,8 @@ body{font-family:var(--font);background:var(--white);color:var(--black);line-hei
 .app-screen-desc-label{font-size:8px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--g300);margin-bottom:14px;font-family:var(--font);}
 .app-screen-desc-text{font-size:13px;color:var(--g500);line-height:1.8;}
 .app-screen-counter{font-family:var(--font);font-size:32px;font-weight:300;font-style:italic;color:var(--g200);letter-spacing:-.01em;margin-top:24px;}
-.cs-next{border-top:1px solid var(--g200);padding-top:32px;margin-top:48px;}
+.cs-next{border-top:none;padding-top:0;margin-top:0;}
+#cs-next{padding-top:52px;padding-bottom:52px;}
 .cs-next-label{font-size:8px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--g300);margin-bottom:14px;font-family:var(--font);}
 .cs-next-link{text-decoration:none;display:inline-block;}
 .cs-next-meta{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--g400);margin-bottom:6px;font-family:var(--font);}
@@ -326,6 +329,12 @@ footer{border-top:1px solid var(--g200);padding:32px 48px;display:flex;align-ite
  gap: 16px !important; 
  background: transparent !important;
  }
+ #cs-s06-the-consumer .carolyn-voice-grid{
+ grid-template-columns:1fr !important;
+ background:transparent !important;
+ gap:12px !important;
+ }
+ #cs-s06-the-consumer .carolyn-voice-cell{border:1px solid var(--g200);}
  .cs-exec-meta-grid { 
  grid-template-columns: repeat(2, minmax(0, 1fr)) !important; 
  gap: 1px !important; 
@@ -399,6 +408,78 @@ footer{border-top:1px solid var(--g200);padding:32px 48px;display:flex;align-ite
 .cs-img-full img{width:100%;height:100%;display:block;}
 .cs-img-contain{overflow:hidden;background:var(--g100);}
 .cs-img-contain img{width:100%;height:100%;object-fit:cover;display:block;}
+#cs-s06-the-consumer .carolyn-consumer-lede{margin-bottom:4px;}
+#cs-s06-the-consumer .carolyn-consumer-lede .cs-body:last-child{margin-bottom:0;}
+#cs-s06-the-consumer .carolyn-consumer-profile{
+ margin-top:32px;
+ border:1px solid var(--g200);
+ background:var(--white);
+ box-shadow:0 1px 0 rgba(0,0,0,.03);
+}
+#cs-s06-the-consumer .carolyn-consumer-profile-kicker{
+ display:flex;
+ flex-wrap:wrap;
+ align-items:baseline;
+ gap:10px 24px;
+ padding:22px 24px 18px;
+ border-bottom:1px solid var(--g200);
+}
+#cs-s06-the-consumer .carolyn-consumer-profile-name{
+ font-size:clamp(22px,2.6vw,30px);
+ font-weight:300;
+ font-style:italic;
+ letter-spacing:.02em;
+ color:var(--black);
+ line-height:1.1;
+}
+#cs-s06-the-consumer .carolyn-consumer-profile-role{
+ font-size:9px;
+ font-weight:600;
+ letter-spacing:.16em;
+ text-transform:uppercase;
+ color:var(--g400);
+ font-family:var(--font);
+}
+#cs-s06-the-consumer .carolyn-consumer-stats{margin-bottom:0;}
+#cs-s06-the-consumer .carolyn-voice-head{
+ margin:0;
+ padding:16px 24px 12px;
+ font-size:9px;
+ font-weight:600;
+ letter-spacing:.18em;
+ text-transform:uppercase;
+ color:var(--g300);
+ font-family:var(--font);
+ border-top:1px solid var(--g200);
+ background:var(--g100);
+}
+#cs-s06-the-consumer .carolyn-voice-grid{
+ display:grid;
+ grid-template-columns:repeat(3,minmax(0,1fr));
+ gap:1px;
+ background:var(--g200);
+}
+#cs-s06-the-consumer .carolyn-voice-cell{
+ background:var(--white);
+ padding:22px 20px 26px;
+ min-width:0;
+}
+#cs-s06-the-consumer .carolyn-voice-cell .pm-lens-label{margin-bottom:10px;}
+#cs-s06-the-consumer .carolyn-voice-cell .pm-lens-text{
+ margin:0;
+ font-size:13px;
+ font-style:italic;
+ color:var(--g500);
+ line-height:1.75;
+}
+@media (max-width:900px){
+ #cs-s06-the-consumer .carolyn-voice-grid{
+ grid-template-columns:1fr;
+ background:transparent;
+ gap:12px;
+ }
+ #cs-s06-the-consumer .carolyn-voice-cell{border:1px solid var(--g200);}
+}
 .img-caption{font-size:11px;color:var(--g400);padding:6px 0 12px;display:block;}
 .cs-hero-sub{margin-top:18px;font-size:13px;color:rgba(255,255,255,.35);letter-spacing:.1em;text-transform:uppercase;}
 .carolyn-product-hero{
@@ -456,6 +537,11 @@ footer{border-top:1px solid var(--g200);padding:32px 48px;display:flex;align-ite
   grid-template-columns:repeat(2,1fr);
  }
 }
+.cs-sidenav-num--nest{font-size:8px;letter-spacing:.06em;width:auto;min-width:26px;line-height:1.2;text-align:left;}
+.artifact-inner .cs-table--dark tr:hover td{background:#161616 !important;}
+@media(max-width:768px){
+ .carolyn-artifact-phase-grid{grid-template-columns:1fr !important;}
+}
 </style>
 </head>
 <body>
@@ -469,7 +555,7 @@ footer{border-top:1px solid var(--g200);padding:32px 48px;display:flex;align-ite
 </nav>
 <div class="page-body">
 <section class="cs-hero">
- <div class="cs-hero-bg"><img src="carolyn_hero_silhouette.webp" alt="The Carolyn — hero silhouette" fetchpriority="high"/></div>
+ <div class="cs-hero-bg"><img src="carolyn_hero_silhouette.webp" alt="The Carolyn · hero silhouette" fetchpriority="high"/></div>
  <div class="cs-hero-scrim"></div>
  <div class="cs-hero-title-wrap">
  <div class="cs-hero-meta-row">
@@ -481,8 +567,8 @@ footer{border-top:1px solid var(--g200);padding:32px 48px;display:flex;align-ite
  </div>
 </section>
 <div class="cs-body-wrap">
-<aside id="cs-sidenav"><div class="cs-sidenav-label">Index</div><a class="cs-sidenav-link active" data-target="cs-s01-executive-summary" onclick="scrollToSection('cs-s01-executive-summary')"><span class="cs-sidenav-num">01</span><span class="cs-sidenav-text">Executive Summary</span></a><a class="cs-sidenav-link" data-target="cs-s02-background" onclick="scrollToSection('cs-s02-background')"><span class="cs-sidenav-num">02</span><span class="cs-sidenav-text">Background</span></a><a class="cs-sidenav-link" data-target="cs-s03-the-ask" onclick="scrollToSection('cs-s03-the-ask')"><span class="cs-sidenav-num">03</span><span class="cs-sidenav-text">The Ask</span></a><a class="cs-sidenav-link" data-target="cs-s04-the-problem" onclick="scrollToSection('cs-s04-the-problem')"><span class="cs-sidenav-num">04</span><span class="cs-sidenav-text">The Problem</span></a><a class="cs-sidenav-link" data-target="cs-s05-research-methods" onclick="scrollToSection('cs-s05-research-methods')"><span class="cs-sidenav-num">05</span><span class="cs-sidenav-text">Research Methods</span></a><a class="cs-sidenav-link" data-target="cs-s06-the-consumer" onclick="scrollToSection('cs-s06-the-consumer')"><span class="cs-sidenav-num">06</span><span class="cs-sidenav-text">The Consumer</span></a><a class="cs-sidenav-link" data-target="cs-s07-key-data" onclick="scrollToSection('cs-s07-key-data')"><span class="cs-sidenav-num">07</span><span class="cs-sidenav-text">Key Data</span></a><a class="cs-sidenav-link" data-target="cs-s08-the-insight" onclick="scrollToSection('cs-s08-the-insight')"><span class="cs-sidenav-num">08</span><span class="cs-sidenav-text">The Insight</span></a><a class="cs-sidenav-link" data-target="cs-s09-the-strategy" onclick="scrollToSection('cs-s09-the-strategy')"><span class="cs-sidenav-num">09</span><span class="cs-sidenav-text">The Strategy</span></a><a class="cs-sidenav-link" data-target="cs-s10-concept-design-work" onclick="scrollToSection('cs-s10-concept-design-work')"><span class="cs-sidenav-num">10</span><span class="cs-sidenav-text">Concept / Design Work</span></a><a class="cs-sidenav-link" data-target="cs-s11-in-context" onclick="scrollToSection('cs-s11-in-context')"><span class="cs-sidenav-num">11</span><span class="cs-sidenav-text">The Carolyn in Context</span></a><a class="cs-sidenav-link" data-target="cs-s12-business-benefits" onclick="scrollToSection('cs-s12-business-benefits')"><span class="cs-sidenav-num">12</span><span class="cs-sidenav-text">Business Benefits</span></a></aside>
-<div class="cs-content"><section id="cs-s01-executive-summary" data-cs-section="cs-s01-executive-summary" style="padding:64px 56px;border-bottom:1px solid var(--g200);">
+<aside id="cs-sidenav"><div class="cs-sidenav-label">Index</div><a class="cs-sidenav-link active" data-target="cs-s01-executive-summary" onclick="scrollToSection('cs-s01-executive-summary')"><span class="cs-sidenav-num">01</span><span class="cs-sidenav-text">Executive Summary</span></a><a class="cs-sidenav-link" data-target="cs-s02-background" onclick="scrollToSection('cs-s02-background')"><span class="cs-sidenav-num">02</span><span class="cs-sidenav-text">Background</span></a><a class="cs-sidenav-link" data-target="cs-s03-the-ask" onclick="scrollToSection('cs-s03-the-ask')"><span class="cs-sidenav-num">03</span><span class="cs-sidenav-text">The Ask</span></a><a class="cs-sidenav-link" data-target="cs-s04-the-problem" onclick="scrollToSection('cs-s04-the-problem')"><span class="cs-sidenav-num">04</span><span class="cs-sidenav-text">The Problem</span></a><a class="cs-sidenav-link" data-target="cs-s05-research-methods" onclick="scrollToSection('cs-s05-research-methods')"><span class="cs-sidenav-num">05</span><span class="cs-sidenav-text">Research Methods</span></a><a class="cs-sidenav-link" data-target="cs-s06-the-consumer" onclick="scrollToSection('cs-s06-the-consumer')"><span class="cs-sidenav-num">06</span><span class="cs-sidenav-text">The Consumer</span></a><a class="cs-sidenav-link" data-target="cs-s07-key-data" onclick="scrollToSection('cs-s07-key-data')"><span class="cs-sidenav-num">07</span><span class="cs-sidenav-text">Key Data</span></a><a class="cs-sidenav-link" data-target="cs-s08-the-insight" onclick="scrollToSection('cs-s08-the-insight')"><span class="cs-sidenav-num">08</span><span class="cs-sidenav-text">The Insight</span></a><a class="cs-sidenav-link" data-target="cs-s09-the-strategy" onclick="scrollToSection('cs-s09-the-strategy')"><span class="cs-sidenav-num">09</span><span class="cs-sidenav-text">The Strategy</span></a><a class="cs-sidenav-link" data-target="cs-s09b-the-muse" onclick="scrollToSection('cs-s09b-the-muse')"><span class="cs-sidenav-num cs-sidenav-num--nest">09B</span><span class="cs-sidenav-text">The Muse</span></a><a class="cs-sidenav-link" data-target="cs-s10-concept-design-work" onclick="scrollToSection('cs-s10-concept-design-work')"><span class="cs-sidenav-num">10</span><span class="cs-sidenav-text">Concept / Design Work</span></a><a class="cs-sidenav-link" data-target="cs-s11-in-context" onclick="scrollToSection('cs-s11-in-context')"><span class="cs-sidenav-num">11</span><span class="cs-sidenav-text">The Carolyn in Context</span></a><a class="cs-sidenav-link" data-target="cs-s12-business-benefits" onclick="scrollToSection('cs-s12-business-benefits')"><span class="cs-sidenav-num">12</span><span class="cs-sidenav-text">Business Benefits</span></a></aside>
+<div class="cs-content"><section class="cs-section" id="cs-s01-executive-summary" data-cs-section="cs-s01-executive-summary">
  <div class="cs-exec-inner" style="grid-template-columns:1fr;">
  <div><h2 class="cs-exec-heading">Executive Summary</h2><p class="cs-body">Calvin Klein has the brand equity to own the accessories category. It does not have the product to do it. The Carolyn is a hero bag strategy built for a consumer who has already proven she can buy the logo, and has decided not to. Restraint is not the absence of a point of view. It is the most specific point of view available in luxury accessories right now.</p></div>
  </div>
@@ -496,59 +582,63 @@ footer{border-top:1px solid var(--g200);padding:32px 48px;display:flex;align-ite
  <p class="cs-the-ask-lede">Develop a hero bag strategy for Calvin Klein&#x27;s accessories category that builds long-term brand equity with a consumer who values restraint over visibility.</p>
  </div>
  </div>
-</section><section class="cs-section cs-section-alt" id="cs-s04-the-problem" data-cs-section="cs-s04-the-problem">
+</section><section class="cs-section" id="cs-s04-the-problem" data-cs-section="cs-s04-the-problem">
  <div class="cs-section-eyebrow"><span class="cs-section-num">04</span><span class="cs-section-title">The Problem</span></div>
  <p class="cs-body">The current accessories landscape is crowded with objects optimized for a single moment: the outfit photograph, the unboxing, the status signal that reads at a distance. That consumer exists and is well-served. The consumer who is not well-served is the one who has moved through that phase, who has purchased the logo piece, understood what it says, and decided she wants something that says something different. She is professional, has purchasing power, buys at high repurchase frequency, and is looking for a product that holds its value and its relevance over time. CK&#x27;s existing accessories offer no clear answer to her.</p>
-</section><section class="cs-section" id="cs-s05-research-methods" data-cs-section="cs-s05-research-methods">
+</section><section class="cs-section cs-section-alt" id="cs-s05-research-methods" data-cs-section="cs-s05-research-methods">
  <div class="cs-section-eyebrow"><span class="cs-section-num">05</span><span class="cs-section-title">Research Methods</span></div>
- <p class="cs-body">Resale market performance was the primary validity signal. The Row Margaux and the Bottega Veneta Jodie were selected as the closest competitive analogues, both positioned in the same aesthetic register, both targeting a consumer profile consistent with the Carolyn&#x27;s intended audience. Resale spread analysis across secondary platforms established the retention benchmarks for silhouette durability. Price positioning was mapped across the $600 to $1,400 segment to identify where the Carolyn could enter without competing directly against established players. Consumer persona work defined the target buyer at the level of actual purchase behavior and lifecycle stage rather than demographic proxy.</p>
-</section><section class="cs-section cs-section-alt" id="cs-s06-the-consumer" data-cs-section="cs-s06-the-consumer">
+ <p class="cs-body">Resale market performance was the primary validity signal. The Row Margaux and the Bottega Veneta Jodie were selected as the closest competitive analogues: both in the same aesthetic register, both targeting a consumer profile consistent with the Carolyn&#x27;s intended audience. Resale spread analysis across secondary platforms established the retention benchmarks that make the design brief legible: silhouette durability is not a design opinion, it is a market signal. Price positioning was mapped across the $600 to $1,400 segment to identify where the Carolyn could enter without competing directly against established players. The consumer definition followed from the data: purchase behavior and lifecycle stage, not demographic proxy.</p>
+</section><section class="cs-section" id="cs-s06-the-consumer" data-cs-section="cs-s06-the-consumer">
  <div class="cs-section-eyebrow"><span class="cs-section-num">06</span><span class="cs-section-title">The Consumer</span></div>
- <p class="cs-body">Cameron is the highest-value consumer in the accessible luxury category. She has the income, the taste, and the purchase frequency. She is not buying. Not because the product doesn&#x27;t exist at the right price — but because nothing in the market has earned her trust. She is the deliberate investor: every purchase is audited against long-term utility, material integrity, and whether it signals taste to a peer group that would notice the difference.</p>
- <p class="cs-body">Her relationship with Calvin Klein is lapsed but conditional. She respects the archives. She views what the brand became — mall distribution, celebrity underwear campaigns, seasonal noise — as a failure of nerve, not of DNA. She is waiting for a reason to return. The Carolyn is that reason, but only if every product decision holds up to her standard.</p>
- <div class="cs-img-2col">
- <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:4/3;min-height:160px;"><img src="mockups/02_street_nyc.png" alt="Cameron — New York street context" loading="lazy"/></div></div>
- <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:4/3;min-height:160px;"><img src="mockups/03_interior_minimal.png" alt="Cameron — minimal interior" loading="lazy"/></div></div>
+ <div class="carolyn-consumer-lede">
+ <p class="cs-body">Cameron is the highest-value consumer in the accessible luxury category. She has the income, the taste, and the purchase frequency. She is not buying. Not because the product doesn&#x27;t exist at the right price, but because nothing in the market has earned her trust. She is the deliberate investor: every purchase is audited against long-term utility, material integrity, and whether it signals taste to a peer group that would notice the difference.</p>
+ <p class="cs-body">Her relationship with Calvin Klein is lapsed but conditional. She respects the archives. She views what the brand became (mall distribution, celebrity underwear campaigns, seasonal noise) as a failure of nerve, not of DNA. She is waiting for a reason to return. The Carolyn is that reason, but only if every product decision holds up to her standard.</p>
  </div>
- <div class="cs-stats cs-stats-3">
- <div class="cs-stat-cell"><div class="cs-stat-eyebrow">Age / Stage</div><div class="cs-stat-num">28–35</div><div class="cs-stat-label">Mid-career Director or Senior Manager — wardrobe is a workplace tool</div></div>
- <div class="cs-stat-cell"><div class="cs-stat-eyebrow">Income</div><div class="cs-stat-num">$110–150K</div><div class="cs-stat-label">High discretionary spend, protective allocation — price is a quality signal</div></div>
- <div class="cs-stat-cell"><div class="cs-stat-eyebrow">Purchase frequency</div><div class="cs-stat-num">2–3×</div><div class="cs-stat-label">Per year — considered, never compulsive</div></div>
+ <div class="carolyn-consumer-profile">
+ <div class="carolyn-consumer-profile-kicker">
+ <span class="carolyn-consumer-profile-name">Cameron</span>
+ <span class="carolyn-consumer-profile-role">Primary persona · accessible luxury</span>
  </div>
- <div class="cs-env-label" style="margin-top:32px;margin-bottom:16px;">Her voice</div>
- <div class="pm-lens" style="background:var(--black);color:#fff;border:none;">
- <div class="pm-lens-label" style="color:rgba(255,255,255,.55);">Purchase motivation</div>
- <div class="pm-lens-text" style="color:#fff;">&ldquo;I don&#x27;t want a billboard; I want a workhorse. It needs to hold my laptop and look better in three years than it does today.&rdquo;</div>
+ <div class="cs-stats cs-stats-3 carolyn-consumer-stats">
+ <div class="cs-stat-cell"><div class="cs-stat-eyebrow">Age / Stage</div><div class="cs-stat-num">28–35</div><div class="cs-stat-label">Mid-career Director or Senior Manager; wardrobe is a workplace tool</div></div>
+ <div class="cs-stat-cell"><div class="cs-stat-eyebrow">Income</div><div class="cs-stat-num">$110–150K</div><div class="cs-stat-label">High discretionary spend, protective allocation; price is a quality signal</div></div>
+ <div class="cs-stat-cell"><div class="cs-stat-eyebrow">Purchase frequency</div><div class="cs-stat-num">2–3×</div><div class="cs-stat-label">Per year: considered, never compulsive</div></div>
  </div>
- <div class="pm-lens" style="background:var(--black);color:#fff;border:none;">
- <div class="pm-lens-label" style="color:rgba(255,255,255,.55);">Quality gate</div>
- <div class="pm-lens-text" style="color:#fff;">&ldquo;If I&#x27;m spending $600 on a contemporary bag, the hardware better not feel hollow when I pick it up.&rdquo;</div>
+ <p class="carolyn-voice-head">Her voice</p>
+ <div class="carolyn-voice-grid">
+ <div class="carolyn-voice-cell">
+ <div class="pm-lens-label">Purchase motivation</div>
+ <div class="pm-lens-text">&ldquo;I don&#x27;t want a billboard; I want a workhorse. It needs to hold my laptop and look better in three years than it does today.&rdquo;</div>
  </div>
- <div class="pm-lens" style="background:var(--black);color:#fff;border:none;">
- <div class="pm-lens-label" style="color:rgba(255,255,255,.55);">Brand relationship</div>
- <div class="pm-lens-text" style="color:#fff;">&ldquo;Calvin Klein used to own American minimalism. If this bag is a return to that, I&#x27;m interested. If it&#x27;s just another influencer push, I&#x27;m out.&rdquo;</div>
+ <div class="carolyn-voice-cell">
+ <div class="pm-lens-label">Quality gate</div>
+ <div class="pm-lens-text">&ldquo;If I&#x27;m spending $795 on a contemporary bag, the hardware better not feel hollow when I pick it up.&rdquo;</div>
  </div>
- <div class="cs-design-system-strip-wrap" id="artifact-2" data-cs-section="artifact-2" style="margin-top:32px;">
+ <div class="carolyn-voice-cell">
+ <div class="pm-lens-label">Brand relationship</div>
+ <div class="pm-lens-text">&ldquo;Calvin Klein used to own American minimalism. If this bag is a return to that, I&#x27;m interested. If it&#x27;s just another influencer push, I&#x27;m out.&rdquo;</div>
+ </div>
+ </div>
+ </div>
+ <div class="cs-design-system-strip-wrap cs-full-bleed carolyn-artifact-bleed" id="artifact-2" data-cs-section="artifact-2">
  <div class="artifact-strip">
  <div class="artifact-trigger" id="art2-trigger" onclick="toggleArtifact(2)">
  <div class="artifact-left">
  <div class="artifact-badge"><span>Artifact</span></div>
  <div class="artifact-meta">
- <div class="artifact-name">Cameron persona (static)</div>
- <div class="artifact-desc">HTML</div>
+ <div class="artifact-name">Persona deep dive</div>
  </div>
  </div>
  <div class="artifact-right"><span class="artifact-toggle" id="art2-cta">+</span></div>
  </div>
  <div class="artifact-expand" id="art2-expand">
  <div class="artifact-inner">
- <div class="artifact-iframe-wrap"><iframe title="Cameron persona (static)" scrolling="yes" src="cameron-persona.html"></iframe></div>
+ <div class="artifact-iframe-wrap"><iframe title="Persona deep dive" scrolling="yes" src="cameron-persona.html"></iframe></div>
  <a class="artifact-model-open-btn" href="/case-studies/carolyn/cameron-persona.html" target="_top" rel="noopener">Open full screen</a>
  </div>
  </div>
  </div>
-</div>
-</section><section class="cs-section" id="cs-s07-key-data" data-cs-section="cs-s07-key-data">
+</section><section class="cs-section cs-section-alt" id="cs-s07-key-data" data-cs-section="cs-s07-key-data">
  <div class="cs-section-eyebrow"><span class="cs-section-num">07</span><span class="cs-section-title">Key Data</span></div>
  <p class="cs-body">The resale data makes the design brief legible. The Row Margaux holds between eighty-five and ninety-five percent of retail value on the secondary market. The Bottega Veneta Jodie retains between seventy and eighty percent. Both are built on the same principles: silhouette authority and hardware restraint. Neither relies on logo visibility to communicate value. The resale retention is the proof that this design language has genuine durability, consumers who buy these objects hold them, and the market affirms the decision. The Carolyn&#x27;s price point at $795 was benchmarked against this data, positioned as the highest-integrity option in the accessible tier, construction that competes with Toteme at a price that remains a smart investment rather than an aspirational stretch.</p>
  <div class="cs-stats cs-stats-3">
@@ -556,41 +646,114 @@ footer{border-top:1px solid var(--g200);padding:32px 48px;display:flex;align-ite
  <div class="cs-stat-cell"><div class="cs-stat-eyebrow">Jodie (secondary)</div><div class="cs-stat-num">70–80%</div><div class="cs-stat-label">Retention band, same register, logo-quiet objects</div></div>
  <div class="cs-stat-cell"><div class="cs-stat-eyebrow">Carolyn entry</div><div class="cs-stat-num">$795</div><div class="cs-stat-label">Benchmarked below Row ceiling, above &ldquo;aspirational noise&rdquo; floor</div></div>
  </div>
-</section><section class="cs-section cs-section-alt" id="cs-s08-the-insight" data-cs-section="cs-s08-the-insight">
+</section><section class="cs-section" id="cs-s08-the-insight" data-cs-section="cs-s08-the-insight">
  <div class="cs-section-eyebrow"><span class="cs-section-num">08</span><span class="cs-section-title">The Insight</span></div>
  <p class="cs-body">The right luxury accessory does not announce itself. It reveals something about the person carrying it, specifically, that she has the taste to choose an object that does not require external validation. The consumer the Carolyn is designed for has already proven she can access the logo. She has outgrown the need to use it. Restraint at this level is not minimalism as aesthetic preference. It is a decision with a specific cultural address, made by a specific consumer, for a specific reason. The brief is to make that decision visible in the product.</p>
-</section><section class="cs-section" id="cs-s09-the-strategy" data-cs-section="cs-s09-the-strategy">
+</section><section class="cs-section cs-section-alt" id="cs-s09-the-strategy" data-cs-section="cs-s09-the-strategy">
  <div class="cs-section-eyebrow"><span class="cs-section-num">09</span><span class="cs-section-title">The Strategy</span></div>
  <p class="cs-body">The design brief is built on four criteria: silhouette authority, hardware restraint, material honesty, and resale durability. Each criterion functions as a filter applied at every product decision, from closure mechanism to strap attachment to finish. The branding treatment is blind-embossed, the CK mark is present in the object but not performing on the surface. Launch sequencing moves in three phases: editorial placement with the right publications before any retail presence, flagship retail introduction at a controlled number of doors, and secondary market seeding to establish the resale signal that validates the product&#x27;s position in the category.</p>
+ <div class="cs-design-system-strip-wrap cs-full-bleed carolyn-artifact-bleed" id="artifact-3" data-cs-section="artifact-3">
+ <div class="artifact-strip">
+ <div class="artifact-trigger" id="art3-trigger" onclick="toggleArtifact(3)">
+ <div class="artifact-left">
+ <div class="artifact-badge"><span>Artifact</span></div>
+ <div class="artifact-meta">
+ <div class="artifact-name">Product Brief, PRD, Silhouette Eval &amp; Launch Sequencing</div>
+ </div>
+ </div>
+ <div class="artifact-right"><span class="artifact-toggle" id="art3-cta">+</span></div>
+ </div>
+ <div class="artifact-expand" id="art3-expand">
+ <div class="artifact-inner" style="padding:clamp(28px,4vw,48px) clamp(24px,4vw,56px) clamp(40px,5vw,56px);">
+ <p style="font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.88);margin:0 0 16px;">PRD, Six Parameters</p>
+ <table class="cs-table cs-table--dark" style="margin-bottom:32px;">
+ <thead><tr>
+ <th style="font-size:8px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.45);padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.12);text-align:left;background:#111;font-family:var(--font);">Parameter</th>
+ <th style="font-size:8px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.45);padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.12);text-align:left;background:#111;font-family:var(--font);">Specification</th>
+ <th style="font-size:8px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.45);padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.12);text-align:left;background:#111;font-family:var(--font);">Rationale</th>
+ </tr></thead>
+ <tbody>
+ <tr><td style="font-size:11px;font-weight:500;color:rgba(255,255,255,.92);padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.08);line-height:1.6;vertical-align:top;letter-spacing:.03em;text-transform:uppercase;">Form Factor</td><td style="font-size:12px;color:rgba(255,255,255,.75);padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.08);line-height:1.6;vertical-align:top;">Structured medium East-West trapezoid shoulder bag with envelope flap</td><td style="font-size:12px;color:rgba(255,255,255,.75);padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.08);line-height:1.6;vertical-align:top;">Usable geometric structure; reads intentional not trend-chasing</td></tr>
+ <tr><td style="font-size:11px;font-weight:500;color:rgba(255,255,255,.92);padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.08);line-height:1.6;vertical-align:top;letter-spacing:.03em;text-transform:uppercase;">Material</td><td style="font-size:12px;color:rgba(255,255,255,.75);padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.08);line-height:1.6;vertical-align:top;">Full-grain smooth leather, bone/ivory at launch; pebbled held for Year 2</td><td style="font-size:12px;color:rgba(255,255,255,.75);padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.08);line-height:1.6;vertical-align:top;">Smooth leather is table-stakes for investment positioning at this tier</td></tr>
+ <tr><td style="font-size:11px;font-weight:500;color:rgba(255,255,255,.92);padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.08);line-height:1.6;vertical-align:top;letter-spacing:.03em;text-transform:uppercase;">Hardware</td><td style="font-size:12px;color:rgba(255,255,255,.75);padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.08);line-height:1.6;vertical-align:top;">Brushed gold, single sculptural rectangular magnetic clasp, no logo hardware</td><td style="font-size:12px;color:rgba(255,255,255,.75);padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.08);line-height:1.6;vertical-align:top;">Single focal point keeps the design resolved</td></tr>
+ <tr><td style="font-size:11px;font-weight:500;color:rgba(255,255,255,.92);padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.08);line-height:1.6;vertical-align:top;letter-spacing:.03em;text-transform:uppercase;">Branding</td><td style="font-size:12px;color:rgba(255,255,255,.75);padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.08);line-height:1.6;vertical-align:top;">Interior only: blind-embossed CALVIN KLEIN / THE CAROLYN, zero exterior logos</td><td style="font-size:12px;color:rgba(255,255,255,.75);padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.08);line-height:1.6;vertical-align:top;">Absence of exterior branding is the status signal at this tier</td></tr>
+ <tr><td style="font-size:11px;font-weight:500;color:rgba(255,255,255,.92);padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.08);line-height:1.6;vertical-align:top;letter-spacing:.03em;text-transform:uppercase;">Carry</td><td style="font-size:12px;color:rgba(255,255,255,.75);padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.08);line-height:1.6;vertical-align:top;">Single adjustable flat strap; working volume: phone, wallet, keys, paperback</td><td style="font-size:12px;color:rgba(255,255,255,.75);padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.08);line-height:1.6;vertical-align:top;">Architectural presence without occasion-bag scale</td></tr>
+ <tr><td style="font-size:11px;font-weight:500;color:rgba(255,255,255,.92);padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.08);line-height:1.6;vertical-align:top;letter-spacing:.03em;text-transform:uppercase;">Price</td><td style="font-size:12px;color:rgba(255,255,255,.75);padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.08);line-height:1.6;vertical-align:top;">$795 MSRP, no seasonal markdowns in Year 1</td><td style="font-size:12px;color:rgba(255,255,255,.75);padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.08);line-height:1.6;vertical-align:top;">No markdowns trains the line as a stable asset; pricing is positioning</td></tr>
+ </tbody>
+ </table>
+ <p style="font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.88);margin:32px 0 16px;">Silhouette Evaluation</p>
+ <table class="cs-table cs-table--dark" style="margin-bottom:32px;">
+ <thead><tr>
+ <th style="font-size:8px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.45);padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.12);text-align:left;background:#111;font-family:var(--font);">Option</th>
+ <th style="font-size:8px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.45);padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.12);text-align:left;background:#111;font-family:var(--font);">Brief Fit</th>
+ <th style="font-size:8px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.45);padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.12);text-align:left;background:#111;font-family:var(--font);">Ownable</th>
+ <th style="font-size:8px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.45);padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.12);text-align:left;background:#111;font-family:var(--font);">Seasonless</th>
+ <th style="font-size:8px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.45);padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.12);text-align:left;background:#111;font-family:var(--font);">Verdict</th>
+ </tr></thead>
+ <tbody>
+ <tr><td style="font-size:12px;color:rgba(255,255,255,.85);padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.08);line-height:1.6;vertical-align:top;">Envelope, Bone/Ivory, Brushed Gold</td><td style="font-size:12px;color:rgba(255,255,255,.75);padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.08);line-height:1.6;vertical-align:top;text-align:center;">&#10003;</td><td style="font-size:12px;color:rgba(255,255,255,.75);padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.08);line-height:1.6;vertical-align:top;text-align:center;">&#10003;</td><td style="font-size:12px;color:rgba(255,255,255,.75);padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.08);line-height:1.6;vertical-align:top;text-align:center;">&#10003;</td><td style="font-size:12px;color:rgba(255,255,255,.75);padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.08);line-height:1.6;vertical-align:top;">Launch. Meets every parameter. No direct comp at this price point.</td></tr>
+ <tr><td style="font-size:12px;color:rgba(255,255,255,.85);padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.08);line-height:1.6;vertical-align:top;">Envelope, Chocolate, Pebbled</td><td style="font-size:12px;color:rgba(255,255,255,.75);padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.08);line-height:1.6;vertical-align:top;text-align:center;">&#10003;</td><td style="font-size:12px;color:rgba(255,255,255,.75);padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.08);line-height:1.6;vertical-align:top;text-align:center;">&#10003;</td><td style="font-size:12px;color:rgba(255,255,255,.75);padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.08);line-height:1.6;vertical-align:top;text-align:center;">&#10003;</td><td style="font-size:12px;color:rgba(255,255,255,.75);padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.08);line-height:1.6;vertical-align:top;">Resort Phase 02. Ships after bone establishes silhouette recognition.</td></tr>
+ <tr><td style="font-size:12px;color:rgba(255,255,255,.85);padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.08);line-height:1.6;vertical-align:top;">Envelope, Black, Brushed Gold</td><td style="font-size:12px;color:rgba(255,255,255,.75);padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.08);line-height:1.6;vertical-align:top;text-align:center;">&#10003;</td><td style="font-size:12px;color:rgba(255,255,255,.75);padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.08);line-height:1.6;vertical-align:top;text-align:center;">&#10003;</td><td style="font-size:12px;color:rgba(255,255,255,.75);padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.08);line-height:1.6;vertical-align:top;text-align:center;">&#10003;</td><td style="font-size:12px;color:rgba(255,255,255,.75);padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.08);line-height:1.6;vertical-align:top;">Resort Phase 02. Black introduced only after bone proves the silhouette.</td></tr>
+ <tr><td style="font-size:12px;color:rgba(255,255,255,.85);padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.08);line-height:1.6;vertical-align:top;">The Crescent (Silhouette B)</td><td style="font-size:12px;color:rgba(255,255,255,.75);padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.08);line-height:1.6;vertical-align:top;text-align:center;">&#10007;</td><td style="font-size:12px;color:rgba(255,255,255,.75);padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.08);line-height:1.6;vertical-align:top;text-align:center;">&#10003;</td><td style="font-size:12px;color:rgba(255,255,255,.75);padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.08);line-height:1.6;vertical-align:top;text-align:center;">&#10007;</td><td style="font-size:12px;color:rgba(255,255,255,.75);padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.08);line-height:1.6;vertical-align:top;">Cut. Hobo peaked 2022&ndash;2024. Fails seasonless requirement.</td></tr>
+ <tr><td style="font-size:12px;color:rgba(255,255,255,.85);padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.08);line-height:1.6;vertical-align:top;">The Column (Silhouette C)</td><td style="font-size:12px;color:rgba(255,255,255,.75);padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.08);line-height:1.6;vertical-align:top;text-align:center;">&#10007;</td><td style="font-size:12px;color:rgba(255,255,255,.75);padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.08);line-height:1.6;vertical-align:top;text-align:center;">&#10007;</td><td style="font-size:12px;color:rgba(255,255,255,.75);padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.08);line-height:1.6;vertical-align:top;text-align:center;">&#10003;</td><td style="font-size:12px;color:rgba(255,255,255,.75);padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.08);line-height:1.6;vertical-align:top;">Cut. Reads utilitarian. Saturated at this tier with no differentiation argument.</td></tr>
+ </tbody>
+ </table>
+ <p style="font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.88);margin:32px 0 16px;">Launch Sequencing</p>
+ <div class="carolyn-artifact-phase-grid" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:rgba(255,255,255,.1);margin:0 0 8px;">
+ <div style="background:#111;padding:28px 22px;min-width:0;">
+ <div style="font-size:9px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:12px;font-family:var(--font);">Phase 01</div>
+ <div style="font-size:14px;font-weight:500;color:#fff;margin-bottom:10px;letter-spacing:.04em;">The Anchor</div>
+ <p style="font-size:12px;color:rgba(255,255,255,.72);line-height:1.65;margin:0;">Pre-Fall: Bone/ivory only, direct-to-consumer and CK flagships. Single colorway forces evaluation of silhouette, not palette. Seeded through long-form editorial only: no influencer gifting, no paid launch support. Goal: 1,000+ waitlist names before public sale.</p>
+ </div>
+ <div style="background:#111;padding:28px 22px;min-width:0;">
+ <div style="font-size:9px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:12px;font-family:var(--font);">Phase 02</div>
+ <div style="font-size:14px;font-weight:500;color:#fff;margin-bottom:10px;letter-spacing:.04em;">The Expansion</div>
+ <p style="font-size:12px;color:rgba(255,255,255,.72);line-height:1.65;margin:0;">Resort: Chocolate and Black introduced. Distribution opens to one premium retail partner. Bone remains the hero: new colorways are evidence of depth, not demand response.</p>
+ </div>
+ <div style="background:#111;padding:28px 22px;min-width:0;">
+ <div style="font-size:9px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:12px;font-family:var(--font);">Phase 03</div>
+ <div style="font-size:14px;font-weight:500;color:#fff;margin-bottom:10px;letter-spacing:.04em;">The Read</div>
+ <p style="font-size:12px;color:rgba(255,255,255,.72);line-height:1.65;margin:0;">Year 2+: Secondary market tracked actively. 70%+ resale retention is the leading indicator the permanence story is working. If resale underperforms, it triggers a distribution and supply audit: not a markdown.</p>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+</section><section class="cs-section" id="cs-s09b-the-muse" data-cs-section="cs-s09b-the-muse">
+ <div class="cs-section-eyebrow"><span class="cs-section-num">09B</span><span class="cs-section-title">The Muse</span></div>
+ <p class="cs-body">The naming choice is an institutional decision, not a mood board. Carolyn Bessette-Kennedy started on the sales floor of a Boston Calvin Klein store and became Director of Publicity and Show Productions in New York. The aesthetic people still reference was not borrowed styling; it was the house&#x27;s own language made personal from inside the company. No competitor can manufacture that relationship.</p>
+ <p class="cs-body">The long-tail demand signal: in 2024&ndash;2025, pieces tied to her wardrobe drew record auction attention. That is not nostalgia; it is a younger audience reading archival images as live aspiration, much of it running without Calvin Klein in the room.</p>
+ <p class="cs-body">The sensitivity framework in two short rules: the product is never marketed as memorial or tribute. Copy is factual, urban, present tense. The name rewards recognition without demanding it: if the audience has to be told why the bag is named what it is, the naming has already failed.</p>
 </section><section class="cs-section cs-section-alt" id="cs-s10-concept-design-work" data-cs-section="cs-s10-concept-design-work">
  <div class="cs-section-eyebrow"><span class="cs-section-num">10</span><span class="cs-section-title">Concept / Design Work</span></div>
  <p class="cs-body">The full product specification covers silhouette, closure, strap system, hardware selection, and material choice. Every decision has documented rationale. Every element traces back to Cameron&#x27;s construction standards and the four strategic criteria.</p>
  <div class="carolyn-product-hero">
- <img src="mockups/ecommerce mocku/ecommerce primary.png" alt="The Carolyn — primary view" loading="lazy"/>
+ <img src="mockups/ecommerce mocku/ecommerce primary.png" alt="The Carolyn (primary view)" loading="lazy"/>
  </div>
  <div class="carolyn-product-2col">
- <div class="carolyn-product-2col-item"><img src="mockups/ecommerce mocku/ecommerce front view.png" alt="The Carolyn — front view" loading="lazy"/></div>
- <div class="carolyn-product-2col-item"><img src="mockups/ecommerce mocku/ecommerce back.png" alt="The Carolyn — back view" loading="lazy"/></div>
+ <div class="carolyn-product-2col-item"><img src="mockups/ecommerce mocku/ecommerce front view.png" alt="The Carolyn) front view" loading="lazy"/></div>
+ <div class="carolyn-product-2col-item"><img src="mockups/ecommerce mocku/ecommerce back.png" alt="The Carolyn (back view)" loading="lazy"/></div>
  </div>
  <div class="carolyn-product-2col">
- <div class="carolyn-product-2col-item"><img src="mockups/ecommerce mocku/ecommerce 3:4 view.png" alt="The Carolyn — three quarter view" loading="lazy"/></div>
- <div class="carolyn-product-2col-item"><img src="mockups/ecommerce mocku/ecommerce environment.png" alt="The Carolyn — environment" loading="lazy"/></div>
+ <div class="carolyn-product-2col-item"><img src="mockups/ecommerce mocku/ecommerce 3:4 view.png" alt="The Carolyn) three quarter view" loading="lazy"/></div>
+ <div class="carolyn-product-2col-item"><img src="mockups/ecommerce mocku/ecommerce environment.png" alt="The Carolyn (environment view)" loading="lazy"/></div>
  </div>
  <div class="carolyn-product-2col">
- <div class="carolyn-product-2col-item"><img src="mockups/ecommerce mocku/ecommerce model.png" alt="The Carolyn — on model" loading="lazy"/></div>
- <div class="carolyn-product-2col-item"><img src="mockups/ecommerce mocku/ecommerce wearing.png" alt="The Carolyn — worn" loading="lazy"/></div>
+ <div class="carolyn-product-2col-item"><img src="mockups/ecommerce mocku/ecommerce model.png" alt="The Carolyn) on model" loading="lazy"/></div>
+ <div class="carolyn-product-2col-item"><img src="mockups/ecommerce mocku/ecommerce wearing.png" alt="The Carolyn (worn" loading="lazy"/></div>
  </div>
  <div class="cs-env-label" style="margin-top:24px;">Construction detail</div>
  <div class="carolyn-product-3col">
- <div class="carolyn-product-3col-item"><img src="mockups/ecommerce mocku/ecommerce closeup.png" alt="The Carolyn — detail closeup" loading="lazy"/></div>
- <div class="carolyn-product-3col-item"><img src="mockups/ecommerce mocku/ecommerce hardware closeup.png" alt="The Carolyn — hardware detail" loading="lazy"/></div>
- <div class="carolyn-product-3col-item"><img src="mockups/ecommerce mocku/ecommerce texuture close up.png" alt="The Carolyn — texture detail" loading="lazy"/></div>
+ <div class="carolyn-product-3col-item"><img src="mockups/ecommerce mocku/ecommerce closeup.png" alt="The Carolyn) detail closeup" loading="lazy"/></div>
+ <div class="carolyn-product-3col-item"><img src="mockups/ecommerce mocku/ecommerce hardware closeup.png" alt="The Carolyn (hardware detail" loading="lazy"/></div>
+ <div class="carolyn-product-3col-item"><img src="mockups/ecommerce mocku/ecommerce texuture close up.png" alt="The Carolyn) texture detail" loading="lazy"/></div>
  </div>
  <div class="carolyn-product-2col" style="margin-top:0;">
- <div class="carolyn-product-2col-item"><img src="mockups/ecommerce mocku/ecommerce interior.png" alt="The Carolyn — interior" loading="lazy"/></div>
- <div class="carolyn-product-2col-item"><img src="mockups/ecommerce mocku/ecommerce flatlay.png" alt="The Carolyn — flatlay" loading="lazy"/></div>
+ <div class="carolyn-product-2col-item"><img src="mockups/ecommerce mocku/ecommerce interior.png" alt="The Carolyn (interior" loading="lazy"/></div>
+ <div class="carolyn-product-2col-item"><img src="mockups/ecommerce mocku/ecommerce flatlay.png" alt="The Carolyn) flatlay" loading="lazy"/></div>
  </div>
-</section><section class="cs-section cs-section-alt" id="cs-s11-in-context" data-cs-section="cs-s11-in-context">
+</section><section class="cs-section" id="cs-s11-in-context" data-cs-section="cs-s11-in-context">
  <div class="cs-section-eyebrow"><span class="cs-section-num">11</span><span class="cs-section-title">The Carolyn in Context</span></div>
  <p class="cs-body">The Carolyn is designed to be the only bag she needs. One silhouette, every context. From the subway to the boardroom to a Parisian street. These are the environments it was built for.</p>
  <div class="carolyn-masonry">
@@ -612,14 +775,16 @@ footer{border-top:1px solid var(--g200);padding:32px 48px;display:flex;align-ite
  <div class="carolyn-masonry-item" style="--span:30"><img src="mockups/E-Commerce Product Photography Views/Celebrity Street Style Paparazzi Shots/009_A_woman_with_long_dark_hair_walks_a_golden_sZQMYRSZ.png" alt="" loading="lazy"/></div>
  <div class="carolyn-masonry-item" style="--span:18"><img src="mockups/Street Style and TikTok OOTD Lifestyle Shots/009_A_flat_lay_composition_displays_a_taupe_clutch_2aNP7hDo.png" alt="" loading="lazy"/></div>
  </div>
-</section><section class="cs-section" id="cs-s12-business-benefits" data-cs-section="cs-s12-business-benefits">
+</section><section class="cs-section cs-section-alt" id="cs-s12-business-benefits" data-cs-section="cs-s12-business-benefits">
  <div class="cs-section-eyebrow"><span class="cs-section-num">12</span><span class="cs-section-title">Business Benefits</span></div>
- <p class="cs-body">A hero bag that holds resale value compounds brand equity in the secondary market without any additional investment. Each time the Carolyn appears on a resale platform at near-retail price, it functions as a brand signal: this is an object worth keeping. That signal reaches the next buyer before she enters a CK store. The category anchoring effect is commercial as well as strategic, a defined hero gives seasonal accessories something to be adjacent to rather than independent of, increasing the coherence of the full category presentation. Positioning the Carolyn against The Row and Bottega rather than against Coach resets the competitive frame for CK&#x27;s accessories business entirely.</p>
+ <p class="cs-body">A hero bag that holds resale value does not need a campaign to keep earning. Every time the Carolyn appears on a secondary platform at near-retail price, it reaches the next buyer before she enters a store (and it reaches her as evidence, not advertising). That is the compounding mechanism Calvin Klein&#x27;s accessories category has never had.</p>
+ <p class="cs-body">The category anchoring effect is commercial as well. A defined hero gives seasonal accessories something to be adjacent to rather than independent from. The Carolyn resets the competitive frame: not against Coach, but against The Row and Bottega, and that repositioning extends to everything CK sells alongside it.</p>
+ <p class="cs-body">This case study is a bet that the brief is the product. Restraint in the design, restraint in the launch, restraint in the naming. Every decision either builds toward permanence or cuts against it. The Carolyn holds because nothing about it was made to expire.</p>
 </section>
-<section class="cs-section cs-section-alt" id="cs-next" data-cs-section="cs-next">
+<section class="cs-section" id="cs-next" data-cs-section="cs-next">
  <div class="cs-next">
  <div class="cs-next-label">Next</div>
- <a href="/work/on" class="cs-next-link" target="_parent">
+ <a href="/work/on-test" class="cs-next-link" target="_parent">
  <div class="cs-next-meta">On APEX</div>
  <div class="cs-next-title">On APEX →</div>
  </a>
@@ -667,7 +832,8 @@ function toggleArtifact(n) {
  const toggle = document.getElementById('art' + n + '-cta');
  if (!expand || !toggle) return;
  const isOpen = expand.dataset.open === 'true';
- expand.style.maxHeight = isOpen ? '0' : '5200px';
+ const maxOpen = (n === 3) ? '28000px' : '5200px';
+ expand.style.maxHeight = isOpen ? '0' : maxOpen;
  expand.dataset.open = isOpen ? 'false' : 'true';
  toggle.textContent = isOpen ? '+' : '\u00d7';
  if (!isOpen) {

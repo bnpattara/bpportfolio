@@ -1,0 +1,26 @@
+Tomorrow (quick checklist
+============================
+Date note: use whatever date is actually “tomorrow” for you.
+
+
+1) Diesel) fix mockups
+   - Portfolio case study page (if layout/asset refs break):
+     src/app/work/diesel/page.tsx
+   - Static HTML case study (if mockup paths or images are wrong):
+     public/case-studies/diesel/index.html
+   - Any Diesel mockup source assets you keep outside the repo (Desktop mocks, etc.)
+   - After edits: open /work/diesel locally and confirm images load; run npm run build if you changed TSX.
+
+
+2) Carolyn case study: fix formatting
+   - Main case study HTML:
+     public/case-studies/carolyn/index.html
+   - Related React wrapper if you’re embedding it:
+     src/app/work/carolyn/page.tsx (and any Carolyn subroutes if applicable)
+   - Spot-check: sidenav, section spacing, artifact expand strips, tables in dark artifact, typography consistency.
+
+
+Optional end-of-day
+-------------------
+- git status → commit with a short message per area (diesel vs carolyn).
+- Quick pass on other open case studies if something still feels off.

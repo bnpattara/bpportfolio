@@ -37,14 +37,12 @@ export default function NikeTestCaseStudyPage(): React.ReactElement {
       ? `/case-studies/nike-test/index.html?__dev=${Date.now()}`
       : "/case-studies/nike-test/index.html";
 
-  return (
-    <div style={{ width: "100%", height: "100dvh", background: "#fff" }}>
+  return (<div style={{ width: "100%", height: "100dvh", background: "#fff" }}>
       <iframe
         className="responsive-iframe"
         src={caseStudySrc}
-        title="Nike SNKRS — Alternate narrative (draft)"
+        title="Nike SNKRS, Alternate narrative (draft)"
         style={{ width: "100%", height: "100%", border: "none" }}
       />
-    </div>
-  );
+    </div>);
 }

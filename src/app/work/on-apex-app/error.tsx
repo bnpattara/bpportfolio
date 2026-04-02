@@ -7,8 +7,7 @@ export default function OnApexAppError({
   error: Error & { digest?: string };
   reset: () => void;
 }) {
-  return (
-    <div
+  return (<div
       style={{
         minHeight: "100dvh",
         background: "#0C0C0C",
@@ -52,6 +51,5 @@ export default function OnApexAppError({
       >
         Try again
       </button>
-    </div>
-  );
+    </div>);
 }

@@ -18,7 +18,7 @@ const SONG_INDEX = indexData as string[];
 // Global: max 200 requests per UTC day
 //
 // Note: module-level state is per-process. On Vercel, separate cold-start
-// instances each have their own counters — acceptable for a portfolio site.
+// instances each have their own counters: acceptable for a portfolio site.
 
 const ipTimestamps = new Map<string, number[]>();
 
@@ -30,8 +30,7 @@ function nextMidnightUTC(): number {
   return Date.UTC(
     now.getUTCFullYear(),
     now.getUTCMonth(),
-    now.getUTCDate() + 1
-  );
+    now.getUTCDate() + 1);
 }
 
 function checkLimits(ip: string): boolean {
@@ -71,9 +70,8 @@ export async function POST(req: Request) {
     const { feeling } = await req.json();
     if (!feeling || typeof feeling !== "string" || feeling.trim().length < 3) {
       return NextResponse.json(
-        { error: "Tell me a little more — even just a few words." },
-        { status: 400 }
-      );
+        { error: "Tell me a little more: even just a few words." },
+        { status: 400 });
     }
 
     const ip = getIP(req);
@@ -85,8 +83,7 @@ export async function POST(req: Request) {
     if (!apiKey) {
       return NextResponse.json(
         { error: "Mirrorball API not configured." },
-        { status: 503 }
-      );
+        { status: 503 });
     }
 
     const systemPrompt = [
@@ -148,8 +145,7 @@ export async function POST(req: Request) {
     if (isNaN(idx) || idx < 0 || !SONGS[idx]) {
       return NextResponse.json(
         { error: "Could not find a matching song." },
-        { status: 502 }
-      );
+        { status: 502 });
     }
 
     return NextResponse.json({ song: SONGS[idx], why: parsed.why || "" });
@@ -157,7 +153,6 @@ export async function POST(req: Request) {
     console.error("Mirrorball API error:", err);
     return NextResponse.json(
       { error: "Something went wrong." },
-      { status: 500 }
-    );
+      { status: 500 });
   }
 }

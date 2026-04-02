@@ -68,7 +68,7 @@ export default function Home() {
     }, 450);
   }, [router]);
 
-  /* NAV scroll observer — watches accordion section top */
+  /* NAV scroll observer · watches accordion section top */
   useEffect(() => {
     const section = accordionRef.current;
     const nav = navRef.current;
@@ -98,8 +98,7 @@ export default function Home() {
           }
         });
       },
-      { threshold: 0.12 }
-    );
+      { threshold: 0.12 });
     els.forEach((el) => obs.observe(el));
     return () => obs.disconnect();
   }, []);
@@ -120,8 +119,7 @@ export default function Home() {
           }
         });
       },
-      { threshold: 0.2, rootMargin: '0px 0px -80px 0px' }
-    );
+      { threshold: 0.2, rootMargin: '0px 0px -80px 0px' });
     els.forEach((el) => obs.observe(el));
     return () => obs.disconnect();
   }, []);
@@ -167,7 +165,7 @@ export default function Home() {
       num: "04 / 06",
       title: "On APEX",
       insight: "\u201CThe hardware is flawless. The software layer doesn\u2019t exist. Designing the witness for the lifetime of the runner.\u201D",
-      link: "/work/on",
+      link: "/work/on-test",
     },
     {
       bg: "linear-gradient(160deg,#1c0e00 0%,#2e1800 35%,#1c0e00 70%,#0e0700 100%)",
@@ -195,8 +193,7 @@ export default function Home() {
     },
   ];
 
-  return (
-    <>
+  return (<>
       {/* ── NAV ── */}
       <nav id="site-nav" ref={navRef}>
         <div className="nav-main">
@@ -215,13 +212,12 @@ export default function Home() {
 
       {/* ── ACCORDION WORK SECTION ── */}
       <section id="work" ref={accordionRef as React.RefObject<HTMLElement>}>
-        {/* Accordion Panels — full viewport */}
+        {/* Accordion Panels · full viewport */}
         <div className="accordion-panels">
           {caseStudies.map((cs, i) => {
             const isHovered = hoveredCard === i;
             const anyHovered = hoveredCard !== null;
-            return (
-              <div
+            return (<div
                 key={i}
                 ref={(el) => { panelRefs.current[i] = el; }}
                 className={`accordion-panel${isHovered ? ' accordion-panel--expanded' : ''}${anyHovered && !isHovered ? ' accordion-panel--compressed' : ''}${fadingOut !== null && fadingOut !== i ? ' accordion-panel--fade-out' : ''}`}
@@ -237,22 +233,18 @@ export default function Home() {
                 {/* Collapsed state: project title */}
                 <div className={`accordion-collapsed${isHovered ? ' accordion-collapsed--hidden' : ''}`}>
                   <div className="accordion-collapsed-title">{cs.title}</div>
-                  {"clientWorkLabel" in cs && cs.clientWorkLabel ? (
-                    <div className="accordion-collapsed-client">{cs.clientWorkLabel}</div>
-                  ) : null}
+                  {"clientWorkLabel" in cs && cs.clientWorkLabel ? (<div className="accordion-collapsed-client">{cs.clientWorkLabel}</div>) : null}
                 </div>
 
                 {/* Card number */}
                 <div className="accordion-num">{cs.num}</div>
 
-                {/* Full content — fades in on expand */}
+                {/* Full content · fades in on expand */}
                 <div className={`accordion-content${isHovered ? ' accordion-content--visible' : ''}`}>
                   <div className="accordion-meta-row">
-                    {"clientWorkLabel" in cs && cs.clientWorkLabel ? (
-                      <div className="accordion-badge accordion-badge--client">
+                    {"clientWorkLabel" in cs && cs.clientWorkLabel ? (<div className="accordion-badge accordion-badge--client">
                         <span>{cs.clientWorkLabel}</span>
-                      </div>
-                    ) : null}
+                      </div>) : null}
                     <div className="accordion-badge">
                       <span>{cs.badge}</span>
                     </div>
@@ -268,8 +260,7 @@ export default function Home() {
                     </button>
                   </div>
                 </div>
-              </div>
-            );
+              </div>);
           })}
         </div>
       </section>
@@ -314,8 +305,7 @@ export default function Home() {
         <div className="writing-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <span className="writing-label">Recent Writing</span>
 
-          {!isBlogExpanded ? (
-            <button
+          {!isBlogExpanded ? (<button
               onClick={() => setIsBlogExpanded(true)}
               style={{
                 cursor: 'pointer',
@@ -333,9 +323,7 @@ export default function Home() {
               onMouseOut={(e) => { e.currentTarget.style.color = 'var(--g500)'; e.currentTarget.style.borderColor = 'var(--g500)'; }}
             >
               All Articles &rarr;
-            </button>
-          ) : (
-            <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+            </button>) : (<div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
               <button
                 onClick={() => setBlogPage(p => Math.max(0, p - 1))}
                 disabled={blogPage === 0}
@@ -369,21 +357,19 @@ export default function Home() {
               >
                 &rarr;
               </button>
-            </div>
-          )}
+            </div>)}
         </div>
 
         <div className="articles-grid">
           {[
-            { category: 'Brand Strategy', title: 'Why Heritage Brands Keep Losing Gen Z', desc: 'The mistake isn’t a failure to reach younger consumers. It’s reaching them with the wrong premise — that history is automatically valuable.', date: 'Mar 2025', link: '/blog/heritage-brands-gen-z', num: '001' },
+            { category: 'Brand Strategy', title: 'Why Heritage Brands Keep Losing Gen Z', desc: 'The mistake isn’t a failure to reach younger consumers. It’s reaching them with the wrong premise: that history is automatically valuable.', date: 'Mar 2025', link: '/blog/heritage-brands-gen-z', num: '001' },
             { category: 'AI & Technology', title: 'The Personalization Paradox', desc: 'There’s a threshold where hyper-relevance starts to feel like surveillance. On the tension between precision and intimacy in AI-driven brand relationships.', date: 'Feb 2025', link: '#', num: '002' },
             { category: 'Systems', title: 'Loyalty Is Not a Program', desc: 'After scaling loyalty conversion 10x at Gap, the most important lesson wasn’t the number. It was what changes when you treat loyalty as a brand promise, not a retention mechanic.', date: 'Dec 2024', link: '#', num: '003' },
             { category: 'Experience Design', title: 'The Phygital Gap', desc: 'Bridging the physical and digital retail experience through journey mapping and intentional architectural choices.', date: 'Nov 2024', link: '#', num: '004' },
             { category: 'Brand Purpose', title: 'Meaning Metrics', desc: 'Why we need to measure the cultural impact, not just the commercial click. Shifting our KPIs towards community health.', date: 'Oct 2024', link: '#', num: '005' },
             { category: 'Cultural Strategy', title: 'Subcultures as Scaffolding', desc: 'How to build brands inside of communities without commodifying them. Earning the right to participate in niche networks.', date: 'Sep 2024', link: '#', num: '006' },
             { category: 'Creative Tech', title: 'Designing with Invisible Intelligence', desc: 'The role of implicit AI in consumer facing experiences. Making algorithms useful without being visible to the user.', date: 'Aug 2024', link: '#', num: '007' }
-          ].slice(isBlogExpanded ? blogPage * 6 : 0, isBlogExpanded ? (blogPage + 1) * 6 : 3).map((blog, index) => (
-            <div
+          ].slice(isBlogExpanded ? blogPage * 6 : 0, isBlogExpanded ? (blogPage + 1) * 6 : 3).map((blog, index) => (<div
               className="article-card"
               key={blog.num}
               data-animate="fade-up"
@@ -397,8 +383,7 @@ export default function Home() {
                 <span className="article-date">{blog.date}</span>
                 <a href={blog.link} className="article-read">{blog.link === '#' ? 'Coming Soon' : 'Read \u2192'}</a>
               </div>
-            </div>
-          ))}
+            </div>))}
         </div>
       </section>
 
@@ -414,16 +399,16 @@ export default function Home() {
             THE FASHION BRANDS THAT LAST DON&rsquo;T JUST SELL CLOTHES, MAKEUP, OR ACCESSORIES. THEY SELL A VERSION OF YOURSELF YOU WANT TO BE.
           </h2>
           <p className="about-hero-body" data-animate="fade-up" data-animate-delay="80">
-            The most powerful ones make people feel like themselves. The smile when a pair of jeans fits perfectly. The satisfaction of redeeming rewards with your favorite retail card. The feeling of the perfect outfit making you stand just a little taller. These are the moments where confidence compounds &mdash; where the items we connect with stop being transactions and start being part of how we see ourselves.
+            The most powerful ones make people feel like themselves. The smile when a pair of jeans fits perfectly. The satisfaction of redeeming rewards with your favorite retail card. The feeling of the perfect outfit making you stand just a little taller. These are the moments where confidence compounds (where the items we connect with stop being transactions and start being part of how we see ourselves.
           </p>
           <p className="about-hero-body" data-animate="fade-up" data-animate-delay="160">
-            I&rsquo;m a multidisciplinary strategic creative who works across every stage of the consumer journey &mdash; from the cultural insight that earns attention, to the product experience that builds trust, to the loyalty system that makes you feel like you belong. I use data to understand desire, and design to fulfill it. That&rsquo;s the work. That&rsquo;s what I build toward.
+            I&rsquo;m a multidisciplinary strategic creative who works across every stage of the consumer journey) from the cultural insight that earns attention, to the product experience that builds trust, to the loyalty system that makes you feel like you belong. I use data to understand desire, and design to fulfill it. That&rsquo;s the work. That&rsquo;s what I build toward.
           </p>
         </div>
 
         <aside className="about-hero-sidebar">
           <div className="about-meta">
-            <p className="about-meta-text">VCU Brandcenter M.S. Business/Branding &mdash; Expected May 2026</p>
+            <p className="about-meta-text">VCU Brandcenter M.S. Business/Branding, expected May 2026</p>
             <p className="about-meta-text">Brand &amp; product strategist</p>
             <p className="about-meta-text">Currently based in Richmond, VA</p>
           </div>
@@ -461,9 +446,9 @@ export default function Home() {
         </div>
         <div className="cap-grid">
           <div className="cap-card" data-animate="fade-up" data-animate-delay="0">
-            <div className="cap-num">01 &mdash;</div>
+            <div className="cap-num">01 · </div>
             <div className="cap-title">Product<br />Management</div>
-            <div className="cap-desc">End-to-end product strategy and execution &mdash; from PRD authorship and user grounding to launch sequencing and sensitivity risk management. Decision-making frameworks, tradeoff documentation, and cross-functional alignment.</div>
+            <div className="cap-desc">End-to-end product strategy and execution, from PRD authorship and user grounding to launch sequencing and sensitivity risk management. Decision-making frameworks, tradeoff documentation, and cross-functional alignment.</div>
             <div className="cap-skills">
               <span className="cap-skill">PRD &amp; Specs</span>
               <span className="cap-skill">GTM Planning</span>
@@ -472,9 +457,9 @@ export default function Home() {
             </div>
           </div>
           <div className="cap-card" data-animate="fade-up" data-animate-delay="80">
-            <div className="cap-num">02 &mdash;</div>
+            <div className="cap-num">02 · </div>
             <div className="cap-title">Brand<br />Strategy</div>
-            <div className="cap-desc">Building brand-consumer relationships across the full journey &mdash; from cultural discovery to deep identity-level advocacy. Trend forecasting, positioning, and narrative architecture.</div>
+            <div className="cap-desc">Building brand-consumer relationships across the full journey, from cultural discovery to deep identity-level advocacy. Trend forecasting, positioning, and narrative architecture.</div>
             <div className="cap-skills">
               <span className="cap-skill">Positioning</span>
               <span className="cap-skill">Trend Forecasting</span>
@@ -483,9 +468,9 @@ export default function Home() {
             </div>
           </div>
           <div className="cap-card" data-animate="fade-up" data-animate-delay="160">
-            <div className="cap-num">03 &mdash;</div>
+            <div className="cap-num">03 · </div>
             <div className="cap-title">Experience<br />Design</div>
-            <div className="cap-desc">Designing the phygital gap &mdash; from user journey mapping and service blueprints to high-fidelity prototypes. Information architecture built for storytelling, not just usability.</div>
+            <div className="cap-desc">Designing the phygital gap, from user journey mapping and service blueprints to high-fidelity prototypes. Information architecture built for storytelling, not just usability.</div>
             <div className="cap-skills">
               <span className="cap-skill">Journey Mapping</span>
               <span className="cap-skill">Service Blueprints</span>
@@ -494,9 +479,9 @@ export default function Home() {
             </div>
           </div>
           <div className="cap-card" data-animate="fade-up" data-animate-delay="240">
-            <div className="cap-num">04 &mdash;</div>
+            <div className="cap-num">04 · </div>
             <div className="cap-title">Systems<br />Design</div>
-            <div className="cap-desc">Designing the invisible scaffolding &mdash; gamification mechanics, loyalty architecture, behavioral loops, and circular economy models that make brand engagement feel effortless.</div>
+            <div className="cap-desc">Designing the invisible scaffolding: gamification mechanics, loyalty architecture, behavioral loops, and circular economy models that make brand engagement feel effortless.</div>
             <div className="cap-skills">
               <span className="cap-skill">Gamification</span>
               <span className="cap-skill">Behavioral Design</span>
@@ -505,7 +490,7 @@ export default function Home() {
             </div>
           </div>
           <div className="cap-card" data-animate="fade-up" data-animate-delay="320">
-            <div className="cap-num">05 &mdash;</div>
+            <div className="cap-num">05 · </div>
             <div className="cap-title">AI &amp;<br />Emerging Tech</div>
             <div className="cap-desc">Translating machine learning concepts into actionable brand strategy. Generative AI workflows, AI-driven personalization systems, and &ldquo;Digital Fluency&rdquo; models for executives.</div>
             <div className="cap-skills">
@@ -556,7 +541,7 @@ export default function Home() {
           </div>
           <div>
             <div className="exp-intro" data-animate="fade-up" data-animate-delay="0">AN UNUSUAL PATH.<br />AN INTENTIONAL PRACTICE.</div>
-            <p className="exp-intro-body">A background in graphic design, trained on visual systems and narrative craft, combined with frontline retail experience where loyalty isn&rsquo;t a program &mdash; it&rsquo;s a feeling you either engineer or lose.</p>
+            <p className="exp-intro-body">A background in graphic design, trained on visual systems and narrative craft, combined with frontline retail experience where loyalty isn&rsquo;t a program: it&rsquo;s a feeling you either engineer or lose.</p>
 
             {/* Role 01 */}
             <div className="role-row" data-animate="fade-left" data-animate-delay="0">
@@ -689,6 +674,5 @@ export default function Home() {
       </footer>
 
       <div id="cs-transition-overlay" ref={overlayRef} />
-    </>
-  );
+    </>);
 }

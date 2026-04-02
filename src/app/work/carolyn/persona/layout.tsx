@@ -8,8 +8,7 @@ export default function CarolynPersonaLayout({
 }: {
   children: React.ReactNode;
 }): React.ReactElement {
-  return (
-    <>
+  return (<>
       <link rel="preconnect" href="https://fonts.googleapis.com" />
       <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       <link
@@ -28,6 +27,5 @@ export default function CarolynPersonaLayout({
       >
         {children}
       </div>
-    </>
-  );
+    </>);
 }

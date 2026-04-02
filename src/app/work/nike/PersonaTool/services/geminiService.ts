@@ -4,11 +4,9 @@ import { Persona } from '../types';
 const apiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY || "";
 const ai = apiKey ? new GoogleGenAI({ apiKey }) : null;
 
-export const generatePersonaResponse = async (
-  persona: Persona,
+export const generatePersonaResponse = async (persona: Persona,
   history: { role: 'user' | 'model'; content: string }[],
-  userMessage: string
-): Promise<string> => {
+  userMessage: string): Promise<string> => {
   try {
     if (!ai) return "The Gemini API key is missing. Please configure it to interact with the personas.";
     const modelId = 'gemini-3-flash-preview';
@@ -40,18 +38,15 @@ export const generatePersonaResponse = async (
   }
 };
 
-export const generateFocusGroupResponse = async (
-  activePersonas: Persona[],
+export const generateFocusGroupResponse = async (activePersonas: Persona[],
   history: { role: 'user' | 'model'; content: string }[],
-  userMessage: string
-): Promise<string> => {
+  userMessage: string): Promise<string> => {
   try {
     if (!ai) return "The Gemini API key is missing. Please configure it to interact with the focus group.";
     const modelId = 'gemini-3-flash-preview';
 
     const participantsDescription = activePersonas.map(p =>
-      `Name: ${p.name.toUpperCase()} (${p.role})\nBio/Personality: ${p.systemInstruction}`
-    ).join('\n---\n');
+      `Name: ${p.name.toUpperCase()} (${p.role})\nBio/Personality: ${p.systemInstruction}`).join('\n---\n');
 
     const groupSystemInstruction = `
       You are simulating a consumer focus group with the following participants:

@@ -1,23 +1,22 @@
 import React from 'react';
 
 export const metadata = {
-    title: 'Why Heritage Brands Keep Losing Gen Z — Blog — Benn Pattara',
+    title: 'Why Heritage Brands Keep Losing Gen Z, Blog · Benn Pattara',
 };
 
 export default function ArticlePage() {
-    return (
-        <article style={{ maxWidth: '800px', margin: '0 auto', padding: '0 48px 120px' }}>
+    return (<article style={{ maxWidth: '800px', margin: '0 auto', padding: '0 48px 120px' }}>
 
             {/* ── HEADER DETAILS ── */}
             <header style={{ borderBottom: '1px solid var(--g200)', paddingBottom: '40px', marginBottom: '40px', marginTop: '40px' }}>
                 <div style={{ fontSize: '10px', fontWeight: 600, letterSpacing: '.14em', textTransform: 'uppercase', color: 'var(--g500)', marginBottom: '24px' }}>
-                    001 &mdash; Brand Strategy
+                    001, Brand Strategy
                 </div>
                 <h1 style={{ fontSize: '42px', fontWeight: 400, letterSpacing: '-.02em', lineHeight: 1.1, color: 'var(--black)', marginBottom: '32px' }}>
                     Why Heritage Brands Keep Losing Gen Z
                 </h1>
                 <div style={{ fontSize: '18px', fontWeight: 400, fontStyle: 'italic', lineHeight: 1.6, color: 'var(--g700)', marginBottom: '24px', maxWidth: '600px' }}>
-                    The mistake isn&rsquo;t a failure to reach younger consumers. It&rsquo;s reaching them with the wrong premise &mdash; that history is automatically valuable.
+                    The mistake isn&rsquo;t a failure to reach younger consumers. It&rsquo;s reaching them with the wrong premise: that history is automatically valuable.
                 </div>
                 <div style={{ fontSize: '11px', letterSpacing: '.1em', textTransform: 'uppercase', color: 'var(--g400)' }}>
                     Mar 2025
@@ -82,7 +81,7 @@ export default function ArticlePage() {
                 <h2 style={{ fontSize: '24px', fontWeight: 400, letterSpacing: '-.01em', marginTop: '40px', marginBottom: '8px' }}>History as infrastructure, not as halo</h2>
 
                 <p>
-                    The heritage brands that are resonating with younger consumers are doing something structurally different. They treat history as a design system and an asset library&mdash;not as a museum exhibit. That shows up in moves like:<sup style={{ marginLeft: '2px' }}><a href="https://www.jaspercolin.com/resources/resource-details/gen-z-loyalty-is-dead" target="_blank" rel="noreferrer" style={{ color: 'var(--g500)', textDecoration: 'none' }}>11</a></sup>
+                    The heritage brands that are resonating with younger consumers are doing something structurally different. They treat history as a design system and an asset library, not as a museum exhibit. That shows up in moves like:<sup style={{ marginLeft: '2px' }}><a href="https://www.jaspercolin.com/resources/resource-details/gen-z-loyalty-is-dead" target="_blank" rel="noreferrer" style={{ color: 'var(--g500)', textDecoration: 'none' }}>11</a></sup>
                 </p>
 
                 <ul style={{ paddingLeft: '24px', display: 'flex', flexDirection: 'column', gap: '16px', listStyleType: 'disc' }}>
@@ -93,7 +92,7 @@ export default function ArticlePage() {
                         Using archives as a sandbox for collaboration, re‑editions, and digital drops that feel like co‑creation rather than nostalgia cosplay.<sup style={{ marginLeft: '2px' }}><a href="https://www.accio.com/business/gen-z-fashion-trends-2025-report" target="_blank" rel="noreferrer" style={{ color: 'var(--g500)', textDecoration: 'none' }}>13</a></sup>
                     </li>
                     <li style={{ paddingLeft: '8px' }}>
-                        Rebalancing heritage storytelling with contemporary relevance&mdash;telling fewer origin myths and more system stories about materials, repair, modularity, and community.<sup style={{ marginLeft: '2px' }}><a href="https://savanta.com/us/knowledge-centre/view/the-evolution-of-gen-z-from-fast-fashion-to-authentic-luxury/" target="_blank" rel="noreferrer" style={{ color: 'var(--g500)', textDecoration: 'none' }}>14</a></sup>
+                        Rebalancing heritage storytelling with contemporary relevance, telling fewer origin myths and more system stories about materials, repair, modularity, and community.<sup style={{ marginLeft: '2px' }}><a href="https://savanta.com/us/knowledge-centre/view/the-evolution-of-gen-z-from-fast-fashion-to-authentic-luxury/" target="_blank" rel="noreferrer" style={{ color: 'var(--g500)', textDecoration: 'none' }}>14</a></sup>
                     </li>
                 </ul>
 
@@ -122,17 +121,17 @@ export default function ArticlePage() {
                 </ul>
 
                 <p>
-                    Here, heritage becomes a flexible design variable&mdash;context you can personalize&mdash;rather than a static monolith.
+                    Here, heritage becomes a flexible design variable, context you can personalize, rather than a static monolith.
                 </p>
 
                 <h2 style={{ fontSize: '24px', fontWeight: 400, letterSpacing: '-.01em', marginTop: '40px', marginBottom: '8px' }}>The mindset shift heritage needs</h2>
 
                 <p>
-                    The core shift is moving from &ldquo;Our history is the product&rdquo; to &ldquo;Our history is the operating system.&rdquo; Gen Z is not asking brands to abandon their roots; they are asking them to show the work&mdash;to make their systems visible, adaptive, and aligned with the realities of this generation&rsquo;s values and economics.<sup style={{ marginLeft: '2px' }}><a href="https://www.consultancy.lat/news/1628/the-authenticity-gap-what-gen-z-really-think-about-brands" target="_blank" rel="noreferrer" style={{ color: 'var(--g500)', textDecoration: 'none' }}>19</a></sup>
+                    The core shift is moving from &ldquo;Our history is the product&rdquo; to &ldquo;Our history is the operating system.&rdquo; Gen Z is not asking brands to abandon their roots; they are asking them to show the work, to make their systems visible, adaptive, and aligned with the realities of this generation&rsquo;s values and economics.<sup style={{ marginLeft: '2px' }}><a href="https://www.consultancy.lat/news/1628/the-authenticity-gap-what-gen-z-really-think-about-brands" target="_blank" rel="noreferrer" style={{ color: 'var(--g500)', textDecoration: 'none' }}>19</a></sup>
                 </p>
 
                 <p>
-                    The brands that will win are not the ones that shout the loudest about legacy. They&rsquo;re the ones that quietly, consistently demonstrate how that legacy is being rewritten into new patterns of access, responsibility, and expression&mdash;online, offline, and in every resale listing that carries their name.<sup style={{ marginLeft: '2px' }}><a href="https://www.jaspercolin.com/resources/resource-details/gen-z-loyalty-is-dead" target="_blank" rel="noreferrer" style={{ color: 'var(--g500)', textDecoration: 'none' }}>20</a></sup>
+                    The brands that will win are not the ones that shout the loudest about legacy. They&rsquo;re the ones that quietly, consistently demonstrate how that legacy is being rewritten into new patterns of access, responsibility, and expression, online, offline, and in every resale listing that carries their name.<sup style={{ marginLeft: '2px' }}><a href="https://www.jaspercolin.com/resources/resource-details/gen-z-loyalty-is-dead" target="_blank" rel="noreferrer" style={{ color: 'var(--g500)', textDecoration: 'none' }}>20</a></sup>
                 </p>
 
             </div>
@@ -141,6 +140,5 @@ export default function ArticlePage() {
                 <a href="/blog" className="link-underline">&larr; Back to all writing</a>
             </div>
 
-        </article>
-    );
+        </article>);
 }

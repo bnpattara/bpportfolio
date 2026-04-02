@@ -20,8 +20,7 @@ export default function MattelCaseStudy() {
                     navRef.current.classList.toggle("scrolled", gone);
                 }
             },
-            { threshold: 0.05 }
-        );
+            { threshold: 0.05 });
         obs.observe(hero);
         return () => obs.disconnect();
     }, []);
@@ -30,8 +29,7 @@ export default function MattelCaseStudy() {
         setActiveMethod(activeMethod === id ? null : id);
     };
 
-    return (
-        <>
+    return (<>
             {/* ── GLOBAL NAV ── */}
             <nav id="site-nav" ref={navRef}>
                 <div className="nav-main">
@@ -58,7 +56,7 @@ export default function MattelCaseStudy() {
                     <div className="cs-hero-inner" style={{ position: 'relative', zIndex: 2, padding: '56px 48px', width: '100%' }}>
                         <div style={{ maxWidth: '680px' }}>
                             <div style={{ display: 'inline-flex', border: '1px solid rgba(255,255,255,.4)', marginBottom: '20px' }}>
-                                <span style={{ fontSize: '9px', fontWeight: 600, letterSpacing: '.16em', textTransform: 'uppercase', color: 'rgba(255,255,255,.85)', padding: '5px 12px' }}>Stage 05 &mdash; Loyalty & LTV Maximization</span>
+                                <span style={{ fontSize: '9px', fontWeight: 600, letterSpacing: '.16em', textTransform: 'uppercase', color: 'rgba(255,255,255,.85)', padding: '5px 12px' }}>Stage 05, Loyalty & LTV Maximization</span>
                             </div>
                             <div style={{ fontSize: '52px', fontWeight: 300, letterSpacing: '.04em', textTransform: 'uppercase', color: '#fff', lineHeight: '.95', marginBottom: '20px' }}>Mattel Dreamers<br />The LTV Engine</div>
                             <div style={{ fontSize: '14px', color: 'rgba(255,255,255,.7)', lineHeight: 1.7, maxWidth: '480px' }}>Building the Post-Box Loyalty Ecosystem. Mattel makes the world's most recognizable toys, but for decades, the brand's relationship with the consumer ended at the checkout counter.</div>
@@ -109,19 +107,19 @@ export default function MattelCaseStudy() {
                             <div style={{ fontSize: '28px', fontWeight: 400, letterSpacing: '.03em', textTransform: 'uppercase', color: '#000', lineHeight: 1.1, marginBottom: '36px' }}>The Play-Pattern Matrix</div>
                             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1px', background: '#e8e8e8', marginBottom: '32px' }}>
                                 <div style={{ background: '#fff', padding: '28px 24px' }}>
-                                    <div style={{ fontSize: '9px', fontWeight: 600, letterSpacing: '.18em', textTransform: 'uppercase', color: '#ccc', marginBottom: '14px' }}>01 &mdash; Gap</div>
+                                    <div style={{ fontSize: '9px', fontWeight: 600, letterSpacing: '.18em', textTransform: 'uppercase', color: '#ccc', marginBottom: '14px' }}>01, Gap</div>
                                     <div style={{ fontSize: '44px', fontWeight: 300, color: '#000', letterSpacing: '-.02em', lineHeight: 1, marginBottom: '10px' }}>4hrs</div>
                                     <div style={{ fontSize: '12px', color: '#666', lineHeight: 1.65 }}>average weekly "narrative play" vs. 0 mins of brand engagement</div>
                                 </div>
                                 <div style={{ background: '#fff', padding: '28px 24px' }}>
-                                    <div style={{ fontSize: '9px', fontWeight: 600, letterSpacing: '.18em', textTransform: 'uppercase', color: '#ccc', marginBottom: '14px' }}>02 &mdash; Demand</div>
+                                    <div style={{ fontSize: '9px', fontWeight: 600, letterSpacing: '.18em', textTransform: 'uppercase', color: '#ccc', marginBottom: '14px' }}>02, Demand</div>
                                     <div style={{ fontSize: '44px', fontWeight: 300, color: '#000', letterSpacing: '-.02em', lineHeight: 1, marginBottom: '10px' }}>82%</div>
                                     <div style={{ fontSize: '12px', color: '#666', lineHeight: 1.65 }}>of parents seeking "guided play" resources that aren't screen-heavy</div>
                                 </div>
                                 <div style={{ background: '#fff', padding: '28px 24px' }}>
-                                    <div style={{ fontSize: '9px', fontWeight: 600, letterSpacing: '.18em', textTransform: 'uppercase', color: '#ccc', marginBottom: '14px' }}>03 &mdash; Scale</div>
+                                    <div style={{ fontSize: '9px', fontWeight: 600, letterSpacing: '.18em', textTransform: 'uppercase', color: '#ccc', marginBottom: '14px' }}>03 (Scale</div>
                                     <div style={{ fontSize: '44px', fontWeight: 300, color: '#000', letterSpacing: '-.02em', lineHeight: 1, marginBottom: '10px' }}>7B</div>
-                                    <div style={{ fontSize: '12px', color: '#666', lineHeight: 1.65 }}>Mattel products currently in circulation &mdash; an untapped "installed base"</div>
+                                    <div style={{ fontSize: '12px', color: '#666', lineHeight: 1.65 }}>Mattel products currently in circulation) an untapped "installed base"</div>
                                 </div>
                             </div>
                         </div>
@@ -136,7 +134,7 @@ export default function MattelCaseStudy() {
                             <div style={{ fontSize: '14px', fontWeight: 500, letterSpacing: '.1em', textTransform: 'uppercase', color: '#000' }}>Execution</div>
                         </div>
                         <div>
-                            <div style={{ fontSize: '28px', fontWeight: 400, letterSpacing: '.03em', textTransform: 'uppercase', color: '#000', lineHeight: 1.1, marginBottom: '28px' }}>The Solution &mdash; Mattel Dreamers</div>
+                            <div style={{ fontSize: '28px', fontWeight: 400, letterSpacing: '.03em', textTransform: 'uppercase', color: '#000', lineHeight: 1.1, marginBottom: '28px' }}>The Solution, Mattel Dreamers</div>
                             <div style={{ borderTop: '1px solid #e8e8e8', marginBottom: '28px' }}>
 
                                 <div onClick={() => toggleMethod(1)} style={{ padding: '16px 0', borderBottom: '1px solid #f5f5f5', cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -155,7 +153,7 @@ export default function MattelCaseStudy() {
                                 </div>
                                 <div style={{ maxHeight: activeMethod === 2 ? '500px' : '0', overflow: 'hidden', transition: 'max-height 300ms ease' }}>
                                     <div style={{ padding: '16px 0 20px', fontSize: '13px', color: '#666', lineHeight: 1.75, borderBottom: '1px solid #f5f5f5' }}>
-                                        Limited-edition, "inspiration-only" accessories that cannot be bought with money &mdash; only through consistent narrative engagement.
+                                        Limited-edition, "inspiration-only" accessories that cannot be bought with money: only through consistent narrative engagement.
                                     </div>
                                 </div>
 
@@ -175,7 +173,7 @@ export default function MattelCaseStudy() {
                                 </div>
                                 <div style={{ maxHeight: activeMethod === 4 ? '500px' : '0', overflow: 'hidden', transition: 'max-height 300ms ease' }}>
                                     <div style={{ padding: '16px 0 20px', fontSize: '13px', color: '#666', lineHeight: 1.75, borderBottom: '1px solid #f5f5f5' }}>
-                                        A moderated, safe space for the most creative play-stories to be displayed globally &mdash; positioning the child as the author and Mattel as the publisher.
+                                        A moderated, safe space for the most creative play-stories to be displayed globally: positioning the child as the author and Mattel as the publisher.
                                     </div>
                                 </div>
 
@@ -234,6 +232,5 @@ export default function MattelCaseStudy() {
                 </div>
                 <span className="footer-copy">&copy; 2025 Benn Pattara &middot; bennpattara.com</span>
             </footer>
-        </>
-    );
+        </>);
 }

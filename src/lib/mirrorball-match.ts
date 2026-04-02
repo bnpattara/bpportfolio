@@ -1,5 +1,5 @@
 /**
- * Client-side song matcher for Mirrorball — no API required.
+ * Client-side song matcher for Mirrorball: no API required.
  * Uses text similarity (word overlap + scoring) to match feelings to Taylor Swift songs.
  */
 
@@ -82,8 +82,7 @@ function scoreTagMatch(userTokens: Set<string>, tags: string[]): number {
 
 export function findMatchingSong(
   feeling: string,
-  songs: Song[]
-): { song: Song; why: string } {
+  songs: Song[]): { song: Song; why: string } {
   const userTokens = tokenize(feeling);
   if (userTokens.size === 0) {
     const fallback = songs[Math.floor(Math.random() * songs.length)];

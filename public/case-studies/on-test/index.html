@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>On APEX,  Prose test (draft) · Benn Pattara</title>
+<title>On APEX · Community Platform · Benn Pattara</title>
 <style>
 :root {
   --black:     #000;
@@ -226,7 +226,7 @@ body{font-family:var(--font);background:var(--white);color:var(--black);line-hei
 .proto-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 28px; align-items: start; width: 100%; max-width: 100%; box-sizing: border-box; }
 .proto-phone { position: sticky; top: 40px; width: 320px; height: 693px; border-radius: 44px; border: 8px solid #000; overflow: hidden; background: #000; box-shadow: 0 0 0 1px #e8e8e8; display: flex; justify-content: center; align-items: flex-start; margin: 0; justify-self: center; align-self: center; }
 /* Fill inner bezel: 304×677,  scale = max(304/375, 677/812) so app bleeds to bottom; sides clip */
-.proto-phone iframe { width: 375px; height: 812px; border: none; display: block; transform: scale(0.83374); transform-origin: top center; flex-shrink: 0; pointer-events: auto; align-self: flex-start; }
+.proto-phone iframe { width: 390px; height: 844px; border: none; display: block; transform: scale(0.802133); transform-origin: top center; flex-shrink: 0; pointer-events: auto; align-self: flex-start; }
 .proto-steps { display: flex; flex-direction: column; gap: 0; min-width: 0; }
 .proto-step { padding: 24px 0; border-bottom: 1px solid var(--g200); cursor: pointer; transition: opacity 0.2s; }
 .proto-step:first-child { border-top: 1px solid var(--g200); }
@@ -415,7 +415,7 @@ footer{border-top:1px solid var(--g200);padding:32px 48px;display:flex;align-ite
   </div>
 </section>
 <div class="cs-body-wrap">
-<aside id="cs-sidenav"><div class="cs-sidenav-label">Index</div><a class="cs-sidenav-link active" data-target="cs-s01-executive-summary" onclick="scrollToSection('cs-s01-executive-summary')"><span class="cs-sidenav-num">01</span><span class="cs-sidenav-text">Executive Summary</span></a><a class="cs-sidenav-link" data-target="cs-s02-background" onclick="scrollToSection('cs-s02-background')"><span class="cs-sidenav-num">02</span><span class="cs-sidenav-text">Background</span></a><a class="cs-sidenav-link" data-target="cs-s03-the-ask" onclick="scrollToSection('cs-s03-the-ask')"><span class="cs-sidenav-num">03</span><span class="cs-sidenav-text">The Ask</span></a><a class="cs-sidenav-link" data-target="cs-s04-the-problem" onclick="scrollToSection('cs-s04-the-problem')"><span class="cs-sidenav-num">04</span><span class="cs-sidenav-text">The Problem</span></a><a class="cs-sidenav-link" data-target="cs-s05-research-methods" onclick="scrollToSection('cs-s05-research-methods')"><span class="cs-sidenav-num">05</span><span class="cs-sidenav-text">Research Methods</span></a><a class="cs-sidenav-link" data-target="cs-s06-key-data-findings" onclick="scrollToSection('cs-s06-key-data-findings')"><span class="cs-sidenav-num">06</span><span class="cs-sidenav-text">Key Data / Findings</span></a><a class="cs-sidenav-link" data-target="cs-s07-the-insight" onclick="scrollToSection('cs-s07-the-insight')"><span class="cs-sidenav-num">07</span><span class="cs-sidenav-text">The Insight</span></a><a class="cs-sidenav-link" data-target="cs-s08-the-strategy" onclick="scrollToSection('cs-s08-the-strategy')"><span class="cs-sidenav-num">08</span><span class="cs-sidenav-text">The Strategy</span></a><a class="cs-sidenav-link" data-target="cs-s09-concept-design-work" onclick="scrollToSection('cs-s09-concept-design-work')"><span class="cs-sidenav-num">09</span><span class="cs-sidenav-text">Concept / Design Work</span></a><a class="cs-sidenav-link" data-target="cs-s10-business-benefits" onclick="scrollToSection('cs-s10-business-benefits')"><span class="cs-sidenav-num">10</span><span class="cs-sidenav-text">Business Benefits</span></a><a class="cs-sidenav-link" data-target="artifact-1" onclick="scrollToSection('artifact-1')"><span class="cs-sidenav-num">, </span><span class="cs-sidenav-text">PRD + design system</span></a><a class="cs-sidenav-link" data-target="prototype" onclick="scrollToSection('prototype')"><span class="cs-sidenav-num">, </span><span class="cs-sidenav-text">Prototype</span></a><div class="cs-sidenav-exec">
+<aside id="cs-sidenav"><div class="cs-sidenav-label">Index</div><a class="cs-sidenav-link active" data-target="cs-s01-executive-summary" onclick="scrollToSection('cs-s01-executive-summary')"><span class="cs-sidenav-num">01</span><span class="cs-sidenav-text">Executive Summary</span></a><a class="cs-sidenav-link" data-target="cs-s02-background" onclick="scrollToSection('cs-s02-background')"><span class="cs-sidenav-num">02</span><span class="cs-sidenav-text">Background</span></a><a class="cs-sidenav-link" data-target="cs-s03-the-ask" onclick="scrollToSection('cs-s03-the-ask')"><span class="cs-sidenav-num">03</span><span class="cs-sidenav-text">The Ask</span></a><a class="cs-sidenav-link" data-target="cs-s04-the-problem" onclick="scrollToSection('cs-s04-the-problem')"><span class="cs-sidenav-num">04</span><span class="cs-sidenav-text">The Problem</span></a><a class="cs-sidenav-link" data-target="cs-s05-research-methods" onclick="scrollToSection('cs-s05-research-methods')"><span class="cs-sidenav-num">05</span><span class="cs-sidenav-text">Research Methods</span></a><a class="cs-sidenav-link" data-target="cs-s06-key-data-findings" onclick="scrollToSection('cs-s06-key-data-findings')"><span class="cs-sidenav-num">06</span><span class="cs-sidenav-text">Key Data / Findings</span></a><a class="cs-sidenav-link" data-target="cs-s07-the-insight" onclick="scrollToSection('cs-s07-the-insight')"><span class="cs-sidenav-num">07</span><span class="cs-sidenav-text">The Insight</span></a><a class="cs-sidenav-link" data-target="cs-s08-the-strategy" onclick="scrollToSection('cs-s08-the-strategy')"><span class="cs-sidenav-num">08</span><span class="cs-sidenav-text">The Strategy</span></a><a class="cs-sidenav-link" data-target="cs-s09-concept-design-work" onclick="scrollToSection('cs-s09-concept-design-work')"><span class="cs-sidenav-num">09</span><span class="cs-sidenav-text">Concept / Design Work</span></a><a class="cs-sidenav-link" data-target="cs-s10-business-benefits" onclick="scrollToSection('cs-s10-business-benefits')"><span class="cs-sidenav-num">10</span><span class="cs-sidenav-text">Business Benefits</span></a><a class="cs-sidenav-link" data-target="artifact-1" onclick="scrollToSection('artifact-1')"><span class="cs-sidenav-num">11</span><span class="cs-sidenav-text">PRD + design system</span></a><a class="cs-sidenav-link" data-target="prototype" onclick="scrollToSection('prototype')"><span class="cs-sidenav-num">12</span><span class="cs-sidenav-text">Prototype</span></a><div class="cs-sidenav-exec">
     <div class="cs-sidenav-exec-label">Draft</div>
     <p class="cs-sidenav-exec-text">Prose test from portfolio-prose.docx. Primary: <a href="/work/on" target="_parent" style="color:inherit">/work/on</a>.</p>
     <a class="cs-sidenav-exec-link" onclick="scrollToSection('cs-s01-executive-summary')">Start &rarr;</a>
@@ -426,8 +426,8 @@ footer{border-top:1px solid var(--g200);padding:32px 48px;display:flex;align-ite
     <div>
       <div class="cs-exec-eyebrow">Meta</div>
       <div class="cs-exec-meta-grid">
-        <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Format</div><div class="cs-exec-meta-val">Prose narrative test</div></div>
-        <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Live</div><div class="cs-exec-meta-val"><a href="/work/on" target="_parent" style="color:inherit">/work/on</a></div></div>
+        <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Format</div><div class="cs-exec-meta-val">Case study (HTML)</div></div>
+        <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Live</div><div class="cs-exec-meta-val"><a href="/work/on-test" target="_parent" style="color:inherit">/work/on-test</a></div></div>
       </div>
     </div>
   </div>
@@ -523,7 +523,7 @@ footer{border-top:1px solid var(--g200);padding:32px 48px;display:flex;align-ite
   </div>
 </div><section class="proto-section" id="prototype" data-cs-section="prototype">
   <div class="proto-intro">
-    <div class="cs-section-eyebrow"><span class="cs-section-num">, </span><span class="cs-section-title">Live prototype</span></div>
+    <div class="cs-section-eyebrow"><span class="cs-section-num">12</span><span class="cs-section-title">Live prototype</span></div>
     <h2 class="cs-heading-serif">Interactive model</h2>
     <p class="cs-body" style="margin-bottom:0;">Same build as the primary case study.</p>
   </div>

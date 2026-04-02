@@ -1,8 +1,7 @@
 "use client";
 
 export default function NavBar() {
-    return (
-        <nav className="ck-nav-sim">
+    return (<nav className="ck-nav-sim">
             {/* Utility bar – optional */}
             <div className="ck-nav-top">
                 <span>Free Shipping on Orders $50+ | US • EN</span>
@@ -20,6 +19,5 @@ export default function NavBar() {
                     <a href="mailto:benn@example.com">Email</a>
                 </div>
             </div>
-        </nav>
-    );
+        </nav>);
 }

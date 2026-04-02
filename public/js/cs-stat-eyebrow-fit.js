@@ -59,8 +59,7 @@
     document.querySelectorAll('.cs-stats').forEach(function (grid) {
       var cols = colCount(grid);
       var cells = Array.prototype.slice.call(
-        grid.querySelectorAll(':scope > .cs-stat-cell')
-      );
+        grid.querySelectorAll(':scope > .cs-stat-cell'));
       var r;
       for (r = 0; r < cells.length; r += cols) {
         var rowCells = cells.slice(r, r + cols);

@@ -3,9 +3,8 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Diesel Iceberg — Flagship Concept · Benn Pattara</title>
+<title>Diesel Iceberg · Benn Pattara</title>
 <style>
-/* DIESEL TOKYO — Aligned with portfolio case study template (Saks / On) */
 :root {
   --black:     #000;
   --white:     #fff;
@@ -21,694 +20,566 @@
   --nav-h:     52px;
   --sidenav-w: 220px;
 }
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body { font-family: var(--font); background: var(--white); color: var(--black); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font);background:var(--white);color:var(--black);line-height:1.6;-webkit-font-smoothing:antialiased;}
+#site-nav{position:fixed;top:0;left:0;right:0;z-index:200;background:var(--white);border-bottom:1px solid var(--g200);}
+.nav-main{position:relative;height:52px;padding:0 48px;}
+.nav-left{position:absolute;left:48px;top:50%;transform:translateY(-50%);display:flex;gap:28px;}
+.nav-left a{font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--g500);text-decoration:none;transition:color var(--ease-fast);}
+.nav-left a:hover{color:var(--black);}
+.nav-wordmark{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:14px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--black);text-decoration:none;white-space:nowrap;}
+.nav-right{position:absolute;right:48px;top:50%;transform:translateY(-50%);}
+.nav-right a{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--black);text-decoration:none;border-bottom:1px solid var(--black);padding-bottom:1px;}
+.page-body{padding-top:var(--nav-h);}
+.cs-hero{position:relative;min-height:85vh;overflow:hidden;display:flex;align-items:flex-end;}
+.cs-hero-bg{position:absolute;inset:0;z-index:0;background:linear-gradient(160deg,#0a0a0a 0%,#141010 40%,#0a0a0a 100%);}
+.cs-hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center center;display:block;}
+.cs-hero-scrim{position:absolute;inset:0;z-index:1;background:linear-gradient(to top,rgba(0,0,0,.85) 0%,rgba(0,0,0,.4) 35%,transparent 60%);pointer-events:none;}
+.cs-hero-title-wrap{position:relative;z-index:2;padding:64px 56px 72px 48px;width:100%;max-width:900px;}
+.cs-hero-title{font-size:clamp(32px,4vw,56px);font-weight:300;letter-spacing:.04em;text-transform:uppercase;color:var(--white);line-height:.95;margin:0;text-shadow:0 2px 24px rgba(0,0,0,.5);}
+.cs-hero-title em{font-style:italic;color:rgba(255,255,255,.65);}
+.cs-hero-kicker{font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:14px;}
+.cs-hero-meta-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:10px;}
+.cs-hero-role{display:inline-block;font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.88);border:1px solid rgba(255,255,255,.35);padding:5px 12px;}
+.cs-body-wrap{display:grid;grid-template-columns:var(--sidenav-w) 1fr;align-items:start;min-height:100vh;}
+#cs-sidenav{position:sticky;top:var(--nav-h);height:calc(100vh - var(--nav-h));overflow-y:auto;border-right:1px solid var(--g200);padding:40px 0;display:flex;flex-direction:column;background:var(--white);z-index:50;scrollbar-width:none;}
+#cs-sidenav::-webkit-scrollbar{display:none;}
+.cs-sidenav-label{font-size:8px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--g300);padding:0 28px 20px;font-family:var(--font);}
+.cs-sidenav-link{display:flex;align-items:center;gap:14px;padding:12px 28px;cursor:pointer;transition:background var(--ease-fast);text-decoration:none;border-left:2px solid transparent;}
+.cs-sidenav-link:hover{background:var(--g100);}
+.cs-sidenav-link.active{border-left-color:var(--black);background:var(--g100);}
+.cs-sidenav-num{font-size:9px;font-weight:600;letter-spacing:.12em;color:var(--g300);width:20px;flex-shrink:0;transition:color var(--ease-fast);font-family:var(--font);}
+.cs-sidenav-link.active .cs-sidenav-num{color:var(--black);}
+.cs-sidenav-text{font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--g400);transition:color var(--ease-fast);}
+.cs-sidenav-link.active .cs-sidenav-text{color:var(--black);}
+.cs-sidenav-divider{height:1px;background:var(--g100);margin:8px 28px;}
+.cs-sidenav-exec{margin-top:auto;padding:20px 28px 0;border-top:1px solid var(--g100);}
+.cs-sidenav-exec-label{font-size:8px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--g300);margin-bottom:10px;font-family:var(--font);}
+.cs-sidenav-exec-text{font-size:13px;color:var(--g400);line-height:1.7;font-family:var(--font);font-style:italic;}
+.cs-sidenav-exec-link{display:inline-block;margin-top:10px;font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--black);text-decoration:none;border-bottom:1px solid var(--black);padding-bottom:1px;cursor:pointer;}
+.cs-content{min-width:0;}
+.cs-exec-inner{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;}
+.cs-exec-eyebrow{font-size:8px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--g300);margin-bottom:16px;font-family:var(--font);}
+.cs-exec-body{font-size:13px;color:var(--g500);line-height:1.85;margin-bottom:20px;}
+.cs-exec-meta-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--g200);margin-bottom:24px;}
+.cs-exec-meta-cell{background:var(--white);padding:20px;min-width:0;overflow-wrap:break-word;}
+.cs-exec-meta-label{font-size:8px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--g300);margin-bottom:6px;font-family:var(--font);}
+.cs-exec-meta-val{font-size:12px;font-weight:500;letter-spacing:.04em;color:var(--black);}
+.cs-section{padding:72px 56px;border-bottom:1px solid #f0f0f0;}
+.cs-full-bleed{width:calc(100% + 112px + 2px);margin-left:calc(-56px - 1px);margin-right:calc(-56px - 1px);}
+#cs-users{padding-bottom:32px;}
+.cs-design-system-strip-wrap{background:var(--g100);padding-top:clamp(28px,4vw,40px);border-bottom:1px solid #f0f0f0;}
+#artifact-design-system{margin-top:-40px;padding-top:calc(72px + 40px);}
+.cs-section-alt{background:var(--g100);}
+.cs-section-eyebrow{display:flex;align-items:center;gap:14px;margin-bottom:28px;}
+.cs-section-num{font-size:9px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--g300);font-family:var(--font);}
+.cs-section-title{font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--black);}
+.cs-heading-serif{font-family:var(--font);font-size:clamp(26px,3vw,40px);font-weight:300;color:var(--black);line-height:1.1;margin-bottom:28px;letter-spacing:.02em;}
+.cs-heading-serif em{font-style:italic;color:var(--g500);}
+.cs-body{font-size:15px;color:var(--g500);line-height:1.8;margin-bottom:20px;}
+.cs-body:last-child{margin-bottom:0;}
+.cs-exec-heading{font-size:32px;font-weight:300;letter-spacing:.04em;text-transform:uppercase;color:var(--black);margin-bottom:8px;}
+.cs-stats-2{grid-template-columns:repeat(2,minmax(0,1fr));}
+.cs-exec-ii-row .cs-stat-num{font-size:clamp(18px,2vw,26px);font-weight:300;letter-spacing:.02em;line-height:1.15;margin-bottom:12px;font-style:normal;}
+.cs-problem-split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,40px);align-items:start;margin-bottom:0;width:100%;max-width:none;}
+.cs-problem-split .cs-body{max-width:none;margin-bottom:0;}
+.cs-problem-split > div{display:flex;flex-direction:column;gap:16px;}
+.proto-intro{max-width:44rem;margin-bottom:40px;}
+.proto-intro .cs-section-eyebrow{margin-bottom:16px;}
+#scroll-progress{position:fixed;top:0;left:0;height:2px;background:var(--black);width:0%;z-index:300;transition:width 100ms linear;}
+.cs-body-2col{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-bottom:28px;}
+.cs-body-2col p{font-size:13px;color:var(--g500);line-height:1.75;}
+.cs-stats{display:grid;gap:1px;background:var(--g200);margin-bottom:28px;}
+.cs-stats-3{grid-template-columns:repeat(3,minmax(0,1fr));}
+.cs-stats-4{grid-template-columns:repeat(4,minmax(0,1fr));}
+.cs-stat-cell{background:var(--white);padding:28px 24px;min-width:0;overflow-wrap:break-word;}
+.cs-stat-eyebrow{font-size:9px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--g300);margin-bottom:12px;font-family:var(--font);}
+.cs-stat-num{font-family:var(--font);font-size:48px;font-weight:300;font-style:italic;color:var(--black);letter-spacing:-.01em;line-height:1;margin-bottom:8px;}
+.cs-stat-label{font-size:12px;color:var(--g500);line-height:1.65;}
+.cs-table{width:100%;border-collapse:collapse;margin-bottom:28px;}
+.cs-table th{font-size:8px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--g300);padding:12px 16px;border-bottom:1px solid var(--g200);text-align:left;background:var(--g100);font-family:var(--font);}
+.cs-table td{font-size:12px;color:var(--g500);padding:14px 16px;border-bottom:1px solid var(--g100);line-height:1.6;vertical-align:top;}
+.cs-table td:first-child{font-weight:500;color:var(--black);font-size:11px;letter-spacing:.03em;text-transform:uppercase;}
+.cs-table tr:hover td{background:#fafafa;}
+.pm-lens{border:1px solid var(--g200);padding:24px 28px;margin-bottom:28px;background:#fafafa;}
+.pm-lens-label{font-size:8px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--g300);margin-bottom:10px;font-family:var(--font);}
+.pm-lens-text{font-size:13px;color:var(--g500);line-height:1.75;font-style:italic;}
+.cs-the-ask-wrap{margin-bottom:0;background:#0a0a0a;}
+.cs-the-ask-inner{
+  background:linear-gradient(165deg,#0a0a0a 0%,#161616 55%,#0d0d0d 100%);
+  color:#fff;
+  padding:clamp(32px,5vw,56px) clamp(32px,5vw,64px);
+  border-left:5px solid #fff;
+  box-shadow:0 22px 56px rgba(0,0,0,.16);
+}
+.cs-the-ask-inner .cs-section-eyebrow{margin-bottom:clamp(14px,2vw,22px);}
+.cs-the-ask-inner .cs-section-num{color:rgba(255,255,255,.48);}
+.cs-the-ask-inner .cs-section-title{color:rgba(255,255,255,.92);}
+.cs-the-ask-lede{
+  font-family:var(--font);
+  font-size:clamp(22px,3vw,38px);
+  font-weight:400;
+  line-height:1.16;
+  letter-spacing:.02em;
+  color:#fff;
+  margin:0;
+  max-width:42rem;
+}
+.cs-the-ask-lede em{font-style:italic;color:rgba(255,255,255,.78);}
+.cs-section:has(.cs-the-ask-wrap) .cs-body{margin-top:28px;}
+@media (max-width:768px){
+  .cs-the-ask-inner{padding:26px 20px 32px;border-left-width:4px;}
+  .cs-the-ask-lede{font-size:clamp(20px,5.2vw,30px);}
+}
+#cs-s03-the-ask {
+  padding: 0 !important;
+  border-bottom: none !important;
+  background: #0a0a0a !important;
+  display: block;
+}
+#cs-s03-the-ask .cs-the-ask-wrap {
+  margin: 0 !important;
+  width: 100% !important;
+  border: none !important;
+}
+#cs-s02-background {
+  border-bottom: none !important;
+}
 
-#site-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; background: var(--white); border-bottom: 1px solid var(--g200); }
-.nav-main { position: relative; height: 52px; padding: 0 48px; }
-.nav-left { position: absolute; left: 48px; top: 50%; transform: translateY(-50%); display: flex; gap: 28px; }
-.nav-left a { font-size: 11px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--g500); text-decoration: none; transition: color var(--ease-fast); }
-.nav-left a:hover { color: var(--black); }
-.nav-wordmark { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); font-size: 14px; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; color: var(--black); text-decoration: none; white-space: nowrap; }
-.nav-right { position: absolute; right: 48px; top: 50%; transform: translateY(-50%); }
-.nav-right a { font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--black); text-decoration: none; border-bottom: 1px solid var(--black); padding-bottom: 1px; }
-.page-body { padding-top: var(--nav-h); }
-
-/* HERO — full-bleed (matches Saks) */
-.cs-hero { position: relative; min-height: 85vh; overflow: hidden; display: flex; align-items: flex-end; }
-.cs-hero-bg { position: absolute; inset: 0; z-index: 0; background: linear-gradient(160deg, #0a0a0a 0%, #141010 40%, #0a0a0a 100%); }
-.cs-hero-bg img { width: 100%; height: 100%; object-fit: cover; object-position: center center; display: block; }
-.cs-hero-scrim { position: absolute; inset: 0; z-index: 1; background: linear-gradient(to top, rgba(0,0,0,.85) 0%, rgba(0,0,0,.4) 35%, transparent 60%); pointer-events: none; }
-.cs-hero-title-wrap { position: relative; z-index: 2; padding: 64px 56px 72px 48px; width: 100%; max-width: 900px; }
-.cs-hero-title { font-size: clamp(32px,4vw,56px); font-weight: 300; letter-spacing: .04em; text-transform: uppercase; color: var(--white); line-height: .95; margin: 0; text-shadow: 0 2px 24px rgba(0,0,0,.5); }
-.cs-hero-ghost { position: absolute; bottom: -40px; right: -30px; font-size: clamp(100px,14vw,200px); font-weight: 300; color: rgba(255,255,255,.03); letter-spacing: -.03em; line-height: 1; white-space: nowrap; pointer-events: none; text-transform: uppercase; user-select: none; z-index: 1; }
-
-
-.meta-strip { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--g200); }
-.meta-strip span { padding: 14px 32px; font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: var(--g400); border-right: 1px solid var(--g200); }
-.meta-strip span:last-child { border-right: none; }
-.meta-strip span b { color: var(--black); font-weight: 600; }
-
-.cs-body-wrap { display: grid; grid-template-columns: var(--sidenav-w) 1fr; align-items: start; min-height: 100vh; }
-#cs-sidenav { position: sticky; top: var(--nav-h); height: calc(100vh - var(--nav-h)); overflow-y: auto; border-right: 1px solid var(--g200); padding: 40px 0; display: flex; flex-direction: column; background: var(--white); z-index: 50; }
-.cs-sidenav-label { font-size: 8px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--g300); padding: 0 28px 20px; }
-.cs-sidenav-link { display: flex; align-items: center; gap: 14px; padding: 12px 28px; cursor: pointer; transition: background var(--ease-fast); text-decoration: none; border-left: 2px solid transparent; color: inherit; }
-.cs-sidenav-link:hover { background: var(--g100); }
-.cs-sidenav-link.active { border-left-color: var(--black); background: var(--g100); }
-.cs-sidenav-num { font-size: 9px; font-weight: 600; letter-spacing: .12em; color: var(--g300); width: 20px; flex-shrink: 0; }
-.cs-sidenav-link.active .cs-sidenav-num { color: var(--black); }
-.cs-sidenav-text { font-size: 11px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--g400); }
-.cs-sidenav-link.active .cs-sidenav-text { color: var(--black); }
-.cs-sidenav-divider { height: 1px; background: var(--g100); margin: 8px 28px; }
-.cs-sidenav-exec { margin-top: auto; padding: 20px 28px 0; border-top: 1px solid var(--g100); }
-.cs-sidenav-exec-label { font-size: 8px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--g300); margin-bottom: 10px; }
-.cs-sidenav-exec-text { font-size: 11px; color: var(--g400); line-height: 1.7; }
-.cs-sidenav-exec-link { display: inline-block; margin-top: 10px; font-size: 9px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--black); text-decoration: none; border-bottom: 1px solid var(--black); padding-bottom: 1px; cursor: pointer; }
-
-.cs-content { min-width: 0; }
-#cs-exec-summary { padding: 64px 56px; border-bottom: 1px solid var(--g200); }
-.cs-exec-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
-.cs-exec-eyebrow { font-size: 8px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--g300); margin-bottom: 16px; }
-.cs-exec-body { font-size: 13px; color: var(--g500); line-height: 1.85; margin-bottom: 32px; }
-.cs-exec-meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--g200); margin-bottom: 24px; }
-.cs-exec-meta-cell { background: var(--white); padding: 20px; min-width: 0; overflow-wrap: break-word; }
-.cs-exec-meta-label { font-size: 8px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--g300); margin-bottom: 6px; }
-.cs-exec-meta-val { font-size: 12px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; color: var(--black); }
-
-.cs-section { padding: 72px 56px; border-bottom: 1px solid #f0f0f0; }
-.cs-section-alt { background: var(--g100); }
-.cs-section-eyebrow { display: flex; align-items: center; gap: 14px; margin-bottom: 28px; }
-.cs-section-num { font-size: 9px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--g300); }
-.cs-section-title { font-size: 11px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--black); }
-.cs-heading { font-size: clamp(22px,2.5vw,30px); font-weight: 400; letter-spacing: .03em; text-transform: uppercase; color: var(--black); line-height: 1.1; margin-bottom: 28px; }
-.cs-body { font-size: 15px; color: var(--g500); line-height: 1.8; margin-bottom: 20px; }
-.cs-body:last-child { margin-bottom: 0; }
-.cs-pull-quote { font-size: clamp(18px, 2.2vw, 26px); font-weight: 400; font-style: italic; color: var(--black); line-height: 1.35; border-left: 2px solid var(--black); padding-left: 24px; margin: 32px 0; max-width: 40rem; }
-.cs-body-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
-/* Strategic Tension Grid */
-.tension-intro { margin-bottom: 48px; }
-.tension-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 48px; }
-
-/* Accusation cards */
-.acc-card { border-top: 1px solid var(--g200); background: var(--white); padding: 32px 0; position: relative; }
-.acc-card.live { border-top-color: var(--black); }
-.acc-label { font-size: 9px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--g300); margin-bottom: 16px; display: block; }
-.acc-text { font-size: 16px; font-weight: 400; line-height: 1.5; color: var(--g700); }
-.acc-text span { color: var(--black); font-weight: 700; }
-
-/* Hara Split — Why Tokyo Context */
-.hara-split { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin-top: 48px; border-top: 1px solid var(--g200); }
-.hara-col { padding: 48px 40px; border-right: 1px solid var(--g200); }
-.hara-col:last-child { border-right: none; }
-.hara-col:first-child { border-left: 3px solid var(--black); }
-.hara-era { font-size: 9px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--g300); margin-bottom: 14px; display: block; }
-.hara-era.now { color: var(--black); }
-.hara-h { font-size: clamp(16px, 2vw, 20px); font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--black); margin-bottom: 20px; line-height: 1.2; }
-
-/* Strategic Thesis — Large Typographic Display */
-.thesis-wrap { padding: 72px 0 48px; border-top: 1px solid var(--g200); margin: 60px 0 0; }
-.thesis-label { font-size: 9px; font-weight: 700; letter-spacing: .24em; text-transform: uppercase; color: var(--g300); margin-bottom: 28px; }
-.thesis-text { font-size: clamp(40px, 6vw, 88px); font-weight: 800; line-height: .92; letter-spacing: -.03em; text-transform: uppercase; color: var(--black); }
-.thesis-text em { font-style: normal; color: var(--g400); font-weight: 800; }
-
-
-/* Token block */
-.token-block { border: 1px solid var(--g200); background: var(--g100); padding: 32px; margin-top: 28px; display: flex; align-items: center; gap: 32px; }
-.token-circle { width: 96px; height: 96px; border-radius: 50%; border: 1px solid var(--g200); background: var(--g100); display: flex; flex-direction: column; align-items: center; justify-content: center; flex-shrink: 0; }
-.token-text { font-size: 9px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--g500); text-align: center; line-height: 1.4; }
-.token-year { font-size: 8px; letter-spacing: .1em; color: var(--g400); margin-top: 4px; }
-.token-desc { font-size: 13px; line-height: 1.75; color: var(--g500); }
-.token-desc strong { color: var(--black); font-weight: 500; }
-
-/* Objection block */
-.objection-block { background: var(--g100); border: 1px solid var(--g200); border-top: 1px solid var(--black); }
-.obj-q { padding: 28px 32px 20px; border-bottom: 1px solid var(--g200); }
-.obj-q-label { font-size: 8px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--g400); margin-bottom: 10px; }
-.obj-q-text { font-size: 20px; font-weight: 700; line-height: 1.2; letter-spacing: -.01em; color: var(--g500); font-style: italic; }
-.obj-a { padding: 28px 32px; }
-.obj-a-label { font-size: 8px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--g400); margin-bottom: 10px; }
-.obj-a-text { font-size: 18px; font-weight: 500; line-height: 1.35; letter-spacing: .03em; text-transform: uppercase; color: var(--black); }
-.obj-a-text em { font-style: italic; font-weight: 400; }
-.obj-sub { margin-top: 14px; font-size: 13px; line-height: 1.75; color: var(--g500); }
-
-/* Content acts */
-.content-acts { border-top: 1px solid var(--g200); }
-.act-row { display: grid; grid-template-columns: 72px 1fr; border-bottom: 1px solid var(--g200); min-height: 120px; transition: background var(--ease-fast); }
-.act-row:last-child { border-bottom: none; }
-.act-row:hover { background: var(--g100); }
-.act-num { border-right: 1px solid var(--g200); display: flex; align-items: center; justify-content: center; font-size: 42px; font-weight: 300; letter-spacing: -.03em; color: var(--g300); transition: color var(--ease-fast); }
-.act-row:hover .act-num { color: var(--black); }
-.act-body { padding: 28px 32px; }
-.act-title { font-size: 18px; font-weight: 500; letter-spacing: .04em; text-transform: uppercase; margin-bottom: 10px; color: var(--black); }
-.act-desc { font-size: 13px; line-height: 1.75; color: var(--g500); }
-.act-desc strong { color: var(--black); font-weight: 500; }
-
-/* Floor layout — Immersive Sticky Sticky */
-.floor-container { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-top: 1px solid var(--g200); }
-.floor-text-track { border-right: 1px solid var(--g200); }
-.floor-visual-track { position: sticky; top: var(--nav-h); height: calc(100vh - var(--nav-h)); overflow: hidden; background: var(--black); }
-
-.floor-item { min-height: 80vh; padding: 64px 48px; border-bottom: 1px solid var(--g100); display: flex; flex-direction: column; justify-content: center; }
-.floor-item:last-child { border-bottom: none; }
-
-.f-num-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--g300); margin-bottom: 16px; display: block; }
-.f-name { font-size: clamp(28px,3.5vw,42px); font-weight: 300; letter-spacing: .02em; text-transform: uppercase; line-height: 1; margin-bottom: 28px; color: var(--black); }
-.f-desc { font-size: 15px; line-height: 1.8; color: var(--g500); margin-bottom: 32px; }
-.f-desc strong { color: var(--black); font-weight: 500; }
-
-.f-strategy-box { background: var(--g100); padding: 28px; border-left: 2px solid var(--black); }
-.f-s-label { font-size: 9px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--g400); margin-bottom: 10px; }
-.f-s-text { font-size: 13px; line-height: 1.7; color: var(--g700); font-style: italic; }
-
-.floor-img-wrap { position: absolute; inset: 0; opacity: 0; transition: opacity 0.6s ease-in-out; }
-.floor-img-wrap.active { opacity: 1; }
-.floor-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
-.floor-img-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.4) 0%, transparent 40%); }
-.floor-img-label { position: absolute; bottom: 32px; right: 32px; font-size: 10px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--white); border: 1px solid rgba(255,255,255,0.3); padding: 8px 16px; background: rgba(0,0,0,0.5); backdrop-filter: blur(8px); }
-
-/* Thumbnail Switcher */
-.floor-thumbs { position: absolute; bottom: 82px; right: 32px; display: flex; gap: 12px; z-index: 10; }
-.f-thumb { width: 64px; height: 42px; border: 1px solid rgba(255,255,255,0.3); cursor: pointer; opacity: 0.6; transition: all var(--ease-base); overflow: hidden; }
-.f-thumb:hover, .f-thumb.active { opacity: 1; border-color: var(--white); transform: translateY(-2px); }
-.f-thumb img { width: 100%; height: 100%; object-fit: cover; }
-
-/* Flagship Exterior Intro */
-.ext-visual { width: 100%; height: 60vh; background: var(--black); margin-bottom: 64px; border-top: 1px solid var(--g200); position: relative; }
-.ext-visual img { width: 100%; height: 100%; object-fit: cover; }
-.ext-label { position: absolute; top: 32px; right: 48px; font-size: 10px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--white); border-bottom: 1px solid var(--white); padding-bottom: 4px; }
-
-
-/* Competitor Grid — Premium Upgrade */
-.comp-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1px; background: var(--g200); border: 1px solid var(--g200); margin-top: 32px; }
-.comp-card { background: var(--white); padding: 32px; display: flex; flex-direction: column; gap: 16px; transition: background var(--ease-fast); }
-.comp-card:hover { background: var(--g100); }
-.comp-card.diesel { background: var(--black); color: var(--white); }
-.comp-card.diesel .c-brand, .comp-card.diesel .c-move, .comp-card.diesel .c-yr { color: var(--white); }
-.c-brand { font-size: 18px; font-weight: 700; text-transform: uppercase; letter-spacing: -.01em; }
-.c-move { font-size: 13px; line-height: 1.6; color: var(--g500); }
-.c-meta { display: flex; justify-content: space-between; align-items: flex-end; margin-top: auto; padding-top: 16px; border-top: 1px solid var(--g100); }
-.comp-card.diesel .c-meta { border-top-color: rgba(255,255,255,0.1); }
-.c-loc { font-size: 10px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--g400); }
-.c-yr { font-size: 24px; font-weight: 300; letter-spacing: -.02em; color: var(--g300); }
-
-
-/* Business Case Carousel (Saks Style) */
-.carousel-container { position: relative; margin: 40px -56px 0; padding: 0 56px; overflow-x: auto; overflow-y: hidden; cursor: grab; scrollbar-width: none; }
-.carousel-container::-webkit-scrollbar { display: none; }
-.carousel-track { display: flex; gap: 24px; padding-bottom: 40px; }
-.carousel-item { flex: 0 0 360px; background: var(--white); border-top: 2px solid var(--black); border-radius: 0; padding: 32px 24px; }
-.carousel-controls { display: flex; gap: 12px; justify-content: flex-end; margin-top: 20px; }
-.carousel-btn { width: 44px; height: 44px; border: 1px solid var(--black); border-radius: 0; background: var(--white); cursor: pointer; font-size: 18px; display: flex; align-items: center; justify-content: center; transition: all var(--ease-fast); }
-.carousel-btn:hover { background: var(--black); color: var(--white); }
-.c-num { font-size: 10px; font-weight: 700; color: var(--g300); margin-bottom: 12px; display: block; }
-.c-h { font-size: 18px; font-weight: 600; text-transform: uppercase; margin-bottom: 12px; color: var(--black); }
-.c-p { font-size: 13px; line-height: 1.6; color: var(--g500); }
-
-/* Brand in the World Grid — 6 Items */
-.world-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--g200); margin-top: 48px; border: 1px solid var(--g200); }
-.world-cell { background: var(--white); position: relative; height: 350px; overflow: hidden; }
-.world-cell img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
-.world-cell:hover img { transform: scale(1.04); }
-.world-cap { position: absolute; bottom: 16px; left: 18px; z-index: 2; font-size: 8px; letter-spacing: .12em; text-transform: uppercase; color: var(--white); background: rgba(0,0,0,.65); padding: 6px 10px; }
-
-/* Outcome Stats — Saks classes */
-.outcome-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--g200); margin-bottom: 32px; }
-.outcome-stat { background: var(--white); padding: 28px 24px; border-top: 3px solid var(--black); min-width: 0; overflow-wrap: break-word; }
-.outcome-stat-num { font-size: 52px; font-weight: 300; color: var(--black); letter-spacing: -.02em; line-height: 1; margin-bottom: 10px; }
-.outcome-stat-label { font-size: 12px; color: var(--g500); line-height: 1.65; }
-
-/* Ending Block */
-.cs-ending-block { background: var(--black); padding: 48px 56px; margin-top: 40px; margin-bottom: 0; }
-.cs-ending-text { font-size: 18px; font-weight: 300; line-height: 1.7; color: rgba(255,255,255,.9); margin: 0; max-width: 720px; font-style: italic; }
-
-
-/* Stats Grid — Saks classes */
-.cs-stats { display: grid; gap: 1px; background: var(--g200); margin-bottom: 28px; }
-.cs-stats-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-.cs-stats-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-.cs-stat-cell { background: var(--white); padding: 28px 24px; min-width: 0; overflow-wrap: break-word; }
-.cs-stat-eyebrow { font-size: 9px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--g300); margin-bottom: 12px; }
-.cs-stat-num { font-size: 48px; font-weight: 300; color: var(--black); letter-spacing: -.02em; line-height: 1; margin-bottom: 8px; }
-.cs-stat-num-inline { font-size: 28px; font-weight: 300; letter-spacing: -.01em; margin-bottom: 12px; white-space: nowrap; }
-.cs-stat-label { font-size: 12px; color: var(--g500); line-height: 1.65; }
-
-/* IMAGE LAYOUTS — Saks classes */
-.cs-img-contain { overflow: hidden; display: block; background: var(--g100); width: 100%; }
-.cs-img-contain img { width: 100%; height: 100%; object-fit: cover; object-position: center center; display: block; }
-.cs-img-full { width: 100%; margin-bottom: 8px; overflow: hidden; }
-.cs-img-full img { width: 100%; display: block; object-fit: cover; }
-.cs-img-full .cs-img-contain img { object-fit: cover; }
-.cs-img-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px; }
-.cs-img-2col-item img { width: 100%; display: block; object-fit: cover; aspect-ratio: 4/3; }
-.cs-img-2col-item .cs-img-contain img { object-fit: cover; }
-.cs-img-3col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 8px; }
-.cs-img-3col-item img { width: 100%; display: block; object-fit: cover; aspect-ratio: 3/4; }
-.cs-img-3col-item .cs-img-contain img { object-fit: cover; }
-.img-caption { font-size: 9px; letter-spacing: .12em; text-transform: uppercase; color: var(--g400); padding: 6px 0 20px; display: block; }
-.cs-img-2col-item .img-caption, .cs-img-3col-item .img-caption { padding: 6px 0 0; }
-
-/* Next Case Study */
-.cs-next { border-top: 1px solid var(--g200); padding-top: 32px; display: flex; justify-content: space-between; align-items: center; margin-top: 48px; }
-.cs-next-label { font-size: 9px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--g300); }
-.cs-next-link { text-align: right; text-decoration: none; display: block; }
-.cs-next-meta { font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: var(--g400); margin-bottom: 5px; }
-.cs-next-title { font-size: 18px; font-weight: 300; color: var(--black); letter-spacing: -.01em; }
-
-/* Footer */
-footer { display: flex; justify-content: space-between; align-items: center; padding: 24px 56px; border-top: 1px solid var(--g200); background: var(--white); }
-
-.footer-id { display: flex; flex-direction: column; gap: 4px; }
-.footer-name { font-size: 12px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--white); }
-.footer-role { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.28); }
-.footer-qualifier { font-size: 9px; letter-spacing: .06em; color: rgba(255,255,255,.2); font-style: italic; text-transform: none; margin-top: 2px; }
-.footer-links { display: flex; gap: 24px; }
-.footer-link { font-size: 10px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.35); text-decoration: none; transition: color var(--ease-fast); }
-.footer-link:hover { color: var(--white); }
-.footer-copy { font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: rgba(255,255,255,.18); }
-#scroll-progress { position: fixed; top: 0; left: 0; height: 2px; background: var(--black); width: 0%; z-index: 150; transition: width 100ms linear; }
-
-/* Divider */
-.cs-divider { display: flex; align-items: center; gap: 16px; padding: 24px 56px; border-bottom: 1px solid var(--g200); }
-.cs-divider-text { font-size: 8px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--g400); white-space: nowrap; }
-.cs-divider-line { flex: 1; height: 1px; background: var(--g200); }
-.cs-divider-end { font-size: 8px; letter-spacing: .12em; color: var(--g400); white-space: nowrap; }
-
+.persona-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--g200);margin-bottom:28px;}
+.persona-card{background:var(--white);padding:28px 24px;min-width:0;overflow-wrap:break-word;}
+.persona-card-tier{font-size:8px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--g300);margin-bottom:12px;font-family:var(--font);}
+.persona-card-name{font-family:var(--font);font-size:20px;font-weight:400;color:var(--black);margin-bottom:4px;}
+.persona-card-city{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--g400);margin-bottom:16px;}
+.persona-card-quote{font-family:var(--font);font-size:13px;font-style:italic;color:var(--g500);line-height:1.65;margin-bottom:16px;border-left:1px solid var(--g300);padding-left:12px;}
+.persona-card-detail{font-size:11px;color:var(--g500);line-height:1.7;}
+.persona-card-tension{font-size:11px;font-weight:500;color:var(--black);margin-top:12px;padding-top:12px;border-top:1px solid var(--g100);}
+.nike-research-persona-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:1px;background:var(--g200);margin-bottom:28px;}
+.nike-research-persona-grid .persona-card{padding:22px 18px;}
+.nike-research-persona-grid .persona-card-name{font-size:17px;}
+.nike-persona-research-intro{margin-top:40px;margin-bottom:24px;}
+.priority-card{padding:24px 28px;border-left:3px solid transparent;background:var(--g100);}
+.priority-card.core{border-left-color:var(--black);background:var(--white);}
+.priority-card.supporting{border-left-color:var(--g300);}
+.priority-card.deferred{border-left-color:var(--g200);background:#fafafa;}
+.priority-tag{display:inline-block;font-size:8px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;padding:3px 10px;margin-bottom:10px;font-family:var(--font);}
+.priority-tag.p0{background:var(--black);color:var(--white);}
+.priority-tag.p1{background:var(--g700);color:var(--white);}
+.priority-tag.supporting{background:var(--g200);color:var(--g500);}
+.priority-tag.deferred{background:var(--g100);color:var(--g400);border:1px solid var(--g200);}
+.priority-feature{font-size:13px;font-weight:500;color:var(--black);margin-bottom:6px;letter-spacing:.02em;}
+.priority-desc{font-size:12px;color:var(--g500);line-height:1.7;margin-bottom:8px;}
+.priority-prd{font-size:10px;font-family:var(--font);color:var(--g400);letter-spacing:.06em;}
+.nike-tri{margin-bottom:28px;}
+.nike-tri-tabs{display:none;gap:0;border-bottom:1px solid var(--g200);margin-bottom:20px;}
+.nike-tri-tab{flex:1;padding:14px 10px;border:none;background:transparent;font-family:var(--font);font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--g400);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;}
+.nike-tri-tab:hover{color:var(--black);}
+.nike-tri-tab.active{color:var(--black);border-bottom-color:var(--black);}
+.nike-tri-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;align-items:start;}
+.nike-tri-col-title{font-size:9px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--g300);margin-bottom:14px;font-family:var(--font);padding-bottom:10px;border-bottom:1px solid var(--g200);}
+.nike-tri-col .priority-card{margin-bottom:16px;}
+.nike-tri-col .priority-card:last-child{margin-bottom:0;}
+.nike-decision-card{background:var(--white);border:1px solid var(--g200);padding:12px 14px;margin-bottom:0;}
+.nike-decision-card.excluded{background:var(--g100);}
+.nike-decision-title{font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--black);margin-bottom:6px;}
+.nike-decision-built,.nike-decision-why{font-size:11px;color:var(--g500);line-height:1.5;margin:0 0 4px;}
+.nike-decision-why{margin-bottom:0;color:var(--g400);font-size:10px;}
+@media (min-width: 1100px) {
+  .nike-tri-decisions .nike-tri-grid > .nike-tri-col {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px 12px;
+    align-content: start;
+  }
+  .nike-tri-decisions .nike-tri-grid > .nike-tri-col > .nike-tri-col-title {
+    grid-column: 1 / -1;
+    margin-bottom: 4px;
+  }
+}
+.nike-persona-seg{margin-top:8px;margin-bottom:28px;}
+.nike-persona-seg-label{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--black);margin-bottom:10px;}
+.nike-persona-seg-body{font-size:13px;color:var(--g500);line-height:1.75;margin:0;max-width:52em;}
+.nike-persona-tool-wrap{margin-top:36px;padding-top:28px;border-top:1px solid var(--g200);}
+.nike-persona-tool-head{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--black);margin-bottom:8px;}
+.nike-persona-tool-desc{font-size:13px;color:var(--g500);line-height:1.7;margin-bottom:16px;max-width:52em;}
+.artifact-strip{background:var(--black);}
+.artifact-trigger{padding:24px 56px;display:flex;align-items:stretch;justify-content:space-between;cursor:pointer;transition:background var(--ease-fast);}
+.artifact-trigger:hover{background:#111;}
+.artifact-left{display:flex;align-items:stretch;gap:20px;}
+.artifact-badge{border:1px solid rgba(255,255,255,.25);padding:0 12px;display:flex;align-items:center;flex-shrink:0;}
+.artifact-badge span{font-size:9px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.6);white-space:nowrap;font-family:var(--font);}
+.artifact-meta{display:flex;flex-direction:column;justify-content:center;gap:5px;}
+.artifact-name{font-size:14px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;color:var(--white);}
+.artifact-desc{font-size:12px;color:rgba(255,255,255,.35);}
+.artifact-right{display:flex;align-items:center;flex-shrink:0;padding-left:20px;}
+.artifact-toggle{font-size:20px;font-weight:300;color:rgba(255,255,255,.5);line-height:1;display:inline-block;width:24px;text-align:center;}
+.artifact-trigger:hover .artifact-toggle{color:var(--white);}
+.artifact-expand{max-height:0;overflow:hidden;transition:max-height 700ms ease;}
+.artifact-inner{background:#0a0a0a;}
+.artifact-close-btn{background:transparent;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.5);padding:9px 18px;font-size:9px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;font-family:var(--font);white-space:nowrap;margin-top:4px;}
+.artifact-iframe-wrap{width:100%;background:#0a0a0a;line-height:0;}
+.artifact-iframe-wrap iframe{width:100%;height:85vh;min-height:600px;border:none;display:block;background:#0a0a0a;}
+.artifact-model-open-btn{display:none;box-sizing:border-box;width:100%;margin:0;padding:18px 20px;text-align:center;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--white);text-decoration:none;background:#141414;border-top:1px solid rgba(255,255,255,.1);font-family:var(--font);-webkit-tap-highlight-color:transparent;}
+.artifact-model-open-btn:active{background:#1a1a1a;}
+.proto-section { padding: 80px clamp(24px, 5vw, 64px); box-sizing: border-box; border-bottom: 1px solid #f0f0f0; overflow-anchor: none; overscroll-behavior: contain; }
+.proto-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 28px; align-items: start; width: 100%; max-width: 100%; box-sizing: border-box; }
+.proto-phone { position: sticky; top: 40px; width: 320px; height: 693px; border-radius: 44px; border: 8px solid #000; overflow: hidden; background: #000; box-shadow: 0 0 0 1px #e8e8e8; display: flex; justify-content: center; align-items: flex-start; margin: 0; justify-self: center; align-self: center; }
+/* Fill inner bezel: 304×677,  scale = max(304/375, 677/812) so app bleeds to bottom; sides clip */
+.proto-phone iframe { width: 375px; height: 812px; border: none; display: block; transform: scale(0.83374); transform-origin: top center; flex-shrink: 0; pointer-events: auto; align-self: flex-start; }
+.proto-steps { display: flex; flex-direction: column; gap: 0; min-width: 0; }
+.proto-step { padding: 24px 0; border-bottom: 1px solid var(--g200); cursor: pointer; transition: opacity 0.2s; }
+.proto-step:first-child { border-top: 1px solid var(--g200); }
+.proto-step-num { font-size: 9px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--g300); margin-bottom: 8px; font-family: var(--mono, 'DM Mono', monospace); }
+.proto-step-title { font-size: 14px; font-weight: 500; color: var(--black); margin-bottom: 6px; letter-spacing: -.01em; }
+.proto-step-desc { font-size: 13px; font-weight: 300; color: var(--g500); line-height: 1.65; overflow-wrap: break-word; word-break: break-word; }
+.proto-step.active .proto-step-num { color: var(--black); }
+.proto-step.active .proto-step-title { color: var(--black); }
+.proto-step.active { opacity: 1; }
+.proto-step:not(.active) { opacity: 0.5; }
+.proto-step:hover:not(.active) { opacity: 0.75; }
 @media (max-width: 768px) {
-  #site-nav .nav-main { padding: 0 20px !important; display: flex !important; justify-content: space-between !important; align-items: center !important; }
-  #site-nav .nav-left, #site-nav .nav-wordmark, #site-nav .nav-right { position: static !important; transform: none !important; left: auto !important; right: auto !important; top: auto !important; }
-  #site-nav .nav-left a:not([href="/"]):not([href="/#work"]) { display: none !important; }
-  #site-nav .nav-wordmark { font-size: 11px !important; letter-spacing: .12em !important; }
-  #site-nav .nav-right a { font-size: 9px !important; }
+  .proto-layout { grid-template-columns: 1fr; gap: 40px; }
+  .proto-phone { position: static; justify-self: center; align-self: center; }
+  .proto-step:not(.active) { opacity: 1; }
+  .proto-step:hover:not(.active) { opacity: 1; }
+}
+  /* Journey Map */
+  .journey-section { padding: 80px 48px; border-top: 1px solid var(--g200); border-bottom: 1px solid var(--g200); background: var(--white); }
+  .journey-map { margin-top: 40px; }
+  .journey-step { border-bottom: 1px solid var(--g100); }
+  .journey-header { 
+    display: flex; align-items: center; gap: 24px; padding: 24px 0; cursor: pointer; 
+    transition: background var(--ease-fast);
+  }
+  .journey-num { font-size: 11px; font-weight: 600; color: var(--g300); font-family: var(--font); width: 24px; }
+  .journey-label { font-size: 14px; font-weight: 500; text-transform: uppercase; letter-spacing: .08em; color: var(--black); flex: 1; }
+  .journey-icon { font-size: 20px; font-weight: 300; color: var(--g300); width: 20px; text-align: center; }
+  .journey-panel { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; padding: 0 0 0 48px; }
+  .journey-panel-title { font-size: 18px; font-weight: 400; color: var(--black); margin-bottom: 16px; border-left: 2px solid var(--black); padding-left: 20px; }
+  .journey-step.active .journey-panel { max-height: 600px; padding-bottom: 32px; }
+  .journey-step.active .journey-icon { transform: rotate(45deg); color: var(--black); }
+  .journey-step:last-child { border-bottom: none; }
 
+  @media (max-width: 768px) {
+    .journey-section { padding: 40px 20px !important; }
+    .journey-panel { padding-left: 20px !important; }
+    .journey-panel-title { font-size: 16px !important; }
+    .flow-panel-meta { flex-wrap: wrap !important; }
+  }
+.app-showcase{padding:0;border-bottom:1px solid var(--g200);}
+.app-showcase-eyebrow{display:flex;align-items:center;gap:14px;padding:56px 56px 0;margin-bottom:12px;}
+.app-showcase-num{font-size:9px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--g300);font-family:var(--font);}
+.app-showcase-label{font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--black);}
+.app-showcase-heading{font-family:var(--font);font-size:clamp(26px,3vw,40px);font-weight:300;color:var(--black);line-height:1.1;letter-spacing:.02em;padding:0 56px;margin-bottom:12px;}
+.app-showcase-heading em{font-style:italic;color:var(--g500);}
+.app-showcase-sub{font-size:13px;color:var(--g500);padding:0 56px 40px;line-height:1.75;max-width:640px;}
+.app-showcase-layout{display:grid;grid-template-columns:160px 1fr;border-top:1px solid var(--g200);}
+.app-screen-nav{border-right:1px solid var(--g200);padding:0;}
+.app-screen-btn{display:flex;flex-direction:column;gap:4px;width:100%;padding:20px 24px;border:none;background:transparent;cursor:pointer;text-align:left;border-bottom:1px solid var(--g200);border-left:2px solid transparent;transition:all var(--ease-fast);}
+.app-screen-btn:hover{background:var(--g100);}
+.app-screen-btn.active{border-left-color:var(--black);background:var(--g100);}
+.app-screen-btn-num{font-size:9px;font-weight:600;letter-spacing:.12em;color:var(--g300);font-family:var(--font);}
+.app-screen-btn.active .app-screen-btn-num{color:var(--black);}
+.app-screen-btn-name{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--g400);}
+.app-screen-btn.active .app-screen-btn-name{color:var(--black);}
+.app-screen-frame{display:none;grid-template-columns:1fr 1fr;}
+.app-screen-frame.active{display:grid;}
+.app-screen-visual{padding:40px;border-right:1px solid var(--g200);display:flex;align-items:center;justify-content:center;background:var(--g100);}
+.app-screen-meta{padding:40px;display:flex;flex-direction:column;justify-content:space-between;}
+.app-screen-desc-label{font-size:8px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--g300);margin-bottom:14px;font-family:var(--font);}
+.app-screen-desc-text{font-size:13px;color:var(--g500);line-height:1.8;}
+.app-screen-counter{font-family:var(--font);font-size:32px;font-weight:300;font-style:italic;color:var(--g200);letter-spacing:-.01em;margin-top:24px;}
+.cs-next{border-top:1px solid var(--g200);padding-top:32px;margin-top:48px;}
+.cs-next-label{font-size:8px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--g300);margin-bottom:14px;font-family:var(--font);}
+.cs-next-link{text-decoration:none;display:inline-block;}
+.cs-next-meta{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--g400);margin-bottom:6px;font-family:var(--font);}
+.cs-next-title{font-family:var(--font);font-size:28px;font-weight:300;color:var(--black);transition:color var(--ease-fast);}
+.cs-next-link:hover .cs-next-title{color:var(--g500);}
+footer{border-top:1px solid var(--g200);padding:32px 48px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;}
+.footer-id{display:flex;flex-direction:column;gap:3px;}
+.footer-name{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--black);}
+.footer-role{font-size:11px;color:var(--g400);}
+.footer-qualifier{font-size:9px;color:var(--g300);font-style:italic;text-transform:none;margin-top:2px;opacity:.85;}
+.footer-links{display:flex;gap:20px;}
+.footer-link{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--g400);text-decoration:none;transition:color var(--ease-fast);}
+.footer-link:hover{color:var(--black);}
+.footer-copy{font-size:11px;color:var(--g300);font-family:var(--font);}
+@media (max-width: 1100px) {
+  .nike-research-persona-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 768px) {
+  .token-panel {
+    max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; 
+    background: var(--white);
+  }
+  .token-row { font-size: 12px; color: var(--g500); line-height: 1.6; margin-bottom: 12px; }
+  .token-icon { font-size: 14px; color: var(--g300); }
   #cs-sidenav { display: none !important; }
   .cs-body-wrap { grid-template-columns: 1fr !important; }
-  #cs-exec-summary, .cs-section, .cs-hero-title-wrap, .hara-col, .act-body { padding: 40px 20px !important; }
-
-  .cs-exec-inner, .cs-stats-3 {
-     grid-template-columns: 1fr !important;
-     gap: 16px !important;
+  #cs-exec-summary, .cs-section { padding: 40px 20px !important; }
+  #cs-users { padding-bottom: 24px !important; }
+  #artifact-design-system { margin-top: -24px !important; padding-top: calc(40px + 24px) !important; }
+  .proto-section { padding: 40px clamp(20px, 5vw, 28px) !important; }
+  .cs-full-bleed { width: calc(100% + 40px + 2px) !important; margin-left: calc(-20px - 1px) !important; margin-right: calc(-20px - 1px) !important; }
+  .cs-exec-inner { grid-template-columns: 1fr !important; gap: 32px !important; }
+  .cs-hero-title-wrap { padding: 40px 20px 48px !important; }
+  .cs-stats, .cs-stats-3, .cs-stats-4, .persona-grid, .nike-research-persona-grid, .cs-body-2col, .cs-img-2col { 
+     grid-template-columns: 1fr !important; 
+     gap: 16px !important; 
+     background: transparent !important;
    }
-  .cs-exec-meta-grid { 
+   .cs-exec-meta-grid { 
      grid-template-columns: repeat(2, minmax(0, 1fr)) !important; 
      gap: 1px !important; 
      background: var(--g200) !important;
      border: 1px solid var(--g200) !important;
    }
-  .outcome-stats-row, .hara-split, .img-pair, .meta-strip, .act-row {
-    grid-template-columns: 1fr !important;
-    gap: 0 !important;
-  }
-  .cs-stats-3, .cs-stats-4 { grid-template-columns: 1fr !important; }
-  .carousel-container { margin-left: -20px !important; margin-right: -20px !important; padding-left: 20px !important; padding-right: 20px !important; }
-  .cs-next { flex-direction: column !important; align-items: flex-start !important; gap: 16px !important; }
-  .cs-next-link { text-align: left !important; }
-  .hara-col { border-right: none !important; border-left: 3px solid var(--g200) !important; }
-  .hara-col:first-child { border-left: 3px solid var(--black) !important; }
-  .cs-body-2col { grid-template-columns: 1fr !important; gap: 32px !important; }
-  .world-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
-  .world-cell { height: 200px !important; }
-  .carousel-controls { justify-content: flex-start !important; }
-
-  .floor-container { grid-template-columns: 1fr !important; }
-  .floor-visual-track { position: relative !important; top: 0 !important; height: 350px !important; }
-  .floor-text-track { border-right: none !important; }
-  .floor-img-label { bottom: 16px !important; right: 16px !important; }
-  .floor-item { min-height: auto !important; padding: 40px 20px !important; }
+  .cs-heading-serif { font-size: 24px !important; }
   
-  .comp-grid { grid-template-columns: 1fr !important; }
-  
-  .c-yr { font-size: 14px !important; margin-top: 4px !important; }
-
-  .cs-hero { min-height: 60vh !important; }
-  .cs-hero-title { font-size: 32px !important; }
-  .cs-heading { font-size: 24px !important; }
-  .token-block { flex-direction: column !important; text-align: center !important; }
+  /* Navbar mobile fixes */
+  .nav-main { padding: 0 20px !important; display: flex !important; justify-content: space-between !important; align-items: center !important; }
+  .nav-left, .nav-wordmark, .nav-right { position: static !important; transform: none !important; left: auto !important; right: auto !important; top: auto !important; }
+  .nav-left a:not([href="/"]) { display: none !important; }
+  .nav-wordmark { font-size: 11px !important; letter-spacing: .12em !important; }
+  .nav-right a { font-size: 9px !important; }
+  .app-showcase-layout { grid-template-columns: 1fr !important; }
+  .app-screen-frame.active { display: flex !important; flex-direction: column !important; }
+  .app-showcase-eyebrow, .app-showcase-heading, .app-showcase-sub { padding-left: 20px !important; padding-right: 20px !important; }
+  .artifact-trigger { padding: 16px 20px !important; }
+  .cs-table { display: block; overflow-x: auto; width: 100%; }
+  .nike-tri-tabs { display: flex !important; }
+  .nike-tri-grid { display: block !important; }
+  .nike-tri-col { display: none !important; }
+  .nike-tri-col.active { display: block !important; }
+  .nike-tri-col .nike-tri-col-title { display: none !important; }
+  .nike-tri-decisions .nike-tri-col.active .nike-decision-card { margin-bottom: 10px; }
+  .nike-tri-decisions .nike-tri-col.active .nike-decision-card:last-child { margin-bottom: 0; }
+  .artifact-iframe-wrap iframe { pointer-events: none !important; }
+  .artifact-model-open-btn { display: block !important; }
+  .cs-next { flex-direction: column !important; gap: 16px !important; align-items: flex-start !important; }
   footer { flex-direction: column !important; gap: 16px !important; padding: 32px 20px !important; align-items: flex-start !important; }
 }
+  /* Metrics Grid */
+  .metrics-container { margin-bottom: 48px; }
+  .metrics-grid-header { font-size: 8px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--g300); margin-bottom: 16px; font-family: var(--font); }
+  .metrics-card-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .metric-card { 
+    background: var(--white); border: 1px solid var(--g100); padding: 20px; 
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .metric-label { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: .05em; color: var(--black); }
+  .metric-target { font-size: 24px; font-weight: 300; color: var(--black); letter-spacing: -.02em; }
+  .metric-desc { font-size: 11px; color: var(--g400); line-height: 1.5; }
+
+  @media (max-width: 768px) {
+    .metrics-card-grid { grid-template-columns: 1fr; }
+    .metric-target { font-size: 20px; }
+    .cs-stats-2 { grid-template-columns: 1fr !important; }
+    .cs-problem-split { grid-template-columns: 1fr !important; gap: 20px !important; }
+  }
+  /* Conclusion Headings */
+  .cs-conclusion-header { 
+    font-size: 11px; font-weight: 600; letter-spacing: .15em; text-transform: uppercase; 
+    color: var(--black); margin-top: 40px; margin-bottom: 12px; font-family: var(--font);
+  }
+  /* Mobile Overrides */
+  @media (max-width: 768px) {
+    #cs-screens, .cs-screens-section, [data-target="cs-screens"] { display: none !important; }
+    
+    .metrics-card-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 8px !important; }
+    .metric-target { font-size: 18px !important; }
+    .metric-card { padding: 12px !important; }
+  }
+.cs-img-2col{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:28px 0;}
+.cs-img-2col img{width:100%;display:block;background:var(--g100);}
+.img-caption{font-size:11px;color:var(--g400);padding:6px 0 0;display:block;}
+
+.cs-img-3col{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:8px 0;}
+.cs-img-4col{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:8px 0;}
+.cs-img-2col-item,.cs-img-3col-item,.cs-img-4col-item{min-width:0;}
+.cs-img-2col-item img,.cs-img-3col-item img,.cs-img-4col-item img{width:100%;display:block;}
+.cs-img-contain{overflow:hidden;background:var(--g100);position:relative;}
+.cs-img-contain img{width:100%;height:100%;object-fit:cover;display:block;}
+.cs-img-full{width:100%;margin-bottom:0;}
+.cs-img-full .cs-img-contain{width:100%;}
+@media(max-width:768px){.cs-img-3col{grid-template-columns:1fr!important;}.cs-img-4col{grid-template-columns:1fr 1fr!important;}}
+
+/* Diesel-test: landscape mock frames + tight grids */
+#cs-diesel-brand-world .cs-img-contain{aspect-ratio:16/9;min-height:0;}
+#cs-diesel-brand-world .cs-img-contain img{object-fit:cover;object-position:center center;}
+#cs-diesel-brand-world .cs-img-2col,#cs-diesel-brand-world .cs-img-3col{gap:6px;margin:8px 0;}
+#cs-s10-business-benefits.cs-section{padding:72px 56px 32px;}
+section#cs-next.cs-section{padding:28px 56px 48px;}
+section#cs-next .cs-next{margin-top:0;padding-top:14px;}
+
 </style>
 </head>
 <body>
-<div id="scroll-progress"></div>
-
+<div id="scroll-progress" aria-hidden="true"></div>
 <nav id="site-nav">
   <div class="nav-main">
-    <div class="nav-left">
-      <a href="/#work" target="_parent">Work</a>
-      <a href="/#about" target="_parent">About</a>
-      <a href="/blog" target="_parent">Blog</a>
-      <a href="/13" target="_parent">13</a>
-    </div>
-    <a href="/" class="nav-wordmark" target="_parent">Benn Pattara</a>
-    <div class="nav-right"><a href="/#contact" target="_parent">Contact</a></div>
+    <div class="nav-left"><a href="/" target="_parent">Work</a><a href="/#about" target="_parent">About</a></div>
+    <a class="nav-wordmark" href="/" target="_parent">Benn Pattara</a>
+    <div class="nav-right"><a href="/" target="_parent">All Projects &rarr;</a></div>
   </div>
 </nav>
-
 <div class="page-body">
-
-  <!-- HERO — full-bleed (matches Saks) -->
-  <section class="cs-hero" id="cs-hero">
-    <div class="cs-hero-ghost">Iceberg</div>
-    <div class="cs-hero-bg">
-      <img src="/img/case-studies/diesel/diesel_hero.webp" alt="Diesel Iceberg — Harajuku flagship concept" width="1920" height="1080">
+<section class="cs-hero">
+  <div class="cs-hero-bg"><img src="/case-studies/diesel/diesel_hero.webp" alt="Diesel Iceberg,  Harajuku flagship concept" width="1920" height="1080"/></div>
+  <div class="cs-hero-scrim"></div>
+  <div class="cs-hero-title-wrap">
+    <div class="cs-hero-meta-row">
+      <p class="cs-hero-kicker" style="margin-bottom:0;">Diesel · Experiential Retail</p>
+      <span class="cs-hero-role">Exp</span>
     </div>
-    <div class="cs-hero-scrim"></div>
-    <div class="cs-hero-title-wrap">
-      <h1 class="cs-hero-title">Diesel Iceberg</h1>
-      <p style="position:relative;z-index:2;font-size:clamp(14px,1.6vw,17px);font-weight:400;letter-spacing:.04em;text-transform:none;color:rgba(255,255,255,.88);line-height:1.55;max-width:36rem;margin-top:20px;text-shadow:0 2px 20px rgba(0,0,0,.45);">A flagship concept that bans phones to manufacture the rarest thing in luxury retail: an opinion you formed yourself.</p>
-    </div>
-  </section>
-
-  <div class="meta-strip">
-    <span><b>Retail Strategy</b> · Experiential Design · Cultural Positioning</span>
-    <span><b>Harajuku</b>, Tokyo</span>
-    <span><b>Glenn Martens</b> Era</span>
+    <h1 class="cs-hero-title">Diesel Iceberg</h1>
   </div>
-
-  <div class="cs-body-wrap">
-    <aside id="cs-sidenav">
-      <div class="cs-sidenav-label">Index</div>
-      <a class="cs-sidenav-link active" href="#cs-exec-summary" data-target="cs-exec-summary" onclick="scrollToSection('cs-exec-summary')"><span class="cs-sidenav-num">00</span><span class="cs-sidenav-text">Exec Summary</span></a>
-      <div class="cs-sidenav-divider"></div>
-      <a class="cs-sidenav-link" href="#cs-section-01" data-target="cs-section-01" onclick="scrollToSection('cs-section-01')"><span class="cs-sidenav-num">01</span><span class="cs-sidenav-text">Context</span></a>
-      <a class="cs-sidenav-link" href="#cs-section-02" data-target="cs-section-02" onclick="scrollToSection('cs-section-02')"><span class="cs-sidenav-num">02</span><span class="cs-sidenav-text">Insight</span></a>
-      <a class="cs-sidenav-link" href="#cs-section-03" data-target="cs-section-03" onclick="scrollToSection('cs-section-03')"><span class="cs-sidenav-num">03</span><span class="cs-sidenav-text">Idea</span></a>
-      <a class="cs-sidenav-link" href="#cs-section-04" data-target="cs-section-04" onclick="scrollToSection('cs-section-04')"><span class="cs-sidenav-num">04</span><span class="cs-sidenav-text">System</span></a>
-      <a class="cs-sidenav-link" href="#cs-section-05" data-target="cs-section-05" onclick="scrollToSection('cs-section-05')"><span class="cs-sidenav-num">05</span><span class="cs-sidenav-text">Scale</span></a>
-      <a class="cs-sidenav-link" href="#cs-section-06" data-target="cs-section-06" onclick="scrollToSection('cs-section-06')"><span class="cs-sidenav-num">06</span><span class="cs-sidenav-text">Return Vectors</span></a>
-      <a class="cs-sidenav-link" href="#cs-outcome" data-target="cs-outcome" onclick="scrollToSection('cs-outcome')"><span class="cs-sidenav-num">07</span><span class="cs-sidenav-text">Legacy</span></a>
-      <div class="cs-sidenav-exec">
-        <div class="cs-sidenav-exec-label">TL;DR</div>
-        <p class="cs-sidenav-exec-text">Phone-free floors. A brass token. Harajuku. Find out who you are first — post later.</p>
-        <span class="cs-sidenav-exec-link" style="cursor:pointer" onclick="scrollToSection('cs-exec-summary')">Read summary →</span>
+</section>
+<div class="cs-body-wrap">
+<aside id="cs-sidenav"><div class="cs-sidenav-label">Index</div><a class="cs-sidenav-link active" data-target="cs-s01-executive-summary" onclick="scrollToSection('cs-s01-executive-summary')"><span class="cs-sidenav-num">01</span><span class="cs-sidenav-text">Executive Summary</span></a><a class="cs-sidenav-link" data-target="cs-s02-background" onclick="scrollToSection('cs-s02-background')"><span class="cs-sidenav-num">02</span><span class="cs-sidenav-text">Background</span></a><a class="cs-sidenav-link" data-target="cs-s03-the-ask" onclick="scrollToSection('cs-s03-the-ask')"><span class="cs-sidenav-num">03</span><span class="cs-sidenav-text">The Ask</span></a><a class="cs-sidenav-link" data-target="cs-s04-the-problem" onclick="scrollToSection('cs-s04-the-problem')"><span class="cs-sidenav-num">04</span><span class="cs-sidenav-text">The Problem</span></a><a class="cs-sidenav-link" data-target="cs-s05-research-methods" onclick="scrollToSection('cs-s05-research-methods')"><span class="cs-sidenav-num">05</span><span class="cs-sidenav-text">Research Methods</span></a><a class="cs-sidenav-link" data-target="cs-s06-key-data-findings" onclick="scrollToSection('cs-s06-key-data-findings')"><span class="cs-sidenav-num">06</span><span class="cs-sidenav-text">Key Data / Findings</span></a><a class="cs-sidenav-link" data-target="cs-s07-the-insight" onclick="scrollToSection('cs-s07-the-insight')"><span class="cs-sidenav-num">07</span><span class="cs-sidenav-text">The Insight</span></a><a class="cs-sidenav-link" data-target="cs-s08-the-strategy" onclick="scrollToSection('cs-s08-the-strategy')"><span class="cs-sidenav-num">08</span><span class="cs-sidenav-text">The Strategy</span></a><a class="cs-sidenav-link" data-target="cs-s09-concept-design-work" onclick="scrollToSection('cs-s09-concept-design-work')"><span class="cs-sidenav-num">09</span><span class="cs-sidenav-text">Concept / Design Work</span></a><a class="cs-sidenav-link" data-target="cs-diesel-brand-world" onclick="scrollToSection('cs-diesel-brand-world')"><span class="cs-sidenav-num">·</span><span class="cs-sidenav-text">Brand in the World</span></a><a class="cs-sidenav-link" data-target="cs-s10-business-benefits" onclick="scrollToSection('cs-s10-business-benefits')"><span class="cs-sidenav-num">10</span><span class="cs-sidenav-text">Business Benefits</span></a><div class="cs-sidenav-exec">
+    <div class="cs-sidenav-exec-label">Archive</div>
+    <p class="cs-sidenav-exec-text">Interactive spatial UI (floor switcher) preserved at <a href="/work/diesel-archive" target="_parent" style="color:inherit">/work/diesel-archive</a>.</p>
+    <a class="cs-sidenav-exec-link" onclick="scrollToSection('cs-s01-executive-summary')">Start &rarr;</a>
+  </div></aside>
+<div class="cs-content"><section id="cs-s01-executive-summary" data-cs-section="cs-s01-executive-summary" style="padding:64px 56px;border-bottom:1px solid var(--g200);">
+  <div class="cs-exec-inner">
+    <div><h2 class="cs-exec-heading">Executive Summary</h2><p class="cs-body">Glenn Martens joined Diesel in 2020 and rebuilt the brand&#x27;s creative authority in three years. The product is strong. The cultural moment is real. What the brand does not yet have is a physical statement that matches the scale of the renaissance. The Iceberg in Harajuku is that statement,  a five-floor structure in the world&#x27;s most design-literate retail market, designed to bring the ninety percent of Diesel&#x27;s identity that has always existed below the surface into the light.</p></div>
+    <div>
+      <div class="cs-exec-eyebrow">Meta</div>
+      <div class="cs-exec-meta-grid">
+        <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Format</div><div class="cs-exec-meta-val">Long-form case study</div></div>
+        <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Live</div><div class="cs-exec-meta-val"><a href="/work/diesel" target="_parent" style="color:inherit">/work/diesel</a></div></div>
       </div>
-    </aside>
-
-    <div class="cs-content">
-
-      <!-- 00 EXECUTIVE SUMMARY -->
-      <section id="cs-exec-summary" data-cs-section="exec-summary">
-        <div class="cs-exec-inner">
-          <div>
-            <div class="cs-exec-eyebrow">Executive Summary</div>
-            <p class="cs-exec-body">Diesel Iceberg is a flagship concept that bans phones on the retail floors to manufacture the rarest thing in luxury retail: an opinion you formed yourself. Built in Harajuku under the Glenn Martens era, it forces digital disconnection so the body and the mirrorless room do the work the feed used to do.</p>
-            <p class="cs-exec-body">Ten percent product. Ninety percent the kind of soul that sells product. Entry trades your phone for a solid milled brass token stamped <em>For Successful Living 1978</em> — the only object in the building without a price tag. The apex is Ghiaccio, where phones return and the story earns its post.</p>
-          </div>
-          <div>
-            <div class="cs-exec-meta-grid">
-              <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Client</div><div class="cs-exec-meta-val">Diesel S.p.A.</div></div>
-              <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Year</div><div class="cs-exec-meta-val">F25</div></div>
-              <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Role</div><div class="cs-exec-meta-val">Brand Strategist / Creative Director</div></div>
-              <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Goal</div><div class="cs-exec-meta-val">Market Expansion · Brand Equity</div></div>
-              <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Deliverables</div><div class="cs-exec-meta-val">Tokyo Flagship Concept · Spatial Narrative</div></div>
-              <div class="cs-exec-meta-cell"><div class="cs-exec-meta-label">Tools</div><div class="cs-exec-meta-val">Strategy · Creative Direction</div></div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 01 CONTEXT -->
-      <section class="cs-section" id="cs-section-01" data-cs-section="section-01">
-        <div class="cs-section-eyebrow"><span class="cs-section-num">01</span><span class="cs-section-title">Context</span></div>
-        <h2 class="cs-heading">Self-expression became self-performance. Fashion followed.</h2>
-        <p class="cs-body" style="max-width:800px;">In the mid-2020s, getting dressed became a content production decision. The algorithm didn't kill personal style — it monetized it, rewarding looks that were just edgy enough to catch the eye but safe enough to earn validation. Diesel, under Glenn Martens, had rebuilt its cultural credibility globally. Its retail stores had not kept pace.</p>
-      </section>
-
-      <!-- 02 INSIGHT -->
-      <section class="cs-section cs-section-alt" id="cs-section-02" data-cs-section="section-02">
-        <div class="cs-section-eyebrow"><span class="cs-section-num">02</span><span class="cs-section-title">Insight</span></div>
-        <h2 class="cs-heading">Diesel's real enemy isn't conformity. It's fake rebellion.</h2>
-        <p class="cs-body" style="max-width:800px;">True non-conformity requires risk — the real possibility of being misunderstood by the people physically in the room. The algorithm eliminated that risk entirely. It replaced it with a pre-approved version of weirdness: curated, optimized, waiting for likes to confirm the outfit worked. People were no longer dressing for themselves. They were dressing for an audience that wasn't even present.</p>
-        <p class="cs-pull-quote">&ldquo;Find out who you are first, post later.&rdquo;</p>
-      </section>
-
-      <!-- 03 IDEA -->
-      <section class="cs-section" id="cs-section-03" data-cs-section="section-03">
-        <div class="cs-section-eyebrow"><span class="cs-section-num">03</span><span class="cs-section-title">Idea</span></div>
-        <div class="cs-body-2col">
-          <div>
-            <h2 class="cs-heading">The store physically removes your ability to perform.</h2>
-            <p class="cs-body">Diesel Iceberg is a five-floor flagship in Harajuku — historically Tokyo's permission zone for authentic self-expression before the feed colonized it — built entirely around forced digital disconnection. Entry requires surrendering your phone. In return: a solid milled brass token, stamped For Successful Living 1978. The only item in the building without a price tag.</p>
-            <div class="token-block">
-              <div class="token-circle">
-                <div class="token-text">FOR<br>SUCCESSFUL<br>LIVING</div>
-                <div class="token-year">1978 ↗</div>
-              </div>
-              <div class="token-desc">
-                <strong>The brass token.</strong> Milled from solid brass, stamped with the founding ethos — <strong>the only piece in the building without a price tag.</strong> Proof of surrender; the first thing worth photographing when you leave.
-              </div>
-            </div>
-          </div>
-          <div>
-            <div class="cs-section-eyebrow" style="margin-bottom:16px;"><span class="cs-section-num">—</span><span class="cs-section-title">Three-act content engine</span></div>
-            <p class="cs-body" style="margin-bottom:24px;">Phone-free floors don't kill the pipeline — they sequence it: surrender, absence, reward.</p>
-            <div class="cs-stats cs-stats-3">
-              <div class="cs-stat-cell">
-                <div class="cs-stat-eyebrow">01 · The Surrender</div>
-                <div class="cs-stat-num-inline">Before you enter</div>
-                <div class="cs-stat-label">The handover and the token are the first documented moment — friction you can feel.</div>
-              </div>
-              <div class="cs-stat-cell">
-                <div class="cs-stat-eyebrow">02 · The Absence</div>
-                <div class="cs-stat-num-inline">The hour offline</div>
-                <div class="cs-stat-label">No lens, no mirror grid — only skin, fabric, and strangers who are actually there.</div>
-              </div>
-              <div class="cs-stat-cell">
-                <div class="cs-stat-eyebrow">03 · The Reward</div>
-                <div class="cs-stat-num-inline">Ghiaccio</div>
-                <div class="cs-stat-label">The only floor where content is allowed — after you've earned the story.</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 04 THE FLOORS -->
-      <section class="cs-section cs-section-alt" id="cs-section-04" data-cs-section="section-04">
-        <div class="cs-section-eyebrow" style="margin-bottom:8px;"><span class="cs-section-num">04</span><span class="cs-section-title">System</span></div>
-        <h2 class="cs-heading" style="margin-bottom:20px;">Ten percent product. Ninety percent the kind of soul that sells product.</h2>
-        <div class="cs-divider">
-          <span class="cs-divider-text">04 — The building</span>
-          <div class="cs-divider-line"></div>
-          <span class="cs-divider-end">Five floors</span>
-        </div>
-
-        <div class="ext-visual">
-          <img src="/img/case-studies/diesel/exterior.png" alt="Diesel Tokyo — Harajuku Flagship Exterior" loading="lazy">
-          <div class="ext-label">Harajuku Flagship · Exterior</div>
-        </div>
-
-
-        <div class="floor-container">
-          <div class="floor-text-track">
-            <div class="floor-item" data-floor="0">
-              <span class="f-num-eyebrow">Floor 01</span>
-              <h3 class="f-name">The Surface — High-velocity retail, no mirrors</h3>
-              <p class="f-desc">Brutalist typography. Volcanic stone checkouts. Lighting calibrated for the human body, not a camera lens. <strong>Without mirrors or phones, customers are forced to decide by feel alone.</strong></p>
-              <div class="f-strategy-box">
-                <div class="f-s-label">Strategic intent</div>
-                <div class="f-s-text">Velocity without the performance layer — retail that refuses to help you film yourself.</div>
-              </div>
-            </div>
-
-            <div class="floor-item" data-floor="1">
-              <span class="f-num-eyebrow">Floor 02</span>
-              <h3 class="f-name">Introspection — 40 pieces, one question</h3>
-              <p class="f-desc">Black marble with gold kintsugi joinery. <strong>No sales associates — only a stylist whose opening question is: &ldquo;What version of yourself are you not wearing yet?&rdquo;</strong></p>
-              <div class="f-strategy-box">
-                <div class="f-s-label">Strategic intent</div>
-                <div class="f-s-text">Premium edit as dialogue — one wall, forty pieces, zero scripts.</div>
-              </div>
-            </div>
-
-            <div class="floor-item" data-floor="2">
-              <span class="f-num-eyebrow">Floor 03</span>
-              <h3 class="f-name">Creation — The Destruction Ceremony</h3>
-              <p class="f-desc">Customers bring their most worn jeans. An artisan repairs or transforms them in a glass-walled theater. <strong>The result is vacuum-sealed and documented — a physical autobiography, not a purchase.</strong></p>
-              <div class="f-strategy-box">
-                <div class="f-s-label">Strategic intent</div>
-                <div class="f-s-text">Loyalty through craft and visible labor — <em>monozukuri</em> as brand proof.</div>
-              </div>
-            </div>
-
-            <div class="floor-item" data-floor="3">
-              <span class="f-num-eyebrow">Floor 04</span>
-              <h3 class="f-name">Rebellion — The Banned Shelf</h3>
-              <p class="f-desc">Every Diesel campaign ever pulled, censored, or banned — behind glass, with original complaint letters. <strong>The brand's willingness to be rejected becomes the brand's most persuasive argument.</strong></p>
-              <div class="f-strategy-box">
-                <div class="f-s-label">Strategic intent</div>
-                <div class="f-s-text">Provocation as museum — evidence that Diesel courts friction on purpose.</div>
-              </div>
-            </div>
-
-            <div class="floor-item" data-floor="4">
-              <span class="f-num-eyebrow">Floor 05</span>
-              <h3 class="f-name">Ghiaccio Ice Bar — Phones permitted</h3>
-              <p class="f-desc">The only space in the building where content is allowed. <strong>To reach it, you've earned the story.</strong> The result is the most coveted reservation in Tokyo — and content worth 400&times; a standard brand activation.</p>
-              <div class="f-strategy-box">
-                <div class="f-s-label">Strategic intent</div>
-                <div class="f-s-text">Scarcity at the top — the post hits harder because the climb was real.</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="floor-visual-track">
-            <!-- F1 -->
-            <div class="floor-img-wrap active" data-floor-img="0">
-              <img src="/img/case-studies/diesel/f1.png" alt="F1 Gallery" data-view="primary" loading="lazy">
-              <img src="/img/case-studies/diesel/f1_detail.png" alt="F1 Detail" data-view="detail" loading="lazy" style="display:none;">
-              <div class="floor-img-overlay"></div>
-              <div class="floor-img-label">F1 · The Surface</div>
-              <div class="floor-thumbs" data-for-floor="0">
-                <div class="f-thumb active" onclick="switchView(event,0, 'primary')"><img src="/img/case-studies/diesel/f1.png" loading="lazy"></div>
-                <div class="f-thumb" onclick="switchView(event,0, 'detail')"><img src="/img/case-studies/diesel/f1_detail.png" loading="lazy"></div>
-              </div>
-            </div>
-            <!-- F2 -->
-            <div class="floor-img-wrap" data-floor-img="1">
-              <img src="/img/case-studies/diesel/f2.png" alt="F2 Premium" data-view="primary" loading="lazy">
-              <img src="/img/case-studies/diesel/f2_detail.png" alt="F2 Detail" data-view="detail" loading="lazy" style="display:none;">
-              <div class="floor-img-overlay"></div>
-              <div class="floor-img-label">F2 · Introspection</div>
-              <div class="floor-thumbs" data-for-floor="1">
-                <div class="f-thumb active" onclick="switchView(event,1, 'primary')"><img src="/img/case-studies/diesel/f2.png" loading="lazy"></div>
-                <div class="f-thumb" onclick="switchView(event,1, 'detail')"><img src="/img/case-studies/diesel/f2_detail.png" loading="lazy"></div>
-              </div>
-            </div>
-            <!-- F3 -->
-            <div class="floor-img-wrap" data-floor-img="2">
-              <img src="/img/case-studies/diesel/f3.png" alt="F3 Lab" data-view="primary" loading="lazy">
-              <img src="/img/case-studies/diesel/f3_detail.png" alt="F3 Detail" data-view="detail" loading="lazy" style="display:none;">
-              <div class="floor-img-overlay"></div>
-              <div class="floor-img-label">F3 · Creation</div>
-              <div class="floor-thumbs" data-for-floor="2">
-                <div class="f-thumb active" onclick="switchView(event,2, 'primary')"><img src="/img/case-studies/diesel/f3.png" loading="lazy"></div>
-                <div class="f-thumb" onclick="switchView(event,2, 'detail')"><img src="/img/case-studies/diesel/f3_detail.png" loading="lazy"></div>
-              </div>
-            </div>
-            <!-- F4 -->
-            <div class="floor-img-wrap" data-floor-img="3">
-              <img src="/img/case-studies/diesel/f4.png" alt="F4 Cafe" data-view="primary" loading="lazy">
-              <img src="/img/case-studies/diesel/f4_detail.png" alt="F4 Detail" data-view="detail" loading="lazy" style="display:none;">
-              <div class="floor-img-overlay"></div>
-              <div class="floor-img-label">F4 · Café 1978</div>
-              <div class="floor-thumbs" data-for-floor="3">
-                <div class="f-thumb active" onclick="switchView(event,3, 'primary')"><img src="/img/case-studies/diesel/f4.png" loading="lazy"></div>
-                <div class="f-thumb" onclick="switchView(event,3, 'detail')"><img src="/img/case-studies/diesel/f4_detail.png" loading="lazy"></div>
-              </div>
-            </div>
-            <!-- F5 -->
-            <div class="floor-img-wrap" data-floor-img="4">
-              <img src="/img/case-studies/diesel/f5.png" alt="F5 Ghiaccio" data-view="primary" loading="lazy">
-              <img src="/img/case-studies/diesel/f5_detail.png" alt="F5 Detail" data-view="detail" loading="lazy" style="display:none;">
-              <div class="floor-img-overlay"></div>
-              <div class="floor-img-label">F5 · Ghiaccio</div>
-              <div class="floor-thumbs" data-for-floor="4">
-                <div class="f-thumb active" onclick="switchView(event,4, 'primary')"><img src="/img/case-studies/diesel/f5.png" loading="lazy"></div>
-                <div class="f-thumb" onclick="switchView(event,4, 'detail')"><img src="/img/case-studies/diesel/f5_detail.png" loading="lazy"></div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-
-      </section>
-
-
-
-      <!-- 05 SCALE -->
-      <section class="cs-section" id="cs-section-05" data-cs-section="section-05">
-        <div class="cs-section-eyebrow" style="margin-bottom:8px;"><span class="cs-section-num">05</span><span class="cs-section-title">Scale</span></div>
-        <div class="cs-divider">
-          <span class="cs-divider-text">05 — Scale</span>
-          <div class="cs-divider-line"></div>
-          <span class="cs-divider-end">Export the blueprint</span>
-        </div>
-        <h2 class="cs-heading">The blueprint is designed to be exported, not replicated.</h2>
-        <p class="cs-body">Harajuku was chosen as proof-of-concept for the world's most discerning intrinsic luxury buyers. Japanese luxury consumers purchase for personal satisfaction, not status signaling — the hardest audience to fake. Success here unlocks the broader Asian market. London and Shanghai are next.</p>
-        <p class="cs-body">The psychological and architectural framework scales; the experience doesn't need to be identical to carry the same argument.</p>
-      </section>
-
-      <!-- 06 RETURN VECTORS -->
-      <section class="cs-section cs-section-alt" id="cs-section-06" data-cs-section="section-06">
-        <div class="cs-section-eyebrow" style="margin-bottom:8px;"><span class="cs-section-num">06</span><span class="cs-section-title">Return Vectors</span></div>
-        <div class="cs-divider">
-          <span class="cs-divider-text">06 — Return vectors</span>
-          <div class="cs-divider-line"></div>
-          <span class="cs-divider-end">Earned outcomes</span>
-        </div>
-        <h2 class="cs-heading">Friction generates better stories than access ever did.</h2>
-        <div class="cs-stats cs-stats-4">
-          <div class="cs-stat-cell">
-            <div class="cs-stat-eyebrow">Earned media</div>
-            <div class="cs-stat-num-inline">400&times;</div>
-            <div class="cs-stat-label">Earned media value of post-immersion content vs. standard activation.</div>
-          </div>
-          <div class="cs-stat-cell">
-            <div class="cs-stat-eyebrow">Content engine</div>
-            <div class="cs-stat-num-inline">3-Act</div>
-            <div class="cs-stat-label">The Surrender &rarr; The Absence &rarr; The Reward.</div>
-          </div>
-          <div class="cs-stat-cell">
-            <div class="cs-stat-eyebrow">Experience ratio</div>
-            <div class="cs-stat-num-inline">90 / 10</div>
-            <div class="cs-stat-label">Experience-to-product ratio — the inverse of standard retail.</div>
-          </div>
-          <div class="cs-stat-cell">
-            <div class="cs-stat-eyebrow">Return vectors</div>
-            <div class="cs-stat-num">5</div>
-            <div class="cs-stat-label">Prestige signal, halo effect, blueprint, LTV, organic reach.</div>
-          </div>
-        </div>
-      </section>
-
-      <section class="cs-section cs-section-alt" id="cs-section-06b" data-cs-section="section-06b">
-
-        <div class="cs-section-eyebrow" style="margin-bottom:20px;"><span class="cs-section-num">06B</span><span class="cs-section-title">Brand in the World</span></div>
-
-        <!-- Sub-section: Store Fixtures -->
-        <div class="cs-body-2col" style="margin-bottom:16px;">
-          <div>
-            <h3 style="font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--black);margin-bottom:8px;">01 · Store Fixtures</h3>
-            <p class="cs-body">The Iceberg communicates through material restraint. Volcanic stone cash wraps, milled steel rails, and raw concrete surfaces. No softness, no padding — every surface is a deliberate argument for the body over the brand.</p>
-          </div>
-        </div>
-        <div class="cs-img-3col">
-          <div class="cs-img-3col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="/img/case-studies/diesel/fixture.png" alt="Diesel Fixture Detail" loading="lazy" /></div><span class="img-caption">Fixtures: Volcanic Stone & Steel.</span></div>
-          <div class="cs-img-3col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="/img/case-studies/diesel/signage.png" alt="Diesel In-Store Signage" loading="lazy" /></div><span class="img-caption">Signage: Brutalist Typography.</span></div>
-          <div class="cs-img-3col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="/img/case-studies/diesel/architecture.png" alt="Diesel Architectural Detail" loading="lazy" /></div><span class="img-caption">Architecture: Raw Concrete & Kintsugi Joinery.</span></div>
-        </div>
-
-        <!-- Sub-section: Packaging System -->
-        <div class="cs-body-2col" style="margin-top:40px;margin-bottom:16px;">
-          <div>
-            <h3 style="font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--black);margin-bottom:8px;">02 · Packaging System</h3>
-            <p class="cs-body">Material constants across every touchpoint. The brass token stamped with the founding ethos. Vacuum-sealed lab kits for Denim Lab artifacts. Every object you leave with carries the same argument as the building you just exited.</p>
-          </div>
-        </div>
-        <div class="cs-img-2col">
-          <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:4/3;min-height:220px;"><img src="/img/case-studies/diesel/packaging.png" alt="Diesel Packaging Detail" loading="lazy" /></div><span class="img-caption">Packaging: Vacuum-Sealed Lab Kits.</span></div>
-          <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:4/3;min-height:220px;"><img src="/img/case-studies/diesel/token.png" alt="Diesel Brass Token" loading="lazy" /></div><span class="img-caption">Token: For Successful Living · 1978.</span></div>
-        </div>
-
-        <!-- Sub-section: Employee Style Guide -->
-        <div class="cs-body-2col" style="margin-top:40px;margin-bottom:16px;">
-          <div>
-            <h3 style="font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--black);margin-bottom:8px;">03 · Employee Style Guide</h3>
-            <p class="cs-body">The team is the first signal. Tonal denim utility — nothing precious, nothing performative. Staff dress the way the building argues you should: for yourself, not for the photo. The stylist relationship is the highest-trust asset in the building.</p>
-          </div>
-        </div>
-        <div class="cs-img-full"><div class="cs-img-contain" style="min-height:320px;aspect-ratio:16/9;"><img src="/img/case-studies/diesel/uniform.png" alt="Diesel Uniform Detail" loading="lazy" /></div></div>
-        <span class="img-caption">Style Guide: Tonal Denim Utility — dressed for the building, not the camera.</span>
-
-      </section>
-
-      <!-- 07 LEGACY -->
-      <section class="cs-section" id="cs-outcome" data-cs-section="outcome">
-        <div class="cs-section-eyebrow" style="margin-bottom:8px;"><span class="cs-section-num">07</span><span class="cs-section-title">Legacy</span></div>
-        <div class="cs-divider">
-          <span class="cs-divider-text">07 — Legacy</span>
-          <div class="cs-divider-line"></div>
-          <span class="cs-divider-end">Conditions for opinion</span>
-        </div>
-        <h2 class="cs-heading">Diesel stopped selling clothes and started selling the conditions for a genuine opinion.</h2>
-        <p class="cs-body" style="max-width:800px;">Authenticity became the luxury good — not because the word tested well in research, but because it had become genuinely scarce. Diesel Iceberg is the first flagship built on the premise that removing a tool from a customer's hand is the most valuable service a brand can provide.</p>
-        <p class="cs-body" style="max-width:800px;">The brands that survive the next decade of digital saturation won't be the ones with the most visibility. They'll be the ones that gave people somewhere to think.</p>
-
-        <div class="cs-next">
-          <div class="cs-next-label">Next Case Study</div>
-          <a href="/work/saks" class="cs-next-link" target="_parent">
-            <div class="cs-next-meta">Vault by Saks · Luxury Retail · 2026</div>
-            <div class="cs-next-title">Vault by Saks &rarr;</div>
-          </a>
-        </div>
-      </section>
-
     </div>
   </div>
-</div>
+</section><section class="cs-section cs-section-alt" id="cs-s02-background" data-cs-section="cs-s02-background">
+  <div class="cs-section-eyebrow"><span class="cs-section-num">02</span><span class="cs-section-title">Background</span></div>
+  <p class="cs-body">Diesel was founded in Molvena, Italy in 1978 by Renzo Rosso with a specific and unconventional proposition: denim as premium luxury rather than workwear. The brand built its first two decades on irreverence, craft, and a willingness to say things in advertising that other brands would not touch. That identity drifted in the 2010s under commercial pressure and an attempt to chase a more accessible market. The result was a brand that had lost the thread of what made it worth caring about. Martens&#x27; appointment as Creative Director restored the thread. His first collections were a recalibration,  back to the archive, back to the denim craft, back to the specific kind of provocation that only makes sense coming from a brand with Diesel&#x27;s history. The renaissance is not a rebrand. It is a return.</p>
+</section><section class="cs-section" id="cs-s03-the-ask" data-cs-section="cs-s03-the-ask">
+  <div class="cs-the-ask-wrap">
+    <div class="cs-the-ask-inner">
+      <div class="cs-section-eyebrow"><span class="cs-section-num">03</span><span class="cs-section-title">The Ask</span></div>
+      <p class="cs-the-ask-lede">Capitalize on the current renaissance under Glenn Martens to cement Diesel&#x27;s revitalized global status through a major physical statement in one of the world&#x27;s most design-literate retail markets.</p>
+    </div>
+  </div>
+</section><section class="cs-section cs-section-alt" id="cs-s04-the-problem" data-cs-section="cs-s04-the-problem">
+  <div class="cs-section-eyebrow"><span class="cs-section-num">04</span><span class="cs-section-title">The Problem</span></div>
+  <p class="cs-body">A standard flagship in Harajuku misses the point of the audience. Japanese luxury consumers are among the most discerning buyers in the world,  not because they spend more, but because they read deeper. They do not purchase the object. They purchase the story behind the object, the craft evidence within it, and the cultural context that makes it worth possessing. A retail environment that presents product without presenting the depth of the brand that made the product is a missed conversation with exactly the audience most capable of having it. Diesel has ninety percent of itself that has never been made visible in a retail context. The Iceberg is the format that makes it present.</p>
+</section><section class="cs-section" id="cs-s05-research-methods" data-cs-section="cs-s05-research-methods">
+  <div class="cs-section-eyebrow"><span class="cs-section-num">05</span><span class="cs-section-title">Research Methods</span></div>
+  <p class="cs-body">Consumer behavior analysis examined the specific reasons Japanese shoppers continue to value physical retail at rates that outpace other major markets, identifying the experience qualities that a digital channel cannot replicate for this consumer. Competitive benchmarking analyzed recent flagship openings in Harajuku by Calvin Klein, Louis Vuitton, Gucci, and Jordan, mapping the spatial and experiential strategies each brand used and identifying where the category had left room. A cultural alignment audit assessed the specific resonances between Diesel&#x27;s brand DNA,  craft, irreverence, Italian warmth, archive depth,  and the values that define Japanese luxury consumer behavior at the premium tier.</p>
+</section><section class="cs-section cs-section-alt" id="cs-s06-key-data-findings" data-cs-section="cs-s06-key-data-findings">
+  <div class="cs-section-eyebrow"><span class="cs-section-num">06</span><span class="cs-section-title">Key Data / Findings</span></div>
+  <p class="cs-body">Japan&#x27;s position as the world&#x27;s fourth-largest economy provides the commercial foundation, but the more important finding is behavioral. Japanese consumers purchase luxury goods primarily as self-reward rather than status performance,  which means the audience is buying for internal reasons, not external ones. That distinction is critical for brand strategy: a consumer buying to signal to others can be reached with visibility. A consumer buying to reward herself needs to be reached with depth. The Harajuku location validates the structural concept directly: the building is in the neighborhood where the most design-literate consumers in the market spend their time. The iceberg metaphor,  ten percent visible, ninety percent submerged,  is not a tagline. It is a precise description of how Diesel&#x27;s brand has always operated, and how the right audience reads it.</p>
+  <div class="cs-stats cs-stats-3">
+    <div class="cs-stat-cell"><div class="cs-stat-eyebrow">Visible / submerged</div><div class="cs-stat-num">10 · 90</div><div class="cs-stat-label">Percent metaphor,  archive &amp; craft as depth</div></div>
+    <div class="cs-stat-cell"><div class="cs-stat-eyebrow">Floors</div><div class="cs-stat-num">5</div><div class="cs-stat-label">Ground retail · caf&eacute; · denim lab · Ghiaccio · spine</div></div>
+    <div class="cs-stat-cell"><div class="cs-stat-eyebrow">Commerce frame</div><div class="cs-stat-num">#4</div><div class="cs-stat-label">Japan as economic scale anchor for flagship bet</div></div>
+  </div>
+</section><section class="cs-section" id="cs-s07-the-insight" data-cs-section="cs-s07-the-insight">
+  <div class="cs-section-eyebrow"><span class="cs-section-num">07</span><span class="cs-section-title">The Insight</span></div>
+  <p class="cs-body">What Diesel has always had,  and what the Martens era has restored,  is a specific kind of depth that most fashion brands do not possess. The archive exists. The craft philosophy exists. The cultural history of the brand as a challenger to the industry&#x27;s own pretensions exists. None of it has ever been made spatially present in a retail context at the scale the brand warrants. Japanese consumers do not need that story explained to them. They need a building that makes it inhabitable. The insight is that the building is the product,  and the product is the argument for everything Diesel has ever stood for.</p>
+</section><section class="cs-section cs-section-alt" id="cs-s08-the-strategy" data-cs-section="cs-s08-the-strategy">
+  <div class="cs-section-eyebrow"><span class="cs-section-num">08</span><span class="cs-section-title">The Strategy</span></div>
+  <p class="cs-body">The Iceberg operates as a cultural hub rather than a retail store, organized around the principle that the brand experience is the primary offering and the product is the outcome of that experience. The spatial strategy balances Tokyo&#x27;s industrial brutalism,  the material language of the city&#x27;s most respected retail architecture,  with the warmth and tactility of Italian craft. Mandatory phone-free floors on selected levels enforce presence over documentation: the experience is not designed to be shared on social media while it is happening. It is designed to be inhabited. The brand earns its social presence through the quality of what visitors remember, not through the content they capture.</p>
+</section><section class="cs-section" id="cs-s09-concept-design-work" data-cs-section="cs-s09-concept-design-work">
+  <div class="cs-section-eyebrow"><span class="cs-section-num">09</span><span class="cs-section-title">Concept / Design Work</span></div>
+  <p class="cs-body">The building runs five floors. The ground floor is high-velocity retail with Fit Check&ndash;optimized lighting and a cash wrap carved from rough-hewn stone, setting the material register for everything above. Caf&eacute; 1978&mdash;archive wall, library, and coworking&mdash;sits in the mid-building volume where the brand&#x27;s history becomes a social space. The Denim Lab is a glass-walled craft theater for laser distressing and vintage repair: work that is visible, participatory, and proof of Italian making. The Ghiaccio Ice Bar crowns the stack: a monolithic molded-glass bar that reads frozen, where phones return and word of mouth is earned after the visit. The walkthrough below follows that climb: street to retail, caf&eacute;, lab, ice bar, then the business case.</p>
+  <div id="cs-diesel-brand-world" data-cs-section="cs-diesel-brand-world" style="margin-top:40px;">
+    <p class="cs-section-title" style="margin-bottom:12px;">Brand in the World</p>
+    <p class="cs-body" style="margin-bottom:28px;">Walk the building in sequence: street arrival and token, ground-floor retail and its fixture kit, the archive caf&eacute;, the denim lab, then Ghiaccio. Each spread follows how a guest actually climbs the Iceberg.</p>
 
+    <div style="margin-top:32px;margin-bottom:16px;">
+      <h3 style="font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--black);margin-bottom:8px;">Arrival &middot; Exterior &amp; token</h3>
+      <p class="cs-body">Massing at the sidewalk and the brass &ldquo;For Successful Living&rdquo; token&mdash;identity before the first fixture.</p>
+    </div>
+    <div class="cs-img-2col">
+      <div class="cs-img-2col-item"><div class="cs-img-contain"><img src="/case-studies/diesel/Diesel%20Mockups/Exterior%20Shots/exteriorhero%20shot.png" alt="Iceberg &middot; exterior hero" loading="lazy"/></div><span class="img-caption">Harajuku massing &middot; exterior hero</span></div>
+      <div class="cs-img-2col-item"><div class="cs-img-contain"><img src="/case-studies/diesel/Diesel%20Mockups/for%20successful%20living%20token.png" alt="Brass entry token &middot; For Successful Living &middot; 1978" loading="lazy"/></div><span class="img-caption">Brass token &middot; For Successful Living &middot; 1978</span></div>
+    </div>
+
+    <div style="margin-top:40px;margin-bottom:16px;">
+      <h3 style="font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--black);margin-bottom:8px;">Ground floor &middot; Retail volume</h3>
+      <p class="cs-body">Storefront, primary circulation, and key merchandising moments&mdash;high-velocity retail with Fit Check lighting and stone register cues.</p>
+    </div>
+    <div class="cs-img-3col">
+      <div class="cs-img-3col-item"><div class="cs-img-contain"><img src="/case-studies/diesel/Diesel%20Mockups/Retail%20Floors%201/storefront.png" alt="Storefront at night" loading="lazy"/></div><span class="img-caption">Storefront &middot; glass volume</span></div>
+      <div class="cs-img-3col-item"><div class="cs-img-contain"><img src="/case-studies/diesel/Diesel%20Mockups/Retail%20Floors%201/primary%20floor.png" alt="Primary retail floor" loading="lazy"/></div><span class="img-caption">Primary floor &middot; circulation</span></div>
+      <div class="cs-img-3col-item"><div class="cs-img-contain"><img src="/case-studies/diesel/Diesel%20Mockups/Retail%20Floors%201/retail%20displays.png" alt="Retail displays" loading="lazy"/></div><span class="img-caption">Displays &middot; merchandising</span></div>
+    </div>
+    <div class="cs-img-3col" style="margin-top:8px;">
+      <div class="cs-img-3col-item"><div class="cs-img-contain"><img src="/case-studies/diesel/Diesel%20Mockups/Retail%20Floors%201/focal%20wall.png" alt="Focal wall" loading="lazy"/></div><span class="img-caption">Focal wall &middot; hero fixture</span></div>
+      <div class="cs-img-3col-item"><div class="cs-img-contain"><img src="/case-studies/diesel/Diesel%20Mockups/Retail%20Floors%201/denimwall.png" alt="Denim wall" loading="lazy"/></div><span class="img-caption">Denim wall</span></div>
+      <div class="cs-img-3col-item"><div class="cs-img-contain"><img src="/case-studies/diesel/Diesel%20Mockups/Retail%20Floors%201/fitting%20room%20big%20room.png" alt="Fitting room" loading="lazy"/></div><span class="img-caption">Fitting suite</span></div>
+    </div>
+
+    <div style="margin-top:40px;margin-bottom:16px;">
+      <h3 style="font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--black);margin-bottom:8px;">Ground floor &middot; Fixture kit</h3>
+      <p class="cs-body">Ceiling hardware, entry focal, shelf logic, footwear, and POS&mdash;the repeatable system for level one.</p>
+    </div>
+    <div class="cs-img-3col">
+      <div class="cs-img-3col-item"><div class="cs-img-contain"><img src="/case-studies/diesel/Diesel%20Mockups/Retail%20Floors%201/ceiling%20lighting%20brackets.png" alt="Ceiling lighting brackets" loading="lazy"/></div><span class="img-caption">Ceiling &middot; lighting brackets</span></div>
+      <div class="cs-img-3col-item"><div class="cs-img-contain"><img src="/case-studies/diesel/Diesel%20Mockups/Retail%20Floors%201/entryway%20focal%20point.png" alt="Entryway focal" loading="lazy"/></div><span class="img-caption">Entryway &middot; focal</span></div>
+      <div class="cs-img-3col-item"><div class="cs-img-contain"><img src="/case-studies/diesel/Diesel%20Mockups/Retail%20Floors%201/accessories%20shelf.png" alt="Accessories shelf" loading="lazy"/></div><span class="img-caption">Accessories &middot; shelf</span></div>
+    </div>
+    <div class="cs-img-2col" style="margin-top:8px;">
+      <div class="cs-img-2col-item"><div class="cs-img-contain"><img src="/case-studies/diesel/Diesel%20Mockups/Retail%20Floors%201/shoe%20petestals.png" alt="Shoe pedestals" loading="lazy"/></div><span class="img-caption">Footwear &middot; pedestals</span></div>
+      <div class="cs-img-2col-item"><div class="cs-img-contain"><img src="/case-studies/diesel/Diesel%20Mockups/Retail%20Floors%201/POS%20example.png" alt="POS example" loading="lazy"/></div><span class="img-caption">POS &middot; touchpoint</span></div>
+    </div>
+
+    <div style="margin-top:40px;margin-bottom:16px;">
+      <h3 style="font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--black);margin-bottom:8px;">Caf&eacute; 1978</h3>
+      <p class="cs-body">Archive wall and social volume: library and coworking after ground retail, before the denim lab.</p>
+    </div>
+    <div class="cs-img-3col">
+      <div class="cs-img-3col-item"><div class="cs-img-contain"><img src="/case-studies/diesel/Diesel%20Mockups/Cafe/bannedwall_closeup.png" alt="Archive wall closeup" loading="lazy"/></div><span class="img-caption">Banned wall &middot; detail</span></div>
+      <div class="cs-img-3col-item"><div class="cs-img-contain"><img src="/case-studies/diesel/Diesel%20Mockups/Cafe/cafe_bannedwall.png" alt="Caf&eacute; banned wall" loading="lazy"/></div><span class="img-caption">Caf&eacute; &middot; banned wall</span></div>
+      <div class="cs-img-3col-item"><div class="cs-img-contain"><img src="/case-studies/diesel/Diesel%20Mockups/Cafe/cafearchive_wideheroangle.png" alt="Archive wide hero" loading="lazy"/></div><span class="img-caption">Archive &middot; social wide</span></div>
+    </div>
+
+    <div style="margin-top:40px;margin-bottom:16px;">
+      <h3 style="font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--black);margin-bottom:8px;">Denim lab</h3>
+      <p class="cs-body">Glass-walled craft theater: workstation, before/after, materials library, and take-home lab packaging.</p>
+    </div>
+    <div class="cs-img-2col">
+      <div class="cs-img-2col-item"><div class="cs-img-contain"><img src="/case-studies/diesel/Diesel%20Mockups/Denim%20Lab/denimlab_artisanworkstation.png" alt="Artisan workstation" loading="lazy"/></div><span class="img-caption">Artisan workstation</span></div>
+      <div class="cs-img-2col-item"><div class="cs-img-contain"><img src="/case-studies/diesel/Diesel%20Mockups/Denim%20Lab/denimlab_before%20and%20after.png" alt="Before and after" loading="lazy"/></div><span class="img-caption">Before / after</span></div>
+    </div>
+    <div class="cs-img-2col" style="margin-top:8px;">
+      <div class="cs-img-2col-item"><div class="cs-img-contain"><img src="/case-studies/diesel/Diesel%20Mockups/Denim%20Lab/denimlab_materials%20display.png" alt="Materials display" loading="lazy"/></div><span class="img-caption">Materials display</span></div>
+      <div class="cs-img-2col-item"><div class="cs-img-contain"><img src="/case-studies/diesel/Diesel%20Mockups/Denim%20Lab/denimlab_vaccuum%20seal.png" alt="Vacuum-sealed lab kit" loading="lazy"/></div><span class="img-caption">Lab kit &middot; vacuum seal</span></div>
+    </div>
+
+    <div style="margin-top:40px;margin-bottom:16px;">
+      <h3 style="font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--black);margin-bottom:8px;">Restaurant &middot; Ghiaccio</h3>
+      <p class="cs-body">The ice bar and dining floor&mdash;where the phone-free story resolves into something worth sharing afterward.</p>
+    </div>
+    <div class="cs-img-3col">
+      <div class="cs-img-3col-item"><div class="cs-img-contain"><img src="/case-studies/diesel/Diesel%20Mockups/Restaraunt/wideangle%20of%20the%20bar.png" alt="Ghiaccio Ice Bar &middot; wide angle" loading="lazy"/></div><span class="img-caption">Ice bar &middot; wide angle</span></div>
+      <div class="cs-img-3col-item"><div class="cs-img-contain"><img src="/case-studies/diesel/Diesel%20Mockups/Restaraunt/tableview%20outside.png" alt="Table view toward exterior" loading="lazy"/></div><span class="img-caption">Dining &middot; view out</span></div>
+      <div class="cs-img-3col-item"><div class="cs-img-contain"><img src="/case-studies/diesel/Diesel%20Mockups/Restaraunt/close%20view%20of%20the%20bar.png" alt="Bar detail" loading="lazy"/></div><span class="img-caption">Bar &middot; close view</span></div>
+    </div>
+    <div class="cs-img-2col" style="margin-top:8px;">
+      <div class="cs-img-2col-item"><div class="cs-img-contain"><img src="/case-studies/diesel/Diesel%20Mockups/Restaraunt/table%20closeup.png" alt="Table closeup" loading="lazy"/></div><span class="img-caption">Tablescape &middot; closeup</span></div>
+      <div class="cs-img-2col-item"><div class="cs-img-contain"><img src="/case-studies/diesel/Diesel%20Mockups/Restaraunt/detailed%20Glasswear%203D%20rendering.png" alt="Glassware detail render" loading="lazy"/></div><span class="img-caption">Glassware &middot; detail</span></div>
+    </div>
+    <p class="cs-body" style="margin-top:28px;font-size:13px;color:var(--g500);">For the interactive floor switcher and full spatial UI, open the archived build at <a href="/work/diesel-archive" target="_parent" style="color:inherit;text-decoration:underline;">/work/diesel-archive</a>.</p>
+  </div>
+</section><section class="cs-section cs-section-alt" id="cs-s10-business-benefits" data-cs-section="cs-s10-business-benefits">
+  <div class="cs-section-eyebrow"><span class="cs-section-num">10</span><span class="cs-section-title">Business Benefits</span></div>
+  <p class="cs-body">A flagship in Harajuku at this level of ambition functions as a global press event that continues to generate coverage for the duration of its operation. The commercial case in Japan is secondary to the reputational case globally: a building this intentional, in this location, communicates that Diesel&#x27;s renaissance is not a collection moment but a brand position. Within the Asian market, Japan&#x27;s cultural influence operates as a distribution mechanism,  the taste that forms in Tokyo travels to Seoul, Shanghai, and Singapore. A successful Iceberg flagship is not a single market investment. It is the first node of an Asian brand narrative with Harajuku as its origin point.</p>
+</section>
+<section class="cs-section cs-section-alt" id="cs-next" data-cs-section="cs-next">
+  <div class="cs-next">
+    <div class="cs-next-label">Next</div>
+    <a href="/work/stylect" class="cs-next-link" target="_parent">
+      <div class="cs-next-meta">Stylect</div>
+      <div class="cs-next-title">Stylect →</div>
+    </a>
+  </div>
+</section>
+</div></div></div>
 <footer>
   <div class="footer-id">
     <span class="footer-name">Benn Pattara</span>
@@ -721,52 +592,21 @@ footer { display: flex; justify-content: space-between; align-items: center; pad
     <a href="/blog" class="footer-link" target="_parent">Blog</a>
     <a href="/#contact" class="footer-link" target="_parent">Contact</a>
   </div>
-  <div class="footer-copy">© 2026 Benn Pattara · bennpattara.com</div>
+  <div class="footer-copy">&copy; 2026 Benn Pattara &middot; bennpattara.com</div>
 </footer>
 
 <script>
-// Floor Visual Switcher
-const floorObserver = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      const f = entry.target.getAttribute('data-floor');
-      document.querySelectorAll('.floor-img-wrap').forEach(img => {
-        img.classList.remove('active');
-        if (img.getAttribute('data-floor-img') === f) img.classList.add('active');
-      });
-    }
-  });
-}, { threshold: 0.5 });
-document.querySelectorAll('.floor-item').forEach(item => floorObserver.observe(item));
-
-function switchView(event, floorIndex, view) {
-  const wrap = document.querySelector(`.floor-img-wrap[data-floor-img="${floorIndex}"]`);
-  if (!wrap) return;
-
-  // Update images
-  wrap.querySelectorAll('img[data-view]').forEach(img => {
-    img.style.display = (img.getAttribute('data-view') === view) ? 'block' : 'none';
-  });
-
-  // Update thumbs
-  wrap.querySelectorAll('.f-thumb').forEach(thumb => {
-    thumb.classList.remove('active');
-  });
-  event.currentTarget.classList.add('active');
-}
-
-
-window.addEventListener('scroll', () => {
-  const s = window.scrollY, t = document.documentElement.scrollHeight - window.innerHeight;
-  document.getElementById('scroll-progress').style.width = (t ? s/t*100 : 0) + '%';
-});
-
+window.addEventListener('scroll', function () {
+  var s = window.scrollY, t = document.documentElement.scrollHeight - window.innerHeight;
+  var bar = document.getElementById('scroll-progress');
+  if (bar) bar.style.width = (t > 0 ? (s / t * 100) : 0) + '%';
+}, { passive: true });
 const sectionObserver = new IntersectionObserver(entries => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       document.querySelectorAll('.cs-sidenav-link').forEach(l => l.classList.remove('active'));
-      const m = document.querySelector('.cs-sidenav-link[data-target="' + entry.target.id + '"]');
-      if (m) m.classList.add('active');
+      const match = document.querySelector('.cs-sidenav-link[data-target="' + entry.target.id + '"]');
+      if (match) match.classList.add('active');
     }
   });
 }, { threshold: 0, rootMargin: '-10% 0px -80% 0px' });
@@ -776,7 +616,21 @@ function scrollToSection(id) {
   if (!el) return;
   window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 104, behavior: 'smooth' });
 }
+(function() {
+  const steps = document.querySelectorAll('.proto-step');
+  const iframe = document.querySelector('.proto-phone iframe');
+  if (!steps.length || !iframe) return;
+  steps[0].classList.add('active');
+  steps.forEach(step => {
+    step.addEventListener('click', () => {
+      steps.forEach(s => s.classList.remove('active'));
+      step.classList.add('active');
+      if (step.dataset.src) iframe.src = step.dataset.src;
+    });
+  });
+})();
 </script>
 <script src="/js/cs-stat-eyebrow-fit.js"></script>
+
 </body>
 </html>

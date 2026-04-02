@@ -459,7 +459,7 @@ img{display:block;width:100%;height:100%;object-fit:cover;}
 /* ══════════════════════════════════
    SCREEN: QUIZ (1.2)
 ══════════════════════════════════ */
-/* Do not set position here — #s-quiz is also .screen (absolute inset:0). position:relative
+/* Do not set position here · #s-quiz is also .screen (absolute inset:0). position:relative
    would override .screen and shrink the quiz to content height, breaking footer placement. */
 #s-quiz {
   background: var(--bg);
@@ -2024,7 +2024,7 @@ img{display:block;width:100%;height:100%;object-fit:cover;}
   transform: translateX(-50%) translateY(0);
 }
 
-/* ── Persona switcher (standalone only; hidden when embed=case — parent page controls) ── */
+/* ── Persona switcher (standalone only; hidden when embed=case · parent page controls) ── */
 #view-switcher {
   position: fixed;
   bottom: 20px;
@@ -2049,7 +2049,7 @@ body.stylect-embed-case #toast {
   bottom: 28px;
 }
 
-/* Case study / iframe: fill the viewport — no stage padding or vertical centering,
+/* Case study / iframe: fill the viewport · no stage padding or vertical centering,
    and hide persona captions so .phone sits flush with the top of the iframe (bezel). */
 body.stylect-embed-case #stage {
   padding: 0;
@@ -2561,7 +2561,7 @@ body.stylect-embed-case .stylist-section {
 <div id="stage">
   <!-- ═══════ STYLEE PHONE ═══════ -->
   <div class="stylist-section" id="stylee-section">
-    <div class="phone-label">Stylee — Sarah</div>
+    <div class="phone-label">Stylee, Sarah</div>
     <div class="phone" id="phone-stylee">
 
       <!-- ── SCREEN 1.1: ONBOARDING ── -->
@@ -2579,7 +2579,7 @@ body.stylect-embed-case .stylist-section {
         <div class="onboard-content">
           <div class="ob-eyebrow">Personal Styling</div>
           <div class="ob-headline">The perfect item is <em>one conversation</em> away.</div>
-          <div class="ob-sub">Real stylists. Real stock. Your city. One brief matched in minutes — not days.</div>
+          <div class="ob-sub">Real stylists. Real stock. Your city. One brief matched in minutes: not days.</div>
           <div class="ob-stylist-strip">
             <div class="ob-stylist-pill" onclick="goScreen('s-quiz')">
               <div class="ob-av"><div class="ob-av-inner ob-av-amber">AK</div></div>
@@ -2616,7 +2616,7 @@ body.stylect-embed-case .stylist-section {
         <div class="app-brand-strip"><div class="app-wordmark">STYLECT</div></div>
         <div class="quiz-header">
           <div class="quiz-progress"><div class="quiz-progress-fill" id="quiz-fill" style="width:20%"></div></div>
-          <div class="quiz-step-label" id="quiz-step-label">Step 1 of 5 — Occasion</div>
+          <div class="quiz-step-label" id="quiz-step-label">Step 1 of 5, Occasion</div>
           <div class="quiz-question" id="quiz-question">What's the <em>occasion?</em></div>
         </div>
         <div class="scroll-body">
@@ -2801,13 +2801,13 @@ body.stylect-embed-case .stylist-section {
             </div>
             <div class="text-input-field" style="margin-top:12px">
               <div class="til-label">Additional context</div>
-              <textarea class="til-input" style="min-height:72px;resize:none;line-height:1.6;border-radius:var(--r-md);padding:14px 16px">Outdoor garden ceremony, 65°F afternoon. I'll be wearing 2-inch ivory block heels all day — comfort matters.</textarea>
+              <textarea class="til-input" style="min-height:72px;resize:none;line-height:1.6;border-radius:var(--r-md);padding:14px 16px">Outdoor garden ceremony, 65°F afternoon. I'll be wearing 2-inch ivory block heels all day: comfort matters.</textarea>
             </div>
             <div style="height:24px"></div>
           </div>
         </div>
         <div style="padding:14px 24px max(22px, env(safe-area-inset-bottom, 0px));background:var(--glass);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);border-top:1px solid var(--border)">
-          <button class="btn btn-primary btn-lg btn-full" onclick="goScreen('s-match');setTab(1);showToast('Brief submitted — finding your stylists…')">Find My Stylist →</button>
+          <button class="btn btn-primary btn-lg btn-full" onclick="goScreen('s-match');setTab(1);showToast('Brief submitted: finding your stylists…')">Find My Stylist →</button>
         </div>
       </div>
 
@@ -2826,7 +2826,7 @@ body.stylect-embed-case .stylist-section {
         </div>
         <div class="scroll-body">
           <div class="match-list">
-            <!-- Stylist 1 — TOP MATCH -->
+            <!-- Stylist 1 · TOP MATCH -->
             <div class="stylist-card top-match anim-up" onclick="goScreen('s-chat');setTab(1);showToast('Amara accepted your brief ✦')">
               <div class="sc-badge-row">
                 <div class="top-match-badge">Top Match</div>
@@ -2853,7 +2853,7 @@ body.stylect-embed-case .stylist-section {
             </div>
 
             <!-- Stylist 2 -->
-            <div class="stylist-card anim-up-2" onclick="showToast('Jin accepted — opening chat')">
+            <div class="stylist-card anim-up-2" onclick="showToast('Jin accepted: opening chat')">
               <div class="sc-body">
                 <div class="sc-av"><div class="ob-av-inner ob-av-sage" style="height:100%;font-size:20px;border-radius:var(--r-md)">JP</div></div>
                 <div class="sc-meta">
@@ -2875,13 +2875,13 @@ body.stylect-embed-case .stylist-section {
             </div>
 
             <!-- Stylist 3 -->
-            <div class="stylist-card anim-up-3" onclick="showToast('Léa is in session — try back in 2 hours')">
+            <div class="stylist-card anim-up-3" onclick="showToast('Léa is in session: try back in 2 hours')">
               <div class="sc-body">
                 <div class="sc-av"><div class="ob-av-inner ob-av-rose" style="height:100%;font-size:20px;border-radius:var(--r-md)">LM</div></div>
                 <div class="sc-meta">
                   <div class="sc-name">Léa Moreau</div>
                   <div class="sc-brands">Anthropologie · Free People · ASOS</div>
-                  <div class="sc-bio">Bohemian and occasion specialist. Highest retention rate on platform — 340 successful sessions.</div>
+                  <div class="sc-bio">Bohemian and occasion specialist. Highest retention rate on platform, 340 successful sessions.</div>
                 </div>
               </div>
               <div class="sc-footer">
@@ -2948,14 +2948,14 @@ body.stylect-embed-case .stylist-section {
           <div class="msg-row right anim-up-1">
             <div class="msg-av"><div class="ob-av-inner ob-av-slate" style="height:100%;font-size:11px;border-radius:var(--r-sm)">S</div></div>
             <div>
-              <div class="bubble user">2-inch block heel — ivory. And I'll be wearing them all day so comfort is key!</div>
+              <div class="bubble user">2-inch block heel: ivory. And I'll be wearing them all day so comfort is key!</div>
               <div class="msg-time" style="text-align:right">2:19 PM</div>
             </div>
           </div>
           <div class="msg-row anim-up-2">
             <div class="msg-av"><div class="ob-av-inner ob-av-amber" style="height:100%;font-size:11px;border-radius:var(--r-sm)">AK</div></div>
             <div>
-              <div class="bubble stylist">Perfect — block heels give us real silhouette flexibility. Give me 20 minutes. Here's your shortlist:</div>
+              <div class="bubble stylist">Perfect: block heels give us real silhouette flexibility. Give me 20 minutes. Here's your shortlist:</div>
               <div class="msg-time">2:41 PM</div>
             </div>
           </div>
@@ -2990,7 +2990,7 @@ body.stylect-embed-case .stylist-section {
               <div class="sl-info">
                 <div class="sl-brand-label">Anthropologie · Floreat · AW25</div>
                 <div class="sl-name">Terracotta Midi Dress</div>
-                <div class="sl-why">Earth-tone is perfect for an outdoor setting. The midi length is calibrated for your heel height — hem will hit at exactly the right point.</div>
+                <div class="sl-why">Earth-tone is perfect for an outdoor setting. The midi length is calibrated for your heel height: hem will hit at exactly the right point.</div>
                 <div class="sl-footer">
                   <div class="sl-price">$198</div>
                   <div class="sl-stock">Size 8 · 2.1 mi away</div>
@@ -3008,7 +3008,7 @@ body.stylect-embed-case .stylist-section {
               <div class="sl-info">
                 <div class="sl-brand-label">Reformation · Vintage · SS26</div>
                 <div class="sl-name">Black Wide-Leg Jumpsuit</div>
-                <div class="sl-why">Re-wearable investment — you'll reach for this beyond the wedding. Ankle length is perfect for your block heels. Polished but moves freely.</div>
+                <div class="sl-why">Re-wearable investment: you'll reach for this beyond the wedding. Ankle length is perfect for your block heels. Polished but moves freely.</div>
                 <div class="sl-footer">
                   <div class="sl-price">$248</div>
                   <div class="sl-stock">Size 4 · 0.8 mi away</div>
@@ -3043,7 +3043,7 @@ body.stylect-embed-case .stylist-section {
           <div class="detail-info">
             <div class="detail-stylist-note">
               <div class="dsn-label">Amara's note</div>
-              <div class="dsn-text">Accentuates your waist and pairs beautifully with your auburn hair. The wrap silhouette photographs exceptionally at outdoor settings — this is the one.</div>
+              <div class="dsn-text">Accentuates your waist and pairs beautifully with your auburn hair. The wrap silhouette photographs exceptionally at outdoor settings: this is the one.</div>
             </div>
             <div class="detail-brand">Nordstrom · Eliza J · SS26</div>
             <div class="detail-name">The Emerald Silk Wrap</div>
@@ -3068,7 +3068,7 @@ body.stylect-embed-case .stylist-section {
           </div>
           <div class="detail-cta-area">
             <button class="btn btn-primary btn-lg btn-full" onclick="goScreen('s-qr');showToast('Reserved! Your QR code is ready ✓')">Reserve & Try In-Store</button>
-            <button class="btn btn-secondary btn-md btn-full" onclick="showToast('Added to bag — checkout anytime')">Buy Online</button>
+            <button class="btn btn-secondary btn-md btn-full" onclick="showToast('Added to bag: checkout anytime')">Buy Online</button>
           </div>
         </div>
       </div>
@@ -3166,7 +3166,7 @@ body.stylect-embed-case .stylist-section {
 
   <!-- ═══════ STYLIST PHONE ═══════ -->
   <div class="stylist-section" id="stylist-section" style="display:none">
-    <div class="phone-label">Stylist — Amara K.</div>
+    <div class="phone-label">Stylist, Amara K.</div>
     <div class="phone" id="phone-stylist">
 
       <!-- Stylist Dashboard -->
@@ -3189,9 +3189,9 @@ body.stylect-embed-case .stylist-section {
           </div>
         </div>
         <div class="brief-queue">
-          <div class="brief-queue-label">New Briefs — 2</div>
+          <div class="brief-queue-label">New Briefs, 2</div>
 
-          <!-- Urgent brief — Sarah -->
+          <!-- Urgent brief · Sarah -->
           <div class="bq-card new urgent" onclick="goStylistScreen('s-stylist-chat')">
             <div class="bq-top">
               <div>
@@ -3222,9 +3222,9 @@ body.stylect-embed-case .stylist-section {
           <div class="copilot-banner">
             <div class="cpb-top">
               <div class="cpb-icon">✦</div>
-              <div class="cpb-label">AI Co-Pilot — Sarah M.</div>
+              <div class="cpb-label">AI Co-Pilot (Sarah M.</div>
             </div>
-            <div class="cpb-text">Based on Sarah's Style Vault: kept 3 wrap silhouettes, returned 2 shift dresses. Strong response to jewel tones and earthy neutrals. Budget likely flexible — history shows 12% over stated max.</div>
+            <div class="cpb-text">Based on Sarah's Style Vault: kept 3 wrap silhouettes, returned 2 shift dresses. Strong response to jewel tones and earthy neutrals. Budget likely flexible) history shows 12% over stated max.</div>
             <div class="cpb-chips">
               <div class="cpb-chip">Wrap silhouette</div>
               <div class="cpb-chip">Jewel tones</div>
@@ -3258,7 +3258,7 @@ body.stylect-embed-case .stylist-section {
             </div>
           </div>
 
-          <div class="brief-queue-label" style="margin-top:4px">Awaiting Client — 2</div>
+          <div class="brief-queue-label" style="margin-top:4px">Awaiting Client, 2</div>
           <div class="bq-card" style="opacity:0.6">
             <div class="bq-top">
               <div><div class="bq-user">Mia C. · shortlist sent</div><div class="bq-occasion">Birthday Dinner</div></div>
@@ -3274,7 +3274,7 @@ body.stylect-embed-case .stylist-section {
         <div class="app-brand-strip"><div class="app-wordmark">STYLECT</div></div>
         <div class="app-bar">
           <button class="app-bar-btn" onclick="goStylistScreen('s-stylist-dash')">←</button>
-          <div class="chat-session-title">Sarah M. — Wedding</div>
+          <div class="chat-session-title">Sarah M., Wedding</div>
           <div style="width:36px"></div>
         </div>
         <!-- Client intelligence panel -->
@@ -3288,17 +3288,17 @@ body.stylect-embed-case .stylist-section {
             <div class="bq-tag" style="background:rgba(201,185,154,0.15);border-color:rgba(201,185,154,0.4);color:var(--accent-hi)">Modern Romantic</div>
           </div>
           <div style="margin-top:8px;display:flex;align-items:center;gap:6px">
-            <div style="font-size:11px;font-style:italic;color:var(--ink-4)">"Outdoor garden, 65°F, ivory block heels all day — comfort matters"</div>
+            <div style="font-size:11px;font-style:italic;color:var(--ink-4)">"Outdoor garden, 65°F, ivory block heels all day: comfort matters"</div>
           </div>
         </div>
         <div class="messages-area" id="stylist-messages-area">
           <div class="msg-row">
             <div class="msg-av"><div class="ob-av-inner ob-av-slate" style="height:100%;font-size:11px;border-radius:var(--r-sm)">S</div></div>
-            <div><div class="bubble stylist" style="background:rgba(201,185,154,0.06);border-color:rgba(201,185,154,0.3)">Hi! I'm Sarah — just submitted my brief for a wedding on Saturday. I'm so excited to work with you!</div><div class="msg-time">2:10 PM</div></div>
+            <div><div class="bubble stylist" style="background:rgba(201,185,154,0.06);border-color:rgba(201,185,154,0.3)">Hi! I'm Sarah: just submitted my brief for a wedding on Saturday. I'm so excited to work with you!</div><div class="msg-time">2:10 PM</div></div>
           </div>
           <div class="msg-row right">
             <div class="msg-av"><div class="ob-av-inner ob-av-amber" style="height:100%;font-size:11px;border-radius:var(--r-sm)">AK</div></div>
-            <div><div class="bubble user">Hi Sarah! Modern Romantic for an outdoor wedding — beautiful direction. One quick question: what's your shoe height? It helps me nail the hemline.</div><div class="msg-time" style="text-align:right">2:14 PM</div></div>
+            <div><div class="bubble user">Hi Sarah! Modern Romantic for an outdoor wedding: beautiful direction. One quick question: what's your shoe height? It helps me nail the hemline.</div><div class="msg-time" style="text-align:right">2:14 PM</div></div>
           </div>
           <div class="msg-row">
             <div class="msg-av"><div class="ob-av-inner ob-av-slate" style="height:100%;font-size:11px;border-radius:var(--r-sm)">S</div></div>
@@ -3309,12 +3309,12 @@ body.stylect-embed-case .stylist-section {
             <div class="msg-row right">
               <div class="msg-av"><div class="ob-av-inner ob-av-amber" style="height:100%;font-size:11px;border-radius:var(--r-sm)">AK</div></div>
               <div>
-                <div class="bubble user">Perfect — block heels give us real silhouette flexibility. Here's your shortlist for Sarah:</div>
+                <div class="bubble user">Perfect (block heels give us real silhouette flexibility. Here's your shortlist for Sarah:</div>
                 <div class="msg-time" style="text-align:right">2:41 PM</div>
               </div>
             </div>
             <div class="shortlist-msg">
-              <div class="sl-card hearted" onclick="showToast('The Emerald Silk Wrap — in client shortlist')">
+              <div class="sl-card hearted" onclick="showToast('The Emerald Silk Wrap) in client shortlist')">
                 <div class="sl-img-row">
                   <img class="sl-photo" src="assets/ds-shortlist-emerald-silk-wrap.png" alt="Emerald silk wrap dress" width="400" height="280" loading="lazy" decoding="async" />
                   <div class="sl-num-badge">1</div>
@@ -3330,7 +3330,7 @@ body.stylect-embed-case .stylist-section {
                   </div>
                 </div>
               </div>
-              <div class="sl-card" onclick="showToast('Terracotta Midi Dress — in client shortlist')">
+              <div class="sl-card" onclick="showToast('Terracotta Midi Dress: in client shortlist')">
                 <div class="sl-img-row" style="background:linear-gradient(135deg,#d4c9b8,#e8dfd0)">
                   <img class="sl-photo" src="assets/ds-shortlist-terracotta-midi-dress.png" alt="Terracotta midi dress" width="400" height="280" loading="lazy" decoding="async" />
                   <div class="sl-num-badge">2</div>
@@ -3339,14 +3339,14 @@ body.stylect-embed-case .stylist-section {
                 <div class="sl-info">
                   <div class="sl-brand-label">Anthropologie · Floreat · AW25</div>
                   <div class="sl-name">Terracotta Midi Dress</div>
-                  <div class="sl-why">Earth-tone is perfect for an outdoor setting. The midi length is calibrated for her heel height — hem will hit at exactly the right point.</div>
+                  <div class="sl-why">Earth-tone is perfect for an outdoor setting. The midi length is calibrated for her heel height (hem will hit at exactly the right point.</div>
                   <div class="sl-footer">
                     <div class="sl-price">$198</div>
                     <div class="sl-stock">Size 8 · 2.1 mi away</div>
                   </div>
                 </div>
               </div>
-              <div class="sl-card" onclick="showToast('Black Wide-Leg Jumpsuit — in client shortlist')">
+              <div class="sl-card" onclick="showToast('Black Wide-Leg Jumpsuit) in client shortlist')">
                 <div class="sl-img-row" style="background:linear-gradient(135deg,#1a1714,#2e2820)">
                   <img class="sl-photo" src="assets/ds-shortlist-black-wide-leg-jumpsuit.png" alt="Black wide-leg jumpsuit" width="400" height="280" loading="lazy" decoding="async" />
                   <div class="sl-num-badge" style="background:rgba(245,241,235,0.15);color:var(--d-ink)">3</div>
@@ -3355,7 +3355,7 @@ body.stylect-embed-case .stylist-section {
                 <div class="sl-info">
                   <div class="sl-brand-label">Reformation · Vintage · SS26</div>
                   <div class="sl-name">Black Wide-Leg Jumpsuit</div>
-                  <div class="sl-why">Re-wearable investment — she'll reach for this beyond the wedding. Ankle length is perfect for block heels. Polished but moves freely.</div>
+                  <div class="sl-why">Re-wearable investment: she'll reach for this beyond the wedding. Ankle length is perfect for block heels. Polished but moves freely.</div>
                   <div class="sl-footer">
                     <div class="sl-price">$248</div>
                     <div class="sl-stock">Size 4 · 0.8 mi away</div>
@@ -3363,7 +3363,7 @@ body.stylect-embed-case .stylist-section {
                 </div>
               </div>
               <div class="revision-btn-wrap">
-                <button type="button" class="btn btn-outline-accent btn-sm btn-full" onclick="showToast('Draft saved — tweak picks before the client sees them')">Edit picks</button>
+                <button type="button" class="btn btn-outline-accent btn-sm btn-full" onclick="showToast('Draft saved: tweak picks before the client sees them')">Edit picks</button>
               </div>
             </div>
           </div>
@@ -3378,7 +3378,7 @@ body.stylect-embed-case .stylist-section {
 
   <!-- ═══════ MANAGER PHONE ═══════ -->
   <div class="stylist-section" id="manager-section" style="display:none">
-    <div class="phone-label">Brand Manager — Nordstrom</div>
+    <div class="phone-label">Brand Manager, Nordstrom</div>
     <div class="phone" id="phone-manager">
       <div class="screen active" id="s-manager">
         <div class="status-bar"><span class="sb-time">9:41</span><div class="sb-icons"><div class="sb-icon signal"></div><div class="sb-icon wifi"></div><div class="sb-icon"></div></div></div>
@@ -3438,7 +3438,7 @@ body.stylect-embed-case .stylist-section {
 
           <div class="leaderboard">
             <div class="lb-header">Stylist Leaderboard</div>
-            <div class="lb-row top" onclick="showToast('Amara Kofi — full profile')">
+            <div class="lb-row top" onclick="showToast('Amara Kofi: full profile')">
               <div class="lb-rank gold">1</div>
               <div class="lb-av"><div class="ob-av-inner ob-av-amber" style="height:100%;font-size:14px;border-radius:var(--r-sm)">AK</div></div>
               <div class="lb-meta">
@@ -3450,7 +3450,7 @@ body.stylect-embed-case .stylist-section {
                 <div class="lb-trust">★ 4.97</div>
               </div>
             </div>
-            <div class="lb-row" onclick="showToast('Léa Moreau — full profile')">
+            <div class="lb-row" onclick="showToast('Léa Moreau: full profile')">
               <div class="lb-rank">2</div>
               <div class="lb-av"><div class="ob-av-inner ob-av-rose" style="height:100%;font-size:14px;border-radius:var(--r-sm)">LM</div></div>
               <div class="lb-meta">
@@ -3462,7 +3462,7 @@ body.stylect-embed-case .stylist-section {
                 <div class="lb-trust">★ 4.82</div>
               </div>
             </div>
-            <div class="lb-row" onclick="showToast('Jin Park — full profile')">
+            <div class="lb-row" onclick="showToast('Jin Park: full profile')">
               <div class="lb-rank">3</div>
               <div class="lb-av"><div class="ob-av-inner ob-av-sage" style="height:100%;font-size:14px;border-radius:var(--r-sm)">JP</div></div>
               <div class="lb-meta">
@@ -3597,11 +3597,11 @@ function submitStylistShortlist() {
 
 // ── QUIZ ──
 const quizData = [
-  { step: 1, label: 'Step 1 of 5 — Occasion', q: 'What\'s the <em>occasion?</em>',        fill: 20,  elId: 'qs-1' },
-  { step: 2, label: 'Step 2 of 5 — Vibe',     q: 'What\'s your style <em>vibe?</em>',      fill: 40,  elId: 'qs-2' },
-  { step: 3, label: 'Step 3 of 5 — Budget',   q: 'What\'s your <em>budget?</em>',          fill: 60,  elId: 'qs-3' },
-  { step: 4, label: 'Step 4 of 5 — Brands',   q: 'Preferred <em>retailers?</em>',          fill: 80,  elId: 'qs-4' },
-  { step: 5, label: 'Step 5 of 5 — Details',  q: 'Final <em>details.</em>',                fill: 100, elId: 'qs-5' },
+  { step: 1, label: 'Step 1 of 5 · Occasion', q: 'What\'s the <em>occasion?</em>',        fill: 20,  elId: 'qs-1' },
+  { step: 2, label: 'Step 2 of 5 · Vibe',     q: 'What\'s your style <em>vibe?</em>',      fill: 40,  elId: 'qs-2' },
+  { step: 3, label: 'Step 3 of 5 · Budget',   q: 'What\'s your <em>budget?</em>',          fill: 60,  elId: 'qs-3' },
+  { step: 4, label: 'Step 4 of 5 · Brands',   q: 'Preferred <em>retailers?</em>',          fill: 80,  elId: 'qs-4' },
+  { step: 5, label: 'Step 5 of 5 · Details',  q: 'Final <em>details.</em>',                fill: 100, elId: 'qs-5' },
 ];
 
 function applyQuizStep(index) {

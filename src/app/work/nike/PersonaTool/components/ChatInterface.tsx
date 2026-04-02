@@ -40,11 +40,9 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
 
   const currentTopic = RESEARCH_TOPICS.find((t: Topic) => t.id === currentTopicId);
 
-  return (
-    <div className="flex flex-col h-full bg-[#050505]/50">
+  return (<div className="flex flex-col h-full bg-[#050505]/50">
       <div className="flex-1 overflow-y-auto p-6 space-y-8 no-scrollbar">
-        {messages.length === 0 && (
-          <div className="h-full flex flex-col items-center justify-center text-stone-400 text-center px-12 space-y-6">
+        {messages.length === 0 && (<div className="h-full flex flex-col items-center justify-center text-stone-400 text-center px-12 space-y-6">
             <div className="p-4 bg-[#0a0a0a] rounded-2xl border border-[#222] shadow-sm">
               <Target className="w-8 h-8 text-white opacity-40" />
             </div>
@@ -54,33 +52,23 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
                 Select a target audience segment to begin extraction of qualitative insights.
               </p>
             </div>
-          </div>
-        )}
+          </div>)}
 
-        {messages.map((msg: Message) => (
-          <div
+        {messages.map((msg: Message) => (<div
             key={msg.id}
             className={`flex w-full ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
           >
             <div className={`flex items-end gap-3 max-w-[90%] sm:max-w-[80%] ${msg.role === 'user' ? 'flex-row-reverse' : 'flex-row'}`}>
 
               {/* Avatar for Model */}
-              {msg.role === 'model' && (
-                <div className="h-8 w-8 rounded-full overflow-hidden border border-[#222] bg-[#0a0a0a] flex-shrink-0 mb-1">
-                  {getPersonaImage(msg.senderName) ? (
-                    <img src={getPersonaImage(msg.senderName)!} alt="" className="h-full w-full object-cover" />
-                  ) : (
-                    <div className="h-full w-full flex items-center justify-center text-[10px] font-bold">NS</div>
-                  )}
-                </div>
-              )}
+              {msg.role === 'model' && (<div className="h-8 w-8 rounded-full overflow-hidden border border-[#222] bg-[#0a0a0a] flex-shrink-0 mb-1">
+                  {getPersonaImage(msg.senderName) ? (<img src={getPersonaImage(msg.senderName)!} alt="" className="h-full w-full object-cover" />) : (<div className="h-full w-full flex items-center justify-center text-[10px] font-bold">NS</div>)}
+                </div>)}
 
               <div className="flex flex-col">
-                {msg.senderName && (
-                  <span className="text-[9px] font-bold uppercase tracking-[0.15em] text-stone-400 mb-1 ml-1">
+                {msg.senderName && (<span className="text-[9px] font-bold uppercase tracking-[0.15em] text-stone-400 mb-1 ml-1">
                     {msg.senderName}
-                  </span>
-                )}
+                  </span>)}
                 <div
                   className={`
                     p-5 rounded-2xl text-[13px] leading-relaxed tracking-wide
@@ -97,32 +85,27 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
                 </div>
               </div>
             </div>
-          </div>
-        ))}
+          </div>))}
 
-        {isLoading && (
-          <div className="flex justify-start w-full">
+        {isLoading && (<div className="flex justify-start w-full">
             <div className="flex items-center gap-2 px-5 py-3 bg-[#0a0a0a] border border-[#222] rounded-2xl rounded-bl-none">
               <div className="w-1.5 h-1.5 bg-stone-300 rounded-full animate-bounce [animation-delay:-0.3s]" />
               <div className="w-1.5 h-1.5 bg-stone-300 rounded-full animate-bounce [animation-delay:-0.15s]" />
               <div className="w-1.5 h-1.5 bg-stone-300 rounded-full animate-bounce" />
             </div>
-          </div>
-        )}
+          </div>)}
         <div ref={messagesEndRef} />
       </div>
 
       {/* Choice Area */}
       <div className="p-8 bg-[#0a0a0a] border-t border-[#222]">
         <div className="max-w-4xl mx-auto">
-          {!currentTopicId ? (
-            <>
+          {!currentTopicId ? (<>
               <h3 className="text-[10px] font-bold uppercase text-stone-500 tracking-[0.25em] mb-6 text-center">
                 Select Inquiry Topic
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {RESEARCH_TOPICS.map((topic: Topic) => (
-                  <button
+                {RESEARCH_TOPICS.map((topic: Topic) => (<button
                     key={topic.id}
                     onClick={() => onSelectTopic(topic)}
                     disabled={isLoading}
@@ -132,12 +115,9 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
                       {topic.label}
                     </span>
                     <Target className="w-4 h-4 text-stone-600 group-hover:text-white transition-colors" />
-                  </button>
-                ))}
+                  </button>))}
               </div>
-            </>
-          ) : (
-            <>
+            </>) : (<>
               <div className="flex items-center justify-between mb-6">
                 <button
                   onClick={onBackToTopics}
@@ -152,8 +132,7 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
                 <div className="w-20" />
               </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {currentTopic?.followUps.map((fu: FollowUp) => (
-                  <button
+                {currentTopic?.followUps.map((fu: FollowUp) => (<button
                     key={fu.id}
                     onClick={() => onSelectFollowUp(fu)}
                     disabled={isLoading}
@@ -162,11 +141,9 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
                     <span className="text-[10px] font-bold uppercase tracking-widest text-stone-300">
                       {fu.question}
                     </span>
-                  </button>
-                ))}
+                  </button>))}
               </div>
-            </>
-          )}
+            </>)}
         </div>
         <div className="text-center mt-8">
           <p className="text-[9px] text-stone-300 font-bold uppercase tracking-[0.3em]">
@@ -174,6 +151,5 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
           </p>
         </div>
       </div>
-    </div>
-  );
+    </div>);
 };

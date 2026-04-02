@@ -1,8 +1,7 @@
 import React from 'react';
 
 export default function BlogLayout({ children }: { children: React.ReactNode }) {
-    return (
-        <>
+    return (<>
             {/* ── NAV ── */}
             <nav id="site-nav" className="scrolled" style={{ position: 'fixed', top: 0, width: '100%', zIndex: 100, borderBottom: '1px solid var(--g200)' }}>
                 <div className="nav-main">
@@ -39,6 +38,5 @@ export default function BlogLayout({ children }: { children: React.ReactNode }) 
                 </div>
                 <span className="footer-copy">&copy; 2026 Benn Pattara &middot; bennpattara.com</span>
             </footer>
-        </>
-    );
+        </>);
 }

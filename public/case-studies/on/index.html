@@ -35,7 +35,7 @@ body { font-family: var(--font); background: var(--white); color: var(--black); 
 .nav-right a { font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--black); text-decoration: none; border-bottom: 1px solid var(--black); padding-bottom: 1px; }
 .page-body { padding-top: var(--nav-h); }
 
-/* ── HERO — full-bleed (matches Saks) ── */
+/* ── HERO · full-bleed (matches Saks) ── */
 .cs-hero { position: relative; min-height: 85vh; overflow: hidden; display: flex; align-items: flex-end; }
 .cs-hero-bg { position: absolute; inset: 0; z-index: 0; background: linear-gradient(160deg, #0a0a0a 0%, #141010 40%, #0a0a0a 100%); }
 .cs-hero-bg img { width: 100%; height: 100%; object-fit: cover; object-position: center center; display: block; }
@@ -104,14 +104,14 @@ body { font-family: var(--font); background: var(--white); color: var(--black); 
 .cs-body-2col p { font-size: 13px; color: var(--g500); line-height: 1.75; }
 .cs-body-2col-dark p { font-size: 13px; color: rgba(255,255,255,.42); line-height: 1.75; }
 
-    /* Success Metrics Grid — Mobile */
+    /* Success Metrics Grid · Mobile */
     .metrics-grid-mobile { display: none; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-bottom: 32px; }
     .metric-card { background: #fff; border: 1px solid var(--g200); padding: 16px; display: flex; flex-direction: column; gap: 8px; }
     .metric-card-title { font-size: 8px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--g300); }
     .metric-card-val { font-size: 20px; font-weight: 200; font-family: var(--serif); color: var(--black); }
     .metric-card-method { font-size: 10px; color: var(--g400); line-height: 1.4; }
 
-    /* Token/Decision Accordion — Mobile */
+    /* Token/Decision Accordion · Mobile */
     .token-accordion-mobile, .decision-accordion-mobile { display: none; border-top: 1px solid var(--g200); margin-bottom: 32px; }
     .token-item, .decision-item { border-bottom: 1px solid var(--g200); }
     .token-header, .decision-header { padding: 16px 0; display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
@@ -123,7 +123,7 @@ body { font-family: var(--font); background: var(--white); color: var(--black); 
     .token-item.active .token-panel, .decision-item.active .token-panel { max-height: 500px; padding: 8px 16px 20px 16px; }
     .token-item.active .token-icon, .decision-item.active .token-icon { transform: rotate(45deg); }
 
-    /* Journey Map — Mobile */
+    /* Journey Map · Mobile */
     .journey-map-mobile { display: none; flex-direction: column; border-top: 1px solid var(--g200); margin-bottom: 32px; }
     .journey-step { border-bottom: 1px solid var(--g200); }
     .journey-header { padding: 20px 0; display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
@@ -221,7 +221,7 @@ body { font-family: var(--font); background: var(--white); color: var(--black); 
 .proto-section { padding: 80px clamp(24px, 5vw, 64px); box-sizing: border-box; border-bottom: 1px solid #f0f0f0; }
 .proto-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 28px; align-items: start; width: 100%; max-width: 100%; box-sizing: border-box; }
 .proto-phone { position: sticky; top: 40px; width: 320px; height: 693px; border-radius: 44px; border: 8px solid #000; overflow: hidden; background: #000; box-shadow: 0 0 0 1px #e8e8e8; display: flex; justify-content: center; align-items: flex-start; margin: 0; justify-self: center; align-self: center; }
-.proto-phone iframe { width: 375px; height: 812px; border: none; display: block; transform: scale(0.8533) translateX(7.33%); transform-origin: top left; flex-shrink: 0; pointer-events: auto; }
+.proto-phone iframe { width: 390px; height: 844px; border: none; display: block; transform: scale(0.802133); transform-origin: top center; flex-shrink: 0; pointer-events: auto; align-self: flex-start; }
 .proto-steps { display: flex; flex-direction: column; gap: 0; min-width: 0; }
 .proto-step { padding: 24px 0; border-bottom: 1px solid var(--g200); cursor: pointer; transition: opacity 0.2s; }
 .proto-step:first-child { border-top: 1px solid var(--g200); }
@@ -400,9 +400,9 @@ footer { padding: 32px 48px; border-top: 1px solid var(--g200); display: flex; j
 
 <div class="page-body">
 
-<!-- HERO — full-bleed (matches Saks) -->
+<!-- HERO · full-bleed (matches Saks) -->
 <section class="cs-hero">
-  <div class="cs-hero-bg"><img src="on_hero.webp" alt="On Apex — community platform for runners" /></div>
+  <div class="cs-hero-bg"><img src="on_hero.webp" alt="On Apex · community platform for runners" /></div>
   <div class="cs-hero-scrim"></div>
   <div class="cs-hero-title-wrap">
     <h1 class="cs-hero-title">On Apex<br><em>Community Platform</em></h1>
@@ -423,7 +423,7 @@ footer { padding: 32px 48px; border-top: 1px solid var(--g200); display: flex; j
     <a class="cs-sidenav-link" data-target="cs-users" onclick="scrollToSection('cs-users')"><span class="cs-sidenav-num">03</span><span class="cs-sidenav-text">The Users</span></a>
     <a class="cs-sidenav-link" data-target="cs-product" onclick="scrollToSection('cs-product')"><span class="cs-sidenav-num">04</span><span class="cs-sidenav-text">The Product</span></a>
     <a class="cs-sidenav-link" data-target="cs-design" onclick="scrollToSection('cs-design')"><span class="cs-sidenav-num">05</span><span class="cs-sidenav-text">Design System</span></a>
-    <a class="cs-sidenav-link" data-target="prototype" onclick="scrollToSection('prototype')"><span class="cs-sidenav-num">—</span><span class="cs-sidenav-text">Prototype</span></a>
+    <a class="cs-sidenav-link" data-target="prototype" onclick="scrollToSection('prototype')"><span class="cs-sidenav-num">·</span><span class="cs-sidenav-text">Prototype</span></a>
     <a class="cs-sidenav-link" data-target="cs-decisions" onclick="scrollToSection('cs-decisions')"><span class="cs-sidenav-num">06</span><span class="cs-sidenav-text">Decision Log</span></a>
     <a class="cs-sidenav-link" data-target="cs-outcome" onclick="scrollToSection('cs-outcome')"><span class="cs-sidenav-num">07</span><span class="cs-sidenav-text">Outcome</span></a>
     <div class="cs-sidenav-exec">
@@ -440,9 +440,9 @@ footer { padding: 32px 48px; border-top: 1px solid var(--g200); display: flex; j
       <div class="cs-exec-inner">
         <div>
           <div class="cs-exec-eyebrow">Executive Summary</div>
-          <p class="cs-exec-body">On holds itself to a standard that most brands don't attempt. Every shoe is a precise answer to the question of what human movement should feel like — engineered in Switzerland, tested on trails and city blocks, finished to a level of detail that makes a runner choose On for the design before they ever read a spec sheet. That standard permeates the hardware. It has never touched the software.</p>
-          <p class="cs-exec-body">Nike owns the aspiration layer with NRC. Strava owns the performance layer. On has no owned digital surface where its runners experience the brand at all. After the transaction, On disappears from its customer's life. The community that formed around On — the runners who see the shoe as identity, the club runners who coordinate on Instagram, the aesthetic athletes who post routes in CloudSurfers — lives entirely on other people's platforms, by other people's rules, in other people's visual language.</p>
-          <p class="cs-exec-body">On Apex is the argument that the software layer deserves the same standard as the hardware. A community-first PWA built to On's precision — Swiss-minimalist, instrument-grade, no gamification chrome, no follower counts as status. A platform where movement is the primary act, the shoe is the identity unit, and the community is built on shared miles rather than shared metrics. Not a Strava competitor. Not a data play. A software product finally worthy of the shoes it tracks.</p>
+          <p class="cs-exec-body">On holds itself to a standard that most brands don't attempt. Every shoe is a precise answer to the question of what human movement should feel like: engineered in Switzerland, tested on trails and city blocks, finished to a level of detail that makes a runner choose On for the design before they ever read a spec sheet. That standard permeates the hardware. It has never touched the software.</p>
+          <p class="cs-exec-body">Nike owns the aspiration layer with NRC. Strava owns the performance layer. On has no owned digital surface where its runners experience the brand at all. After the transaction, On disappears from its customer's life. The community that formed around On (the runners who see the shoe as identity, the club runners who coordinate on Instagram, the aesthetic athletes who post routes in CloudSurfers) lives entirely on other people's platforms, by other people's rules, in other people's visual language.</p>
+          <p class="cs-exec-body">On Apex is the argument that the software layer deserves the same standard as the hardware. A community-first PWA built to On's precision, Swiss-minimalist, instrument-grade, no gamification chrome, no follower counts as status. A platform where movement is the primary act, the shoe is the identity unit, and the community is built on shared miles rather than shared metrics. Not a Strava competitor. Not a data play. A software product finally worthy of the shoes it tracks.</p>
           <div class="cs-exec-kpis" style="margin-top:24px;">
             <div class="cs-exec-kpi"><div class="cs-exec-kpi-num">35%</div><div class="cs-exec-kpi-eyebrow">WAU target</div><div class="cs-exec-kpi-label">Y1 registered users</div></div>
             <div class="cs-exec-kpi"><div class="cs-exec-kpi-num">70%</div><div class="cs-exec-kpi-eyebrow">Shoe registration</div><div class="cs-exec-kpi-label">rate · 90-day target</div></div>
@@ -469,19 +469,19 @@ footer { padding: 32px 48px; border-top: 1px solid var(--g200); display: flex; j
       <div class="cs-section-eyebrow"><span class="cs-section-num">01</span><span class="cs-section-title">The Problem</span></div>
       <h2 class="cs-heading-serif">The hardware is flawless. <em>The software layer doesn't exist.</em></h2>
       <div class="cs-body-2col">
-        <p>On's brand is built on a specific belief: that human movement is the highest form of self-expression, and that the objects which enable that movement deserve to be built accordingly. The CloudTec sole geometry, the Helion foam, the Speedboard — these are not features. They are a philosophy made physical. Runners choose On not because it ranks highest in a comparison chart but because wearing it feels like a considered decision about how they move through the world. That level of intention lives in every product On ships. It has never existed anywhere else in the brand experience.</p>
-        <p>After a runner buys On shoes, the brand's presence in their life effectively ends. They train in Strava. They share on Instagram. They organize club runs in WhatsApp groups. They post to Reddit communities that On has no relationship with. The running that happens in On shoes — the data, the community, the identity, the culture — all of it accumulates somewhere else. Nike understood this fifteen years ago and built NRC. Adidas understood it and built Runtastic. On has remained, at the digital layer, a transaction. A beautiful transaction. But only a transaction.</p>
+        <p>On's brand is built on a specific belief: that human movement is the highest form of self-expression, and that the objects which enable that movement deserve to be built accordingly. The CloudTec sole geometry, the Helion foam, the Speedboard: these are not features. They are a philosophy made physical. Runners choose On not because it ranks highest in a comparison chart but because wearing it feels like a considered decision about how they move through the world. That level of intention lives in every product On ships. It has never existed anywhere else in the brand experience.</p>
+        <p>After a runner buys On shoes, the brand's presence in their life effectively ends. They train in Strava. They share on Instagram. They organize club runs in WhatsApp groups. They post to Reddit communities that On has no relationship with. The running that happens in On shoes (the data, the community, the identity, the culture) all of it accumulates somewhere else. Nike understood this fifteen years ago and built NRC. Adidas understood it and built Runtastic. On has remained, at the digital layer, a transaction. A beautiful transaction. But only a transaction.</p>
       </div>
       <div class="cs-stats cs-stats-4">
         <div class="cs-stat-cell">
           <div class="cs-stat-num">0</div>
           <div class="cs-stat-eyebrow">01 · The Standard Gap</div>
-          <div class="cs-stat-label">Owned digital surfaces where On's craft standard — Swiss precision, no excess, form earning function — is reflected back to the runner after the purchase. The hardware has a philosophy. The software has nothing.</div>
+          <div class="cs-stat-label">Owned digital surfaces where On's craft standard (Swiss precision, no excess, form earning function) is reflected back to the runner after the purchase. The hardware has a philosophy. The software has nothing.</div>
         </div>
         <div class="cs-stat-cell">
           <div class="cs-stat-num">NRC</div>
           <div class="cs-stat-eyebrow">02 · The Platform Gap</div>
-          <div class="cs-stat-label">Nike owns aspiration. Strava owns data. Garmin owns hardware precision. The specific territory On occupies — aesthetic intentionality, movement as identity, design-forward running culture — has no platform home.</div>
+          <div class="cs-stat-label">Nike owns aspiration. Strava owns data. Garmin owns hardware precision. The specific territory On occupies (aesthetic intentionality, movement as identity, design-forward running culture) has no platform home.</div>
         </div>
         <div class="cs-stat-cell">
           <div class="cs-stat-num">↑47%</div>
@@ -495,7 +495,7 @@ footer { padding: 32px 48px; border-top: 1px solid var(--g200); display: flex; j
         </div>
       </div>
       <div class="cs-pull-quote">&ldquo;On engineers the most precise running hardware in the world. Then hands its runners a third-party app to experience what they made.&rdquo;</div>
-      <p class="cs-body">The competitive context makes the gap more urgent. Nike Run Club is not a competitor On can beat on fitness features — it has a decade of head start and Nike's full media apparatus behind it. On cannot win by building a better GPS tracker or a more gamified leaderboard. What On can build — what only On can build — is a platform that holds itself to On's own standard. Minimal. Precise. Designed around movement as a human act, not a performance metric. The question On Apex answers is not "how do we compete with Strava?" It is: "what does software look like when it's built the way On builds shoes?"</p>
+      <p class="cs-body">The competitive context makes the gap more urgent. Nike Run Club is not a competitor On can beat on fitness features (it has a decade of head start and Nike's full media apparatus behind it. On cannot win by building a better GPS tracker or a more gamified leaderboard. What On can build) what only On can build: is a platform that holds itself to On's own standard. Minimal. Precise. Designed around movement as a human act, not a performance metric. The question On Apex answers is not "how do we compete with Strava?" It is: "what does software look like when it's built the way On builds shoes?"</p>
     </section>
 
     <!-- ══ 02 THE INSIGHT ══ -->
@@ -504,14 +504,14 @@ footer { padding: 32px 48px; border-top: 1px solid var(--g200); display: flex; j
       <h2 class="cs-heading-serif">Movement is the act. <em>The shoe is the object. The platform is the witness.</em></h2>
       <div class="cs-pull-quote">&ldquo;On runners don&rsquo;t run to compete with each other. They run to become a version of themselves. The platform needs to understand the difference.&rdquo;</div>
       <div class="cs-body-2col">
-        <p>The insight that separates On Apex from every existing running platform is a belief about why people run. Strava is built on the premise that runners are primarily motivated by performance comparison — KOMs, segments, leaderboards, the implicit question of how you rank. Nike Run Club is built on aspiration — the brand halo, the motivation overlays, the celebrity run guides. Both are valid products for large portions of the running market. Neither is the right product for On's runner, who chose On precisely because they are not that runner. The On runner chose a shoe designed in Switzerland, engineered for the sensation of movement, finished without ornamentation. That choice is a statement about values. The platform needs to honor it.</p>
-        <p>The second insight is about what makes On's position defensible. Any app can add GPS tracking. Any app can build a social feed. What no other app can do is make the shoe the identity unit — because no other app has On's shoe portfolio, On's brand permission, and the specific psychographic of runner that On attracts. The Cloudmonster runner and the Cloudgo runner are different people with different relationships to performance, aesthetics, and community. Apex knows the difference at the data level. That specificity is the moat. Not the technology. The specificity.</p>
+        <p>The insight that separates On Apex from every existing running platform is a belief about why people run. Strava is built on the premise that runners are primarily motivated by performance comparison (KOMs, segments, leaderboards, the implicit question of how you rank. Nike Run Club is built on aspiration) the brand halo, the motivation overlays, the celebrity run guides. Both are valid products for large portions of the running market. Neither is the right product for On's runner, who chose On precisely because they are not that runner. The On runner chose a shoe designed in Switzerland, engineered for the sensation of movement, finished without ornamentation. That choice is a statement about values. The platform needs to honor it.</p>
+        <p>The second insight is about what makes On's position defensible. Any app can add GPS tracking. Any app can build a social feed. What no other app can do is make the shoe the identity unit: because no other app has On's shoe portfolio, On's brand permission, and the specific psychographic of runner that On attracts. The Cloudmonster runner and the Cloudgo runner are different people with different relationships to performance, aesthetics, and community. Apex knows the difference at the data level. That specificity is the moat. Not the technology. The specificity.</p>
       </div>
       <div class="cs-stats cs-stats-3">
         <div class="cs-stat-cell">
           <div class="cs-stat-num">Act</div>
           <div class="cs-stat-eyebrow">Insight 01 · Movement as Expression</div>
-          <div class="cs-stat-label">On runners run to express something — an aesthetic, a discipline, a relationship to their own body in motion. The platform's job is to witness that, not to rank it. No KOM. No trophy. No gamification chrome.</div>
+          <div class="cs-stat-label">On runners run to express something: an aesthetic, a discipline, a relationship to their own body in motion. The platform's job is to witness that, not to rank it. No KOM. No trophy. No gamification chrome.</div>
         </div>
         <div class="cs-stat-cell">
           <div class="cs-stat-num">Swiss</div>
@@ -521,41 +521,41 @@ footer { padding: 32px 48px; border-top: 1px solid var(--g200); display: flex; j
         <div class="cs-stat-cell">
           <div class="cs-stat-num">Open</div>
           <div class="cs-stat-eyebrow">Insight 03 · The Untaken Territory</div>
-          <div class="cs-stat-label">Nike owns aspiration. Strava owns data. The territory no platform owns — aesthetic intentionality, movement as identity, design-forward running culture — is exactly where On lives. Apex plants the flag there.</div>
+          <div class="cs-stat-label">Nike owns aspiration. Strava owns data. The territory no platform owns (aesthetic intentionality, movement as identity, design-forward running culture) is exactly where On lives. Apex plants the flag there.</div>
         </div>
       </div>
-      <p class="cs-body">The design system reflects this thesis at every level. The split mode — white for community and identity, black for the active run — is not a dark mode feature. It is a statement that the run is a different register of experience from everything that surrounds it. The scanning line on the run screen, the instrument-grade metric grid, the blinking colon that switches rather than fades — these are not aesthetic choices. They are the software equivalent of the Speedboard's flex geometry: every element doing exactly what it needs to do, nothing performing for its own sake. The app is built the way On builds shoes. That is the insight and the product simultaneously.</p>
+      <p class="cs-body">The design system reflects this thesis at every level. The split mode (white for community and identity, black for the active run) is not a dark mode feature. It is a statement that the run is a different register of experience from everything that surrounds it. The scanning line on the run screen, the instrument-grade metric grid, the blinking colon that switches rather than fades: these are not aesthetic choices. They are the software equivalent of the Speedboard's flex geometry: every element doing exactly what it needs to do, nothing performing for its own sake. The app is built the way On builds shoes. That is the insight and the product simultaneously.</p>
     </section>
 
     <!-- ══ 03 THE USERS ══ -->
     <section class="cs-section" id="cs-users" data-cs-section="cs-users">
       <div class="cs-section-eyebrow"><span class="cs-section-num">03</span><span class="cs-section-title">The Users</span></div>
       <h2 class="cs-heading-serif">Three runners. <em>One relationship to movement.</em></h2>
-      <p class="cs-body" style="margin-bottom:32px;">What unites On's three distinct runner psychographics is not their pace, their mileage, or their competitive drive. It is a shared belief that the act of running means something — that it is a form of self-expression that deserves to be treated with care. The brand they chose reflects that belief. The platform they use every day doesn't. On Apex is built for the runner who made that choice deliberately, and who notices when the software around the hardware doesn't match.</p>
+      <p class="cs-body" style="margin-bottom:32px;">What unites On's three distinct runner psychographics is not their pace, their mileage, or their competitive drive. It is a shared belief that the act of running means something: that it is a form of self-expression that deserves to be treated with care. The brand they chose reflects that belief. The platform they use every day doesn't. On Apex is built for the runner who made that choice deliberately, and who notices when the software around the hardware doesn't match.</p>
 
       <div class="persona-grid">
         <div class="persona-card">
           <div class="persona-card-tier">Persona A · Aesthetic Athlete</div>
           <div class="persona-card-name">Elena L.</div>
           <div class="persona-card-city">28–36 · Urban · CloudSurfer / Cloudgo</div>
-          <div class="persona-card-quote">"I chose On because the design reflects how I think about movement. I want the app to feel the same way — not like a spreadsheet, not like a leaderboard. Like something that was made for me."</div>
-          <div class="persona-card-detail">Runs 4x/week. Posts routes. Chose On for the design before the technology. The visual language of the brand — Swiss precision, restraint as authority, nothing decorative — maps exactly to how she thinks about her running. She wants community that holds the same standard.</div>
-          <div class="persona-card-tension">Core tension: Every existing platform treats her like a fitness enthusiast. She is not a fitness enthusiast. She is someone for whom movement is aesthetic practice. No platform speaks to that distinction — yet.</div>
+          <div class="persona-card-quote">"I chose On because the design reflects how I think about movement. I want the app to feel the same way (not like a spreadsheet, not like a leaderboard. Like something that was made for me."</div>
+          <div class="persona-card-detail">Runs 4x/week. Posts routes. Chose On for the design before the technology. The visual language of the brand) Swiss precision, restraint as authority, nothing decorative (maps exactly to how she thinks about her running. She wants community that holds the same standard.</div>
+          <div class="persona-card-tension">Core tension: Every existing platform treats her like a fitness enthusiast. She is not a fitness enthusiast. She is someone for whom movement is aesthetic practice. No platform speaks to that distinction) yet.</div>
         </div>
         <div class="persona-card">
           <div class="persona-card-tier">Persona B · Data-Driven Competitor</div>
           <div class="persona-card-name">Marcus R.</div>
           <div class="persona-card-city">32–44 · Suburban · Cloudmonster / Cloudflow</div>
-          <div class="persona-card-quote">"I train with data because I respect the work enough to measure it. I wear On because the shoe is precise. I want a platform that holds the same standard — not more chrome, more precision."</div>
-          <div class="persona-card-detail">Trains for half marathons. Strava power user. Chose On because he trusts the engineering — the CloudTec geometry, the Helion foam, the specificity of each model for a specific kind of running. Wants performance data presented with the same directness the shoe delivers it.</div>
-          <div class="persona-card-tension">Core tension: Strava gives him data but no brand context. The shoe he runs in shapes how he performs — but no platform reflects that relationship back at him. Apex makes the shoe visible in the data.</div>
+          <div class="persona-card-quote">"I train with data because I respect the work enough to measure it. I wear On because the shoe is precise. I want a platform that holds the same standard (not more chrome, more precision."</div>
+          <div class="persona-card-detail">Trains for half marathons. Strava power user. Chose On because he trusts the engineering) the CloudTec geometry, the Helion foam, the specificity of each model for a specific kind of running. Wants performance data presented with the same directness the shoe delivers it.</div>
+          <div class="persona-card-tension">Core tension: Strava gives him data but no brand context. The shoe he runs in shapes how he performs, but no platform reflects that relationship back at him. Apex makes the shoe visible in the data.</div>
         </div>
         <div class="persona-card">
           <div class="persona-card-tier">Persona C · Community Connector</div>
           <div class="persona-card-name">Jamie K.</div>
           <div class="persona-card-city">24–34 · Urban · Group Runner · Any Model</div>
-          <div class="persona-card-quote">"Running is the most honest thing I do. It's also the most social. I want a place to share that with people who understand what it means — not just who ran furthest."</div>
-          <div class="persona-card-detail">Organizes club runs. Views movement as social ritual. The On shoe is the badge of belonging — the signal to other runners that you share a particular relationship to the craft. Wants a community built around shared values, not shared metrics.</div>
+          <div class="persona-card-quote">"Running is the most honest thing I do. It's also the most social. I want a place to share that with people who understand what it means (not just who ran furthest."</div>
+          <div class="persona-card-detail">Organizes club runs. Views movement as social ritual. The On shoe is the badge of belonging) the signal to other runners that you share a particular relationship to the craft. Wants a community built around shared values, not shared metrics.</div>
           <div class="persona-card-tension">Core tension: The club he's building lives across five platforms and two group chats. None of them reflect the culture of the brand. Apex unifies the coordination, the identity, and the expression in a single surface that finally matches the shoes.</div>
         </div>
       </div>
@@ -566,49 +566,49 @@ footer { padding: 32px 48px; border-top: 1px solid var(--g200); display: flex; j
     <section class="cs-section cs-section-alt" id="cs-product" data-cs-section="cs-product">
       <div class="cs-section-eyebrow"><span class="cs-section-num">04</span><span class="cs-section-title">The Product</span></div>
       <h2 class="cs-heading-serif">Six P0 features. <em>Four P1. One rule.</em></h2>
-      <p class="cs-body" style="margin-bottom:8px;">The PRD scopes three phases with an explicit dependency chain. Phase 1 ships the core loop — Activity Log, Shoe Garage, Social Feed, Onboarding, Pre-Run Screen, Profile. Each feature enables the next: the run produces data; the data feeds the Garage; the Garage earns the commerce trigger; the community retains the runner who generates the next run. Phase 2 adds the social infrastructure — Apex Clubs, Challenges, Events, Routes — but only once Phase 1 has produced the behavioral data that justifies their design. Phase 3 integrates commerce. The rule: no Phase 2 feature exists before Phase 1 is proven. No Phase 3 feature enters the app without the contextual data to justify its placement. Shipping in the wrong order produces a product where features exist but don't connect.</p>
+      <p class="cs-body" style="margin-bottom:8px;">The PRD scopes three phases with an explicit dependency chain. Phase 1 ships the core loop (Activity Log, Shoe Garage, Social Feed, Onboarding, Pre-Run Screen, Profile. Each feature enables the next: the run produces data; the data feeds the Garage; the Garage earns the commerce trigger; the community retains the runner who generates the next run. Phase 2 adds the social infrastructure) Apex Clubs, Challenges, Events, Routes, but only once Phase 1 has produced the behavioral data that justifies their design. Phase 3 integrates commerce. The rule: no Phase 2 feature exists before Phase 1 is proven. No Phase 3 feature enters the app without the contextual data to justify its placement. Shipping in the wrong order produces a product where features exist but don't connect.</p>
 
       <div class="priority-grid" style="margin-top:28px;">
         <div class="priority-card core">
           <div class="priority-tag p0">P0 · Phase 1 · MVP</div>
-          <div class="priority-feature">Activity Log — GPS Tracking</div>
-          <div class="priority-desc">Live run simulation with pace, HR, cadence, zone bars, and route map. Post-run summary with On-branded visual output designed to be shared. The core product loop — without a run, nothing else in the app has meaning.</div>
+          <div class="priority-feature">Activity Log (GPS Tracking</div>
+          <div class="priority-desc">Live run simulation with pace, HR, cadence, zone bars, and route map. Post-run summary with On-branded visual output designed to be shared. The core product loop) without a run, nothing else in the app has meaning.</div>
           <div class="priority-prd">PRD: Phase 1 P0 · Prerequisite for all behavioral data</div>
         </div>
         <div class="priority-card core">
           <div class="priority-tag p0">P0 · Phase 1 · MVP</div>
-          <div class="priority-feature">Shoe Garage — Mileage Tracking</div>
-          <div class="priority-desc">Register On shoes from order history via SSO. Auto-track mileage per shoe across every logged run. Amber wear warnings at configurable thresholds. Deep-link to on.com for replacement — no in-app checkout. Cyclon integration for circular returns.</div>
+          <div class="priority-feature">Shoe Garage (Mileage Tracking</div>
+          <div class="priority-desc">Register On shoes from order history via SSO. Auto-track mileage per shoe across every logged run. Amber wear warnings at configurable thresholds. Deep-link to on.com for replacement) no in-app checkout. Cyclon integration for circular returns.</div>
           <div class="priority-prd">PRD: Phase 1 P0 · Primary commerce loop trigger</div>
         </div>
         <div class="priority-card core">
           <div class="priority-tag p0">P0 · Phase 1 · MVP</div>
-          <div class="priority-feature">Social Feed — Reactions System</div>
-          <div class="priority-desc">Activity cards with shoe attribution, run type color coding, PR badges. On-native reactions — Push, Solid, Pace, Zone, Respect — replacing generic hearts. Pull-to-refresh with skeleton loading. Long press for contextual share/edit/delete.</div>
+          <div class="priority-feature">Social Feed (Reactions System</div>
+          <div class="priority-desc">Activity cards with shoe attribution, run type color coding, PR badges. On-native reactions) Push, Solid, Pace, Zone, Respect: replacing generic hearts. Pull-to-refresh with skeleton loading. Long press for contextual share/edit/delete.</div>
           <div class="priority-prd">PRD: Phase 1 P0 · No follower counts as status · No KOM system</div>
         </div>
         <div class="priority-card core">
           <div class="priority-tag p0">P0 · Phase 1 · MVP</div>
           <div class="priority-feature">3-Screen Onboarding</div>
-          <div class="priority-desc">Welcome on black (mode sets expectations). Shoe selection on white (the first identity moment). Goal-setting plus follow suggestions (community seeding). Data carries forward into every surface — shoe appears in pre-run, post-run, and garage.</div>
+          <div class="priority-desc">Welcome on black (mode sets expectations). Shoe selection on white (the first identity moment). Goal-setting plus follow suggestions (community seeding). Data carries forward into every surface: shoe appears in pre-run, post-run, and garage.</div>
           <div class="priority-prd">PRD: Phase 1 P0 · 70% shoe registration rate is a 90-day success metric</div>
         </div>
         <div class="priority-card core">
           <div class="priority-tag p0">P0 · Phase 1 · MVP</div>
           <div class="priority-feature">Pre-Run Screen + Shoe Select</div>
-          <div class="priority-desc">GPS lock animation with expanding ring pulses. Shoe selector sheet before the clock starts. Start button disabled and grey until GPS locks — no ambiguity about state. This screen was missing from every prior version and missing from Flow 1 in the PRD.</div>
+          <div class="priority-desc">GPS lock animation with expanding ring pulses. Shoe selector sheet before the clock starts. Start button disabled and grey until GPS locks: no ambiguity about state. This screen was missing from every prior version and missing from Flow 1 in the PRD.</div>
           <div class="priority-prd">PRD: Flow 1, Step 2 · GPS Lock + Shoe Select · Previously unbuilt</div>
         </div>
         <div class="priority-card core">
           <div class="priority-tag p0">P0 · Phase 1 · MVP</div>
           <div class="priority-feature">Profile + Stats Dashboard</div>
-          <div class="priority-desc">Editorial black header. Weekly/monthly/YTD stats. Animated 6-month bar chart. YTD grid. Goal progress bar. Shareable stat card with ghost type. On SSO connection indicator. Connected to On account — orders sync automatically.</div>
+          <div class="priority-desc">Editorial black header. Weekly/monthly/YTD stats. Animated 6-month bar chart. YTD grid. Goal progress bar. Shareable stat card with ghost type. On SSO connection indicator. Connected to On account (orders sync automatically.</div>
           <div class="priority-prd">PRD: Phase 1 P0 · Shareable stat card is a retention mechanic</div>
         </div>
         <div class="priority-card supporting">
           <div class="priority-tag p1">P1 · Phase 2 · Community Layer</div>
-          <div class="priority-feature">Apex Clubs — Full Implementation</div>
-          <div class="priority-desc">Geo-located running clubs with group leaderboard, club identity, club run scheduling, and RSVP. Not a flat activity feed labeled "Apex Clubs" — a full club infrastructure with ranked members, upcoming runs, and crew formation.</div>
+          <div class="priority-feature">Apex Clubs) Full Implementation</div>
+          <div class="priority-desc">Geo-located running clubs with group leaderboard, club identity, club run scheduling, and RSVP. Not a flat activity feed labeled "Apex Clubs": a full club infrastructure with ranked members, upcoming runs, and crew formation.</div>
           <div class="priority-prd">PRD: Phase 2 P1 · Group leaderboard · Club run scheduling · RSVP</div>
         </div>
         <div class="priority-card supporting">
@@ -625,8 +625,8 @@ footer { padding: 32px 48px; border-top: 1px solid var(--g200); display: flex; j
         </div>
         <div class="priority-card deferred">
           <div class="priority-tag deferred">Phase 3 · Deferred · Context Only</div>
-          <div class="priority-feature">Commerce Integration — Deep Link Only</div>
-          <div class="priority-desc">No in-app checkout. No product catalog. No advertising. The only commerce surface in the app is a deep-link to on.com, triggered by a mileage threshold in the Shoe Garage, earned by behavioral data. Commerce is the consequence of the platform working — not its purpose.</div>
+          <div class="priority-feature">Commerce Integration (Deep Link Only</div>
+          <div class="priority-desc">No in-app checkout. No product catalog. No advertising. The only commerce surface in the app is a deep-link to on.com, triggered by a mileage threshold in the Shoe Garage, earned by behavioral data. Commerce is the consequence of the platform working) not its purpose.</div>
           <div class="priority-prd">PRD: Constraint · Deep-link to on.com only · No in-app checkout in Phase 1 or 2</div>
         </div>
       </div>
@@ -637,8 +637,8 @@ footer { padding: 32px 48px; border-top: 1px solid var(--g200); display: flex; j
       <div class="cs-section-eyebrow"><span class="cs-section-num">05</span><span class="cs-section-title">Design System</span></div>
       <h2 class="cs-heading-serif">A Molecular Design System built for <em>two registers.</em></h2>
       <div class="cs-body-2col">
-        <p>The Molecular Design System was built alongside the PRD, not after it. Every token, component, and pattern was derived from a specific user need — the split mode system exists because of the persona strategy, not because dark mode is fashionable. Light mode (#F7F7F3 base, #FFFFFF card surface) serves the architectural register: community, discovery, identity. Dark mode (#050505 base, #0E0E0E card surface) serves the instrument register: active run, pre-run GPS lock, onboarding threshold moment.</p>
-        <p>Three typefaces carry three distinct roles. Bebas Neue is display-only — large numbers, screen titles, the 116px weekly km that is the home screen's entire argument. DM Mono handles all metadata: pace labels, distances, dates, status indicators. DM Sans carries body copy, names, and conversational text. No typeface crosses into another's territory. The volt accent (#E8FF3C) appears a maximum of three times per screen — always on a dark surface, always earning its presence.</p>
+        <p>The Molecular Design System was built alongside the PRD, not after it. Every token, component, and pattern was derived from a specific user need: the split mode system exists because of the persona strategy, not because dark mode is fashionable. Light mode (#F7F7F3 base, #FFFFFF card surface) serves the architectural register: community, discovery, identity. Dark mode (#050505 base, #0E0E0E card surface) serves the instrument register: active run, pre-run GPS lock, onboarding threshold moment.</p>
+        <p>Three typefaces carry three distinct roles. Bebas Neue is display-only (large numbers, screen titles, the 116px weekly km that is the home screen's entire argument. DM Mono handles all metadata: pace labels, distances, dates, status indicators. DM Sans carries body copy, names, and conversational text. No typeface crosses into another's territory. The volt accent (#E8FF3C) appears a maximum of three times per screen) always on a dark surface, always earning its presence.</p>
       </div>
 
       <!-- Mode split demo -->
@@ -678,7 +678,7 @@ footer { padding: 32px 48px; border-top: 1px solid var(--g200); display: flex; j
         <div class="cs-stat-cell">
           <div class="cs-stat-eyebrow">Mode System</div>
           <div class="cs-stat-num">2</div>
-          <div class="cs-stat-label">Split mode: Light (community/data) and Dark (active run/GPS). The transition is a product mechanic — not a preference setting.</div>
+          <div class="cs-stat-label">Split mode: Light (community/data) and Dark (active run/GPS). The transition is a product mechanic: not a preference setting.</div>
         </div>
         <div class="cs-stat-cell">
           <div class="cs-stat-eyebrow">Volt Rule</div>
@@ -688,7 +688,7 @@ footer { padding: 32px 48px; border-top: 1px solid var(--g200); display: flex; j
         <div class="cs-stat-cell">
           <div class="cs-stat-eyebrow">Radius</div>
           <div class="cs-stat-num">0px</div>
-          <div class="cs-stat-label">Zero border-radius throughout. Everywhere. On's Swiss-minimalist visual identity rendered at the component level — architecture, not decoration.</div>
+          <div class="cs-stat-label">Zero border-radius throughout. Everywhere. On's Swiss-minimalist visual identity rendered at the component level: architecture, not decoration.</div>
         </div>
         <div class="cs-stat-cell">
           <div class="cs-stat-eyebrow">Interaction Patterns</div>
@@ -723,9 +723,9 @@ footer { padding: 32px 48px; border-top: 1px solid var(--g200); display: flex; j
         </div>
       </div>
 
-      <!-- Token documentation — surfaced from MDS -->
+      <!-- Token documentation · surfaced from MDS -->
       <div style="margin-bottom:28px;">
-        <div style="font-size:8px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--g300);margin-bottom:14px;font-family:var(--mono);">Key Token Decisions — Light → Dark Mapping</div>
+        <div style="font-size:8px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--g300);margin-bottom:14px;font-family:var(--mono);">Key Token Decisions, Light → Dark Mapping</div>
         <table class="cs-table" style="margin-bottom:0;">
           <thead>
             <tr><th>Token</th><th>Light Value</th><th>Dark Value</th><th>Role &amp; Rationale</th></tr>
@@ -734,8 +734,8 @@ footer { padding: 32px 48px; border-top: 1px solid var(--g200); display: flex; j
             <tr><td>surface-primary</td><td>#F7F7F3</td><td>#050505</td><td>Off-white base keeps light mode warm, not clinical. Near-black base gives dark mode depth without pure black harshness.</td></tr>
             <tr><td>surface-card</td><td>#FFFFFF</td><td>#0E0E0E</td><td>Pure white cards on warm grey base creates the elevation contrast the architectural register depends on.</td></tr>
             <tr><td>ink-primary</td><td>#0A0A0A</td><td>#F0F0EA</td><td>Near-black ink on light, warm white on dark. Both pass WCAG AAA at 18:1+ contrast ratio.</td></tr>
-            <tr><td>brand-volt</td><td>#E8FF3C</td><td>#E8FF3C</td><td>Mode-invariant. Volt was designed for dark surfaces — it earns equal authority on white at maximum restraint (≤3 instances per screen).</td></tr>
-            <tr><td>semantic-warn</td><td>#B85800</td><td>#E89030</td><td>Amber in light mode passes AA contrast on white. Lightened for dark mode to maintain same visual weight against near-black. Used exclusively for shoe retirement — completion, not alarm.</td></tr>
+            <tr><td>brand-volt</td><td>#E8FF3C</td><td>#E8FF3C</td><td>Mode-invariant. Volt was designed for dark surfaces (it earns equal authority on white at maximum restraint (≤3 instances per screen).</td></tr>
+            <tr><td>semantic-warn</td><td>#B85800</td><td>#E89030</td><td>Amber in light mode passes AA contrast on white. Lightened for dark mode to maintain same visual weight against near-black. Used exclusively for shoe retirement) completion, not alarm.</td></tr>
           </tbody>
         </table>
       </div>
@@ -773,28 +773,28 @@ footer { padding: 32px 48px; border-top: 1px solid var(--g200); display: flex; j
             <div class="proto-step-num">01</div>
             <div class="proto-step-body">
               <div class="proto-step-title">Open App</div>
-              <div class="proto-step-desc">The app opens to white mode. The weekly km number resolves before anything else &mdash; at 116px in Bebas Neue, it earns its authority before the rest of the screen loads. Staggered reveal animations (greeting at 60ms, name at 100ms, number at 160ms) give the screen weight arriving, not popping in. The week strip, recent runs, and shoe nudge follow in order of importance. Every element has a single job.</div>
+              <div class="proto-step-desc">The app opens to white mode. The weekly km number resolves before anything else: at 116px in Bebas Neue, it earns its authority before the rest of the screen loads. Staggered reveal animations (greeting at 60ms, name at 100ms, number at 160ms) give the screen weight arriving, not popping in. The week strip, recent runs, and shoe nudge follow in order of importance. Every element has a single job.</div>
             </div>
           </div>
           <div class="proto-step" data-step="2" data-src="/work/on-apex-app"><!-- TODO: replace with on-app.html#screen-N once anchor ids are added -->
             <div class="proto-step-num">02</div>
             <div class="proto-step-body">
               <div class="proto-step-title">Pre-Run</div>
-              <div class="proto-step-desc">The Start button in the nav goes to Pre-Run, not directly to the Active Run clock. This was the missing step in every prior version of the PRD. GPS lock animation plays &mdash; expanding ring pulses at 0.55s intervals. The shoe selector defaults to the user&rsquo;s registered shoe but can be changed via a sheet modal. The Start button remains greyed out until GPS locks. The transition from Pre-Run to Active Run is the moment the world turns black.</div>
+              <div class="proto-step-desc">The Start button in the nav goes to Pre-Run, not directly to the Active Run clock. This was the missing step in every prior version of the PRD. GPS lock animation plays: expanding ring pulses at 0.55s intervals. The shoe selector defaults to the user&rsquo;s registered shoe but can be changed via a sheet modal. The Start button remains greyed out until GPS locks. The transition from Pre-Run to Active Run is the moment the world turns black.</div>
             </div>
           </div>
           <div class="proto-step" data-step="3" data-src="/work/on-apex-app"><!-- TODO: replace with on-app.html#screen-N once anchor ids are added -->
             <div class="proto-step-num">03</div>
             <div class="proto-step-body">
               <div class="proto-step-title">Active Run</div>
-              <div class="proto-step-desc">The run screen is black. A scanning line at 3.4s interval gives the screen live-data signal. Pace fluctuates &plusmn;8 sec/km per tick. HR drifts &plusmn;4 bpm. Cadence &plusmn;3 spm. Zone bars update in real time as the simulation runs. The Dynamic Island expands with a blinking volt dot and the live clock. Tapping the map opens a full-screen overlay with scale-origin animation. The Finish button is volt-on-black &mdash; the only bright thing on the screen.</div>
+              <div class="proto-step-desc">The run screen is black. A scanning line at 3.4s interval gives the screen live-data signal. Pace fluctuates &plusmn;8 sec/km per tick. HR drifts &plusmn;4 bpm. Cadence &plusmn;3 spm. Zone bars update in real time as the simulation runs. The Dynamic Island expands with a blinking volt dot and the live clock. Tapping the map opens a full-screen overlay with scale-origin animation. The Finish button is volt-on-black: the only bright thing on the screen.</div>
             </div>
           </div>
           <div class="proto-step" data-step="4" data-src="/work/on-apex-app"><!-- TODO: replace with on-app.html#screen-N once anchor ids are added -->
             <div class="proto-step-num">04</div>
             <div class="proto-step-body">
               <div class="proto-step-title">Post-Run</div>
-              <div class="proto-step-desc">The world returns to white. The post-run summary is an editorial screen &mdash; designed to be screenshotted and shared. PR badge volt-pop animation arrives 750ms after mount. The shoe is present in every summary &mdash; mileage bar, km remaining. If the runner is near threshold, the bar is amber. No prompt, no CTA. Just the data. The share sheet generates a branded card with ghost type and a volt On Apex tag. Toast fires on save.</div>
+              <div class="proto-step-desc">The world returns to white. The post-run summary is an editorial screen (designed to be screenshotted and shared. PR badge volt-pop animation arrives 750ms after mount. The shoe is present in every summary) mileage bar, km remaining. If the runner is near threshold, the bar is amber. No prompt, no CTA. Just the data. The share sheet generates a branded card with ghost type and a volt On Apex tag. Toast fires on save.</div>
             </div>
           </div>
           <div class="proto-step" data-step="5" data-src="/work/on-apex-app"><!-- TODO: replace with on-app.html#screen-N once anchor ids are added -->
@@ -815,7 +815,7 @@ footer { padding: 32px 48px; border-top: 1px solid var(--g200); display: flex; j
             <div class="proto-step-num">07</div>
             <div class="proto-step-body">
               <div class="proto-step-title">Retire + Replace</div>
-              <div class="proto-step-desc">When a shoe crosses 75% of its mileage goal, the bar turns amber. At 90%, red. The retire prompt appears in the Garage as an inverted black card with an amber dot &mdash; completion, not alarm. Two options: &ldquo;Shop on.com &rarr;&rdquo; (deep link, no in-app checkout, ever) and &ldquo;Cyclon ♻&rdquo; (circular return program). The Cyclon sheet shows the subscription details and a join CTA. Toast fires on join: &ldquo;Cyclon request sent ♻&rdquo;. This is the entire commerce strategy &mdash; contextual, earned, never promotional.</div>
+              <div class="proto-step-desc">When a shoe crosses 75% of its mileage goal, the bar turns amber. At 90%, red. The retire prompt appears in the Garage as an inverted black card with an amber dot (completion, not alarm. Two options: &ldquo;Shop on.com &rarr;&rdquo; (deep link, no in-app checkout, ever) and &ldquo;Cyclon ♻&rdquo; (circular return program). The Cyclon sheet shows the subscription details and a join CTA. Toast fires on join: &ldquo;Cyclon request sent ♻&rdquo;. This is the entire commerce strategy) contextual, earned, never promotional.</div>
             </div>
           </div>
         </div>
@@ -826,7 +826,7 @@ footer { padding: 32px 48px; border-top: 1px solid var(--g200); display: flex; j
     <section class="cs-section" id="cs-decisions" data-cs-section="cs-decisions">
       <div class="cs-section-eyebrow"><span class="cs-section-num">06</span><span class="cs-section-title">Decision Log</span></div>
       <h2 class="cs-heading-serif">Build scope</h2>
-      <p class="cs-body" style="margin-bottom:32px;">Product decisions are only credible when documented with the tradeoff accepted — not just the choice made. This log covers every significant decision in the PRD, design system, and prototype, including the features that were cut from Phase 1 and the reasons they were not premature inclusions.</p>
+      <p class="cs-body" style="margin-bottom:32px;">Product decisions are only credible when documented with the tradeoff accepted: not just the choice made. This log covers every significant decision in the PRD, design system, and prototype, including the features that were cut from Phase 1 and the reasons they were not premature inclusions.</p>
 
       <table class="decision-log">
         <thead>
@@ -841,19 +841,19 @@ footer { padding: 32px 48px; border-top: 1px solid var(--g200); display: flex; j
           <tr class="shipped">
             <td>Split Mode System</td>
             <td>White mode for Home, Garage, Post-Run, Feed. Black mode for Active Run, Pre-Run, Onboarding. The transition is a product mechanic, not a user preference setting.</td>
-            <td>More engineering complexity than a single-mode app. Required: the mode transition is how the app communicates "you're in the work now" — no other signal makes that moment as clear or as brand-specific.</td>
+            <td>More engineering complexity than a single-mode app. Required: the mode transition is how the app communicates "you're in the work now" (no other signal makes that moment as clear or as brand-specific.</td>
             <td><span class="decision-status shipped">Shipped</span></td>
           </tr>
           <tr class="shipped">
             <td>Reactions, Not Likes</td>
-            <td>Five On-native reactions — Push 🔥, Solid ✊, Pace ⚡, Zone 🏔, Respect ✓ — replace the universal heart. Each reaction names a specific thing a runner might feel about another runner's effort.</td>
-            <td>Unfamiliar interaction pattern requires user education. Required: the PRD constraint is explicit — the app must not feel like a Strava clone. Generic hearts are the Strava pattern. On-native reactions are the brand differentiator at the interaction level.</td>
+            <td>Five On-native reactions) Push 🔥, Solid ✊, Pace ⚡, Zone 🏔, Respect ✓ (replace the universal heart. Each reaction names a specific thing a runner might feel about another runner's effort.</td>
+            <td>Unfamiliar interaction pattern requires user education. Required: the PRD constraint is explicit) the app must not feel like a Strava clone. Generic hearts are the Strava pattern. On-native reactions are the brand differentiator at the interaction level.</td>
             <td><span class="decision-status shipped">Shipped</span></td>
           </tr>
           <tr class="shipped">
             <td>Pre-Run Screen</td>
             <td>Added Pre-Run as a mandatory step between the Start CTA and the Active Run clock. GPS lock animation, shoe selector, disabled Start until GPS locks.</td>
-            <td>Adds friction to the start-a-run flow — one extra screen. Required: Flow 1 in the PRD specifies "GPS Lock + Shoe Select" as Step 2. Without it, the shoe attribution that powers the Garage is unreliable, and the transition to black mode has no ceremony.</td>
+            <td>Adds friction to the start-a-run flow: one extra screen. Required: Flow 1 in the PRD specifies "GPS Lock + Shoe Select" as Step 2. Without it, the shoe attribution that powers the Garage is unreliable, and the transition to black mode has no ceremony.</td>
             <td><span class="decision-status shipped">Shipped</span></td>
           </tr>
           <tr class="shipped">
@@ -864,29 +864,29 @@ footer { padding: 32px 48px; border-top: 1px solid var(--g200); display: flex; j
           </tr>
           <tr class="shipped">
             <td>Zero Border-Radius</td>
-            <td>No border-radius anywhere in the app. Cards, buttons, inputs, badges, avatars — all square. This is an explicit On brand constraint, not an aesthetic preference.</td>
-            <td>Accessibility research suggests rounded elements feel more approachable. Accepted: the PRD constraint is clear — Swiss-minimalist, no gamification chrome. Rounded corners are the visual language of consumer-friendly apps. Zero radius is the language of Swiss precision instruments.</td>
+            <td>No border-radius anywhere in the app. Cards, buttons, inputs, badges, avatars (all square. This is an explicit On brand constraint, not an aesthetic preference.</td>
+            <td>Accessibility research suggests rounded elements feel more approachable. Accepted: the PRD constraint is clear) Swiss-minimalist, no gamification chrome. Rounded corners are the visual language of consumer-friendly apps. Zero radius is the language of Swiss precision instruments.</td>
             <td><span class="decision-status shipped">Shipped</span></td>
           </tr>
           <tr class="shipped">
-            <td>PWA — Phase 1 Architecture</td>
+            <td>PWA, Phase 1 Architecture</td>
             <td>Phase 1 ships as a Progressive Web App: service worker caching for offline run logging, Web Geolocation API for GPS tracking, Web Vibration API for haptics, manifest.json for home screen install, aggressive install prompting from within on.com. No App Store submission. No native binary. No third-party distribution dependency.</td>
             <td>
               The case for PWA in Phase 1 is a distribution argument, not a capability argument.<br><br>
-              <strong>On's acquisition channel is on.com, not the App Store.</strong> The runner who chooses On does so deliberately — they arrive via the website, they research CloudTec, they know the model they want before they buy it. The install prompt inside that owned relationship converts an already-engaged audience. An App Store listing converts a cold search audience surrounded by Nike ads, Strava featured placements, and Garmin promotions. The two distribution surfaces are not equivalent. On's is better.<br><br>
-              <strong>App Store review cycle kills Phase 1 iteration velocity.</strong> A new product finding product-market fit needs to ship fixes and experiments weekly. App Store review averages 1–3 days per submission, with rejection risk on each. A PWA deploys in minutes, updates invisibly to the user, and iterates without a gatekeeper. For Phase 1 — where the onboarding flow, reaction system, and shoe registration UX will all need rapid iteration based on real user behavior — this is not a minor advantage.<br><br>
-              <strong>Note on App Store commerce fees:</strong> Apple's 30% commission applies exclusively to digital goods and in-app subscriptions — not physical product transactions. Fashion apps (ASOS, Farfetch, Depop) and running apps (Nike) sell physical goods natively without App Store commission. This is not a factor in the PWA decision for Apex, whose only commerce surface is a deep-link to on.com for physical shoe purchases.<br><br>
-              <strong>Capability tradeoffs accepted:</strong> Web Geolocation API cannot run in the background — the screen must stay active during a run. Push notifications are less reliable than native APNs. No HealthKit or Garmin Connect API access without a native layer. These are real costs. They are acceptable in Phase 1 because the core loop — log a run, track a shoe, build community — does not require background GPS or wearable sync. Phase 3 ships native.
+              <strong>On's acquisition channel is on.com, not the App Store.</strong> The runner who chooses On does so deliberately: they arrive via the website, they research CloudTec, they know the model they want before they buy it. The install prompt inside that owned relationship converts an already-engaged audience. An App Store listing converts a cold search audience surrounded by Nike ads, Strava featured placements, and Garmin promotions. The two distribution surfaces are not equivalent. On's is better.<br><br>
+              <strong>App Store review cycle kills Phase 1 iteration velocity.</strong> A new product finding product-market fit needs to ship fixes and experiments weekly. App Store review averages 1–3 days per submission, with rejection risk on each. A PWA deploys in minutes, updates invisibly to the user, and iterates without a gatekeeper. For Phase 1 (where the onboarding flow, reaction system, and shoe registration UX will all need rapid iteration based on real user behavior) this is not a minor advantage.<br><br>
+              <strong>Note on App Store commerce fees:</strong> Apple's 30% commission applies exclusively to digital goods and in-app subscriptions: not physical product transactions. Fashion apps (ASOS, Farfetch, Depop) and running apps (Nike) sell physical goods natively without App Store commission. This is not a factor in the PWA decision for Apex, whose only commerce surface is a deep-link to on.com for physical shoe purchases.<br><br>
+              <strong>Capability tradeoffs accepted:</strong> Web Geolocation API cannot run in the background (the screen must stay active during a run. Push notifications are less reliable than native APNs. No HealthKit or Garmin Connect API access without a native layer. These are real costs. They are acceptable in Phase 1 because the core loop) log a run, track a shoe, build community (does not require background GPS or wearable sync. Phase 3 ships native.
             </td>
             <td><span class="decision-status shipped">Shipped · Phase 1</span></td>
           </tr>
           <tr class="deferred">
-            <td>Native App — Phase 3 Roadmap</td>
+            <td>Native App) Phase 3 Roadmap</td>
             <td>React Native or Swift/Kotlin native app with HealthKit and Garmin Connect integration, background GPS tracking, reliable APNs push notifications, Apple Watch complication for live run metrics, and App Store presence for brand legitimacy signal. Deferred to Phase 3.</td>
             <td>
               Native is the right long-term architecture. The question is sequencing.<br><br>
-              Phase 1 needs to prove the core loop works — that runners register shoes, log runs, and return to the community surface — before investing in the higher engineering cost of a dual-platform native build. The behavioral data from Phase 1 (WAU, shoe registration rate, session frequency) directly informs the native app's feature prioritization. Building native before that data exists produces a well-engineered product optimized for the wrong things.<br><br>
-              The Phase 3 trigger is retention: when 35% WAU holds for two consecutive quarters and shoe registration exceeds 70%, the product has proven retention sufficient to justify native investment. At that point, the App Store presence shifts from a distribution channel to a brand legitimacy signal — a top-ranked running app with On's name on it is itself a brand asset, not just a download mechanism.<br><br>
+              Phase 1 needs to prove the core loop works (that runners register shoes, log runs, and return to the community surface) before investing in the higher engineering cost of a dual-platform native build. The behavioral data from Phase 1 (WAU, shoe registration rate, session frequency) directly informs the native app's feature prioritization. Building native before that data exists produces a well-engineered product optimized for the wrong things.<br><br>
+              The Phase 3 trigger is retention: when 35% WAU holds for two consecutive quarters and shoe registration exceeds 70%, the product has proven retention sufficient to justify native investment. At that point, the App Store presence shifts from a distribution channel to a brand legitimacy signal: a top-ranked running app with On's name on it is itself a brand asset, not just a download mechanism.<br><br>
               Precedent: Strava launched mobile web before native. Whoop shipped a simplified app before its current native architecture. The pattern for fitness products is validate on web, scale on native.
             </td>
             <td><span class="decision-status deferred">Deferred · Phase 3</span></td>
@@ -894,19 +894,19 @@ footer { padding: 32px 48px; border-top: 1px solid var(--g200); display: flex; j
           <tr class="shipped">
             <td>Scroll Snap Carousels</td>
             <td>Shoe Garage and Route Library use CSS scroll-snap-type: mandatory horizontal carousels with dot position indicators, replacing the prior vertical stacks. Each card peeks the next at the right edge.</td>
-            <td>Horizontal carousels hide content below the fold. The peek signals scrollability. Shoe cards at full card-width encourage treating each shoe as a primary object, not a list item — which reinforces the shoe-as-identity-layer thesis at the component level.</td>
+            <td>Horizontal carousels hide content below the fold. The peek signals scrollability. Shoe cards at full card-width encourage treating each shoe as a primary object, not a list item: which reinforces the shoe-as-identity-layer thesis at the component level.</td>
             <td><span class="decision-status shipped">Shipped</span></td>
           </tr>
           <tr class="shipped">
             <td>Commerce Constraint</td>
             <td>Deep-link to on.com only. No in-app checkout, no product catalog, no advertising in any phase. The only commerce surface is the Garage retire prompt, triggered by mileage data.</td>
-            <td>Limits near-term revenue potential. Required: On's commerce channel is on.com. Building a competing in-app channel would create a business conflict with On's existing retail model. The commerce constraint protects the partnership and keeps the app's incentive structure aligned — the platform earns on engagement, not transaction.</td>
+            <td>Limits near-term revenue potential. Required: On's commerce channel is on.com. Building a competing in-app channel would create a business conflict with On's existing retail model. The commerce constraint protects the partnership and keeps the app's incentive structure aligned: the platform earns on engagement, not transaction.</td>
             <td><span class="decision-status shipped">Shipped</span></td>
           </tr>
           <tr class="shipped">
             <td>Haptic API</td>
             <td>Web Vibration API wired to every TapBtn with type parameters: light (8ms) for standard taps, medium (18ms) for confirmations and successes, warning (12+8+12ms) for destructive actions.</td>
-            <td>Vibration API not supported across all browsers and PWA contexts. Implemented with graceful fallback — haptic() returns silently if navigator.vibrate is unavailable. The interaction quality improvement on supported devices justifies the implementation cost.</td>
+            <td>Vibration API not supported across all browsers and PWA contexts. Implemented with graceful fallback: haptic() returns silently if navigator.vibrate is unavailable. The interaction quality improvement on supported devices justifies the implementation cost.</td>
             <td><span class="decision-status shipped">Shipped</span></td>
           </tr>
           <tr class="deferred">
@@ -918,19 +918,19 @@ footer { padding: 32px 48px; border-top: 1px solid var(--g200); display: flex; j
           <tr class="deferred">
             <td>On Account SSO</td>
             <td>SSO indicator is present in Profile ("Connected to On account · Orders sync automatically"). The actual OAuth integration with On's account infrastructure is not implemented in the prototype.</td>
-            <td>Requires API access to On's production systems — deferred to a future build phase. The UI, the flow (Order Sync step in Shoe Registration), and the data model are all specified. Implementation is a Phase 1 engineering dependency, not a product decision.</td>
+            <td>Requires API access to On's production systems: deferred to a future build phase. The UI, the flow (Order Sync step in Shoe Registration), and the data model are all specified. Implementation is a Phase 1 engineering dependency, not a product decision.</td>
             <td><span class="decision-status deferred">Deferred · Eng</span></td>
           </tr>
           <tr class="deferred">
             <td>PWA Manifest + Service Worker</td>
             <td>PWA install banner implemented in the prototype (fires 3 seconds after onboarding completion). Full manifest.json, service worker offline caching for run sessions, and background sync for post-run data not yet implemented.</td>
-            <td>45% PWA install rate is a PRD success metric requiring the complete manifest implementation. The banner in the prototype demonstrates the prompt strategy and conversion moment. Full service worker implementation — offline run logging, background sync queue, push notification registration — is a Phase 1 engineering deliverable. The prototype proves the UX. Engineering builds the infrastructure.</td>
+            <td>45% PWA install rate is a PRD success metric requiring the complete manifest implementation. The banner in the prototype demonstrates the prompt strategy and conversion moment. Full service worker implementation (offline run logging, background sync queue, push notification registration) is a Phase 1 engineering deliverable. The prototype proves the UX. Engineering builds the infrastructure.</td>
             <td><span class="decision-status deferred">Deferred · Eng</span></td>
           </tr>
         </tbody>
       </table>
 
-      <div class="cs-pull-quote">&ldquo;The PRD doesn&rsquo;t just specify what to build. It specifies what <em>not</em> to build — and why. Every deferred feature is a tradeoff documented, not a feature forgotten.&rdquo;</div>
+      <div class="cs-pull-quote">&ldquo;The PRD doesn&rsquo;t just specify what to build. It specifies what <em>not</em> to build: and why. Every deferred feature is a tradeoff documented, not a feature forgotten.&rdquo;</div>
     </section>
 
     <!-- ══ 07 OUTCOME ══ -->
@@ -951,7 +951,7 @@ footer { padding: 32px 48px; border-top: 1px solid var(--g200); display: flex; j
         </div>
         <div class="cs-stat-cell">
           <div class="cs-stat-num">35%</div>
-          <div class="cs-stat-label">WAU target from registered users. The primary success metric that validates the community loop — not downloads, not impressions.</div>
+          <div class="cs-stat-label">WAU target from registered users. The primary success metric that validates the community loop: not downloads, not impressions.</div>
         </div>
       </div>
 
@@ -979,8 +979,8 @@ footer { padding: 32px 48px; border-top: 1px solid var(--g200); display: flex; j
       </div>
 
 
-      <p class="cs-body">The runners who choose On have already made a statement about how they want to experience movement. They chose a brand that holds its hardware to an unusual standard — not the loudest, not the most marketed, but the most considered. That same runner has never had a software experience that reflects the choice they made. Every day they open Strava, or Instagram, or a WhatsApp group to organize a club run, is a day the brand's standard stops at the box. On Apex is the argument that it shouldn't. The data is a consequence. The community is a consequence. The commerce is a consequence. The thing itself is a software product built the way On builds shoes: with nothing unnecessary, nothing decorative, and nothing that doesn't earn its presence.</p>
-      <p class="cs-body">The strongest product decisions are the ones that can be traced back to a belief. The volt scarcity rule traces back to the belief that a signal earns its authority through scarcity. The Pre-Run screen traces back to the belief that the transition into the run deserves ceremony — it is the moment the platform signals that it understands what running means to this user. The zero border-radius traces back to On's own design language, which is not approachable consumer aesthetics but Swiss instrument precision. These are not design choices made in a vacuum. They are a belief system made tangible in product decisions, made visible in a design system, and made interactive in a prototype. That is the discipline this case study demonstrates — and the standard On Apex was built to meet.</p>
+      <p class="cs-body">The runners who choose On have already made a statement about how they want to experience movement. They chose a brand that holds its hardware to an unusual standard: not the loudest, not the most marketed, but the most considered. That same runner has never had a software experience that reflects the choice they made. Every day they open Strava, or Instagram, or a WhatsApp group to organize a club run, is a day the brand's standard stops at the box. On Apex is the argument that it shouldn't. The data is a consequence. The community is a consequence. The commerce is a consequence. The thing itself is a software product built the way On builds shoes: with nothing unnecessary, nothing decorative, and nothing that doesn't earn its presence.</p>
+      <p class="cs-body">The strongest product decisions are the ones that can be traced back to a belief. The volt scarcity rule traces back to the belief that a signal earns its authority through scarcity. The Pre-Run screen traces back to the belief that the transition into the run deserves ceremony: it is the moment the platform signals that it understands what running means to this user. The zero border-radius traces back to On's own design language, which is not approachable consumer aesthetics but Swiss instrument precision. These are not design choices made in a vacuum. They are a belief system made tangible in product decisions, made visible in a design system, and made interactive in a prototype. That is the discipline this case study demonstrates: and the standard On Apex was built to meet.</p>
 
       <div class="cs-next">
         <div class="cs-next-label">Next Case Study</div>

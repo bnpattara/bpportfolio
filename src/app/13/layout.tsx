@@ -14,7 +14,7 @@ const dmMono = DM_Mono({
 });
 
 export const metadata: Metadata = {
-  title: '13 / Mirrorball — Find Your Song | Benn Pattara',
+  title: '13 / Mirrorball, Find Your Song | Benn Pattara',
   description: 'Tell me how you feel. Match your feeling to a Taylor Swift song.',
 };
 
@@ -23,9 +23,7 @@ export default function ThirteenLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <div className={`${bebasNeue.variable} ${dmMono.variable}`} style={{ background: '#fff', minHeight: '100vh' }}>
+  return (<div className={`${bebasNeue.variable} ${dmMono.variable}`} style={{ background: '#fff', minHeight: '100vh' }}>
       {children}
-    </div>
-  );
+    </div>);
 }

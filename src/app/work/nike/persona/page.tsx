@@ -3,14 +3,13 @@ import type { Metadata } from "next";
 import NikePersonaTool from "../PersonaTool/NikePersonaTool";
 
 export const metadata: Metadata = {
-  title: "Nike SNKRS — Persona research lab — Benn Pattara",
+  title: "Nike SNKRS, Persona research lab · Benn Pattara",
   description:
     "Interactive scripted personas for SNKRS Confidence Hub research: probe archetypes individually or compare in focus mode.",
 };
 
 export default function NikePersonaLabPage(): React.ReactElement {
-  return (
-    <div
+  return (<div
       style={{
         minHeight: "100dvh",
         height: "100dvh",
@@ -34,6 +33,5 @@ export default function NikePersonaLabPage(): React.ReactElement {
       >
         <NikePersonaTool />
       </div>
-    </div>
-  );
+    </div>);
 }

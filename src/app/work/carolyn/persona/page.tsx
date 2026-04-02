@@ -5,11 +5,11 @@ import type { Metadata } from "next";
 import CarolynPersonaTool from "../CarolynPersonaTool/CarolynPersonaTool";
 
 export const metadata: Metadata = {
-  title: "Cameron — Persona profile — The Carolyn — Benn Pattara",
+  title: "Cameron (Persona profile) The Carolyn · Benn Pattara",
   description:
-    "Primary consumer persona for The Carolyn: Cameron, the deliberate investor — identity, psychographics, tensions, competitive set, construction standards, pricing psychology, and strategic implications.",
+    "Primary consumer persona for The Carolyn: Cameron, the deliberate investor (identity, psychographics, tensions, competitive set, construction standards, pricing psychology, and strategic implications.",
   openGraph: {
-    title: "Cameron — Persona profile — The Carolyn — Benn Pattara",
+    title: "Cameron) Persona profile, The Carolyn · Benn Pattara",
     description:
       "Primary consumer persona for The Carolyn: identity through strategic implications for product, price, channel, and communication.",
     url: "/work/carolyn/persona",
@@ -45,13 +45,11 @@ function extractPageWrap(html: string): string {
 export default function CarolynPersonaPage(): React.ReactElement {
   const fullPath = path.join(
     process.cwd(),
-    "public/case-studies/carolyn/cameron-persona.html",
-  );
+    "public/case-studies/carolyn/cameron-persona.html",);
   const html = fs.readFileSync(fullPath, "utf-8");
   const markup = extractPageWrap(html);
 
-  return (
-    <div
+  return (<div
       style={{
         width: "100%",
         height: "100dvh",
@@ -72,6 +70,5 @@ export default function CarolynPersonaPage(): React.ReactElement {
       >
         <CarolynPersonaTool initialMarkup={markup} />
       </div>
-    </div>
-  );
+    </div>);
 }

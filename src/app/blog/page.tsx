@@ -7,7 +7,7 @@ const ARTICLES = [
         slug: '/blog/heritage-brands-gen-z',
         num: '01',
         category: 'Brand Strategy',
-        title: 'Why Heritage Brands Are Losing Gen Z — And What to Do About It',
+        title: 'Why Heritage Brands Are Losing Gen Z, And What to Do About It',
         date: 'Feb 2026',
         readTime: '8 min read',
         excerpt: 'The cultural contract between luxury brands and younger consumers has fundamentally shifted. Prestige without participation is no longer enough.',
@@ -20,7 +20,7 @@ const ARTICLES = [
         title: 'The Loyalty Loop: How Retention Systems Break Before They Begin',
         date: 'Coming Soon',
         readTime: null,
-        excerpt: 'Most loyalty programs are built backwards — engineered for the brand\'s revenue model, not the consumer\'s lived experience.',
+        excerpt: 'Most loyalty programs are built backwards: engineered for the brand\'s revenue model, not the consumer\'s lived experience.',
         live: false,
     },
     {
@@ -60,7 +60,7 @@ const ARTICLES = [
         title: 'What Subcultures Can Teach Mass Brands About Belonging',
         date: 'Coming Soon',
         readTime: null,
-        excerpt: 'Scale killed the magic of most brand communities. The ones that survived built barriers — not funnels.',
+        excerpt: 'Scale killed the magic of most brand communities. The ones that survived built barriers: not funnels.',
         live: false,
     },
     {
@@ -76,8 +76,7 @@ const ARTICLES = [
 ];
 
 export default function BlogIndex() {
-    return (
-        <div style={{ maxWidth: '900px', margin: '0 auto', padding: '0 48px 80px', fontFamily: "'Helvetica Neue', Arial, sans-serif" }}>
+    return (<div style={{ maxWidth: '900px', margin: '0 auto', padding: '0 48px 80px', fontFamily: "'Helvetica Neue', Arial, sans-serif" }}>
 
             {/* ── HEADER ── */}
             <div style={{ borderBottom: '1px solid #e8e8e8', paddingBottom: '40px', marginBottom: '0' }}>
@@ -91,8 +90,7 @@ export default function BlogIndex() {
 
             {/* ── ARTICLE LIST ── */}
             <div>
-                {ARTICLES.map((article) => (
-                    <div
+                {ARTICLES.map((article) => (<div
                         key={article.num}
                         style={{
                             borderBottom: '1px solid #f0f0f0',
@@ -113,21 +111,16 @@ export default function BlogIndex() {
                                         {article.category}
                                     </span>
                                     <span style={{ fontSize: '9px', color: '#ccc', letterSpacing: '.06em' }}>{article.date}</span>
-                                    {article.readTime && (
-                                        <span style={{ fontSize: '9px', color: '#ccc', letterSpacing: '.06em' }}>{article.readTime}</span>
-                                    )}
-                                    {!article.live && (
-                                        <span style={{
+                                    {article.readTime && (<span style={{ fontSize: '9px', color: '#ccc', letterSpacing: '.06em' }}>{article.readTime}</span>)}
+                                    {!article.live && (<span style={{
                                             fontSize: '8px', fontWeight: 600, letterSpacing: '.14em', textTransform: 'uppercase',
                                             color: '#bbb', border: '1px solid #e4e4e4', padding: '2px 8px',
                                         }}>
                                             In Progress
-                                        </span>
-                                    )}
+                                        </span>)}
                                 </div>
 
-                                {article.live ? (
-                                    <Link href={article.slug!} style={{ textDecoration: 'none' }}>
+                                {article.live ? (<Link href={article.slug!} style={{ textDecoration: 'none' }}>
                                         <div style={{
                                             fontSize: '20px', fontWeight: 400, letterSpacing: '.01em', color: '#000',
                                             lineHeight: 1.25, marginBottom: '12px',
@@ -138,30 +131,23 @@ export default function BlogIndex() {
                                         >
                                             {article.title}
                                         </div>
-                                    </Link>
-                                ) : (
-                                    <div style={{ fontSize: '20px', fontWeight: 400, letterSpacing: '.01em', color: '#000', lineHeight: 1.25, marginBottom: '12px' }}>
+                                    </Link>) : (<div style={{ fontSize: '20px', fontWeight: 400, letterSpacing: '.01em', color: '#000', lineHeight: 1.25, marginBottom: '12px' }}>
                                         {article.title}
-                                    </div>
-                                )}
+                                    </div>)}
 
                                 <div style={{ fontSize: '14px', color: '#777', lineHeight: 1.7, maxWidth: '580px' }}>
                                     {article.excerpt}
                                 </div>
 
-                                {article.live && (
-                                    <Link
+                                {article.live && (<Link
                                         href={article.slug!}
                                         style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', marginTop: '16px', fontSize: '11px', fontWeight: 500, letterSpacing: '.1em', textTransform: 'uppercase', color: '#000', textDecoration: 'none', borderBottom: '1px solid #000', paddingBottom: '2px' }}
                                     >
                                         Read Article &rarr;
-                                    </Link>
-                                )}
+                                    </Link>)}
                             </div>
                         </div>
-                    </div>
-                ))}
+                    </div>))}
             </div>
-        </div>
-    );
+        </div>);
 }

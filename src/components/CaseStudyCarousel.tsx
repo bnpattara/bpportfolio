@@ -14,11 +14,7 @@ export default function CaseStudyCarousel() {
             .catch((e) => console.error("Failed to load case studies", e));
     }, []);
 
-    return (
-        <div className="flex gap-6">
-            {studies.map((study) => (
-                <CaseStudyCard key={study.caseId} study={study} />
-            ))}
-        </div>
-    );
+    return (<div className="flex gap-6">
+            {studies.map((study) => (<CaseStudyCard key={study.caseId} study={study} />))}
+        </div>);
 }

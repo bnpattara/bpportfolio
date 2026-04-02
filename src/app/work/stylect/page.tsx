@@ -3,11 +3,11 @@ import type { Metadata } from "next";
 import CaseStudyHtmlIframe from "@/components/CaseStudyHtmlIframe";
 
 export const metadata: Metadata = {
-  title: "Stylect — Benn Pattara",
+  title: "Stylect · Benn Pattara",
   description:
     "Algorithm proposes. Human closes. A case study on trust, accountability, and the three-sided marketplace between shopper, stylist, and brand.",
   openGraph: {
-    title: "Stylect — Benn Pattara",
+    title: "Stylect · Benn Pattara",
     description:
       "Algorithm proposes. Human closes. Trust, attribution, and human-authored recommendation in fashion e-commerce.",
     url: "/work/stylect",
@@ -17,12 +17,10 @@ export const metadata: Metadata = {
 };
 
 export default function StylectCaseStudy() {
-  return (
-    <div style={{ width: "100%", height: "100dvh", background: "#fff" }}>
+  return (<div style={{ width: "100%", height: "100dvh", background: "#fff" }}>
       <CaseStudyHtmlIframe
         htmlPath="/case-studies/stylect/index.html"
-        title="Stylect — Product &amp; UX Design Case Study"
+        title="Stylect, Product &amp; UX Design Case Study"
       />
-    </div>
-  );
+    </div>);
 }

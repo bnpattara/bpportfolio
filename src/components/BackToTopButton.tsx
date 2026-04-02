@@ -17,8 +17,7 @@ export default function BackToTopButton() {
 
   if (!visible) return null;
 
-  return (
-    <button
+  return (<button
       onClick={scrollToTop}
       className="back-to-top"
       aria-label="Back to top"
@@ -37,6 +36,5 @@ export default function BackToTopButton() {
       }}
     >
       ↑ Top
-    </button>
-  );
+    </button>);
 }

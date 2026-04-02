@@ -18,13 +18,11 @@ export default function CaseStudyHtmlIframe({
 }) {
   const [src] = useState(() => withDevCacheBust(htmlPath));
 
-  return (
-    <iframe
+  return (<iframe
       key={src}
       src={src}
       title={title}
       className="responsive-iframe"
       style={{ width: "100%", height: "100%", border: "none" }}
-    />
-  );
+    />);
 }

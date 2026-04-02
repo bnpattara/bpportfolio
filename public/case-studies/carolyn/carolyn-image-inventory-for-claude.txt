@@ -1,0 +1,238 @@
+Carolyn case study (image inventory (for Claude)
+==================================================
+Source: public/case-studies/carolyn/
+Notes: Descriptions are inferred from filenames only (not image pixels). .DS_Store omitted.
+
+
+================================================================================
+PART 1) mockups/
+================================================================================
+
+--- mockups/ (root) ---
+
+Filename: 01_hero_product_marble.png
+Extension: .png
+Description: Hero-style product shot; marble-like surface implied by name.
+
+Filename: 02_street_nyc.png
+Extension: .png
+Description: Street scene; NYC implied by name.
+
+Filename: 03_interior_minimal.png
+Extension: .png
+Description: Minimal interior environment.
+
+
+--- mockups/E-Commerce Product Photography Views/ ---
+
+Filename: 001_A_taupe_leather_handbag_with_gold_hardware_is_91TMmMhp.png
+Extension: .png
+Description: Taupe leather handbag with gold hardware.
+
+Filename: 002_A_taupe_leather_tote_bag_with_gold_hardware_is_cAjgrM_F.png
+Extension: .png
+Description: Taupe leather tote with gold hardware.
+
+Filename: 003_A_beige_structured_handbag_with_gold_hardware_is_UW2-CJLj.png
+Extension: .png
+Description: Beige structured handbag with gold hardware.
+
+Filename: 004_A_taupe_leather_shoulder_bag_with_a_gold_bar_BC4DpBl3.png
+Extension: .png
+Description: Taupe leather shoulder bag with gold bar detail.
+
+Filename: 005_A_minimalist_taupe_leather_handbag_with_gold_zgsB0DzG.png
+Extension: .png
+Description: Minimalist taupe leather handbag with gold accents.
+
+Filename: 006_A_close-up_shot_focuses_on_the_brushed_texture_VFIc6w4U.png
+Extension: .png
+Description: Close-up emphasizing brushed texture.
+
+Filename: 007_A_close-up_shot_focuses_on_the_detailed_texture_10rkAbjN.png
+Extension: .png
+Description: Close-up emphasizing detailed texture.
+
+Filename: 008_A_light_beige_clutch_bag_with_gold_hardware_is_5b0fUFaA.png
+Extension: .png
+Description: Light beige clutch with gold hardware.
+
+Filename: 009_In_a_minimalist_style_a_person_wears_a_black_top_wBa7tB0c.png
+Extension: .png
+Description: Minimalist styling; person in black top.
+
+
+--- mockups/E-Commerce Product Photography Views/Celebrity Street Style Paparazzi Shots/ ---
+
+Filename: 001_In_a_realist_style_a_woman_with_dark_hair_JnbUx3Mn.png
+Extension: .png
+Description: Realist style; woman with dark hair (street / paparazzi context).
+
+Filename: 002_In_a_fashion_photography_style_a_young_woman_qxwN80dj.png
+Extension: .png
+Description: Fashion photography; young woman.
+
+Filename: 003_A_woman_walks_outside_a_cafe_carrying_a_light_9duEKvNR.png
+Extension: .png
+Description: Woman outside café with light-colored bag.
+
+Filename: 004_A_woman_with_dark_curly_hair_and_dark_eyes_X080hHyo.png
+Extension: .png
+Description: Woman with dark curly hair and dark eyes.
+
+Filename: 005_In_a_candid_street_style_photograph_a_woman_with_Kf5-SmaT.png
+Extension: .png
+Description: Candid street-style photograph.
+
+Filename: 006_In_a_realistic_style_a_woman_with_blonde_hair_7kjRLVNx.png
+Extension: .png
+Description: Realistic style; woman with blonde hair.
+
+Filename: 007_A_woman_stands_outside_a_building_entrance_LJYNYotx.png
+Extension: .png
+Description: Woman at building entrance.
+
+Filename: 008_In_a_Parisian_street_scene_a_young_woman_with_-gN0riVT.png
+Extension: .png
+Description: Parisian street scene; young woman.
+
+Filename: 009_A_woman_with_long_dark_hair_walks_a_golden_sZQMYRSZ.png
+Extension: .png
+Description: Woman with long dark hair walking; golden (light/setup) suggested in name.
+
+
+--- mockups/Seasonal Styling Lookbook/ ---
+
+Filename: 001_In_a_romantic_painterly_style_a_woman_walks_DhtUlcLI.png
+Extension: .png
+Description: Romantic painterly lookbook; woman walking.
+
+Filename: 002_In_a_naturalistic_style_a_woman_with_brown_hair_D2fgAoRk.png
+Extension: .png
+Description: Naturalistic style; woman with brown hair.
+
+Filename: 003_A_woman_with_brown_hair_wears_a_white_slip_dress_LTRedgRB.png
+Extension: .png
+Description: Woman with brown hair in white slip dress.
+
+Filename: 004_In_a_fashion_photography_style_a_woman_with_dark_pnxZQXfJ.png
+Extension: .png
+Description: Fashion photography; woman with dark hair.
+
+Filename: 005_A_woman_with_brown_hair_wearing_a_cream_tmoOzZz3.png
+Extension: .png
+Description: Woman with brown hair in cream-toned outfit.
+
+Filename: 006_A_person_is_pictured_from_the_waist_down_walking_DJ49f2oH.png
+Extension: .png
+Description: Waist-down walking / outfit detail.
+
+Filename: 007_In_a_realistic_style_a_woman_with_dark_hair_98emGca.png
+Extension: .png
+Description: Realistic style; woman with dark hair.
+
+Filename: 008_A_sophisticated_woman_stands_against_a_dark_49clCB-T.png
+Extension: .png
+Description: Sophisticated woman against dark backdrop.
+
+Filename: 009_A_woman_stands_centered_against_a_plain_0aR9zeAz.png
+Extension: .png
+Description: Centered full-length look; plain background.
+
+
+--- mockups/Street Style and TikTok OOTD Lifestyle Shots/ ---
+
+Filename: 001_In_a_minimalist_style_a_woman_with_brown_hair_ghpsBuMX.png
+Extension: .png
+Description: Minimalist OOTD / lifestyle; woman with brown hair.
+
+Filename: 002_In_a_photographic_realism_style_a_woman_with_z1r33xAf.png
+Extension: .png
+Description: Photographic realism; lifestyle portrait.
+
+Filename: 003_A_person_in_a_black_turtleneck_and_black_pants_8-5av1de.png
+Extension: .png
+Description: Black turtleneck and black pants outfit.
+
+Filename: 004_A_persons_hand_rests_on_a_taupe_handbag_with_1JXmI1M7.png
+Extension: .png
+Description: Hand resting on taupe handbag.
+
+Filename: 005_A_young_woman_stands_on_a_subway_car_wearing_a_cgEwHavK.png
+Extension: .png
+Description: Young woman on subway car in styled outfit.
+
+Filename: 006_In_a_naturalistic_style_a_woman_with_dark_hair_kfNjSfdI.png
+Extension: .png
+Description: Naturalistic style; woman with dark hair.
+
+Filename: 007_In_a_film_noir_style_a_woman_stands_on_a_wet_iGpwWlAl.png
+Extension: .png
+Description: Film-noir mood; woman on wet street/surface.
+
+Filename: 008_In_a_natural_light_style_a_woman_with_brown_hair_QacX8nNi.png
+Extension: .png
+Description: Natural light; woman with brown hair.
+
+Filename: 009_A_flat_lay_composition_displays_a_taupe_clutch_2aNP7hDo.png
+Extension: .png
+Description: Flat lay with taupe clutch.
+
+Filename: 010_A_beige_clutch_with_gold_hardware_is_positioned_eYb-1Nob.png
+Extension: .png
+Description: Beige clutch with gold hardware (styled placement).
+
+
+================================================================================
+PART 2 · Unified E-Commerce Product Shoot/
+(Re: public/case-studies/carolyn/Unified E-Commerce Product Shoot/)
+================================================================================
+
+Filename: 001_In_a_minimalist_product_photography_style_a_tan_adHo00Kk.png
+Extension: .png
+Description: Minimalist product photography; tan bag implied.
+
+Filename: 002_A_taupe_leather_tote_bag_with_a_clean_minimalist_QdDJPgbp.png
+Extension: .png
+Description: Taupe leather tote; clean minimalist presentation.
+
+Filename: 003_A_taupe_leather_handbag_with_gold-toned_hardware_lqvpIRcg.png
+Extension: .png
+Description: Taupe leather handbag with gold-toned hardware.
+
+Filename: 004_In_a_minimalist_product_photography_style_this_LWWCiVUF.png
+Extension: .png
+Description: Minimalist product photography (subject truncated in filename).
+
+Filename: 005_A_taupe_leather_clutch_bag_with_a_gold_bar_vHgIlaTS.png
+Extension: .png
+Description: Taupe leather clutch with gold bar detail.
+
+Filename: 006_A_taupe_leather_handbag_with_a_polished_gold_20UZNyMB.png
+Extension: .png
+Description: Taupe leather handbag with polished gold hardware.
+
+Filename: 007_A_close-up_shows_the_detailed_stitching_on_a_0UvwTxTF.png
+Extension: .png
+Description: Close-up of detailed stitching.
+
+Filename: 008_A_beige_leather_handbag_with_gold_hardware_is_msWzVh0u.png
+Extension: .png
+Description: Beige leather handbag with gold hardware.
+
+Filename: 009_In_a_studio_style_a_young_woman_with_long_brown_KNbCOq24.png
+Extension: .png
+Description: Studio-style shot; young woman with long brown hair (on-model or editorial).
+
+
+================================================================================
+COUNTS
+================================================================================
+mockups/ root: 3 files
+mockups/E-Commerce Product Photography Views/: 9 files
+mockups/.../Celebrity Street Style Paparazzi Shots/: 9 files
+mockups/Seasonal Styling Lookbook/: 9 files
+mockups/Street Style and TikTok OOTD Lifestyle Shots/: 10 files
+Unified E-Commerce Product Shoot/: 9 files
+
+Total listed above: 49 PNG files

@@ -20,8 +20,7 @@ export default function BurberryCaseStudy() {
                     navRef.current.classList.toggle("scrolled", gone);
                 }
             },
-            { threshold: 0.05 }
-        );
+            { threshold: 0.05 });
         obs.observe(hero);
         return () => obs.disconnect();
     }, []);
@@ -30,8 +29,7 @@ export default function BurberryCaseStudy() {
         setActiveMethod(activeMethod === id ? null : id);
     };
 
-    return (
-        <>
+    return (<>
             {/* ── GLOBAL NAV ── */}
             <nav id="site-nav" ref={navRef}>
                 <div className="nav-main">
@@ -58,10 +56,10 @@ export default function BurberryCaseStudy() {
                     <div className="cs-hero-inner" style={{ position: 'relative', zIndex: 2, padding: '56px 48px', width: '100%' }}>
                         <div style={{ maxWidth: '680px' }}>
                             <div style={{ display: 'inline-flex', border: '1px solid rgba(255,255,255,.25)', marginBottom: '20px' }}>
-                                <span style={{ fontSize: '9px', fontWeight: 600, letterSpacing: '.16em', textTransform: 'uppercase', color: 'rgba(255,255,255,.65)', padding: '5px 12px' }}>Stage 01 &mdash; Discovery & Cultural Relevance</span>
+                                <span style={{ fontSize: '9px', fontWeight: 600, letterSpacing: '.16em', textTransform: 'uppercase', color: 'rgba(255,255,255,.65)', padding: '5px 12px' }}>Stage 01, Discovery & Cultural Relevance</span>
                             </div>
                             <div style={{ fontSize: '52px', fontWeight: 300, letterSpacing: '.04em', textTransform: 'uppercase', color: '#fff', lineHeight: '.95', marginBottom: '20px' }}>Burberry &times; Fortnite<br />The Forest of Arden</div>
-                            <div style={{ fontSize: '14px', color: 'rgba(255,255,255,.5)', lineHeight: 1.7, maxWidth: '480px' }}>The Forest of Arden &mdash; A Transmedia Brand Takeover. Gen Z uses the internet like a dressing room, seeking costumes that signal their identity.</div>
+                            <div style={{ fontSize: '14px', color: 'rgba(255,255,255,.5)', lineHeight: 1.7, maxWidth: '480px' }}>The Forest of Arden, A Transmedia Brand Takeover. Gen Z uses the internet like a dressing room, seeking costumes that signal their identity.</div>
                         </div>
                     </div>
                 </div>
@@ -76,7 +74,7 @@ export default function BurberryCaseStudy() {
                         <div>
                             <div style={{ fontSize: '28px', fontWeight: 400, letterSpacing: '.03em', textTransform: 'uppercase', color: '#000', lineHeight: 1.1, marginBottom: '24px' }}>Heritage as a Liability</div>
                             <div style={{ fontSize: '15px', color: '#555', lineHeight: 1.8, marginBottom: '20px' }}>Burberry's 160-year history is simultaneously its greatest asset and its most significant liability. For a generation that values digital participation over passive consumption, a brand that exists primarily as a "history lesson" has no natural entry point.</div>
-                            <div style={{ fontSize: '15px', color: '#555', lineHeight: 1.8 }}>The Trench Coat &mdash; the most iconic piece in British fashion &mdash; was sitting in an archive when it should have been in the arena.</div>
+                            <div style={{ fontSize: '15px', color: '#555', lineHeight: 1.8 }}>The Trench Coat (the most iconic piece in British fashion) was sitting in an archive when it should have been in the arena.</div>
                         </div>
                     </div>
                 </div>
@@ -89,7 +87,7 @@ export default function BurberryCaseStudy() {
                             <div style={{ fontSize: '14px', fontWeight: 500, letterSpacing: '.1em', textTransform: 'uppercase', color: '#000' }}>The Strategic Insight</div>
                         </div>
                         <div>
-                            <div style={{ fontSize: '32px', fontWeight: 300, letterSpacing: '.02em', color: '#000', lineHeight: 1.35, marginBottom: '28px', borderLeft: '2px solid #000', paddingLeft: '28px', fontStyle: 'italic' }}>"Gen Z spends nearly 25% of their free time in Fortnite. The opportunity isn't just reach &mdash; it's identity infrastructure."</div>
+                            <div style={{ fontSize: '32px', fontWeight: 300, letterSpacing: '.02em', color: '#000', lineHeight: 1.35, marginBottom: '28px', borderLeft: '2px solid #000', paddingLeft: '28px', fontStyle: 'italic' }}>"Gen Z spends nearly 25% of their free time in Fortnite. The opportunity isn't just reach: it's identity infrastructure."</div>
                             <div className="cs-body-2col" style={{ gap: '32px' }}>
                                 <div style={{ fontSize: '13px', color: '#777', lineHeight: 1.75 }}>Gen Z uses the internet like a dressing room, seeking costumes that signal their intellectual and creative identity.</div>
                                 <div style={{ fontSize: '13px', color: '#777', lineHeight: 1.75 }}>The goal is to be the brand that taught a generation to perform themselves through clothing.</div>
@@ -110,17 +108,17 @@ export default function BurberryCaseStudy() {
                             <div className="cs-stat-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1px', background: '#e8e8e8', marginBottom: '32px' }}>
                                 <div className="cs-stat-cell" style={{ background: '#fff', padding: '28px 24px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
                                     <div style={{ fontSize: '44px', fontWeight: 300, color: '#000', letterSpacing: '-.02em', lineHeight: 1 }}>25%</div>
-                                    <div style={{ fontSize: '9px', fontWeight: 600, letterSpacing: '.18em', textTransform: 'uppercase', color: '#ccc' }}>01 &mdash; Attention</div>
-                                    <div style={{ fontSize: '12px', color: '#666', lineHeight: 1.65 }}>of Gen Z free time spent in Fortnite &mdash; more than Netflix or Instagram</div>
+                                    <div style={{ fontSize: '9px', fontWeight: 600, letterSpacing: '.18em', textTransform: 'uppercase', color: '#ccc' }}>01 (Attention</div>
+                                    <div style={{ fontSize: '12px', color: '#666', lineHeight: 1.65 }}>of Gen Z free time spent in Fortnite) more than Netflix or Instagram</div>
                                 </div>
                                 <div className="cs-stat-cell" style={{ background: '#fff', padding: '28px 24px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
                                     <div style={{ fontSize: '44px', fontWeight: 300, color: '#000', letterSpacing: '-.02em', lineHeight: 1 }}>650M+</div>
-                                    <div style={{ fontSize: '9px', fontWeight: 600, letterSpacing: '.18em', textTransform: 'uppercase', color: '#ccc' }}>02 &mdash; Reach</div>
+                                    <div style={{ fontSize: '9px', fontWeight: 600, letterSpacing: '.18em', textTransform: 'uppercase', color: '#ccc' }}>02, Reach</div>
                                     <div style={{ fontSize: '12px', color: '#666', lineHeight: 1.65 }}>registered Fortnite players (2025/26 estimate)</div>
                                 </div>
                                 <div className="cs-stat-cell" style={{ background: '#fff', padding: '28px 24px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
                                     <div style={{ fontSize: '44px', fontWeight: 300, color: '#000', letterSpacing: '-.02em', lineHeight: 1 }}>70hrs+</div>
-                                    <div style={{ fontSize: '9px', fontWeight: 600, letterSpacing: '.18em', textTransform: 'uppercase', color: '#ccc' }}>03 &mdash; Engagement</div>
+                                    <div style={{ fontSize: '9px', fontWeight: 600, letterSpacing: '.18em', textTransform: 'uppercase', color: '#ccc' }}>03, Engagement</div>
                                     <div style={{ fontSize: '12px', color: '#666', lineHeight: 1.65 }}>seasonal brand engagement per player vs. 5-second passive ads</div>
                                 </div>
                             </div>
@@ -136,7 +134,7 @@ export default function BurberryCaseStudy() {
                             <div style={{ fontSize: '14px', fontWeight: 500, letterSpacing: '.1em', textTransform: 'uppercase', color: '#000' }}>Execution</div>
                         </div>
                         <div>
-                            <div style={{ fontSize: '28px', fontWeight: 400, letterSpacing: '.03em', textTransform: 'uppercase', color: '#000', lineHeight: 1.1, marginBottom: '28px' }}>The Solution &mdash; "The Theater of the Coat"</div>
+                            <div style={{ fontSize: '28px', fontWeight: 400, letterSpacing: '.03em', textTransform: 'uppercase', color: '#000', lineHeight: 1.1, marginBottom: '28px' }}>The Solution, "The Theater of the Coat"</div>
                             <div style={{ borderTop: '1px solid #e8e8e8', marginBottom: '28px' }}>
 
                                 <div onClick={() => toggleMethod(1)} style={{ padding: '16px 0', borderBottom: '1px solid #f5f5f5', cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -145,7 +143,7 @@ export default function BurberryCaseStudy() {
                                 </div>
                                 <div style={{ maxHeight: activeMethod === 1 ? '500px' : '0', overflow: 'hidden', transition: 'max-height 300ms ease' }}>
                                     <div style={{ padding: '16px 0 20px', fontSize: '13px', color: '#666', lineHeight: 1.75, borderBottom: '1px solid #f5f5f5' }}>
-                                        A bespoke Fortnite POI &mdash; a "Green World" space for transformation and identity freedom, grounded in Shakespearean narrative and RSC's Unreal Engine technology.
+                                        A bespoke Fortnite POI: a "Green World" space for transformation and identity freedom, grounded in Shakespearean narrative and RSC's Unreal Engine technology.
                                     </div>
                                 </div>
 
@@ -165,7 +163,7 @@ export default function BurberryCaseStudy() {
                                 </div>
                                 <div style={{ maxHeight: activeMethod === 3 ? '500px' : '0', overflow: 'hidden', transition: 'max-height 300ms ease' }}>
                                     <div style={{ padding: '16px 0 20px', fontSize: '13px', color: '#666', lineHeight: 1.75, borderBottom: '1px solid #f5f5f5' }}>
-                                        A first-of-its-kind live digital theatrical performance within Fortnite &mdash; RSC actors perform in real time, player choices influence the outcome.
+                                        A first-of-its-kind live digital theatrical performance within Fortnite, RSC actors perform in real time, player choices influence the outcome.
                                     </div>
                                 </div>
 
@@ -175,7 +173,7 @@ export default function BurberryCaseStudy() {
                                 </div>
                                 <div style={{ maxHeight: activeMethod === 4 ? '500px' : '0', overflow: 'hidden', transition: 'max-height 300ms ease' }}>
                                     <div style={{ padding: '16px 0 20px', fontSize: '13px', color: '#666', lineHeight: 1.75, borderBottom: '1px solid #f5f5f5' }}>
-                                        Global flagship AR mirrors allowing customers to see their physical self merge with their high-level digital avatar &mdash; closing the loop between digital identity and physical purchase.
+                                        Global flagship AR mirrors allowing customers to see their physical self merge with their high-level digital avatar: closing the loop between digital identity and physical purchase.
                                     </div>
                                 </div>
 
@@ -197,7 +195,7 @@ export default function BurberryCaseStudy() {
                                 <div className="cs-stat-cell" style={{ background: '#fff', padding: '28px 24px', borderTop: '3px solid #000', display: 'flex', flexDirection: 'column', gap: '4px' }}>
                                     <div style={{ fontSize: '48px', fontWeight: 300, color: '#000', letterSpacing: '-.02em', lineHeight: 1 }}>70hrs+</div>
                                     <div style={{ fontSize: '9px', fontWeight: 600, letterSpacing: '.18em', textTransform: 'uppercase', color: '#ccc' }}>Engagement</div>
-                                    <div style={{ fontSize: '12px', color: '#666', lineHeight: 1.6 }}>Brand engagement per player &mdash; replaces 5-second passive media</div>
+                                    <div style={{ fontSize: '12px', color: '#666', lineHeight: 1.6 }}>Brand engagement per player: replaces 5-second passive media</div>
                                 </div>
                                 <div className="cs-stat-cell" style={{ background: '#fff', padding: '28px 24px', borderTop: '3px solid #000', display: 'flex', flexDirection: 'column', gap: '4px' }}>
                                     <div style={{ fontSize: '48px', fontWeight: 300, color: '#000', letterSpacing: '-.02em', lineHeight: 1 }}>50%</div>
@@ -246,6 +244,5 @@ export default function BurberryCaseStudy() {
                 </div>
                 <span className="footer-copy">&copy; 2025 Benn Pattara &middot; bennpattara.com</span>
             </footer>
-        </>
-    );
+        </>);
 }

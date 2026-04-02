@@ -10,8 +10,7 @@ interface PersonaCardProps {
 }
 
 export const PersonaCard: React.FC<PersonaCardProps> = ({ persona, isSelected, onToggle }) => {
-  return (
-    <div 
+  return (<div 
       onClick={() => onToggle(persona.id)}
       className={`
         group relative p-4 rounded-xl border cursor-pointer transition-all duration-300
@@ -32,15 +31,11 @@ export const PersonaCard: React.FC<PersonaCardProps> = ({ persona, isSelected, o
             />
           </div>
           <div className="absolute -bottom-1 -right-1">
-            {isSelected ? (
-              <div className="bg-white rounded-full p-0.5 border-2 border-white">
+            {isSelected ? (<div className="bg-white rounded-full p-0.5 border-2 border-white">
                 <CheckCircle2 className="w-4 h-4 text-white" />
-              </div>
-            ) : (
-              <div className="bg-[#0a0a0a] rounded-full p-0.5 border border-[#222] group-hover:border-stone-400">
+              </div>) : (<div className="bg-[#0a0a0a] rounded-full p-0.5 border border-[#222] group-hover:border-stone-400">
                 <Circle className="w-4 h-4 text-stone-300 group-hover:text-stone-400" />
-              </div>
-            )}
+              </div>)}
           </div>
         </div>
         
@@ -56,6 +51,5 @@ export const PersonaCard: React.FC<PersonaCardProps> = ({ persona, isSelected, o
           </p>
         </div>
       </div>
-    </div>
-  );
+    </div>);
 };

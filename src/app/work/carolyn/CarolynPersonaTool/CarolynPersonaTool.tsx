@@ -32,15 +32,13 @@ export default function CarolynPersonaTool({
           }
         });
       },
-      { rootMargin: "-40% 0px -55% 0px" },
-    );
+      { rootMargin: "-40% 0px -55% 0px" },);
 
     sections.forEach((section) => observer.observe(section));
     return () => observer.disconnect();
   }, [initialMarkup]);
 
-  return (
-    <div
+  return (<div
       ref={rootRef}
       className="carolynPtRoot"
       style={{
@@ -53,6 +51,5 @@ export default function CarolynPersonaTool({
     >
       {/* eslint-disable-next-line react/no-danger -- static artifact markup from repo HTML */}
       <div dangerouslySetInnerHTML={{ __html: initialMarkup }} />
-    </div>
-  );
+    </div>);
 }

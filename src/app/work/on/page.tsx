@@ -2,10 +2,10 @@ import React from "react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "On APEX — Benn Pattara",
+  title: "On APEX · Benn Pattara",
   description: "The brand that owns the community owns the repeat purchase cycle for the lifetime of the runner.",
   openGraph: {
-    title: "On APEX — Benn Pattara",
+    title: "On APEX · Benn Pattara",
     description: "The brand that owns the community owns the repeat purchase cycle for the lifetime of the runner.",
     url: "/work/on",
     type: "website",
@@ -14,13 +14,11 @@ export const metadata: Metadata = {
 };
 
 export default function OnApexCaseStudy(): React.ReactElement {
-  return (
-    <div style={{ width: "100%", height: "100dvh", background: "#fff" }}>
+  return (<div style={{ width: "100%", height: "100dvh", background: "#fff" }}>
       <iframe className="responsive-iframe"
         src="/case-studies/on/index.html"
-        title="On Apex — Community Platform"
+        title="On Apex · community platform"
         style={{ width: "100%", height: "100%", border: "none" }}
       />
-    </div>
-  );
+    </div>);
 }

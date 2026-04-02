@@ -2,11 +2,13 @@ import React from "react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "On APEX — Prose test (draft) — Benn Pattara",
+  title: "On APEX · Community Platform · Benn Pattara",
   description:
-    "Draft narrative from portfolio-prose.docx with PRD + design system and On APEX prototype embeds.",
+    "Community PWA case study for On Running: pods, retention, design system, and interactive prototype.",
   openGraph: {
-    title: "On APEX — Prose test (draft) — Benn Pattara",
+    title: "On APEX · Community Platform · Benn Pattara",
+    description:
+      "Community PWA case study for On Running: pods, retention, design system, and interactive prototype.",
     url: "/work/on-test",
     type: "website",
     images: [{ url: "https://bennpattara.com/og/on.jpg", width: 1200, height: 630 }],

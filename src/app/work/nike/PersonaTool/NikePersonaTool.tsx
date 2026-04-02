@@ -69,8 +69,7 @@ export default function PersonaTool() {
     setMode(m); setMsgs([]); setTyping(false); setSelId(null); setFocusIds([]);
   };
 
-  return (
-    <div
+  return (<div
       className="nike-pt-root"
       style={{
         display: 'flex',
@@ -102,8 +101,7 @@ export default function PersonaTool() {
 
         {/* Mode toggle */}
         <div style={{ padding: '12px 20px', borderBottom: `1px solid ${D.border}`, display: 'flex', gap: '1px' }}>
-          {(['individual', 'focus'] as const).map(m => (
-            <button key={m} onClick={() => switchMode(m)} style={{
+          {(['individual', 'focus'] as const).map(m => (<button key={m} onClick={() => switchMode(m)} style={{
               flex: 1, padding: '8px 0',
               fontSize: '10px', fontWeight: 600, letterSpacing: '.12em', textTransform: 'uppercase',
               border: 'none', background: mode === m ? D.white : 'transparent',
@@ -111,8 +109,7 @@ export default function PersonaTool() {
               cursor: 'pointer', transition: 'all 150ms ease',
             }}>
               {m === 'individual' ? 'Inquiry' : 'Focus Group'}
-            </button>
-          ))}
+            </button>))}
         </div>
 
         {/* Persona cards */}
@@ -124,8 +121,7 @@ export default function PersonaTool() {
           </div>
           {PERSONAS.map(p => {
             const isSel = mode === 'individual' ? selId === p.id : focusIds.includes(p.id);
-            return (
-              <button key={p.id} onClick={() => {
+            return (<button key={p.id} onClick={() => {
                 if (mode === 'individual') {
                   if (selId !== p.id) { setSelId(p.id); setMsgs([]); setTyping(false); }
                 } else {
@@ -158,23 +154,19 @@ export default function PersonaTool() {
                     {p.role}
                   </div>
                 </div>
-                {mode === 'focus' && (
-                  <div style={{ marginLeft: 'auto', flexShrink: 0, width: '16px', height: '16px', borderRadius: '50%', border: `1px solid ${isSel ? p.accent : D.b2}`, display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all 150ms ease' }}>
+                {mode === 'focus' && (<div style={{ marginLeft: 'auto', flexShrink: 0, width: '16px', height: '16px', borderRadius: '50%', border: `1px solid ${isSel ? p.accent : D.b2}`, display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all 150ms ease' }}>
                     {isSel && <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: p.accent }} />}
-                  </div>
-                )}
-              </button>
-            );
+                  </div>)}
+              </button>);
           })}
         </div>
 
         {/* Footer */}
         <div style={{ padding: '14px 20px', borderTop: `1px solid ${D.border}` }}>
           <div style={{ fontSize: '10px', color: D.label, lineHeight: 1.6 }}>
-            Built from <span style={{ color: D.mid }}>629 research touchpoints</span> — surveys, interviews &amp; behavioral data.
+            Built from <span style={{ color: D.mid }}>629 research touchpoints</span>: surveys, interviews &amp; behavioral data.
           </div>
-          {msgs.length > 0 && (
-            <button onClick={reset} style={{
+          {msgs.length > 0 && (<button onClick={reset} style={{
               marginTop: '10px', width: '100%', padding: '7px 0',
               fontSize: '10px', fontWeight: 600, letterSpacing: '.12em', textTransform: 'uppercase',
               border: `1px solid ${D.b2}`, background: 'transparent', color: D.label,
@@ -184,8 +176,7 @@ export default function PersonaTool() {
               onMouseLeave={e => { const el = e.currentTarget as HTMLButtonElement; el.style.color = D.label; el.style.borderColor = D.b2; }}
             >
               ↺ Reset Session
-            </button>
-          )}
+            </button>)}
         </div>
       </aside>
 
@@ -195,27 +186,19 @@ export default function PersonaTool() {
         {/* Status bar */}
         <div style={{ padding: '0 24px', height: '52px', borderBottom: `1px solid ${D.border}`, background: D.panel, display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexShrink: 0 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            {active.length > 0 ? (
-              <>
+            {active.length > 0 ? (<>
                 <div style={{ display: 'flex' }}>
-                  {active.slice(0, 5).map((p, i) => (
-                    <div key={p.id} style={{ width: '26px', height: '26px', borderRadius: '50%', background: p.accent, border: `2px solid ${D.bg}`, marginLeft: i > 0 ? '-7px' : 0, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '9px', fontWeight: 700, color: D.white }}>
+                  {active.slice(0, 5).map((p, i) => (<div key={p.id} style={{ width: '26px', height: '26px', borderRadius: '50%', background: p.accent, border: `2px solid ${D.bg}`, marginLeft: i > 0 ? '-7px' : 0, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '9px', fontWeight: 700, color: D.white }}>
                       {p.initials}
-                    </div>
-                  ))}
+                    </div>))}
                 </div>
                 <div>
                   <div style={{ fontSize: '12px', fontWeight: 600, letterSpacing: '.08em', textTransform: 'uppercase', color: D.bright }}>
-                    {mode === 'individual' ? `${active[0].name} — ${active[0].role}` : `Focus Group · ${active.length} participants`}
+                    {mode === 'individual' ? `${active[0].name}, ${active[0].role}` : `Focus Group · ${active.length} participants`}
                   </div>
-                  {mode === 'individual' && active[0] && (
-                    <div style={{ fontSize: '11px', color: D.mid, marginTop: '1px' }}>{active[0].bio}</div>
-                  )}
+                  {mode === 'individual' && active[0] && (<div style={{ fontSize: '11px', color: D.mid, marginTop: '1px' }}>{active[0].bio}</div>)}
                 </div>
-              </>
-            ) : (
-              <span style={{ fontSize: '11px', letterSpacing: '.1em', textTransform: 'uppercase', color: D.label }}>Select a segment from the sidebar</span>
-            )}
+              </>) : (<span style={{ fontSize: '11px', letterSpacing: '.1em', textTransform: 'uppercase', color: D.label }}>Select a segment from the sidebar</span>)}
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
             <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: active.length > 0 ? '#4a8' : '#2a2a2a', boxShadow: active.length > 0 ? '0 0 6px rgba(68,170,100,.5)' : 'none', transition: 'all 300ms' }} />
@@ -227,32 +210,25 @@ export default function PersonaTool() {
 
         {/* Chat */}
         <div ref={chatRef} style={{ flex: 1, overflowY: 'auto', padding: '24px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
-          {msgs.length === 0 && (
-            <div style={{ height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          {msgs.length === 0 && (<div style={{ height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <div style={{ textAlign: 'center' }}>
                 <div style={{ fontSize: '28px', color: D.border, marginBottom: '12px' }}>◎</div>
                 <div style={{ fontSize: '11px', fontWeight: 600, letterSpacing: '.16em', textTransform: 'uppercase', color: D.label }}>
                   {active.length === 0 ? 'Select a segment to begin the inquiry' : 'Choose a question below to extract insights'}
                 </div>
               </div>
-            </div>
-          )}
+            </div>)}
 
           {msgs.map(msg => {
             const p = msg.personaId ? getP(msg.personaId) : null;
-            return (
-              <div key={msg.id} style={{ display: 'flex', justifyContent: msg.from === 'user' ? 'flex-end' : 'flex-start', gap: '10px', alignItems: 'flex-start' }}>
-                {msg.from === 'persona' && p && (
-                  <div style={{ width: '30px', height: '30px', borderRadius: '50%', background: p.accent, flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '10px', fontWeight: 700, color: D.white, marginTop: '14px' }}>
+            return (<div key={msg.id} style={{ display: 'flex', justifyContent: msg.from === 'user' ? 'flex-end' : 'flex-start', gap: '10px', alignItems: 'flex-start' }}>
+                {msg.from === 'persona' && p && (<div style={{ width: '30px', height: '30px', borderRadius: '50%', background: p.accent, flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '10px', fontWeight: 700, color: D.white, marginTop: '14px' }}>
                     {p.initials}
-                  </div>
-                )}
+                  </div>)}
                 <div style={{ maxWidth: '78%' }}>
-                  {msg.from === 'persona' && p && (
-                    <div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '.14em', textTransform: 'uppercase', color: p.accent, marginBottom: '5px' }}>
-                      {p.name} &mdash; {p.role}
-                    </div>
-                  )}
+                  {msg.from === 'persona' && p && (<div style={{ fontSize: '10px', fontWeight: 700, letterSpacing: '.14em', textTransform: 'uppercase', color: p.accent, marginBottom: '5px' }}>
+                      {p.name}, {p.role}
+                    </div>)}
                   <div style={{
                     padding: '12px 16px',
                     background: msg.from === 'user' ? D.white : D.panel,
@@ -263,20 +239,15 @@ export default function PersonaTool() {
                     {msg.text}
                   </div>
                 </div>
-              </div>
-            );
+              </div>);
           })}
 
-          {typing && (
-            <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+          {typing && (<div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
               <div style={{ width: '30px', height: '30px', borderRadius: '50%', background: '#1c1c1c', flexShrink: 0 }} />
               <div style={{ padding: '12px 16px', background: D.panel, display: 'flex', gap: '5px', alignItems: 'center' }}>
-                {[0, 1, 2].map(i => (
-                  <div key={i} style={{ width: '6px', height: '6px', borderRadius: '50%', background: D.label, animation: `ptb 1s ease infinite ${i * .14}s` }} />
-                ))}
+                {[0, 1, 2].map(i => (<div key={i} style={{ width: '6px', height: '6px', borderRadius: '50%', background: D.label, animation: `ptb 1s ease infinite ${i * .14}s` }} />))}
               </div>
-            </div>
-          )}
+            </div>)}
           <div ref={endRef} />
         </div>
 
@@ -288,8 +259,7 @@ export default function PersonaTool() {
             </span>
           </div>
           <div className="nike-pt-question-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1px', background: D.border }}>
-            {QUESTIONS.map(q => (
-              <button key={q.id} onClick={() => ask(q)} disabled={!canAsk}
+            {QUESTIONS.map(q => (<button key={q.id} onClick={() => ask(q)} disabled={!canAsk}
                 style={{
                   padding: '13px 16px',
                   fontSize: '12px', fontWeight: 400, lineHeight: 1.4, letterSpacing: '.02em',
@@ -303,8 +273,7 @@ export default function PersonaTool() {
                 onMouseLeave={e => { const el = e.currentTarget as HTMLButtonElement; el.style.background = canAsk ? D.bg : '#0d0d0d'; el.style.color = canAsk ? D.mid : D.label; }}
               >
                 {q.text}
-              </button>
-            ))}
+              </button>))}
           </div>
         </div>
       </main>
@@ -318,6 +287,5 @@ export default function PersonaTool() {
           .nike-pt-question-grid{grid-template-columns:1fr!important}
         }
       `}</style>
-    </div>
-  );
+    </div>);
 }

@@ -21,8 +21,7 @@ export class OnApexErrorBoundary extends React.Component<
 
   render() {
     if (this.state.hasError) {
-      return (
-        <div
+      return (<div
           style={{
             minHeight: "100dvh",
             background: "#0C0C0C",
@@ -66,8 +65,7 @@ export class OnApexErrorBoundary extends React.Component<
           >
             Try again
           </button>
-        </div>
-      );
+        </div>);
     }
     return this.props.children;
   }

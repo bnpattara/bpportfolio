@@ -57,7 +57,7 @@ A static HTML template for portfolio case studies, based on the Vault by Saks st
 | `[STAT_1_DESC]` | Debt following merger... |
 | *(repeat for STAT_2, STAT_3)* |
 | `[IMAGE_01]` | [01] |
-| `[IMAGE_01_DESC]` | Exterior detail — street-level intrigue |
+| `[IMAGE_01_DESC]` | Exterior detail: street-level intrigue |
 | `[IMAGE_01_CAPTION]` | Caption for image 1 |
 | *(repeat for IMAGE_02)* |
 
@@ -156,15 +156,13 @@ For Next.js: create `src/app/work/[slug]/page.tsx`:
 
 ```tsx
 export default function CaseStudyPage({ params }: { params: { slug: string } }) {
-  return (
-    <div style={{ width: "100%", height: "100dvh", background: "#fff" }}>
+  return (<div style={{ width: "100%", height: "100dvh", background: "#fff" }}>
       <iframe
         src={`/case-studies/${params.slug}/index.html`}
         title="Case Study"
         style={{ width: "100%", height: "100%", border: "none" }}
       />
-    </div>
-  );
+    </div>);
 }
 ```
 

@@ -74,7 +74,7 @@ const pad = n => String(n).padStart(2,"0");
 const fmtClock = s => `${pad(Math.floor(s/60))}:${pad(s%60)}`;
 const fmtPace  = s => `${Math.floor(s/60)}:${pad(s%60)}`;
 
-// Haptic — Web Vibration API, graceful fallback
+// Haptic, Web Vibration API, graceful fallback
 const haptic = (type="light") => {
   try {
     if(!navigator?.vibrate) return;
@@ -119,8 +119,7 @@ function useToast() {
 }
 
 function ToastLayer({toasts,C}) {
-  return (
-    <div style={{position:"absolute",bottom:96,left:16,right:16,zIndex:500,display:"flex",flexDirection:"column",gap:8,pointerEvents:"none"}}>
+  return (<div style={{position:"absolute",bottom:96,left:16,right:16,zIndex:500,display:"flex",flexDirection:"column",gap:8,pointerEvents:"none"}}>
       {toasts.map(t=>(
         <div key={t.id} style={{
           display:"flex",alignItems:"center",gap:10,
@@ -132,19 +131,13 @@ function ToastLayer({toasts,C}) {
           <span style={{fontSize:14}}>{t.icon}</span>
           <span style={{fontFamily:"'DM Mono',monospace",fontSize:10,letterSpacing:"0.08em",textTransform:"uppercase",color:C.bg,flex:1}}>{t.msg}</span>
           <div style={{width:3,height:3,borderRadius:"50%",background:C.volt,flexShrink:0}}/>
-        </div>
-      ))}
-    </div>
-  );
+        </div>))}
+    </div>);
 }
 
 // ─── ATOMS ──────────────────────────────────────────────────
-const M = ({c,sz=9,sp="0.12em",up=true,children,sx={}}) => (
-  <span style={{fontFamily:"'DM Mono',monospace",fontSize:sz,letterSpacing:sp,textTransform:up?"uppercase":"none",color:c,lineHeight:1,...sx}}>{children}</span>
-);
-const F = ({n,sz=80,c,sx={}}) => (
-  <span style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:sz,lineHeight:.88,letterSpacing:"0.02em",color:c,...sx}}>{n}</span>
-);
+const M = ({c,sz=9,sp="0.12em",up=true,children,sx={}}) => (<span style={{fontFamily:"'DM Mono',monospace",fontSize:sz,letterSpacing:sp,textTransform:up?"uppercase":"none",color:c,lineHeight:1,...sx}}>{children}</span>);
+const F = ({n,sz=80,c,sx={}}) => (<span style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:sz,lineHeight:.88,letterSpacing:"0.02em",color:c,...sx}}>{n}</span>);
 const HR = ({c,sx={}}) => <div style={{height:1,background:c,...sx}}/>;
 
 // Tap-ripple + haptic
@@ -164,7 +157,7 @@ function TapBtn({children,onClick,sx={},dark=false,hapticType="light"}) {
   return <button ref={r} onPointerDown={tap} style={{position:"relative",overflow:"hidden",...sx}}>{children}</button>;
 }
 
-// Long-press button — 400ms hold → action sheet
+// Long-press button, 400ms hold → action sheet
 function LongPressBtn({children,onLongPress,onClick,sx={},C}) {
   const timer = useRef(null);
   const [pressing,setPressing] = useState(false);
@@ -183,8 +176,7 @@ function LongPressBtn({children,onLongPress,onClick,sx={},C}) {
   }
   function pl() { clearTimeout(timer.current); setPressing(false); }
 
-  return (
-    <div
+  return (<div
       onPointerDown={pd} onPointerUp={pu} onPointerLeave={pl}
       style={{position:"relative",cursor:"pointer",...sx}}
     >
@@ -195,8 +187,7 @@ function LongPressBtn({children,onLongPress,onClick,sx={},C}) {
         animation:"longRing .4s ease-out both",
         pointerEvents:"none",
       }}/>}
-    </div>
-  );
+    </div>);
 }
 
 // Pull-to-refresh wrapper
@@ -223,8 +214,7 @@ function PullRefresh({onRefresh,children,C}) {
     startY.current=null;
   }
 
-  return (
-    <div style={{position:"relative",height:"100%",overflow:"hidden"}}
+  return (<div style={{position:"relative",height:"100%",overflow:"hidden"}}
       onPointerDown={pd} onPointerMove={pm} onPointerUp={pu}>
       {/* Pull indicator */}
       <div style={{
@@ -233,19 +223,14 @@ function PullRefresh({onRefresh,children,C}) {
         overflow:"hidden",transition:dy?"none":"height .2s ease",
         background:C.bg,zIndex:10,
       }}>
-        {refreshing ? (
-          <div style={{width:"100%",height:2,position:"relative",overflow:"hidden",background:C.lift}}>
+        {refreshing ? (<div style={{width:"100%",height:2,position:"relative",overflow:"hidden",background:C.lift}}>
             <div style={{position:"absolute",top:0,height:"100%",width:"30%",background:C.volt,animation:"pullScan .9s ease-in-out infinite"}}/>
-          </div>
-        ) : (
-          <div style={{height:2,width:`${Math.min((dy/THRESH)*100,100)}%`,background:dy>=THRESH?C.volt:C.ink4,transition:"background .1s",marginTop:dy/2}}/>
-        )}
+          </div>) : (<div style={{height:2,width:`${Math.min((dy/THRESH)*100,100)}%`,background:dy>=THRESH?C.volt:C.ink4,transition:"background .1s",marginTop:dy/2}}/>)}
       </div>
       <div ref={el} style={{height:"100%",overflowY:"auto",transform:`translateY(${dy*.4}px)`,transition:dy?"none":"transform .2s ease"}}>
         {children}
       </div>
-    </div>
-  );
+    </div>);
 }
 
 // Sheet modal
@@ -253,8 +238,7 @@ function Sheet({open,onClose,children,title,C}) {
   const [dy,setDy]=useState(0);
   const sy=useRef(null);
   if(!open) return null;
-  return (
-    <div style={{position:"absolute",inset:0,zIndex:300,background:"rgba(0,0,0,0.45)",animation:"fadeIn .2s ease both"}}
+  return (<div style={{position:"absolute",inset:0,zIndex:300,background:"rgba(0,0,0,0.45)",animation:"fadeIn .2s ease both"}}
       onPointerDown={e=>{if(e.target===e.currentTarget)onClose();}}>
       <div
         onPointerDown={e=>sy.current=e.clientY}
@@ -277,15 +261,13 @@ function Sheet({open,onClose,children,title,C}) {
         </div>}
         <div style={{overflowY:"auto",padding:"20px 24px 36px"}}>{children}</div>
       </div>
-    </div>
-  );
+    </div>);
 }
 
 // Map expand overlay
 function MapOverlay({open,onClose,C}) {
   if(!open) return null;
-  return (
-    <div style={{position:"absolute",inset:0,zIndex:400,background:C.bg,animation:"scaleMap .38s cubic-bezier(.34,1.56,.64,1) both"}}>
+  return (<div style={{position:"absolute",inset:0,zIndex:400,background:C.bg,animation:"scaleMap .38s cubic-bezier(.34,1.56,.64,1) both"}}>
       <div style={{position:"absolute",top:56,left:16,right:16,bottom:16,background:C.card,overflow:"hidden"}}>
         <div style={{position:"absolute",inset:0,backgroundImage:`linear-gradient(${C.rule} 1px,transparent 1px),linear-gradient(90deg,${C.rule} 1px,transparent 1px)`,backgroundSize:"20px 20px"}}/>
         <div style={{position:"absolute",inset:20}}>
@@ -302,15 +284,13 @@ function MapOverlay({open,onClose,C}) {
       <TapBtn dark onClick={onClose} sx={{position:"absolute",top:14,right:16,width:36,height:36,background:D.lift,border:`1px solid ${D.rule}`,display:"flex",alignItems:"center",justifyContent:"center"}}>
         <M c={D.ink} sz={12} sp="0">✕</M>
       </TapBtn>
-    </div>
-  );
+    </div>);
 }
 
 // PWA Install banner
 function InstallBanner({show,onInstall,onDismiss}) {
   if(!show) return null;
-  return (
-    <div style={{
+  return (<div style={{
       position:"absolute",top:56,left:12,right:12,zIndex:200,
       background:L.ink,padding:"14px 16px",
       boxShadow:"0 4px 24px rgba(0,0,0,0.25)",
@@ -330,26 +310,21 @@ function InstallBanner({show,onInstall,onDismiss}) {
           <M c="rgba(255,255,255,0.45)" sz={11} sp="0">✕</M>
         </TapBtn>
       </div>
-    </div>
-  );
+    </div>);
 }
 
 // ─── ISLAND + STATUS + NAV ──────────────────────────────────
-const Island = ({running,elapsed}) => (
-  <div style={{position:"absolute",top:10,left:"50%",transform:"translateX(-50%)",width:running?196:124,height:35,background:"#000",borderRadius:18,zIndex:100,display:"flex",alignItems:"center",justifyContent:"center",gap:7,transition:"width .38s cubic-bezier(.34,1.56,.64,1)"}}>
+const Island = ({running,elapsed}) => (<div style={{position:"absolute",top:10,left:"50%",transform:"translateX(-50%)",width:running?196:124,height:35,background:"#000",borderRadius:18,zIndex:100,display:"flex",alignItems:"center",justifyContent:"center",gap:7,transition:"width .38s cubic-bezier(.34,1.56,.64,1)"}}>
     {running&&<><div style={{width:7,height:7,borderRadius:"50%",background:D.volt,animation:"blink 1.1s step-end infinite"}}/><M c={D.ink} sz={11} sp="0.04em" up={false}>{fmtClock(elapsed)}</M></>}
-  </div>
-);
+  </div>);
 
 const Status = ({C}) => {
   const [t,setT]=useState(()=>{const n=new Date();return`${n.getHours()}:${pad(n.getMinutes())}`;});
   useEffect(()=>{const i=setInterval(()=>{const n=new Date();setT(`${n.getHours()}:${pad(n.getMinutes())}`);},15e3);return()=>clearInterval(i);},[]);
-  return (
-    <div style={{position:"absolute",top:0,left:0,right:0,height:50,padding:"13px 24px 0",display:"flex",justifyContent:"space-between",zIndex:90,pointerEvents:"none"}}>
+  return (<div style={{position:"absolute",top:0,left:0,right:0,height:50,padding:"13px 24px 0",display:"flex",justifyContent:"space-between",zIndex:90,pointerEvents:"none"}}>
       <M c={C.ink} sz={12} sp="0.02em" up={false}>{t}</M>
       <M c={C.ink} sz={11} sp="0" up={false}>●●● 100%</M>
-    </div>
-  );
+    </div>);
 };
 
 const NAV_ITEMS=[
@@ -361,30 +336,26 @@ const NAV_ITEMS=[
 ];
 
 function BottomNav({cur,go,C}) {
-  return (
-    <nav style={{position:"absolute",bottom:0,left:0,right:0,height:82,background:C.card,borderTop:`1px solid ${C.rule}`,display:"flex",alignItems:"flex-start",paddingTop:8,zIndex:80}}>
+  return (<nav style={{position:"absolute",bottom:0,left:0,right:0,height:82,background:C.card,borderTop:`1px solid ${C.rule}`,display:"flex",alignItems:"flex-start",paddingTop:8,zIndex:80}}>
       {NAV_ITEMS.map(item=>item.isStart?(
         <TapBtn key="s" onClick={()=>go("prerun")} hapticType="medium" dark sx={{flex:1,display:"flex",flexDirection:"column",alignItems:"center",gap:3,marginTop:-10,background:"none"}}>
           <div style={{width:50,height:50,background:C.ink,display:"flex",alignItems:"center",justifyContent:"center",boxShadow:`0 4px 24px rgba(0,0,0,${C===L?".18":".5"})`}}>
             <svg width="16"height="16"viewBox="0 0 18 18"><polygon points="5,3 15,9 5,15"fill={C.bg}/></svg>
           </div>
           <M c={C.ink3} sz={8} sp="0.08em">Start</M>
-        </TapBtn>
-      ):(
+        </TapBtn>):(
         <TapBtn key={item.id} onClick={()=>go(item.id)} sx={{flex:1,display:"flex",flexDirection:"column",alignItems:"center",gap:3,padding:"5px 4px",background:"none"}}>
           <div style={{width:22,height:22,display:"flex",alignItems:"center",justifyContent:"center"}}>{item.ico(cur===item.id,C)}</div>
           <M c={cur===item.id?C.ink:C.ink3} sz={8} sp="0.08em">{item.label}</M>
-        </TapBtn>
-      ))}
-    </nav>
-  );
+        </TapBtn>))}
+    </nav>);
 }
 
 // ═══════════════════════════════════════════════════════════
 // ONBOARDING
 // ═══════════════════════════════════════════════════════════
 const SHOE_MODELS=["Cloudmonster 2","Cloudflow 4","Cloudgo 2","Cloudrunner 2","Cloud X 3","Cloudsurfer 2"];
-const GOALS_LIST=["Complete my first 5k","Run a half marathon","Hit 50 km/week","Stay consistent — 3 runs/week","Train for a full marathon"];
+const GOALS_LIST=["Complete my first 5k","Run a half marathon","Hit 50 km/week","Stay consistent, 3 runs/week","Train for a full marathon"];
 const SUGGESTED_RUNNERS=[{i:"MR",n:"Maya R.",city:"Richmond VA",shoe:"Cloudmonster 2"},{i:"JK",n:"Jordan K.",city:"Richmond VA",shoe:"Cloudflow 4"},{i:"ST",n:"Sam T.",city:"New York",shoe:"Cloudgo 2"},{i:"AC",n:"Alex C.",city:"Boston",shoe:"Cloudmonster 2"}];
 
 function OnboardingScreen({go,onComplete}) {
@@ -396,8 +367,7 @@ function OnboardingScreen({go,onComplete}) {
 
   function finish(){onComplete({name:name||"Runner",shoe:shoe||SHOE_MODELS[0],goal});go("home");}
 
-  if(step===0) return (
-    <div style={{position:"absolute",inset:0,background:D.bg,display:"flex",flexDirection:"column",padding:"80px 32px 48px"}}>
+  if(step===0) return (<div style={{position:"absolute",inset:0,background:D.bg,display:"flex",flexDirection:"column",padding:"80px 32px 48px"}}>
       <div style={{flex:1,display:"flex",flexDirection:"column",justifyContent:"center"}}>
         <M c={D.volt} sz={10} sp="0.18em" sx={{display:"block",marginBottom:16}}>On Apex</M>
         <F n={"Run\nTogether."} sz={72} c={D.ink} sx={{lineHeight:.88,whiteSpace:"pre-line",display:"block",marginBottom:24}}/>
@@ -410,10 +380,8 @@ function OnboardingScreen({go,onComplete}) {
       <div style={{display:"flex",justifyContent:"center",gap:6,marginTop:16}}>
         {[0,1,2].map(i=><div key={i} style={{width:i===0?20:6,height:3,background:i===0?D.volt:D.ink4}}/>)}
       </div>
-    </div>
-  );
-  if(step===1) return (
-    <div style={{position:"absolute",inset:0,background:L.bg,display:"flex",flexDirection:"column",padding:"60px 24px 32px"}}>
+    </div>);
+  if(step===1) return (<div style={{position:"absolute",inset:0,background:L.bg,display:"flex",flexDirection:"column",padding:"60px 24px 32px"}}>
       <M c={L.ink3} sz={9} sp="0.14em" sx={{display:"block",marginBottom:8}}>Step 2 of 3</M>
       <F n="Your Shoe." sz={56} c={L.ink} sx={{display:"block",marginBottom:6}}/>
       <p style={{fontSize:13,color:L.ink3,lineHeight:1.6,marginBottom:20}}>Which On shoe are you running in? We'll track mileage automatically.</p>
@@ -425,18 +393,15 @@ function OnboardingScreen({go,onComplete}) {
               <M c={shoe===s?"rgba(255,255,255,0.5)":L.ink3} sz={9} sp="0.06em">On Running</M>
             </div>
             {shoe===s&&<div style={{width:20,height:20,background:L.volt,display:"flex",alignItems:"center",justifyContent:"center"}}><svg width="12"height="12"viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke={L.ink} strokeWidth="1.5" fill="none" strokeLinecap="square"/></svg></div>}
-          </TapBtn>
-        ))}
+          </TapBtn>))}
       </div>
       <div style={{marginTop:16,display:"flex",gap:10}}>
         <TapBtn onClick={()=>setStep(0)} sx={{height:52,flex:1,background:L.lift,border:`1px solid ${L.rule}`,fontFamily:"'DM Mono',monospace",fontSize:10,letterSpacing:"0.1em",textTransform:"uppercase",color:L.ink3}}>← Back</TapBtn>
         <TapBtn onClick={()=>setStep(2)} hapticType="medium" sx={{height:52,flex:2,background:shoe?L.ink:L.lift,fontFamily:"'DM Mono',monospace",fontSize:10,letterSpacing:"0.1em",textTransform:"uppercase",color:shoe?"#fff":L.ink4,pointerEvents:shoe?"auto":"none"}}>Next →</TapBtn>
       </div>
       <div style={{display:"flex",justifyContent:"center",gap:6,marginTop:14}}>{[0,1,2].map(i=><div key={i} style={{width:i===1?20:6,height:3,background:i===1?L.ink:L.ink4}}/>)}</div>
-    </div>
-  );
-  return (
-    <div style={{position:"absolute",inset:0,background:L.bg,display:"flex",flexDirection:"column",padding:"60px 24px 32px"}}>
+    </div>);
+  return (<div style={{position:"absolute",inset:0,background:L.bg,display:"flex",flexDirection:"column",padding:"60px 24px 32px"}}>
       <M c={L.ink3} sz={9} sp="0.14em" sx={{display:"block",marginBottom:8}}>Step 3 of 3</M>
       <F n="Goal + Crew." sz={56} c={L.ink} sx={{display:"block",marginBottom:6}}/>
       <div style={{flex:1,overflowY:"auto"}}>
@@ -446,8 +411,7 @@ function OnboardingScreen({go,onComplete}) {
             <TapBtn key={g} onClick={()=>setGoal(g)} sx={{width:"100%",padding:"12px 14px",textAlign:"left",background:goal===g?L.ink:L.card,border:`1px solid ${goal===g?L.ink:L.rule}`,display:"flex",justifyContent:"space-between",alignItems:"center"}}>
               <span style={{fontSize:13,color:goal===g?"#fff":L.ink}}>{g}</span>
               {goal===g&&<div style={{width:16,height:16,background:L.volt,display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}><svg width="10"height="10"viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke={L.ink} strokeWidth="1.5" fill="none" strokeLinecap="square"/></svg></div>}
-            </TapBtn>
-          ))}
+            </TapBtn>))}
         </div>
         <M c={L.ink3} sz={9} sp="0.12em" sx={{display:"block",marginBottom:8}}>Suggested runners</M>
         {SUGGESTED_RUNNERS.map(u=>(
@@ -460,16 +424,14 @@ function OnboardingScreen({go,onComplete}) {
             <TapBtn onClick={()=>setFollowed(p=>p.includes(u.i)?p.filter(x=>x!==u.i):[...p,u.i])} sx={{height:28,padding:"0 12px",background:followed.includes(u.i)?L.ink:L.lift,border:`1px solid ${followed.includes(u.i)?L.ink:L.rule}`,fontFamily:"'DM Mono',monospace",fontSize:8,letterSpacing:"0.1em",textTransform:"uppercase",color:followed.includes(u.i)?"#fff":L.ink2}}>
               {followed.includes(u.i)?"Following":"Follow"}
             </TapBtn>
-          </div>
-        ))}
+          </div>))}
       </div>
       <div style={{marginTop:16,display:"flex",gap:10}}>
         <TapBtn onClick={()=>setStep(1)} sx={{height:52,flex:1,background:L.lift,border:`1px solid ${L.rule}`,fontFamily:"'DM Mono',monospace",fontSize:10,letterSpacing:"0.1em",textTransform:"uppercase",color:L.ink3}}>← Back</TapBtn>
         <TapBtn onClick={finish} hapticType="medium" sx={{height:52,flex:2,background:L.ink,fontFamily:"'DM Mono',monospace",fontSize:10,letterSpacing:"0.1em",textTransform:"uppercase",color:"#fff",fontWeight:500}}>Enter Apex →</TapBtn>
       </div>
       <div style={{display:"flex",justifyContent:"center",gap:6,marginTop:14}}>{[0,1,2].map(i=><div key={i} style={{width:i===2?20:6,height:3,background:i===2?L.ink:L.ink4}}/>)}</div>
-    </div>
-  );
+    </div>);
 }
 
 // ═══════════════════════════════════════════════════════════
@@ -482,8 +444,7 @@ function PreRunScreen({go,run,dispatch,userShoe,toast}) {
   const [shoeSheet,setShoeSheet]=useState(false);
   useEffect(()=>{const t=setTimeout(()=>setGps("locked"),2200);return()=>clearTimeout(t);},[]);
   function start(){haptic("medium");dispatch({type:"START",shoe:sel});go("run");}
-  return (
-    <div style={{position:"absolute",inset:0,background:D.bg,display:"flex",flexDirection:"column",padding:"56px 0 0"}}>
+  return (<div style={{position:"absolute",inset:0,background:D.bg,display:"flex",flexDirection:"column",padding:"56px 0 0"}}>
       <div style={{flex:1,display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:"0 24px",position:"relative"}}>
         <div style={{position:"relative",width:120,height:120,display:"flex",alignItems:"center",justifyContent:"center",marginBottom:32}}>
           {gps==="locking"&&[0,1,2].map(i=><div key={i} style={{position:"absolute",width:120,height:120,borderRadius:"50%",border:`1px solid ${D.volt}`,animation:`gpsRing 2s ease-out ${i*.55}s infinite`}}/>)}
@@ -521,12 +482,10 @@ function PreRunScreen({go,run,dispatch,userShoe,toast}) {
             <TapBtn dark key={s} onClick={()=>{setSel(s);setShoeSheet(false);}} sx={{width:"100%",padding:"14px 16px",background:sel===s?D.volt:D.lift,border:`1px solid ${sel===s?D.volt:D.rule}`,display:"flex",justifyContent:"space-between",alignItems:"center",textAlign:"left"}}>
               <div style={{fontSize:13,fontWeight:500,color:sel===s?D.bg:D.ink}}>{s}</div>
               {sel===s&&<svg width="14"height="14"viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke={D.bg} strokeWidth="2" fill="none" strokeLinecap="square"/></svg>}
-            </TapBtn>
-          ))}
+            </TapBtn>))}
         </div>
       </Sheet>
-    </div>
-  );
+    </div>);
 }
 
 // ═══════════════════════════════════════════════════════════
@@ -541,11 +500,10 @@ function HomeScreen({go,userName,toast}) {
   const [v,setV]=useState(false);
   const [ws,setWs]=useState(false);
   const [lp,setLp]=useState(null); // long-press run item
-  useEffect(()=>setTimeout(()=>setV(true),60),[]);
+  useEffect(()=>{const t=setTimeout(()=>setV(true),60);return()=>clearTimeout(t);},[]);
   const tr=d=>`all .44s cubic-bezier(0,0,.2,1) ${d}s`;
 
-  return (
-    <div style={{position:"absolute",inset:0,background:L.bg,overflowY:"auto",paddingBottom:82}}>
+  return (<div style={{position:"absolute",inset:0,background:L.bg,overflowY:"auto",paddingBottom:82}}>
       <div style={{padding:"60px 24px 0"}}>
         <M c={L.ink3} sz={9} sp="0.14em" sx={{display:"block",marginBottom:8,opacity:v?1:0,transition:tr(.06)}}>Good morning</M>
         <div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:64,lineHeight:.88,color:L.ink,marginBottom:4,opacity:v?1:0,transform:v?"none":"translateY(10px)",transition:tr(.1)}}>{(userName||"RUNNER").toUpperCase()}.</div>
@@ -569,8 +527,7 @@ function HomeScreen({go,userName,toast}) {
             <div key={i} style={{paddingRight:i<2?14:0,paddingLeft:i>0?14:0,borderRight:i<2?`1px solid ${L.rule}`:"none"}}>
               <M c={L.ink4} sz={8} sp="0.1em" sx={{display:"block",marginBottom:3}}>{s.l}</M>
               <span style={{fontFamily:"'DM Mono',monospace",fontSize:12,color:s.c||L.ink}}>{s.v}</span>
-            </div>
-          ))}
+            </div>))}
         </div>
       </div>
 
@@ -587,13 +544,12 @@ function HomeScreen({go,userName,toast}) {
               <div style={{width:"100%",height:52,background:L.lift,position:"relative",overflow:"hidden"}}>
                 {v&&<div style={{position:"absolute",bottom:0,left:0,right:0,height:`${Math.max((w.km/MXK)*100,w.today?8:0)}%`,background:w.today?L.volt:w.run?L.ink:L.rule,transformOrigin:"bottom",animation:`barRise .5s cubic-bezier(0,0,.2,1) ${.3+i*.05}s both`}}/>}
               </div>
-              {w.today?<div style={{background:L.ink,padding:"1px 3px"}}><M c={L.volt} sz={7} sp="0.08em">now</M></div>:w.run?<M c={L.ink3} sz={8} sp="0" up={false}>{w.km}</M>:<M c={L.ink4} sz={8} sp="0">—</M>}
-            </div>
-          ))}
+              {w.today?<div style={{background:L.ink,padding:"1px 3px"}}><M c={L.volt} sz={7} sp="0.08em">now</M></div>:w.run?<M c={L.ink3} sz={8} sp="0" up={false}>{w.km}</M>:<M c={L.ink4} sz={8} sp="0">, </M>}
+            </div>))}
         </div>
       </div>
 
-      {/* Recent runs — long press enabled */}
+      {/* Recent runs · long press enabled */}
       <div style={{padding:"20px 24px 0",opacity:v?1:0,transition:tr(.3)}}>
         <div style={{display:"flex",justifyContent:"space-between",marginBottom:10}}>
           <M c={L.ink3} sz={9} sp="0.14em">Recent runs</M><M c={L.ink3} sz={9} sp="0.08em">All →</M>
@@ -610,8 +566,7 @@ function HomeScreen({go,userName,toast}) {
               <M c={L.ink3} sz={9} sp="0.04em" up={false}>{r.meta}</M>
             </div>
             <div style={{textAlign:"right"}}><F n={r.km} sz={24} c={L.ink}/><br/><M c={L.ink3} sz={8} sp="0.08em">km</M></div>
-          </LongPressBtn>
-        ))}
+          </LongPressBtn>))}
       </div>
 
       {/* Shoe nudge */}
@@ -624,8 +579,7 @@ function HomeScreen({go,userName,toast}) {
       {/* Long press action sheet */}
       <Sheet open={!!lp} onClose={()=>setLp(null)} C={L} title={lp?.n}>
         {lp&&["Share this run","Edit details","Delete run"].map((opt,i)=>(
-          <TapBtn key={i} onClick={()=>{haptic(i===2?"warning":"light");if(i===0)toast("Run shared","→");if(i===2)toast("Run deleted","✕");setLp(null);}} sx={{width:"100%",height:46,background:i===2?`rgba(192,48,32,0.06)`:L.lift,border:`1px solid ${i===2?`rgba(192,48,32,0.12)`:L.rule}`,fontFamily:"'DM Mono',monospace",fontSize:10,letterSpacing:"0.1em",textTransform:"uppercase",color:i===2?L.neg:L.ink,marginBottom:8}}>{opt}</TapBtn>
-        ))}
+          <TapBtn key={i} onClick={()=>{haptic(i===2?"warning":"light");if(i===0)toast("Run shared","→");if(i===2)toast("Run deleted","✕");setLp(null);}} sx={{width:"100%",height:46,background:i===2?`rgba(192,48,32,0.06)`:L.lift,border:`1px solid ${i===2?`rgba(192,48,32,0.12)`:L.rule}`,fontFamily:"'DM Mono',monospace",fontSize:10,letterSpacing:"0.1em",textTransform:"uppercase",color:i===2?L.neg:L.ink,marginBottom:8}}>{opt}</TapBtn>))}
       </Sheet>
 
       <Sheet open={ws} onClose={()=>setWs(false)} C={L} title="Week Detail">
@@ -636,11 +590,9 @@ function HomeScreen({go,userName,toast}) {
               <div style={{width:50,height:2,background:L.lift,position:"relative"}}><div style={{position:"absolute",left:0,top:0,height:"100%",width:`${(w.km/MXK)*100}%`,background:L.ink}}/></div>
               <M c={L.ink} sz={10} sp="0.04em" up={false}>{w.km} km</M>
             </div>
-          </div>
-        ))}
+          </div>))}
       </Sheet>
-    </div>
-  );
+    </div>);
 }
 
 // ═══════════════════════════════════════════════════════════
@@ -650,8 +602,7 @@ function RunScreen({go,run,dispatch,toast}) {
   const {elapsed,km,pace,hr,cadence,zone,paused,shoe}=run;
   const [confirm,setConfirm]=useState(false);
   const [mapOpen,setMapOpen]=useState(false);
-  return (
-    <div style={{position:"absolute",inset:0,background:D.bg,display:"flex",flexDirection:"column"}}>
+  return (<div style={{position:"absolute",inset:0,background:D.bg,display:"flex",flexDirection:"column"}}>
       <div style={{flex:"0 0 auto",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:"62px 24px 0",position:"relative",minHeight:230}}>
         {!paused&&<div className="scan-line" style={{background:`linear-gradient(90deg,transparent,${D.volt},transparent)`,opacity:.18}}/>}
         <M c={D.ink3} sz={9} sp="0.14em" sx={{marginBottom:10}}>Elapsed time</M>
@@ -669,8 +620,7 @@ function RunScreen({go,run,dispatch,toast}) {
           <div key={i} style={{padding:"18px 0",display:"flex",flexDirection:"column",alignItems:"center",gap:4}}>
             <M c={D.ink3} sz={8} sp="0.12em">{it.l}</M>
             <F n={it.v} sz={32} c={D.ink}/><M c={D.ink3} sz={8} sp="0.08em">{it.u}</M>
-          </div>
-        )}
+          </div>)}
       </div>
       <div style={{padding:"12px 24px",display:"flex",alignItems:"center",gap:10,flexShrink:0}}>
         <div style={{display:"flex",gap:3,flex:1}}>
@@ -678,7 +628,7 @@ function RunScreen({go,run,dispatch,toast}) {
         </div>
         <M c={D.volt} sz={9} sp="0.1em">Zone {zone+1}</M>
       </div>
-      {/* Map — tap to expand */}
+      {/* Map · tap to expand */}
       <TapBtn dark onClick={()=>setMapOpen(true)} sx={{flex:1,background:D.card,position:"relative",overflow:"hidden",minHeight:130,display:"block",width:"100%",textAlign:"left"}}>
         <div style={{position:"absolute",inset:0,backgroundImage:`linear-gradient(${D.rule} 1px,transparent 1px),linear-gradient(90deg,${D.rule} 1px,transparent 1px)`,backgroundSize:"22px 22px"}}/>
         <div style={{position:"absolute",inset:12}}>
@@ -705,8 +655,7 @@ function RunScreen({go,run,dispatch,toast}) {
         <TapBtn dark onClick={()=>{dispatch({type:"RESET"});go("home");}} hapticType="warning" sx={{width:"100%",height:48,background:"transparent",border:`1px solid ${D.rule}`,fontFamily:"'DM Mono',monospace",fontSize:10,letterSpacing:"0.1em",textTransform:"uppercase",color:D.ink2}}>Discard</TapBtn>
       </Sheet>
       <MapOverlay open={mapOpen} onClose={()=>setMapOpen(false)} C={D}/>
-    </div>
-  );
+    </div>);
 }
 
 // ═══════════════════════════════════════════════════════════
@@ -718,13 +667,12 @@ function SummaryScreen({go,run,toast}) {
   const [v,setV]=useState(false);
   const [pr,setPr]=useState(false);
   const [sh,setSh]=useState(false);
-  useEffect(()=>{setTimeout(()=>setV(true),100);setTimeout(()=>setPr(true),750);},[]);
+  useEffect(()=>{const a=setTimeout(()=>setV(true),100);const b=setTimeout(()=>setPr(true),750);return()=>{clearTimeout(a);clearTimeout(b);};},[]);
   const km=run.active?run.km.toFixed(2):"12.4";
   const tm=run.active?fmtClock(run.elapsed):"58:02";
   const pc=run.active?fmtPace(Math.round(run.elapsed/Math.max(run.km,.01))):"4:41";
   const shoe=run.shoe||"Cloudmonster 2";
-  return (
-    <div style={{position:"absolute",inset:0,background:L.bg,overflowY:"auto",paddingBottom:82}}>
+  return (<div style={{position:"absolute",inset:0,background:L.bg,overflowY:"auto",paddingBottom:82}}>
       <div style={{height:296,background:L.ink,position:"relative",overflow:"hidden",display:"flex",flexDirection:"column",justifyContent:"flex-end",padding:"0 24px 24px"}}>
         <div style={{position:"absolute",fontFamily:"'Bebas Neue',sans-serif",fontSize:210,lineHeight:.8,color:"transparent",WebkitTextStroke:"1px rgba(255,255,255,0.05)",top:-18,right:-8,whiteSpace:"nowrap",pointerEvents:"none"}}>RUN</div>
         <div style={{position:"relative",zIndex:1}}>
@@ -752,8 +700,7 @@ function SummaryScreen({go,run,toast}) {
           {[{l:"Cadence",v:"176",u:"spm"},{l:"Avg HR",v:"164",u:"bpm"},{l:"Elev",v:"+62",u:"m"}].map((s,i)=>(
             <div key={i}style={{display:"flex",flexDirection:"column",gap:5,borderRight:i<2?`1px solid ${L.rule}`:"none",paddingRight:i<2?14:0,paddingLeft:i>0?14:0}}>
               <M c={L.ink3}sz={8}sp="0.12em">{s.l}</M><div><F n={s.v}sz={26}c={L.ink}/><M c={L.ink3}sz={9}sp="0.04em"up={false}sx={{marginLeft:3}}>{s.u}</M></div>
-            </div>
-          ))}
+            </div>))}
         </div>
         <div style={{padding:"18px 0",borderBottom:`1px solid ${L.rule}`,opacity:v?1:0,transition:"opacity .4s .26s"}}>
           <M c={L.ink3}sz={9}sp="0.14em"sx={{display:"block",marginBottom:12}}>Pace / km</M>
@@ -780,11 +727,9 @@ function SummaryScreen({go,run,toast}) {
           <div style={{display:"inline-flex",alignItems:"center",height:18,padding:"0 8px",background:L.volt,marginTop:10}}><M c={L.ink}sz={8}sp="0.1em"sx={{fontWeight:500}}>ON APEX</M></div>
         </div>
         {["Save to Photos","Share to Instagram","Copy Link"].map((opt,i)=>(
-          <TapBtn key={i}onClick={()=>{toast("Shared","→");setSh(false);}}sx={{width:"100%",height:46,background:L.lift,border:`1px solid ${L.rule}`,fontFamily:"'DM Mono',monospace",fontSize:10,letterSpacing:"0.1em",textTransform:"uppercase",color:L.ink,marginBottom:8}}>{opt}</TapBtn>
-        ))}
+          <TapBtn key={i}onClick={()=>{toast("Shared","→");setSh(false);}}sx={{width:"100%",height:46,background:L.lift,border:`1px solid ${L.rule}`,fontFamily:"'DM Mono',monospace",fontSize:10,letterSpacing:"0.1em",textTransform:"uppercase",color:L.ink,marginBottom:8}}>{opt}</TapBtn>))}
       </Sheet>
-    </div>
-  );
+    </div>);
 }
 
 // ═══════════════════════════════════════════════════════════
@@ -797,8 +742,7 @@ function ShoeRegScreen({go,toast}) {
   const [shoe,setShoe]=useState(null);
   const [nick,setNick]=useState("");
   const [goal,setGoal]=useState("800");
-  if(step===0) return (
-    <div style={{position:"absolute",inset:0,background:L.bg,display:"flex",flexDirection:"column",padding:"60px 24px 32px"}}>
+  if(step===0) return (<div style={{position:"absolute",inset:0,background:L.bg,display:"flex",flexDirection:"column",padding:"60px 24px 32px"}}>
       <M c={L.ink3}sz={9}sp="0.14em"sx={{display:"block",marginBottom:8}}>Registration · 1 of 3</M>
       <F n={"Order\nSync."} sz={56}c={L.ink}sx={{lineHeight:.88,whiteSpace:"pre-line",display:"block",marginBottom:20}}/>
       <div style={{flex:1,display:"flex",flexDirection:"column",gap:10}}>
@@ -807,18 +751,15 @@ function ShoeRegScreen({go,toast}) {
             <div style={{width:48,height:48,background:shoe===d.m?L.volt:L.lift,display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}><svg width="26"height="26"viewBox="0 0 24 24"fill={shoe===d.m?L.ink:L.ink3}><path d="M2 18l2-6h14l2 6H2zm4-2h12l-1-2H7l-1 2z"/></svg></div>
             <div style={{flex:1}}><div style={{fontSize:14,fontWeight:500,color:shoe===d.m?"#fff":L.ink,marginBottom:3}}>{d.m}</div><M c={shoe===d.m?"rgba(255,255,255,0.5)":L.ink3}sz={9}sp="0.04em"up={false}>{d.order} · {d.date}</M></div>
             {shoe===d.m&&<div style={{width:20,height:20,background:L.volt,display:"flex",alignItems:"center",justifyContent:"center"}}><svg width="12"height="12"viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"stroke={L.ink}strokeWidth="1.5"fill="none"strokeLinecap="square"/></svg></div>}
-          </TapBtn>
-        ))}
+          </TapBtn>))}
         <TapBtn sx={{width:"100%",padding:14,background:L.lift,border:`1px solid ${L.rule}`,textAlign:"center"}}><M c={L.ink3}sz={9}sp="0.1em">Add manually</M></TapBtn>
       </div>
       <div style={{marginTop:16,display:"flex",gap:10}}>
         <TapBtn onClick={()=>go("garage")}sx={{height:52,flex:1,background:L.lift,border:`1px solid ${L.rule}`,fontFamily:"'DM Mono',monospace",fontSize:10,letterSpacing:"0.1em",textTransform:"uppercase",color:L.ink3}}>Cancel</TapBtn>
         <TapBtn onClick={()=>setStep(1)}sx={{height:52,flex:2,background:shoe?L.ink:L.lift,fontFamily:"'DM Mono',monospace",fontSize:10,letterSpacing:"0.1em",textTransform:"uppercase",color:shoe?"#fff":L.ink4,pointerEvents:shoe?"auto":"none"}}>Confirm →</TapBtn>
       </div>
-    </div>
-  );
-  if(step===1) return (
-    <div style={{position:"absolute",inset:0,background:L.bg,display:"flex",flexDirection:"column",padding:"60px 24px 32px"}}>
+    </div>);
+  if(step===1) return (<div style={{position:"absolute",inset:0,background:L.bg,display:"flex",flexDirection:"column",padding:"60px 24px 32px"}}>
       <M c={L.ink3}sz={9}sp="0.14em"sx={{display:"block",marginBottom:8}}>Registration · 2 of 3</M>
       <F n="Name It." sz={56}c={L.ink}sx={{display:"block",marginBottom:20}}/>
       <div style={{flex:1}}>
@@ -835,10 +776,8 @@ function ShoeRegScreen({go,toast}) {
         <TapBtn onClick={()=>setStep(0)}sx={{height:52,flex:1,background:L.lift,border:`1px solid ${L.rule}`,fontFamily:"'DM Mono',monospace",fontSize:10,letterSpacing:"0.1em",textTransform:"uppercase",color:L.ink3}}>← Back</TapBtn>
         <TapBtn onClick={()=>setStep(2)}sx={{height:52,flex:2,background:L.ink,fontFamily:"'DM Mono',monospace",fontSize:10,letterSpacing:"0.1em",textTransform:"uppercase",color:"#fff",fontWeight:500}}>Next →</TapBtn>
       </div>
-    </div>
-  );
-  return (
-    <div style={{position:"absolute",inset:0,background:L.bg,display:"flex",flexDirection:"column",padding:"60px 24px 32px"}}>
+    </div>);
+  return (<div style={{position:"absolute",inset:0,background:L.bg,display:"flex",flexDirection:"column",padding:"60px 24px 32px"}}>
       <M c={L.ink3}sz={9}sp="0.14em"sx={{display:"block",marginBottom:8}}>Registration · 3 of 3</M>
       <F n="Set Goal." sz={56}c={L.ink}sx={{display:"block",marginBottom:20}}/>
       <div style={{flex:1}}>
@@ -846,8 +785,7 @@ function ShoeRegScreen({go,toast}) {
           {KM_GOALS.map(g=>(
             <TapBtn key={g}onClick={()=>setGoal(g)}sx={{height:52,background:goal===g?L.ink:L.card,border:`1px solid ${goal===g?L.ink:L.rule}`,display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",gap:1}}>
               <F n={g}sz={18}c={goal===g?"#fff":L.ink}/><M c={goal===g?"rgba(255,255,255,0.5)":L.ink4}sz={7}sp="0.1em">km</M>
-            </TapBtn>
-          ))}
+            </TapBtn>))}
         </div>
         <div style={{padding:18,background:L.ink,marginBottom:16}}>
           <div style={{display:"flex",gap:12,alignItems:"center",marginBottom:16}}>
@@ -861,12 +799,11 @@ function ShoeRegScreen({go,toast}) {
         <TapBtn onClick={()=>setStep(1)}sx={{height:52,flex:1,background:L.lift,border:`1px solid ${L.rule}`,fontFamily:"'DM Mono',monospace",fontSize:10,letterSpacing:"0.1em",textTransform:"uppercase",color:L.ink3}}>← Back</TapBtn>
         <TapBtn onClick={()=>{haptic("medium");toast("Shoe registered","✓");go("garage");}}sx={{height:52,flex:2,background:L.ink,fontFamily:"'DM Mono',monospace",fontSize:10,letterSpacing:"0.1em",textTransform:"uppercase",color:"#fff",fontWeight:500}}>Add to Garage →</TapBtn>
       </div>
-    </div>
-  );
+    </div>);
 }
 
 // ═══════════════════════════════════════════════════════════
-// SHOE CAROUSEL — horizontal scroll-snap, CSS scroll-snap-type: mandatory
+// SHOE CAROUSEL: horizontal scroll-snap, CSS scroll-snap-type: mandatory
 // ═══════════════════════════════════════════════════════════
 function ShoeCarousel({shoes,v,onSelect}) {
   const ref = useRef(null);
@@ -879,8 +816,7 @@ function ShoeCarousel({shoes,v,onSelect}) {
     setActive(idx);
   }
 
-  return (
-    <div style={{marginTop:20,opacity:v?1:0,transition:"opacity .44s .2s"}}>
+  return (<div style={{marginTop:20,opacity:v?1:0,transition:"opacity .44s .2s"}}>
       {/* Scroll container */}
       <div
         ref={ref}
@@ -902,8 +838,7 @@ function ShoeCarousel({shoes,v,onSelect}) {
         {shoes.map((sh,i)=>{
           const pct = sh.km/sh.goal;
           const fill = pct>.9?L.neg:pct>.75?L.warn:L.ink;
-          return (
-            <TapBtn
+          return (<TapBtn
               key={i}
               onClick={()=>onSelect(sh)}
               sx={{
@@ -956,8 +891,7 @@ function ShoeCarousel({shoes,v,onSelect}) {
                 <M c={L.ink4}sz={8}sp="0.1em">Tap for details</M>
                 <M c={L.ink3}sz={12}sp="0">›</M>
               </div>
-            </TapBtn>
-          );
+            </TapBtn>);
         })}
       </div>
 
@@ -976,15 +910,13 @@ function ShoeCarousel({shoes,v,onSelect}) {
               cursor:"pointer",
               transition:"width .22s cubic-bezier(.34,1.56,.64,1), background .15s ease",
             }}
-          />
-        ))}
+          />))}
       </div>
-    </div>
-  );
+    </div>);
 }
 
 // ═══════════════════════════════════════════════════════════
-// ROUTE CAROUSEL — horizontal scroll-snap
+// ROUTE CAROUSEL: horizontal scroll-snap
 // ═══════════════════════════════════════════════════════════
 
 // Unique SVG path per route so each card feels distinct
@@ -1005,8 +937,7 @@ function RouteCarousel({routes,saved,setSaved,toast,onExpand}) {
     setActive(idx);
   }
 
-  return (
-    <div style={{marginTop:16}}>
+  return (<div style={{marginTop:16}}>
       <div
         ref={ref}
         onScroll={onScroll}
@@ -1051,8 +982,7 @@ function RouteCarousel({routes,saved,setSaved,toast,onExpand}) {
               {rt.by==="On Curated"&&(
                 <div style={{position:"absolute",top:8,left:8,height:16,padding:"0 6px",background:L.volt,display:"flex",alignItems:"center"}}>
                   <M c={L.ink}sz={7}sp="0.1em">Curated</M>
-                </div>
-              )}
+                </div>)}
               <div style={{position:"absolute",bottom:8,right:8,padding:"3px 7px",background:"rgba(0,0,0,0.08)"}}>
                 <M c={L.ink3}sz={7}sp="0.1em">Expand →</M>
               </div>
@@ -1093,8 +1023,7 @@ function RouteCarousel({routes,saved,setSaved,toast,onExpand}) {
                 <M c={L.ink4}sz={8}sp="0.06em">· {rt.by}</M>
               </div>
             </div>
-          </div>
-        ))}
+          </div>))}
       </div>
 
       {/* Dot indicators */}
@@ -1113,11 +1042,9 @@ function RouteCarousel({routes,saved,setSaved,toast,onExpand}) {
               cursor:"pointer",
               transition:"width .22s cubic-bezier(.34,1.56,.64,1), background .15s ease",
             }}
-          />
-        ))}
+          />))}
       </div>
-    </div>
-  );
+    </div>);
 }
 
 // ═══════════════════════════════════════════════════════════
@@ -1128,9 +1055,8 @@ function GarageScreen({go,toast}) {
   const [v,setV]=useState(false);
   const [det,setDet]=useState(null);
   const [cyclon,setCyclon]=useState(false);
-  useEffect(()=>setTimeout(()=>setV(true),60),[]);
-  return (
-    <div style={{position:"absolute",inset:0,background:L.bg,overflowY:"auto",paddingBottom:82}}>
+  useEffect(()=>{const t=setTimeout(()=>setV(true),60);return()=>clearTimeout(t);},[]);
+  return (<div style={{position:"absolute",inset:0,background:L.bg,overflowY:"auto",paddingBottom:82}}>
       <div style={{padding:"60px 24px 0"}}>
         <div style={{fontFamily:"'Bebas Neue',sans-serif",fontSize:64,lineHeight:.88,color:L.ink,marginBottom:4,opacity:v?1:0,transform:v?"none":"translateY(10px)",transition:"all .44s cubic-bezier(0,0,.2,1) .05s"}}>SHOE<br/>GARAGE.</div>
         <div style={{display:"flex",justifyContent:"space-between",alignItems:"baseline",opacity:v?1:0,transition:"opacity .4s .15s"}}>
@@ -1152,30 +1078,27 @@ function GarageScreen({go,toast}) {
           </div>
         </div>
       </div>
-      {/* Shoe cards — horizontal scroll-snap carousel */}
+      {/* Shoe cards · horizontal scroll-snap carousel */}
       <ShoeCarousel shoes={SHOES_DATA} v={v} onSelect={setDet}/>
       <div style={{margin:"14px 24px 24px",padding:"18px 0",borderTop:`1px solid ${L.rule}`,display:"grid",gridTemplateColumns:"1fr 1px 1fr 1px 1fr",opacity:v?1:0,transition:"opacity .44s .48s"}}>
         {[{v:"3",l:"Active"},null,{v:"1069",l:"Total km"},null,{v:"14",l:"Months"}].map((it,i)=>it===null?<div key={i}style={{background:L.rule}}/>:<div key={i}style={{display:"flex",flexDirection:"column",alignItems:"center",gap:4}}><F n={it.v}sz={28}c={L.ink}/><M c={L.ink3}sz={8}sp="0.1em"sx={{textAlign:"center"}}>{it.l}</M></div>)}
       </div>
       <Sheet open={!!det}onClose={()=>setDet(null)}C={L}title={det?.m}>
         {det&&<div>{[{l:"Distance",v:`${det.km} km`},{l:"Goal",v:`${det.goal} km`},{l:"Remaining",v:`${det.goal-det.km} km`},{l:"Condition",v:det.km/det.goal>.75?"Replace Soon":"Good"}].map((row,i)=>(
-          <div key={i}style={{display:"flex",justifyContent:"space-between",padding:"12px 0",borderBottom:i<3?`1px solid ${L.rule}`:"none"}}><M c={L.ink3}sz={9}sp="0.1em">{row.l}</M><M c={L.ink}sz={9}sp="0.04em"up={false}>{row.v}</M></div>
-        ))}<TapBtn sx={{width:"100%",height:48,background:L.ink,fontFamily:"'DM Mono',monospace",fontSize:10,letterSpacing:"0.1em",textTransform:"uppercase",color:"#fff",marginTop:16}}>View on on.com →</TapBtn></div>}
+          <div key={i}style={{display:"flex",justifyContent:"space-between",padding:"12px 0",borderBottom:i<3?`1px solid ${L.rule}`:"none"}}><M c={L.ink3}sz={9}sp="0.1em">{row.l}</M><M c={L.ink}sz={9}sp="0.04em"up={false}>{row.v}</M></div>))}<TapBtn sx={{width:"100%",height:48,background:L.ink,fontFamily:"'DM Mono',monospace",fontSize:10,letterSpacing:"0.1em",textTransform:"uppercase",color:"#fff",marginTop:16}}>View on on.com →</TapBtn></div>}
       </Sheet>
       {/* Cyclon sheet */}
       <Sheet open={cyclon}onClose={()=>setCyclon(false)}C={L}title="Cyclon Program">
         <p style={{fontSize:13,color:L.ink2,lineHeight:1.65,marginBottom:16}}>On's Cyclon subscription lets you return worn shoes for recycling and receive a new pair. Close the loop on your Cloudflow 4.</p>
         {[{l:"Monthly subscription",v:"$29.99/mo"},{l:"Shoes covered",v:"Cloudflow 4"},{l:"Return process",v:"Free shipping label"},{l:"Turnaround",v:"5–7 business days"}].map((row,i)=>(
-          <div key={i}style={{display:"flex",justifyContent:"space-between",padding:"12px 0",borderBottom:`1px solid ${L.rule}`}}><M c={L.ink3}sz={9}sp="0.1em">{row.l}</M><M c={L.ink}sz={9}sp="0.04em"up={false}>{row.v}</M></div>
-        ))}
+          <div key={i}style={{display:"flex",justifyContent:"space-between",padding:"12px 0",borderBottom:`1px solid ${L.rule}`}}><M c={L.ink3}sz={9}sp="0.1em">{row.l}</M><M c={L.ink}sz={9}sp="0.04em"up={false}>{row.v}</M></div>))}
         <TapBtn onClick={()=>{toast("Cyclon request sent","♻");setCyclon(false);}}sx={{width:"100%",height:48,background:L.ink,fontFamily:"'DM Mono',monospace",fontSize:10,letterSpacing:"0.1em",textTransform:"uppercase",color:"#fff",marginTop:16}}>Join Cyclon →</TapBtn>
       </Sheet>
-    </div>
-  );
+    </div>);
 }
 
 // ═══════════════════════════════════════════════════════════
-// FEED — Reactions + Pull-to-Refresh
+// FEED, Reactions + Pull-to-Refresh
 // ═══════════════════════════════════════════════════════════
 const REACTIONS=[{id:"push",icon:"🔥",label:"Push"},{id:"solid",icon:"✊",label:"Solid"},{id:"pace",icon:"⚡",label:"Pace"},{id:"zone",icon:"🏔",label:"Zone"},{id:"rep",icon:"✓",label:"Respect"}];
 const FEED_DATA=[
@@ -1189,15 +1112,14 @@ function FeedScreen({toast}) {
   const [loading,setLoading]=useState(true);
   const [items,setItems]=useState(FEED_DATA.map(f=>({...f,rxn:{...f.rxn}})));
   const [mine,setMine]=useState(FEED_DATA.map(()=>({})));
-  useEffect(()=>setTimeout(()=>setLoading(false),1000),[]);
+  useEffect(()=>{const t=setTimeout(()=>setLoading(false),1000);return()=>clearTimeout(t);},[]);
   function react(fi,rid){
     const already=mine[fi][rid];
     setMine(p=>{const n=[...p];n[fi]={...n[fi],[rid]:!already};return n;});
     setItems(p=>{const n=p.map(x=>({...x,rxn:{...x.rxn}}));n[fi].rxn[rid]+=(already?-1:1);return n;});
   }
   function refresh(){setLoading(true);setTimeout(()=>setLoading(false),1000);}
-  return (
-    <div style={{position:"absolute",inset:0,background:L.bg}}>
+  return (<div style={{position:"absolute",inset:0,background:L.bg}}>
       <PullRefresh onRefresh={refresh} C={L}>
         <div style={{paddingBottom:82}}>
           <div style={{padding:"60px 24px 0"}}>
@@ -1211,10 +1133,8 @@ function FeedScreen({toast}) {
                 <div key={i}style={{padding:"20px 0",borderBottom:`1px solid ${L.rule}`,display:"flex",flexDirection:"column",gap:10}}>
                   <div style={{display:"flex",gap:10,alignItems:"center"}}><div className="sk"style={{width:36,height:36,borderRadius:"50%",flexShrink:0}}/><div style={{flex:1,display:"flex",flexDirection:"column",gap:6}}><div className="sk"style={{width:"40%",height:10}}/><div className="sk"style={{width:"26%",height:8}}/></div></div>
                   <div className="sk"style={{height:52,width:"100%"}}/><div className="sk"style={{width:"75%",height:9}}/>
-                </div>
-              ))}
-            </div>
-          ):(
+                </div>))}
+            </div>):(
             <div style={{padding:"0 24px"}}>
               {items.map((item,i)=>(
                 <div key={i}style={{padding:"20px 0",borderBottom:`1px solid ${L.rule}`,animation:`countUp .4s cubic-bezier(0,0,.2,1) ${i*.08}s both`}}>
@@ -1239,26 +1159,21 @@ function FeedScreen({toast}) {
                   <div style={{display:"flex",gap:5,flexWrap:"wrap"}}>
                     {REACTIONS.map(rxn=>{
                       const active=mine[i][rxn.id];
-                      return (
-                        <TapBtn key={rxn.id}onClick={()=>react(i,rxn.id)}sx={{display:"flex",alignItems:"center",gap:4,height:28,padding:"0 10px",background:active?L.ink:L.lift,border:`1px solid ${active?L.ink:L.rule}`,transition:"all .15s ease"}}>
+                      return (<TapBtn key={rxn.id}onClick={()=>react(i,rxn.id)}sx={{display:"flex",alignItems:"center",gap:4,height:28,padding:"0 10px",background:active?L.ink:L.lift,border:`1px solid ${active?L.ink:L.rule}`,transition:"all .15s ease"}}>
                           <span style={{fontSize:12,lineHeight:1}}>{rxn.icon}</span>
                           <M c={active?"#fff":L.ink3}sz={8}sp="0.06em"up={false}>{item.rxn[rxn.id]}</M>
-                        </TapBtn>
-                      );
+                        </TapBtn>);
                     })}
                   </div>
-                </div>
-              ))}
-            </div>
-          )}
+                </div>))}
+            </div>)}
         </div>
       </PullRefresh>
-    </div>
-  );
+    </div>);
 }
 
 // ═══════════════════════════════════════════════════════════
-// APEX CLUBS — full implementation
+// APEX CLUBS: full implementation
 // ═══════════════════════════════════════════════════════════
 const CLUBS=[
   {name:"Richmond Running Co.",members:24,city:"Richmond VA",upcoming:"Sat 7am · Brown's Island",myClub:true,board:[{i:"MR",n:"Maya R.",km:68,rank:1},{i:"BP",n:"Benn P.",km:38,rank:2},{i:"JK",n:"Jordan K.",km:32,rank:3},{i:"ST",n:"Sam T.",km:28,rank:4}]},
@@ -1267,8 +1182,7 @@ const CLUBS=[
 function ClubsScreen({toast}) {
   const [sel,setSel]=useState(null);
   const [rsvp,setRsvp]=useState(false);
-  return (
-    <div style={{position:"absolute",inset:0,background:L.bg,overflowY:"auto",paddingBottom:82}}>
+  return (<div style={{position:"absolute",inset:0,background:L.bg,overflowY:"auto",paddingBottom:82}}>
       <div style={{padding:"60px 24px 20px"}}>
         <F n="My\nClubs." sz={64}c={L.ink}sx={{lineHeight:.88,whiteSpace:"pre-line",display:"block",marginBottom:4}}/>
         <M c={L.ink3}sz={10}sp="0.08em">Geo-located running communities</M>
@@ -1287,8 +1201,7 @@ function ClubsScreen({toast}) {
             <div style={{width:6,height:6,borderRadius:"50%",background:club.myClub?L.volt:L.ink,flexShrink:0}}/>
             <M c={club.myClub?L.volt:L.ink3}sz={9}sp="0.06em">{club.upcoming}</M>
           </div>}
-        </TapBtn>
-      ))}
+        </TapBtn>))}
       <TapBtn sx={{display:"block",width:"calc(100% - 48px)",margin:"12px 24px",padding:16,background:L.lift,border:`1px solid ${L.rule}`,textAlign:"center"}}>
         <M c={L.ink3}sz={9}sp="0.1em">+ Discover clubs near you</M>
       </TapBtn>
@@ -1304,8 +1217,7 @@ function ClubsScreen({toast}) {
               <div style={{width:32,height:32,borderRadius:"50%",background:L.ink,display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}><M c={L.bg}sz={9}sp="0.04em">{row.i}</M></div>
               <div style={{flex:1}}><div style={{fontSize:13,color:row.n==="Benn P."?L.ink:L.ink2,fontWeight:row.n==="Benn P."?500:400}}>{row.n}</div></div>
               <M c={L.ink}sz={10}sp="0.04em"up={false}>{row.km} km</M>
-            </div>
-          ))}
+            </div>))}
           {sel.upcoming&&<div style={{marginTop:16}}>
             <M c={L.ink3}sz={9}sp="0.12em"sx={{display:"block",marginBottom:10}}>Next club run</M>
             <div style={{padding:16,background:L.lift,marginBottom:12}}>
@@ -1316,8 +1228,7 @@ function ClubsScreen({toast}) {
           </div>}
         </div>}
       </Sheet>
-    </div>
-  );
+    </div>);
 }
 
 // ═══════════════════════════════════════════════════════════
@@ -1331,8 +1242,7 @@ const CHALLENGES_DATA=[
 ];
 function ChallengesScreen({toast}) {
   const [joined,setJoined]=useState(CHALLENGES_DATA.map(c=>c.joined));
-  return (
-    <div style={{position:"absolute",inset:0,background:L.bg,overflowY:"auto",paddingBottom:82}}>
+  return (<div style={{position:"absolute",inset:0,background:L.bg,overflowY:"auto",paddingBottom:82}}>
       <div style={{padding:"60px 24px 20px"}}>
         <F n="Chal-\nlenges." sz={64}c={L.ink}sx={{lineHeight:.88,whiteSpace:"pre-line",display:"block",marginBottom:4}}/>
         <M c={L.ink3}sz={10}sp="0.08em">Distance · Elevation · Streak</M>
@@ -1369,11 +1279,9 @@ function ChallengesScreen({toast}) {
               <M c={L.ink3}sz={8}sp="0.1em">Top finisher drop</M>
               <M c={L.ink}sz={8}sp="0.06em"up={false}>· {ch.drop}</M>
             </div>}
-          </div>
-        ))}
+          </div>))}
       </div>
-    </div>
-  );
+    </div>);
 }
 
 // ═══════════════════════════════════════════════════════════
@@ -1387,8 +1295,7 @@ const EVENTS_DATA=[
 ];
 function EventsScreen({toast}) {
   const [rsvped,setRsvped]=useState(EVENTS_DATA.map(e=>e.rsvped));
-  return (
-    <div style={{position:"absolute",inset:0,background:L.bg,overflowY:"auto",paddingBottom:82}}>
+  return (<div style={{position:"absolute",inset:0,background:L.bg,overflowY:"auto",paddingBottom:82}}>
       <div style={{padding:"60px 24px 20px"}}>
         <F n="Events." sz={64}c={L.ink}sx={{lineHeight:.88,display:"block",marginBottom:4}}/>
         <M c={L.ink3}sz={10}sp="0.08em">Races · Club runs · Community events</M>
@@ -1425,11 +1332,9 @@ function EventsScreen({toast}) {
                 {rsvped[i]?"Going ✓":"RSVP"}
               </TapBtn>
             </div>
-          </div>
-        ))}
+          </div>))}
       </div>
-    </div>
-  );
+    </div>);
 }
 
 // ═══════════════════════════════════════════════════════════
@@ -1444,8 +1349,7 @@ const ROUTES_DATA=[
 function RoutesScreen({toast}) {
   const [saved,setSaved]=useState(ROUTES_DATA.map(r=>r.saved));
   const [mapRoute,setMapRoute]=useState(null);
-  return (
-    <div style={{position:"absolute",inset:0,background:L.bg,overflowY:"auto",paddingBottom:82}}>
+  return (<div style={{position:"absolute",inset:0,background:L.bg,overflowY:"auto",paddingBottom:82}}>
       <div style={{padding:"60px 24px 20px"}}>
         <F n="Routes." sz={64}c={L.ink}sx={{lineHeight:.88,display:"block",marginBottom:4}}/>
         <M c={L.ink3}sz={10}sp="0.08em">Community routes · Curated by On</M>
@@ -1453,8 +1357,7 @@ function RoutesScreen({toast}) {
       <HR c={L.rule}/>
       <RouteCarousel routes={ROUTES_DATA} saved={saved} setSaved={setSaved} toast={toast} onExpand={setMapRoute}/>
       <MapOverlay open={!!mapRoute} onClose={()=>setMapRoute(null)} C={L}/>
-    </div>
-  );
+    </div>);
 }
 
 // ═══════════════════════════════════════════════════════════
@@ -1465,10 +1368,9 @@ const MMKM=Math.max(...MONTHLY.map(m=>m.km));
 function ProfileScreen({go,userName,userShoe,toast}) {
   const [v,setV]=useState(false);
   const [cardSheet,setCardSheet]=useState(false);
-  useEffect(()=>setTimeout(()=>setV(true),60),[]);
+  useEffect(()=>{const t=setTimeout(()=>setV(true),60);return()=>clearTimeout(t);},[]);
   const STATS=[{l:"Total km",v:"546"},{l:"Runs",v:"42"},{l:"Avg pace",v:"4:48"},{l:"Longest",v:"21.1 km"},{l:"Best pace",v:"3:58/km"},{l:"Shoe goal",v:"70%"}];
-  return (
-    <div style={{position:"absolute",inset:0,background:L.bg,overflowY:"auto",paddingBottom:82}}>
+  return (<div style={{position:"absolute",inset:0,background:L.bg,overflowY:"auto",paddingBottom:82}}>
       <div style={{background:L.ink,padding:"60px 24px 24px",position:"relative",overflow:"hidden"}}>
         <div style={{position:"absolute",fontFamily:"'Bebas Neue',sans-serif",fontSize:180,lineHeight:.8,color:"transparent",WebkitTextStroke:"1px rgba(255,255,255,0.04)",top:-10,right:-12,whiteSpace:"nowrap",pointerEvents:"none"}}>{(userName||"RUN").toUpperCase()}</div>
         <div style={{position:"relative",zIndex:1}}>
@@ -1482,22 +1384,19 @@ function ProfileScreen({go,userName,userShoe,toast}) {
           <div key={i}style={{padding:"14px 12px",background:L.card,border:`1px solid ${L.rule}`,boxShadow:"0 1px 8px rgba(0,0,0,0.05)"}}>
             <M c={L.ink3}sz={8}sp="0.1em"sx={{display:"block",marginBottom:4}}>{s.l}</M>
             <div style={{fontFamily:"'DM Mono',monospace",fontSize:12,color:L.ink}}>{s.v}</div>
-          </div>
-        ))}
+          </div>))}
       </div>
       <div style={{margin:"12px 24px 0",padding:20,background:L.card,border:`1px solid ${L.rule}`,boxShadow:"0 2px 16px rgba(0,0,0,0.06)",opacity:v?1:0,transition:"opacity .4s .18s"}}>
         <div style={{display:"flex",justifyContent:"space-between",marginBottom:14}}><M c={L.ink3}sz={9}sp="0.14em">Monthly km</M><M c={L.ink3}sz={9}sp="0.08em"up={false}>6 months</M></div>
         <div style={{display:"flex",alignItems:"flex-end",gap:6,height:72}}>
           {MONTHLY.map((m,i)=>{
             const isLast=i===MONTHLY.length-1;
-            return (
-              <div key={i}style={{flex:1,display:"flex",flexDirection:"column",alignItems:"center",gap:4}}>
+            return (<div key={i}style={{flex:1,display:"flex",flexDirection:"column",alignItems:"center",gap:4}}>
                 <div style={{width:"100%",position:"relative",height:v?Math.round((m.km/MMKM)*60):0,transition:`height .6s cubic-bezier(0,0,.2,1) ${.2+i*.06}s`}}>
                   <div style={{position:"absolute",inset:0,background:isLast?L.ink:L.ink4}}/>
                 </div>
                 <M c={isLast?L.ink:L.ink4}sz={7}sp="0.06em">{m.mo}</M>
-              </div>
-            );
+              </div>);
           })}
         </div>
       </div>
@@ -1531,21 +1430,18 @@ function ProfileScreen({go,userName,userShoe,toast}) {
           <F n="546"sz={60}c="#fff"/><M c="rgba(255,255,255,0.5)"sz={12}sp="0.04em"up={false}sx={{marginLeft:5}}>km</M>
           <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:14,marginTop:14}}>
             {[{l:"Runs",v:"42"},{l:"Avg pace",v:"4:48/km"},{l:"Best",v:"3:58/km"},{l:"Shoe",v:userShoe||"CM2"}].map((s,i)=>(
-              <div key={i}><M c="rgba(255,255,255,0.35)"sz={8}sp="0.12em"sx={{display:"block",marginBottom:2}}>{s.l}</M><M c="rgba(255,255,255,0.8)"sz={10}sp="0.04em"up={false}>{s.v}</M></div>
-            ))}
+              <div key={i}><M c="rgba(255,255,255,0.35)"sz={8}sp="0.12em"sx={{display:"block",marginBottom:2}}>{s.l}</M><M c="rgba(255,255,255,0.8)"sz={10}sp="0.04em"up={false}>{s.v}</M></div>))}
           </div>
           <div style={{display:"inline-flex",alignItems:"center",height:18,padding:"0 8px",background:L.volt,marginTop:14}}><M c={L.ink}sz={8}sp="0.1em"sx={{fontWeight:500}}>ON APEX</M></div>
         </div>
         {["Save to Photos","Share to Instagram","Copy Link"].map((opt,i)=>(
-          <TapBtn key={i}onClick={()=>{toast("Shared","→");setCardSheet(false);}}sx={{width:"100%",height:46,background:L.lift,border:`1px solid ${L.rule}`,fontFamily:"'DM Mono',monospace",fontSize:10,letterSpacing:"0.1em",textTransform:"uppercase",color:L.ink,marginBottom:8}}>{opt}</TapBtn>
-        ))}
+          <TapBtn key={i}onClick={()=>{toast("Shared","→");setCardSheet(false);}}sx={{width:"100%",height:46,background:L.lift,border:`1px solid ${L.rule}`,fontFamily:"'DM Mono',monospace",fontSize:10,letterSpacing:"0.1em",textTransform:"uppercase",color:L.ink,marginBottom:8}}>{opt}</TapBtn>))}
       </Sheet>
-    </div>
-  );
+    </div>);
 }
 
 // ═══════════════════════════════════════════════════════════
-// SECONDARY NAV — Clubs/Challenges/Events/Routes sub-nav
+// SECONDARY NAV, Clubs/Challenges/Events/Routes sub-nav
 // ═══════════════════════════════════════════════════════════
 function CommunityHub({go,toast}) {
   const [tab,setTab]=useState("clubs");
@@ -1556,24 +1452,21 @@ function CommunityHub({go,toast}) {
     events:     <EventsScreen toast={toast}/>,
     routes:     <RoutesScreen toast={toast}/>,
   };
-  return (
-    <div style={{position:"absolute",inset:0,background:L.bg,display:"flex",flexDirection:"column",paddingBottom:82}}>
+  return (<div style={{position:"absolute",inset:0,background:L.bg,display:"flex",flexDirection:"column",paddingBottom:82}}>
       {/* Sub-nav tabs */}
       <div style={{position:"absolute",top:50,left:0,right:0,height:40,background:L.bg,borderBottom:`1px solid ${L.rule}`,display:"flex",zIndex:70}}>
         {TABS.map(t=>(
           <TapBtn key={t.id}onClick={()=>setTab(t.id)}sx={{flex:1,height:"100%",display:"flex",alignItems:"center",justifyContent:"center",background:"none",borderBottom:tab===t.id?`2px solid ${L.ink}`:"2px solid transparent",transition:"border-color .15s"}}>
             <M c={tab===t.id?L.ink:L.ink3}sz={9}sp="0.1em">{t.label}</M>
-          </TapBtn>
-        ))}
+          </TapBtn>))}
       </div>
-      {/* Content — offset for tabs */}
+      {/* Content · offset for tabs */}
       <div style={{position:"absolute",top:90,left:0,right:0,bottom:0,overflow:"hidden"}}>
         <div key={tab} style={{position:"absolute",inset:0,animation:"fadeUp .3s cubic-bezier(0,0,.2,1) both"}}>
           {content[tab]}
         </div>
       </div>
-    </div>
-  );
+    </div>);
 }
 
 // ═══════════════════════════════════════════════════════════
@@ -1583,6 +1476,8 @@ const NAV_ORDER=["home","feed","prerun","garage","you"];
 
 export default function App() {
   useGlobal();
+  const embedded =
+    typeof window !== "undefined" && window.self !== window.top;
   const {toasts,show:toast} = useToast();
   const [screen,setScreen] = useState("onboarding");
   const [run,dispatch] = useReducer(runR,RUN0);
@@ -1594,7 +1489,9 @@ export default function App() {
 
   // Show install prompt after onboarding
   useEffect(()=>{
-    if(screen==="home") setTimeout(()=>setInstallBanner(true),3000);
+    if(screen!=="home") return;
+    const t=setTimeout(()=>setInstallBanner(true),3000);
+    return()=>clearTimeout(t);
   },[screen]);
 
   const go = useCallback(target=>{
@@ -1637,39 +1534,53 @@ export default function App() {
     you:        <ProfileScreen go={go} userName={user.name} userShoe={user.shoe} toast={toast}/>,
   };
 
-  return (
-    <div style={{display:"flex",alignItems:"center",justifyContent:"center",minHeight:"100vh",background:"#0C0C0C",padding:20,fontFamily:"'DM Sans',sans-serif"}}>
+  return (<div style={{
+      display:"flex",alignItems:"center",justifyContent:"center",
+      minHeight: embedded ? undefined : "100vh",
+      height: embedded ? "auto" : undefined,
+      background:"#0C0C0C",
+      padding: embedded ? 0 : 20,
+      fontFamily:"'DM Sans',sans-serif",
+      boxSizing:"border-box",
+    }}>
       <div
         onPointerDown={onPD} onPointerMove={onPM} onPointerUp={onPU}
         style={{
           width:390,height:844,
           background:C.bg,
-          border:"1px solid rgba(255,255,255,0.07)",
-          borderRadius:50,overflow:"hidden",
+          border: embedded ? "none" : "1px solid rgba(255,255,255,0.07)",
+          borderRadius: embedded ? 0 : 50,
+          overflow:"hidden",
           position:"relative",flexShrink:0,
-          boxShadow:"0 0 0 1px rgba(255,255,255,0.03),0 40px 100px rgba(0,0,0,0.9)",
+          boxShadow: embedded ? "none" : "0 0 0 1px rgba(255,255,255,0.03),0 40px 100px rgba(0,0,0,0.9)",
           transform:swipeDx?`translateX(${swipeDx*.12}px)`:"none",
           transition:swipeDx?"none":"transform .2s ease, background .5s ease",
           touchAction:"none",
         }}
       >
-        {!["onboarding","prerun"].includes(screen)&&<Island running={screen==="run"} elapsed={run.elapsed}/>}
-        {screen!=="onboarding"&&<Status C={C}/>}
+        <div style={{
+          position:"absolute",
+          inset: embedded ? 10 : 0,
+          overflow:"hidden",
+          borderRadius: embedded ? 40 : 0,
+        }}>
+          {!["onboarding","prerun"].includes(screen)&&<Island running={screen==="run"} elapsed={run.elapsed}/>}
+          {screen!=="onboarding"&&<Status C={C}/>}
 
-        <div key={screen} style={{position:"absolute",inset:0,animation:"fadeUp .3s cubic-bezier(0,0,.2,1) both"}}>
-          {screenMap[screen]||screenMap.home}
+          <div key={screen} style={{position:"absolute",inset:0,animation:"fadeUp .3s cubic-bezier(0,0,.2,1) both"}}>
+            {screenMap[screen]||screenMap.home}
+          </div>
+
+          {showNav&&<BottomNav cur={navCur} go={go} C={C}/>}
+
+          <ToastLayer toasts={toasts} C={C}/>
+
+          <InstallBanner
+            show={installBanner&&screen==="home"}
+            onInstall={()=>{toast("Added to Home Screen","✓");setInstallBanner(false);}}
+            onDismiss={()=>setInstallBanner(false)}
+          />
         </div>
-
-        {showNav&&<BottomNav cur={navCur} go={go} C={C}/>}
-
-        <ToastLayer toasts={toasts} C={C}/>
-
-        <InstallBanner
-          show={installBanner&&screen==="home"}
-          onInstall={()=>{toast("Added to Home Screen","✓");setInstallBanner(false);}}
-          onDismiss={()=>setInstallBanner(false)}
-        />
       </div>
-    </div>
-  );
+    </div>);
 }
