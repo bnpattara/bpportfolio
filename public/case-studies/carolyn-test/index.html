@@ -401,11 +401,25 @@ footer{border-top:1px solid var(--g200);padding:32px 48px;display:flex;align-ite
 .cs-img-contain img{width:100%;height:100%;object-fit:cover;display:block;}
 .img-caption{font-size:11px;color:var(--g400);padding:6px 0 12px;display:block;}
 .cs-hero-sub{margin-top:18px;font-size:13px;color:rgba(255,255,255,.35);letter-spacing:.1em;text-transform:uppercase;}
-.carolyn-masonry{columns:3;column-gap:8px;margin-top:32px;}
-.carolyn-masonry-item{break-inside:avoid;margin-bottom:8px;display:block;}
-.carolyn-masonry-item img{width:100%;display:block;}
-@media(max-width:768px){
-.carolyn-masonry{columns:2;}
+.carolyn-masonry{
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ grid-auto-rows:8px;
+ gap:0 8px;
+ margin-top:32px;
+}
+.carolyn-masonry-item{
+ grid-row-end:span var(--span);
+ padding-bottom:8px;
+}
+.carolyn-masonry-item img{
+ width:100%;
+ display:block;
+}
+@media (max-width:768px){
+ .carolyn-masonry{
+  grid-template-columns:repeat(2,1fr);
+ }
 }
 </style>
 </head>
@@ -516,58 +530,59 @@ footer{border-top:1px solid var(--g200);padding:32px 48px;display:flex;align-ite
 </section><section class="cs-section cs-section-alt" id="cs-s10-concept-design-work" data-cs-section="cs-s10-concept-design-work">
  <div class="cs-section-eyebrow"><span class="cs-section-num">10</span><span class="cs-section-title">Concept / Design Work</span></div>
  <p class="cs-body">The full product specification covers silhouette, closure, strap system, hardware selection, and material choice. Every decision has documented rationale. Every element traces back to Cameron&#x27;s construction standards and the four strategic criteria.</p>
- <div class="cs-img-full" style="aspect-ratio:16/9;margin-bottom:28px;"><div class="cs-img-contain" style="width:100%;height:100%;min-height:200px;"><img src="../carolyn/mockups/01_hero_product_marble.png" alt="The Carolyn — hero product shot" style="width:100%;height:100%;object-fit:cover;" loading="lazy"/></div></div>
+ <div class="cs-img-full" style="aspect-ratio:16/9;margin-bottom:28px;"><div class="cs-img-contain" style="width:100%;height:100%;min-height:200px;"><img src="../carolyn/mockups/ecommerce mocku/ecommerce 3:4 view.png" alt="" style="width:100%;height:100%;object-fit:cover;" loading="lazy"/></div></div>
  <div class="cs-img-3col">
- <div class="cs-img-3col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="../carolyn/mockups/E-Commerce Product Photography Views/001_A_taupe_leather_handbag_with_gold_hardware_is_91TMmMhp.png" alt="" loading="lazy"/></div></div>
- <div class="cs-img-3col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="../carolyn/mockups/E-Commerce Product Photography Views/002_A_taupe_leather_tote_bag_with_gold_hardware_is_cAjgrM_F.png" alt="" loading="lazy"/></div></div>
- <div class="cs-img-3col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="../carolyn/mockups/E-Commerce Product Photography Views/003_A_beige_structured_handbag_with_gold_hardware_is_UW2-CJLj.png" alt="" loading="lazy"/></div></div>
+ <div class="cs-img-3col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="../carolyn/mockups/ecommerce mocku/ecommerce back.png" alt="" loading="lazy"/></div></div>
+ <div class="cs-img-3col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="../carolyn/mockups/ecommerce mocku/ecommerce closeup.png" alt="" loading="lazy"/></div></div>
+ <div class="cs-img-3col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="../carolyn/mockups/ecommerce mocku/ecommerce environment.png" alt="" loading="lazy"/></div></div>
  </div>
  <div class="cs-img-3col">
- <div class="cs-img-3col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="../carolyn/mockups/E-Commerce Product Photography Views/004_A_taupe_leather_shoulder_bag_with_a_gold_bar_BC4DpBl3.png" alt="" loading="lazy"/></div></div>
- <div class="cs-img-3col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="../carolyn/mockups/E-Commerce Product Photography Views/005_A_minimalist_taupe_leather_handbag_with_gold_zgsB0DzG.png" alt="" loading="lazy"/></div></div>
- <div class="cs-img-3col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="../carolyn/mockups/E-Commerce Product Photography Views/009_In_a_minimalist_style_a_person_wears_a_black_top_wBa7tB0c.png" alt="" loading="lazy"/></div></div>
+ <div class="cs-img-3col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="../carolyn/mockups/ecommerce mocku/ecommerce flatlay.png" alt="" loading="lazy"/></div></div>
+ <div class="cs-img-3col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="../carolyn/mockups/ecommerce mocku/ecommerce front view.png" alt="" loading="lazy"/></div></div>
+ <div class="cs-img-3col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="../carolyn/mockups/ecommerce mocku/ecommerce hardware closeup.png" alt="" loading="lazy"/></div></div>
  </div>
  <div class="cs-env-label">Construction detail</div>
  <div class="cs-img-2col">
- <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:1/1;min-height:160px;"><img src="../carolyn/mockups/E-Commerce Product Photography Views/006_A_close-up_shot_focuses_on_the_brushed_texture_VFIc6w4U.png" alt="" loading="lazy"/></div></div>
- <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:1/1;min-height:160px;"><img src="../carolyn/mockups/E-Commerce Product Photography Views/007_A_close-up_shot_focuses_on_the_detailed_texture_10rkAbjN.png" alt="" loading="lazy"/></div></div>
+ <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:1/1;min-height:160px;"><img src="../carolyn/mockups/ecommerce mocku/ecommerce interior.png" alt="" loading="lazy"/></div></div>
+ <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:1/1;min-height:160px;"><img src="../carolyn/mockups/ecommerce mocku/ecommerce model.png" alt="" loading="lazy"/></div></div>
  </div>
- <div class="cs-img-2col" style="margin-top:8px;">
- <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="../carolyn/mockups/Unified E-Commerce Product Shoot/005_A_taupe_leather_clutch_bag_with_a_gold_bar_vHgIlaTS.png" alt="" loading="lazy"/></div></div>
- <div class="cs-img-2col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="../carolyn/mockups/Unified E-Commerce Product Shoot/007_A_close-up_shows_the_detailed_stitching_on_a_0UvwTxTF.png" alt="" loading="lazy"/></div></div>
+ <div class="cs-img-3col" style="margin-top:8px;">
+ <div class="cs-img-3col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="../carolyn/mockups/ecommerce mocku/ecommerce primary.png" alt="" loading="lazy"/></div></div>
+ <div class="cs-img-3col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="../carolyn/mockups/ecommerce mocku/ecommerce texuture close up.png" alt="" loading="lazy"/></div></div>
+ <div class="cs-img-3col-item"><div class="cs-img-contain" style="aspect-ratio:3/4;min-height:200px;"><img src="../carolyn/mockups/ecommerce mocku/ecommerce wearing.png" alt="" loading="lazy"/></div></div>
  </div>
 </section><section class="cs-section cs-section-alt" id="cs-s11-in-context" data-cs-section="cs-s11-in-context">
  <div class="cs-section-eyebrow"><span class="cs-section-num">11</span><span class="cs-section-title">The Carolyn in Context</span></div>
  <p class="cs-body">The Carolyn is designed to be the only bag she needs. One silhouette, every context. From the subway to the boardroom to a Parisian street. These are the environments it was built for.</p>
  <div class="carolyn-masonry">
- <div class="carolyn-masonry-item"><img src="../carolyn/mockups/E-Commerce Product Photography Views/Celebrity Street Style Paparazzi Shots/001_In_a_realist_style_a_woman_with_dark_hair_JnbUx3Mn.png" alt="" loading="lazy"/></div>
- <div class="carolyn-masonry-item"><img src="../carolyn/mockups/Seasonal Styling Lookbook/001_In_a_romantic_painterly_style_a_woman_walks_DhtUlcLI.png" alt="" loading="lazy"/></div>
- <div class="carolyn-masonry-item"><img src="../carolyn/mockups/Street Style and TikTok OOTD Lifestyle Shots/003_A_person_in_a_black_turtleneck_and_black_pants_8-5av1de.png" alt="" loading="lazy"/></div>
- <div class="carolyn-masonry-item"><img src="../carolyn/mockups/E-Commerce Product Photography Views/Celebrity Street Style Paparazzi Shots/002_In_a_fashion_photography_style_a_young_woman_qxwN80dj.png" alt="" loading="lazy"/></div>
- <div class="carolyn-masonry-item"><img src="../carolyn/mockups/Seasonal Styling Lookbook/003_A_woman_with_brown_hair_wears_a_white_slip_dress_LTRedgRB.png" alt="" loading="lazy"/></div>
- <div class="carolyn-masonry-item"><img src="../carolyn/mockups/Street Style and TikTok OOTD Lifestyle Shots/005_A_young_woman_stands_on_a_subway_car_wearing_a_cgEwHavK.png" alt="" loading="lazy"/></div>
- <div class="carolyn-masonry-item"><img src="../carolyn/mockups/E-Commerce Product Photography Views/Celebrity Street Style Paparazzi Shots/003_A_woman_walks_outside_a_cafe_carrying_a_light_9duEKvNR.png" alt="" loading="lazy"/></div>
- <div class="carolyn-masonry-item"><img src="../carolyn/mockups/Seasonal Styling Lookbook/002_In_a_naturalistic_style_a_woman_with_brown_hair_D2fgAoRk.png" alt="" loading="lazy"/></div>
- <div class="carolyn-masonry-item"><img src="../carolyn/mockups/Street Style and TikTok OOTD Lifestyle Shots/007_In_a_film_noir_style_a_woman_stands_on_a_wet_iGpwWlAl.png" alt="" loading="lazy"/></div>
- <div class="carolyn-masonry-item"><img src="../carolyn/mockups/E-Commerce Product Photography Views/Celebrity Street Style Paparazzi Shots/004_A_woman_with_dark_curly_hair_and_dark_eyes_X080hHyo.png" alt="" loading="lazy"/></div>
- <div class="carolyn-masonry-item"><img src="../carolyn/mockups/Seasonal Styling Lookbook/005_A_woman_with_brown_hair_wearing_a_cream_tmoOzZz3.png" alt="" loading="lazy"/></div>
- <div class="carolyn-masonry-item"><img src="../carolyn/mockups/Street Style and TikTok OOTD Lifestyle Shots/004_A_persons_hand_rests_on_a_taupe_handbag_with_1JXmI1M7.png" alt="" loading="lazy"/></div>
- <div class="carolyn-masonry-item"><img src="../carolyn/mockups/E-Commerce Product Photography Views/Celebrity Street Style Paparazzi Shots/005_In_a_candid_street_style_photograph_a_woman_with_Kf5-SmaT.png" alt="" loading="lazy"/></div>
- <div class="carolyn-masonry-item"><img src="../carolyn/mockups/Seasonal Styling Lookbook/004_In_a_fashion_photography_style_a_woman_with_dark_pnxZQXfJ.png" alt="" loading="lazy"/></div>
- <div class="carolyn-masonry-item"><img src="../carolyn/mockups/Street Style and TikTok OOTD Lifestyle Shots/001_In_a_minimalist_style_a_woman_with_brown_hair_ghpsBuMX.png" alt="" loading="lazy"/></div>
- <div class="carolyn-masonry-item"><img src="../carolyn/mockups/E-Commerce Product Photography Views/Celebrity Street Style Paparazzi Shots/006_In_a_realistic_style_a_woman_with_blonde_hair_7kjRLVNx.png" alt="" loading="lazy"/></div>
- <div class="carolyn-masonry-item"><img src="../carolyn/mockups/Seasonal Styling Lookbook/006_A_person_is_pictured_from_the_waist_down_walking_DJ49f2oH.png" alt="" loading="lazy"/></div>
- <div class="carolyn-masonry-item"><img src="../carolyn/mockups/Street Style and TikTok OOTD Lifestyle Shots/008_In_a_natural_light_style_a_woman_with_brown_hair_QacX8nNi.png" alt="" loading="lazy"/></div>
- <div class="carolyn-masonry-item"><img src="../carolyn/mockups/E-Commerce Product Photography Views/Celebrity Street Style Paparazzi Shots/007_A_woman_stands_outside_a_building_entrance_LJYNYotx.png" alt="" loading="lazy"/></div>
- <div class="carolyn-masonry-item"><img src="../carolyn/mockups/Seasonal Styling Lookbook/007_In_a_realistic_style_a_woman_with_dark_hair_98emGca.png" alt="" loading="lazy"/></div>
- <div class="carolyn-masonry-item"><img src="../carolyn/mockups/Street Style and TikTok OOTD Lifestyle Shots/002_In_a_photographic_realism_style_a_woman_with_z1r33xAf.png" alt="" loading="lazy"/></div>
- <div class="carolyn-masonry-item"><img src="../carolyn/mockups/E-Commerce Product Photography Views/Celebrity Street Style Paparazzi Shots/008_In_a_Parisian_street_scene_a_young_woman_with_-gN0riVT.png" alt="" loading="lazy"/></div>
- <div class="carolyn-masonry-item"><img src="../carolyn/mockups/Seasonal Styling Lookbook/008_A_sophisticated_woman_stands_against_a_dark_49clCB-T.png" alt="" loading="lazy"/></div>
- <div class="carolyn-masonry-item"><img src="../carolyn/mockups/Street Style and TikTok OOTD Lifestyle Shots/006_In_a_naturalistic_style_a_woman_with_dark_hair_kfNjSfdI.png" alt="" loading="lazy"/></div>
- <div class="carolyn-masonry-item"><img src="../carolyn/mockups/E-Commerce Product Photography Views/Celebrity Street Style Paparazzi Shots/009_A_woman_with_long_dark_hair_walks_a_golden_sZQMYRSZ.png" alt="" loading="lazy"/></div>
- <div class="carolyn-masonry-item"><img src="../carolyn/mockups/Seasonal Styling Lookbook/009_A_woman_stands_centered_against_a_plain_0aR9zeAz.png" alt="" loading="lazy"/></div>
- <div class="carolyn-masonry-item"><img src="../carolyn/mockups/Street Style and TikTok OOTD Lifestyle Shots/009_A_flat_lay_composition_displays_a_taupe_clutch_2aNP7hDo.png" alt="" loading="lazy"/></div>
- <div class="carolyn-masonry-item"><img src="../carolyn/mockups/Street Style and TikTok OOTD Lifestyle Shots/010_A_beige_clutch_with_gold_hardware_is_positioned_eYb-1Nob.png" alt="" loading="lazy"/></div>
+ <div class="carolyn-masonry-item" style="--span:32"><img src="../carolyn/mockups/E-Commerce Product Photography Views/Celebrity Street Style Paparazzi Shots/001_In_a_realist_style_a_woman_with_dark_hair_JnbUx3Mn.png" alt="" loading="lazy"/></div>
+ <div class="carolyn-masonry-item" style="--span:28"><img src="../carolyn/mockups/Seasonal Styling Lookbook/001_In_a_romantic_painterly_style_a_woman_walks_DhtUlcLI.png" alt="" loading="lazy"/></div>
+ <div class="carolyn-masonry-item" style="--span:24"><img src="../carolyn/mockups/Street Style and TikTok OOTD Lifestyle Shots/003_A_person_in_a_black_turtleneck_and_black_pants_8-5av1de.png" alt="" loading="lazy"/></div>
+ <div class="carolyn-masonry-item" style="--span:26"><img src="../carolyn/mockups/E-Commerce Product Photography Views/Celebrity Street Style Paparazzi Shots/002_In_a_fashion_photography_style_a_young_woman_qxwN80dj.png" alt="" loading="lazy"/></div>
+ <div class="carolyn-masonry-item" style="--span:30"><img src="../carolyn/mockups/Seasonal Styling Lookbook/003_A_woman_with_brown_hair_wears_a_white_slip_dress_LTRedgRB.png" alt="" loading="lazy"/></div>
+ <div class="carolyn-masonry-item" style="--span:22"><img src="../carolyn/mockups/Street Style and TikTok OOTD Lifestyle Shots/005_A_young_woman_stands_on_a_subway_car_wearing_a_cgEwHavK.png" alt="" loading="lazy"/></div>
+ <div class="carolyn-masonry-item" style="--span:28"><img src="../carolyn/mockups/E-Commerce Product Photography Views/Celebrity Street Style Paparazzi Shots/003_A_woman_walks_outside_a_cafe_carrying_a_light_9duEKvNR.png" alt="" loading="lazy"/></div>
+ <div class="carolyn-masonry-item" style="--span:24"><img src="../carolyn/mockups/Seasonal Styling Lookbook/002_In_a_naturalistic_style_a_woman_with_brown_hair_D2fgAoRk.png" alt="" loading="lazy"/></div>
+ <div class="carolyn-masonry-item" style="--span:32"><img src="../carolyn/mockups/Street Style and TikTok OOTD Lifestyle Shots/007_In_a_film_noir_style_a_woman_stands_on_a_wet_iGpwWlAl.png" alt="" loading="lazy"/></div>
+ <div class="carolyn-masonry-item" style="--span:26"><img src="../carolyn/mockups/E-Commerce Product Photography Views/Celebrity Street Style Paparazzi Shots/004_A_woman_with_dark_curly_hair_and_dark_eyes_X080hHyo.png" alt="" loading="lazy"/></div>
+ <div class="carolyn-masonry-item" style="--span:28"><img src="../carolyn/mockups/Seasonal Styling Lookbook/005_A_woman_with_brown_hair_wearing_a_cream_tmoOzZz3.png" alt="" loading="lazy"/></div>
+ <div class="carolyn-masonry-item" style="--span:18"><img src="../carolyn/mockups/Street Style and TikTok OOTD Lifestyle Shots/004_A_persons_hand_rests_on_a_taupe_handbag_with_1JXmI1M7.png" alt="" loading="lazy"/></div>
+ <div class="carolyn-masonry-item" style="--span:30"><img src="../carolyn/mockups/E-Commerce Product Photography Views/Celebrity Street Style Paparazzi Shots/005_In_a_candid_street_style_photograph_a_woman_with_Kf5-SmaT.png" alt="" loading="lazy"/></div>
+ <div class="carolyn-masonry-item" style="--span:24"><img src="../carolyn/mockups/Seasonal Styling Lookbook/004_In_a_fashion_photography_style_a_woman_with_dark_pnxZQXfJ.png" alt="" loading="lazy"/></div>
+ <div class="carolyn-masonry-item" style="--span:26"><img src="../carolyn/mockups/Street Style and TikTok OOTD Lifestyle Shots/001_In_a_minimalist_style_a_woman_with_brown_hair_ghpsBuMX.png" alt="" loading="lazy"/></div>
+ <div class="carolyn-masonry-item" style="--span:28"><img src="../carolyn/mockups/E-Commerce Product Photography Views/Celebrity Street Style Paparazzi Shots/006_In_a_realistic_style_a_woman_with_blonde_hair_7kjRLVNx.png" alt="" loading="lazy"/></div>
+ <div class="carolyn-masonry-item" style="--span:20"><img src="../carolyn/mockups/Seasonal Styling Lookbook/006_A_person_is_pictured_from_the_waist_down_walking_DJ49f2oH.png" alt="" loading="lazy"/></div>
+ <div class="carolyn-masonry-item" style="--span:26"><img src="../carolyn/mockups/Street Style and TikTok OOTD Lifestyle Shots/008_In_a_natural_light_style_a_woman_with_brown_hair_QacX8nNi.png" alt="" loading="lazy"/></div>
+ <div class="carolyn-masonry-item" style="--span:30"><img src="../carolyn/mockups/E-Commerce Product Photography Views/Celebrity Street Style Paparazzi Shots/007_A_woman_stands_outside_a_building_entrance_LJYNYotx.png" alt="" loading="lazy"/></div>
+ <div class="carolyn-masonry-item" style="--span:28"><img src="../carolyn/mockups/Seasonal Styling Lookbook/007_In_a_realistic_style_a_woman_with_dark_hair_98emGca.png" alt="" loading="lazy"/></div>
+ <div class="carolyn-masonry-item" style="--span:24"><img src="../carolyn/mockups/Street Style and TikTok OOTD Lifestyle Shots/002_In_a_photographic_realism_style_a_woman_with_z1r33xAf.png" alt="" loading="lazy"/></div>
+ <div class="carolyn-masonry-item" style="--span:32"><img src="../carolyn/mockups/E-Commerce Product Photography Views/Celebrity Street Style Paparazzi Shots/008_In_a_Parisian_street_scene_a_young_woman_with_-gN0riVT.png" alt="" loading="lazy"/></div>
+ <div class="carolyn-masonry-item" style="--span:28"><img src="../carolyn/mockups/Seasonal Styling Lookbook/008_A_sophisticated_woman_stands_against_a_dark_49clCB-T.png" alt="" loading="lazy"/></div>
+ <div class="carolyn-masonry-item" style="--span:26"><img src="../carolyn/mockups/Street Style and TikTok OOTD Lifestyle Shots/006_In_a_naturalistic_style_a_woman_with_dark_hair_kfNjSfdI.png" alt="" loading="lazy"/></div>
+ <div class="carolyn-masonry-item" style="--span:30"><img src="../carolyn/mockups/E-Commerce Product Photography Views/Celebrity Street Style Paparazzi Shots/009_A_woman_with_long_dark_hair_walks_a_golden_sZQMYRSZ.png" alt="" loading="lazy"/></div>
+ <div class="carolyn-masonry-item" style="--span:28"><img src="../carolyn/mockups/Seasonal Styling Lookbook/009_A_woman_stands_centered_against_a_plain_0aR9zeAz.png" alt="" loading="lazy"/></div>
+ <div class="carolyn-masonry-item" style="--span:18"><img src="../carolyn/mockups/Street Style and TikTok OOTD Lifestyle Shots/009_A_flat_lay_composition_displays_a_taupe_clutch_2aNP7hDo.png" alt="" loading="lazy"/></div>
+ <div class="carolyn-masonry-item" style="--span:18"><img src="../carolyn/mockups/Street Style and TikTok OOTD Lifestyle Shots/010_A_beige_clutch_with_gold_hardware_is_positioned_eYb-1Nob.png" alt="" loading="lazy"/></div>
  </div>
 </section><section class="cs-section" id="cs-s12-business-benefits" data-cs-section="cs-s12-business-benefits">
  <div class="cs-section-eyebrow"><span class="cs-section-num">12</span><span class="cs-section-title">Business Benefits</span></div>
@@ -647,6 +662,22 @@ function toggleArtifact(n) {
  });
  });
 })();
+document.querySelectorAll('.carolyn-masonry-item img').forEach(function(img) {
+ function setSpan() {
+ var item = img.parentElement;
+ var ratio = img.naturalHeight / img.naturalWidth;
+ var colWidth = item.offsetWidth;
+ var imgHeight = colWidth * ratio;
+ var span = Math.ceil((imgHeight + 8) / 8);
+ item.style.setProperty('--span', span);
+ item.style.gridRowEnd = 'span ' + span;
+ }
+ if (img.complete && img.naturalHeight) {
+ setSpan();
+ } else {
+ img.addEventListener('load', setSpan);
+ }
+});
 </script>
 <script src="/js/cs-stat-eyebrow-fit.js"></script>
 
