@@ -1,6 +1,9 @@
 import React from "react";
 import type { Metadata } from "next";
 
+/** Bump when `public/case-studies/carolyn/index.html` changes so cached iframe HTML refreshes in production. */
+const CAROLYN_CASE_HTML_REV = "1";
+
 export const metadata: Metadata = {
   title: "The Carolyn · Calvin Klein · Benn Pattara",
   description:
@@ -16,11 +19,18 @@ export const metadata: Metadata = {
 };
 
 export default function CarolynCaseStudy(): React.ReactElement {
-  return (<div style={{ width: "100%", height: "100dvh", background: "#fff" }}>
-      <iframe className="responsive-iframe"
-        src="/case-studies/carolyn/index.html"
+  const src =
+    process.env.NODE_ENV === "development"
+      ? "/case-studies/carolyn/index.html"
+      : `/case-studies/carolyn/index.html?v=${CAROLYN_CASE_HTML_REV}`;
+  return (
+    <div style={{ width: "100%", height: "100dvh", background: "#fff" }}>
+      <iframe
+        className="responsive-iframe"
+        src={src}
         title="The Carolyn · Case Study"
         style={{ width: "100%", height: "100%", border: "none" }}
       />
-    </div>);
+    </div>
+  );
 }

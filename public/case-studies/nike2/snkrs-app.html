@@ -788,7 +788,11 @@ body{background:#b8b8b8;font-family:var(--fu);display:flex;justify-content:cente
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 const S2T={'s-feed':'t-feed','s-pdp':'t-instk','s-drop':'t-drop','s-style':'t-style','s-profile':'t-prof'};
 const VALID_SCREENS = ['s-feed','s-pdp','s-style','s-drop','s-profile'];
+// Suppress scroll-lock messages during initial load; only emit once user interacts
+var _protoReady = false;
+setTimeout(function(){ _protoReady = true; }, 500);
 function emitProtoScrollLock(py,ty){
+  if(!_protoReady) return;
   try{
     if(typeof py==='number'&&!isNaN(py)&&window.parent!==window){
       window.parent.postMessage({type:'snkrs-proto-lock',y:py},'*');
@@ -828,7 +832,9 @@ function go(id){
 }
 function applyHashRoute(){
   var raw = (location.hash || '').replace(/^#/,'');
-  if (raw && VALID_SCREENS.indexOf(raw) !== -1) go(raw);
+  // Default to feed screen if no valid hash provided
+  var target = (raw && VALID_SCREENS.indexOf(raw) !== -1) ? raw : 's-feed';
+  go(target);
 }
 window.addEventListener('hashchange', applyHashRoute);
 if (document.readyState === 'loading') {

@@ -399,10 +399,10 @@ export default function Home() {
             THE FASHION BRANDS THAT LAST DON&rsquo;T JUST SELL CLOTHES, MAKEUP, OR ACCESSORIES. THEY SELL A VERSION OF YOURSELF YOU WANT TO BE.
           </h2>
           <p className="about-hero-body" data-animate="fade-up" data-animate-delay="80">
-            The most powerful ones make people feel like themselves. The smile when a pair of jeans fits perfectly. The satisfaction of redeeming rewards with your favorite retail card. The feeling of the perfect outfit making you stand just a little taller. These are the moments where confidence compounds (where the items we connect with stop being transactions and start being part of how we see ourselves.
+            The most powerful ones make people feel like themselves. The smile when a pair of jeans fits perfectly. The satisfaction of redeeming rewards with your favorite retail card. The feeling of the perfect outfit making you stand just a little taller. These are the moments where confidence compounds, where the items we connect with stop being transactions and start being part of how we see ourselves.
           </p>
           <p className="about-hero-body" data-animate="fade-up" data-animate-delay="160">
-            I&rsquo;m a multidisciplinary strategic creative who works across every stage of the consumer journey) from the cultural insight that earns attention, to the product experience that builds trust, to the loyalty system that makes you feel like you belong. I use data to understand desire, and design to fulfill it. That&rsquo;s the work. That&rsquo;s what I build toward.
+            I&rsquo;m a multidisciplinary strategic creative who works across every stage of the consumer journey: from the cultural insight that earns attention, to the product experience that builds trust, to the loyalty system that makes you feel like you belong. I use data to understand desire, and design to fulfill it. That&rsquo;s the work. That&rsquo;s what I build toward.
           </p>
         </div>
 

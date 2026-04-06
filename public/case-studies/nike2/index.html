@@ -732,7 +732,7 @@ function switchDualConcept(type) {
   </div>
   <div class="proto-layout">
     <div class="proto-phone">
-      <iframe src="../nike2/snkrs-app.html#s-feed" title="Nike SNKRS App Prototype" scrolling="yes"></iframe>
+      <iframe src="../nike2/snkrs-app.html" title="Nike SNKRS App Prototype" scrolling="yes"></iframe>
     </div>
     <div class="proto-steps">
       <div class="proto-step" data-step="1" data-src="../nike2/snkrs-app.html#s-feed">
@@ -911,8 +911,29 @@ function toggleJourney(el) {
   const iframe = document.querySelector('.proto-phone iframe');
   if (!steps.length || !iframe) return;
 
+  function snapScrollTo(y) {
+    const html = document.documentElement;
+    const prev = html.style.scrollBehavior;
+    html.style.scrollBehavior = 'auto';
+    window.scrollTo(0, y);
+    if (document.documentElement) document.documentElement.scrollTop = y;
+    if (document.body) document.body.scrollTop = y;
+    html.style.scrollBehavior = prev;
+  }
+
+  function restoreCaseStudyScroll(y) {
+    if (typeof y !== 'number' || isNaN(y)) return;
+    snapScrollTo(y);
+  }
+
+  window.addEventListener('message', function (e) {
+    if (!e.data || e.data.type !== 'snkrs-proto-lock') return;
+    restoreCaseStudyScroll(e.data.y);
+  });
+
   function applyProtoSrc(src) {
     if (!src) return;
+    const y = window.scrollY;
     const i = src.indexOf('#');
     const hash = i >= 0 ? src.slice(i) : '';
     try {
@@ -920,20 +941,29 @@ function toggleJourney(el) {
       const loc = win && win.location;
       if (loc && /snkrs-app\.html/i.test(loc.pathname || '') && hash) {
         if (loc.hash !== hash) loc.hash = hash;
+        restoreCaseStudyScroll(y);
         return;
       }
     } catch (e) {}
+    iframe.addEventListener('load', function onPrLoad() {
+      iframe.removeEventListener('load', onPrLoad);
+      restoreCaseStudyScroll(y);
+    });
     iframe.src = src;
   }
 
   steps[0].classList.add('active');
   steps.forEach(step => {
     step.addEventListener('click', () => {
+      const y = window.scrollY;
       steps.forEach(s => s.classList.remove('active'));
       step.classList.add('active');
       applyProtoSrc(step.dataset.src);
+      restoreCaseStudyScroll(y);
     });
   });
+
+
 })();
 </script>
 <script src="/js/cs-stat-eyebrow-fit.js"></script>
