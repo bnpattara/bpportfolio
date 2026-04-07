@@ -53,8 +53,8 @@ body { font-family: var(--font); background: var(--white); color: var(--black); 
 .cs-hero-title em { font-style: italic; color: rgba(255,255,255,.72); }
 .cs-hero-ghost { position: absolute; bottom: -36px; right: -24px; font-size: clamp(80px,12vw,160px); font-weight: 300; color: rgba(255,255,255,.04); letter-spacing: -.03em; line-height: 1; white-space: nowrap; pointer-events: none; text-transform: uppercase; user-select: none; z-index: 1; }
 
-.cs-body-wrap { display: grid; grid-template-columns: var(--sidenav-w) 1fr; align-items: start; min-height: 100vh; }
-#cs-sidenav { position: sticky; top: var(--nav-h); height: calc(100vh - var(--nav-h)); overflow-y: auto; border-right: 1px solid var(--g200); padding: 40px 0; display: flex; flex-direction: column; background: var(--white); z-index: 50; scrollbar-width: none; }
+.cs-body-wrap { display: grid; grid-template-columns: var(--sidenav-w) 1fr; align-items: start; min-height: 100dvh; }
+#cs-sidenav { position: sticky; top: var(--nav-h); height: calc(100dvh - var(--nav-h)); overflow-y: auto; border-right: 1px solid var(--g200); padding: 40px 0; display: flex; flex-direction: column; background: var(--white); z-index: 50; scrollbar-width: none; }
 #cs-sidenav::-webkit-scrollbar { display: none; }
 .cs-sidenav-label { font-size: 8px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--g300); padding: 0 28px 20px; }
 .cs-sidenav-link { display: flex; align-items: center; gap: 14px; padding: 12px 28px; cursor: pointer; transition: background var(--ease-fast); text-decoration: none; border-left: 2px solid transparent; }
@@ -342,7 +342,7 @@ p.cs-exec-body:last-child { margin-bottom: 0; }
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  min-height: min(100vh, 1200px);
+  min-height: min(100dvh, 1200px);
 }
 .proto-intro { max-width: 40rem; margin-bottom: 40px; width: 100%; text-align: left; }
 .proto-intro .cs-section-eyebrow { margin-bottom: 16px; }
@@ -430,9 +430,11 @@ footer { background: var(--black); padding: 32px 48px; display: flex; justify-co
   .cs-section { padding: 40px 20px !important; }
   .proto-section { padding: 40px 20px !important; min-height: 0 !important; }
   .cs-hero-title-wrap { padding: 40px 20px 48px !important; }
-  .nav-left { display: none; }
-  .nav-main { padding: 0 20px !important; }
-  .nav-right { right: 20px !important; }
+  .nav-main { padding: 0 20px !important; display: flex !important; justify-content: space-between !important; align-items: center !important; }
+  .nav-left, .nav-wordmark, .nav-right { position: static !important; transform: none !important; left: auto !important; right: auto !important; top: auto !important; }
+  .nav-left { display: none !important; }
+  .nav-wordmark { font-size: 11px !important; letter-spacing: .12em !important; }
+  .nav-right a { font-size: 9px !important; }
   .jm-wrap {
     margin-top: 24px;
     padding: 20px 14px 24px;
