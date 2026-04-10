@@ -200,8 +200,6 @@ export default function Home() {
           <div className="nav-left">
             <a href="#work">Work</a>
             <a href="#about">About</a>
-            <a href="/blog">Blog</a>
-            <a href="/13">13</a>
           </div>
           <a href="/" className="nav-wordmark">Benn Pattara</a>
           <div className="nav-right">
