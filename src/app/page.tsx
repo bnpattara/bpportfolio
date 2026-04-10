@@ -566,7 +566,7 @@ export default function Home() {
             <div className="role-row" data-animate="fade-left" data-animate-delay="100">
               <div>
                 <div className="role-date">MAR 2025 &ndash; PRESENT</div>
-                <div className="role-company">BRANCH MUSEUM OF ARCHITECTURE AND DESIGN</div>
+                <div className="role-company">BRANCH MUSEUM OF DESIGN</div>
               </div>
               <div>
                 <div className="role-desc">
