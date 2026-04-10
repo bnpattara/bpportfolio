@@ -11,6 +11,7 @@ export const metadata: Metadata = {
     title: 'Benn Pattara · Brand & Product Strategist',
     description:
       'Brand & Product Strategist. From cultural insight to shipped product specs across digital products, physical spaces, and everything in between. VCU Brandcenter M.S. 2026.',
+    images: [{ url: 'https://bennpattara.com/og/home.png', width: 1200, height: 628 }],
   },
 };
 
