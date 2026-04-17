@@ -3,7 +3,14 @@ import type { Metadata } from 'next';
 import Script from 'next/script';
 // import MaintenanceNotice from '@/components/MaintenanceNotice'; // uncomment to enable maintenance mode
 
-const gaMeasurementId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID?.trim();
+/** GA4 stream “Benn Portfolio” — public ID; override with NEXT_PUBLIC_GA_MEASUREMENT_ID. */
+const DEFAULT_GA_MEASUREMENT_ID = 'G-1S5D7FGYE8';
+
+const gaEnvId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID?.trim();
+const gaMeasurementId =
+  process.env.NODE_ENV === 'production'
+    ? gaEnvId || DEFAULT_GA_MEASUREMENT_ID
+    : gaEnvId;
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://bennpattara.com'),
