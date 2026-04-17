@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 
+/** Includes drafts (`live: false`). Only `live: true` entries are rendered on the public index. */
 const ARTICLES = [
     {
         slug: '/blog/heritage-brands-gen-z',
@@ -75,6 +76,8 @@ const ARTICLES = [
     },
 ];
 
+const PUBLIC_ARTICLES = ARTICLES.filter((a) => a.live);
+
 export default function BlogIndex() {
     return (<div style={{ maxWidth: '900px', margin: '0 auto', padding: '0 48px 80px', fontFamily: "'Helvetica Neue', Arial, sans-serif" }}>
 
@@ -90,7 +93,7 @@ export default function BlogIndex() {
 
             {/* ── ARTICLE LIST ── */}
             <div>
-                {ARTICLES.map((article) => (<div
+                {PUBLIC_ARTICLES.map((article) => (<div
                         key={article.num}
                         style={{
                             borderBottom: '1px solid #f0f0f0',

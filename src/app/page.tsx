@@ -4,6 +4,22 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import BackToTopButton from "@/components/BackToTopButton";
 import { useRouter } from "next/navigation";
 
+const WRITING_PAGE_SIZE = 6;
+const WRITING_PREVIEW = 3;
+
+/** Draft rows stay in source; only `live: true` appears if this section is shown. */
+const HOME_WRITING_ALL = [
+  { category: 'Brand Strategy', title: 'Why Heritage Brands Keep Losing Gen Z', desc: 'The mistake isn’t a failure to reach younger consumers. It’s reaching them with the wrong premise: that history is automatically valuable.', date: 'Mar 2025', link: '/blog/heritage-brands-gen-z', num: '001', live: true },
+  { category: 'AI & Technology', title: 'The Personalization Paradox', desc: 'There’s a threshold where hyper-relevance starts to feel like surveillance. On the tension between precision and intimacy in AI-driven brand relationships.', date: 'Feb 2025', link: '#', num: '002', live: false },
+  { category: 'Systems', title: 'Loyalty Is Not a Program', desc: 'After scaling loyalty conversion 10x at Gap, the most important lesson wasn’t the number. It was what changes when you treat loyalty as a brand promise, not a retention mechanic.', date: 'Dec 2024', link: '#', num: '003', live: false },
+  { category: 'Experience Design', title: 'The Phygital Gap', desc: 'Bridging the physical and digital retail experience through journey mapping and intentional architectural choices.', date: 'Nov 2024', link: '#', num: '004', live: false },
+  { category: 'Brand Purpose', title: 'Meaning Metrics', desc: 'Why we need to measure the cultural impact, not just the commercial click. Shifting our KPIs towards community health.', date: 'Oct 2024', link: '#', num: '005', live: false },
+  { category: 'Cultural Strategy', title: 'Subcultures as Scaffolding', desc: 'How to build brands inside of communities without commodifying them. Earning the right to participate in niche networks.', date: 'Sep 2024', link: '#', num: '006', live: false },
+  { category: 'Creative Tech', title: 'Designing with Invisible Intelligence', desc: 'The role of implicit AI in consumer facing experiences. Making algorithms useful without being visible to the user.', date: 'Aug 2024', link: '#', num: '007', live: false },
+];
+
+const HOME_WRITING_PUBLIC = HOME_WRITING_ALL.filter((b) => b.live);
+
 export default function Home() {
   const navRef = useRef<HTMLElement>(null);
 
@@ -193,6 +209,11 @@ export default function Home() {
     },
   ];
 
+  const writingPageMax = Math.max(0, Math.ceil(HOME_WRITING_PUBLIC.length / WRITING_PAGE_SIZE) - 1);
+  const writingBlogs = isBlogExpanded
+    ? HOME_WRITING_PUBLIC.slice(blogPage * WRITING_PAGE_SIZE, (blogPage + 1) * WRITING_PAGE_SIZE)
+    : HOME_WRITING_PUBLIC.slice(0, WRITING_PREVIEW);
+
   return (<>
       {/* ── NAV ── */}
       <nav id="site-nav" ref={navRef}>
@@ -303,7 +324,7 @@ export default function Home() {
         <div className="writing-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <span className="writing-label">Recent Writing</span>
 
-          {!isBlogExpanded ? (<button
+          {HOME_WRITING_PUBLIC.length > WRITING_PREVIEW && (!isBlogExpanded ? (<button
               onClick={() => setIsBlogExpanded(true)}
               style={{
                 cursor: 'pointer',
@@ -338,14 +359,14 @@ export default function Home() {
                 &larr;
               </button>
               <span style={{ fontSize: '11px', letterSpacing: '.1em', color: 'var(--g500)', textTransform: 'uppercase' }}>
-                {blogPage + 1} / 2
+                {blogPage + 1} / {writingPageMax + 1}
               </span>
               <button
-                onClick={() => setBlogPage(p => Math.min(1, p + 1))}
-                disabled={blogPage >= 1}
+                onClick={() => setBlogPage(p => Math.min(writingPageMax, p + 1))}
+                disabled={blogPage >= writingPageMax}
                 style={{
-                  cursor: blogPage >= 1 ? 'not-allowed' : 'pointer',
-                  opacity: blogPage >= 1 ? 0.3 : 1,
+                  cursor: blogPage >= writingPageMax ? 'not-allowed' : 'pointer',
+                  opacity: blogPage >= writingPageMax ? 0.3 : 1,
                   background: 'transparent',
                   border: 'none',
                   fontSize: '20px',
@@ -355,19 +376,11 @@ export default function Home() {
               >
                 &rarr;
               </button>
-            </div>)}
+            </div>))}
         </div>
 
         <div className="articles-grid">
-          {[
-            { category: 'Brand Strategy', title: 'Why Heritage Brands Keep Losing Gen Z', desc: 'The mistake isn’t a failure to reach younger consumers. It’s reaching them with the wrong premise: that history is automatically valuable.', date: 'Mar 2025', link: '/blog/heritage-brands-gen-z', num: '001' },
-            { category: 'AI & Technology', title: 'The Personalization Paradox', desc: 'There’s a threshold where hyper-relevance starts to feel like surveillance. On the tension between precision and intimacy in AI-driven brand relationships.', date: 'Feb 2025', link: '#', num: '002' },
-            { category: 'Systems', title: 'Loyalty Is Not a Program', desc: 'After scaling loyalty conversion 10x at Gap, the most important lesson wasn’t the number. It was what changes when you treat loyalty as a brand promise, not a retention mechanic.', date: 'Dec 2024', link: '#', num: '003' },
-            { category: 'Experience Design', title: 'The Phygital Gap', desc: 'Bridging the physical and digital retail experience through journey mapping and intentional architectural choices.', date: 'Nov 2024', link: '#', num: '004' },
-            { category: 'Brand Purpose', title: 'Meaning Metrics', desc: 'Why we need to measure the cultural impact, not just the commercial click. Shifting our KPIs towards community health.', date: 'Oct 2024', link: '#', num: '005' },
-            { category: 'Cultural Strategy', title: 'Subcultures as Scaffolding', desc: 'How to build brands inside of communities without commodifying them. Earning the right to participate in niche networks.', date: 'Sep 2024', link: '#', num: '006' },
-            { category: 'Creative Tech', title: 'Designing with Invisible Intelligence', desc: 'The role of implicit AI in consumer facing experiences. Making algorithms useful without being visible to the user.', date: 'Aug 2024', link: '#', num: '007' }
-          ].slice(isBlogExpanded ? blogPage * 6 : 0, isBlogExpanded ? (blogPage + 1) * 6 : 3).map((blog, index) => (<div
+          {writingBlogs.map((blog, index) => (<div
               className="article-card"
               key={blog.num}
               data-animate="fade-up"
