@@ -85,7 +85,7 @@ export default function ThirteenPage() {
         <div className="nav-main">
           <div className="nav-left">
             <a href="/#work">Work</a>
-            <a href="/#about">About</a>
+            <a href="/about">About</a>
             <a href="/blog">Blog</a>
             <a href="/13" style={{ color: 'var(--black)' }}>13</a>
           </div>

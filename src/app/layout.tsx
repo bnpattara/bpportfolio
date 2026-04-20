@@ -14,13 +14,13 @@ const gaMeasurementId =
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://bennpattara.com'),
-  title: 'Benn Pattara · Brand & Product Strategist',
+  title: 'Benn Pattara · Product Design & Brand Strategy',
   description:
-    'Brand & Product Strategist. From cultural insight to shipped product specs across digital products, physical spaces, and everything in between. VCU Brandcenter M.S. 2026.',
+    'Product Design & Brand Strategy. From cultural insight to shipped product specs across digital products, physical spaces, and everything in between. VCU Brandcenter M.S. 2026.',
   openGraph: {
-    title: 'Benn Pattara · Brand & Product Strategist',
+    title: 'Benn Pattara · Product Design & Brand Strategy',
     description:
-      'Brand & Product Strategist. From cultural insight to shipped product specs across digital products, physical spaces, and everything in between. VCU Brandcenter M.S. 2026.',
+      'Product Design & Brand Strategy. From cultural insight to shipped product specs across digital products, physical spaces, and everything in between. VCU Brandcenter M.S. 2026.',
     images: [{ url: 'https://bennpattara.com/og/home.png', width: 1200, height: 628 }],
   },
 };

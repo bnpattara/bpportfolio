@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, useCallback } from "react";
 import BackToTopButton from "@/components/BackToTopButton";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 const WRITING_PAGE_SIZE = 6;
@@ -420,7 +421,7 @@ export default function Home() {
         <aside className="about-hero-sidebar">
           <div className="about-meta">
             <p className="about-meta-text">VCU Brandcenter M.S. Business/Branding, expected May 2026</p>
-            <p className="about-meta-text">Brand &amp; product strategist</p>
+            <p className="about-meta-text">Product Design &amp; Brand Strategy</p>
             <p className="about-meta-text">Currently based in Richmond, VA</p>
           </div>
 
@@ -439,6 +440,7 @@ export default function Home() {
           </div>
 
           <div className="about-hero-ctas">
+            <Link href="/about" className="about-cta-btn about-cta-btn--secondary">About me</Link>
             <a href="/resume.pdf" className="about-cta-btn about-cta-btn--secondary" download="Benn_Pattara.pdf">Download R&eacute;sum&eacute;</a>
             <a href="#contact" className="about-cta-btn about-cta-btn--primary">Get in Touch</a>
           </div>
@@ -645,7 +647,7 @@ export default function Home() {
           </div>
           <div>
             <h2 className="contact-heading" data-animate="fade-up" data-animate-delay="0">LET&rsquo;S MAKE SOMETHING WORTH DOING.</h2>
-            <p className="contact-body" data-animate="fade-up" data-animate-delay="80">Open to full-time brand strategy, experience design, and creative direction roles. Also available for consulting and collaborative projects. Response within 48 hours.</p>
+            <p className="contact-body" data-animate="fade-up" data-animate-delay="80">Open to full-time product design and brand strategy, experience design, and creative direction roles. Also available for consulting and collaborative projects. Response within 48 hours.</p>
 
             <div className="contact-links" style={{ background: 'transparent' }}>
               <div className="contact-link-cell" data-animate="fade-up" data-animate-delay="160">
@@ -672,7 +674,7 @@ export default function Home() {
       <footer>
         <div className="footer-left">
           <span className="footer-name">BENN PATTARA</span>
-          <span className="footer-role">BRAND &amp; PRODUCT STRATEGIST</span>
+          <span className="footer-role">PRODUCT DESIGN &amp; BRAND STRATEGY</span>
           <span className="footer-qualifier">from cultural insight to shipped product specs</span>
         </div>
         <div className="footer-links">

@@ -35,7 +35,7 @@ export default function BurberryCaseStudy() {
                 <div className="nav-main">
                     <div className="nav-left">
                         <Link href="/#work">Work</Link>
-                        <Link href="/#about">About</Link>
+                        <Link href="/about">About</Link>
                         <Link href="/blog">Blog</Link>
                         <Link href="/13">13</Link>
                     </div>
@@ -237,7 +237,7 @@ export default function BurberryCaseStudy() {
                     <span className="footer-qualifier">from cultural insight to shipped product specs</span>
                 </div>
                 <div className="footer-links">
-                    <Link href="/#about" className="footer-link">About</Link>
+                    <Link href="/about" className="footer-link">About</Link>
                     <Link href="/blog" className="footer-link">Blog</Link>
                     <Link href="/13" className="footer-link">13</Link>
                     <Link href="/#contact" className="footer-link">Contact</Link>
