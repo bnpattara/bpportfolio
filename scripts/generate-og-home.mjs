@@ -30,12 +30,12 @@ const html = `<!DOCTYPE html>
     -webkit-font-smoothing: antialiased;
   }
   .name {
-    font-size: 132px;
+    font-size: 160px;
     font-weight: 300;
     color: #ffffff;
     letter-spacing: -0.02em;
     line-height: 1.06;
-    margin-bottom: 32px;
+    margin-bottom: 38px;
   }
   .name em {
     font-style: italic;
@@ -43,7 +43,7 @@ const html = `<!DOCTYPE html>
     color: #ffffff;
   }
   .title {
-    font-size: 23px;
+    font-size: 28px;
     font-weight: 500;
     letter-spacing: 0.06em;
     color: #ffffff;

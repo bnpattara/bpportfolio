@@ -4,7 +4,7 @@ import Script from 'next/script';
 // import MaintenanceNotice from '@/components/MaintenanceNotice'; // uncomment to enable maintenance mode
 
 /** Bump when replacing `public/og/home.png` so social crawlers refetch (LinkedIn caches aggressively). */
-const OG_HOME_VERSION = '7';
+const OG_HOME_VERSION = '8';
 
 /** GA4 stream “Benn Portfolio” — public ID; override with NEXT_PUBLIC_GA_MEASUREMENT_ID. */
 const DEFAULT_GA_MEASUREMENT_ID = 'G-1S5D7FGYE8';
