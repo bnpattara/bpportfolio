@@ -45,8 +45,7 @@ const html = `<!DOCTYPE html>
   .title {
     font-size: 15px;
     font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
+    letter-spacing: 0.04em;
     color: #ffffff;
     max-width: 28em;
     line-height: 1.5;
@@ -55,7 +54,7 @@ const html = `<!DOCTYPE html>
 </head>
 <body>
   <h1 class="name">Benn <em>Pattara</em></h1>
-  <p class="title">Product Design &amp; Brand Strategy</p>
+  <p class="title">product design &amp; brand strategy</p>
 </body>
 </html>`;
 
