@@ -9,6 +9,7 @@
     "build:turbo": "next build",
     "start": "next start",
     "lint": "eslint",
+    "og:home": "node scripts/generate-og-home.mjs",
     "sync:saks": "cp ../vault_by_saks_case_study.html ./public/case-studies/saks/index.html"
   },
   "dependencies": {
