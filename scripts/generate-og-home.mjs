@@ -20,7 +20,7 @@ const html = `<!DOCTYPE html>
   body {
     width: 1200px;
     height: 628px;
-    background: #ffffff;
+    background: #000000;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -30,24 +30,24 @@ const html = `<!DOCTYPE html>
     -webkit-font-smoothing: antialiased;
   }
   .name {
-    font-size: 86px;
+    font-size: 104px;
     font-weight: 300;
-    color: #000000;
+    color: #ffffff;
     letter-spacing: -0.02em;
     line-height: 1.06;
-    margin-bottom: 22px;
+    margin-bottom: 26px;
   }
   .name em {
     font-style: italic;
     font-weight: 300;
-    color: #000000;
+    color: #ffffff;
   }
   .title {
-    font-size: 13px;
+    font-size: 15px;
     font-weight: 500;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: #000000;
+    color: #ffffff;
     max-width: 28em;
     line-height: 1.5;
   }
