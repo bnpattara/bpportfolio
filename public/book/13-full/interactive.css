@@ -1,0 +1,291 @@
+/* Book demo chrome — works with Anthology template pages */
+
+:root {
+  --book-chrome-bg: rgba(28, 27, 25, 0.92);
+  --book-chrome-border: rgba(201, 169, 110, 0.22);
+  --book-chrome-text: rgba(246, 242, 235, 0.9);
+  --book-chrome-muted: rgba(201, 169, 110, 0.55);
+  --book-chrome-accent: #c9a96e;
+  --book-focus-ring: rgba(201, 169, 110, 0.65);
+}
+
+.book-chrome {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10001;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  padding: 10px 14px;
+  font-family: var(--sans, "DM Mono", monospace);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--book-chrome-text);
+  background: var(--book-chrome-bg);
+  border-bottom: 1px solid var(--book-chrome-border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.book-chrome__group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.book-chrome__sep {
+  width: 1px;
+  height: 18px;
+  background: var(--book-chrome-border);
+  margin: 0 4px;
+}
+
+.book-chrome button {
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  color: var(--book-chrome-text);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--book-chrome-border);
+  border-radius: 2px;
+  padding: 6px 10px;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.book-chrome button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(201, 169, 110, 0.35);
+}
+
+.book-chrome button:focus-visible {
+  outline: 2px solid var(--book-focus-ring);
+  outline-offset: 2px;
+}
+
+.book-chrome button[aria-pressed="true"] {
+  background: rgba(156, 125, 62, 0.25);
+  border-color: rgba(201, 169, 110, 0.45);
+}
+
+.book-chrome__progress-wrap {
+  flex: 1 1 120px;
+  min-width: 80px;
+  max-width: 200px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.book-chrome__progress-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--book-chrome-accent), rgba(201, 169, 110, 0.65));
+  border-radius: 2px;
+  transition: width 0.2s ease-out;
+}
+
+.book-chrome__label {
+  color: var(--book-chrome-muted);
+  font-size: 9px;
+  white-space: nowrap;
+}
+
+.book-toc {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: min(320px, 92vw);
+  max-height: 100vh;
+  z-index: 10002;
+  background: rgba(22, 21, 19, 0.97);
+  border-left: 1px solid var(--book-chrome-border);
+  box-shadow: -12px 0 40px rgba(0, 0, 0, 0.35);
+  transform: translateX(100%);
+  visibility: hidden;
+  transition: transform 0.25s ease, visibility 0.25s;
+  padding: 56px 0 24px;
+  overflow-y: auto;
+}
+
+.book-toc.is-open {
+  transform: translateX(0);
+  visibility: visible;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .book-toc {
+    transition: none;
+  }
+  .book-chrome__progress-bar {
+    transition: none;
+  }
+}
+
+.book-toc__head {
+  font-family: var(--serif, Georgia, serif);
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  text-transform: none;
+  color: var(--book-chrome-text);
+  padding: 0 20px 16px;
+  border-bottom: 1px solid var(--book-chrome-border);
+  margin-bottom: 12px;
+}
+
+.book-toc__list {
+  list-style: none;
+  margin: 0;
+  padding: 0 12px;
+}
+
+.book-toc__list a {
+  display: block;
+  padding: 10px 12px;
+  color: rgba(246, 242, 235, 0.82);
+  text-decoration: none;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  line-height: 1.35;
+  border-radius: 4px;
+  transition: background 0.12s ease;
+}
+
+.book-toc__list a:hover,
+.book-toc__list a:focus-visible {
+  background: rgba(255, 255, 255, 0.06);
+  outline: none;
+}
+
+.book-toc__list a:focus-visible {
+  box-shadow: 0 0 0 2px var(--book-focus-ring);
+}
+
+.book-toc__list a small {
+  display: block;
+  font-size: 9px;
+  color: var(--book-chrome-muted);
+  letter-spacing: 0.14em;
+  margin-top: 4px;
+  text-transform: uppercase;
+}
+
+.book-toc__backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: rgba(0, 0, 0, 0.35);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s;
+}
+
+.book-toc__backdrop.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+body.book-has-chrome {
+  padding-top: 52px;
+}
+
+/* Invisible left/right hit targets when a section has no spread (single page, front matter, etc.). */
+html.book-flip .template-section {
+  position: relative;
+}
+
+.book-flip-zones {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  display: flex;
+  pointer-events: none;
+}
+
+.book-flip-zones__half {
+  flex: 1;
+  pointer-events: auto;
+  border: none;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.book-flip-zones__half:focus-visible {
+  outline: 2px solid var(--book-focus-ring, rgba(201, 169, 110, 0.65));
+  outline-offset: -4px;
+}
+
+/* Spreads: whole left page / whole right page turn (editorial + anthology templates). */
+.book-flip--prev,
+.book-flip--next {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.template-section {
+  scroll-margin-top: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .template-section.book-reveal {
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 0.55s ease-out, transform 0.55s ease-out;
+  }
+
+  .template-section.book-reveal.is-inview {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.spread[data-layout="stack"] {
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.spread[data-layout="stack"] .page.rp::before {
+  left: 36px;
+  right: auto;
+  box-shadow: 1px 0 0 rgba(201, 169, 110, 0.28);
+}
+
+/* Flip-book reading: one section per viewport, vertical snap (embed-friendly). */
+html.book-flip {
+  scroll-snap-type: y mandatory;
+  scroll-padding-top: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.book-flip {
+    scroll-snap-type: y proximity;
+  }
+}
+
+html.book-flip .template-section {
+  min-height: 100svh;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  padding-top: 28px;
+  padding-bottom: 36px;
+  box-sizing: border-box;
+  justify-content: center;
+}
+
+html.book-flip body {
+  padding-bottom: 32px;
+}

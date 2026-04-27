@@ -14,8 +14,9 @@ const dmMono = DM_Mono({
 });
 
 export const metadata: Metadata = {
-  title: '13 / Mirrorball, Find Your Song | Benn Pattara',
-  description: 'Tell me how you feel. Match your feeling to a Taylor Swift song.',
+  title: '13 · Chapter & track draw | Benn Pattara',
+  description:
+    'A book I wrote from Taylor Swift’s discography: draw an album chapter and a track, with optional glitter gel, quill, and fountain filters from the pen system she’s shared with fans.',
 };
 
 export default function ThirteenLayout({
@@ -23,7 +24,12 @@ export default function ThirteenLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return (<div className={`${bebasNeue.variable} ${dmMono.variable}`} style={{ background: '#fff', minHeight: '100vh' }}>
+  return (
+    <div
+      className={`page-13-layout ${bebasNeue.variable} ${dmMono.variable}`}
+      style={{ background: 'transparent' }}
+    >
       {children}
-    </div>);
+    </div>
+  );
 }

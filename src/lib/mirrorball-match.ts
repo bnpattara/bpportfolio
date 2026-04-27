@@ -3,6 +3,9 @@
  * Uses text similarity (word overlap + scoring) to match feelings to Taylor Swift songs.
  */
 
+/** From the Taylor Swift “pen” taxonomy (book); optional on disk, merged with overrides. */
+export type PenId = 'glitter' | 'quill' | 'fountain';
+
 export type Song = {
   album: string;
   title: string;
@@ -12,6 +15,8 @@ export type Song = {
   tags?: string[];
   spotify_url?: string;
   youtube_url?: string;
+  /** Populated at runtime from `mirrorball-pen-overrides.json` (defaults to glitter). */
+  pen?: PenId;
 };
 
 const STOP_WORDS = new Set([
