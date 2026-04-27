@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 };
 
 const WATCHING = ['Scandal', 'Madam Secretary', '2 Broke Girls', 'Nobody Wants This'];
-const LISTENING = ['Taylor Swift', 'Young Now, Miley Cyrus', 'Hopeless Fountain Kingdom, Halsey'];
+const LISTENING = ['Taylor Swift', 'Younger Now, Miley Cyrus', 'Hopeless Fountain Kingdom, Halsey'];
 const READING = ['The Empyrean Series', 'Red Queen Series', 'Heartless'];
 
 export default function AboutPage() {
